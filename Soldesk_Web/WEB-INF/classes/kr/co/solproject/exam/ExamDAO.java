@@ -1,0 +1,5 @@
+package kr.co.solproject.exam;
+
+public class ExamDAO {
+
+}

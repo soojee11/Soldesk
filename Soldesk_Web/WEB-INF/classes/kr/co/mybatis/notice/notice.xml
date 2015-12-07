@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<!-- namespace는 주로 테이블명 사용. 생략가능 -->
+<sqlMap namespace="notice">
+
+	<!-- 매개변수 NoticeDTO사용 -->
+	<typeAlias alias="NoticeDTO" type="kr.co.mybatis.notice.NoticeDTO" />
+
+	<insert id="create" parameterClass="NoticeDTO">
+		insert into
+		notice(noticeno,title,rdate)
+		values (#noticeno#,#title#,now())
+	</insert>
+
+	<insert id="create2" parameterClass="NoticeDTO">
+
+		<selectKey keyProperty="noticeno" resultClass="Integer">  <!-- resultClass => 자료형적기 -->
+			select nvl(max(noticeno),0)+1 as noticeno from notice <!-- max값 구해서noticeno에게 전달 -->
+		</selectKey>
+
+		insert into notice(noticeno, title, rdate)
+		values
+		(#noticeno#,#title#,sysdate)
+
+	</insert>
+
+	<!-- NoticeDTO객체가 레코드 수만큼 생성되어 List에 추가되어 리턴 -->
+	<select id="list" resultClass="NoticeDTO">
+		select noticeno, title, rdate
+		from
+		notice
+		order by noticeno desc
+	</select>
+
+	<select id="read" parameterClass="Integer" resultClass="NoticeDTO">
+		select
+		noticeno, title, rdate
+		from notice
+		where noticeno=#noticeno#
+	</select>
+
+	<sql id="tablename"> <!-- 자주쓰는것들 담아놓고 조합해서 쓸 수 있다. -->
+		select noticeno, title, rdate from notice
+	</sql>
+
+	<sql id="sort">
+		order by noticeno desc
+	</sql>
+
+	<select id="list2" resultClass="NoticeDTO"><!-- 자주쓰는것들 담아놓고 조합해서 쓸 수 있다. -->
+		<include refid="tablename" />
+		<include refid="sort" />
+	</select>
+
+	<update id="update" parameterClass="NoticeDTO">
+		update notice
+		set
+		title=#title#
+		where noticeno=#noticeno#
+	</update>
+
+	<update id="delete" parameterClass="Integer">
+		delete from notice
+		where
+		noticeno=#noticeno#
+	</update>
+
+	<!-- [CDATA[]]비교연산자 <>등의 특수문자를 사용하고자 할때 -->
+	<update id="delete2" parameterClass="Integer">
+		<![CDATA[
+		delete from notice
+		where noticeno < #noticeno#
+		]]>
+	</update>
+
+	<select id="search" parameterClass="String" resultClass="NoticeDTO">
+		<include refid="tablename" />
+		where title like '%' || #title# || '%'
+		<include refid="sort" />
+	</select>
+	
+</sqlMap>
