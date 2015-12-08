@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE sqlMap       
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"       
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<!-- namespace : 주로 테이블 명 사용, 생략 가능 -->
+<sqlMap namespace="sol_category">
+
+  <!-- 매개변수 NoticeDTO 사용 -->
+  <typeAlias alias="PlayerDTO" type="kr.co.solproject.player.PlayerDTO" />
+  
+  <!-- 카테고리 넘버 가져오기 -->
+  <select id="read" parameterClass="Map" resultClass="Integer">
+    SELECT categoryno FROM sol_category
+    WHERE grade=#grade# AND gwamok=#gwamok#
+  </select>
+
+  <insert id="insert" parameterClass="PlayerDTO" >
+    INSERT INTO sol_lecture(subject, filename, filesize, poster, teacher, lecturetime, categoryno)
+    VALUES (#subject#, #filename#, #filesize#, #poster#, #teacher#, #lecturetime#, #categoryno#)
+  </insert>
+  
+</sqlMap>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE sqlMapConfig       
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map Config 2.0//EN"       
+    "http://ibatis.apache.org/dtd/sql-map-config-2.dtd"> 
+
+<sqlMapConfig> 
+  <settings  
+      cacheModelsEnabled="true"  
+      enhancementEnabled="true"  
+      useStatementNamespaces="true"  
+      lazyLoadingEnabled="true"  
+      maxRequests="512"  
+      maxSessions="128"  
+      maxTransactions="32" /> 
+      
+  <transactionManager type="JDBC" commitRequired="false"> 
+    <dataSource type="SIMPLE"> 
+      <property name="JDBC.Driver" value="org.gjt.mm.mysql.Driver"/> 
+      <property name="JDBC.ConnectionURL" value="jdbc:mysql://localhost:3306/solproject"/> 
+      <property name="JDBC.Username" value="root"/> 
+      <property name="JDBC.Password" value="1234"/> 
+      <property name="Pool.MaximumActiveConnections" value="2"/> 
+      <property name="Pool.MaximumIdleConnections" value="1"/> 
+      <property name="Pool.MaximumCheckoutTime" value="20000"/> 
+    </dataSource> 
+  </transactionManager>
+
+
+<!-- <transactionManager type="JDBC" commitRequired="false"> 
+    <dataSource type="SIMPLE"> 
+      <property name="JDBC.Driver" value="com.mysql.jdbc.Driver"/> 
+      <property name="JDBC.ConnectionURL" value="jdbc:mysql://localhost:3306/alfidalfo1"/> 
+      <property name="JDBC.Username" value="alfidalfo1"/> 
+      <property name="JDBC.Password" value="alfidalfo1"/> 
+      <property name="Pool.MaximumActiveConnections" value="2"/> 
+      <property name="Pool.MaximumIdleConnections" value="1"/> 
+      <property name="Pool.MaximumCheckoutTime" value="20000"/> 
+    </dataSource> 
+  </transactionManager> -->
+  <!-- 
+  <transactionManager type="JDBC" commitRequired="false"> 
+    <dataSource type="SIMPLE"> 
+      <property name="JDBC.Driver" value="oracle.jdbc.driver.OracleDriver"/> 
+      <property name="JDBC.ConnectionURL" value="jdbc:oracle:thin:@127.0.0.1:1521:XE"/> 
+      <property name="JDBC.Username" value="java0713a"/> 
+      <property name="JDBC.Password" value="1234"/> 
+      <property name="Pool.MaximumActiveConnections" value="2"/> 
+      <property name="Pool.MaximumIdleConnections" value="1"/> 
+      <property name="Pool.MaximumCheckoutTime" value="20000"/> 
+    </dataSource> 
+  </transactionManager> 
+ -->
+  <!-- List the SQL Map XML files. They can be loaded from the  
+       classpath, as they are here (com.domain.data...) --> 
+       
+<!-- <sqlMap resource="kr/co/mybatis/notice/notice.xml"/> DAO에서 작업하던 SQL문을 여기다가 작성 / 여러개 작성 가능(각 TABLE 마다)
+    <sqlMap resource="kr/co/mybatis/bbs/bbs.xml"/> -->
+  
+  <sqlMap resource="kr/co/solproject/player/player.xml"/>
+
+</sqlMapConfig> 

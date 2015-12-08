@@ -22,8 +22,12 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
-	<context:component-scan base-package="kr.co.solproject" />
-	
-	
+	 <!-- 파일전송관련 스프링 빈즈 -->
+  <beans:bean id="multipartResolver"
+       class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+  </beans:bean>
+  
+  <context:component-scan base-package="kr.co.solproject" />
+  <context:component-scan base-package="net.utility" />
 	
 </beans:beans>
