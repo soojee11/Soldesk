@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%@ include file="../adminheader.jsp" %>
+<%@ include file="../header.jsp" %>
 		<!-- page start-->
 		<!--  동영상 등록 header랑 footer 나눠야 함. -->
 		<div align="center"><h3>동영상 등록</h3></div>
@@ -49,4 +49,4 @@
 		  </table>
 		</form>
 <!-- page end-->
-<%@ include file="../adminfooter.jsp" %>		
+<%@ include file="../footer.jsp" %>		
