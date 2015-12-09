@@ -21,7 +21,7 @@ public class TestCont {
 	private TestDAO dao=null;
 	
 	public TestCont() {
-		System.out.println("testCont按眉 积己凳...");
+		System.out.println("---------------testCont按眉 积己凳");
 	}
 	
 	//http://localhost:9090/solproject/sol_test/list.do
@@ -66,7 +66,7 @@ public class TestCont {
 		String dbean=Utility.getDate();
 		int total=dao.getTotal(map);
 		
-		String paging=Paging.paging3(total,nowPage,numPerPage,col1,col2,url);
+		String paging=Paging.paging(total,nowPage,numPerPage,col1,col2,url);
 		
 		recNo=total-(nowPage-1)*numPerPage;
 		

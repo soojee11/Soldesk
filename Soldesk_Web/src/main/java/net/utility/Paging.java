@@ -10,7 +10,7 @@ public class Paging {
    * @param recordPerPage 페이지당 레코드 수 
    * @return
    */
-  public static String paging(int totalRecord, int nowPage, int recordPerPage, String col, String word, String filenm){
+  public static  String paging(int totalRecord, int nowPage, int recordPerPage, String col, String word, String filenm){
     int pagePerBlock = 10; // 블럭당 페이지 수
     int totalPage = (int)(Math.ceil((double)totalRecord/recordPerPage)); // 전체 페이지 
     int totalGrp = (int)(Math.ceil((double)totalPage/pagePerBlock));// 전체 그룹
