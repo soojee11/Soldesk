@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="sol_member"><!-- 테이블이름 -->
+	<typeAlias alias="MemberDTO" type="kr.co.solproject.member.MemberDTO" />
+	
+	<select id="loginproc"  parameterClass="MemberDTO" resultClass="String">
+		select mlevel from sol_member
+		where id =#id# and passwd = #passwd# and mlevel in('A1','B1','C1','D1')
+	</select>
+	
+
+</sqlMap>
