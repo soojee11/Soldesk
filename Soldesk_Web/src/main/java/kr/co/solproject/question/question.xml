@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="sol_question"><!-- 테이블이름 -->
+	<typeAlias alias="QuestionDTO" type="kr.co.solproject.question.QuestionDTO" />
+
+	<select resultClass="QuestionDTO" parameterClass="Map" id="getquestion">
+		select testno, questno, qtitle, qtype, answer, comment from
+		sol_question where testno = #testno# order by questno asc </select>
+
+	<select resultClass="Integer" parameterClass="Map" id="questionTotal"> select
+		count(*) as cnt from sol_question </select>
+
+</sqlMap>
