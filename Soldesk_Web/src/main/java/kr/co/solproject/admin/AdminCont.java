@@ -147,7 +147,7 @@ public class AdminCont {
 		String dbean = Utility.getDate();
 		int total = dao.getTestTotal(map);
 
-		String paging = Paging.paging(total, nowPage, numPerPage, col, word, url);
+		String paging = Paging.paging3(total, nowPage, numPerPage, col, word, url);
 
 		recNo = total - (nowPage - 1) * numPerPage + 1;
 

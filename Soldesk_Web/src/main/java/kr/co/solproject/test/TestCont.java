@@ -66,7 +66,7 @@ public class TestCont {
 		String dbean=Utility.getDate();
 		int total=dao.getTotal(map);
 		
-		String paging=Paging.paging(total,nowPage,numPerPage,col1,col2,url);
+		String paging=Paging.paging3(total,nowPage,numPerPage,col1,col2,url);
 		
 		recNo=total-(nowPage-1)*numPerPage;
 		
