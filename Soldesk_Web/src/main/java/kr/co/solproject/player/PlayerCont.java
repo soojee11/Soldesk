@@ -26,10 +26,10 @@ public class PlayerCont {
   @RequestMapping(value="/player/player.do", method=RequestMethod.GET)
   public String createForm(){
      // 여기서 동영상 정보들 가져오기 
-    return "player/player";
+    return "sol_player/player";
   }
   
-  // admin index.jsp
+ /* // admin index.jsp
   @RequestMapping(value="/admin/admin.do")
   public String admin(){
     return "admin/adminIndex";
@@ -83,5 +83,5 @@ public class PlayerCont {
         
         return "bbs/error";
       }
-  }
+  }*/
 }
