@@ -10,7 +10,9 @@
     <link rel="shortcut icon" href="img/favicon.png">
 
     <title>solProject admin</title>
-
+    
+	<script src="js/myjs.js"></script>
+	
     <!-- Bootstrap CSS -->    
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <!-- bootstrap theme -->
@@ -163,33 +165,9 @@
           </div>
       </aside>
       <!--sidebar end-->
-    
+      
       <!--main content start-->
       <section id="main-content">
           <section class="wrapper">
     
     
-    
-    
-    
-    
-    
-    
-      </section>
-      </section>
-      <!--main content end-->
-    
-      <!--main content end-->
-  </section>
-  <!-- container section end -->
-    <!-- javascripts -->
-    <script src="js/jquery.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <!-- nice scroll -->
-    <script src="js/jquery.scrollTo.min.js"></script>
-    <script src="js/jquery.nicescroll.js" type="text/javascript"></script><!--custome script for all page-->
-    <script src="js/scripts.js"></script>
-
-
-  </body>
-</html>
