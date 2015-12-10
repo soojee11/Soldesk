@@ -13,6 +13,7 @@ public class QuestionDAO {
 	
 	public QuestionDAO() {
 		mybatis=GetSqlMapClient.get();
+		System.out.println("---------------QuestionDAO°´Ã¼ »ý¼ºµÊ");
 	}
 	
 	public List getList(Map map) {

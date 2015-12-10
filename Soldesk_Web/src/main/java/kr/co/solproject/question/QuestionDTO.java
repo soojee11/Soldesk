@@ -1,5 +1,7 @@
 package kr.co.solproject.question;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class QuestionDTO {
 	
 	private int testno;			//일련번호	
@@ -8,6 +10,11 @@ public class QuestionDTO {
 	private String qtype;		//문제종류(G/J/OX)	
 	private String answer;		//답	
 	private String comment;		//해설	
+	private String poster;		//첨부파일
+	private String example;		//보기
+	
+	private MultipartFile posterMF;		// <input type="file" name="posterMF">
+	
 	
 	public QuestionDTO() {	}
 
@@ -59,13 +66,35 @@ public class QuestionDTO {
 		this.comment = comment;
 	}
 
+	public String getPoster() {
+		return poster;
+	}
+
+	public void setPoster(String poster) {
+		this.poster = poster;
+	}
+
+	public MultipartFile getPosterMF() {
+		return posterMF;
+	}
+
+	public void setPosterMF(MultipartFile posterMF) {
+		this.posterMF = posterMF;
+	}
+
+	public String getExample() {
+		return example;
+	}
+
+	public void setExample(String example) {
+		this.example = example;
+	}
+
 	@Override
 	public String toString() {
-		return "questionDTO [testno=" + testno + ", questno=" + questno + ", qtitle=" + qtitle + ", qtype=" + qtype
-				+ ", answer=" + answer + ", comment=" + comment + ", getTestno()=" + getTestno() + ", getQuestno()="
-				+ getQuestno() + ", getQtitle()=" + getQtitle() + ", getQtype()=" + getQtype() + ", getAnswer()="
-				+ getAnswer() + ", getComment()=" + getComment() + ", getClass()=" + getClass() + ", hashCode()="
-				+ hashCode() + ", toString()=" + super.toString() + "]";
+		return "QuestionDTO [testno=" + testno + ", questno=" + questno + ", qtitle=" + qtitle + ", qtype=" + qtype
+				+ ", answer=" + answer + ", comment=" + comment + ", poster=" + poster + ", example=" + example
+				+ ", posterMF=" + posterMF + "]";
 	}
 	
 }

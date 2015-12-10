@@ -8,7 +8,9 @@ import org.springframework.stereotype.Component;
 import com.ibatis.sqlmap.client.SqlMapClient;
 
 import kr.co.solproject.GetSqlMapClient;
+import kr.co.solproject.example.ExampleDTO;
 import kr.co.solproject.member.MemberDTO;
+import kr.co.solproject.question.QuestionDTO;
 import kr.co.solproject.test.TestDTO;
 
 @Component
@@ -29,62 +31,91 @@ public class AdminDAO {
 		}
 		return mlevel;
 	}
-	
-	public Boolean testIns(TestDTO dto){
-		
+
+// -----------------------------------------------------------------------------------------문제풀기부분 시작	
+	public boolean testInsert(TestDTO dto){
 		boolean flag=false;
-		
 		try {
 			int cnt=mybatis.update("sol_test.insert",dto);
 			if(cnt>0)
 				flag=true;
+			
 		}	catch(Exception e) {
 			System.out.println("testInsert error: "+e);
 		}
 		return flag;
-		
-	}
-
-	public List getTestList(Map map) {
-		List list=null;
-		try {
-			list=mybatis.queryForList("sol_test.testList", map);
-		}catch(Exception e) {
-			System.out.println("getTestList error: "+e);		
-		}
-		return list;
 	}//end
 
-	public int getTestTotal(Map map) {
-		int count=0;
-		try {
-			count=(Integer) mybatis.queryForObject("sol_test.testTotal", map);
-		}	catch(Exception e) {
-			System.out.println("getTestTotal error: "+e);		
-		}
-		return count;
-	}
-	
-	public List getquestion(Map map) {
+	public List testList(Map map) {
 		List list=null;
 		try {
-			list=mybatis.queryForList("sol_question.getquestion", map);
-			System.out.println("------------------");
-			System.out.println(list.toString());
-		}catch(Exception e) {
-			System.out.println("getquestion error: "+e);		
+			list=mybatis.queryForList("sol_test.list",map);
+
+		}	catch(Exception e) {
+			System.out.println("testList error: "+e);		
 		}
 		return list;
 	}//end
 	
-	public int getQuestionTotal(Map map) {
+	public int testTotal(Map map) {
+		int res=0;
+		try {
+			res=(Integer) mybatis.queryForObject("sol_test.total",map);
+			
+		}	catch(Exception e) {
+			System.out.println("testTotal error: "+e);		
+		}
+		return res;
+	}//end
+	
+	public List questionList(Map map) {
+		List list=null;
+		try {
+			list=mybatis.queryForList("sol_question.list", map);
+			
+		}catch(Exception e) {
+			System.out.println("questionList error: "+e);		
+		}
+		return list;
+	}//end
+	
+	public int questionTotal(Map map) {
 		int count=0;
 		try {
-			count=(Integer) mybatis.queryForObject("sol_question.questionTotal", map);
+			count=(Integer) mybatis.queryForObject("sol_question.total", map);
+			
 		}	catch(Exception e) {
-			System.out.println("getQuestionTotal error: "+e);		
+			System.out.println("questionTotal error: "+e);		
 		}
 		return count;
-	}
+	}//end
 	
+	public boolean questionInsert(QuestionDTO dto){
+		boolean flag=false;
+		try {
+			int cnt=mybatis.update("sol_question.insert",dto);
+			if(cnt>0)
+				flag=true;
+			
+		}	catch(Exception e) {
+			System.out.println("questionInsert error: "+e);
+		}
+		return flag;
+	}//end
+	
+	public boolean exampleInsert(ExampleDTO dto){
+		boolean flag=false;
+		try {
+			System.out.println(dto.toString());
+			int cnt=mybatis.update("sol_example.insert",dto);
+			if(cnt>0)
+				flag=true;
+			
+		}	catch(Exception e) {
+			System.out.println("exampleInsert error: "+e);
+		}
+		return flag;
+	}//end
+	
+// -----------------------------------------------------------------------------------------문제풀기부분 시작	
 }
