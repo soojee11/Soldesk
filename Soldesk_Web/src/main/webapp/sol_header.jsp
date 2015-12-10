@@ -91,7 +91,7 @@
 			
 	</header>
 	<!--end: Header-->
-	<div align="right" style="background-color: grey; color: white; margin: 0; padding-top: 1%;">
+	<div align="right" style="background-color: grey; color: white; margin: 0; padding-top: 20px; height: 51px;">
 		<div class="row">
 			<form class="form-inline" method="post" action=""
 				onsubmit="return search(this)">

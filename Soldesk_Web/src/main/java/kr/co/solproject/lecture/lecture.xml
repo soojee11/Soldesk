@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="sol_lecture">
+	<typeAlias alias="LectureDTO" type="kr.co.solproject.lecture.LectureDTO" />
+
+	<select id="list" parameterClass="Map" resultClass="LectureDTO">
+		SELECT lecture.no, lecture.subject, lecture.poster, lecture.teacher, lecture.lecturetime
+		FROM sol_lecture lecture join sol_category category
+		ON lecture.categoryno = category.categoryno
+		WHERE category.grade = #grade# AND category.gwamok=#gwamok#
+		ORDER BY lecture.no DESC
+	</select>
+
+	<select resultClass="Integer" parameterClass="Map" id="lectureTotal">
+		SELECT count(*) as cnt
+		FROM sol_lecture lecture join sol_category category
+		ON lecture.categoryno = category.categoryno
+		WHERE category.grade = #grade# AND category.gwamok=#gwamok#
+	</select>
+
+</sqlMap>
