@@ -18,14 +18,16 @@
 		</h3>
 		<ol class="breadcrumb">
 			<li><i class="fa fa-home"></i><a href="adminindex.do">Home</a></li>
-			<li><i class="icon_document_alt"></i>Lecture</li>
-			<li><i class="fa fa-file-text-o"></i>Lecture_List</li>
+			<li>동영상 교육 관리자페이지</li>
 		</ol>
 	</div>
 </div>
-<div align="right">
-<form class="form-inline" action="leclist.do">
-	<select name="col1" >
+
+<div class="row">
+	<div class="col-lg-24" align="center">
+		<form class="form-inline" action="leclist.do">
+			<div class="form-group">
+				<select class="form-control input-sm m-bot15" name="col1">
 		<option value="" <c:choose><c:when  test="${col1 eq '' }" >selected</c:when></c:choose>>학년전체</option>
 		<option value="1" <c:choose><c:when  test="${col1 eq '1' }" >selected</c:when></c:choose>>1학년</option>
 		<option value="2" <c:choose><c:when  test="${col1 eq '2' }" >selected</c:when></c:choose>>2학년</option>
@@ -33,16 +35,26 @@
 		<option value="4" <c:choose><c:when  test="${col1 eq '4' }" >selected</c:when></c:choose>>4학년</option>
 		<option value="5" <c:choose><c:when  test="${col1 eq '5' }" >selected</c:when></c:choose>>5학년</option>
 		<option value="6" <c:choose><c:when  test="${col1 eq '6' }" >selected</c:when></c:choose>>6학년</option>
-	</select>
-	<select name="col2" >
+					</select>
+			</div>
+
+			<div class="form-group">
+				<select class="form-control input-sm m-bot15" name="col2">
 		<option value="" <c:choose><c:when  test="${col2 eq '' }" >selected</c:when></c:choose>>과목전체</option>
 		<option value="kor" <c:choose><c:when  test="${col2 eq 'kor' }" >selected</c:when></c:choose>>국어</option>
 		<option value="eng" <c:choose><c:when  test="${col2 eq 'eng' }" >selected</c:when></c:choose>>영어</option>
 		<option value="mat" <c:choose><c:when  test="${col2 eq 'mat' }" >selected</c:when></c:choose>>수학</option>
-	</select>
-	<button>검색</button>	
-</form>
+				</select>
+			</div>
+				<button class="btn btn-success btn-sm">검색</button>
+		</form>
+	</div>
 </div>
+
+<div align="left">
+<a href="lecinsert.do"><button class="btn btn-danger btn-sm">강좌 등록</button></a>
+</div>
+
 
 <table border="0" cellspacing="0" cellpadding="0" align="center" class="table">
 	<tr align ="center">
@@ -52,7 +64,7 @@
 		<th><div align="center">파일크기</div></th>
 		<th><div align="center">캡쳐화면</div></th>
 		<th><div align="center">선생님이름</div></th>
-		<th><div align="center">강의시간(분)</div></th>
+		<th><div align="center">강의시간(초)</div></th>
 	</tr>
 	<c:if test="${total ==0 }">
 		<tr>

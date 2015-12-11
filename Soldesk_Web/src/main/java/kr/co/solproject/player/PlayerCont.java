@@ -57,13 +57,10 @@ public class PlayerCont {
 		String filename = UploadSaveManager.saveFileSpring30(filenameMF, basePath);
 		dto.setFilename(filename);
 		dto.setFilesize(filenameMF.getSize());
-		System.out.println("------");
+		
 		// categoryno
 		int grade = Integer.parseInt(req.getParameter("grade"));
 		String gwamok = req.getParameter("gwamok").trim();
-		
-		System.out.println("-----grade: "+grade);
-		System.out.println("-----gwamok: "+gwamok);
 		
 		Map map = new HashMap();
 		map.put("grade", grade);

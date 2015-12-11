@@ -7,7 +7,7 @@
 <sqlMap namespace="sol_admin">
   <!-- 매개변수 NoticeDTO 사용 -->
   <typeAlias alias="PlayerDTO" type="kr.co.solproject.player.PlayerDTO" />
-  <typeAlias alias="CategoryDTO" type="kr.co.solproject.admin.CategoryDTO" />
+  <typeAlias alias="CategoryDTO" type="kr.co.solproject.category.CategoryDTO" />
   
   <select id="getCategoryno" parameterClass="Map" resultClass="Integer">
   		select categoryno
@@ -53,6 +53,12 @@
 	
 	<update id="lecDelProc" parameterClass="Integer">
 		delete from sol_lecture
+		where lectureno = #lectureno#
+	</update>
+	
+	<update id="lecUpdate" parameterClass="PlayerDTO">
+		update sol_lecture
+		set subject = #subject#, filename=#filename#, filesize=#filesize#, poster=#poster#,teacher=#teacher#,lecturetime=#lecturetime#
 		where lectureno = #lectureno#
 	</update>
   
