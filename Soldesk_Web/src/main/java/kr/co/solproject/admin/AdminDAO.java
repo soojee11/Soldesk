@@ -1,8 +1,5 @@
 package kr.co.solproject.admin;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.util.List;
 import java.util.Map;
 
@@ -10,6 +7,8 @@ import org.springframework.stereotype.Component;
 import com.ibatis.sqlmap.client.SqlMapClient;
 
 import kr.co.solproject.GetSqlMapClient;
+import kr.co.solproject.category.CategoryDTO;
+import kr.co.solproject.example.ExampleDTO;
 import kr.co.solproject.member.MemberDTO;
 import kr.co.solproject.player.PlayerDTO;
 import kr.co.solproject.question.QuestionDTO;
@@ -23,11 +22,7 @@ public class AdminDAO {
 	public AdminDAO() {
 		mybatis=GetSqlMapClient.get();
 	}
-	
 
-	//----------------------------------------------------------- login/out ----------------------------------------------------------------------------------------------
-	
-	
 	public String loginProc(MemberDTO dto){
 		String mlevel = "";
 		try {
@@ -37,14 +32,7 @@ public class AdminDAO {
 		}
 		return mlevel;
 	}
-	//----------------------------------------------------------- member ----------------------------------------------------------------------------------------------
 	
-	
-	
-	//----------------------------------------------------------- test ----------------------------------------------------------------------------------------------
-	
-	
-	//----------------------------------------------------------- lecture ----------------------------------------------------------------------------------------------
 	public int getCategoryno(Map map) {
 		int categoryno = 0;
 		try {
@@ -223,4 +211,14 @@ public class AdminDAO {
 		}
 	}//end
 // -----------------------------------------------------------------------------------------문제풀기부분 끝
+	
+	public void lecUpdate(PlayerDTO dto) {
+		try {
+			mybatis.update("sol_admin.lecUpdate", dto);
+			
+		}	catch(Exception e) {
+			System.out.println("lecUpdate error: "+e);		
+		}
+	}//end
+	
 }

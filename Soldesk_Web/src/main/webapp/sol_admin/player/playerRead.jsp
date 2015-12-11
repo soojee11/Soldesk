@@ -10,8 +10,7 @@
 		</h3>
 		<ol class="breadcrumb">
 			<li><i class="fa fa-home"></i><a href="adminindex.do">Home</a></li>
-			<li><i class="icon_document_alt"></i>Lecture</li>
-			<li><i class="fa fa-file-text-o"></i>Lecture_Read</li>
+			<li>동영상 교육 관리자페이지</li>
 		</ol>
 	</div>
 </div>
@@ -61,7 +60,7 @@
 <br />
 <div align="center">
 	<button type="button" class="btn btn-info btn-sm"  onclick="location.href='./leclist.do?col1=${dto2.grade}&col2=${dto2.gwamok}'">목록</button>
-	<button type="button" class="btn btn-info btn-sm"  onclick="location.href='./lecUpdate.do'">수정</button>
+	<button type="button" class="btn btn-info btn-sm"  onclick="location.href='./lecUpdate.do?lectureno=${param.lectureno}&categoryno=${dto.categoryno }'">수정</button>
 	<button type="button" class="btn btn-info btn-sm"  onclick="location.href='./lecDel.do?lectureno=${param.lectureno}&categoryno=${dto.categoryno }'">삭제</button>
 </div>
 

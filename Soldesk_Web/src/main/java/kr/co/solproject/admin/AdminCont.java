@@ -13,7 +13,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
+import kr.co.solproject.category.CategoryDTO;
 import kr.co.solproject.member.MemberDTO;
 import kr.co.solproject.player.PlayerDTO;
 import kr.co.solproject.question.QuestionDTO;
@@ -32,10 +34,6 @@ public class AdminCont {
 	public AdminCont() {
 		System.out.println("--------------AdminCont객체 생성됨");
 	}
-	
-	
-	//----------------------------------------------------------- login/out ----------------------------------------------------------------------------------------------
-	
 	
 	@RequestMapping(value="sol_admin/login.do", method=RequestMethod.GET)
 	public String loginForm() {
@@ -69,7 +67,6 @@ public class AdminCont {
 		}else{ 	// 로그인 성공 
 			
 			if(mlevel.equals("A")){
-				// A1, B1, C1 등급만 관리자 페이지에 로그인 가능
 				session.setAttribute("s_admin_id", id);
 				session.setAttribute("s_admin_mlevel", mlevel);
 				session.setAttribute("s_admin_passwd", passwd);
@@ -84,8 +81,6 @@ public class AdminCont {
 		}
 	}//end
 	
-	//----------------------------------------------------------- member ----------------------------------------------------------------------------------------------
-		
 	@RequestMapping(value="sol_admin/member.do", method=RequestMethod.GET)
 	public String loginProc() {
 		return "sol_admin/member/memberList";
@@ -96,8 +91,6 @@ public class AdminCont {
 	public String memList() {
 		return "sol_admin/member/memberList";
 	}
-	
-	//----------------------------------------------------------- lecture ----------------------------------------------------------------------------------------------
 
 	@RequestMapping(value="sol_admin/leclist.do")
 	public String lecList(HttpServletRequest request) {
@@ -478,4 +471,64 @@ public class AdminCont {
 		
 		return "redirect:questionList.do?testno="+dto.getTestno();
 	}
+	
+	@RequestMapping(value = "sol_admin/lecUpdate.do", method = RequestMethod.GET)
+	public String lecUpdate(int lectureno, int categoryno, HttpServletRequest request) {
+		//System.out.println("lectureno---"+lectureno);
+		//System.out.println("categoryno---"+categoryno);
+		
+		PlayerDTO dto = null;
+		CategoryDTO dto2 = null;
+		
+		dto = dao.lecRead(lectureno);
+		dto2 = dao.categoryRead(categoryno);
+		
+		request.setAttribute("dto", dto);
+		request.setAttribute("dto2", dto2);
+		
+		return "sol_admin/player/playerUpdate";
+	}
+	
+	@RequestMapping(value = "sol_admin/lecUpdate.do", method = RequestMethod.POST)
+	public String lecUpdateProc(PlayerDTO dto, HttpServletRequest request) {
+		
+		System.out.println("lectureno: "+dto.getLectureno());
+		int lectureno = dto.getLectureno();
+		
+		request.setAttribute("root", Utility.getRoot());
+		
+		String basePath = Utility.getRealPath(request, "/sol_admin/player/storage");
+		PlayerDTO oldDTO = dao.lecRead(lectureno);
+		
+		//1) posterMF 파일 관련
+		MultipartFile posterMF = dto.getPosterMF();
+		
+		if(posterMF.getSize()>0){
+			Utility.deleteFile(basePath, oldDTO.getPoster());
+			String poster = UploadSaveManager.saveFileSpring30(posterMF, basePath);
+			dto.setPoster(poster);
+		}else{	
+			dto.setPoster(oldDTO.getPoster());
+		}
+		
+		// 2) filenameMF 파일 관련 
+		MultipartFile filenameMF = dto.getFilenameMF();
+		
+		if(filenameMF.getSize()>0){
+			Utility.deleteFile(basePath, oldDTO.getFilename());
+			String filename = UploadSaveManager.saveFileSpring30(filenameMF, basePath);
+			dto.setFilename(filename);	
+			dto.setFilesize(filenameMF.getSize());
+			
+		}else{	
+			dto.setFilename(oldDTO.getFilename());	
+			dto.setFilesize(oldDTO.getFilesize());
+		}
+		
+		dao.lecUpdate(dto);
+
+		return "sol_admin/player/playerList";
+	}
+		
+	
 }
