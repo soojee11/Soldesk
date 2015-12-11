@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix ="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,6 +39,44 @@
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 
+<!-- 하나)로그인추가 -->
+<script language="javascript">
+function check1(frm){
+	var id = frm.id.value;
+	var passwd = frm.passwd.value;
+	id = id.replace(/^\s*|\s*$/g,'');
+	passwd = passwd.replace(/^\s*|\s*$/g,'');
+	if(id.length <= 0){
+		alert('아이디을 입력해주세요.');
+		frm.id.focus();
+		return;
+	}
+	
+	if(passwd.length <= 0){
+		alert('비밀번호를 입력해주세요.');
+		frm.passwd.focus();
+		return;
+	}
+		frm.submit();
+}//end
+
+function check2(frm){
+	  var mess="로그아웃을 하시겠습니까?";
+		if(confirm(mess)){
+			frm.submit();
+			return;
+		}
+	}//end
+
+	function check3(frm){
+		  var mess="정보수정을 하시겠습니까?";
+			if(confirm(mess)){
+				frm.submit();
+				return;
+			}
+		}//end
+</script>
+
 </head>
 <body>
 	
@@ -70,12 +109,22 @@
 			          		</a>
 			          		<div class="nav-collapse collapse">
 			            		<ul class="nav">
-			              			<li><a href="../sol_study/intro.jsp">학습하기</a></li>
+<!-- 			              			<li><a href="../sol_study/intro.jsp">학습하기</a></li>
 									<li><a href="../sol_test/list.do">문제풀기</a></li>
 									<li><a href="../sol_bbs/bbsList.jsp">자유게시판</a></li>
 			              			<li><a href="../sol_mypage/intro.jsp">내정보</a></li>
 			              			<li><a href="../sol_total.jsp">전체보기</a></li>
-			            		</ul>
+ -->			            		
+ 											<!-- 하나)변경 -->
+ 			              			<li><a href="intro.do">학습하기</a></li>
+									        <li><a href="examList.do">문제풀기</a></li>
+									        <li><a href="bbsList.do">자유게시판</a></li>
+			              			<li><a href="mypage.do">내정보</a></li>
+			              			<li><a href="total.do">전체보기</a></li>
+ 
+ 
+ 
+ </ul>
 			          		</div>
 			        	</div>
 			      	</div>
@@ -91,20 +140,83 @@
 			
 	</header>
 	<!--end: Header-->
-	<div align="right" style="background-color: grey; color: white; margin: 0; padding-top: 20px; height: 51px;">
+	
+	<!-- 하나)로그인 추가 -->
+		
+<c:if test="${empty s_id || s_id == 'guest'}">
+	<%
+	// 사용자  pc에 저장된 쿠키값 가져오기
+	Cookie[] cookies = request.getCookies();
+	String c_id="";
+	if(cookies != null){//쿠키가 존재한다면
+		for(int i=0; i<cookies.length; i++){
+			Cookie item = cookies[i];//쿠키 1개 가져오기
+			if(item.getName().equals("c_id")==true){ //쿠키변수c_id
+				c_id=item.getValue(); //쿠키값 가져오기
+			}
+		}
+	}
+	%>
+		
+		<div align="right" style="background-color: grey; color: white; margin: 0; padding-top: 1%;">
 		<div class="row">
-			<form class="form-inline" method="post" action=""
-				onsubmit="return search(this)">
+		
+		<table>
+		<tr>
+		<td>
+			<form class="form-inline" method="post" action="login.do">
 
 				<div class="form-group">
-					<input type="text" class="form-control" name="" value="아이디">
-					<input type="text" class="form-control" name="" value="비번">
-					<button type="submit" class="btn btn-primary">로그인</button>
+					<input type="text"  name="id" size="10" value="<%=c_id%>"/>
+					<input type="password"  name="passwd" size="10" value=""/>
+					<input type="checkbox" name="c_id" value="SAVE" <%if(!c_id.isEmpty()){out.print("checked");} %> />ID저장 
+					<input type="button" name="login"  class="btn btn-primary" value="로그인"  onclick="check1(this.form)"/>
 				</div>
 
 			</form>
+			</td>
+			<td>
+			<form class="form-inline"  action="joinagree.do">
+				  <button type="submit" class="btn btn-primary">회원가입</button>
+			</form>
+			</td>
+			<td>
+			<form class="form-inline" method="post" action="findform.do">
+					<button type="submit" class="btn btn-primary">ID/PW찾기</button>
+			</form>
+			</td>
+			</tr>
+			</table>
+				
 		</div>
 	</div>
+	
+	</c:if>
+	
+	<c:if test="${s_id != null && s_id != 'guest'}">
+	
+	<div align="right" style="background-color: grey; color: white; margin: 0; padding-top: 1%;">
+		<div class="row">
+		
+		<table>
+	  <tr><td>
+			<form class="form-inline" method="post"  action="logout.do" >
+					${s_id }님 환영합니다.
+					<input type="button" name="logout"  class="btn btn-primary" value="로그아웃" onclick="check2(this.form)"/>
+			</form>
+			</td>
+			<td>
+			<form class="form-inline" method="post" action="update.do">
+							<input type="hidden" name="id" value="${s_id }" />
+								<input type="button" name="update" class="btn btn-primary"
+									      value="정보수정" onclick="check3(this.form)" />
+							</form>
+		</td></tr>
+		</table>
+				
+		</div>
+	</div>
+	</c:if>
 	
 	<!--start: Wrapper-->
 	<div id="wrapper">
