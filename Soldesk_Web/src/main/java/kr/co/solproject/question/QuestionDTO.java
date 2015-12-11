@@ -12,6 +12,7 @@ public class QuestionDTO {
 	private String comment;		//해설	
 	private String poster;		//첨부파일
 	private String example;		//보기
+	private String qynshow;		//문제선택(Y/N)
 	
 	private MultipartFile posterMF;		// <input type="file" name="posterMF">
 	
@@ -90,11 +91,20 @@ public class QuestionDTO {
 		this.example = example;
 	}
 
+	
+	public String getQynshow() {
+		return qynshow;
+	}
+
+	public void setQynshow(String qynshow) {
+		this.qynshow = qynshow;
+	}
+
 	@Override
 	public String toString() {
 		return "QuestionDTO [testno=" + testno + ", questno=" + questno + ", qtitle=" + qtitle + ", qtype=" + qtype
 				+ ", answer=" + answer + ", comment=" + comment + ", poster=" + poster + ", example=" + example
-				+ ", posterMF=" + posterMF + "]";
+				+ ", qynshow=" + qynshow + ", posterMF=" + posterMF + "]";
 	}
 	
 }

@@ -117,5 +117,22 @@ public class AdminDAO {
 		return flag;
 	}//end
 	
-// -----------------------------------------------------------------------------------------문제풀기부분 시작	
+	public void questionSelect(Map map) {
+		try {
+			mybatis.update("sol_question.questionSelect", map);
+			
+		}	catch(Exception e) {
+			System.out.println("questionSelect error: "+e);		
+		}
+	}//end
+	
+	public void questionDelete(Map map) {
+		try {
+			mybatis.update("sol_question.questionDelete", map);
+			
+		}	catch(Exception e) {
+			System.out.println("questionDelete error: "+e);		
+		}
+	}//end
+// -----------------------------------------------------------------------------------------문제풀기부분 끝
 }
