@@ -1,6 +1,8 @@
 package kr.co.solproject.lecture;
 
 public class LectureDTO {
+	
+	// --------------------------------------- sol_lecture 교육 테이블 컬럼
 	private int lectureno;		// 교육번호	
 	private String subject;		// 제목
 	private String filename;	// 강의파일 
@@ -10,19 +12,24 @@ public class LectureDTO {
 	
 	private int categoryno;		// 카테고리번호	
 		
-	// --------------------------------------- 카테고리 테이블 조인
-	
+	// --------------------------------------- sol_category 카테고리 테이블 컬럼
 	//private int categoryno;	// 카테고리 번호
 	private int grade;		// 학년	
 	private String gwamok;	// 과목
 	
 	
+	// --------------------------------------- sol_lectureinfo 과목정보 테이블 컬럼
+	//private int lectureno;
+	private String categoryinfo;
+	
+	// 생성자
 	public LectureDTO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
 
+	// --------------------------------------- sol_lecture get,set method
 	public int getLectureno() {
 		return lectureno;
 	}
@@ -86,8 +93,13 @@ public class LectureDTO {
 	public int getCategoryno() {
 		return categoryno;
 	}
+	
+	public void setCategoryno(int categoryno) {
+		this.categoryno = categoryno;
+	}
+		
 
-	//------------------------------------------ 카테고리 테이블 조인
+	//------------------------------------------ sol_category get, set method
 	public int getGrade() {
 		return grade;
 	}
@@ -106,15 +118,16 @@ public class LectureDTO {
 	public void setGwamok(String gwamok) {
 		this.gwamok = gwamok;
 	}
-
-
-	@Override
-	public String toString() {
-		return "LectureDTO [lectureno=" + lectureno + ", subject=" + subject + ", filename=" + filename
-				+ ", poster=" + poster + ", teacher=" + teacher + ", lecturetime=" + lecturetime
-				+ ", categoryno=" + categoryno + ", grade=" + grade + ", gwamok=" + gwamok + "]";
+	
+	
+	public String getCategoryinfo() {
+		return categoryinfo;
 	}
 	
 	
+	public void setCategoryinfo(String categoryinfo) {
+		this.categoryinfo = categoryinfo;
+	}
+		
 	
 }
