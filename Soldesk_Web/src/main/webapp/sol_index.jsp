@@ -101,7 +101,7 @@
 				<!--start: Logo -->
 				<div class="logo span3">
 
-					<a class="brand" href="sol_index.jsp"><img
+					<a class="brand" href="sol_index.do"><img
 						src="sol_img/logo.png" alt="Logo"></a>
 
 				</div>
@@ -157,6 +157,7 @@
 						}
 					}
 				}
+				System.out.print("쿠키값= "+c_id);
 		%>
 
 	<!-- 하나)로그인 페이지 -->
@@ -167,7 +168,7 @@
 				<table>
 					<tr>
 						<td style="height: 30px;">
-							<form class="form-inline" method="post" action="login.do">
+							<form class="form-inline" method="post" action="sol_member/login.do">
 								<div class="form-group">
 									<input type="text" name="id" size="10" value="<%=c_id%>" /> <input
 										type="password" name="passwd" size="10" value="" /> <input
@@ -181,12 +182,12 @@
 							</form>
 						</td>
 						<td>
-							<form class="form-inline" action="joinagree.do">
+							<form class="form-inline" action="sol_member/joinagree.do">
 								<button type="submit" class="btn btn-primary">회원가입</button>
 							</form>
 						</td>
 						<td>
-							<form class="form-inline" method="post" action="findform.do">
+							<form class="form-inline" method="post" action="sol_member/findform.do">
 								<button type="submit" class="btn btn-primary">ID/PW찾기</button>
 							</form>
 						</td>
@@ -207,14 +208,14 @@
 				<table>
 					<tr>
 						<td>
-							<form class="form-inline" method="post" action="logout.do">
+							<form class="form-inline" method="post" action="sol_member/logout.do">
 								${s_id }님 환영합니다. <input type="button" name="logout"
 									class="btn btn-primary" value="로그아웃"
 									onclick="check2(this.form)" />
 							</form>
 						</td>
 						<td>
-							<form class="form-inline" method="post" action="update.do">
+							<form class="form-inline" method="post" action="sol_member/update.do">
 								<input type="hidden" name="id" value="${s_id }" /> <input
 									type="button" name="update" class="btn btn-primary"
 									value="정보수정" onclick="check3(this.form)" />
@@ -227,7 +228,6 @@
 		</div>
 
 	</c:if>
-	index.do페이지
 
 
 

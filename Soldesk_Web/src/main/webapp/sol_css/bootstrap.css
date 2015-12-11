@@ -985,6 +985,7 @@ textarea,
 
 textarea {
   height: auto;
+   width: 100%;
 }
 
 textarea,
