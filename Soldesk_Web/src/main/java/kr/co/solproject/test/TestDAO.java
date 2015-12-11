@@ -19,7 +19,6 @@ public class TestDAO {
 	public List getList(Map map) {
 		List list=null;
 		try {
-			//System.out.println("map:"+ map.toString());
 			list=mybatis.queryForList("sol_test.list",map);
 
 		}	catch(Exception e) {

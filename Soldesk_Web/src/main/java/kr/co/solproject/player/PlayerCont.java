@@ -1,6 +1,7 @@
 package kr.co.solproject.player;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.solproject.player.PlayerDAO;
+import kr.co.solproject.study.StudyDAO;
 import net.utility.UploadSaveManager;
 import net.utility.Utility;
 
@@ -20,13 +22,38 @@ public class PlayerCont {
   
   @Autowired
   private PlayerDAO dao=null;  
+  @Autowired
+  private StudyDAO sdao=null;
   
   public PlayerCont() {System.out.println("PlayerCont 객체 생성");}
   
   @RequestMapping(value="/player/player.do", method=RequestMethod.GET)
-  public String createForm(){
-     // 여기서 동영상 정보들 가져오기 
-    return "sol_player/player";
+  public String createForm(HttpServletRequest req){
+    // 여기서 동영상 정보들 가져오기     
+    PlayerDTO dto = null;
+    List list = null;
+    
+    int lectureno = 7;  // default 우선적으로 해놈 
+    if(req.getParameter("lectureno") != null){
+      lectureno = Integer.parseInt(req.getParameter("lectureno"));
+    }
+    dto = dao.read(lectureno);
+    
+    int categoryno = dto.getCategoryno();
+    list = dao.list(categoryno);
+    
+    int lecNo = list.size();
+    
+    req.setAttribute("lecNo", lecNo);
+    req.setAttribute("list", list);
+    req.setAttribute("dto", dto);
+    
+    // 학습 테이블에 동영상 본 기록 집어넣기( id와 lecturno이 같은 레코드가 존재하면 insert 하지 않음 )
+    String id = "soldesk";
+    
+    sdao.check(id, lectureno); // id 와 lectureno 이 같은 레코드가 존재하는 지 검사 -> insert O / X
+      
+    return "player/player";
   }
   
  /* // admin index.jsp

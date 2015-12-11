@@ -6,4 +6,9 @@
 <sqlMap namespace="sol_example">
 	<typeAlias alias="ExampleDTO" type="kr.co.solproject.example.ExampleDTO" />
 	
+		<update id="insert" parameterClass="ExampleDTO">
+			insert into sol_question(questno, example)
+			values(#questno#, #example#)
+		</update>
+	
 </sqlMap>

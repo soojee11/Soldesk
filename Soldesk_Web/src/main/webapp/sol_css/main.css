@@ -13,7 +13,7 @@ body {
     color: #000;
     margin: 20px auto;
     position: relative;
-    width: 900px;
+   /*  width: 900px; */
 }
 #slideshow {
     border:1px #000 solid;
