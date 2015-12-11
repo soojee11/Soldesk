@@ -1,17 +1,21 @@
 package kr.co.solproject.member;
 
 public class MemberDTO {
-
-    private String id;      
-    private String passwd;   
-    private String mname;   
-    private String tel;      
-    private String email;    
-    private String zipcode; 
-    private String address1; 
-    private String address2;  
-    private String mlevel;   
-    private String mdate;
+	
+	private String id; 		 // -- 아이디, 중복 안됨, 레코드를 구분하는 컬럼
+	private String passwd; 	 // -- 패스워드
+	private String name; 	 // -- 성명
+	private String tel; 	 // -- 전화번호
+	private String email; 	 // -- 전자우편 주소, 중복 안됨 //unique설정하기★★★★★★★★★★★★★
+	private String zipcode;  // -- 우편번호, 101-101
+	private String address1; // -- 주소
+	private String address2; // -- 주소
+	private String mlevel;	 // -- 회원 등급, A, B, D
+	private String mdate;    //-- 등록일
+	private String promise;    //-- 한줄다짐
+	public MemberDTO() {
+			System.out.println("▶------MemberDTO()객체 생성됨...");
+	}
 	public String getId() {
 		return id;
 	}
@@ -24,11 +28,11 @@ public class MemberDTO {
 	public void setPasswd(String passwd) {
 		this.passwd = passwd;
 	}
-	public String getMname() {
-		return mname;
+	public String getName() {
+		return name;
 	}
-	public void setMname(String mname) {
-		this.mname = mname;
+	public void setName(String name) {
+		this.name = name;
 	}
 	public String getTel() {
 		return tel;
@@ -72,14 +76,18 @@ public class MemberDTO {
 	public void setMdate(String mdate) {
 		this.mdate = mdate;
 	}
-	
+	public String getPromise() {
+		return promise;
+	}
+	public void setPromise(String promise) {
+		this.promise = promise;
+	}
 	@Override
 	public String toString() {
-		return "AdminDTO [id=" + id + ", passwd=" + passwd + ", mname=" + mname + ", tel=" + tel + ", email=" + email
+		return "MemberDTO [id=" + id + ", passwd=" + passwd + ", name=" + name + ", tel=" + tel + ", email=" + email
 				+ ", zipcode=" + zipcode + ", address1=" + address1 + ", address2=" + address2 + ", mlevel=" + mlevel
-				+ ", mdate=" + mdate + "]";
-	}   
-		
-    
-		
+				+ ", mdate=" + mdate + ", promise=" + promise + "]";
+	}
+	
+	
 }
