@@ -11,23 +11,22 @@
 	<transactionManager type="JDBC" commitRequired="false">
 		<dataSource type="SIMPLE">
 			<property name="JDBC.Driver" value="org.gjt.mm.mysql.Driver" />
-			<!-- 
+			
 			<property name="JDBC.ConnectionURL" value="jdbc:mysql://localhost:3306/solproject" />
 			<property name="JDBC.Username" value="root" />
 			<property name="JDBC.Password" value="1234" /> 
-			-->
-			<!-- 이건 내것일세 위에껀 그대들것이오   -->
+			<!-- 
+			이건 내것일세 위에껀 그대들것이오  
 			<property name="JDBC.ConnectionURL" value="jdbc:mysql://localhost:3306/soldesk" />
 			<property name="JDBC.Username" value="root" />
 			<property name="JDBC.Password" value="tnwl4752" /> 
-			
+			 -->
 			<property name="Pool.MaximumActiveConnections" value="2" />
 			<property name="Pool.MaximumIdleConnections" value="1" />
 			<property name="Pool.MaximumCheckoutTime" value="20000" />
 		</dataSource>
 	</transactionManager>
 
-	<sqlMap resource="kr/co/solproject/example/example.xml" />
 	<sqlMap resource="kr/co/solproject/myscore/myscore.xml" />
 	<sqlMap resource="kr/co/solproject/question/question.xml" />
 	<sqlMap resource="kr/co/solproject/test/test.xml" />
