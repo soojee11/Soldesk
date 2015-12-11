@@ -1,5 +1,6 @@
 package kr.co.solproject.admin;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -173,7 +174,7 @@ public class AdminCont {
 		int numPerPage = 10;
 
 		int recNo = 1;
-
+		
 		String col = null;
 		if (request.getParameter("col") != "") {
 			col = request.getParameter("col");
@@ -205,8 +206,6 @@ public class AdminCont {
 		request.setAttribute("recNo", recNo);
 		request.setAttribute("nowPage", nowPage);
 		request.setAttribute("total", total);
-		
-		//System.out.println("list.toString()"+list.toString());
 
 		return "sol_admin/test/questionList";
 	}
@@ -268,6 +267,69 @@ public class AdminCont {
 		}
 
 	}
+	
+	@RequestMapping(value = "sol_admin/questionSelect.do", method = RequestMethod.POST)
+	public String questionSelect(QuestionDTO dto, HttpServletRequest request) {
 
+		String[] checks=request.getParameterValues("check");
+		
+		String str=""; 
+		for(int idx=0; idx<checks.length; idx++) {
+			str+=checks[idx]+",";
+		}
+		str=str.substring(0,str.length()-1);
+		//System.out.println(str);
+		
+		List list = new ArrayList();
+		int selno;
+		String[] str2 = str.split(",");		// ","을 기준으로 분리
+		for (int idx = 0; idx < str2.length; idx++) {
+			//System.out.println(str2[idx]);
+			selno=Integer.parseInt(str2[idx]);
+			list.add(selno);
+		}
+		//System.out.println("list:" +list);
+		
+		//System.out.println("dto.getTestno(): "+dto.getTestno());
+		Map map=new HashMap();
+		map.put("list", list);
+		map.put("testno", dto.getTestno());
+		
+		dao.questionSelect(map);
+		
+		return "redirect:questionList.do?testno="+dto.getTestno();
+	}
+
+	@RequestMapping(value = "sol_admin/questionDelete.do", method = RequestMethod.POST)
+	public String questionDelete(QuestionDTO dto, HttpServletRequest request) {
+
+		String[] checks=request.getParameterValues("check2");
+		
+		String str=""; 
+		for(int idx=0; idx<checks.length; idx++) {
+			str+=checks[idx]+",";
+		}
+		str=str.substring(0,str.length()-1);
+		//System.out.println(str);
+		
+		List list = new ArrayList();
+		int selno;
+		String[] str2 = str.split(",");		// ","을 기준으로 분리
+		for (int idx = 0; idx < str2.length; idx++) {
+			//System.out.println(str2[idx]);
+			selno=Integer.parseInt(str2[idx]);
+			list.add(selno);
+		}
+		//System.out.println("list:" +list);
+		
+		//System.out.println("dto.getTestno(): "+dto.getTestno());
+		Map map=new HashMap();
+		map.put("list", list);
+		map.put("testno", dto.getTestno());
+		
+		dao.questionDelete(map);
+		
+		return "redirect:questionList.do?testno="+dto.getTestno();
+	}
 // -----------------------------------------------------------------------------------------문제풀기부분 끝
 }

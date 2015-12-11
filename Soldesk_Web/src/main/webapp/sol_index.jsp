@@ -118,18 +118,13 @@
 							</a>
 							<div class="nav-collapse collapse">
 								<ul class="nav">
-									<!-- 									<li><a href="sol_study/intro.jsp">학습하기</a></li>
+								
+									<li><a href="sol_study/lectureList.do">학습하기</a></li>
 									<li><a href="sol_test/list.do">문제풀기</a></li>
 									<li><a href="sol_bbs/bbsList.jsp">자유게시판</a></li>
 									<li><a href="sol_mypage/intro.jsp">내정보</a></li>
-									<li><a href="sol_total.jsp">전체보기</a></li>
- -->
-									<!-- 하나).do로 변경 -->
-									<li><a href="intro.do">학습하기</a></li>
-									<li><a href="examList.do">문제풀기</a></li>
-									<li><a href="bbsList.do">자유게시판</a></li>
-									<li><a href="mypage.do">내정보</a></li>
-									<li><a href="total.do">전체보기</a></li>
+									<li><a href="sol_total/total.jsp">전체보기</a></li>
+
 								</ul>
 							</div>
 						</div>

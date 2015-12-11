@@ -2,24 +2,30 @@
 <%@ include file="../header.jsp"%>
 
 <script>
-function show(kind) {
-	switch(kind) {
+function show(value) {
+	switch(value) {
+	case '':
+		document.getElementById("G").style.display = "none";
+		document.getElementById("answer").style.display = "none";
+		document.getElementById("OX").style.display = "none";
+		break;
+		
 	case 'G':
-		document.getElementById("G").style.display = "block";
+		document.getElementById("G").style.display = "";
 		document.getElementById("answer").style.display = "none";
 		document.getElementById("OX").style.display = "none";
 		break;
 		
 	case 'J':
 		document.getElementById("G").style.display = "none";
-		document.getElementById("answer").style.display = "block";
+		document.getElementById("answer").style.display = "";
 		document.getElementById("OX").style.display = "none";
 		break;
 		
 	case 'OX':
 		document.getElementById("G").style.display = "none";
 		document.getElementById("answer").style.display = "none";
-		document.getElementById("OX").style.display = "block";
+		document.getElementById("OX").style.display = "";
 		break;
 		}
 }
@@ -55,11 +61,11 @@ function show(kind) {
 				<div class="form-group">
 				<label class="col-sm-2 control-label">문제종류</label>
 				<div class="col-sm-10">
-				<select class="form-control input-sm m-bot15" name="qtype">
+				<select class="form-control input-sm m-bot15" name="qtype" onchange="show(this.value)">
 						<option value="">문제유형을 선택하세요</option>
-						<option value="G" onclick = "show('G')">객관식</option>
-						<option value="J" onclick = "show('J')">주관식</option>
-						<option value="OX" onclick = "show('OX')">OX</option>
+						<option value="G">객관식</option>
+						<option value="J">주관식</option>
+						<option value="OX">OX</option>
 				</select>
 				</div>
 				</div>
@@ -116,7 +122,7 @@ function show(kind) {
 				</div>
 				
 				<div class="form-group" id="OX" style="display: none;">
-					<label class="control-label col-lg-2" for="inputSuccess">답</label>
+					<label class="col-sm-2 control-label">답</label>
 					<div class="col-lg-10">
 						<label class="checkbox-inline">
 							<input type="radio" name="OXAnswer" value="O" checked>O
