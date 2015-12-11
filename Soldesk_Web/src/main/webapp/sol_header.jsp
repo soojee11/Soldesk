@@ -116,7 +116,7 @@
 							<div class="nav-collapse collapse">
 								<ul class="nav">
 
-									<li><a href="../sol_study/intro.jsp">학습하기</a></li>
+									<li><a href="../sol_study/lectureList.do">학습하기</a></li>
 									<li><a href="../sol_test/list.do">문제풀기</a></li>
 									<li><a href="../sol_bbs/bbsList.jsp">자유게시판</a></li>
 									<li><a href="../sol_mypage/intro.jsp">내정보</a></li>
@@ -163,7 +163,7 @@
 				<table>
 					<tr>
 						<td>
-							<form class="form-inline" method="post" action="login.do">
+							<form class="form-inline" method="post" action="../login.do">
 
 								<div class="form-group">
 									<input type="text" name="id" size="10" value="<%=c_id%>" /> <input
@@ -179,12 +179,12 @@
 							</form>
 						</td>
 						<td>
-							<form class="form-inline" action="joinagree.do">
+							<form class="form-inline" action="../joinagree.do">
 								<button type="submit" class="btn btn-primary">회원가입</button>
 							</form>
 						</td>
 						<td>
-							<form class="form-inline" method="post" action="findform.do">
+							<form class="form-inline" method="post" action="../findform.do">
 								<button type="submit" class="btn btn-primary">ID/PW찾기</button>
 							</form>
 						</td>
