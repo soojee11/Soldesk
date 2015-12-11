@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.solproject.member.MemberDTO;
 import kr.co.solproject.player.PlayerDTO;
@@ -96,9 +96,6 @@ public class AdminCont {
 	public String memList() {
 		return "sol_admin/member/memberList";
 	}
-	
-	//----------------------------------------------------------- test ----------------------------------------------------------------------------------------------
-	
 	
 	//----------------------------------------------------------- lecture ----------------------------------------------------------------------------------------------
 

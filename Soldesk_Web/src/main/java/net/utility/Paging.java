@@ -20,7 +20,6 @@ public class Paging {
     int endPage = (nowGrp * (int)Math.ceil((double)totalRecord/recordPerPage));	// Æ¯Á¤ ±×·ìÀÇ ÆäÀÌÁö ¸ñ·Ï Á¾·á  
     //System.out.println(startPage);
     //System.out.println(endPage);
-€
     StringBuffer str = new StringBuffer();
     
     str.append("<style type='text/css'>");
