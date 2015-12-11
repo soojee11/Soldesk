@@ -26,5 +26,17 @@ public class QuestionDAO {
 		return list;
 	}//end
 	
+	public int getQuestionTotal(int testno) {
+		int res=0;
+		try {
+			res=(Integer)mybatis.queryForObject("sol_question.getQuestionTotal",testno);
+
+		}	catch(Exception e) {
+			System.out.println("getQuestion error: "+e);		
+		}
+		return res;
+	}//end
+	
+	
 }
 

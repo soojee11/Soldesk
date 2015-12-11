@@ -26,6 +26,8 @@ public class QuestionCont {
 		List list=dao.getQuestionList(testno);
 		request.setAttribute("list", list);
 		
+		int total=dao.getQuestionTotal(testno);
+		request.setAttribute("recNo", total);
 		return "sol_test/questionList";
 	}
 }

@@ -57,42 +57,45 @@ function killtime() {
 
 <input type="button" onclick="killtime()" value="채점"/>
 
-
-<table class="table" style="text-align: center;">
-	<tr>
-		<th width="50">선택</th>
-		<th width="90">문제지번호</th>
-		<th width="90">문제번호</th>
-		<th width="90">문제종류</th>
-		<th>문제제목</th>
-		<th>답</th>
-		<th>보기</th>
-		<th>해설</th>
-		<th width="100">첨부파일</th>
-	</tr>
-	
-	<c:forEach var ="dto" items="${list }">
-	<c:if test="${dto.qynshow eq 'Y'}">
-	</c:if>
+<table align="center">
+<c:set var="recNo" value="${recNo-5 }" />
+<c:forEach var="dto" items="${list }" >
+<c:set var="recNo" value="${recNo+1 }" />
+<tr>
+	<td><c:if test="${recNo > 1 }"><br /><br /><br /><br /></c:if>
+		<c:if test="${dto.poster != '' }">
+		<img src="../sol_admin/test/storage/${dto.poster }" style="border='1px';" /></c:if></td>
 		<tr>
-		<td><input type="checkbox" name="check" value="${dto.questno }" /></td>
-		<td>${dto.testno }</td>
-		<td>${dto.questno }</td>
-		<td>${dto.qtype }</td>
-		<td style="text-align: left;">${dto.qtitle }</td>
-		<td style="text-align: left;">${dto.answer }</td>
-		<td style="text-align: left;">${dto.example }</td>
-		<td style="text-align: left;">${dto.comment }</td>
+	<td><br /><strong><font font-size="12px;">${recNo }. </font></strong>${dto.qtitle }</td>
+</tr>
+	<c:if test="${dto.qtype eq 'G' }">
+	<tr>
 		<td>
-		<c:if test="${dto.poster != '' }">${dto.poster }
-		<%-- <img src="../sol_admin/test/storage/${dto.poster }" > --%>
-		</c:if>
+			<c:set var="example" value="${dto.example }" />
+		 	<%
+		 	String example = (String)pageContext.getAttribute("example");
+		 	String[] number=new String[5];
+			String[] str=example.split("/");
+			for (int idx = 0; idx < str.length; idx++) {
+				number[idx]=str[idx];
+				//System.out.print(number[idx]);
+			}
+			
+			for (int idx = 0; idx < str.length; idx++) {
+				pageContext.setAttribute("number"+idx, number[idx]) ;
+			}
+			%>
+			<ul>
+				<li style="list-style:none;"><input type="radio" name="answer" value="${number0 }" />${number0}</li>
+				<li style="list-style:none;"><input type="radio" name="answer" value="${number1 }" />${number1}</li>
+				<li style="list-style:none;"><input type="radio" name="answer" value="${number2 }" />${number2}</li>
+				<li style="list-style:none;"><input type="radio" name="answer" value="${number3 }" />${number3}</li>
+				<li style="list-style:none;"><input type="radio" name="answer" value="${number4 }" />${number4}</li>
+			</ul>
 		</td>
-	</tr>
-	<c:if test="${dto.qynshow eq 'N'}">
+		</tr> 
 	</c:if>
-	</c:forEach>
+</c:forEach>
 </table>
-
 </body>
 </html>
