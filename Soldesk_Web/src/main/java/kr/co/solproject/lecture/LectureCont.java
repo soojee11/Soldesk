@@ -1,4 +1,4 @@
-package kr.co.solproject.test;
+package kr.co.solproject.lecture;
 
 import java.util.HashMap;
 import java.util.List;
@@ -10,90 +10,80 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import kr.co.solproject.question.QuestionDTO;
 import net.utility.Paging;
 import net.utility.Utility;
 
 
 @Controller
-public class TestCont {
+public class LectureCont {
 
 	@Autowired
-	private TestDAO dao=null;
+	private LectureDAO dao=null;
 	
-	public TestCont() {
-		System.out.println("---------------testCont객체 생성됨");
+	public LectureCont() {
+		System.out.println("---------------LectureCont객체 생성");
 	}
 	
-	//http://localhost:9090/solproject/sol_test/list.do
-	@RequestMapping(value="/sol_test/list.do")
+	//http://localhost:9090/solproject/sol_study/lectureList.do"
+	@RequestMapping(value="/sol_study/lectureList.do")
 	public String list(HttpServletRequest request) {
 
-		String url="list.do";	// page링크시 이동할 페이지
+		String url="lectureList.do";	// page링크시 이동할 페이지
 		int nowPage=1;			// 현재페이지, 페이지 시작번호 0->1page
 		int numPerPage=5;		// 페이지당 레코드 수
+		int grade = 1;			// default 1학년으로 설정 
+		String gwamok = "국어";
 		
-		int recNo=1;	// 게시판 목록에 출력될 글 번호
-		
-		String col1=null;//null이면 <dynamic prepend="where">가 적용안됨
-		if(request.getParameter("col1")!="") {
-			col1=request.getParameter("col1");
-			//System.out.println("학년: "+col1);
+		if(request.getParameter("grade") != null){
+			grade = Integer.parseInt(request.getParameter("grade"));
 		}
 		
-		String col2=null;
-		if(request.getParameter("col2")!="") {
-			col2=request.getParameter("col2");
-			//System.out.println("과목: "+col2);
+		if(request.getParameter("gwamok")!=null) {
+			gwamok=request.getParameter("gwamok");
 		}
+		
+		int lectureNo=1;	// 게시판 목록에 출력될 글 번호
 
 		// 현재 페이지의 정보를 가져옴
 		if(request.getParameter("nowPage")!=null) {
 			nowPage=Integer.parseInt(request.getParameter("nowPage"));
 		}
 		
+		
 		//int sno=((nowPage-1)*numPerPage)+1;	//(0*5)+1=1,6,11
 		int sno=((nowPage-1)*numPerPage);
 		//int eno=nowPage*numPerPage;//1*5=5,10,15
 		
 		Map map=new HashMap();
-		map.put("col1", col1);
-		map.put("col2", col2);
 		map.put("sno", sno);
+		map.put("gwamok", gwamok);
+		map.put("grade", grade);
 		map.put("numPerPage", numPerPage);
+		
 		
 		// 1. model사용
 		List list=dao.getList(map);
+		String categoryInfo = dao.getCategoryInfo(grade, gwamok);
 		String dbean=Utility.getDate();
 		int total=dao.getTotal(map);
 		
-		String paging=Paging.paging(total,nowPage,numPerPage,col1,col2,url);
+		String paging=Paging.paging4(total,nowPage,numPerPage,url);
 		
-		recNo=total-(nowPage-1)*numPerPage;
+		lectureNo=total-(nowPage-1)*numPerPage;
 		
 		// 2. model사용후 결과값을 request영역에 저장
+		request.setAttribute("categoryInfo", categoryInfo);
 		request.setAttribute("list", list);
+		request.setAttribute("grade", new Integer(grade));
+		request.setAttribute("gwamok", gwamok);
 		request.setAttribute("dbean", dbean);
 		request.setAttribute("paging", paging);
-		request.setAttribute("recNo", recNo);
+		request.setAttribute("lectureNo", lectureNo);
 		request.setAttribute("nowPage", nowPage);
-		request.setAttribute("col1", col1);
-		request.setAttribute("col2", col2);
 		request.setAttribute("total", total);
 		
 		//System.out.println(list.toString());
 		// 3. 결과값을 보여줄 view 리턴
-		return "sol_test/testList";
-	}
-	
-	@RequestMapping(value="/sol_test/questionList.do")
-	public String questionList(String testtitle, int testno, QuestionDTO dto, HttpServletRequest request) {
-		
-		request.setAttribute("testtitle", testtitle);
-		
-		dto=dao.getQuestion(testno);
-		request.setAttribute("dto", dto);
-		
-		return "sol_test/testWindow";
+		return "sol_study/lectureList";
 	}
 }

@@ -65,4 +65,11 @@
 		</iterate>   
 	</update>
 
+	<select id="questionList" resultClass="QuestionDTO" parameterClass="int">
+		select testno, questno, qtitle, qtype, answer, comment, poster, qynshow, example
+		from sol_question
+		where qynshow='Y' and testno=#testno#
+		order by questno asc
+	</select>
+	
 </sqlMap>

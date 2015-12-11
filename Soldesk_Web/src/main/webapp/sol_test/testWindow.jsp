@@ -41,7 +41,7 @@ function killtime() {
 <table style="margin:0; padding:0; width:100%; height:60px; background-color:LightGray; valign:center;">
 <tr>
 	<td align="left" width="100px" rowspan="2"><img src="../sol_img/test/ebslogo.PNG" align="left"/></td>
-	<td align="center" style="font-size:25px;" rowspan="2">1학년 국어 핵심 예제1</td>
+	<td align="center" style="font-size:25px;" rowspan="2">${testtitle }</td>
 	<td align="right" width="150px">
 	<img src="../sol_img/test/alarm.png" /> 경과시간
 	</td>
@@ -54,6 +54,7 @@ function killtime() {
 </table>
 
 <input type="button" onclick="killtime()" value="채점"/>
+
 
 </body>
 </html>

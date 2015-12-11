@@ -111,15 +111,15 @@
 				<div class="span9">
 
 					<div class="navbar navbar-inverse">
-						<div class="navbar-inner">
-							<a class="btn btn-navbar" data-toggle="collapse"
-								data-target=".nav-collapse"> <span class="icon-bar"></span>
-								<span class="icon-bar"></span> <span class="icon-bar"></span>
-							</a>
-							<div class="nav-collapse collapse">
-								<ul class="nav">
-								
-									<li><a href="sol_study/lectureList.do">학습하기</a></li>
+			    		<div class="navbar-inner">
+			          		<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+			            		<span class="icon-bar"></span>
+			            		<span class="icon-bar"></span>
+			            		<span class="icon-bar"></span>
+			          		</a>
+			          		<div class="nav-collapse collapse">
+			            		<ul class="nav">
+			              			<li><a href="sol_study/lectureList.do">학습하기</a></li>
 									<li><a href="sol_test/list.do">문제풀기</a></li>
 									<li><a href="sol_bbs/bbsList.jsp">자유게시판</a></li>
 									<li><a href="sol_mypage/intro.jsp">내정보</a></li>

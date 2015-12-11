@@ -3,14 +3,24 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ include file="../header.jsp"%>
 
+
+<c:if test="${flag == true }">
+	<script>
+		flag = false;
+		alert("문제 등록에 성공하였습니다. ");
+	</script>
+</c:if>
+
 <div class="row">
 	<div class="col-lg-12">
 		<h3 class="page-header">
 			<i class="fa fa-file-text-o"></i> Test
 		</h3>
 		<ol class="breadcrumb">
+
 			<li><i class="fa fa-home"></i><a href="../adminindex.do">Home</a></li>
 			<li>문제풀기 게시판 관리 페이지</li>
+
 		</ol>
 	</div>
 </div>
@@ -137,4 +147,5 @@
 </table>
 </form>
  
+
 <%@ include file="../footer.jsp"%>
