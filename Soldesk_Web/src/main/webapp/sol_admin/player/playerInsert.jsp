@@ -1,9 +1,10 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%@ include file="../adminheader.jsp" %>
+<%@ include file="../header.jsp"%>
+
 		<!-- page start-->
 		<!--  동영상 등록 header랑 footer 나눠야 함. -->
 		<div align="center"><h3>동영상 등록</h3></div>
-		<form action="./playerInsert.do" method="post" enctype='multipart/form-data'>
+		<form action="lecinsert.do" method="post" enctype='multipart/form-data'>
 		  <table align="center">
 		    <tr>
 		      <td colspan="2">
@@ -16,9 +17,9 @@
 		          <option value="6">6학년</option>
 		        </select>
 		        <select class="form-control" name="gwamok">
-		          <option value="국어">국어</option>
-		          <option value="영어">영어</option>
-		          <option value="수학">수학</option>
+		          <option value="kor">국어</option>
+		          <option value="eng">영어</option>
+		          <option value="mat">수학</option>
 		        </select>
 		      </td>
 		    </tr>
@@ -49,4 +50,4 @@
 		  </table>
 		</form>
 <!-- page end-->
-<%@ include file="../adminfooter.jsp" %>		
+<%@ include file="../footer.jsp"%>

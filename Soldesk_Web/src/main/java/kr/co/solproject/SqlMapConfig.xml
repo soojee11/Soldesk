@@ -25,5 +25,7 @@
 	<sqlMap resource="kr/co/solproject/question/question.xml" />
 	<sqlMap resource="kr/co/solproject/test/test.xml" />
 	<sqlMap resource="kr/co/solproject/member/member.xml" />
+	<sqlMap resource="kr/co/solproject/player/player.xml" />
+	<sqlMap resource="kr/co/solproject/admin/admin.xml" />
 		
 </sqlMapConfig> 

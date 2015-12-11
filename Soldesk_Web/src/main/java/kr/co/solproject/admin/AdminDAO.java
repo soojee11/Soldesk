@@ -1,14 +1,17 @@
 package kr.co.solproject.admin;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Component;
-
 import com.ibatis.sqlmap.client.SqlMapClient;
 
 import kr.co.solproject.GetSqlMapClient;
 import kr.co.solproject.member.MemberDTO;
+import kr.co.solproject.player.PlayerDTO;
 import kr.co.solproject.test.TestDTO;
 
 @Component
@@ -20,6 +23,10 @@ public class AdminDAO {
 		mybatis=GetSqlMapClient.get();
 	}
 	
+
+	//----------------------------------------------------------- login/out ----------------------------------------------------------------------------------------------
+	
+	
 	public String loginProc(MemberDTO dto){
 		String mlevel = "";
 		try {
@@ -29,62 +36,101 @@ public class AdminDAO {
 		}
 		return mlevel;
 	}
+	//----------------------------------------------------------- member ----------------------------------------------------------------------------------------------
 	
-	public Boolean testIns(TestDTO dto){
-		
-		boolean flag=false;
-		
+	
+	
+	//----------------------------------------------------------- test ----------------------------------------------------------------------------------------------
+	
+	
+	//----------------------------------------------------------- lecture ----------------------------------------------------------------------------------------------
+	public int getCategoryno(Map map) {
+		int categoryno = 0;
 		try {
-			int cnt=mybatis.update("sol_test.insert",dto);
-			if(cnt>0)
-				flag=true;
-		}	catch(Exception e) {
-			System.out.println("testInsert error: "+e);
-		}
-		return flag;
-		
-	}
-
-	public List getTestList(Map map) {
-		List list=null;
-		try {
-			list=mybatis.queryForList("sol_test.testList", map);
+			categoryno=(Integer) mybatis.queryForObject("sol_admin.getCategoryno",map);
 		}catch(Exception e) {
-			System.out.println("getTestList error: "+e);		
+			System.out.println("getCategoryno error: "+e);		
 		}
-		return list;
+		return categoryno;
 	}//end
-
-	public int getTestTotal(Map map) {
-		int count=0;
-		try {
-			count=(Integer) mybatis.queryForObject("sol_test.testTotal", map);
-		}	catch(Exception e) {
-			System.out.println("getTestTotal error: "+e);		
-		}
-		return count;
-	}
 	
-	public List getquestion(Map map) {
+	public List getLecList() {
 		List list=null;
 		try {
-			list=mybatis.queryForList("sol_question.getquestion", map);
-			System.out.println("------------------");
-			System.out.println(list.toString());
+			list=mybatis.queryForList("sol_admin.getLecList1");
 		}catch(Exception e) {
-			System.out.println("getquestion error: "+e);		
+			System.out.println("getLecList error: "+e);		
 		}
 		return list;
 	}//end
 	
-	public int getQuestionTotal(Map map) {
+	public List getLecList(int categoryno) {
+		List list=null;
+		try {
+			list=mybatis.queryForList("sol_admin.getLecList",categoryno);
+		}catch(Exception e) {
+			System.out.println("getLecList error: "+e);		
+		}
+		return list;
+	}//end
+	
+	public int getLecTotal() {
 		int count=0;
 		try {
-			count=(Integer) mybatis.queryForObject("sol_question.questionTotal", map);
+			count=(Integer) mybatis.queryForObject("sol_admin.getLecTotal1");
 		}	catch(Exception e) {
-			System.out.println("getQuestionTotal error: "+e);		
+			System.out.println("getLecTotal error: "+e);		
 		}
 		return count;
 	}
+	
+	public int getLecTotal(int categoryno) {
+		int count=0;
+		try {
+			count=(Integer) mybatis.queryForObject("sol_admin.getLecTotal", categoryno);
+		}	catch(Exception e) {
+			System.out.println("getLecTotal error: "+e);		
+		}
+		return count;
+	}
+	public PlayerDTO lecRead(int lectureno){
+		
+		PlayerDTO dto = null;
+		
+		try {
+				dto = (PlayerDTO) mybatis.queryForObject("sol_admin.lecRead", lectureno);
+		}catch(Exception e){
+				System.out.println("lecRead error: "+e);		
+		}
+		return dto;
+	}// end
+	
+	public CategoryDTO categoryRead(int categoryno){
+		
+		CategoryDTO dto = null;
+		
+		try {
+				dto = (CategoryDTO) mybatis.queryForObject("sol_admin.categoryRead", categoryno);
+		}catch(Exception e){
+				System.out.println("CategoryDTO error: "+e);		
+		}
+		return dto;
+	}// end
+	
+	public void categoryDelProc(int categoryno){
+		try {
+				mybatis.update("sol_admin.categoryDelProc", categoryno);
+		}catch(Exception e){
+				System.out.println("categoryDelProc error: "+e);		
+		}
+	}// end
+	
+	public void lecDelProc(int lectureno){
+		try {
+				mybatis.update("sol_admin.lecDelProc", lectureno);
+		}catch(Exception e){
+				System.out.println("categoryDelProc error: "+e);		
+		}
+	}// end
 	
 }
