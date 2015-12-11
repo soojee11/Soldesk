@@ -12,6 +12,7 @@
     <title>solProject admin</title>
     
 	<script src="js/test/myjs.js"></script>
+	<script src="js/myjs.js"></script>
 	
     <!-- Bootstrap CSS -->    
     <link href="css/bootstrap.min.css" rel="stylesheet">

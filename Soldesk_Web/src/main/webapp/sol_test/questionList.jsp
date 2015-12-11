@@ -55,17 +55,31 @@ function killtime() {
 </tr>
 </table>
 
-<input type="button" onclick="killtime()" value="채점"/>
 
-<table align="center">
-<c:set var="recNo" value="${recNo-5 }" />
+<c:forEach var="i" end="${recNo }" begin="1" step="1">
+    <c:set var="recNo2" value="${recNo+1-i}"/>
+    
+</c:forEach>
+
+
+
+<input type="button" onclick="killtime()" value="채점"/>
+<div align="center"> 
+<table align="center" text-align="center">
+<c:set var="recNo" value="${recNo2-1 }" />
 <c:forEach var="dto" items="${list }" >
 <c:set var="recNo" value="${recNo+1 }" />
 <tr>
+
 	<td><c:if test="${recNo > 1 }"><br /><br /><br /><br /></c:if>
 		<c:if test="${dto.poster != '' }">
-		<img src="../sol_admin/test/storage/${dto.poster }" style="border='1px';" /></c:if></td>
-		<tr>
+		<div style="border:1px dotted; padding: 10px;">
+		<img src="../sol_admin/test/storage/${dto.poster }" />
+		</div>
+		</c:if>
+	</td>
+
+	<tr>
 	<td><br /><strong><font font-size="12px;">${recNo }. </font></strong>${dto.qtitle }</td>
 </tr>
 	<c:if test="${dto.qtype eq 'G' }">
@@ -95,7 +109,27 @@ function killtime() {
 		</td>
 		</tr> 
 	</c:if>
+	
+	<c:if test="${dto.qtype eq 'J' }">
+	<tr>
+		<td>
+			<ul><li style="list-style:none;"><input type="text" name="answer"/></li></ul>
+		</td>
+		</tr> 
+	</c:if>
+	
+	<c:if test="${dto.qtype eq 'OX' }">
+	<tr>
+		<td>
+			<ul>
+			<li style="list-style:none;"><input type="radio" name="answer" value="O" />O</li>
+			<li style="list-style:none;"><input type="radio" name="answer" value="X" />X</li>
+			</ul>
+		</td>
+		</tr> 
+	</c:if>
 </c:forEach>
 </table>
+</div>
 </body>
 </html>
