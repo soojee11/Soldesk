@@ -1,6 +1,7 @@
 package kr.co.solproject.player;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.solproject.player.PlayerDAO;
+import kr.co.solproject.study.StudyDAO;
 import net.utility.UploadSaveManager;
 import net.utility.Utility;
 
@@ -99,5 +101,6 @@ public class PlayerCont {
 	}//end
 	
 	
+
 
 }

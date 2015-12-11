@@ -1,5 +1,6 @@
 package kr.co.solproject.player;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Component;
@@ -17,6 +18,7 @@ public class PlayerDAO {
     System.out.println("PlayerDAO 객체 생성");
   }
   
+
   public Boolean categoryIns(Map map){
 	  
 	  boolean flag=false;
@@ -39,14 +41,17 @@ public class PlayerDAO {
     try{
       categoryno = (Integer) mybatis.queryForObject("sol_category.read", map);
       System.out.println("dao categoryno: "+categoryno);
+
     }catch (Exception e){
       System.out.println("실패: "+e);
     }
     return categoryno;
   }
   
+  // admin page 에서 동영상 등록 
   public boolean playerInsert(PlayerDTO dto){
     boolean flag = false;
+
 	    try{
 	    	dto.getCategoryno();
 	    	int cnt=mybatis.update("sol_category.insert",dto);
@@ -56,6 +61,27 @@ public class PlayerDAO {
 	      System.out.println("실패: "+e);
 	    }
 	    return flag;
+
+  }
+  
+  public PlayerDTO read(int lectureno){
+    PlayerDTO dto = null;
+    try{
+      dto = (PlayerDTO) mybatis.queryForObject("sol_category.lectureRead", lectureno);
+    }catch (Exception e){
+      System.out.println("read 실패다: "+e);
+    }
+    return dto;
+  }
+  
+  public List list(int categoryno){
+    List list = null;
+    try{
+      list = mybatis.queryForList("sol_category.lectureList", categoryno);
+    }catch (Exception e){
+      System.out.println("read 실패다: "+e);
+    }
+    return list;
   }
   
 }

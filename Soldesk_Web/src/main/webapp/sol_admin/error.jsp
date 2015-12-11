@@ -10,13 +10,15 @@
 <div style="width: 100%; text-align: center; margin: 0 auto; font-size: 20px">
 
 <% 
-	String msg1=(String)request.getAttribute("msg1");
+
+	String msg=(String)request.getAttribute("msg");
 	String link1=(String)request.getAttribute("link1");
 	String link2=(String)request.getAttribute("link2");
 	
 	out.print("<dl>");
-	if(msg1 != null) {
-		out.print("<dd><img src='/mybatis/images/face-monkey.png'>"+msg1);
+
+	if(msg != null) {
+		out.print("<dd><img src='../sol_img/face-monkey.png'>"+msg);
 	}
 	out.print("</dl>");
 	out.print("<br /><br />");

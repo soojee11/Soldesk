@@ -7,68 +7,24 @@
 	<typeAlias alias="TestDTO" type="kr.co.solproject.test.TestDTO" />
 
 	<update id="insert" parameterClass="TestDTO">
-		insert into
-		sol_test(grade,subject,testtitle)
+		insert into sol_test(grade,subject,testtitle)
 		values(#grade#,#subject#,#testtitle#)
 	</update>
 
-	<select id="testList" parameterClass="Map" resultClass="TestDTO">
-
-		select testno,grade,subject,testtitle
-		from sol_test
-		<dynamic prepend="where">
-			<isEqual property="col" compareValue="wname">
-				grade LIKE CONCAT('%',#grade#,'%')
-			</isEqual>
-			<isEqual property="col" compareValue="subject">
-				subject LIKE CONCAT('%',#subject#,'%')
-			</isEqual>
-			<isEqual property="col" compareValue="content">
-				testtitle LIKE CONCAT('%',#testtitle#,'%')
-			</isEqual>
-		</dynamic>
-		order by testno DESC
-		limit #sno#, #numPerPage#
-
-	</select>
-
-	<select id="testTotal" parameterClass="Map" resultClass="Integer">
-		select count(*) as cnt
-		from sol_test
-		<dynamic prepend="where">
-			<isEqual property="col" compareValue="wname">
-				grade LIKE CONCAT('%',#grade#,'%')
-			</isEqual>
-			<isEqual property="col" compareValue="subject">
-				subject LIKE CONCAT('%',#subject#,'%')
-			</isEqual>
-			<isEqual property="col" compareValue="content">
-				testtitle LIKE CONCAT('%',#testtitle#,'%')
-			</isEqual>
-		</dynamic>
-	</select>
-
 	<select id="list" parameterClass="Map" resultClass="TestDTO">
-
 		select testno,grade,subject,testtitle
 		from sol_test
 		<dynamic prepend="WHERE">
 			<isNotEmpty property="col1" prepend="AND">
-
 				grade = #col1#
-
 			</isNotEmpty>
 
 			<isNotEmpty property="col2" prepend="AND">
-
 				subject = #col2#
-
 			</isNotEmpty>
-
 		</dynamic>
 		order by testno desc
 		limit #sno#, #numPerPage#
-
 	</select>
 
 	<select id="total" parameterClass="Map" resultClass="Integer">
@@ -76,17 +32,12 @@
 		from sol_test
 		<dynamic prepend="WHERE">
 			<isNotEmpty property="col1" prepend="AND">
-
 				grade = #col1#
-
 			</isNotEmpty>
 
 			<isNotEmpty property="col2" prepend="AND">
-
 				subject = #col2#
-
 			</isNotEmpty>
-
 		</dynamic>
 	</select>
 

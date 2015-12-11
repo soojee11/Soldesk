@@ -13,12 +13,12 @@ public class TestDAO {
 	
 	public TestDAO() {
 		mybatis=GetSqlMapClient.get();
+		System.out.println("---------------testCont°´Ã¼ »ý¼ºµÊ");
 	}
 	
 	public List getList(Map map) {
 		List list=null;
 		try {
-			//System.out.println("map:"+ map.toString());
 			list=mybatis.queryForList("sol_test.list",map);
 
 		}	catch(Exception e) {
