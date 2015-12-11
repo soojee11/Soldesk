@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import kr.co.solproject.question.QuestionDTO;
 import net.utility.Paging;
 import net.utility.Utility;
 
@@ -83,5 +84,16 @@ public class TestCont {
 		//System.out.println(list.toString());
 		// 3. 결과값을 보여줄 view 리턴
 		return "sol_test/testList";
+	}
+	
+	@RequestMapping(value="/sol_test/questionList.do")
+	public String questionList(String testtitle, int testno, QuestionDTO dto, HttpServletRequest request) {
+		
+		request.setAttribute("testtitle", testtitle);
+		
+		dto=dao.getQuestion(testno);
+		request.setAttribute("dto", dto);
+		
+		return "sol_test/testWindow";
 	}
 }

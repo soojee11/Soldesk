@@ -1,10 +1,12 @@
 package kr.co.solproject.player;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Component;
 import com.ibatis.sqlmap.client.SqlMapClient;
 import kr.co.solproject.GetSqlMapClient;
+import kr.co.solproject.test.TestDTO;
 
 @Component
 public class PlayerDAO {
@@ -16,26 +18,70 @@ public class PlayerDAO {
     System.out.println("PlayerDAO 객체 생성");
   }
   
+
+  public Boolean categoryIns(Map map){
+	  
+	  boolean flag=false;
+	  
+	    try{
+	    	
+	    	int cnt=mybatis.update("sol_category.categoryIns",map);
+	    	
+			if(cnt>0)
+				flag=true;
+			
+	    }catch (Exception e){
+	      System.out.println("실패: "+e);
+	    }
+	    return flag;
+	  }
+  
   public int getCategoryno(Map map){
     int categoryno = 0;
     try{
       categoryno = (Integer) mybatis.queryForObject("sol_category.read", map);
+      System.out.println("dao categoryno: "+categoryno);
+
     }catch (Exception e){
       System.out.println("실패: "+e);
     }
     return categoryno;
   }
   
+  // admin page 에서 동영상 등록 
   public boolean playerInsert(PlayerDTO dto){
-    
     boolean flag = false;
+
+	    try{
+	    	dto.getCategoryno();
+	    	int cnt=mybatis.update("sol_category.insert",dto);
+			if(cnt>0)
+				flag=true;
+	    }catch (Exception e){
+	      System.out.println("실패: "+e);
+	    }
+	    return flag;
+
+  }
+  
+  public PlayerDTO read(int lectureno){
+    PlayerDTO dto = null;
     try{
-      int cnt = (Integer) mybatis.insert("sol_category.insert", dto);
-      if(cnt>0) flag = true;
+      dto = (PlayerDTO) mybatis.queryForObject("sol_category.lectureRead", lectureno);
     }catch (Exception e){
-      System.out.println("실패다: "+e);
+      System.out.println("read 실패다: "+e);
     }
-    return flag;
+    return dto;
+  }
+  
+  public List list(int categoryno){
+    List list = null;
+    try{
+      list = mybatis.queryForList("sol_category.lectureList", categoryno);
+    }catch (Exception e){
+      System.out.println("read 실패다: "+e);
+    }
+    return list;
   }
   
 }

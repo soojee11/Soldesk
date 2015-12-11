@@ -10,15 +10,17 @@ public class Paging {
    * @param recordPerPage ÆäÀÌÁö´ç ·¹ÄÚµå ¼ö 
    * @return
    */
-  public static  String paging(int totalRecord, int nowPage, int recordPerPage, String col, String word, String filenm){
+
+  public static String paging(int totalRecord, int nowPage, int recordPerPage, String col, String word, String filenm){
     int pagePerBlock = 10; // ºí·°´ç ÆäÀÌÁö ¼ö
     int totalPage = (int)(Math.ceil((double)totalRecord/recordPerPage)); // ÀüÃ¼ ÆäÀÌÁö 
     int totalGrp = (int)(Math.ceil((double)totalPage/pagePerBlock));// ÀüÃ¼ ±×·ì
     int nowGrp = (int)(Math.ceil((double)nowPage/pagePerBlock));    // ÇöÀç ±×·ì
     int startPage = ((nowGrp - 1) * recordPerPage) + 1; // Æ¯Á¤ ±×·ìÀÇ ÆäÀÌÁö ¸ñ·Ï ½ÃÀÛ 
     int endPage = (nowGrp * (int)Math.ceil((double)totalRecord/recordPerPage));	// Æ¯Á¤ ±×·ìÀÇ ÆäÀÌÁö ¸ñ·Ï Á¾·á  
-    System.out.println(startPage);
-    System.out.println(endPage);
+    //System.out.println(startPage);
+    //System.out.println(endPage);
+€
     StringBuffer str = new StringBuffer();
     
     str.append("<style type='text/css'>");

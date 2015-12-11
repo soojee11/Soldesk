@@ -13,17 +13,8 @@ public class QuestionDAO {
 	
 	public QuestionDAO() {
 		mybatis=GetSqlMapClient.get();
+		System.out.println("---------------QuestionDAO°´Ã¼ »ý¼ºµÊ");
 	}
-	
-	public List getList(Map map) {
-		List list=null;
-		try {
-			list=mybatis.queryForList("question.list",map);
-		}	catch(Exception e) {
-			System.out.println("list error: "+e);		
-		}
-		return list;
-	}//end
 	
 }
 
