@@ -213,6 +213,7 @@ public class MemberController {
 		res = dao.emailcheck(email);
 
 		if (res == 0) {
+			email.trim();
 			req.setAttribute("email", email);
 			return "/sol_member/checkprocemail";
 		} else {
