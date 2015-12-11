@@ -1,4 +1,4 @@
-function test_window(testno,testtitle) 
+function questionList(testno,testtitle) 
 {
 	//http://a3040.com/bbs/board.php?bo_table=javascript&wr_id=9&page=2
 	

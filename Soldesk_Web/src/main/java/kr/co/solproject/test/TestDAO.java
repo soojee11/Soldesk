@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 import com.ibatis.sqlmap.client.SqlMapClient;
 
 import kr.co.solproject.GetSqlMapClient;
-import kr.co.solproject.question.QuestionDTO;
 
 @Component
 public class TestDAO {
@@ -39,16 +38,6 @@ public class TestDAO {
 		}
 		return res;
 	}
-
-	public QuestionDTO getQuestion(int testno) {
-		QuestionDTO dto=null;
-		try {
-			dto=(QuestionDTO) mybatis.queryForObject("sol_question.questionList",testno);
-
-		}	catch(Exception e) {
-			System.out.println("getQuestion error: "+e);		
-		}
-		return dto;
-	}//end
+	
 }
 
