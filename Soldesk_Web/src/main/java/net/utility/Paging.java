@@ -10,6 +10,7 @@ public class Paging {
    * @param recordPerPage ÆäÀÌÁö´ç ·¹ÄÚµå ¼ö 
    * @return
    */
+
   public static String paging(int totalRecord, int nowPage, int recordPerPage, String col, String word, String filenm){
     int pagePerBlock = 10; // ºí·°´ç ÆäÀÌÁö ¼ö
     int totalPage = (int)(Math.ceil((double)totalRecord/recordPerPage)); // ÀüÃ¼ ÆäÀÌÁö 
@@ -19,6 +20,7 @@ public class Paging {
     int endPage = (nowGrp * (int)Math.ceil((double)totalRecord/recordPerPage));	// Æ¯Á¤ ±×·ìÀÇ ÆäÀÌÁö ¸ñ·Ï Á¾·á  
     //System.out.println(startPage);
     //System.out.println(endPage);
+€
     StringBuffer str = new StringBuffer();
     
     str.append("<style type='text/css'>");
@@ -246,6 +248,5 @@ public class Paging {
 	    
 	    return str.toString();
 	  }// end
-  
   
 }
