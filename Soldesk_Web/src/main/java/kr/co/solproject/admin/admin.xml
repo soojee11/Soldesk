@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE sqlMap       
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"       
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<!-- namespace : 주로 테이블 명 사용, 생략 가능 -->
+<sqlMap namespace="sol_admin">
+  <!-- 매개변수 NoticeDTO 사용 -->
+  <typeAlias alias="PlayerDTO" type="kr.co.solproject.player.PlayerDTO" />
+  <typeAlias alias="CategoryDTO" type="kr.co.solproject.admin.CategoryDTO" />
+  
+  <select id="getCategoryno" parameterClass="Map" resultClass="Integer">
+  		select categoryno
+  		from sol_category
+  		where gwamok = #col2# and grade = #col1#
+   </select>
+   <select id="getLecList1" resultClass="PlayerDTO">
+		select lectureno,subject,filename,filesize,poster,teacher,lecturetime
+		from sol_lecture
+    </select> 
+	<select id="getLecList" parameterClass="Integer" resultClass="PlayerDTO">
+		select lectureno,subject,filename,filesize,poster,teacher,lecturetime
+		from sol_lecture
+		where categoryno = #categoryno#
+	</select> 
+	<select id="getLecTotal1" resultClass="Integer">
+		select count(*) as cnt
+		from sol_lecture
+	</select>
+ 
+	<select id="getLecTotal" parameterClass="Integer" resultClass="Integer">
+		select count(*) as cnt
+		from sol_lecture
+		where categoryno = #categoryno#
+	</select>
+	
+	<select id="lecRead" parameterClass="Integer" resultClass="PlayerDTO">
+		select subject,filename,filesize,poster,teacher,lecturetime,categoryno
+		from sol_lecture
+		where lectureno = #lectureno#
+	</select>
+	
+	<select id="categoryRead" parameterClass="Integer" resultClass="CategoryDTO">
+		select grade, gwamok
+		from sol_category
+		where categoryno = #categoryno#
+	</select>
+    
+    <update id="categoryDelProc" parameterClass="Integer">
+		delete from sol_category
+		where categoryno = #categoryno#
+	</update>
+	
+	<update id="lecDelProc" parameterClass="Integer">
+		delete from sol_lecture
+		where lectureno = #lectureno#
+	</update>
+  
+</sqlMap>

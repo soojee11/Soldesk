@@ -10,11 +10,13 @@
 <div style="width: 100%; text-align: center; margin: 0 auto; font-size: 20px">
 
 <% 
+
 	String msg=(String)request.getAttribute("msg");
 	String link1=(String)request.getAttribute("link1");
 	String link2=(String)request.getAttribute("link2");
 	
 	out.print("<dl>");
+
 	if(msg != null) {
 		out.print("<dd><img src='../sol_img/face-monkey.png'>"+msg);
 	}

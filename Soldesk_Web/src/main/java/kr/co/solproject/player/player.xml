@@ -9,9 +9,14 @@
   <!-- 매개변수 NoticeDTO 사용 -->
   <typeAlias alias="PlayerDTO" type="kr.co.solproject.player.PlayerDTO" />
   
+    <insert id="categoryIns" parameterClass="Map">
+    INSERT INTO sol_category(grade,gwamok)
+    VALUES (#grade#,#gwamok#)
+  </insert>
+  
   <!-- 카테고리 넘버 가져오기 -->
   <select id="read" parameterClass="Map" resultClass="Integer">
-    SELECT categoryno FROM sol_category
+    SELECT max(categoryno) FROM sol_category
     WHERE grade=#grade# AND gwamok=#gwamok#
   </select>
 

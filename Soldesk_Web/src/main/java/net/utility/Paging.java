@@ -10,15 +10,17 @@ public class Paging {
    * @param recordPerPage ÆäÀÌÁö´ç ·¹ÄÚµå ¼ö 
    * @return
    */
-  public static  String paging(int totalRecord, int nowPage, int recordPerPage, String col, String word, String filenm){
+
+  public static String paging(int totalRecord, int nowPage, int recordPerPage, String col, String word, String filenm){
     int pagePerBlock = 10; // ºí·°´ç ÆäÀÌÁö ¼ö
     int totalPage = (int)(Math.ceil((double)totalRecord/recordPerPage)); // ÀüÃ¼ ÆäÀÌÁö 
     int totalGrp = (int)(Math.ceil((double)totalPage/pagePerBlock));// ÀüÃ¼ ±×·ì
     int nowGrp = (int)(Math.ceil((double)nowPage/pagePerBlock));    // ÇöÀç ±×·ì
     int startPage = ((nowGrp - 1) * recordPerPage) + 1; // Æ¯Á¤ ±×·ìÀÇ ÆäÀÌÁö ¸ñ·Ï ½ÃÀÛ 
     int endPage = (nowGrp * (int)Math.ceil((double)totalRecord/recordPerPage));	// Æ¯Á¤ ±×·ìÀÇ ÆäÀÌÁö ¸ñ·Ï Á¾·á  
-    System.out.println(startPage);
-    System.out.println(endPage);
+    //System.out.println(startPage);
+    //System.out.println(endPage);
+€
     StringBuffer str = new StringBuffer();
     
     str.append("<style type='text/css'>");
@@ -199,4 +201,52 @@ public class Paging {
     
     return str.toString();
   }
+  
+  public static String paging4(int totalRecord, int nowPage, int recordPerPage, String filenm){
+	    int pagePerBlock = 10; // ºí·°´ç ÆäÀÌÁö ¼ö
+	    int totalPage = (int)(Math.ceil((double)totalRecord/recordPerPage)); // ÀüÃ¼ ÆäÀÌÁö 
+	    int totalGrp = (int)(Math.ceil((double)totalPage/pagePerBlock));// ÀüÃ¼ ±×·ì
+	    int nowGrp = (int)(Math.ceil((double)nowPage/pagePerBlock));    // ÇöÀç ±×·ì
+	    int startPage = ((nowGrp - 1) * recordPerPage) + 1; // Æ¯Á¤ ±×·ìÀÇ ÆäÀÌÁö ¸ñ·Ï ½ÃÀÛ 
+	    int endPage = (nowGrp * (int)Math.ceil((double)totalRecord/recordPerPage));	// Æ¯Á¤ ±×·ìÀÇ ÆäÀÌÁö ¸ñ·Ï Á¾·á  
+	    //System.out.println(startPage);
+	    //System.out.println(endPage);
+	    StringBuffer str = new StringBuffer();
+	    
+	    str.append("<style type='text/css'>");
+	    str.append("  #paging {text-align: center; margin-top: 5px; font-size: 1em;}");
+	    str.append("  #paging A:link {text-decoration:none; color:black; font-size: 1em;}");
+	    str.append("  #paging A:hover{text-decoration:underline; background-color: #ffffff; color:black; font-size: 1em;}");
+	    str.append("  #paging A:visited {text-decoration:none;color:black; font-size: 1em;}");
+	    str.append("</style>");
+	    str.append("<DIV id='paging'>");
+	    //str.append("ÇöÀç ÆäÀÌÁö: " + nowPage + " / " + totalPage + "&nbsp;&nbsp;");
+
+	    int _nowPage = (nowGrp-1) * pagePerBlock; // 10°³ ÀÌÀü ÆäÀÌÁö·Î ÀÌµ¿
+	    if (nowGrp >= 2){
+	      str.append("[<A href='./"+filenm+"?nowPage="+_nowPage+"'>ÀÌÀü</A>]");
+	    }
+
+	    for(int i=startPage; i<=endPage; i++){
+	      if (i > totalPage){
+	        break;
+	      }
+	 
+	      if (nowPage == i){ // ÇöÀç ÆäÀÌÁöÀÌ¸é °­Á¶ È¿°ú
+	        str.append("<span style='font-size: 1.2em; font-weight: bold;'>"+i+"</span>&nbsp;");  
+	      }else{
+	        str.append("<A href='./"+filenm+"?nowPage="+i+"'>"+i+"</A>&nbsp;");
+	      }
+	      
+	    }
+	    
+	    _nowPage = (nowGrp * pagePerBlock)+1; // 10°³ ´ÙÀ½ ÆäÀÌÁö·Î ÀÌµ¿
+	    if (nowGrp < totalGrp){
+	      str.append("[<A href='./"+filenm+"?nowPage="+_nowPage+"'>´ÙÀ½</A>]");
+	    }
+	    str.append("</DIV>");
+	    
+	    return str.toString();
+	  }// end
+  
 }
