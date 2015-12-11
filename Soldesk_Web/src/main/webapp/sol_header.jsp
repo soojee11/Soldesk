@@ -138,19 +138,7 @@
 
 	</header>
 	<!--end: Header-->
-	<div align="right" style="background-color: grey; color: white; margin: 0; padding-top: 20px; height: 51px;">
-		<div class="row">
-			<form class="form-inline" method="post" action=""
-				onsubmit="return search(this)">
-
-				<div class="form-group">
-					<input type="text" class="form-control" name="" value="아이디">
-					<input type="text" class="form-control" name="" value="비번">
-					<button type="submit" class="btn btn-primary">로그인</button>
-				</div>
-
-			</form>
-
+	
 	<!-- 하나)로그인 추가 -->
 
 	<c:if test="${empty s_id || s_id == 'guest'}">
