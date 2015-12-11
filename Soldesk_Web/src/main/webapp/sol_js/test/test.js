@@ -1,4 +1,4 @@
-function test_window() 
+function questionList(testno,testtitle) 
 {
 	//http://a3040.com/bbs/board.php?bo_table=javascript&wr_id=9&page=2
 	
@@ -9,7 +9,7 @@ function test_window()
 	var tops = Number(((screen.height/2)-(userheight/2))-50);
 	var left = Number((screen.width/2)-(userwidth/2));
 	
-	window.open('test_window.jsp','test_window',
+	window.open('questionList.do?testno='+testno+"&testtitle="+testtitle,'test_window',
 			'scrollbars=yes,resizable=yes,width='+userwidth+',height='+userheight+',top='+tops+', left='+left);
 
 } 

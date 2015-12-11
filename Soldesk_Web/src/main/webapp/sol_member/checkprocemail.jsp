@@ -4,6 +4,7 @@
 <head>
 <script language="javascript">
 	function apply(email) {
+		var email=email.replace(/(^\s*)|(\s*$)/gi, "");
 		opener.document.joinForm.email.value = email;
 		window.close();
 	}

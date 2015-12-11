@@ -374,15 +374,15 @@ public class AdminCont {
 		
 		if(dto.getQtype().equals("G")) {
 			StringBuffer example = new StringBuffer();
-			example.append(request.getParameter("example1"));
+			example.append(request.getParameter("example1").trim());
 			example.append("/");
-			example.append(request.getParameter("example2"));
+			example.append(request.getParameter("example2").trim());
 			example.append("/");
-			example.append(request.getParameter("example3"));
+			example.append(request.getParameter("example3").trim());
 			example.append("/");
-			example.append(request.getParameter("example4"));
+			example.append(request.getParameter("example4").trim());
 			example.append("/");
-			example.append(request.getParameter("example5"));
+			example.append(request.getParameter("example5").trim());
 			//System.out.println("exampleº¸±â:" +example);
 	
 		

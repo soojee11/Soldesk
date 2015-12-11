@@ -192,21 +192,7 @@ public class AdminDAO {
 		}
 		return flag;
 	}//end
-	
-	public boolean exampleInsert(ExampleDTO dto){
-		boolean flag=false;
-		try {
-			System.out.println(dto.toString());
-			int cnt=mybatis.update("sol_example.insert",dto);
-			if(cnt>0)
-				flag=true;
-			
-		}	catch(Exception e) {
-			System.out.println("exampleInsert error: "+e);
-		}
-		return flag;
-	}//end
-	
+		
 	public void questionSelect(Map map) {
 		try {
 			mybatis.update("sol_question.questionSelect", map);

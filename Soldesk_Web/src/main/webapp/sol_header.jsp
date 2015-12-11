@@ -98,7 +98,7 @@
 				<!--start: Logo -->
 				<div class="logo span3">
 
-					<a class="brand" href="../sol_index.jsp"><img
+					<a class="brand" href="../sol_index.do"><img
 						src="../sol_img/logo.png" alt="Logo"></a>
 
 				</div>
@@ -108,15 +108,15 @@
 				<div class="span9">
 
 					<div class="navbar navbar-inverse">
-						<div class="navbar-inner">
-							<a class="btn btn-navbar" data-toggle="collapse"
-								data-target=".nav-collapse"> <span class="icon-bar"></span>
-								<span class="icon-bar"></span> <span class="icon-bar"></span>
-							</a>
-							<div class="nav-collapse collapse">
-								<ul class="nav">
-
-									<li><a href="../sol_study/lectureList.do">학습하기</a></li>
+			    		<div class="navbar-inner">
+			          		<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+			            		<span class="icon-bar"></span>
+			            		<span class="icon-bar"></span>
+			            		<span class="icon-bar"></span>
+			          		</a>
+			          		<div class="nav-collapse collapse">
+			            		<ul class="nav">
+			              			<li><a href="../sol_study/lectureList.do">학습하기</a></li>
 									<li><a href="../sol_test/list.do">문제풀기</a></li>
 									<li><a href="../sol_bbs/bbsList.jsp">자유게시판</a></li>
 									<li><a href="../sol_mypage/intro.jsp">내정보</a></li>
@@ -138,7 +138,7 @@
 
 	</header>
 	<!--end: Header-->
-
+	
 	<!-- 하나)로그인 추가 -->
 
 	<c:if test="${empty s_id || s_id == 'guest'}">
@@ -163,7 +163,7 @@
 				<table>
 					<tr>
 						<td>
-							<form class="form-inline" method="post" action="../login.do">
+							<form class="form-inline" method="post" action="../sol_member/login.do">
 
 								<div class="form-group">
 									<input type="text" name="id" size="10" value="<%=c_id%>" /> <input
@@ -179,12 +179,12 @@
 							</form>
 						</td>
 						<td>
-							<form class="form-inline" action="../joinagree.do">
+							<form class="form-inline" action="../sol_member/joinagree.do">
 								<button type="submit" class="btn btn-primary">회원가입</button>
 							</form>
 						</td>
 						<td>
-							<form class="form-inline" method="post" action="../findform.do">
+							<form class="form-inline" method="post" action="../sol_member/findform.do">
 								<button type="submit" class="btn btn-primary">ID/PW찾기</button>
 							</form>
 						</td>
@@ -205,14 +205,14 @@
 				<table>
 					<tr>
 						<td>
-							<form class="form-inline" method="post" action="logout.do">
+							<form class="form-inline" method="post" action="../sol_member/logout.do">
 								${s_id }님 환영합니다. <input type="button" name="logout"
 									class="btn btn-primary" value="로그아웃"
 									onclick="check2(this.form)" />
 							</form>
 						</td>
 						<td>
-							<form class="form-inline" method="post" action="update.do">
+							<form class="form-inline" method="post" action="../sol_member/update.do">
 								<input type="hidden" name="id" value="${s_id }" /> <input
 									type="button" name="update" class="btn btn-primary"
 									value="정보수정" onclick="check3(this.form)" />

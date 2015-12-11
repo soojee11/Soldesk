@@ -65,7 +65,7 @@ EBS 추천 문제지&nbsp;&nbsp;<span style="font-size: 12px;">함께 풀고 학
 			</c:choose>
 		</td>
 		<td>${dto.testtitle }</td>
-		<td><input type="button" value="응시하기" onclick="test_window()"/></td>
+		<td><input type="button" value="응시하기" onclick="questionList('${dto.testno }','${dto.testtitle }')"/></td>
 	</tr>
 </c:forEach>
 
