@@ -35,7 +35,7 @@ function send() {
 <table  border="0"  cellspacing="0" cellpadding="2"  align="center">
     <tr align="center" height="10"> 
         <td>
-            <textarea id="mylayer"  cols="43" rows="20" readonly>Community 서비스약관 (2005. 7. 18 부터 유효)
+            <textarea id="mylayer"  cols="100" rows="15" readonly>Community 서비스약관 (2005. 7. 18 부터 유효)
 
 제1조(목적 등)
 

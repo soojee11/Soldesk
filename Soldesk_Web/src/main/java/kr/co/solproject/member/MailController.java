@@ -23,7 +23,7 @@ public class MailController {
 	@Autowired
 	private JavaMailSender mailSender;
 
-	@RequestMapping(value = "/mail.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/sol_member/mail.do", method = RequestMethod.GET)
 	public String sendMail(HttpServletRequest req, HttpServletResponse resp) {
 
 		String id=  req.getParameter("id");

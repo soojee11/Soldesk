@@ -30,15 +30,12 @@ public class MemberController {
 	// http://localhost:9090/solproject/index.jsp
 
 	// --------------------------------------------------------------------
-
-	@RequestMapping(value = "/login.do", method = RequestMethod.GET)
-	public String loginsucess(HttpServletRequest req, HttpSession session) {
-
+	@RequestMapping(value = "/sol_index.do")
+	public String index(HttpServletRequest req, HttpSession session) {
 		return "/sol_index";
-
-	}// end
-
-	@RequestMapping(value = "/login.do", method = RequestMethod.POST)
+	}// end	
+	
+	@RequestMapping(value = "/sol_member/login.do")
 	public ModelAndView login(MemberDTO dto, HttpServletRequest req, HttpServletResponse resp, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		String id = dto.getId();
@@ -80,44 +77,48 @@ public class MemberController {
 			}
 			resp.addCookie(cookie);// 사용자 pc에 쿠키값 저장
 
+			System.out.println(id);
 			// session영역
 			session.setAttribute("s_id", id);
 			session.setAttribute("s_pw", pw);
 
-			mav.setViewName("/sol_index");
-
+			String msg="<meta http-equiv='Refresh' content='0;url=/solproject/sol_index.do'>";
+			req.setAttribute("msg", msg);
+			
+			mav.setViewName("/sol_member/result");
+			//mav.setViewName("solproject/sol_index");
 			return mav;
 		}
 	}// end
 
-	@RequestMapping(value = "/logout.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/sol_member/logout.do", method = RequestMethod.POST)
 	public String loginout(HttpServletRequest req, HttpSession session) {
 
 		return "/sol_member/logout";
 
 	}// end
-
-	@RequestMapping(value = "/index.do", method = RequestMethod.GET)
+/*
+	@RequestMapping(value = "/sol_member/index.do", method = RequestMethod.GET)
 	public String login(HttpServletRequest req, HttpSession session) {
 
 		return "/sol_index";
 
 	}// end
-
-	@RequestMapping("/joinagree.do")
+*/
+	@RequestMapping("/sol_member/joinagree.do")
 	public String join(HttpServletRequest req, HttpSession session) {
 
 		return "/sol_member/agreement";
 
 	}// end
 
-	@RequestMapping(value = "/joinok.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/sol_member/joinok.do", method = RequestMethod.POST)
 	public String joinok(HttpServletRequest req, HttpSession session) {
 		return "/sol_member/join";
 
 	}// end
 
-	@RequestMapping(value = "/join.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/sol_member/join.do", method = RequestMethod.POST)
 	public String joinproc(MemberDTO dto, HttpServletRequest req, HttpSession session) {
 		String id = dto.getId();
 		String name = dto.getName();
@@ -131,7 +132,13 @@ public class MemberController {
 		boolean flag = dao.join(dto);
 
 		if (flag) {
-			return "redirect:./index.do";
+			//return "redirect:./index.do";
+			//return "/sol_index";
+			
+			String msg="<meta http-equiv='Refresh' content='0;url=/solproject/sol_index.do'>";
+			req.setAttribute("msg", msg);
+			return "/sol_member/result";
+
 		} else {
 			req.setAttribute("msg", "회원가입에 실패했습니다.<br/><Br/>");
 			return "/sol_member/error";
@@ -139,49 +146,49 @@ public class MemberController {
 
 	}// end
 
-	@RequestMapping("/intro.do")
+	@RequestMapping("/sol_member/intro.do")
 	public String intro(HttpServletRequest req, HttpSession session) {
 
 		return "/sol_study/intro";
 
 	}// end
 
-	@RequestMapping("/examList.do")
+	@RequestMapping("/sol_member/examList.do")
 	public String examList(HttpServletRequest req, HttpSession session) {
 
 		return "/sol_exam/examList";
 
 	}// end
 
-	@RequestMapping("/bbsList.do")
+	@RequestMapping("/sol_member/bbsList.do")
 	public String bbsList(HttpServletRequest req, HttpSession session) {
 
 		return "/sol_bbs/bbsList";
 
 	}// end
 
-	@RequestMapping("/mypage.do")
+	@RequestMapping("/sol_member/mypage.do")
 	public String mypage(HttpServletRequest req, HttpSession session) {
 
 		return "/sol_mypage/intro";
 
 	}// end
 
-	@RequestMapping("/total.do")
+	@RequestMapping("/sol_member/total.do")
 	public String total(HttpServletRequest req, HttpSession session) {
 
 		return "/sol_total/total";
 
 	}// end
 
-	@RequestMapping("/checkid.do")
+	@RequestMapping("/sol_member/checkid.do")
 	public String checkid(HttpServletRequest req, HttpSession session) {
 
 		return "/sol_member/checkid";
 
 	}// end
 
-	@RequestMapping(value = "/checkid.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/sol_member/checkid.do", method = RequestMethod.POST)
 	public String idcheck(String id, HttpServletRequest req, HttpSession session) {
 
 		int res = 0;
@@ -199,14 +206,14 @@ public class MemberController {
 		}
 	}// end
 
-	@RequestMapping("/checkemail.do")
+	@RequestMapping("/sol_member/checkemail.do")
 	public String checkemail(HttpServletRequest req, HttpSession session) {
 
 		return "/sol_member/checkemail";
 
 	}// end
 
-	@RequestMapping(value = "/checkemail.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/sol_member/checkemail.do", method = RequestMethod.POST)
 	public String emailcheck(String email, HttpServletRequest req, HttpSession session) {
 
 		int res = 0;
@@ -224,14 +231,14 @@ public class MemberController {
 		}
 	}// end
 
-	@RequestMapping("/checkzip.do")
+	@RequestMapping("/sol_member/checkzip.do")
 	public String checkzip(HttpServletRequest req, HttpSession session) {
 
 		return "/sol_member/checkzip";
 
 	}// end
 
-	@RequestMapping(value = "/checkzip.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/sol_member/checkzip.do", method = RequestMethod.POST)
 	public String zipcheck(String dong, HttpServletRequest req, HttpSession session) {
 
 		List<ZipcodeDTO> list = dao.zipcheck(dong);
@@ -248,14 +255,14 @@ public class MemberController {
 		}
 	}// end
 
-	@RequestMapping(value = "/update.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/sol_member/update.do", method = RequestMethod.POST)
 	public String update(String id, HttpServletRequest req, HttpSession session) {
 		System.out.println(id);
 		req.setAttribute("id", id);
 		return "/sol_member/update";
 	}// end
 
-	@RequestMapping(value = "/updateproc.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/sol_member/updateproc.do", method = RequestMethod.POST)
 	public String updateproc(MemberDTO dto, String passwd, String id, HttpServletRequest req, HttpSession session) {
 
 		System.out.println(passwd);
@@ -297,7 +304,7 @@ public class MemberController {
 
 	}// end
 
-	@RequestMapping(value = "/updatego.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/sol_member/updatego.do", method = RequestMethod.POST)
 	public String updatego(MemberDTO dto, HttpServletRequest req, HttpSession session) {
 
 		boolean flag = dao.updatego(dto);
@@ -313,7 +320,7 @@ public class MemberController {
 		}
 	}// end
 
-	@RequestMapping(value = "/delete.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/sol_member/delete.do", method = RequestMethod.POST)
 	public String delete(MemberDTO dto, HttpServletRequest req, HttpSession session) {
 		System.out.println(dto.getId());
 		String id = dto.getId();
@@ -322,7 +329,7 @@ public class MemberController {
 		return "/sol_member/delete";
 	}// end
 
-	@RequestMapping(value = "/deleteproc.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/sol_member/deleteproc.do", method = RequestMethod.POST)
 	public String deleteproc(MemberDTO dto, HttpServletRequest req, HttpSession session) {
 
 		String id = dto.getId();
@@ -343,14 +350,14 @@ public class MemberController {
 		}
 	}// end
 
-	@RequestMapping("/findform.do")
+	@RequestMapping("/sol_member/findform.do")
 	public String findform(HttpServletRequest req, HttpSession session) {
 
 		return "/sol_member/findform";
 
 	}// end
 
-	@RequestMapping(value = "/findidform.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/sol_member/findidform.do", method = RequestMethod.POST)
 	public String findidform(String name,String email,String from, HttpServletRequest req, HttpSession session) {
 
 		System.out.println(name);
@@ -372,7 +379,7 @@ public class MemberController {
 		}
 	}// end
 
-	@RequestMapping(value = "/findpwform.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/sol_member/findpwform.do", method = RequestMethod.POST)
 	public String findpwform(String id,String email,String from, HttpServletRequest req, HttpSession session) {
 
 		Map map = new HashMap();
