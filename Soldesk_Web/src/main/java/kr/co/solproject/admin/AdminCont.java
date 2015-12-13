@@ -13,7 +13,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.solproject.category.CategoryDTO;
 import kr.co.solproject.member.MemberDTO;
@@ -122,14 +121,14 @@ public class AdminCont {
 		int sno = ((nowPage-1)*numPerPage);
 		
 		Map map = new HashMap();
-		map.put("col1", co1);
-		map.put("col2",col2);
+		map.put("grade", co1);
+		map.put("gwamok", col2);
 		map.put("sno", sno);
 		map.put("numPerPage", numPerPage);
 		
 		List list = null;
-		int categoryno = 0;
 		int total = 0;
+		String categoryInfo="";
 		
 		if((co1=="" && col2=="")||(co1==null||col2==null)){
 			
@@ -138,10 +137,10 @@ public class AdminCont {
 			
 		}else{
 			
-			categoryno = dao.getCategoryno(map);
-		
-			list = dao.getLecList(categoryno);
-			total = dao.getLecTotal(categoryno);
+			list=dao.getLecList(map);
+			//categoryInfo = dao.getCategoryInfo(Integer.parseInt(co1), col2);
+			//System.out.println(categoryInfo);
+			total=dao.getLecTotal(map);
 			
 		}
 		
@@ -529,6 +528,79 @@ public class AdminCont {
 
 		return "sol_admin/player/playerList";
 	}
+	
+	@RequestMapping(value="sol_admin/lecdelete.do", method = RequestMethod.GET)
+	public String lecDelList(HttpServletRequest request) {
+		
+		String url = "./lecdelete.do";	
+		
+		int nowPage=1;	
+		int numPerPage=5;
+		
+		int recNo=1;
+		
+		// 검색관련 변수
+		String co1 = null;
+		if(request.getParameter("col1") != null){
+			co1 = request.getParameter("col1");
+			System.out.println("검색컬럼: "+co1);
+		}
+		
+		String col2 = null;
+		if(request.getParameter("col2") != null){
+			col2 = request.getParameter("col2");
+			System.out.println("검색컬럼: "+col2);
+		}
+		
+		if(request.getParameter("nowPage")!=null){
+			nowPage = Integer.parseInt(request.getParameter("nowPage"));
+		}
+		
+		int sno = ((nowPage-1)*numPerPage);
+		
+		Map map = new HashMap();
+		map.put("grade", co1);
+		map.put("gwamok", col2);
+		map.put("sno", sno);
+		map.put("numPerPage", numPerPage);
+		
+		List list = null;
+		int total = 0;
+		String categoryInfo="";
+		
+		if((co1=="" && col2=="")||(co1==null||col2==null)){
+			
+			list = dao.getLecList();
+			total = dao.getLecTotal();
+			
+		}else{
+			
+			list=dao.getLecList(map);
+			//categoryInfo = dao.getCategoryInfo(Integer.parseInt(co1), col2);
+			//System.out.println(categoryInfo);
+			total=dao.getLecTotal(map);
+			
+		}
+		
+		String dbean = Utility.getDate();
+		String paging = Paging.paging4(total, nowPage, numPerPage, url);
+		
+		recNo = total - (nowPage - 1) * numPerPage + 1 ;
+		
+		request.setAttribute("list", list);
+		request.setAttribute("dbean", dbean);
+		request.setAttribute("paging", paging);
+		request.setAttribute("recNo", recNo);
+		request.setAttribute("nowPage", nowPage);
+		request.setAttribute("col1", co1); //gwamok
+		request.setAttribute("col2", col2);
+		request.setAttribute("total", total);
+	
+		return "sol_admin/player/playerDelList";
+		
+	}//end
+	
+	
 		
 	
 }
