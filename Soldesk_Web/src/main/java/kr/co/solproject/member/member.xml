@@ -1,15 +1,106 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE sqlMap
-    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap       
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"       
     "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
-<sqlMap namespace="sol_member"><!-- 테이블이름 -->
+<!-- namespace: 테이블명 사용 -->
+<sqlMap namespace="sol_member">
 	<typeAlias alias="MemberDTO" type="kr.co.solproject.member.MemberDTO" />
+	<typeAlias alias="ZipcodeDTO" type="kr.co.solproject.member.ZipcodeDTO" />
+
+	<select id="logincount" parameterClass="Map" resultClass="int">
+		select
+		count(*)
+		from sol_member
+		where passwd = #pw# and id = #id#
+		and mlevel in
+		('A','B')
+	</select>
+
+	<select id="idcheck" parameterClass="String" resultClass="int">
+		select
+		count(*)
+		from sol_member
+		where id = #id#
+	</select>
+
+	<select id="emailcheck" parameterClass="String" resultClass="int">
+		select count(*)
+		from sol_member
+		where email = #email#
+	</select>
+
+	<select id="zipcheck" parameterClass="String" resultClass="ZipcodeDTO">
+		select zipcode,sido,gugun,dong,li,bunji,etc
+		from sol_zipcode
+		where dong like "%$dong$%"
+		order by zipcode
+	</select>
+
+	<update id="join" parameterClass="MemberDTO">
+	  insert into sol_member (id,name, passwd,email,tel,zipcode,address1,address2,mdate,promise)
+		values(#id#, #name#, #passwd#, #email#, #tel#, #zipcode#, #address1#, #address2#, now(),#promise#)
+	</update> 
 	
-	<select id="loginproc"  parameterClass="MemberDTO" resultClass="String">
-		select mlevel from sol_member
-		where id =#id# and passwd = #passwd# and mlevel in('A1','B1','C1','D1')
+	<select id="pwcheck" parameterClass="Map" resultClass="int">
+		select
+		count(*)
+		from sol_member
+		where passwd = #passwd# and id = #id#
 	</select>
 	
 
-</sqlMap>
+	<select id="loginproc"  parameterClass="MemberDTO" resultClass="String">
+		select mlevel from sol_member
+		where id =#id# and passwd = #passwd# and mlevel in('A','B','D')
+	</select>
+
+	<select id="read" parameterClass="String" resultClass="MemberDTO">
+		select id,name, passwd,email,tel,zipcode,address1,address2,promise
+		from sol_member
+		where id = #id#
+	</select>
+
+
+	<update id="updatego" parameterClass="MemberDTO" >
+	  update sol_member
+	  set  passwd=#passwd#, tel=#tel#, zipcode=#zipcode#, address1=#address1#,address2=#address2#,promise=#promise#
+	  where id=#id#
+	  and mlevel in
+		('A','B')
+	</update> 
+	
+	<update id="deletego" parameterClass="Map">
+	  update sol_member
+	  set mlevel = 'D'
+	  where id=#id# and passwd=#passwd#
+	</update> 
+
+
+	<select id="findid" parameterClass="Map" resultClass="String">
+		select
+		id
+		from sol_member
+		where name = #name# and email = #email#
+		and mlevel in
+		('A','B')
+	</select>
+
+	<select id="findpw" parameterClass="Map" resultClass="String">
+		select
+		passwd
+		from sol_member
+		where id = #id# and email = #email#
+		and mlevel in
+		('A','B')
+	</select>
+
+	<update id="findpwupdate" parameterClass="Map">
+	  update sol_member
+	  set passwd =#passwd#
+	  where id=#id# and email=#email#
+	</update> 
+
+	
+	
+</sqlMap> 

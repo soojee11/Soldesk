@@ -7,25 +7,31 @@
 	<typeAlias alias="QuestionDTO" type="kr.co.solproject.question.QuestionDTO" />
 
 	<update id="insert" parameterClass="QuestionDTO">
-		
-		insert into sol_question(testno, questno, qtitle, qtype, answer, comment, poster, example)
-		values(#testno#,(select ifnull(max(questno),0)+1 from sol_question as SQ where testno=#testno#),#qtitle#,#qtype#,#answer#,#comment#,#poster#,#example#)
-		
+
+		insert into
+		sol_question(testno, questno, qtitle, qtype, answer, comment,
+		poster,
+		example)
+		values(#testno#,(select ifnull(max(questno),0)+1 from
+		sol_question as SQ where
+		testno=#testno#),#qtitle#,#qtype#,#answer#,#comment#,#poster#,#example#)
+
 	</update>
 
 	<select id="list" resultClass="QuestionDTO" parameterClass="Map">
-		select testno, questno, qtitle, qtype, answer, comment, poster, qynshow, example
+		select testno, questno, qtitle, qtype, answer, comment, poster,
+		qynshow, example
 		from sol_question
-		
+
 		<dynamic prepend="WHERE">
 			<isNotEmpty property="col">
 				qtype = #col# and testno = #testno#
 			</isNotEmpty>
 			<isEmpty property="col">
 				testno = #testno#
-			</isEmpty>			
+			</isEmpty>
 		</dynamic>
-		
+
 		order by questno asc
 	</select>
 
@@ -38,8 +44,45 @@
 			</isNotEmpty>
 			<isEmpty property="col">
 				testno = #testno#
-			</isEmpty>			
+			</isEmpty>
 		</dynamic>
+	</select>
+
+	<update id="questionSelect" parameterClass="Map">
+		update sol_question
+		set qynshow='Y'
+		where testno=#testno# and questno
+		<iterate prepend="IN" property="list" open="(" close=")"
+			conjunction=",">
+			#list[]#
+		</iterate>
+	</update>
+
+	<update id="questionDelete" parameterClass="Map">
+		update sol_question
+		set qynshow='N'
+		where testno=#testno# and questno
+		<iterate prepend="IN" property="list" open="(" close=")"
+			conjunction=",">
+			#list[]#
+		</iterate>
+	</update>
+
+	<select id="questionList" resultClass="QuestionDTO"
+		parameterClass="int">
+		select testno, questno, qtitle, qtype, answer, comment,
+		poster, qynshow, example
+		from sol_question
+		where qynshow='Y' and
+		testno=#testno#
+		order by questno asc
+	</select>
+
+	<select id="getQuestionTotal" parameterClass="int" resultClass="int">
+		select count(*) as cnt
+		from sol_question
+		where qynshow='Y' and
+		testno=#testno#
 	</select>
 
 </sqlMap>

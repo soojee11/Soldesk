@@ -84,4 +84,5 @@ public class TestCont {
 		// 3. 결과값을 보여줄 view 리턴
 		return "sol_test/testList";
 	}
+
 }

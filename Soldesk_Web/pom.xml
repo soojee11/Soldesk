@@ -123,13 +123,7 @@
 			<version>5.1.18</version>
 		</dependency>
 
-		<!-- 자바메일 -->
-		<dependency>
-			<groupId>javax.mail</groupId>
-			<artifactId>mail</artifactId>
-			<version>1.4</version>
-		</dependency>
-
+		
 		<!-- 파일 전송 라이브러리/ fileupload -->
 		<dependency>
 			<groupId>commons-fileupload</groupId>
@@ -143,6 +137,24 @@
 			<artifactId>commons-io</artifactId>
 			<version>2.4</version>
 		</dependency>
+
+
+<!-- Java Mail API -->
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.4.3</version>
+		</dependency>
+
+<!-- 하나)메일보내기위해필요 -->
+		<dependency>
+			<groupId>cglib</groupId>
+			<artifactId>cglib</artifactId>
+			<version>2.2.2</version>
+		</dependency>
+
+
+
 
 		<!-- Test -->
 		<dependency>

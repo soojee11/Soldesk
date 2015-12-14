@@ -1,5 +1,6 @@
 package kr.co.solproject.lecture;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,6 +15,7 @@ public class LectureDAO {
 	
 	public LectureDAO(){
 		mybatis = GetSqlMapClient.get();
+		System.out.println("---------------LectureDAO 객체 생성");
 	}
 	
 	/** 학습하기 게시글 조회 **/
@@ -21,6 +23,7 @@ public class LectureDAO {
 		List list = null;
 		try {
 			list = mybatis.queryForList("sol_lecture.list",map);
+			//System.out.println(list.toString());
 		} catch (Exception e) {
 			System.out.println("lecture list error"+e);
 		}
@@ -36,6 +39,23 @@ public class LectureDAO {
 			System.out.println("getLectureTotal error: "+e);		
 		}
 		return res;
+	}
+	
+	/** 학습하기 강좌설명 조회 **/
+	public String getCategoryInfo(int grade, String gwamok){
+		String categoryInfo = null;
+		try {
+			Map map = new HashMap();
+			map.put("grade", grade);
+			map.put("gwamok", gwamok);
+			
+			categoryInfo = (String) mybatis.queryForObject("sol_lecture.info",map);
+			System.out.println(">>>>>>>>>>>>>>"+categoryInfo);
+			
+		} catch (Exception e) {
+			System.out.println("categoryInfo error: "+e);		
+		}
+		return categoryInfo;
 	}
 	
 	
