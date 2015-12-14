@@ -14,7 +14,6 @@ public class MemberDTO {
 	private String mdate;    //-- µî·ÏÀÏ
 	private String promise;    //-- ÇÑÁÙ´ÙÁü
 	public MemberDTO() {
-			System.out.println("¢º------MemberDTO()°´Ã¼ »ı¼ºµÊ...");
 	}
 	public String getId() {
 		return id;

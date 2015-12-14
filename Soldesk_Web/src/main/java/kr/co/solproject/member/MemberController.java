@@ -196,6 +196,8 @@ public class MemberController {
 
 		if (res == 0) {
 			id.trim();
+			System.out.println(id);
+			
 			req.setAttribute("id", id);
 			return "/sol_member/checkprocid";
 		} else {

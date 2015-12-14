@@ -6,7 +6,7 @@
 
 <!-- start: Meta -->
 <meta charset="utf-8">
-<title>GotYA FREE BOOTSTRAP THEME by BootstrapMaster</title>
+<title>SOLPROJECT</title>
 <meta name="description" content="GotYa Free Bootstrap Theme" />
 <meta name="keywords"
 	content="Template, Theme, web, html5, css3, Bootstrap" />
@@ -104,9 +104,11 @@
 				</div>
 				<!--end: Logo -->
 
+
+
+
 				<!--start: Navigation -->
 				<div class="span9">
-
 					<div class="navbar navbar-inverse">
 			    		<div class="navbar-inner">
 			          		<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
@@ -115,13 +117,12 @@
 			            		<span class="icon-bar"></span>
 			          		</a>
 			          		<div class="nav-collapse collapse">
-			            		<ul class="nav">
-			              			<li><a href="../sol_study/lectureList.do">학습하기</a></li>
+			            <ul class="nav">
+			            <li><a href="../sol_study/lectureList.do">학습하기</a></li>
 									<li><a href="../sol_test/list.do">문제풀기</a></li>
 									<li><a href="../sol_bbs/bbsList.jsp">자유게시판</a></li>
-									<li><a href="../sol_mypage/intro.jsp">내정보</a></li>
+									<li><a href="../sol_mypage/calendar.do?s_id=${s_id}">내정보</a></li>
 									<li><a href="../sol_total/total.jsp">전체보기</a></li>
-
 								</ul>
 							</div>
 						</div>
@@ -129,6 +130,7 @@
 
 				</div>
 				<!--end: Navigation -->
+
 
 			</div>
 			<!--end: Row -->
@@ -138,18 +140,7 @@
 
 	</header>
 	<!--end: Header-->
-	<div align="right" style="background-color: grey; color: white; margin: 0; padding-top: 20px; height: 51px;">
-		<div class="row">
-			<form class="form-inline" method="post" action=""
-				onsubmit="return search(this)">
 
-				<div class="form-group">
-					<input type="text" class="form-control" name="" value="아이디">
-					<input type="text" class="form-control" name="" value="비번">
-					<button type="submit" class="btn btn-primary">로그인</button>
-				</div>
-
-			</form>
 
 	<!-- 하나)로그인 추가 -->
 
