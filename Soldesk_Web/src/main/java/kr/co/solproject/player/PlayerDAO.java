@@ -11,25 +11,19 @@ import kr.co.solproject.test.TestDTO;
 @Component
 public class PlayerDAO {
 
-  private SqlMapClient mybatis; // Connection con
+  private SqlMapClient mybatis;
   
   public PlayerDAO(){
-    mybatis = GetSqlMapClient.get();  // con = dbopen.getConnection()
+    mybatis = GetSqlMapClient.get(); 
     System.out.println("PlayerDAO 객체 생성");
   }
   
-
   public Boolean categoryIns(Map map){
-	  
 	  boolean flag=false;
-	  
 	    try{
-	    	
 	    	int cnt=mybatis.update("sol_category.categoryIns",map);
-	    	
 			if(cnt>0)
 				flag=true;
-			
 	    }catch (Exception e){
 	      System.out.println("실패: "+e);
 	    }
@@ -48,7 +42,6 @@ public class PlayerDAO {
     return categoryno;
   }
   
-  // admin page 에서 동영상 등록 
   public boolean playerInsert(PlayerDTO dto){
     boolean flag = false;
 
