@@ -3,14 +3,6 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ include file="../header.jsp"%>
 
-<c:if test="${flag == true }">
-	동영상등록성공공공
-	<script>
-		flag = false;
-		alert("동영상 업로드 완료. ");
-	</script>
-</c:if>
-
 <div class="row">
 	<div class="col-lg-12">
 		<h3 class="page-header">
@@ -25,7 +17,7 @@
 
 <div class="row">
 	<div class="col-lg-24" align="center">
-		<form class="form-inline" action="leclist.do">
+		<form class="form-inline" action="lecdelete.do">
 			<div class="form-group">
 				<select class="form-control input-sm m-bot15" name="col1">
 		<option value="" <c:choose><c:when  test="${col1 eq '' }" >selected</c:when></c:choose>>학년전체</option>
@@ -51,46 +43,52 @@
 	</div>
 </div>
 
-<div align="left">
-<a href="lecinsert.do"><button class="btn btn-danger btn-sm">강좌 등록</button></a>
-</div>
-
-
-<table border="0" cellspacing="0" cellpadding="0" align="center" class="table">
-	<tr align ="center">
-		<th><div align="center">교육번호</div></th>
-		<th><div align="center">제목</div></th>
-		<th><div align="center">강의파일</div></th>
-		<th><div align="center">파일크기</div></th>
-		<th><div align="center">캡쳐화면</div></th>
-		<th><div align="center">선생님이름</div></th>
-		<th><div align="center">강의시간(초)</div></th>
-	</tr>
-	<c:if test="${total ==0 }">
+<form method="post" action="lecDelProc.do?lectureno=${dto.lectureno }&categoryno=${dto.categoryno}">
+	<table border="0" cellspacing="0" cellpadding="0" align="center" class="table">
 		<tr>
-			<td colspan="7" align="center">관련된 동영상 교육이 없습니다. <br> 검색을 진행해주세요. </td>
+			<td colspan="9" align="left"> 
+			<input type="checkbox" name="allck2" id="allck2" onclick="checkboxEnable2()"/>
+			<strong><span style="font-size:12px; color:#1717ff;">모두체크</span></strong>
+			<button type="button" class="btn btn-danger btn-sm" onclick="playCheck2(this.form)">동영상삭제</button>
+		</td>
 		</tr>
-	</c:if>
-	<c:set var ="recNo" value="${recNo }"/>
-	<c:forEach var ="dto" items="${list }">
-		<c:set var ="recNo" value="${recNo-1 }"/>
-			<tr align ="center">
-				<td>${dto.lectureno }</td>
-				<td>${dto.subject }</td>
-				<td><a href="lecread.do?lectureno=${dto.lectureno }">${dto.filename }</a></td>
-				<td>${dto.filesize/(1024)-((dto.filesize/(1024))%1) }KB</td>
-				<td><img src="./player/storage/${dto.poster }" width="60px"></td>
-				<td>${dto.teacher }</td>
-				<td>${dto.lecturetime }</td>
+		<tr align ="center">
+			<th width="50"><div align="center">선택</div></th>
+			<th><div align="center">교육번호</div></th>
+			<th><div align="center">제목</div></th>
+			<th><div align="center">강의파일</div></th>
+			<th><div align="center">파일크기</div></th>
+			<th><div align="center">캡쳐화면</div></th>
+			<th><div align="center">선생님이름</div></th>
+			<th><div align="center">강의시간(초)</div></th>
+		</tr>
+		<c:if test="${total ==0 }">
+			<tr>
+				<td colspan="8" align="center">관련된 동영상 교육이 없습니다. <br> 검색을 진행해주세요. </td>
 			</tr>
-	</c:forEach>
-	<!-- &col1=${param.col1}&col2=${param.col2} -->
-	<tr>
-		<td colspan="7" align="right" ><strong>total:</strong>${total }</td>
-	</tr>
-	<tr>
-		<td colspan="7"><div align="center">${paging }</div></td>
-	</tr>
-</table>
+		</c:if>
+		<c:set var ="recNo" value="${recNo }"/>
+		<c:forEach var ="dto" items="${list }">
+			<c:set var ="recNo" value="${recNo-1 }"/>
+				<tr align ="center">
+					<td><input type="checkbox" name="check2" value="${dto.lectureno }" /></td>
+					<td>${dto.lectureno }</td>
+					<td>${dto.subject }</td>
+					<td>${dto.filename }</td>
+					<td>${dto.filesize/(1024)-((dto.filesize/(1024))%1) }KB</td>
+					<td><img src="./player/storage/${dto.poster }" width="60px"></td>
+					<td>${dto.teacher }</td>
+					<td>${dto.lecturetime }</td>
+				</tr>
+		</c:forEach>
+		<!-- &col1=${param.col1}&col2=${param.col2} -->
+		<tr>
+			<td colspan="8" align="right" ><strong>total:</strong>${total }</td>
+		</tr>
+		<tr>
+			<td colspan="8"><div align="center">${paging }</div></td>
+		</tr>
+	</table>
+</form>
 
 <%@ include file="../footer.jsp"%>

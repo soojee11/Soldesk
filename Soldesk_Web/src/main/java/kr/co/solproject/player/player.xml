@@ -9,20 +9,27 @@
   <!-- 매개변수 NoticeDTO 사용 -->
   <typeAlias alias="PlayerDTO" type="kr.co.solproject.player.PlayerDTO" />
   
-    <insert id="categoryIns" parameterClass="Map">
-    INSERT INTO sol_category(grade,gwamok)
-    VALUES (#grade#,#gwamok#)
-  </insert>
-  
   <!-- 카테고리 넘버 가져오기 -->
-  <select id="read" parameterClass="Map" resultClass="Integer">
-    SELECT max(categoryno) FROM sol_category
+  <select id="categorynoRead" parameterClass="Map" resultClass="Integer">
+    SELECT categoryno FROM sol_category
     WHERE grade=#grade# AND gwamok=#gwamok#
   </select>
 
-  <insert id="insert" parameterClass="PlayerDTO" >
+  <!-- 동영상 등록하기 -->
+  <insert id="lectureInsert" parameterClass="PlayerDTO" >
     INSERT INTO sol_lecture(subject, filename, filesize, poster, teacher, lecturetime, categoryno)
     VALUES (#subject#, #filename#, #filesize#, #poster#, #teacher#, #lecturetime#, #categoryno#)
   </insert>
+  
+  <select id="lectureRead" parameterClass="Integer" resultClass="PlayerDTO">
+    SELECT lectureno, subject, filename, filesize, poster, teacher, lecturetime, categoryno FROM sol_lecture
+    WHERE lectureno=#lectureno#
+  </select>
+  
+  <select id="lectureList" parameterClass="Integer" resultClass="PlayerDTO">
+    SELECT lectureno, subject, filename, filesize, poster, teacher, lecturetime, categoryno FROM sol_lecture
+    WHERE categoryno=#categoryno#
+    ORDER BY lectureno DESC
+  </select>
   
 </sqlMap>

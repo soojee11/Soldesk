@@ -36,4 +36,5 @@
 	<sqlMap resource="kr/co/solproject/lecture/lecture.xml" />
 	<sqlMap resource="kr/co/solproject/player/player.xml" />
 	<sqlMap resource="kr/co/solproject/mypage/mypage.xml" />
+	<sqlMap resource="kr/co/solproject/study/study.xml" />
 </sqlMapConfig> 

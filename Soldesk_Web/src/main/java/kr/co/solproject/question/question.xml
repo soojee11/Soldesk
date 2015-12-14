@@ -19,7 +19,8 @@
 	</update>
 
 	<select id="list" resultClass="QuestionDTO" parameterClass="Map">
-		select testno, questno, qtitle, qtype, answer, comment, poster, qynshow, example
+		select testno, questno, qtitle, qtype, answer, comment, poster,
+		qynshow, example
 		from sol_question
 
 		<dynamic prepend="WHERE">
@@ -51,25 +52,37 @@
 		update sol_question
 		set qynshow='Y'
 		where testno=#testno# and questno
-		<iterate prepend="IN" property="list" open="(" close=")" conjunction=",">
+		<iterate prepend="IN" property="list" open="(" close=")"
+			conjunction=",">
 			#list[]#
-		</iterate>   
+		</iterate>
 	</update>
-	
+
 	<update id="questionDelete" parameterClass="Map">
 		update sol_question
 		set qynshow='N'
 		where testno=#testno# and questno
-		<iterate prepend="IN" property="list" open="(" close=")" conjunction=",">
+		<iterate prepend="IN" property="list" open="(" close=")"
+			conjunction=",">
 			#list[]#
-		</iterate>   
+		</iterate>
 	</update>
 
-	<select id="questionList" resultClass="QuestionDTO" parameterClass="int">
-		select testno, questno, qtitle, qtype, answer, comment, poster, qynshow, example
+	<select id="questionList" resultClass="QuestionDTO"
+		parameterClass="int">
+		select testno, questno, qtitle, qtype, answer, comment,
+		poster, qynshow, example
 		from sol_question
-		where qynshow='Y' and testno=#testno#
+		where qynshow='Y' and
+		testno=#testno#
 		order by questno asc
 	</select>
-	
+
+	<select id="getQuestionTotal" parameterClass="int" resultClass="int">
+		select count(*) as cnt
+		from sol_question
+		where qynshow='Y' and
+		testno=#testno#
+	</select>
+
 </sqlMap>

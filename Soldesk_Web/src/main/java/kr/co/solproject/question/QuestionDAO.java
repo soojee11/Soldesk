@@ -1,7 +1,6 @@
 package kr.co.solproject.question;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.stereotype.Component;
 import com.ibatis.sqlmap.client.SqlMapClient;
@@ -15,6 +14,29 @@ public class QuestionDAO {
 		mybatis=GetSqlMapClient.get();
 		System.out.println("---------------QuestionDAO°´Ã¼ »ý¼ºµÊ");
 	}
+	
+	public List getQuestionList(int testno) {
+		List list=null;
+		try {
+			list=mybatis.queryForList("sol_question.questionList",testno);
+
+		}	catch(Exception e) {
+			System.out.println("getQuestion error: "+e);		
+		}
+		return list;
+	}//end
+	
+	public int getQuestionTotal(int testno) {
+		int res=0;
+		try {
+			res=(Integer)mybatis.queryForObject("sol_question.getQuestionTotal",testno);
+
+		}	catch(Exception e) {
+			System.out.println("getQuestion error: "+e);		
+		}
+		return res;
+	}//end
+	
 	
 }
 

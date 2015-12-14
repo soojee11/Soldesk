@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 
+import kr.co.solproject.category.CategoryDTO;
 import kr.co.solproject.member.MemberDTO;
 import kr.co.solproject.player.PlayerDTO;
 import kr.co.solproject.question.QuestionDTO;
@@ -32,10 +33,6 @@ public class AdminCont {
 	public AdminCont() {
 		System.out.println("--------------AdminCont객체 생성됨");
 	}
-	
-	
-	//----------------------------------------------------------- login/out ----------------------------------------------------------------------------------------------
-	
 	
 	@RequestMapping(value="sol_admin/login.do", method=RequestMethod.GET)
 	public String loginForm() {
@@ -69,7 +66,6 @@ public class AdminCont {
 		}else{ 	// 로그인 성공 
 			
 			if(mlevel.equals("A")){
-				// A1, B1, C1 등급만 관리자 페이지에 로그인 가능
 				session.setAttribute("s_admin_id", id);
 				session.setAttribute("s_admin_mlevel", mlevel);
 				session.setAttribute("s_admin_passwd", passwd);
@@ -84,8 +80,6 @@ public class AdminCont {
 		}
 	}//end
 	
-	//----------------------------------------------------------- member ----------------------------------------------------------------------------------------------
-		
 	@RequestMapping(value="sol_admin/member.do", method=RequestMethod.GET)
 	public String loginProc() {
 		return "sol_admin/member/memberList";
@@ -96,8 +90,6 @@ public class AdminCont {
 	public String memList() {
 		return "sol_admin/member/memberList";
 	}
-	
-	//----------------------------------------------------------- lecture ----------------------------------------------------------------------------------------------
 
 	@RequestMapping(value="sol_admin/leclist.do")
 	public String lecList(HttpServletRequest request) {
@@ -129,14 +121,14 @@ public class AdminCont {
 		int sno = ((nowPage-1)*numPerPage);
 		
 		Map map = new HashMap();
-		map.put("col1", co1);
-		map.put("col2",col2);
+		map.put("grade", co1);
+		map.put("gwamok", col2);
 		map.put("sno", sno);
 		map.put("numPerPage", numPerPage);
 		
 		List list = null;
-		int categoryno = 0;
 		int total = 0;
+		String categoryInfo="";
 		
 		if((co1=="" && col2=="")||(co1==null||col2==null)){
 			
@@ -145,10 +137,10 @@ public class AdminCont {
 			
 		}else{
 			
-			categoryno = dao.getCategoryno(map);
-		
-			list = dao.getLecList(categoryno);
-			total = dao.getLecTotal(categoryno);
+			list=dao.getLecList(map);
+			//categoryInfo = dao.getCategoryInfo(Integer.parseInt(co1), col2);
+			//System.out.println(categoryInfo);
+			total=dao.getLecTotal(map);
 			
 		}
 		
@@ -381,15 +373,15 @@ public class AdminCont {
 		
 		if(dto.getQtype().equals("G")) {
 			StringBuffer example = new StringBuffer();
-			example.append(request.getParameter("example1"));
+			example.append(request.getParameter("example1").trim());
 			example.append("/");
-			example.append(request.getParameter("example2"));
+			example.append(request.getParameter("example2").trim());
 			example.append("/");
-			example.append(request.getParameter("example3"));
+			example.append(request.getParameter("example3").trim());
 			example.append("/");
-			example.append(request.getParameter("example4"));
+			example.append(request.getParameter("example4").trim());
 			example.append("/");
-			example.append(request.getParameter("example5"));
+			example.append(request.getParameter("example5").trim());
 			//System.out.println("example보기:" +example);
 	
 		
@@ -478,4 +470,137 @@ public class AdminCont {
 		
 		return "redirect:questionList.do?testno="+dto.getTestno();
 	}
+	
+	@RequestMapping(value = "sol_admin/lecUpdate.do", method = RequestMethod.GET)
+	public String lecUpdate(int lectureno, int categoryno, HttpServletRequest request) {
+		//System.out.println("lectureno---"+lectureno);
+		//System.out.println("categoryno---"+categoryno);
+		
+		PlayerDTO dto = null;
+		CategoryDTO dto2 = null;
+		
+		dto = dao.lecRead(lectureno);
+		dto2 = dao.categoryRead(categoryno);
+		
+		request.setAttribute("dto", dto);
+		request.setAttribute("dto2", dto2);
+		
+		return "sol_admin/player/playerUpdate";
+	}
+	
+	@RequestMapping(value = "sol_admin/lecUpdate.do", method = RequestMethod.POST)
+	public String lecUpdateProc(PlayerDTO dto, HttpServletRequest request) {
+		
+		System.out.println("lectureno: "+dto.getLectureno());
+		int lectureno = dto.getLectureno();
+		
+		request.setAttribute("root", Utility.getRoot());
+		
+		String basePath = Utility.getRealPath(request, "/sol_admin/player/storage");
+		PlayerDTO oldDTO = dao.lecRead(lectureno);
+		
+		//1) posterMF 파일 관련
+		MultipartFile posterMF = dto.getPosterMF();
+		
+		if(posterMF.getSize()>0){
+			Utility.deleteFile(basePath, oldDTO.getPoster());
+			String poster = UploadSaveManager.saveFileSpring30(posterMF, basePath);
+			dto.setPoster(poster);
+		}else{	
+			dto.setPoster(oldDTO.getPoster());
+		}
+		
+		// 2) filenameMF 파일 관련 
+		MultipartFile filenameMF = dto.getFilenameMF();
+		
+		if(filenameMF.getSize()>0){
+			Utility.deleteFile(basePath, oldDTO.getFilename());
+			String filename = UploadSaveManager.saveFileSpring30(filenameMF, basePath);
+			dto.setFilename(filename);	
+			dto.setFilesize(filenameMF.getSize());
+			
+		}else{	
+			dto.setFilename(oldDTO.getFilename());	
+			dto.setFilesize(oldDTO.getFilesize());
+		}
+		
+		dao.lecUpdate(dto);
+
+		return "sol_admin/player/playerList";
+	}
+	
+	@RequestMapping(value="sol_admin/lecdelete.do", method = RequestMethod.GET)
+	public String lecDelList(HttpServletRequest request) {
+		
+		String url = "./lecdelete.do";	
+		
+		int nowPage=1;	
+		int numPerPage=5;
+		
+		int recNo=1;
+		
+		// 검색관련 변수
+		String co1 = null;
+		if(request.getParameter("col1") != null){
+			co1 = request.getParameter("col1");
+			System.out.println("검색컬럼: "+co1);
+		}
+		
+		String col2 = null;
+		if(request.getParameter("col2") != null){
+			col2 = request.getParameter("col2");
+			System.out.println("검색컬럼: "+col2);
+		}
+		
+		if(request.getParameter("nowPage")!=null){
+			nowPage = Integer.parseInt(request.getParameter("nowPage"));
+		}
+		
+		int sno = ((nowPage-1)*numPerPage);
+		
+		Map map = new HashMap();
+		map.put("grade", co1);
+		map.put("gwamok", col2);
+		map.put("sno", sno);
+		map.put("numPerPage", numPerPage);
+		
+		List list = null;
+		int total = 0;
+		String categoryInfo="";
+		
+		if((co1=="" && col2=="")||(co1==null||col2==null)){
+			
+			list = dao.getLecList();
+			total = dao.getLecTotal();
+			
+		}else{
+			
+			list=dao.getLecList(map);
+			//categoryInfo = dao.getCategoryInfo(Integer.parseInt(co1), col2);
+			//System.out.println(categoryInfo);
+			total=dao.getLecTotal(map);
+			
+		}
+		
+		String dbean = Utility.getDate();
+		String paging = Paging.paging4(total, nowPage, numPerPage, url);
+		
+		recNo = total - (nowPage - 1) * numPerPage + 1 ;
+		
+		request.setAttribute("list", list);
+		request.setAttribute("dbean", dbean);
+		request.setAttribute("paging", paging);
+		request.setAttribute("recNo", recNo);
+		request.setAttribute("nowPage", nowPage);
+		request.setAttribute("col1", co1); //gwamok
+		request.setAttribute("col2", col2);
+		request.setAttribute("total", total);
+	
+		return "sol_admin/player/playerDelList";
+		
+	}//end
+	
+	
+		
+	
 }

@@ -140,8 +140,8 @@
 
 	</header>
 	<!--end: Header-->
-
-
+	
+	
 	<!-- 하나)로그인 추가 -->
 
 	<c:if test="${empty s_id || s_id == 'guest'}">

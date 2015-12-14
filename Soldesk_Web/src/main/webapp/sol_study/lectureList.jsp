@@ -4,6 +4,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!-- page start-->
+<script language="javascript">
+function lectureGo(lectureno){
+	  str = "/solproject/sol_player/player.do?lectureno="+lectureno;
+	  r = window.open(str, "학습하기", 'scrollbars=yes, resizeable=no, width=1500, height=700');
+	}
+</script>
 
 <link href="./css/style.css" rel="stylesheet" type="text/css">
 <h5>
@@ -77,7 +83,7 @@
 		<td>${dto.poster }</td>
 		<td>${dto.lecturetime }</td>
 		<td>${dto.teacher }</td>
-		<td align="center"><a href=""><img src='img/btn_study_play.png' width="30" height="20"></a></td>
+		<td align="center"><a href="javascript:lectureGo(${dto.lectureno })"><img src='img/btn_study_play.png' width="30" height="20"></a></td>
 	</tr>
 </c:forEach>
 
@@ -86,8 +92,6 @@
 	</tr>
 
 </table>
-	
 </div>
-
 <!-- page end-->
 <%@ include file="../sol_footer.jsp"%>
