@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap       
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"       
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<!-- namespace: 테이블명 사용 -->
+<sqlMap namespace="sol_calendar">
+	<typeAlias alias="MypageDTO" type="kr.co.solproject.mypage.MypageDTO" />
+
+	<select id="getpromise" parameterClass="String" resultClass="String">
+		select
+		promise
+		from sol_member
+		where id = #id#
+	</select>
+
+	<select id="getname" parameterClass="String" resultClass="String">
+		select
+		name
+		from sol_member
+		where id = #id#
+	</select>
+
+
+
+</sqlMap> 

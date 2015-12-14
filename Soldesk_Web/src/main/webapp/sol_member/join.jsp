@@ -43,11 +43,12 @@
 		id=frm.id.value;
 		id=id.replace(/(^\s*)|(\s*$)/gi, "");
 		if(id.length<5 || id.length>=11){
-			alert("공백없이, 아이디는 5~10글자 이내로 입력하세요.");
+			alert("아이디는 5~10글자 이내로 입력하세요.");
 			frm.id.value="";
 			frm.id.focus();
 			return;
 		}
+		
 		passwd=frm.passwd.value;
 		passwd=passwd.replace(/^\s*|\s*$/g,'');
 		if(passwd.length<4 || passwd.length>=11){
@@ -150,7 +151,7 @@
 </tr>
 <tr align="left" >  
   <th >한줄다짐</th>
-  <td><input type="text" name="promise" size="30" style="background-color:#f7f4f5;"></td>
+  <td><input type="text" name="promise" size="30" value="study hard!" style="background-color:#f7f4f5;"></td>
 </tr>
 </table>
 <br/>
