@@ -41,7 +41,7 @@ function memoSaveResponse(data, status) { //callback함수
       </td>
   </tr>
   <tr>
-    <td style="background-color: #4fb37e; padding-left: 10%;">
+    <td style="background-color: #99cc66; padding-left: 10%;">
       <div class="container">
           <div class="video_player" style="width: 80%;">
             <video controls="controls" poster="../sol_storage/${dto.poster }"
