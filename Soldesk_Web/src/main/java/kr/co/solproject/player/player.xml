@@ -23,4 +23,15 @@
     VALUES (#subject#, #filename#, #filesize#, #poster#, #teacher#, #lecturetime#, #categoryno#)
   </insert>
   
+  <select id="lectureRead" parameterClass="Integer" resultClass="PlayerDTO">
+    SELECT lectureno, subject, filename, filesize, poster, teacher, lecturetime, categoryno FROM sol_lecture
+    WHERE lectureno=#lectureno#
+  </select>
+  
+  <select id="lectureList" parameterClass="Integer" resultClass="PlayerDTO">
+    SELECT lectureno, subject, filename, filesize, poster, teacher, lecturetime, categoryno FROM sol_lecture
+    WHERE categoryno=#categoryno#
+    ORDER BY lectureno DESC
+  </select>
+  
 </sqlMap>
