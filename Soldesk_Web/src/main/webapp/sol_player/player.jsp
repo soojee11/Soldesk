@@ -10,6 +10,7 @@
 <link href="../sol_css/bootstrap.min.css" rel="stylesheet" type="text/css">
 <link href="../sol_css/player.css" rel="stylesheet" type="text/css">
 <link href="../sol_css/main.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> 
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script> 
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
@@ -30,21 +31,22 @@ function save(){
 function memoSaveResponse(data, status) { //callback함수
 	 alert("메모가 저장되었습니다.");
 }
+
 </script>
 </head>
 <body>
 <table border="1" style="width: 100%;">
-  <tr style="background-color: #fefefe">
-      <td height="20px" colspan="2" style="padding-top: 7px;"> 
-          <p><span style="color: black; font: 30px arial, sans-serif; font-weight: bold;">&nbsp;&nbsp;&nbsp;${dto.subject }</span>
+  <tr style="background-color: #99cc66">
+      <td height="50px" colspan="2" style="padding-top: 7px;"> 
+          <p><span style="color: White; font: 30px arial, sans-serif; font-weight: bold;">&nbsp;&nbsp;&nbsp;${dto.subject }</span>
           &nbsp;&nbsp;&nbsp;<span style="color: #444444">${dto.teacher }</span></p>
       </td>
   </tr>
   <tr>
-    <td style="background-color: #99cc66; padding-left: 10%;">
+    <td style="background-color: #ffffff; padding-left: 10%;">
       <div class="container">
           <div class="video_player" style="width: 80%;">
-            <video controls="controls" poster="../sol_storage/${dto.poster }"
+            <video id="video" controls="controls" poster="../sol_storage/${dto.poster }"
               style="width: 100%;">
               <source src="../sol_storage/${dto.filename }" type="video/mp4" />
             </video>
@@ -57,7 +59,9 @@ function memoSaveResponse(data, status) { //callback함수
                 <div class="volume_slider"></div>
                 <a class="mute" title="Mute"></a> 
                 <a class="unmute" title="Unmute"></a>
-               </div>
+              </div>
+            <!--   &nbsp;&nbsp;
+              <button type="button" id="btnFS" name="btnFS" style="border-style: none; color: #444444"><i class="fa fa-arrows-alt"></i></button> -->
             </div>
            </div>
           </div>
