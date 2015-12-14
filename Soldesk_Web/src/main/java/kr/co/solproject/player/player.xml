@@ -6,7 +6,6 @@
 <!-- namespace : 주로 테이블 명 사용, 생략 가능 -->
 <sqlMap namespace="sol_category">
 
-  <!-- 매개변수 NoticeDTO 사용 -->
   <typeAlias alias="PlayerDTO" type="kr.co.solproject.player.PlayerDTO" />
   
     <insert id="categoryIns" parameterClass="Map">
@@ -14,7 +13,6 @@
     VALUES (#grade#,#gwamok#)
   </insert>
   
-  <!-- 카테고리 넘버 가져오기 -->
   <select id="read" parameterClass="Map" resultClass="Integer">
     SELECT max(categoryno) FROM sol_category
     WHERE grade=#grade# AND gwamok=#gwamok#

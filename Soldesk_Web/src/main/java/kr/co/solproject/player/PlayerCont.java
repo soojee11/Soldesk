@@ -29,36 +29,28 @@ public class PlayerCont {
 
 	@RequestMapping(value = "/player/player.do", method = RequestMethod.GET)
 	public String createForm() {
-		// 여기서 동영상 정보들 가져오기
 		return "sol_player/player";
 	}
 
-	// admin 동영상 등록
 	@RequestMapping(value = "sol_admin/lecinsert.do", method = RequestMethod.GET)
 	public String adminPlayInsert() {
 		return "sol_admin/player/playerInsert";
 	}
 
-	// admin 동영상 등록 form
 	@RequestMapping(value = "sol_admin/lecinsert.do", method = RequestMethod.POST)
 	public String adminPlayInsertForm(PlayerDTO dto, HttpServletRequest req) {
 
-		// 전송된 파일이 저장될 실제 물리적인 경로 파악
 		String basePath = Utility.getRealPath(req, "/sol_admin/player/storage");
 
-		// 1)postMF 파일 관련
 		MultipartFile posterMF = dto.getPosterMF();
-		// 파일 저장 및 리네임된 파일명 변환
 		String poster = UploadSaveManager.saveFileSpring30(posterMF, basePath);
 		dto.setPoster(poster);
 
-		// 2) filenameMF 파일 관련
 		MultipartFile filenameMF = dto.getFilenameMF();
 		String filename = UploadSaveManager.saveFileSpring30(filenameMF, basePath);
 		dto.setFilename(filename);
 		dto.setFilesize(filenameMF.getSize());
 		
-		// categoryno
 		int grade = Integer.parseInt(req.getParameter("grade"));
 		String gwamok = req.getParameter("gwamok").trim();
 		
