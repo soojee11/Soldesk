@@ -1,7 +1,6 @@
 package kr.co.solproject.question;
 
 import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,4 +30,5 @@ public class QuestionCont {
 		
 		return "sol_test/questionList";
 	}
+
 }
