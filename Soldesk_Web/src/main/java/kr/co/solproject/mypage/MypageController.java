@@ -1,6 +1,7 @@
 package kr.co.solproject.mypage;
 
 import java.util.Calendar;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -9,6 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import kr.co.solproject.study.StudyDTO;
+
 
 
 @Controller
@@ -24,6 +28,9 @@ public class MypageController {
 	// --------------------------------------------------------------------
 	@RequestMapping(value = "sol_mypage/calendar.do", method = RequestMethod.GET)
 	public String calendar(String s_id,HttpServletRequest req, HttpSession session) {
+		
+	
+		if(s_id != ""){
 		
 		//달력---------------------------------------------------------------------------------------------------
 		Calendar cal = Calendar.getInstance();
@@ -77,7 +84,29 @@ public class MypageController {
 		promise = dao.getpromise(s_id);
 		name = dao.getname(s_id);
 		
+
+		//List<StudyDTO> list = dao.getstudylist(s_id); //학습테이블 리스트가져오기
+		System.out.println("아이디: " + s_id);
+		//System.out.println("리스트: " + list);
 		
+		int res = 0;
+		res = dao.getstudytable(s_id); //학습테이블이 있나요?
+		System.out.println(res);
+		
+		if(res != 0){//학습테이블이 0이아니면 학습을 한거니까 학습도장찍어야지
+			//어떤 강의를 들은건지 학습테이블에서 list를 가져와야한다.
+			
+			List<StudyDTO> list = dao.getstudylist(s_id);
+			System.out.println(list);
+			
+			
+		}
+		
+		
+		
+		
+		//----------------------------------------------------------------------------------
+
 		req.setAttribute("nowYear", nowYear);
 		req.setAttribute("nowMonth", nowMonth);
 		req.setAttribute("nowDay", nowDay);
@@ -99,7 +128,12 @@ public class MypageController {
 		req.setAttribute("name", name);
 		
 		return "/sol_mypage/calendar";
-
+		}
+		else{
+			//로그인안한경우
+			return "/sol_mypage/calendarError";
+		}
+		
 	}// end
 	
 	

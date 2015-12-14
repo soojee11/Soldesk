@@ -21,6 +21,21 @@
 		where id = #id#
 	</select>
 
+<select id="getstudytable" parameterClass="String" resultClass="int">
+		select
+		count(*)
+		from sol_study
+		where id = #id#
+	</select>
 
-
+<select id="getstudylist" parameterClass="String" resultClass="StudyDTO">
+		select
+	  lectureno, memo, regdate
+		from sol_study
+		where id = #id#
+	</select>
+	
+	
+	
+	
 </sqlMap> 

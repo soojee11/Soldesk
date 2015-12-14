@@ -1,10 +1,13 @@
 package kr.co.solproject.mypage;
 
+import java.util.List;
+
 import org.springframework.stereotype.Component;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
 
 import kr.co.solproject.GetSqlMapClient;
+import kr.co.solproject.study.StudyDTO;
 
 @Component
 public class MypageDAO {
@@ -41,4 +44,25 @@ public class MypageDAO {
 		}
 		return res;
 	}// end
+	
+	public int getstudytable(String id) {
+		int res = 0;
+		try {
+			res = (Integer) mybatis.queryForObject("sol_calendar.getstudytable", id);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return res;
+	}// end
+	
+	public List<StudyDTO> getstudylist(String id) {
+		List<StudyDTO> res = null;
+		try {
+			res =  (List<StudyDTO>) mybatis.queryForObject("sol_calendar.getstudylist", id);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return res;
+	}// end
+	
 }
