@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,13 +35,15 @@ public class PlayerCont {
 	}
 
 	@RequestMapping(value="/sol_player/player.do", method=RequestMethod.GET)
-  public String createForm(HttpServletRequest req){
+  public String createForm(HttpServletRequest req, HttpSession session){
+	 // System.out.println("-----------session id값"+session.getAttribute("s_id"));
+   // System.out.println("-----------session pw값"+session.getAttribute("s_pw"));
     // 여기서 동영상 정보들 가져오기     
     PlayerDTO dto = null;
     StudyDTO sdto = null;
     List list = null;
     
-    String id = "soldesk";    // 우선적으로 id
+    String id = (String) session.getAttribute("s_id");    // 우선적으로 id
     int lectureno = 7;        // default 우선적으로 해놈 
     
     if(req.getParameter("lectureno") != null){
@@ -68,11 +71,11 @@ public class PlayerCont {
   } // player.do end
 	
 	@RequestMapping(value="/sol_player/memoSave.do", method=RequestMethod.POST)
-  public void save(StudyDTO dto, HttpServletResponse resp){
+  public void save(StudyDTO dto, HttpServletResponse resp, HttpSession session){
     //System.out.println("----------memo:"+dto.getMemo());
    // System.out.println("----------lectureno:"+dto.getLectureno());
     try {
-      String id = "soldesk";
+      String id = (String) session.getAttribute("s_id");
       
       // id랑 lectureno가 일치하는 레코드에 update sol_study
       Map map = new HashMap();
