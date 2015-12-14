@@ -14,7 +14,7 @@ public class MemberDTO {
 	private String mdate;    //-- 殿废老
 	private String promise;    //-- 茄临促咙
 	public MemberDTO() {
-			System.out.println("⒑------MemberDTO()按眉 积己凳...");
+			//System.out.println("⒑------MemberDTO()按眉 积己凳...");
 	}
 	public String getId() {
 		return id;
