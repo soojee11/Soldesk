@@ -24,7 +24,6 @@ public class PlayerDAO {
 	  boolean flag=false;
 	  
 	    try{
-	    	
 	    	int cnt=mybatis.update("sol_category.categoryIns",map);
 	    	
 			if(cnt>0)
