@@ -16,4 +16,16 @@
       INSERT INTO sol_study (lectureno, id, memo, regdate)
       VALUES (#lectureno#, #id#, #memo#, now())
   </insert>
+  
+  <update id="insertMemo" parameterClass="Map">
+      UPDATE sol_study 
+      SET memo=#memo#
+      WHERE id=#id# AND lectureno=#lectureno#
+  </update>
+  
+  <select id="read" parameterClass="Map" resultClass="StudyDTO">
+    SELECT memo FROM sol_study
+    WHERE id=#id# AND lectureno=#lectureno#
+  </select>
+  
 </sqlMap>

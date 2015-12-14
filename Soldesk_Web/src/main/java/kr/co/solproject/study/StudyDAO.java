@@ -49,4 +49,28 @@ private SqlMapClient mybatis; // Connection con
     }
   }
   
+  public void updateMemo(Map map){
+    try{
+     mybatis.update("sol_study.insertMemo", map); 
+    }catch (Exception e){
+      System.out.println("memo 저장 실패다: "+e);
+    }
+  }
+  
+  public StudyDTO read(String id, int lectureno){
+   StudyDTO sdto = null;
+   try{
+    Map map = new HashMap();
+    map.put("id", id);
+    map.put("lectureno", lectureno);
+    
+    sdto = (StudyDTO) mybatis.queryForObject("sol_study.read", map);
+    
+   }catch (Exception e){
+     System.out.println("memo 읽기 실패다: "+e);
+   }
+   
+   return sdto;
+  }
+  
 }
