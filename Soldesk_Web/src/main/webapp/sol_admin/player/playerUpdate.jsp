@@ -69,6 +69,7 @@
 				<div align="center">
 					<button type="button" class="btn btn-danger btn-sm" onclick="javascript:player_validate2(this.form)">수정</button>
 					<button type="reset" class="btn btn-danger btn-sm" >취소</button>
+					<button type="button" class="btn btn-danger btn-sm" onclick="history.go(-1); return false;">뒤로가기</button>
 				</div>
 			</form>
 		</div>

@@ -208,8 +208,8 @@ public static  String paging4(int totalRecord, int nowPage, int recordPerPage, S
     int nowGrp = (int)(Math.ceil((double)nowPage/pagePerBlock));    // 현재 그룹
     int startPage = ((nowGrp - 1) * recordPerPage) + 1; // 특정 그룹의 페이지 목록 시작 
     int endPage = (nowGrp * (int)Math.ceil((double)totalRecord/recordPerPage));	// 특정 그룹의 페이지 목록 종료  
-    System.out.println(startPage);
-    System.out.println(endPage);
+    //System.out.println(startPage);
+    //System.out.println(endPage);
     StringBuffer str = new StringBuffer();
     
     str.append("<style type='text/css'>");

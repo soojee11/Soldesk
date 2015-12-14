@@ -1,5 +1,7 @@
 package kr.co.solproject.admin;
 
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -8,7 +10,6 @@ import com.ibatis.sqlmap.client.SqlMapClient;
 
 import kr.co.solproject.GetSqlMapClient;
 import kr.co.solproject.category.CategoryDTO;
-import kr.co.solproject.example.ExampleDTO;
 import kr.co.solproject.member.MemberDTO;
 import kr.co.solproject.player.PlayerDTO;
 import kr.co.solproject.question.QuestionDTO;
@@ -33,16 +34,6 @@ public class AdminDAO {
 		return mlevel;
 	}
 	
-	public int getCategoryno(Map map) {
-		int categoryno = 0;
-		try {
-			categoryno=(Integer) mybatis.queryForObject("sol_admin.getCategoryno",map);
-		}catch(Exception e) {
-			System.out.println("getCategoryno error: "+e);		
-		}
-		return categoryno;
-	}//end
-	
 	public List getLecList() {
 		List list=null;
 		try {
@@ -52,16 +43,6 @@ public class AdminDAO {
 		}
 		return list;
 	}//end
-	
-	public List getLecList(int categoryno) {
-		List list=null;
-		try {
-			list=mybatis.queryForList("sol_admin.getLecList",categoryno);
-		}catch(Exception e) {
-			System.out.println("getLecList error: "+e);	
-		}
-			return list;
-	}//end	
 
 // -----------------------------------------------------------------------------------------문제풀기부분 시작	
 	public boolean testInsert(TestDTO dto){
@@ -120,15 +101,6 @@ public class AdminDAO {
 		return count;
 	}
 	
-	public int getLecTotal(int categoryno) {
-		int count=0;
-		try {
-			count=(Integer) mybatis.queryForObject("sol_admin.getLecTotal", categoryno);
-		}	catch(Exception e) {
-			System.out.println("getLecTotal error: "+e);		
-		}
-		return count;
-	}
 	public PlayerDTO lecRead(int lectureno){
 		
 		PlayerDTO dto = null;
@@ -218,6 +190,83 @@ public class AdminDAO {
 			
 		}	catch(Exception e) {
 			System.out.println("lecUpdate error: "+e);		
+		}
+	}//end
+	
+	public List getLecList(Map map) {
+		List list = null;
+		try {
+			list = mybatis.queryForList("sol_admin.getLecList",map);
+		} catch (Exception e) {
+			System.out.println("getLecList error"+e);
+		}
+		return list;
+	}// end
+	
+	public String getCategoryInfo(int grade, String gwamok){
+		String categoryInfo = null;
+		try {
+			Map map = new HashMap();
+			map.put("grade", grade);
+			map.put("gwamok", gwamok);
+			
+			categoryInfo = (String) mybatis.queryForObject("sol_lecture.info",map);
+			//System.out.println(">>>>>>>>>>>>>>"+categoryInfo);
+			
+		} catch (Exception e) {
+			System.out.println("categoryInfo error: "+e);		
+		}
+		return categoryInfo;
+	}
+	
+	public int getLecTotal(Map map) {
+		int res=0;
+		try {
+			res=(Integer) mybatis.queryForObject("sol_lecture.total",map);
+		}	catch(Exception e) {
+			System.out.println("getLecTotal error: "+e);		
+		}
+		return res;
+	}
+	
+	public List getMemList(Map map) {
+		List list = null;
+		try {
+			list = mybatis.queryForList("sol_admin.getMemList",map);
+		} catch (Exception e) {
+			System.out.println("getMemList error"+e);
+		}
+		return list;
+	}// end
+
+	public int getMemTotal(Map map) {
+		int res=0;
+		try {
+			res=(Integer) mybatis.queryForObject("sol_admin.getMemTotal",map);
+		}	catch(Exception e) {
+			System.out.println("getMemTotal error: "+e);		
+		}
+		return res;
+	}
+	
+	public boolean memLevelProc(Map map){
+		boolean flag=false;
+		try {
+			int cnt=mybatis.update("sol_admin.memLevelProc",map);
+			if(cnt>0)
+				flag=true;
+		}	catch(Exception e) {
+			System.out.println("memLevelProc error: "+e);
+		}
+		return flag;
+	}//end
+	
+	public void memDelProc(Map map) {
+		try {
+			System.out.println(map.toString());
+			mybatis.update("sol_admin.memDelProc", map);
+		}catch(Exception e) {
+			System.out.println("memDelProc error: "+e);		
 		}
 	}//end
 	

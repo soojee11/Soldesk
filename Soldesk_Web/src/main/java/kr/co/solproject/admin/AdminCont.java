@@ -13,7 +13,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.solproject.category.CategoryDTO;
 import kr.co.solproject.member.MemberDTO;
@@ -80,17 +79,6 @@ public class AdminCont {
 			
 		}
 	}//end
-	
-	@RequestMapping(value="sol_admin/member.do", method=RequestMethod.GET)
-	public String loginProc() {
-		return "sol_admin/member/memberList";
-	}
-	
-	
-	@RequestMapping(value="sol_admin/memlist.do", method=RequestMethod.GET)
-	public String memList() {
-		return "sol_admin/member/memberList";
-	}
 
 	@RequestMapping(value="sol_admin/leclist.do")
 	public String lecList(HttpServletRequest request) {
@@ -122,14 +110,14 @@ public class AdminCont {
 		int sno = ((nowPage-1)*numPerPage);
 		
 		Map map = new HashMap();
-		map.put("col1", co1);
-		map.put("col2",col2);
+		map.put("grade", co1);
+		map.put("gwamok", col2);
 		map.put("sno", sno);
 		map.put("numPerPage", numPerPage);
 		
 		List list = null;
-		int categoryno = 0;
 		int total = 0;
+		String categoryInfo="";
 		
 		if((co1=="" && col2=="")||(co1==null||col2==null)){
 			
@@ -138,10 +126,10 @@ public class AdminCont {
 			
 		}else{
 			
-			categoryno = dao.getCategoryno(map);
-		
-			list = dao.getLecList(categoryno);
-			total = dao.getLecTotal(categoryno);
+			list=dao.getLecList(map);
+			//categoryInfo = dao.getCategoryInfo(Integer.parseInt(co1), col2);
+			//System.out.println(categoryInfo);
+			total=dao.getLecTotal(map);
 			
 		}
 		
@@ -529,6 +517,344 @@ public class AdminCont {
 
 		return "sol_admin/player/playerList";
 	}
+	
+	@RequestMapping(value="sol_admin/lecdelete.do", method = RequestMethod.GET)
+	public String lecDelList(HttpServletRequest request) {
 		
+		String url = "./lecdelete.do";	
+		
+		int nowPage=1;	
+		int numPerPage=5;
+		
+		int recNo=1;
+		
+		// 검색관련 변수
+		String co1 = null;
+		if(request.getParameter("col1") != null){
+			co1 = request.getParameter("col1");
+			System.out.println("검색컬럼: "+co1);
+		}
+		
+		String col2 = null;
+		if(request.getParameter("col2") != null){
+			col2 = request.getParameter("col2");
+			System.out.println("검색컬럼: "+col2);
+		}
+		
+		if(request.getParameter("nowPage")!=null){
+			nowPage = Integer.parseInt(request.getParameter("nowPage"));
+		}
+		
+		int sno = ((nowPage-1)*numPerPage);
+		
+		Map map = new HashMap();
+		map.put("grade", co1);
+		map.put("gwamok", col2);
+		map.put("sno", sno);
+		map.put("numPerPage", numPerPage);
+		
+		List list = null;
+		int total = 0;
+		String categoryInfo="";
+		
+		if((co1=="" && col2=="")||(co1==null||col2==null)){
+			
+			list = dao.getLecList();
+			total = dao.getLecTotal();
+			
+		}else{
+			
+			list=dao.getLecList(map);
+			//categoryInfo = dao.getCategoryInfo(Integer.parseInt(co1), col2);
+			//System.out.println(categoryInfo);
+			total=dao.getLecTotal(map);
+			
+		}
+		
+		String dbean = Utility.getDate();
+		String paging = Paging.paging4(total, nowPage, numPerPage, url);
+		
+		recNo = total - (nowPage - 1) * numPerPage + 1 ;
+		
+		request.setAttribute("list", list);
+		request.setAttribute("dbean", dbean);
+		request.setAttribute("paging", paging);
+		request.setAttribute("recNo", recNo);
+		request.setAttribute("nowPage", nowPage);
+		request.setAttribute("col1", co1); //gwamok
+		request.setAttribute("col2", col2);
+		request.setAttribute("total", total);
+	
+		return "sol_admin/player/playerDelList";
+		
+	}//end
+	
+	
+	@RequestMapping(value="sol_admin/memlist.do", method=RequestMethod.GET)
+	public String memList(HttpServletRequest request) {
+		
+		String url = "./memlist.do";
+		
+		int numPerPage=5;	
+		int recNo=1;
+		
+		String nowPage = request.getParameter("nowPage");
+		if (nowPage == null) {
+			nowPage = "1";
+		}
+		
+		int sno = ((Integer.parseInt(nowPage) - 1) * numPerPage);
+		int intNowPage = Integer.parseInt(nowPage);
+		
+		String col = null;
+		if(request.getParameter("col") != null){
+			col = request.getParameter("col");
+			System.out.println("검색컬럼: "+col);
+		}
+		
+		Map map = new HashMap();
+		map.put("col", col);
+		map.put("sno", sno);
+		map.put("numPerPage", numPerPage);
+		
+		List list = dao.getMemList(map);
+		String dbean = Utility.getDate();
+		int total = dao.getMemTotal(map);
+		
+		String paging = Paging.paging4(total, intNowPage, numPerPage, url);
+		
+		recNo = total - (intNowPage - 1) * numPerPage + 1 ;
+		
+		request.setAttribute("list", list);
+		request.setAttribute("dbean", dbean);
+		request.setAttribute("paging", paging);
+		request.setAttribute("recNo", recNo);
+		request.setAttribute("nowPage", nowPage);
+		request.setAttribute("col", col);
+		request.setAttribute("total", total);
+		
+		return "sol_admin/member/memberList";
+	}//end
+	
+	@RequestMapping(value="sol_admin/memmlevel.do", method=RequestMethod.GET)
+	public String memLevelList(HttpServletRequest request) {
+		
+		String url = "./memmlevel.do";
+		
+		int numPerPage=5;	
+		int recNo=1;
+		
+		String nowPage = request.getParameter("nowPage");
+		if (nowPage == null) {
+			nowPage = "1";
+		}
+		
+		int sno = ((Integer.parseInt(nowPage) - 1) * numPerPage);
+		int intNowPage = Integer.parseInt(nowPage);
+		
+		String col = null;
+		if(request.getParameter("col") != null){
+			col = request.getParameter("col");
+			System.out.println("검색컬럼: "+col);
+		}
+		
+		Map map = new HashMap();
+		map.put("col", col);
+		map.put("sno", sno);
+		map.put("numPerPage", numPerPage);
+		
+		List list = dao.getMemList(map);
+		String dbean = Utility.getDate();
+		int total = dao.getMemTotal(map);
+		
+		String paging = Paging.paging4(total, intNowPage, numPerPage, url);
+		
+		recNo = total - (intNowPage - 1) * numPerPage + 1 ;
+		
+		request.setAttribute("list", list);
+		request.setAttribute("dbean", dbean);
+		request.setAttribute("paging", paging);
+		request.setAttribute("recNo", recNo);
+		request.setAttribute("nowPage", nowPage);
+		request.setAttribute("col", col);
+		request.setAttribute("total", total);
+		
+		return "sol_admin/member/memLevel";
+	}//end
+	
+	@RequestMapping(value="sol_admin/memmlevel.do", method=RequestMethod.POST)
+	public String memLevelProc(String mlevel, String id, HttpServletRequest request) {	
+		
+		System.out.println(mlevel);
+		System.out.println(id);
+		
+		Map map = new HashMap();
+		map.put("mlevel", mlevel);
+		map.put("id", id);
+		
+		Boolean flag = dao.memLevelProc(map);
+			
+		String url = "./memmlevel.do";
+			
+		int numPerPage=5;	
+		int recNo=1;
+			
+		String nowPage = request.getParameter("nowPage");
+		if (nowPage == null) {
+			nowPage = "1";
+		}
+			
+		int sno = ((Integer.parseInt(nowPage) - 1) * numPerPage);
+		int intNowPage = Integer.parseInt(nowPage);
+
+		String col = request.getParameter("col");
+		String paging ="";
+		
+		Map map2 = new HashMap();
+		map2.put("col", col);
+		map2.put("sno", sno);
+		map2.put("numPerPage", numPerPage);
+			
+		List list = dao.getMemList(map2);
+		String dbean = Utility.getDate();
+		int total = dao.getMemTotal(map2);
+			
+		recNo = total - (intNowPage - 1) * numPerPage + 1 ;
+		
+		if(col==null){
+			col="mdate";
+			paging = Paging.paging4(total, intNowPage, numPerPage, url);
+		}else{
+			col = request.getParameter("col");
+			System.out.println("검색컬럼: "+col);
+		}
+			
+		request.setAttribute("list", list);
+		request.setAttribute("dbean", dbean);
+		request.setAttribute("paging", paging);
+		request.setAttribute("recNo", recNo);
+		request.setAttribute("nowPage", nowPage);
+		request.setAttribute("col", col);
+		request.setAttribute("total", total);
+	
+		return "sol_admin/member/memLevel";
+	}//end
+	
+	@RequestMapping(value="sol_admin/memdelete.do", method=RequestMethod.GET)
+	public String memDelete(HttpServletRequest request) {	
+		
+		String url = "./memdelete.do";
+		
+		int numPerPage=5;	
+		int recNo=1;
+		
+		String nowPage = request.getParameter("nowPage");
+		if (nowPage == null) {
+			nowPage = "1";
+		}
+		
+		int sno = ((Integer.parseInt(nowPage) - 1) * numPerPage);
+		int intNowPage = Integer.parseInt(nowPage);
+		
+		String col = null;
+		if(request.getParameter("col") != null){
+			col = request.getParameter("col");
+			System.out.println("검색컬럼: "+col);
+		}
+		
+		Map map = new HashMap();
+		map.put("col", col);
+		map.put("sno", sno);
+		map.put("numPerPage", numPerPage);
+		
+		List list = dao.getMemList(map);
+		String dbean = Utility.getDate();
+		int total = dao.getMemTotal(map);
+		
+		String paging = Paging.paging4(total, intNowPage, numPerPage, url);
+		
+		recNo = total - (intNowPage - 1) * numPerPage + 1 ;
+		
+		request.setAttribute("list", list);
+		request.setAttribute("dbean", dbean);
+		request.setAttribute("paging", paging);
+		request.setAttribute("recNo", recNo);
+		request.setAttribute("nowPage", nowPage);
+		request.setAttribute("col", col);
+		request.setAttribute("total", total);
+		
+		return "sol_admin/member/memDelete";
+	}//end
+	
+	@RequestMapping(value="sol_admin/memdelete.do", method=RequestMethod.POST)
+	public String memDelProc(MemberDTO dto, HttpServletRequest request) {	
+
+			String[] checks=request.getParameterValues("check2");
+			
+			String str=""; 
+			for(int idx=0; idx<checks.length; idx++) {
+				str+=checks[idx]+",";
+			}
+			str=str.substring(0,str.length()-1);
+			System.out.println(str);
+			
+			List list2 = new ArrayList();
+			String id = "";
+			String[] str2 = str.split(",");		// ","을 기준으로 분리
+			for (int idx = 0; idx < str2.length; idx++) {
+				System.out.println(str2[idx]);
+				id=str2[idx];
+				list2.add(id);
+			}
+			System.out.println("list:" +list2);
+			
+			Map map=new HashMap();
+			map.put("list", list2);
+			
+			dao.memDelProc(map);
+			
+			String url = "./memdelete.do";
+			
+			int numPerPage=5;	
+			int recNo=1;
+			
+			String nowPage = request.getParameter("nowPage");
+			if (nowPage == null) {
+				nowPage = "1";
+			}
+			
+			int sno = ((Integer.parseInt(nowPage) - 1) * numPerPage);
+			int intNowPage = Integer.parseInt(nowPage);
+			
+			String col = null;
+			if(request.getParameter("col") != null){
+				col = request.getParameter("col");
+				System.out.println("검색컬럼: "+col);
+			}
+			
+			Map map2 = new HashMap();
+			map2.put("col", col);
+			map2.put("sno", sno);
+			map2.put("numPerPage", numPerPage);
+			
+			List list = dao.getMemList(map2);
+			String dbean = Utility.getDate();
+			int total = dao.getMemTotal(map2);
+			
+			String paging = Paging.paging4(total, intNowPage, numPerPage, url);
+			
+			recNo = total - (intNowPage - 1) * numPerPage + 1 ;
+			
+			request.setAttribute("list", list);
+			request.setAttribute("dbean", dbean);
+			request.setAttribute("paging", paging);
+			request.setAttribute("recNo", recNo);
+			request.setAttribute("nowPage", nowPage);
+			request.setAttribute("col", col);
+			request.setAttribute("total", total);
+			
+			return "sol_admin/member/memDelete";
+			
+	}//end
 	
 }
