@@ -55,14 +55,17 @@ function lectureGo(lectureno){
 			<!-- 강의 카테고리 -->
 			<ul>				
 				<li style="background-color: #99cc66">강의</li>
-				<li><a href="lectureList.do?grade=${grade }&gwamok=${gwamok}">목록</a></li>
-				<li><a href="lectureList.do?grade=${grade }&gwamok=${gwamok}">학습Q&A</a></li>
-				<li><a href="lectureList.do?grade=${grade }&gwamok=${gwamok}">수강후기</a></li>
+				<li class="active"><a data-toggle="tab" href="#menu1">목록</a></li>
+				<li><a data-toggle="tab" href="#menu2">학습Q&A</a></li>
+				<li><a data-toggle="tab" href="#menu3">수강후기</a></li>
 			</ul>		
 	</div>
 	<hr>
+<div class="tab-content" style="width: 90%; color: black; height: 400px;">
+<div  id="menu1" class="tab-pane fade in active">
 총 <span style="color: red;"><strong>${total}</strong></span>개의 강좌가 있습니다.
 <br/><br/>
+
 <table class="table">
 	<tr align="center" >
 		<th>회차</th>
@@ -73,12 +76,12 @@ function lectureGo(lectureno){
 		<th>학습하기</th>
 	</tr>
 
-<c:set var="lectuerNo" value="${lectuerNo+1 }" />	
+<c:set var="lectureNo" value="${lectureNo+1 }" />	
 <c:forEach var="dto" items="${list }" >
-<c:set var="lectuerNo" value="${lectuerNo-1 }" />
+<c:set var="lectureNo" value="${lectureNo-1 }" />
 
 	<tr align="center">
-		<td>${lectuerNo }</td>
+		<td>${lectureNo }</td>
 		<td>${dto.subject }</td>
 		<td>${dto.poster }</td>
 		<td>${dto.lecturetime }</td>
@@ -92,6 +95,79 @@ function lectureGo(lectureno){
 	</tr>
 
 </table>
+</div>
+
+<!-- 학습QnA 탭 -->
+<div id="menu2" class="tab-pane fade">
+총 <span style="color: red;"><strong>${qnaTotal}</strong></span>개의 Q&A가 있습니다.
+<br/>
+<div align="right"><a href="bbsform.do"><img src='./img/bt_write.gif' width="40" height="20"></a></div>
+<br/>
+
+<table class="table">
+	<tr align="center" >
+		<th>순번</th>
+		<th >아이디</th>
+		<th>제목</th>
+		<th>등록일</th>
+		<th>조회수</th>
+	</tr>
+
+<c:set var="QnAno" value="${QnAno+1 }" />	
+<c:forEach var="qnaDto" items="${qnaList }" >
+<c:set var="QnAno" value="${QnAno-1 }" />
+
+	<tr align="center">
+		<td>${QnAno }</td>
+		<td>${qnaDto.id }</td>
+		<td>${qnaDto.subject }</td>
+		<td>${qnaDto.regdate }</td>
+		<td>${qnaDto.readcnt }</td>
+	</tr>
+</c:forEach>
+
+	<tr>
+		<td colspan="5"><div align="center">${qnaPaging }</div></td>
+	</tr>
+
+</table>
+</div>
+
+<!-- 후기 탭 -->
+<div id="menu3" class="tab-pane fade">
+총 <span style="color: red;"><strong>${postTotal}</strong></span>개의 후기가 있습니다.
+<br/><br/>
+
+<table class="table">
+	<tr align="center" >
+		<th>순번</th>
+		<th >아이디</th>
+		<th>내용</th>
+		<th>등록일</th>
+		<th>평점</th>
+	</tr>
+
+<c:set var="postNo" value="${postNo+1 }" />	
+<c:forEach var="postDto" items="${postList }" >
+<c:set var="postNo" value="${postNo-1 }" />
+
+	<tr align="center">
+		<td>${postNo }</td>
+		<td>${postDto.id }</td>
+		<td>${postDto.content }</td>
+		<td>${postDto.regdate }</td>
+		<td>${postDto.postgrade }</td>
+	</tr>
+</c:forEach>
+
+	<tr>
+		<td colspan="5"><div align="center">${postPaging }</div></td>
+	</tr>
+
+</table>
+</div>
+
+</div>
 </div>
 <!-- page end-->
 <%@ include file="../sol_footer.jsp"%>
