@@ -27,7 +27,6 @@ public class MyscoreCont {
 		System.out.println("---------------MyscoreCont객체 생성됨");
 	}
 	
-	
 	@RequestMapping(value="/sol_test/questionCheck.do")
 	public String questionCheck(QuestionDTO dto, HttpServletRequest request, HttpSession session) {
 		
@@ -69,7 +68,7 @@ public class MyscoreCont {
 		request.setAttribute("recNo", total);
 		
 		request.setAttribute("usetime", usetime);
-		
+		request.setAttribute("s_id", s_id);
 		
 		List answerList = new ArrayList();
 		List answerList2 = new ArrayList();
@@ -102,7 +101,7 @@ public class MyscoreCont {
 		double oneQuest=100.0/total;	//문제 하나당 점수
 		//System.out.println("oneQuest:"+oneQuest);
 		
-		
+		String img[] = new String[total];
 		double myscore=0;
 		for(int idx=0; idx<resultList.size(); idx++) {
 			dto=(QuestionDTO) resultList.get(idx);
@@ -110,14 +109,22 @@ public class MyscoreCont {
 			String confirm=(String) answerList2.get(idx);
 			if(dto.getAnswer().equals(confirm)) {
 				myscore+=oneQuest;
+				img[idx]="ok";
 			}	
+			else {
+				img[idx]="wrong";
+			}
 		}
 		myscore=Math.round(myscore);//반올림
 		//System.out.println(myscore);
 		int myScore =(int)myscore;
 		request.setAttribute("myscore", myScore);
-		
-		
+		/*
+		for(int idx=0; idx<img.length; idx++) {
+			System.out.println(img[idx]);
+		}
+		*/
+		request.setAttribute("img", img);
 		return "sol_test/questionCheck";
 	}
 	

@@ -7,32 +7,8 @@
 <meta charset="UTF-8">
 <title>EBS 초중학</title>
 <script src="js/test.js"></script>
-<style>
-#layer_fixed {
-	height:80px;
-	width:100%;
-	vertical-align:middle;
-	position:fixed;
-	z-index:999;
-	top:0px;
-	left:0px;
-	-webkit-box-shadow: 0 1px 2px 0 #777;
-	box-shadow: 0 1px 2px 0 #777;
-	background-color: #E1DDDD;
-	}
-#layer_fixed2 {
-	height:30px;
-	width:100%;
-	vertical-align:middle;
-	position:fixed;
-	z-index:999;
-	top:80px;
-	left:0px;
-	-webkit-box-shadow: 0 1px 2px 0 #777;
-	box-shadow: 0 1px 2px 0 #777;
-	background-color: #566075;
-	}
-</style>
+<link href="css/test.css" rel="stylesheet">
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 </head>
 
 <body onload="showtime()" onunload="killtime()">
@@ -58,7 +34,7 @@
 <div id="layer_fixed2">
 <table cellspacing="0" cellpadding="0" style="width:100%; height:100%;">
 <tr>
-	<td><input type="button" onclick="killtime(this.form,${recNo })" value="채점하기"/></td>
+	<td><input class="btn btn-warning" type="button" onclick="killtime(this.form,${recNo })" value="채점하기" /></td>
 </tr>
 </table>
 </div>
@@ -69,7 +45,7 @@
     
 </c:forEach>
 
-<div align="center" style="margin-top: 110px;"> 
+<div align="center" style="margin-top: 120px;"> 
 <table align="center" text-align="center">
 <c:set var="recNo" value="${recNo2-1 }" />
 <c:forEach var="dto" items="${list }" >
@@ -85,7 +61,8 @@
 	</td>
 
 	<tr>
-	<td><br /><strong><font font-size="12px;">${recNo }. </font></strong>${dto.qtitle }</td>
+	<td><br />
+	<span><strong>${recNo }. </strong></span>${dto.qtitle }</td>
 </tr>
 	<c:if test="${dto.qtype eq 'G' }">
 	<tr>
