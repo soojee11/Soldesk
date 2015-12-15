@@ -85,4 +85,16 @@
 		testno=#testno#
 	</select>
 
+	<select id="myscoreAnswer" resultClass="QuestionDTO"
+		parameterClass="Map">
+		select questno, answer
+		from sol_question
+		where testno=#testno# and
+		questno
+		<iterate prepend="IN" property="answerList" open="(" close=")"
+			conjunction=",">
+			#answerList[]#
+		</iterate>
+		order by questno asc
+	</select>
 </sqlMap>

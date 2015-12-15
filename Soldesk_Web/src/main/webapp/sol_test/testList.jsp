@@ -3,15 +3,15 @@
 <%@ include file="../sol_header.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<script src="../sol_js/test/test.js"></script>
+<script src="js/test.js"></script>
 
 <!-- page start-->
 <br />
-<h3><img src="../sol_img/test/go_right.png" width="20px"/>
+<h3><img src="img/go_right.png" width="20px"/>
 EBS 추천 문제지&nbsp;&nbsp;<span style="font-size: 12px;">함께 풀고 학습해 봅시다</span></h3>
 <hr>
 <div>
-<img src="../sol_img/test/test_info.jpg" />
+<img src="img/test_info.jpg" />
 </div>
 <br />
 <div align="right">
@@ -34,7 +34,7 @@ EBS 추천 문제지&nbsp;&nbsp;<span style="font-size: 12px;">함께 풀고 학
 	<button class="btn btn-primary">검색</button>
 </form>
 </div>
-
+	
 <table class="table">
 	<tr>
 		<th width="60">순번</th>
@@ -65,7 +65,8 @@ EBS 추천 문제지&nbsp;&nbsp;<span style="font-size: 12px;">함께 풀고 학
 			</c:choose>
 		</td>
 		<td>${dto.testtitle }</td>
-		<td><input type="button" value="응시하기" onclick="questionList('${dto.testno }','${dto.testtitle }')"/></td>
+		<td><img src="img/test_ok.PNG" onclick="questionList('${s_id }','${dto.testno }','${dto.testtitle }')"/>
+		<%-- <input type="button" value="응시하기" onclick="questionList('${dto.testno }','${dto.testtitle }')"/> --%></td>
 	</tr>
 </c:forEach>
 

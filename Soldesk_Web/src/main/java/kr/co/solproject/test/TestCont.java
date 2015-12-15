@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,7 +27,7 @@ public class TestCont {
 	
 	//http://localhost:9090/solproject/sol_test/list.do
 	@RequestMapping(value="/sol_test/list.do")
-	public String list(HttpServletRequest request) {
+	public String list(HttpServletRequest request,HttpSession session) {
 
 		String url="list.do";	// page링크시 이동할 페이지
 		int nowPage=1;			// 현재페이지, 페이지 시작번호 0->1page
@@ -79,7 +80,8 @@ public class TestCont {
 		request.setAttribute("col1", col1);
 		request.setAttribute("col2", col2);
 		request.setAttribute("total", total);
-		
+		session.setAttribute("s_id", session.getAttribute("s_id"));
+	
 		//System.out.println(list.toString());
 		// 3. 결과값을 보여줄 view 리턴
 		return "sol_test/testList";

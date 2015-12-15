@@ -37,7 +37,7 @@ create table SOL_MYSCORE (
 	mytestno	INT				NOT NULL	auto_increment,	--max(mytestno)해서 최근본 시험출력
 	id			VARCHAR(10)		NOT NULL,					--아이디
 	testno		INT				NOT NULL,					--일련번호
-	usetime		INT				NOT NULL,					--경과시간
+	usetime		VARCHAR(20)		NOT NULL,					--경과시간
 	answerno	VARCHAR(200)	NOT NULL,					--문제번호,답/
 	regdt		datetime		NOT NULL,					--시험일
 	primary key(mytestno),
