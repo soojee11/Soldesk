@@ -14,53 +14,12 @@
 <meta charset="UTF-8">
 <title>EBS 초중학</title>
 <script src="js/test.js"></script>
-<style>
-#layer_fixed {
-	height: 80px;
-	width: 100%;
-	vertical-align: middle;
-	position: fixed;
-	z-index: 999;
-	top: 0px;
-	left: 0px;
-	-webkit-box-shadow: 0 1px 2px 0 #777;
-	box-shadow: 0 1px 2px 0 #777;
-	background-color: #E1DDDD;
-}
-
-#layer_fixed2 {
-	height: 30px;
-	width: 100%;
-	vertical-align: middle;
-	align: center;
-	position: fixed;
-	z-index: 999;
-	top: 80px;
-	left: 0px;
-	-webkit-box-shadow: 0 1px 2px 0 #777;
-	box-shadow: 0 1px 2px 0 #777;
-}
-
-.mytable {
-	border-collapse: collapse;
-}
-
-.mytable th {
-	border: 1px solid black;
-	padding: 5px;
-}
-
-.mytable td {
-	border: 1px solid black;
-	padding: 5px;
-}
-</style>
+<link href="css/test.css" rel="stylesheet">
 </head>
 
 <body>
 	<div id="layer_fixed">
-		<table cellspacing="0" cellpadding="0"
-			style="width: 100%; height: 100%;">
+		<table cellspacing="0" cellpadding="0" style="width: 100%; height: 100%;">
 			<tr>
 				<td
 					style="text-align: left; padding-left: 20px; padding-right: 20px;">
@@ -79,23 +38,21 @@
 	</div>
 
 	<div id="layer_fixed2">
-		<table cellspacing="0" cellpadding="0"
-			style="width: 100%; height: 100%; color: white; text-align: center; background-color: #566075;">
+		<table cellspacing="0" cellpadding="0" style="width:100%; height:100%; color:white;">
 			<tr>
-				<td>답안지</td>
+				<!-- <td align="left">답안지</td> -->
+				<td align="center" valign="middle" style="font-size:24px;">${s_id }님의 점수는: <span style="color:red;"><strong>${myscore}점</strong></span> 입니다.</td>
 			</tr>
 		</table>
-	</div>
 
-	<div style="margin-top: 120px;font-size:55px; text-align:center; color:red; font-family: 궁서;">
-	<strong>${myscore}점</strong></div>
+	</div>
 
 	<c:forEach var="i" end="${recNo }" begin="1" step="1">
 		<c:set var="recNo2" value="${recNo+1-i}" />
 
 	</c:forEach>
 
-	<div align="center" style="margin-top: 50px;">
+	<div align="center" style="margin-top: 120px;">
 		<table align="center" text-align="center">
 			<c:set var="recNo" value="${recNo2-1 }" />
 			<c:forEach var="dto" items="${list }">
@@ -114,7 +71,14 @@
 						</c:if></td>
 				<tr>
 					<td><br />
-					<span font="bold 12px;">${recNo }. </span>${dto.qtitle }</td>
+					<c:forEach var="img2" items="${img }" varStatus="status">
+					<c:if test="${status.count eq recNo }">
+					<c:if test="${img2 eq 'wrong' }"><img src="img/wrong.png"/>
+					</c:if>
+					<c:if test="${img2 eq 'ok' }"><img src="img/ok.png"/></c:if>
+					</c:if>
+					</c:forEach>
+					<span><strong>${recNo }. </strong></span>${dto.qtitle }</td>
 				</tr>
 				<c:if test="${dto.qtype eq 'G' }">
 					<tr>
@@ -129,19 +93,27 @@
 
  			for (int idx = 0; idx < str.length; idx++) {
  				pageContext.setAttribute("number" + idx, number[idx]);
+ 
  			}
  %>
+
+
 							<ul>
 								<li style="list-style: none;"><input type="checkbox"
-									name="answer" value="${dto.questno },${number0 }" disabled/>${number0}</li>
+									name="answer" value="${dto.questno },${number0 }" 
+									<c:choose><c:when  test="${dto.answer eq number0}" >checked</c:when></c:choose> disabled/>${number0}</li>
 								<li style="list-style: none;"><input type="checkbox"
-									name="answer" value="${dto.questno },${number1 }" disabled/>${number1}</li>
+									name="answer" value="${dto.questno },${number1 }" 
+									<c:choose><c:when  test="${dto.answer eq number1}" >checked</c:when></c:choose> disabled/>${number1}</li>
 								<li style="list-style: none;"><input type="checkbox"
-									name="answer" value="${dto.questno },${number2 }" disabled/>${number2}</li>
+									name="answer" value="${dto.questno },${number2 }" 
+									<c:choose><c:when  test="${dto.answer eq number2}" >checked</c:when></c:choose> disabled/>${number2}</li>
 								<li style="list-style: none;"><input type="checkbox"
-									name="answer" value="${dto.questno },${number3 }" disabled/>${number3}</li>
+									name="answer" value="${dto.questno },${number3 }" 
+									<c:choose><c:when  test="${dto.answer eq number3}" >checked</c:when></c:choose> disabled/>${number3}</li>
 								<li style="list-style: none;"><input type="checkbox"
-									name="answer" value="${dto.questno },${number4 }" disabled/>${number4}</li>
+									name="answer" value="${dto.questno },${number4 }" 
+									<c:choose><c:when  test="${dto.answer eq number4}" >checked</c:when></c:choose> disabled/>${number4}</li>
 							</ul></td>
 					</tr>
 					<tr>
@@ -162,9 +134,8 @@
 					<tr>
 						<td>
 							<ul>
-								<li style="list-style: none;"><input type="hidden"
-									name="answer" value="${dto.questno }*" /> <input type="text"
-									name="answer" /></li>
+								<li style="list-style: none;"><input type="text"
+									name="answer" value="${dto.answer }" readonly /></li>
 							</ul>
 						</td>
 					</tr>
@@ -186,12 +157,13 @@
 					<tr>
 						<td>
 							<ul>
-								<li style="list-style: none;"><input
-									onclick="check_only(this,${dto.questno })" type="checkbox"
-									name="answer" value="${dto.questno },O"/>O</li>
-								<li style="list-style: none;"><input
-									onclick="check_only(this,${dto.questno })" type="checkbox"
-									name="answer" value="${dto.questno },X"/>X</li>
+								<li style="list-style: none"><input type="checkbox"
+									name="answer" value="${dto.questno },O" 
+									<c:choose><c:when  test="${dto.answer eq 'O' }" >checked</c:when></c:choose> disabled/>O</li>
+								<li style="list-style: none"><input type="checkbox"
+									name="answer" value="${dto.questno },X" 
+									<c:choose><c:when  test="${dto.answer eq 'X' }" >checked</c:when></c:choose>
+									disabled/>X</li>
 							</ul>
 						</td>
 					</tr>
