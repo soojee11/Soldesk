@@ -5,9 +5,9 @@
 	<div align="center">
 		<h3>카테고리 삭제</h3><br/>
 		<h4>${dto.grade } 학년 
-		<c:choose><c:when  test="${dto.gwamok eq 'kor' }" >국어 </c:when></c:choose>
-		<c:choose><c:when  test="${dto.gwamok eq 'mat' }" >수학 </c:when></c:choose>
-		<c:choose><c:when  test="${dto.gwamok eq 'eng' }" >영어 </c:when></c:choose>
+		<c:choose><c:when  test="${dto.gwamok eq '국어' }" >국어 </c:when></c:choose>
+		<c:choose><c:when  test="${dto.gwamok eq '수학' }" >수학 </c:when></c:choose>
+		<c:choose><c:when  test="${dto.gwamok eq '영어' }" >영어 </c:when></c:choose>
 		<br/>
 		</h4>
 		강좌설명 | ${dto.categoryInfo }
