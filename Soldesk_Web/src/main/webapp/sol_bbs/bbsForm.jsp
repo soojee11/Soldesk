@@ -22,7 +22,8 @@ function createBbs(frm){
 <br/>
 <c:if test="${msg != null}">
 	<script type="text/javascript">
-	 alert("댓글 등록 성공");
+	 alert("게시물 등록 성공");
+	 location.href="bbslist.do";
 	</script>
 </c:if>
 <h5>

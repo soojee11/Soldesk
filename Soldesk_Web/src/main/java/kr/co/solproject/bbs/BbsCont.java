@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.tools.DocumentationTool.Location;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -74,10 +75,23 @@ public class BbsCont {
   }
   
   @RequestMapping(value="/sol_bbs/bbsupdate.do", method=RequestMethod.POST)
-  public String bbsUpdateProc(BbsDTO dto){
-    dao.update(dto);
-    
+  public String bbsUpdateProc(BbsDTO dto,HttpServletRequest req){
+    boolean flag = false;
+    flag = dao.update(dto);
+    if(flag == true){
+      req.setAttribute("dto", dto);
+      req.setAttribute("msg", "");
+    }
     return "/sol_bbs/bbsUpdate";
   }
   
+  @RequestMapping(value="/sol_bbs/bbsdelete.do")
+  public String bbsDeleteProc(BbsDTO dto,HttpServletRequest req){
+    boolean flag = false;
+    flag = dao.delete(dto);
+    if(flag == true){
+      req.setAttribute("msg", "");
+    }
+    return "/sol_bbs/bbsDelete";
+  }
 }
