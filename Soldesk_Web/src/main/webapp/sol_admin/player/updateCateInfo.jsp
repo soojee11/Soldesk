@@ -18,9 +18,9 @@
 	<div class="col-lg-12">
 		<section class="panel">
 			<header class="panel-heading">${dto.grade }학년
-			 <c:choose><c:when  test="${dto.gwamok eq 'kor' }" >국어 </c:when></c:choose>
-			 <c:choose><c:when  test="${dto.gwamok eq 'mat' }" >수학 </c:when></c:choose>
-			 <c:choose><c:when  test="${dto.gwamok eq 'eng' }" >영어 </c:when></c:choose>
+			 <c:choose><c:when  test="${dto.gwamok eq '국어' }" >국어 </c:when></c:choose>
+			 <c:choose><c:when  test="${dto.gwamok eq '수학' }" >수학 </c:when></c:choose>
+			 <c:choose><c:when  test="${dto.gwamok eq '영어' }" >영어 </c:when></c:choose>
 			 - 강좌설명 수정	</header>
 			<div class="panel-body">
 			
@@ -43,9 +43,9 @@
 					<label class="col-sm-2 control-label">과목</label>
 					<div class="col-sm-10">
 						<select class="form-control input-sm m-bot15" name="gwamok">
-							<option value="kor" <c:choose><c:when  test="${dto.gwamok eq 'kor' }" >selected</c:when></c:choose>>국어</option>
-							<option value="eng" <c:choose><c:when  test="${dto.gwamok eq 'eng' }" >selected</c:when></c:choose>>영어</option>
-							<option value="mat" <c:choose><c:when  test="${dto.gwamok eq 'mat' }" >selected</c:when></c:choose>>수학</option>
+							<option value="국어" <c:choose><c:when  test="${dto.gwamok eq '국어' }" >selected</c:when></c:choose>>국어</option>
+							<option value="영어" <c:choose><c:when  test="${dto.gwamok eq '영어' }" >selected</c:when></c:choose>>영어</option>
+							<option value="수학" <c:choose><c:when  test="${dto.gwamok eq '수학' }" >selected</c:when></c:choose>>수학</option>
 						</select>
 				</div>
 				</div>

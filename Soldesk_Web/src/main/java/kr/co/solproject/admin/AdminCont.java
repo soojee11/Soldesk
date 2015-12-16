@@ -1077,10 +1077,14 @@ public class AdminCont {
 		return "redirect:./readCateInfo.do";
 	}//end
 	
-	@RequestMapping(value="sol_admin/cateIns.do", method=RequestMethod.GET)
-	public String cateIns(HttpServletRequest request) {
+	@RequestMapping(value="sol_admin/cateInsert.do", method=RequestMethod.GET)
+	public String cateInsert(HttpServletRequest request) {
 		return "sol_admin/player/categoryIns";
 	}//end
 	
+	@RequestMapping(value="sol_admin/cateDelete.do", method=RequestMethod.GET)
+	public String cateDelete(HttpServletRequest request) {
+		return "sol_admin/player/playerDelList";
+	}//end
 	
 }

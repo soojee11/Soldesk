@@ -135,8 +135,8 @@
                       </a>
                         <ul class="sub">
                           <li><a  href="readCateInfo.do">Lecture_list</a></li>
-                          <li><a  href="lecinsert.do">Lecture_insert</a></li>                          
-                          <li><a  href="lecdelete.do">Lecture_delete</a></li>
+                          <li><a  href="cateInsert.do">Lecture_insert</a></li>                          
+                          <li><a  href="cateDelete.do">Lecture_delete</a></li>
                       </ul>
                   </li>
                    <li class="sub-menu">
