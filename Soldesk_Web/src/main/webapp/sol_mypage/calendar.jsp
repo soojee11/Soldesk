@@ -5,8 +5,8 @@
 
 <br /><br />
 <div align="left">
-| ★ '<strong>${name }</strong>(${id })'님의 스터디캘린더 ★<Br/>
-| <strong> "${promise }"</strong>
+|  '<strong>${name }</strong>(${id })'님의 스터디캘린더 <Br/>
+|나의다짐:&nbsp;"<STRONG>${promise }"</strong>
 </div>
 <br/>
 
@@ -137,7 +137,7 @@
 					<c:if test="${year gt nowYear}">
 						<td align='center' bgcolor=${bgColor }>
 						<font color="#8C8C8C">
-						 미래
+					<!-- 	 미래 -->
 						</font>
 						</td>
 						<c:set var="newLine">${ newLine+1}</c:set>
@@ -157,7 +157,7 @@
 							<c:if test="${a ge nowDay }">
 								<td align='center' bgcolor=${bgColor }>
 								<font color="#8C8C8C"> 
-								현재
+								<!-- 현재 -->
 								</font>
 								</td>
 								<c:set var="newLine">${ newLine+1}</c:set>
@@ -169,7 +169,7 @@
 						<c:if test="${month lt nowMonth }">
 							<td align='center' bgcolor=${bgColor }>
 							<font color="#5D5D5D">
-							과거
+						<!-- 	과거 -->
 							</font>
 							</td>
 							<c:set var="newLine">${ newLine+1}</c:set>

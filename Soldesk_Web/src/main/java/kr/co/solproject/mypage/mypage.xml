@@ -6,6 +6,7 @@
 <!-- namespace: 테이블명 사용 -->
 <sqlMap namespace="sol_calendar">
 	<typeAlias alias="MypageDTO" type="kr.co.solproject.mypage.MypageDTO" />
+	<typeAlias alias="StudyDTO" type="kr.co.solproject.study.StudyDTO" />
 
 	<select id="getpromise" parameterClass="String" resultClass="String">
 		select
@@ -21,21 +22,28 @@
 		where id = #id#
 	</select>
 
-<select id="getstudytable" parameterClass="String" resultClass="int">
+	<select id="getstudytable" parameterClass="String" resultClass="int">
 		select
 		count(*)
 		from sol_study
 		where id = #id#
 	</select>
 
-<select id="getstudylist" parameterClass="String" resultClass="StudyDTO">
+	<select id="check" parameterClass="Map" resultClass="int">
+		SELECT count(*) FROM sol_calendar
+		WHERE id=#id# AND lectureno=#lectureno#
+	</select>
+
+	<insert id="insert" parameterClass="Map">
+		INSERT INTO sol_calendar (lectureno, id, regdate)
+		VALUES (#lectureno#, #id#, now())
+	</insert>
+
+<select id="getregdate" parameterClass="String" resultClass="String">
 		select
-	  lectureno, memo, regdate
-		from sol_study
+		regdate
+		from sol_calendar
 		where id = #id#
 	</select>
-	
-	
-	
-	
+
 </sqlMap> 

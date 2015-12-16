@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import kr.co.solproject.mypage.MypageDAO;
+import kr.co.solproject.mypage.MypageDTO;
 import kr.co.solproject.player.PlayerDAO;
 import kr.co.solproject.study.StudyDAO;
 import kr.co.solproject.study.StudyDTO;
@@ -29,7 +31,10 @@ public class PlayerCont {
 	private PlayerDAO dao = null;
 	 @Autowired
 	  private StudyDAO sdao=null;
-
+	 @Autowired
+	  private MypageDAO mdao=null; //하나)추가-캘린더
+	 
+	 
 	public PlayerCont() {
 		System.out.println("PlayerCont 객체 생성");
 	}
@@ -41,10 +46,11 @@ public class PlayerCont {
     // 여기서 동영상 정보들 가져오기     
     PlayerDTO dto = null;
     StudyDTO sdto = null;
+    MypageDTO mdto = null;//하나)추가-캘린더
     List list = null;
     
     String id = (String) session.getAttribute("s_id");    // 우선적으로 id
-    int lectureno = 7;        // default 우선적으로 해놈 
+    int lectureno =3;        // default 우선적으로 해놈 
     
     if(req.getParameter("lectureno") != null){
       lectureno = Integer.parseInt(req.getParameter("lectureno"));
@@ -63,12 +69,22 @@ public class PlayerCont {
     // 학습 테이블에 동영상 본 기록 집어넣기( id와 lecturno이 같은 레코드가 존재하면 insert 하지 않음 )
     sdao.check(id, lectureno);        // id 와 lectureno 이 같은 레코드가 존재하는 지 검사 -> insert O / X
     
-    sdto = sdao.read(id, lectureno);  // id 와 lectureno 이 같은 레코드 memo 가져오기 
+    // 캘린더 테이블에 동영상 본 기록 집어넣기(학습테이블 생성된 날짜가 여기에  저장됨)
+    mdao.calinsert(id, lectureno); //하나)추가  -> 계속insert, update는없음.
+    
+    
+    sdto = sdao.read(id, lectureno);  // id      와 lectureno 이 같은 레코드 memo 가져오기 
   //  System.out.println("---------------------"+sdto.getMemo());
-      
+    
     req.setAttribute("sdto", sdto);
+    
     return "sol_player/player";
-  } // player.do end
+} // player.do end
+	
+	
+	
+	
+	
 	
 	@RequestMapping(value="/sol_player/memoSave.do", method=RequestMethod.POST)
   public void save(StudyDTO dto, HttpServletResponse resp, HttpSession session){

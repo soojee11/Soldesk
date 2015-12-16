@@ -43,6 +43,7 @@ private SqlMapClient mybatis; // Connection con
   public void insert(Map map){
     try{
       mybatis.update("sol_study.insert", map);
+      
     }
     catch (Exception e){
       System.out.println("insert ½ÇÆÐ: "+e);

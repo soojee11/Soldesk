@@ -1,7 +1,9 @@
 package kr.co.solproject.mypage;
 
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -11,15 +13,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import kr.co.solproject.study.StudyDAO;
 import kr.co.solproject.study.StudyDTO;
-
-
 
 @Controller
 public class MypageController {
 
 	@Autowired
 	private MypageDAO dao = null;
+	@Autowired
+	private StudyDAO sdao = null;
+
+	StudyDTO sdto = null;
+	MypageDTO mdto = null;
 
 	public MypageController() {
 		System.out.println("▶------MypageController()객체 생성됨...");
@@ -40,7 +46,8 @@ public class MypageController {
 		int nowMonth = cal.get(Calendar.MONTH) + 1;
 		//월은 0부터 시작하므로 1월 표시를 위해 1을 더해 줍니다.
 		int nowDay = cal.get(Calendar.DAY_OF_MONTH);
-
+		String onldate = (String)(nowYear+"-"+nowMonth+"-"+nowDay);
+		
 		//클라이언트가 선택하여 넘어온 날짜
 		String strYear = req.getParameter("year");
 		String strMonth = req.getParameter("month");
@@ -84,24 +91,10 @@ public class MypageController {
 		promise = dao.getpromise(s_id);
 		name = dao.getname(s_id);
 		
-
-		//List<StudyDTO> list = dao.getstudylist(s_id); //학습테이블 리스트가져오기
-		System.out.println("아이디: " + s_id);
-		//System.out.println("리스트: " + list);
+		String regdate = null;
+	    regdate = dao.getregdate(s_id); //강좌를들은날짜들을 가져오자
 		
-		int res = 0;
-		res = dao.getstudytable(s_id); //학습테이블이 있나요?
-		System.out.println(res);
-		
-		if(res != 0){//학습테이블이 0이아니면 학습을 한거니까 학습도장찍어야지
-			//어떤 강의를 들은건지 학습테이블에서 list를 가져와야한다.
-			
-			List<StudyDTO> list = dao.getstudylist(s_id);
-			System.out.println(list);
-			
-			
-		}
-		
+		System.out.println("regdate: "+regdate);
 		
 		
 		
@@ -135,9 +128,5 @@ public class MypageController {
 		}
 		
 	}// end
-	
-	
-	
-	
-	
+
 }
