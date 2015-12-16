@@ -23,7 +23,7 @@
 		</ol>
 	</div>
 </div>
-<div style="text-align:center; font-size:33px; color: black;">
+<div style="text-align:center; font-size:33px;">
 <strong>${param.testtitle }</strong>
 </div>
 <div class="row">

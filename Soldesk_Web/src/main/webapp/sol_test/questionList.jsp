@@ -1,6 +1,15 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
+<c:if test="${res==false}">
+	<script>
+		alert("문제를 모두 풀어야 점수확인이 가능합니다.");
+		//location.href="questionList.do?testno=${param.testno}&testtitle=${param.testtitle}";
+		history.go(-1);
+	</script>
+</c:if>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,7 +43,7 @@
 <div id="layer_fixed2">
 <table cellspacing="0" cellpadding="0" style="width:100%; height:100%;">
 <tr>
-	<td><input class="btn btn-warning" type="button" onclick="killtime(this.form,${recNo })" value="채점하기" /></td>
+	<td><input class="btn btn-warning" type="button" onclick="killtime(this.form)" value="채점하기" /></td>
 </tr>
 </table>
 </div>

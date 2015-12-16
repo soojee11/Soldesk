@@ -49,7 +49,7 @@ function killtime(frm) {
 	var clock=document.getElementById("clock").innerHTML;
 	frm.clock.value=clock;
 	//alert(clock);
-	
+
 	frm.submit();
 }
 
