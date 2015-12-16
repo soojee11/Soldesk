@@ -37,6 +37,7 @@
   
    <select id="getCategory" parameterClass="Integer" resultClass="CategoryDTO">
     SELECT grade, gwamok
+    from sol_category
     WHERE categoryno=#categoryno#
   </select>
   

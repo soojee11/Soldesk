@@ -35,11 +35,11 @@ public class CategoryDTO {
 	}
 
 	public String getCategoryInfo() {
-		return categoryInfo;
+		return categoryinfo;
 	}
 
-	public void setCategoryInfo(String categoryInfo) {
-		this.categoryInfo = categoryInfo;
+	public void setCategoryInfo(String categoryinfo) {
+		this.categoryinfo = categoryinfo;
 	}
 	
 }
