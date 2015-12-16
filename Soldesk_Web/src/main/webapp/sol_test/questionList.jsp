@@ -6,54 +6,38 @@
 <head>
 <meta charset="UTF-8">
 <title>EBS 초중학</title>
+<script src="js/test.js"></script>
+<link href="css/test.css" rel="stylesheet">
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 </head>
-<script>
-var Timmer=new Date();                                        
-var Login=Timmer.getTime();
-var timer, timer2;
 
-function showtime() {
-	var stop=new Date();
-	var SumTime=((stop.getTime()-Login)/1000); // 접속시간 총계
-	var LoadH=Math.floor(SumTime/3600);      // 시간
-	var LoadM=Math.floor((SumTime%3600)/60); // 분
-	var LoadS=Math.floor(SumTime%60);        // 초
-	
-	var ctime = LoadH+" 시간 "+LoadM+" 분 "+LoadS+ "초"
-	document.getElementById("clock").innerHTML = ctime;
-	
-	
-	// 1초후 showtime()호출
-	timer2 = window.setTimeout("showtime()", 1000);
-}
-
-function killtime() {
-	
-	alert(' 선택하지 않은 문제는 0점으로 처리됩니다 ');
-	
-	window.clearTimeout(timer);
-	window.clearTimeout(timer2);
-	
-	location.href="list.do";
-	
-}
-</script>
 <body onload="showtime()" onunload="killtime()">
-
-<table style="margin:0; padding:0; width:100%; height:60px; background-color:LightGray; valign:center;">
+<div id="layer_fixed">
+<table cellspacing="0" cellpadding="0" style="width:100%; height:100%;">
 <tr>
-	<td align="left" width="100px" rowspan="2"><img src="../sol_img/test/ebslogo.PNG" align="left"/></td>
-	<td align="center" style="font-size:25px;" rowspan="2">${testtitle }</td>
-	<td align="right" width="200px">
-	<img src="../sol_img/test/alarm.png" /> 경과시간
+	<td style="text-align:left; padding-left: 20px; padding-right: 20px;">
+		<img src="img/ebslogo.PNG" align="left"/>
 	</td>
-</tr>
-<tr>
-	<td align="right" width="150px">
-	<p id="clock" style="font: 20px bold;"></p>
+	<td style="text-align: center; font-size:25px; padding-left: 20px; padding-right: 20px;">
+		${testtitle }
+	</td>
+		<td style="text-align:right; padding-left: 20px; padding-right: 20px;">
+		<img src="img/alarm.png" /> 경과시간<br />
+		<span id="clock" style="font: 20px bold;"></span>
 	</td>
 </tr>
 </table>
+</div>
+
+<form class="form-inline" method="post" action="questionCheck.do?testno=${param.testno}&testtitle=${param.testtitle}">
+<input type="hidden" id="clock" name="clock" />
+<div id="layer_fixed2">
+<table cellspacing="0" cellpadding="0" style="width:100%; height:100%;">
+<tr>
+	<td><input class="btn btn-warning" type="button" onclick="killtime(this.form,${recNo })" value="채점하기" /></td>
+</tr>
+</table>
+</div>
 
 
 <c:forEach var="i" end="${recNo }" begin="1" step="1">
@@ -61,10 +45,7 @@ function killtime() {
     
 </c:forEach>
 
-
-
-<input type="button" onclick="killtime()" value="채점"/>
-<div align="center"> 
+<div align="center" style="margin-top: 120px;"> 
 <table align="center" text-align="center">
 <c:set var="recNo" value="${recNo2-1 }" />
 <c:forEach var="dto" items="${list }" >
@@ -80,7 +61,8 @@ function killtime() {
 	</td>
 
 	<tr>
-	<td><br /><strong><font font-size="12px;">${recNo }. </font></strong>${dto.qtitle }</td>
+	<td><br />
+	<span><strong>${recNo }. </strong></span>${dto.qtitle }</td>
 </tr>
 	<c:if test="${dto.qtype eq 'G' }">
 	<tr>
@@ -100,11 +82,11 @@ function killtime() {
 			}
 			%>
 			<ul>
-				<li style="list-style:none;"><input type="radio" name="answer" value="${number0 }" />${number0}</li>
-				<li style="list-style:none;"><input type="radio" name="answer" value="${number1 }" />${number1}</li>
-				<li style="list-style:none;"><input type="radio" name="answer" value="${number2 }" />${number2}</li>
-				<li style="list-style:none;"><input type="radio" name="answer" value="${number3 }" />${number3}</li>
-				<li style="list-style:none;"><input type="radio" name="answer" value="${number4 }" />${number4}</li>
+				<li style="list-style:none;"><input onclick="check_only(this,${dto.questno })" type="checkbox" name="answer" value="${dto.questno },${number0 }" />${number0}</li>
+				<li style="list-style:none;"><input onclick="check_only(this,${dto.questno })" type="checkbox" name="answer" value="${dto.questno },${number1 }" />${number1}</li>
+				<li style="list-style:none;"><input onclick="check_only(this,${dto.questno })" type="checkbox" name="answer" value="${dto.questno },${number2 }" />${number2}</li>
+				<li style="list-style:none;"><input onclick="check_only(this,${dto.questno })" type="checkbox" name="answer" value="${dto.questno },${number3 }" />${number3}</li>
+				<li style="list-style:none;"><input onclick="check_only(this,${dto.questno })" type="checkbox" name="answer" value="${dto.questno },${number4 }" />${number4}</li>
 			</ul>
 		</td>
 		</tr> 
@@ -113,7 +95,9 @@ function killtime() {
 	<c:if test="${dto.qtype eq 'J' }">
 	<tr>
 		<td>
-			<ul><li style="list-style:none;"><input type="text" name="answer"/></li></ul>
+			<ul><li style="list-style:none;"><input type="hidden" name="answer" value="${dto.questno }*"/>
+			<input type="text" name="answer" />
+			</li></ul>
 		</td>
 		</tr> 
 	</c:if>
@@ -122,8 +106,8 @@ function killtime() {
 	<tr>
 		<td>
 			<ul>
-			<li style="list-style:none;"><input type="radio" name="answer" value="O" />O</li>
-			<li style="list-style:none;"><input type="radio" name="answer" value="X" />X</li>
+			<li style="list-style:none;"><input onclick="check_only(this,${dto.questno })" type="checkbox" name="answer" value="${dto.questno },O" />O</li>
+			<li style="list-style:none;"><input onclick="check_only(this,${dto.questno })" type="checkbox" name="answer" value="${dto.questno },X" />X</li>
 			</ul>
 		</td>
 		</tr> 
@@ -131,5 +115,6 @@ function killtime() {
 </c:forEach>
 </table>
 </div>
+</form>
 </body>
 </html>

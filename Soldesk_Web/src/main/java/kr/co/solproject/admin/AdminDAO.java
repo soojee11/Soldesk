@@ -1,6 +1,7 @@
 package kr.co.solproject.admin;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -227,4 +228,46 @@ public class AdminDAO {
 		}
 		return res;
 	}
+	
+	public List getMemList(Map map) {
+		List list = null;
+		try {
+			list = mybatis.queryForList("sol_admin.getMemList",map);
+		} catch (Exception e) {
+			System.out.println("getMemList error"+e);
+		}
+		return list;
+	}// end
+
+	public int getMemTotal(Map map) {
+		int res=0;
+		try {
+			res=(Integer) mybatis.queryForObject("sol_admin.getMemTotal",map);
+		}	catch(Exception e) {
+			System.out.println("getMemTotal error: "+e);		
+		}
+		return res;
+	}
+	
+	public boolean memLevelProc(Map map){
+		boolean flag=false;
+		try {
+			int cnt=mybatis.update("sol_admin.memLevelProc",map);
+			if(cnt>0)
+				flag=true;
+		}	catch(Exception e) {
+			System.out.println("memLevelProc error: "+e);
+		}
+		return flag;
+	}//end
+	
+	public void memDelProc(Map map) {
+		try {
+			System.out.println(map.toString());
+			mybatis.update("sol_admin.memDelProc", map);
+		}catch(Exception e) {
+			System.out.println("memDelProc error: "+e);		
+		}
+	}//end
+	
 }

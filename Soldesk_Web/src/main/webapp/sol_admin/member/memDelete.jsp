@@ -17,13 +17,13 @@
 
 <div class="row">
 	<div class="col-lg-12" align="right">
-		<form class="form-inline" action="memlist.do">
+		<form class="form-inline" action="memdelete.do">
 			<div class="form-group">
 				<select class="form-control input-sm m-bot15" name="col">
 					<option value="" >--회원전체--</option>
-					<option value="mdate" <c:choose><c:when  test="${col eq 'mdate' }" >selected</c:when></c:choose>>가입일순</option>
-					<option value="id" <c:choose><c:when  test="${col eq 'id' }" >selected</c:when></c:choose>>ID순</option>
-					<option value="name" <c:choose><c:when  test="${col eq 'name' }" >selected</c:when></c:choose>>이름순</option>
+					<option value="mdate" >가입일순</option>
+					<option value="id">ID순</option>
+					<option value="name">이름순</option>
 				</select>
 			</div>
 			<button class="btn btn-success btn-sm">검색</button>
@@ -31,16 +31,23 @@
 	</div>
 </div>
 
-
+<form method="post" action="memdelete.do">
 <table border="0" cellspacing="0" cellpadding="0" align="center" class="table">
+	<tr>
+		<td colspan="9" align="left"> 
+			<input type="checkbox" name="allck2" id="allck2" onclick="checkboxEnable2()"/>
+			<strong><span style="font-size:12px; color:#1717ff;">모두체크</span></strong>
+			<button type="button" class="btn btn-danger btn-sm" onclick="memCheck2(this.form)">선택 삭제</button>
+		</td>
+	</tr>
 	<tr align ="center">
+		<th><div align="center">선택</div></th>
 		<th><div align="center">ID</div></th>
 		<th><div align="center">이름</div></th>
 		<th><div align="center">email</div></th>
 		<th><div align="center">전화번호</div></th>
 		<th><div align="center">등록일</div></th>
 		<th><div align="center">등급</div></th>
-		<th><div align="center">한마디 각오</div></th>
 	</tr>
 	<c:if test="${total ==0 }">
 		<tr>
@@ -51,6 +58,7 @@
 	<c:forEach var ="dto" items="${list }">
 		<c:set var ="recNo" value="${recNo-1 }"/>
 			<tr align ="center">
+				<td><input type="checkbox" name="check2" value="${dto.id }"  /></td>
 				<td>${dto.id }</td>
 				<td>${dto.name }</td>
 				<td>${dto.email }</td>
@@ -61,12 +69,13 @@
 			</tr>
 	</c:forEach>
 	<tr>
-		<td colspan="7" align="right" ><strong>total:</strong>${total }</td>
+		<td colspan="8" align="right" ><strong>total:</strong>${total }</td>
 	</tr>
 	<tr>
-		<td colspan="7"><div align="center">${paging }</div></td>
+		<td colspan="8"><div align="center">${paging }</div></td>
 	</tr>
 </table>
+</form>
 
 
 
