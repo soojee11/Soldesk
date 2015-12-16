@@ -297,8 +297,9 @@ public int testDeleteProc(Map map) {
 			res=(Integer) mybatis.queryForObject("sol_admin.getCateTotal",map);
 		}	catch(Exception e) {
 			System.out.println("getCateTotal error: "+e);
-
-
+		}
+		return res;
+	}
 	public List getLectureno(int categoryno) {
 		List list = null;
 		try {
