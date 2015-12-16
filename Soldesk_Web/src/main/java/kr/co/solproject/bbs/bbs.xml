@@ -27,4 +27,13 @@
     where bbsno=#bbsno#
   </update>
   
+  <update id="update" parameterClass="BbsDTO">
+    update sol_bbs set subject=#subject# , content=#content#
+    where bbsno=#bbsno#
+  </update>
+  
+  <delete id="delete" parameterClass="Integer">
+     delete from sol_bbs where bbsno=#bbsno#
+  </delete>
+  
 </sqlMap>

@@ -62,11 +62,26 @@ public class BbsDAO {
     }
   }
    // bbs 수정
-  public void update(BbsDTO dto){
+  public boolean update(BbsDTO dto){
+    boolean flag = false;
     try{
-      
+      int cnt = mybatis.update("sol_bbs.update",dto);
+      if(cnt > 0) flag = true;
     }catch (Exception e){
       System.out.println("실패: "+e);
     }
+    return flag;
+  }
+  
+  // bbs 삭제
+  public boolean delete(BbsDTO dto){
+    boolean flag = false;
+    try{
+      int cnt = mybatis.update("sol_bbs.delete",dto.getBbsno());
+      if(cnt > 0) flag = true;
+    }catch (Exception e){
+      System.out.println("실패: "+e);
+    }
+    return flag;
   }
 }
