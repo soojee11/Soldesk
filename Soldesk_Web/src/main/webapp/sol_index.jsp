@@ -121,7 +121,7 @@
 			            		<ul class="nav">
 			              			<li><a href="sol_study/lectureList.do">학습하기</a></li>
 									<li><a href="sol_test/list.do">문제풀기</a></li>
-									<li><a href="sol_bbs/bbsList.jsp">자유게시판</a></li>
+									<li><a href="sol_bbs/bbslist.do">자유게시판</a></li>
 									<li><a href="sol_mypage/calendar.do?s_id=${s_id}">내정보</a></li>
 									<li><a href="sol_total/total.jsp">전체보기</a></li>
 

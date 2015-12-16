@@ -1,8 +1,8 @@
 package kr.co.solproject.question;
 
 import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,7 +19,7 @@ public class QuestionCont {
 	}
 	
 	@RequestMapping(value="/sol_test/questionList.do")
-	public String questionList(String testtitle, int testno, QuestionDTO dto, HttpServletRequest request) {
+	public String questionList(String testtitle, int testno, QuestionDTO dto, HttpServletRequest request,HttpSession session) {
 		
 		request.setAttribute("testtitle", testtitle);
 		
@@ -29,6 +29,9 @@ public class QuestionCont {
 		int total=dao.getQuestionTotal(testno);
 		request.setAttribute("recNo", total);
 		
+		
+		
 		return "sol_test/questionList";
 	}
+
 }

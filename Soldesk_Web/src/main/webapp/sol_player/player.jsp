@@ -75,12 +75,12 @@ function memoSaveResponse(data, status) { //callback함수
          <br/><br/><br/>
          <div class="tab-content" style="width: 90%; color: black; height: 400px;">
            <div id="menu1" class="tab-pane fade in active">
-           <table width="100%" border="1" align="center" class="lecturelist">
+           <table width="100%" border="0" align="center" class="table">
             <c:set var="lecNo" value="${lecNo+1 }"/>
              <c:forEach var="lecturelist" items="${list }">
              <c:set var="lecNo" value="${lecNo-1 }"></c:set>
              <br>
-               <tr height="30px;" style="vertical-align: center; <c:if test="${dto.lectureno == lecturelist.lectureno }">color: red;</c:if>">
+               <tr  style="vertical-align: center; <c:if test="${dto.lectureno == lecturelist.lectureno }">color: red;</c:if>">
                <td>${lecNo }강.</td>
                <td>
                <form action="./player.do">
@@ -89,7 +89,7 @@ function memoSaveResponse(data, status) { //callback함수
                  <c:if test="${dto.lectureno == lecturelist.lectureno }">color: red;</c:if>">
                </form>
                </td>
-               <td>${lecturelist.lecturetime }초</td>
+               <td>${lecturelist.lecturetime }분</td>
                </tr>
              </c:forEach>
              </table>

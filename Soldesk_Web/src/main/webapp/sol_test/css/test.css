@@ -1,0 +1,41 @@
+#layer_fixed {
+	height: 80px;
+	width: 100%;
+	vertical-align: middle;
+	position: fixed;
+	z-index: 999;
+	top: 0px;
+	left: 0px;
+	-webkit-box-shadow: 0 1px 2px 0 #777;
+	box-shadow: 0 1px 2px 0 #777;
+	background-color: #E1DDDD;
+}
+
+#layer_fixed2 {
+	height: 40px;
+	width: 100%;
+	vertical-align: middle;
+	position: fixed;
+	z-index: 999;
+	top: 80px;
+	left: 0px;
+	-webkit-box-shadow: 0 1px 2px 0 #777;
+	box-shadow: 0 1px 2px 0 #777;
+	background-color: #566075;
+	width: 100%;
+	text-align: center;
+}
+
+.mytable {
+	border-collapse: collapse;
+}
+
+.mytable th {
+	border: 1px solid black;
+	padding: 5px;
+}
+
+.mytable td {
+	border: 1px solid black;
+	padding: 5px;
+}

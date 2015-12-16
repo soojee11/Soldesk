@@ -30,7 +30,7 @@ public class LectureDAO {
 		return list;
 	}// end
 	
-	/** 학습하기 게시글 조회 **/
+	/** 학습하기 게시글 갯수 조회 **/
 	public int getTotal(Map map) {
 		int res=0;
 		try {
@@ -50,13 +50,14 @@ public class LectureDAO {
 			map.put("gwamok", gwamok);
 			
 			categoryInfo = (String) mybatis.queryForObject("sol_lecture.info",map);
-			System.out.println(">>>>>>>>>>>>>>"+categoryInfo);
+			//System.out.println(">>>>>>>>>>>>>>"+categoryInfo);
 			
 		} catch (Exception e) {
 			System.out.println("categoryInfo error: "+e);		
 		}
 		return categoryInfo;
 	}
+	
 	
 	
 }
