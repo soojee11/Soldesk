@@ -7,8 +7,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.swing.plaf.synth.SynthSpinnerUI;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,9 +38,8 @@ public class MyscoreCont {
 		String[] checks=request.getParameterValues("answer");
 		String str=""; 
 		for(int idx=0; idx<checks.length; idx++) {
-			System.out.println("-----------check값"+checks[idx]);
+			//System.out.println("-----------check값"+checks[idx]);
 			if(checks[idx]=="") {
-				System.out.println("주관식1");
 				checks[idx]="●";
 			}
 			str+=checks[idx]+"/";
@@ -60,39 +57,38 @@ public class MyscoreCont {
 	
 			}
 		}
-		System.out.println("str:"+str);
+		//System.out.println("str:"+str);
 		for(int idx=0; idx<str.length(); idx++) {
 			if(str.charAt(idx)==',')
 				cnt+=1;
 		}
-		System.out.println(str);
-		System.out.println("cnt:"+cnt);
+		//System.out.println(str);
+		//System.out.println("cnt:"+cnt);
 		
 		for(int idx=0; idx<str.length(); idx++) {
 			if(str.charAt(idx)=='●')
 				cnt-=1;
 		}
-		System.out.println(str);
-		System.out.println("cnt:"+cnt);
+		//System.out.println(str);
+		//System.out.println("cnt:"+cnt);
 		
-		Map map=new HashMap();
-		map.put("usetime", usetime);
-		map.put("testno", testno);
-		map.put("id", s_id);
-		map.put("answerno", str);
-		
-
 		int total=dao2.getQuestionTotal(testno);
 		
 		if(cnt!=total) {
-			System.out.println("등록실패");
+			//System.out.println("등록실패");
 			request.setAttribute("res",false);
 			request.setAttribute("testno",testno);
 			request.setAttribute("testtitle",testtitle);
 			return "sol_test/questionList";
-			//return "redirect:sol_test/questionList.do?testno="+testno+"&testtitle="+testtitle;
+			
 		}
 		else {
+			Map map=new HashMap();
+			map.put("usetime", usetime);
+			map.put("testno", testno);
+			map.put("id", s_id);
+			map.put("answerno", str);
+			
 			int res=dao.getAnswer(map);
 			request.setAttribute("res", res);
 			
