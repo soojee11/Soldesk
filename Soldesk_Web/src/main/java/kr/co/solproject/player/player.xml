@@ -7,10 +7,11 @@
 <sqlMap namespace="sol_category">
 
   <typeAlias alias="PlayerDTO" type="kr.co.solproject.player.PlayerDTO" />
+  <typeAlias alias="CategoryDTO" type="kr.co.solproject.category.CategoryDTO" />
   
     <insert id="categoryIns" parameterClass="Map">
-    INSERT INTO sol_category(grade,gwamok)
-    VALUES (#grade#,#gwamok#)
+    INSERT INTO sol_category(grade,gwamok,categoryInfo)
+    VALUES (#grade#,#gwamok#,#categoryInfo#)
   </insert>
   
   <select id="read" parameterClass="Map" resultClass="Integer">
@@ -32,6 +33,11 @@
     SELECT lectureno, subject, filename, filesize, poster, teacher, lecturetime, categoryno FROM sol_lecture
     WHERE categoryno=#categoryno#
     ORDER BY lectureno DESC
+  </select>
+  
+   <select id="getCategory" parameterClass="Integer" resultClass="CategoryDTO">
+    SELECT grade, gwamok
+    WHERE categoryno=#categoryno#
   </select>
   
 </sqlMap>

@@ -52,7 +52,7 @@
 </div>
 
 <div align="left">
-<a href="lecinsert.do"><button class="btn btn-danger btn-sm">강좌 등록</button></a>
+<a href="readCateInfo.do"><button class="btn btn-danger btn-sm">강좌 목록</button></a>
 </div>
 
 

@@ -43,44 +43,42 @@
 	</div>
 </div>
 
-<form method="post" action="lecDelProc.do?lectureno=${dto.lectureno }&categoryno=${dto.categoryno}">
-	<table border="0" cellspacing="0" cellpadding="0" align="center" class="table">
-		<tr>
-			<td colspan="9" align="left"> 
-			<input type="checkbox" name="allck2" id="allck2" onclick="checkboxEnable2()"/>
-			<strong><span style="font-size:12px; color:#1717ff;">모두체크</span></strong>
-			<button type="button" class="btn btn-danger btn-sm" onclick="playCheck2(this.form)">동영상삭제</button>
-		</td>
-		</tr>
-		<tr align ="center">
-			<th width="50"><div align="center">선택</div></th>
-			<th><div align="center">교육번호</div></th>
-			<th><div align="center">제목</div></th>
-			<th><div align="center">강의파일</div></th>
-			<th><div align="center">파일크기</div></th>
-			<th><div align="center">캡쳐화면</div></th>
-			<th><div align="center">선생님이름</div></th>
-			<th><div align="center">강의시간(초)</div></th>
-		</tr>
+<table border="0" cellspacing="0" cellpadding="0" align="center" class="table">
+	<tr align ="center">
+		<th><div align="center">교육번호</div></th>
+		<th><div align="center">제목</div></th>
+		<th><div align="center">강의파일</div></th>
+		<th><div align="center">파일크기</div></th>
+		<th><div align="center">캡쳐화면</div></th>
+		<th><div align="center">선생님이름</div></th>
+		<th><div align="center">강의시간(초)</div></th>
+		<th><div align="center">삭제</div></th>
+	</tr>
 		<c:if test="${total ==0 }">
 			<tr>
 				<td colspan="8" align="center">관련된 동영상 교육이 없습니다. <br> 검색을 진행해주세요. </td>
 			</tr>
 		</c:if>
-		<c:set var ="recNo" value="${recNo }"/>
-		<c:forEach var ="dto" items="${list }">
-			<c:set var ="recNo" value="${recNo-1 }"/>
-				<tr align ="center">
-					<td><input type="checkbox" name="check2" value="${dto.lectureno }" /></td>
-					<td>${dto.lectureno }</td>
-					<td>${dto.subject }</td>
-					<td>${dto.filename }</td>
-					<td>${dto.filesize/(1024)-((dto.filesize/(1024))%1) }KB</td>
-					<td><img src="./player/storage/${dto.poster }" width="60px"></td>
-					<td>${dto.teacher }</td>
-					<td>${dto.lecturetime }</td>
-				</tr>
-		</c:forEach>
+	<c:set var ="recNo" value="${recNo }"/>
+	<c:forEach var ="dto" items="${list }">
+		<c:set var ="recNo" value="${recNo-1 }"/>
+		<form action="lecDelProc.do">
+			<input type="hidden" name="lectureno" value="${dto.lectureno }"> 
+			<input type="hidden" name="categoryno" value="${dto.categoryno }"> 
+			<tr align ="center">
+				<td>${dto.lectureno }</td>
+				<td>${dto.subject }</td>
+				<td>${dto.filename }</td>
+				<td>${dto.filesize/(1024)-((dto.filesize/(1024))%1) }KB</td>
+				<td><img src="./player/storage/${dto.poster }" width="60px"></td>
+				<td>${dto.teacher }</td>
+				<td>${dto.lecturetime }</td>
+				<td>
+					<button class="btn btn-danger btn-sm" onclick="lecDelete(this.form)">삭제</button>
+				</td>
+			</tr>
+			</form>
+	</c:forEach>
 		<!-- &col1=${param.col1}&col2=${param.col2} -->
 		<tr>
 			<td colspan="8" align="right" ><strong>total:</strong>${total }</td>
@@ -89,6 +87,6 @@
 			<td colspan="8"><div align="center">${paging }</div></td>
 		</tr>
 	</table>
-</form>
+
 
 <%@ include file="../footer.jsp"%>

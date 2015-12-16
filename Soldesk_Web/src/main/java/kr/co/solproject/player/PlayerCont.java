@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import kr.co.solproject.category.CategoryDTO;
 import kr.co.solproject.player.PlayerDAO;
 import kr.co.solproject.study.StudyDAO;
 import kr.co.solproject.study.StudyDTO;
@@ -102,6 +103,9 @@ public class PlayerCont {
 	@RequestMapping(value = "sol_admin/lecinsert.do", method = RequestMethod.POST)
 	public String adminPlayInsertForm(PlayerDTO dto, HttpServletRequest req) {
 
+		CategoryDTO dto2 = null;
+		dto2 = dao.getCategory(dto.getCategoryno());
+		
 		String basePath = Utility.getRealPath(req, "/sol_admin/player/storage");
 
 		MultipartFile posterMF = dto.getPosterMF();
@@ -113,27 +117,13 @@ public class PlayerCont {
 		dto.setFilename(filename);
 		dto.setFilesize(filenameMF.getSize());
 		
-		int grade = Integer.parseInt(req.getParameter("grade"));
-		String gwamok = req.getParameter("gwamok").trim();
-		
-		Map map = new HashMap();
-		map.put("grade", grade);
-		map.put("gwamok", gwamok);
-
-		boolean flag = dao.categoryIns(map);
-		
-		if(flag) {
+		System.out.println("---cateno:" +dto.getCategoryno());
+		boolean flag = dao.playerInsert(dto);
 			
-			int categoryno = dao.getCategoryno(map);
-			System.out.println("---cateno:" +categoryno);
-			dto.setCategoryno(categoryno);
-
-			boolean flag2 = dao.playerInsert(dto);
-			
-			if (flag2) {
+		if (flag) {
 				req.setAttribute("flag", true);
 				
-				return "redirect:./leclist.do";
+				return "redirect:./leclist.do?col1="+dto2.getGrade()+"&col2="+dto2.getGwamok();
 			} else {
 				req.setAttribute("msg1", "동영상 업로드 실패<br/><br/>");
 				req.setAttribute("link1", "<input type='button' value='다시시도' onclick=\"history.back();\">");
@@ -141,14 +131,7 @@ public class PlayerCont {
 
 				return "sol_admin/error";
 			}
-			
-		}else {
-			req.setAttribute("msg", "카테고리 등록에 실패하였습니다.<br /><br /> 다시 시도해 주십시오.");
-			req.setAttribute("link1", "<input type='button' value='다시시도' onclick=\"history.back();\">");
-			req.setAttribute("link2", "<input type='button' value='문제지 목록' onclick=\"location.href='leclist.do';\">");
 		
-			return "sol_admin/error";
-		}
 	}//end
 	
 }
