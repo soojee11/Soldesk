@@ -6,7 +6,6 @@ import java.util.Map;
 import org.springframework.stereotype.Component;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
-
 import kr.co.solproject.GetSqlMapClient;
 
 @Component
