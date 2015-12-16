@@ -1,6 +1,9 @@
 package kr.co.solproject.mypage;
 
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -10,12 +13,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import kr.co.solproject.study.StudyDAO;
+import kr.co.solproject.study.StudyDTO;
 
 @Controller
 public class MypageController {
 
 	@Autowired
 	private MypageDAO dao = null;
+	@Autowired
+	private StudyDAO sdao = null;
+
+	StudyDTO sdto = null;
+	MypageDTO mdto = null;
 
 	public MypageController() {
 		System.out.println("▶------MypageController()객체 생성됨...");
@@ -25,6 +35,9 @@ public class MypageController {
 	@RequestMapping(value = "sol_mypage/calendar.do", method = RequestMethod.GET)
 	public String calendar(String s_id,HttpServletRequest req, HttpSession session) {
 		
+	
+		if(s_id != ""){
+		
 		//달력---------------------------------------------------------------------------------------------------
 		Calendar cal = Calendar.getInstance();
 
@@ -33,7 +46,8 @@ public class MypageController {
 		int nowMonth = cal.get(Calendar.MONTH) + 1;
 		//월은 0부터 시작하므로 1월 표시를 위해 1을 더해 줍니다.
 		int nowDay = cal.get(Calendar.DAY_OF_MONTH);
-
+		String onldate = (String)(nowYear+"-"+nowMonth+"-"+nowDay);
+		
 		//클라이언트가 선택하여 넘어온 날짜
 		String strYear = req.getParameter("year");
 		String strMonth = req.getParameter("month");
@@ -77,7 +91,15 @@ public class MypageController {
 		promise = dao.getpromise(s_id);
 		name = dao.getname(s_id);
 		
+		String regdate = null;
+	    regdate = dao.getregdate(s_id); //강좌를들은날짜들을 가져오자
 		
+		System.out.println("regdate: "+regdate);
+		
+		
+		
+		//----------------------------------------------------------------------------------
+
 		req.setAttribute("nowYear", nowYear);
 		req.setAttribute("nowMonth", nowMonth);
 		req.setAttribute("nowDay", nowDay);
@@ -99,11 +121,12 @@ public class MypageController {
 		req.setAttribute("name", name);
 		
 		return "/sol_mypage/calendar";
-
+		}
+		else{
+			//로그인안한경우
+			return "/sol_mypage/calendarError";
+		}
+		
 	}// end
-	
-	
-	
-	
-	
+
 }

@@ -263,11 +263,51 @@ public class AdminDAO {
 	
 	public void memDelProc(Map map) {
 		try {
-			System.out.println(map.toString());
+			//System.out.println(map.toString());
 			mybatis.update("sol_admin.memDelProc", map);
 		}catch(Exception e) {
 			System.out.println("memDelProc error: "+e);		
 		}
 	}//end
+	
+	public List readCateInfo(Map map) {
+		List list = null;
+		try {
+			list = mybatis.queryForList("sol_admin.readCateInfo",map);
+		} catch (Exception e) {
+			System.out.println("readCateInfo error"+e);
+		}
+		return list;
+	}// end
+	
+	public int getCateTotal(Map map) {
+		int res=0;
+		try {
+			res=(Integer) mybatis.queryForObject("sol_admin.getCateTotal",map);
+		}	catch(Exception e) {
+			System.out.println("getCateTotal error: "+e);		
+		}
+		return res;
+	}//end
+	
+	public List getLectureno(int categoryno) {
+		List list = null;
+		try {
+			list=mybatis.queryForList("sol_admin.getLectureno",categoryno);
+		}	catch(Exception e) {
+			System.out.println("getLectureno error: "+e);		
+		}
+		return list;
+	}//end
+	
+	public void updateCateProc(CategoryDTO dto){
+		boolean flag=false;
+		try {
+			mybatis.update("sol_admin.updateCateProc",dto);
+		}	catch(Exception e) {
+			System.out.println("updateCateProc error: "+e);
+		}
+	}//end
+	
 	
 }
