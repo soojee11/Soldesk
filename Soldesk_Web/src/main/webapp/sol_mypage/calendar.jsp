@@ -4,30 +4,30 @@
 <%@ include file="../sol_header.jsp"%>
 
 <br /><br />
+<div align="left">
+|  '<strong>${name }</strong>(${id })'님의 스터디캘린더 <Br/>
+|나의다짐:&nbsp;"<STRONG>${promise }"</strong>
+</div>
+<br/>
+
+<!-- *************************************************************** -->
+
+
 <table align="center" cellpadding="2" cellspacing="1" 
          style="font-weight: bold; width:100%; font-size: 20px;">
 	<tr>
 		<td align="center"><a
-			href="calendar.do?year=${preYear }&month=${preMonth } "
+			href="calendar.do?year=${preYear }&month=${preMonth }&s_id=${id } "
 			target="_self">◀</a> <b>&nbsp;${year }년&nbsp;&nbsp;${month }월 </b> <a
-			href="calendar.do?year=${nextYear }&month=${nextMonth}"
+			href="calendar.do?year=${nextYear }&month=${nextMonth}&s_id=${id }"
 			target="_self">▶</a></td>
+	</tr>
+	<tr><td align="center" style="font-size: 12px;">
+	<a href="calendar.do?year=${nowYear }&month=${nowMonth }&s_id=${id }">  Today : ${nowYear }/${nowMonth }/${nowDay }
+	</a> </td>
 	</tr>
 </table>
 <br />
-
-<!-- *************************************************************** -->
-
-<div align="left">
-	<a href="calendar.do?year=${nowYear }&month=${nowMonth }">  Today : ${nowYear }년${nowMonth }월${nowDay }일
-	</a>
-</div>
-
-<div align="left">
-<c:if test="${id != '' }">
-'<strong>${name }</strong>(${id })'님의 다짐 : <strong> "${promise }"</strong>
-</c:if>
-</div>
 
 <!-- *************************************************************** -->
 
@@ -35,13 +35,13 @@
 <div id=Cal>
 	<table align="center" width=100% cellpadding="0" cellspacing="1"
 		bgcolor="#cccccc" border="1">
-		<tr style="font-weight: bold; width:100%; height:25px; " bgcolor="#e2e2e2" align="center">
+		<tr style="font-weight: bold; width:100%; height:25px; " bgcolor="#89c236" align="center">
 			<td><font color="red">일</font></td>
-			<td>월</td>
-			<td>화</td>
-			<td>수</td>
-			<td>목</td>
-			<td>금</td>
+			<td><font color="#000000">월</font></td>
+			<td><font color="#000000">화</font></td>
+			<td><font color="#000000">수</font></td>
+			<td><font color="#000000">목</font></td>
+			<td><font color="#000000">금</font></td>
 			<td><font color="blue">토</font></td>
 		</tr>
 
@@ -94,7 +94,8 @@
 		
 <!-- *************************************************************** -->
 	<!-- 빈공간  -->	
-		
+
+
 		<tr height='40px'>
 			<c:set var="newLine" value="0" />
 			<c:if test="${i < 7}">
@@ -134,32 +135,43 @@
 
 					<%--이후 년도 표시 --%>
 					<c:if test="${year gt nowYear}">
-						<td align='center' bgcolor=${bgColor }><font color="#8C8C8C"> ##
-						</font></td>
+						<td align='center' bgcolor=${bgColor }>
+						<font color="#8C8C8C">
+					<!-- 	 미래 -->
+						</font>
+						</td>
 						<c:set var="newLine">${ newLine+1}</c:set>
 					</c:if>
 
 					<%--현재 년도 --%>
 					<c:if test="${year eq nowYear }">
 						<c:if test="${month gt nowMonth }">
-							<td align='center' bgcolor=${bgColor }><font color="#8C8C8C"> 
-							</font></td>
+							<td align='center' bgcolor=${bgColor }>
+							<font color="#8C8C8C"> 
+						%%%	
+						</font>
+						</td>
 							<c:set var="newLine">${ newLine+1}</c:set>
 						</c:if>
 						<c:if test="${month eq nowMonth }">
 							<c:if test="${a ge nowDay }">
-								<td align='center' bgcolor=${bgColor }><font
-									color="#8C8C8C"> 
-								</font></td>
+								<td align='center' bgcolor=${bgColor }>
+								<font color="#8C8C8C"> 
+								<!-- 현재 -->
+								</font>
+								</td>
 								<c:set var="newLine">${ newLine+1}</c:set>
 							</c:if>
 						</c:if>
 
 
-<!-- 이전달까지 표시 -->
+       <!-- 이전달까지 표시 -->
 						<c:if test="${month lt nowMonth }">
-							<td align='center' bgcolor=${bgColor }><font color="#5D5D5D">@@
-							</font></td>
+							<td align='center' bgcolor=${bgColor }>
+							<font color="#5D5D5D">
+						<!-- 	과거 -->
+							</font>
+							</td>
 							<c:set var="newLine">${ newLine+1}</c:set>
 						</c:if>
 					</c:if>
