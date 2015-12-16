@@ -330,7 +330,7 @@ public class AdminCont {
 
 		recNo = total - (nowPage - 1) * numPerPage + 1;
 
-		request.setAttribute("col", col);
+		request.setAttribute("col", col);request.setAttribute("recNo", recNo);
 		request.setAttribute("list", list);
 		request.setAttribute("questno", dto.getTestno());
 		request.setAttribute("dbean", dbean);
@@ -428,8 +428,8 @@ public class AdminCont {
 		return "redirect:questionList.do?testno="+dto.getTestno();
 	}
 
-	@RequestMapping(value = "sol_admin/questionDelete.do", method = RequestMethod.POST)
-	public String questionDelete(QuestionDTO dto, HttpServletRequest request) {
+	@RequestMapping(value = "sol_admin/questionUnSelect.do", method = RequestMethod.POST)
+	public String questionUnSelect(QuestionDTO dto, HttpServletRequest request) {
 
 		String[] checks=request.getParameterValues("check2");
 		
@@ -455,7 +455,7 @@ public class AdminCont {
 		map.put("list", list);
 		map.put("testno", dto.getTestno());
 		
-		dao.questionDelete(map);
+		dao.questionUnSelect(map);
 		
 		return "redirect:questionList.do?testno="+dto.getTestno();
 	}
@@ -856,5 +856,130 @@ public class AdminCont {
 			return "sol_admin/member/memDelete";
 			
 	}//end
+	
+	@RequestMapping(value = "/sol_admin/testDelete.do")
+	public String testDelete(HttpServletRequest request) {
+
+		String url = "testDelete.do"; // page링크시 이동할 페이지
+		int nowPage = 1; // 현재페이지, 페이지 시작번호 0->1page
+		int numPerPage = 5; // 페이지당 레코드 수
+
+		int recNo = 1; // 게시판 목록에 출력될 글 번호
+
+		String col1 = null;// null이면 <dynamic prepend="where">가 적용안됨
+		if (request.getParameter("col1") != "") {
+			col1 = request.getParameter("col1");
+			// System.out.println("학년: "+col1);
+		}
+
+		String col2 = null;
+		if (request.getParameter("col2") != "") {
+			col2 = request.getParameter("col2");
+			// System.out.println("과목: "+col2);
+		}
+
+		// 현재 페이지의 정보를 가져옴
+		if (request.getParameter("nowPage") != null) {
+			nowPage = Integer.parseInt(request.getParameter("nowPage"));
+		}
+
+		// int sno=((nowPage-1)*numPerPage)+1; //(0*5)+1=1,6,11
+		int sno = ((nowPage - 1) * numPerPage);
+		// int eno=nowPage*numPerPage;//1*5=5,10,15
+
+		Map map = new HashMap();
+		map.put("col1", col1);
+		map.put("col2", col2);
+		map.put("sno", sno);
+		map.put("numPerPage", numPerPage);
+
+		List list = dao.testList(map);
+		String dbean = Utility.getDate();
+		int total = dao.testTotal(map);
+
+		String paging = Paging.paging(total, nowPage, numPerPage, col1, col2, url);
+
+		recNo = total - (nowPage - 1) * numPerPage;
+
+		request.setAttribute("list", list);
+		request.setAttribute("dbean", dbean);
+		request.setAttribute("paging", paging);
+		request.setAttribute("recNo", recNo);
+		request.setAttribute("nowPage", nowPage);
+		request.setAttribute("col1", col1);
+		request.setAttribute("col2", col2);
+		request.setAttribute("total", total);
+
+		return "sol_admin/test/testDelete";
+	}// end
+	
+	@RequestMapping(value = "sol_admin/questionDeleteList.do")
+	public String questionDeleteList(QuestionDTO dto, HttpServletRequest request) {
+		int nowPage = 1;
+		int numPerPage = 10;
+
+		int recNo = 1;
+		
+		String col = null;
+		if (request.getParameter("col") != "") {
+			col = request.getParameter("col");
+
+		}
+		
+		if (request.getParameter("nowPage") != null) {
+			nowPage = Integer.parseInt(request.getParameter("nowPage"));
+		}
+
+		int sno = ((nowPage - 1) * numPerPage);
+
+		Map map=new HashMap();
+		map.put("col", col);
+		map.put("sno", sno);
+		map.put("testno", dto.getTestno());
+		map.put("numPerPage", numPerPage);
+
+		List list = dao.questionList(map);
+		String dbean = Utility.getDate();
+		int total = dao.questionTotal(map);
+
+		recNo = total - (nowPage - 1) * numPerPage + 1;
+
+		request.setAttribute("col", col);request.setAttribute("recNo", recNo);
+		request.setAttribute("list", list);
+		request.setAttribute("questno", dto.getTestno());
+		request.setAttribute("dbean", dbean);
+
+		return "sol_admin/test/questionDeleteList";
+	} //end
+	
+	@RequestMapping(value = "sol_admin/testDeleteProc.do")
+	public String testDeleteProc(QuestionDTO dto, HttpServletRequest request) {
+
+		String[] checks=request.getParameterValues("check3");
+		
+		String str=""; 
+		for(int idx=0; idx<checks.length; idx++) {
+			str+=checks[idx]+",";
+		}
+		str=str.substring(0,str.length()-1);
+		//System.out.println(str);
+		
+		List testDeleteList = new ArrayList();
+		int delno;
+		String[] str2 = str.split(",");		// ","을 기준으로 분리
+		for (int idx = 0; idx < str2.length; idx++) {
+			//System.out.println(str2[idx]);
+			delno=Integer.parseInt(str2[idx]);
+			testDeleteList.add(delno);
+		}
+		//System.out.println("testDeleteList:" +testDeleteList);
+		
+		Map map=new HashMap();
+		map.put("testDeleteList", testDeleteList);
+		
+		int res=dao.testDeleteProc(map);
+		
+		return "redirect:testDelete.do";
+	}
 	
 }

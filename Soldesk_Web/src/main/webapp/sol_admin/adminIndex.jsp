@@ -150,7 +150,7 @@
                           <li><a  href="testList.do">Test_insert</a></li>
                           <li><a  href="testIns.do">Test_update</a></li>                          
 
-                          <li><a  href="testDel.do">Test_delete</a></li>
+                          <li><a  href="testDelete.do">Test_delete</a></li>
                       </ul>
                   </li>
                   <li>

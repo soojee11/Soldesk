@@ -174,12 +174,12 @@ public class AdminDAO {
 		}
 	}//end
 	
-	public void questionDelete(Map map) {
+	public void questionUnSelect(Map map) {
 		try {
-			mybatis.update("sol_question.questionDelete", map);
+			mybatis.update("sol_question.questionUnSelect", map);
 			
 		}	catch(Exception e) {
-			System.out.println("questionDelete error: "+e);		
+			System.out.println("questionUnSelect error: "+e);		
 		}
 	}//end
 // -----------------------------------------------------------------------------------------문제풀기부분 끝
@@ -268,6 +268,16 @@ public class AdminDAO {
 		}catch(Exception e) {
 			System.out.println("memDelProc error: "+e);		
 		}
+	}//end
+	
+	public int testDeleteProc(Map map) {
+		int res=0;
+		try {
+			res=mybatis.delete("sol_test.testDeleteProc", map);
+		}catch(Exception e) {
+			System.out.println("testDeleteProc error: "+e);		
+		}
+		return res;
 	}//end
 	
 }

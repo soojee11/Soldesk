@@ -198,6 +198,34 @@ function checkboxEnable2() {
 		}
 	}
 }
+function checkboxEnable3() {
+	var ck = document.getElementById('allck3');
+	if (ck.checked) {
+		var check = document.getElementsByName('check3');
+		for (var i = 0; i < check.length; i++) {
+			check[i].checked = true;
+		}
+	} else {
+		var check = document.getElementsByName('check3');
+		for (var i = 0; i < check.length; i++) {
+			check[i].checked = false;
+		}
+	}
+}
+function checkboxEnable4() {
+	var ck = document.getElementById('allck4');
+	if (ck.checked) {
+		var check = document.getElementsByName('check4');
+		for (var i = 0; i < check.length; i++) {
+			check[i].checked = true;
+		}
+	} else {
+		var check = document.getElementsByName('check4');
+		for (var i = 0; i < check.length; i++) {
+			check[i].checked = false;
+		}
+	}
+}
 function questionCheck(frm) {
 	var flag=false;
 	var check = document.getElementsByName('check');
@@ -228,3 +256,4 @@ function questionCheck2(frm) {
 		frm.submit();
 	}
 }
+
