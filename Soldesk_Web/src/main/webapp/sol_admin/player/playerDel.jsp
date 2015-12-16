@@ -11,8 +11,8 @@
 		
 		<h5>영구히 삭제하시겠습니까?</h5>
 		
-		<button type="button" class="btn btn-info btn-sm"  onclick="location.href='./lecDelProc.do?categoryno=${param.categoryno}&lectureno=${param.lectureno }'" >삭제진행</button>
-		<button type="button" class="btn btn-info btn-sm"  onclick="javascript:history.go(-1)">취소</button>
+		<button type="button" class="btn btn-danger btn-sm"  onclick="location.href='./lecDelProc.do?categoryno=${param.categoryno}&lectureno=${param.lectureno }'" >삭제진행</button>
+		<button type="button" class="btn btn-danger btn-sm"  onclick="javascript:history.go(-1)">취소</button>
 		
 	</div>
 

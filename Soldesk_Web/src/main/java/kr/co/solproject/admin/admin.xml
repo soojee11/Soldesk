@@ -15,22 +15,10 @@
   		from sol_category
   		where gwamok = #gwamok# and grade = #grade#
    </select>
-   
-   <select id="getLecList1" resultClass="PlayerDTO">
-		select lectureno,subject,filename,filesize,poster,teacher,lecturetime
-		from sol_lecture
-		order by lectureno DESC
-    </select> 
-	
-	<select id="getLecTotal1" resultClass="Integer">
+    	
+	<select id="getCateTotal" parameterClass="Map" resultClass="Integer">
 		select count(*) as cnt
-		from sol_lecture
-	</select>
- 
-	<select id="lecRead" parameterClass="Integer" resultClass="PlayerDTO">
-		select subject,filename,filesize,poster,teacher,lecturetime,categoryno
-		from sol_lecture
-		where lectureno = #lectureno#
+		from sol_category
 	</select>
 	
 	<select id="categoryRead" parameterClass="Integer" resultClass="CategoryDTO">
@@ -43,10 +31,67 @@
 		delete from sol_category
 		where categoryno = #categoryno#
 	</update>
+		<select id="readCateInfo" parameterClass="Map" resultClass="CategoryDTO">
+		SELECT categoryno, grade, gwamok, categoryinfo
+		FROM sol_category
+		limit #sno#, #numPerPage#
+	</select>
+
+	<update id="updateCateProc" parameterClass="CategoryDTO">
+		update sol_category
+		set grade = #grade#, gwamok=#gwamok#, categoryinfo=#categoryinfo#
+		where categoryno = #categoryno#
+	</update>
+	
+	<update id="cateIns" parameterClass="CategoryDTO">
+		insert into sol_category(grade, gwamok, categoryinfo)
+		values(#grade#,#gwamok#,#categoryinfo#)
+	</update>
+	
+	<select id="checkCateinfo" resultClass="String" parameterClass="Map" >
+		select categoryinfo
+		from sol_category
+		where grade = #grade# and gwamok = #gwamok#
+	</select>
+   	
+	<select id="getLectureno" parameterClass="Integer" resultClass="Integer">
+		select lectureno
+		from sol_lecture
+		where categoryno = #categoryno#
+	</select>
+   
+   	<select id="getlecList" parameterClass="Map" resultClass="PlayerDTO">
+		SELECT lectureno, subject,filename,filesize,poster,teacher,lecturetime,categoryno
+		FROM sol_lecture
+		where categoryno = #categoryno#
+		order by lectureno desc 
+		limit #sno#, #numPerPage#
+	</select>
+	
+	<select id="getlecTotal" parameterClass="Map" resultClass="Integer">
+		SELECT count(*) as cnt
+		FROM sol_lecture
+		where categoryno = #categoryno# 
+	</select>
+
+	<select id="lecRead" parameterClass="Integer" resultClass="PlayerDTO">
+		select subject,filename,filesize,poster,teacher,lecturetime,categoryno
+		from sol_lecture
+		where lectureno = #lectureno#
+	</select>
 	
 	<update id="lecDelProc" parameterClass="Integer">
 		delete from sol_lecture
 		where lectureno = #lectureno#
+	</update>
+	
+	<update id="lecDelProc2" parameterClass="Map">
+		delete from sol_lecture
+		where lectureno
+		<iterate prepend="IN" property="list" open="(" close=")"
+			conjunction=",">
+			#list[]#
+		</iterate>
 	</update>
 	
 	<update id="lecUpdate" parameterClass="PlayerDTO">
@@ -54,14 +99,6 @@
 		set subject = #subject#, filename=#filename#, filesize=#filesize#, poster=#poster#,teacher=#teacher#,lecturetime=#lecturetime#
 		where lectureno = #lectureno#
 	</update>
-	
-	<select id="getLecList" parameterClass="Map" resultClass="PlayerDTO">
-		SELECT lecture.lectureno,lecture.subject,lecture.filename,lecture.filesize,lecture.poster,lecture.teacher,lecture.lecturetime
-		FROM sol_lecture lecture join sol_category category
-		ON lecture.categoryno = category.categoryno
-		WHERE category.grade = #grade# AND category.gwamok = #gwamok#
-		ORDER BY lecture.lectureno DESC
-	</select>
 	
 	<select id="getMemList" parameterClass="Map" resultClass="MemberDTO">
 		SELECT id, name, email, tel, mdate, mlevel, promise
@@ -92,37 +129,4 @@
 		</iterate>
 	</update>
 	
-	<update id="lecDelProc2" parameterClass="Map">
-		delete from sol_lecture
-		where lectureno
-		<iterate prepend="IN" property="list" open="(" close=")"
-			conjunction=",">
-			#list[]#
-		</iterate>
-	</update>
-	
-	<select id="readCateInfo" parameterClass="Map" resultClass="CategoryDTO">
-		SELECT categoryno, grade, gwamok, categoryinfo
-		FROM sol_category
-		group by grade
-		limit #sno#, #numPerPage#
-	</select>
-	
-	<select id="getCateTotal" parameterClass="Map" resultClass="Integer">
-		select count(*) as cnt
-		from sol_category
-	</select>
-	
-	<select id="getLectureno" parameterClass="Integer" resultClass="Integer">
-		select lectureno
-		from sol_lecture
-		where categoryno = #categoryno#
-	</select>
-
-	<update id="updateCateProc" parameterClass="CategoryDTO">
-		update sol_category
-		set grade = #grade#, gwamok=#gwamok#, categoryinfo=#categoryinfo#
-		where categoryno = #categoryno#
-	</update>
-  
 </sqlMap>

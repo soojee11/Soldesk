@@ -53,15 +53,17 @@
 		<td  valign="middle">${dto.filesize }</td>
 	</tr>
 	<tr align="center">
-		<td  valign="middle">강의시간(초)</td>
+		<td  valign="middle">강의시간(분)</td>
 		<td  valign="middle">${dto.lecturetime }</td>
 	</tr>
 </table>
 <br />
 <div align="center">
-	<button type="button" class="btn btn-info btn-sm"  onclick="location.href='./leclist.do?col1=${dto2.grade}&col2=${dto2.gwamok}'">목록</button>
-	<button type="button" class="btn btn-info btn-sm"  onclick="location.href='./lecUpdate.do?lectureno=${param.lectureno}&categoryno=${dto.categoryno }'">수정</button>
-	<button type="button" class="btn btn-info btn-sm"  onclick="location.href='./lecDel.do?lectureno=${param.lectureno}&categoryno=${dto.categoryno }'">삭제</button>
+	<c:if test="${flag==2 }">
+		<button type="button" class="btn btn-info btn-sm"  onclick="location.href='./lecUpdate.do?lectureno=${param.lectureno}&categoryno=${dto.categoryno }'">수정</button>
+		<button type="button" class="btn btn-info btn-sm"  onclick="location.href='./lecDel.do?lectureno=${param.lectureno}&categoryno=${dto.categoryno }'">삭제</button>
+	</c:if>
+		<button type="button" class="btn btn-info btn-sm" onclick="history.go(-1); return false;">목록</button>
 </div>
 
 <%@ include file="../footer.jsp"%>

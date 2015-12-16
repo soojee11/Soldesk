@@ -52,7 +52,7 @@
 				<div class="form-group">
 					<label class="col-sm-2 control-label">강좌 설명</label>
 					<div class="col-sm-10">
-						<textarea rows="5" cols="100" name ="categoryInfo">${dto.categoryInfo }</textarea>
+						<textarea rows="5" cols="100" name ="categoryinfo">${dto.categoryinfo }</textarea>
 					</div>
 				</div>
 				<div align="center">
