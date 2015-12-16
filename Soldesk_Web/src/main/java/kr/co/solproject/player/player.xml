@@ -10,8 +10,8 @@
   <typeAlias alias="CategoryDTO" type="kr.co.solproject.category.CategoryDTO" />
   
     <insert id="categoryIns" parameterClass="Map">
-    INSERT INTO sol_category(grade,gwamok,categoryInfo)
-    VALUES (#grade#,#gwamok#,#categoryInfo#)
+    INSERT INTO sol_category(grade,gwamok,categoryinfo)
+    VALUES (#grade#,#gwamok#,#categoryinfo#)
   </insert>
   
   <select id="read" parameterClass="Map" resultClass="Integer">

@@ -34,7 +34,7 @@
 	</select>
 	
 	<select id="categoryRead" parameterClass="Integer" resultClass="CategoryDTO">
-		select categoryno, grade, gwamok, categoryInfo
+		select categoryno, grade, gwamok, categoryinfo
 		from sol_category
 		where categoryno = #categoryno#
 	</select>
@@ -102,7 +102,7 @@
 	</update>
 	
 	<select id="readCateInfo" parameterClass="Map" resultClass="CategoryDTO">
-		SELECT categoryno, grade, gwamok, categoryInfo
+		SELECT categoryno, grade, gwamok, categoryinfo
 		FROM sol_category
 		group by grade
 		limit #sno#, #numPerPage#
@@ -121,7 +121,7 @@
 
 	<update id="updateCateProc" parameterClass="CategoryDTO">
 		update sol_category
-		set grade = #grade#, gwamok=#gwamok#, categoryInfo=#categoryInfo#
+		set grade = #grade#, gwamok=#gwamok#, categoryinfo=#categoryinfo#
 		where categoryno = #categoryno#
 	</update>
   
