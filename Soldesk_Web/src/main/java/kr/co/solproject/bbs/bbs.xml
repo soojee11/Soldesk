@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE sqlMap       
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"       
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+    
+<sqlMap namespace="sol_bbs">
+  <!-- 매개변수 BbsDTO 사용 -->
+  <typeAlias alias="BbsDTO" type="kr.co.solproject.bbs.BbsDTO" />
+  
+  <insert id="insert" parameterClass="BbsDTO">
+    insert into sol_bbs(subject, content, passwd, regdt)
+    values (#subject#, #content#, #passwd#, now())
+  </insert>
+  
+  <select id="list" resultClass="BbsDTO">
+     select bbsno, subject, content, passwd, regdt, readcnt from sol_bbs
+     order by bbsno DESC;
+  </select>
+</sqlMap>
