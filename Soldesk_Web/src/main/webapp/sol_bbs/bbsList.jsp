@@ -36,7 +36,7 @@ function denywrite(){
         <td>${recNo }</td>
         <td>${dto.passwd }</td>
         <td>
-          <a href="javascript:read('${dto.bbsno }')">${dto.subject }</a>
+          <a href="./bbsread.do?bbsno=${dto.bbsno }">${dto.subject }</a>
         </td>
         <td>${dto.regdt }</td>
         <td>${dto.readcnt }</td>

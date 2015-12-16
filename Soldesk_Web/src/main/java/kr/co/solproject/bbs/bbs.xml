@@ -16,4 +16,15 @@
      select bbsno, subject, content, passwd, regdt, readcnt from sol_bbs
      order by bbsno DESC;
   </select>
+  
+  <select id="read" parameterClass="Integer" resultClass="BbsDTO">
+    select bbsno, subject, content, passwd, regdt, readcnt from sol_bbs
+    where bbsno=#bbsno#
+  </select>
+  
+  <update id="increment" parameterClass="Integer">
+    update sol_bbs set readcnt = readcnt + 1
+    where bbsno=#bbsno#
+  </update>
+  
 </sqlMap>
