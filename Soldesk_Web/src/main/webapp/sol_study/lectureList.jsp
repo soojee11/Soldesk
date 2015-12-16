@@ -14,7 +14,7 @@ function lectureGo(lectureno){
 <link href="./css/style.css" rel="stylesheet" type="text/css">
 <h5>
 	<!-- <img src="img/cont.JPG"> -->
-	<img src="../sol_img/test/go_right.png" width="20px"/><img src="img/study.png" width="150px" height="50px"> 
+	<img src="../sol_img/go_right.png" width="20px"/><img src="img/study.png" width="150px" height="50px"> 
 </h5>
 
 <div class="column">
@@ -107,7 +107,7 @@ function lectureGo(lectureno){
 <table class="table">
 	<tr align="center" >
 		<th>순번</th>
-		<th >아이디</th>
+		<th >작성자</th>
 		<th>제목</th>
 		<th>등록일</th>
 		<th>조회수</th>
@@ -136,12 +136,14 @@ function lectureGo(lectureno){
 <!-- 후기 탭 -->
 <div id="menu3" class="tab-pane fade">
 총 <span style="color: red;"><strong>${postTotal}</strong></span>개의 후기가 있습니다.
-<br/><br/>
+<br/>
+<div> </div>
+<br/>
 
 <table class="table">
 	<tr align="center" >
 		<th>순번</th>
-		<th >아이디</th>
+		<th >작성자</th>
 		<th>내용</th>
 		<th>등록일</th>
 		<th>평점</th>

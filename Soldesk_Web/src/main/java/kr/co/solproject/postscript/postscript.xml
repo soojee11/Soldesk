@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="sol_postscript">
+	<typeAlias alias="PostscriptDTO" type="kr.co.solproject.postscript.PostscriptDTO" />
+
+	<select id="postList" parameterClass="Map" resultClass="PostscriptDTO">
+		SELECT post.postscriptno, post.id, post.content, post.regdate, post.postgrade
+		FROM sol_postscript post join sol_category category
+		ON post.categoryno = category.categoryno
+		WHERE category.grade = #grade# AND category.gwamok = #gwamok#
+		ORDER BY post.postscriptno DESC
+	</select>
+
+	<select id="postTotal" resultClass="Integer" parameterClass="Map" >
+		SELECT count(*) as cnt
+		FROM sol_postscript post join sol_category category
+		ON post.categoryno = category.categoryno
+		WHERE category.grade = #grade# AND category.gwamok = #gwamok#
+	</select>
+
+</sqlMap>
