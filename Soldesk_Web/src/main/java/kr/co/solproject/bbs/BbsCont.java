@@ -75,6 +75,7 @@ public class BbsCont {
   
   @RequestMapping(value="/sol_bbs/bbsupdate.do", method=RequestMethod.POST)
   public String bbsUpdateProc(BbsDTO dto){
+    dao.update(dto);
     
     return "/sol_bbs/bbsUpdate";
   }

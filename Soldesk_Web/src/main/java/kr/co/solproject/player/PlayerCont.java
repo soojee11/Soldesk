@@ -83,11 +83,6 @@ public class PlayerCont {
     return "sol_player/player";
 } // player.do end
 	
-	
-	
-	
-	
-	
 	@RequestMapping(value="/sol_player/memoSave.do", method=RequestMethod.POST)
   public void save(StudyDTO dto, HttpServletResponse resp, HttpSession session){
     //System.out.println("----------memo:"+dto.getMemo());
@@ -120,8 +115,8 @@ public class PlayerCont {
 	@RequestMapping(value = "sol_admin/lecinsert.do", method = RequestMethod.POST)
 	public String adminPlayInsertForm(PlayerDTO dto, HttpServletRequest req) {
 
-		CategoryDTO dto2 = null;
-		dto2 = dao.getCategory(dto.getCategoryno());
+		CategoryDTO cdto = null;
+		cdto = dao.getCategory(dto.getCategoryno());
 		
 		String basePath = Utility.getRealPath(req, "/sol_admin/player/storage");
 
@@ -134,13 +129,13 @@ public class PlayerCont {
 		dto.setFilename(filename);
 		dto.setFilesize(filenameMF.getSize());
 		
-		System.out.println("---cateno:" +dto.getCategoryno());
+		System.out.println("---cateno:" +cdto.getCategoryno()+"-----cate grade: "+cdto.getGrade()+"------cate gwamok"+cdto.getGwamok());
 		boolean flag = dao.playerInsert(dto);
 			
 		if (flag) {
 				req.setAttribute("flag", true);
 				
-				return "redirect:./leclist.do?col1="+dto2.getGrade()+"&col2="+dto2.getGwamok();
+				return "redirect:./leclist.do?col1="+cdto.getGrade()+"&col2="+cdto.getGwamok();
 			} else {
 				req.setAttribute("msg1", "동영상 업로드 실패<br/><br/>");
 				req.setAttribute("link1", "<input type='button' value='다시시도' onclick=\"history.back();\">");

@@ -61,4 +61,12 @@ public class BbsDAO {
       System.out.println("실패: "+e);
     }
   }
+   // bbs 수정
+  public void update(BbsDTO dto){
+    try{
+      
+    }catch (Exception e){
+      System.out.println("실패: "+e);
+    }
+  }
 }
