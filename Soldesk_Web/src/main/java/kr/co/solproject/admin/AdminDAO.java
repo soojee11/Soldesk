@@ -174,12 +174,12 @@ public class AdminDAO {
 		}
 	}//end
 	
-	public void questionDelete(Map map) {
+	public void questionUnSelect(Map map) {
 		try {
-			mybatis.update("sol_question.questionDelete", map);
+			mybatis.update("sol_question.questionUnSelect", map);
 			
 		}	catch(Exception e) {
-			System.out.println("questionDelete error: "+e);		
+			System.out.println("questionUnSelect error: "+e);		
 		}
 	}//end
 // -----------------------------------------------------------------------------------------문제풀기부분 끝
@@ -270,6 +270,17 @@ public class AdminDAO {
 		}
 	}//end
 	
+public int testDeleteProc(Map map) {
+		int res=0;
+		try {
+			res=mybatis.delete("sol_test.testDeleteProc", map);
+		}catch(Exception e) {
+			System.out.println("testDeleteProc error: "+e);		
+
+		}
+		return res;
+	}//end
+
 	public List readCateInfo(Map map) {
 		List list = null;
 		try {
@@ -285,11 +296,9 @@ public class AdminDAO {
 		try {
 			res=(Integer) mybatis.queryForObject("sol_admin.getCateTotal",map);
 		}	catch(Exception e) {
-			System.out.println("getCateTotal error: "+e);		
-		}
-		return res;
-	}//end
-	
+			System.out.println("getCateTotal error: "+e);
+
+
 	public List getLectureno(int categoryno) {
 		List list = null;
 		try {
@@ -307,7 +316,5 @@ public class AdminDAO {
 		}	catch(Exception e) {
 			System.out.println("updateCateProc error: "+e);
 		}
-	}//end
-	
-	
+	}//end		
 }

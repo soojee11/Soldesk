@@ -19,9 +19,9 @@
 <h4>
 	<strong>
 		${dto.subject } - 
-		<c:choose><c:when  test="${dto2.gwamok eq 'kor' }" >국어 </c:when></c:choose>
-		<c:choose><c:when  test="${dto2.gwamok eq 'mat' }" >수학 </c:when></c:choose>
-		<c:choose><c:when  test="${dto2.gwamok eq 'eng' }" >영어 </c:when></c:choose>
+		<c:choose><c:when  test="${dto2.gwamok eq '국어' }" >국어 </c:when></c:choose>
+		<c:choose><c:when  test="${dto2.gwamok eq '수학' }" >수학 </c:when></c:choose>
+		<c:choose><c:when  test="${dto2.gwamok eq '영어' }" >영어 </c:when></c:choose>
 		
 		<c:choose><c:when  test="${dto2.grade eq '1' }" >1학년 </c:when></c:choose>
 		<c:choose><c:when  test="${dto2.grade eq '2' }" >2학년 </c:when></c:choose>

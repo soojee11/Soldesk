@@ -58,7 +58,7 @@
 		</iterate>
 	</update>
 
-	<update id="questionDelete" parameterClass="Map">
+	<update id="questionUnSelect" parameterClass="Map">
 		update sol_question
 		set qynshow='N'
 		where testno=#testno# and questno

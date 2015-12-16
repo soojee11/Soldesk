@@ -5,9 +5,9 @@
 	<div align="center">
 		<h3>동영상 삭제</h3><br/>
 		<h4>${dto2.grade } 학년 
-		<c:choose><c:when  test="${dto2.gwamok eq 'kor' }" >국어 </c:when></c:choose>
-		<c:choose><c:when  test="${dto2.gwamok eq 'mat' }" >수학 </c:when></c:choose>
-		<c:choose><c:when  test="${dto2.gwamok eq 'eng' }" >영어 </c:when></c:choose> - ${dto.subject }</h4>
+		<c:choose><c:when  test="${dto2.gwamok eq '국어' }" >국어 </c:when></c:choose>
+		<c:choose><c:when  test="${dto2.gwamok eq '수학' }" >수학 </c:when></c:choose>
+		<c:choose><c:when  test="${dto2.gwamok eq '영어' }" >영어 </c:when></c:choose> - ${dto.subject }</h4>
 		
 		<h5>영구히 삭제하시겠습니까?</h5>
 		

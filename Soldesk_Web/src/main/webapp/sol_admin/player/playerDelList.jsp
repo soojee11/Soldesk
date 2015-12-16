@@ -33,9 +33,9 @@
 			<div class="form-group">
 				<select class="form-control input-sm m-bot15" name="col2">
 		<option value="" <c:choose><c:when  test="${col2 eq '' }" >selected</c:when></c:choose>>과목전체</option>
-		<option value="kor" <c:choose><c:when  test="${col2 eq 'kor' }" >selected</c:when></c:choose>>국어</option>
-		<option value="eng" <c:choose><c:when  test="${col2 eq 'eng' }" >selected</c:when></c:choose>>영어</option>
-		<option value="mat" <c:choose><c:when  test="${col2 eq 'mat' }" >selected</c:when></c:choose>>수학</option>
+		<option value="국어" <c:choose><c:when  test="${col2 eq '국어' }" >selected</c:when></c:choose>>국어</option>
+		<option value="영어" <c:choose><c:when  test="${col2 eq '영어' }" >selected</c:when></c:choose>>영어</option>
+		<option value="수학" <c:choose><c:when  test="${col2 eq '수학' }" >selected</c:when></c:choose>>수학</option>
 				</select>
 			</div>
 				<button class="btn btn-success btn-sm">검색</button>
