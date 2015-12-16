@@ -134,7 +134,7 @@
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
                         <ul class="sub">
-                          <li><a  href="leclist.do">Lecture_list</a></li>
+                          <li><a  href="readCateInfo.do">Lecture_list</a></li>
                           <li><a  href="lecinsert.do">Lecture_insert</a></li>                          
                           <li><a  href="lecdelete.do">Lecture_delete</a></li>
                       </ul>

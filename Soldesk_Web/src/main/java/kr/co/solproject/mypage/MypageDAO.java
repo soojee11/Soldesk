@@ -1,10 +1,15 @@
 package kr.co.solproject.mypage;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.stereotype.Component;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
 
 import kr.co.solproject.GetSqlMapClient;
+import kr.co.solproject.study.StudyDTO;
 
 @Component
 public class MypageDAO {
@@ -19,11 +24,9 @@ public class MypageDAO {
 	// --------------------------------------------------------------------
 
 	public String getpromise(String id) {
-		System.out.println("#" + id + "#");
 		String res = null;
 		try {
 			res = (String) mybatis.queryForObject("sol_calendar.getpromise", id);
-			System.out.println("#" + res + "#");
 		} catch (Exception e) {
 			System.out.println(e);
 		}
@@ -31,14 +34,41 @@ public class MypageDAO {
 	}// end
 
 	public String getname(String id) {
-		System.out.println("#" + id + "#");
 		String res = null;
 		try {
 			res = (String) mybatis.queryForObject("sol_calendar.getname", id);
-			System.out.println("#" + res + "#");
 		} catch (Exception e) {
 			System.out.println(e);
 		}
 		return res;
 	}// end
+
+	
+	 // 캘린더 테이블에 동영상 본 기록 집어넣기->insert(update는없음,계속insert)
+	public void calinsert(String id, int lectureno) { 
+		int cnt = 0;
+
+		Map map = new HashMap();
+		map.put("id", id);
+		map.put("lectureno", lectureno);
+		map.put("regdate", "");
+
+		try {
+				cnt = (Integer) mybatis.insert("sol_calendar.insert", map);
+				
+		} catch (Exception e) {                                
+			System.out.println(e);
+		}
+	}
+	
+	public String getregdate(String id) {
+		String res = null;
+		try {
+			res = (String) mybatis.queryForObject("sol_calendar.getregdate", id);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return res;
+	}// end
+
 }

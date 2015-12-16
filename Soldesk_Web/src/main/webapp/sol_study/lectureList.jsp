@@ -88,7 +88,7 @@ function lectureNotGo(){
 		<td>${lectureNo }</td>
 		<td>${dto.subject }</td>
 		<td>${dto.poster }</td>
-		<td>${dto.lecturetime }</td>
+		<td>${dto.lecturetime }분</td>
 		<td>${dto.teacher }</td>
 		<td align="center">
 		<c:choose>

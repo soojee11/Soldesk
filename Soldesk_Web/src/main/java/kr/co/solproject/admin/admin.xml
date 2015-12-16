@@ -34,7 +34,7 @@
 	</select>
 	
 	<select id="categoryRead" parameterClass="Integer" resultClass="CategoryDTO">
-		select grade, gwamok
+		select categoryno, grade, gwamok, categoryinfo
 		from sol_category
 		where categoryno = #categoryno#
 	</select>
@@ -90,6 +90,39 @@
 			conjunction=",">
 			#list[]#
 		</iterate>
+	</update>
+	
+	<update id="lecDelProc2" parameterClass="Map">
+		delete from sol_lecture
+		where lectureno
+		<iterate prepend="IN" property="list" open="(" close=")"
+			conjunction=",">
+			#list[]#
+		</iterate>
+	</update>
+	
+	<select id="readCateInfo" parameterClass="Map" resultClass="CategoryDTO">
+		SELECT categoryno, grade, gwamok, categoryinfo
+		FROM sol_category
+		group by grade
+		limit #sno#, #numPerPage#
+	</select>
+	
+	<select id="getCateTotal" parameterClass="Map" resultClass="Integer">
+		select count(*) as cnt
+		from sol_category
+	</select>
+	
+	<select id="getLectureno" parameterClass="Integer" resultClass="Integer">
+		select lectureno
+		from sol_lecture
+		where categoryno = #categoryno#
+	</select>
+
+	<update id="updateCateProc" parameterClass="CategoryDTO">
+		update sol_category
+		set grade = #grade#, gwamok=#gwamok#, categoryinfo=#categoryinfo#
+		where categoryno = #categoryno#
 	</update>
   
 </sqlMap>

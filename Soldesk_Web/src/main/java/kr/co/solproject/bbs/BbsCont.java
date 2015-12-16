@@ -58,4 +58,26 @@ public class BbsCont {
     return "/sol_bbs/bbsForm";
   }
   
+  @RequestMapping(value="/sol_bbs/bbsread.do")
+  public String bbsRead(BbsDTO dto, HttpServletRequest req){
+    dao.increment(dto);
+    dto = dao.read(dto); // dto 에 저장된 bbsno 넘김
+    req.setAttribute("dto", dto);
+    return "/sol_bbs/bbsRead";
+  }
+  
+  @RequestMapping(value="/sol_bbs/bbsupdate.do", method=RequestMethod.GET)
+  public String bbsUpdate(BbsDTO dto, HttpServletRequest req){
+    dto = dao.read(dto);
+    req.setAttribute("dto", dto);
+    return "/sol_bbs/bbsUpdate";
+  }
+  
+  @RequestMapping(value="/sol_bbs/bbsupdate.do", method=RequestMethod.POST)
+  public String bbsUpdateProc(BbsDTO dto){
+    dao.update(dto);
+    
+    return "/sol_bbs/bbsUpdate";
+  }
+  
 }

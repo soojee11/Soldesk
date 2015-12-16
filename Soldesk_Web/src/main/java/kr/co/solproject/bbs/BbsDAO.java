@@ -41,4 +41,32 @@ public class BbsDAO {
     }
     return list;
   }
+  
+  // bbs 상세보기
+  public BbsDTO read(BbsDTO dto){
+    try{
+      dto = (BbsDTO) mybatis.queryForObject("sol_bbs.read", dto.getBbsno());
+    }
+    catch (Exception e){
+      System.out.println("실패: "+e);
+    }
+    return dto;
+  }
+  
+  //bbs 조회수 올리기
+  public void increment(BbsDTO dto){
+    try{
+      mybatis.update("sol_bbs.increment", dto.getBbsno());
+    }catch (Exception e){
+      System.out.println("실패: "+e);
+    }
+  }
+   // bbs 수정
+  public void update(BbsDTO dto){
+    try{
+      
+    }catch (Exception e){
+      System.out.println("실패: "+e);
+    }
+  }
 }
