@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="sol_lectureqna">
+	<typeAlias alias="LectureQnADTO" type="kr.co.solproject.lectureqna.LectureQnADTO" />
+
+	<select id="qnaList" parameterClass="Map" resultClass="LectureQnADTO">
+		SELECT qna.lectureqnano, qna.id, qna.subject, qna.readcnt, qna.regdate
+		FROM sol_lectureqna qna join sol_category category
+		ON qna.categoryno = category.categoryno
+		WHERE category.grade = #grade# AND category.gwamok = #gwamok#
+		ORDER BY qna.lectureqnano DESC
+	</select>
+
+	<select id="qnaTotal" resultClass="Integer" parameterClass="Map" >
+		SELECT count(*) as cnt
+		FROM sol_lectureqna qna join sol_category category
+		ON qna.categoryno = category.categoryno
+		WHERE category.grade = #grade# AND category.gwamok = #gwamok#
+	</select>
+
+</sqlMap>

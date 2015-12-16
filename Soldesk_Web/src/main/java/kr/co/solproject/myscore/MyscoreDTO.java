@@ -4,7 +4,7 @@ public class MyscoreDTO {
 	private int mytestno;		//max(mytestno)해서 최근본 시험출력
 	private String id;			//아이디
 	private int testno;			//일련번호
-	private int usetime;		//경과시간
+	private String usetime;		//경과시간
 	private String answerno;	//문제번호,답
 	private String regdt;		//시험일
 	
@@ -34,11 +34,11 @@ public class MyscoreDTO {
 		this.testno = testno;
 	}
 
-	public int getUsetime() {
+	public String getUsetime() {
 		return usetime;
 	}
 
-	public void setUsetime(int usetime) {
+	public void setUsetime(String usetime) {
 		this.usetime = usetime;
 	}
 
@@ -60,7 +60,7 @@ public class MyscoreDTO {
 
 	@Override
 	public String toString() {
-		return "myscoreDTO [mytestno=" + mytestno + ", id=" + id + ", testno=" + testno + ", usetime=" + usetime
+		return "MyscoreDTO [mytestno=" + mytestno + ", id=" + id + ", testno=" + testno + ", usetime=" + usetime
 				+ ", answerno=" + answerno + ", regdt=" + regdt + "]";
 	}
 	

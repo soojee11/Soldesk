@@ -6,27 +6,9 @@
 <sqlMap namespace="sol_myscore">
 	<typeAlias alias="MyscoreDTO" type="kr.co.solproject.myscore.MyscoreDTO" />
 
-	<select id="list" parameterClass="Map" resultClass="MyscoreDTO">
-	select bbsno,wname,subject,date_format(regdt,'%Y-%m-%d') as regdt,readcnt,indent
-	from tb_bbs
-	<dynamic prepend="where">
-		<isEqual property="col" compareValue="wname">
-			wname like concat('%',#word#,'%')
-		</isEqual>
-		<isEqual property="col" compareValue="subject">
-			subject like concat('%',#word#,'%')
-		</isEqual>
-		<isEqual property="col" compareValue="content">
-			content like concat('%',#word#,'%')
-		</isEqual>
-		<isEqual property="col" compareValue="subject_content">
-			subject like concat('%',#word#,'%')
-			or
-			content like concat('%',#word#,'%')
-		</isEqual>			
-	</dynamic>
-	order by grpno desc, ansnum asc	
-	limit #sno#, #numPerPage#
-	</select>
-		
+	<update id="insert" parameterClass="Map">
+	insert into sol_myscore(id,testno,usetime,answerno,regdt)
+	values(#id#,#testno#,#usetime#,#answerno#,now())
+	</update>
+	
 </sqlMap>

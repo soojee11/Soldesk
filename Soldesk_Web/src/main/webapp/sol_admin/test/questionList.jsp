@@ -3,7 +3,6 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ include file="../header.jsp"%>
 
-
 <c:if test="${flag == true }">
 	<script>
 		flag = false;
@@ -24,10 +23,12 @@
 		</ol>
 	</div>
 </div>
-
+<div style="text-align:center; font-size:33px;">
+<strong>${param.testtitle }</strong>
+</div>
 <div class="row">
 	<div class="col-lg-24" align="center">
-		<form class="form-inline" method="post" action="questionList.do?testno=${param.testno }">
+		<form class="form-inline" method="post" action="questionList.do?testno=${param.testno }&testtitle=${param.testtitle }">
 			<div class="form-group">
 				<select class="form-control input-sm m-bot15" name="col">
 					<option value=""
@@ -48,7 +49,7 @@
 
 <div align="left">
 <a href="testList.do"><button class="btn btn-info btn-sm">문제지 목록</button></a>
-<a href="questionForm.do?testno=${param.testno }"><button	class="btn btn-info btn-sm">문제 등록</button></a>
+<a href="questionForm.do?testno=${param.testno }"><button class="btn btn-info btn-sm">문제 등록</button></a>
 </div>
 
 <form method="post" action="questionDelete.do?testno=${param.testno }">

@@ -13,17 +13,28 @@ public class MyscoreDAO {
 	
 	public MyscoreDAO() {
 		mybatis=GetSqlMapClient.get();
+		System.out.println("---------------MyscoreDAO°´Ã¼ »ý¼ºµÊ");
 	}
 	
-	public List getList(Map map) {
+	public int getAnswer(Map map) {
+		int res=0;
+		try {
+			res=mybatis.update("sol_myscore.insert",map);
+		}	catch(Exception e) {
+			System.out.println("getAnswer error: "+e);		
+		}
+		return res;
+	}//end
+	
+	public List myscoreAnswer(Map map) {
 		List list=null;
 		try {
-			list=mybatis.queryForList("myscore.list",map);
+			list=mybatis.queryForList("sol_question.myscoreAnswer", map);
+			
 		}	catch(Exception e) {
-			System.out.println("list error: "+e);		
+			System.out.println("myscoreAnswer error: "+e);		
 		}
 		return list;
 	}//end
-	
 }
 

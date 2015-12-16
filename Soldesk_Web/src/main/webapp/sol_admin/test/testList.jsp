@@ -86,7 +86,7 @@
 				</c:when>
 				</c:choose></td>
 			<td>${dto.testtitle }</td>
-			<td><a href="questionList.do?testno=${dto.testno }"><button
+			<td><a href="questionList.do?testno=${dto.testno }&testtitle=${dto.testtitle }"><button
 						class="btn btn-info btn-sm">문제 보기</button></a></td>
 		</tr>
 	</c:forEach>

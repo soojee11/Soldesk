@@ -1,11 +1,12 @@
 package kr.co.solproject.category;
 
 public class CategoryDTO {
-	private int categoryno;	// 카테고리 번호
-	private int grade;		// 학년	
-	private String gwamok;	// 과목
-	private String categoryInfo; // 강좌설명
-	
+
+	private int categoryno;	      // 카테고리 번호
+	private int grade;		        // 학년	
+	private String gwamok;	      // 과목
+	private String categoryinfo;  // 강의 설명
+
 	public CategoryDTO() {
 	}
 
