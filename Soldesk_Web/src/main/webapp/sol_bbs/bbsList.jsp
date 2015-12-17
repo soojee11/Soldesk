@@ -14,7 +14,7 @@ function denywrite(){
   <img src="img/cont.JPG"><img src="img/pna.JPG">| 무엇이든 물어보세요
 </h5>
 <hr>
-총 <strong>${recNo }</strong>개의 등록된 글이 있습니다. | 현재 페이지 : <strong>${nowPage }/${totalPage }</strong>
+총 <strong>${recNo-1 }</strong>개의 등록된 글이 있습니다. | 현재 페이지 : <strong>${nowPage }/${totalPage }</strong>
 <div align="right"><input type="button" value="글쓰기" class="btn btn-default" 
           <c:if test="${s_id == null }">onclick="denywrite()"</c:if>
           <c:if test="${s_id != null }">onclick="location.href='./create.do'"</c:if>></div>
