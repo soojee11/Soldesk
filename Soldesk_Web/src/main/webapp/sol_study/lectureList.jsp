@@ -80,7 +80,7 @@ function lectureNotGo(){
 		<th>학습하기</th>
 	</tr>
 
-<c:set var="lectureNo" value="${lectureNo+1 }" />	
+<c:set var="lectureNo" value="${lectureNo }" />	
 <c:forEach var="dto" items="${list }" >
 <c:set var="lectureNo" value="${lectureNo-1 }" />
 
