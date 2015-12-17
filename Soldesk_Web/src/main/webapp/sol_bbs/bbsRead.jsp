@@ -32,10 +32,10 @@
 </tr>
 <tr>
    <td colspan="2" align="center">
-      <input type="button" name="list" value="목록" onclick="location.href='bbslist.do'">
+      <input type="button" name="list" value="목록" onclick="location.href='bbslist.do?nowPage=${nowPage }'">
       <c:if test="${s_id == dto.passwd }">
-        <input type="button" name="insert" value="수정" onclick="location.href='bbsupdate.do?bbsno=${dto.bbsno }'">
-        <input type="reset" name="reset" value="삭제" onclick="location.href='bbsdelete.do?bbsno=${dto.bbsno }'">
+        <input type="button" name="insert" value="수정" onclick="location.href='bbsupdate.do?bbsno=${dto.bbsno }&nowPage=${nowPage }'">
+        <input type="reset" name="reset" value="삭제" onclick="location.href='bbsdelete.do?bbsno=${dto.bbsno }&nowPage=${nowPage }'">
       </c:if>
    </td>
 </tr>
