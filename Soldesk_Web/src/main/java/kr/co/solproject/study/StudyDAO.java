@@ -25,7 +25,7 @@ private SqlMapClient mybatis; // Connection con
     map.put("id", id);
     map.put("lectureno", lectureno);
     map.put("memo", "");
-    map.put("regdate", "");
+    map.put("memodate", "");
     
     try{
       cnt = (Integer) mybatis.queryForObject("sol_study.check", map);

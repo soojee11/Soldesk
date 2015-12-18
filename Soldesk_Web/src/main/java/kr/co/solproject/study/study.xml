@@ -13,13 +13,13 @@
   </select>
   
   <insert id="insert" parameterClass="Map">
-      INSERT INTO sol_study (lectureno, id, memo, regdate)
+      INSERT INTO sol_study (lectureno, id, memo, memodate)
       VALUES (#lectureno#, #id#, #memo#, now())
   </insert>
   
   <update id="insertMemo" parameterClass="Map">
       UPDATE sol_study 
-      SET memo=#memo#
+      SET memo=#memo#, memodate=now()
       WHERE id=#id# AND lectureno=#lectureno#
   </update>
   
