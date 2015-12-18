@@ -12,6 +12,7 @@
 		ON lecture.categoryno = category.categoryno
 		WHERE category.grade = #grade# AND category.gwamok = #gwamok#
 		ORDER BY lecture.lectureno DESC
+		limit #sno#, #numPerPage#
 	</select>
 
 	<select id="total" resultClass="Integer" parameterClass="Map" >

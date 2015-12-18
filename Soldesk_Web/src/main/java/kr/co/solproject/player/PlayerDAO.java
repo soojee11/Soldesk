@@ -81,9 +81,7 @@ public class PlayerDAO {
   public CategoryDTO getCategory(int categoryno){
 	   CategoryDTO dto = null;
 	    try{
-	      System.out.println("---------------getCategory 전");
 	      dto = (CategoryDTO) mybatis.queryForObject("sol_category.getCategory", categoryno);
-	      System.out.println("---------------getCategory 후");
 	    }catch (Exception e){
 	      System.out.println("read 실패다: "+e);
 	    }

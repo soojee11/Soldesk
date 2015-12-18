@@ -43,3 +43,56 @@ create table SOL_MYSCORE (
 	primary key(mytestno),
 	constraint fk_testno foreign key (testno) REFERENCES SOL_TEST(testno) on delete cascade
 );
+
+CREATE TABLE sol_qna(		
+qnano		int(11)		NOT NULL	auto_increment,		
+subject		varchar(100)    NOT NULL,       		
+content		text		NOT NULL,		
+passwd 		varchar(15)	NOT NULL,		
+regdt		datetime	NOT  NULL,		
+qnashow		varchar(10)     NOT NULL	default 'N',	
+PRIMARY KEY  (qnano)		
+);		
+		
+
+CREATE TABLE sol_bbs(
+bbsno		int(11)		NOT NULL	auto_increment,
+subject		varchar(100)    NOT NULL,       
+content		text		NOT NULL,
+passwd		varchar(15)	NOT NULL,
+regdt		datetime	NOT  NULL,
+readcnt		int(11)		NOT NULL	default 0,
+PRIMARY KEY  (bbsno)
+);
+
+CREATE TABLE sol_study(
+lectureno	int(11)		NOT NULL,
+id		VARCHAR(200) 	NOT NULL,      
+memo		VARCHAR(500)	NULL,
+regdate		datetime	NULL,
+PRIMARY KEY  (lectureno,id)
+);
+
+
+CREATE TABLE sol_postscript(
+postscriptno	INT(11)	auto_increment NOT NULL,
+categoryno	INT(11)	NOT NULL,
+id		VARCHAR(20)	NOT NULL,
+content		VARCHAR(500)	NOT NULL,
+regdate		datetime	NOT NULL,
+postgrade	INT(11)	default 0	NOT NULL,
+PRIMARY KEY  (postscriptno)
+);
+
+
+CREATE TABLE sol_lectureqna(
+lectureqnano	INT(11)		auto_increment 	NOT NULL,
+categoryno	INT(11)		NOT NULL,
+id		VARCHAR(20)	NOT NULL,
+subject		VARCHAR(200)	NOT NULL,
+content		VARCHAR(500)	NOT NULL,
+regdate		datetime	NOT NULL,
+readcnt		INT(11)		NOT NULL	default 0,
+filename	VARCHAR(200)	NULL,
+PRIMARY KEY  (lectureqnano)
+);

@@ -101,7 +101,7 @@ public class LectureCont {
 		
 		
 		// 1. model사용
-		List list=dao.getList(map);
+		List list=dao.getList(map);     // 수지야 getList query문 부분 수정했당 
 		String categoryInfo = dao.getCategoryInfo(grade, gwamok);
 		String dbean=Utility.getDate();
 		int total=dao.getTotal(map);
@@ -117,9 +117,7 @@ public class LectureCont {
 		int postTotal = qnaDao.getTotal(postMap);
 		String postPaging = Paging.paging4(postTotal, postNowPage, postNumPerPage, url);
 		
-		
-		
-		lectureNo=list.size();
+		lectureNo=total - (nowPage - 1) * numPerPage + 1; // 수지야 이 부분 수정했당
 		QnAno = qnaList.size();
 		postscriptNo = postList.size();
 		

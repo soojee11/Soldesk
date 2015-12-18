@@ -5,8 +5,8 @@
 <c:if test="${res==false}">
 	<script>
 		alert("문제를 모두 풀어야 점수확인이 가능합니다.");
-		//location.href="questionList.do?testno=${param.testno}&testtitle=${param.testtitle}";
-		history.go(-1);
+		location.href="questionList.do?testno=${param.testno}&testtitle=${param.testtitle}";
+		//history.go(-1);
 	</script>
 </c:if>
 
@@ -21,6 +21,7 @@
 </head>
 
 <body onload="showtime()" onunload="killtime()">
+
 <div id="layer_fixed">
 <table cellspacing="0" cellpadding="0" style="width:100%; height:100%;">
 <tr>
@@ -47,7 +48,6 @@
 </tr>
 </table>
 </div>
-
 
 <c:forEach var="i" end="${recNo }" begin="1" step="1">
     <c:set var="recNo2" value="${recNo+1-i}"/>

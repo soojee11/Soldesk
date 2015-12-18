@@ -164,18 +164,34 @@ function memCheck2(frm) {
 	}
 }
 
-function cateInsert_validate(frm){
-	  var categoryInfo = frm.categoryInfo.value;
+function cateInsert(frm){
+	  var categoryinfo = frm.categoryinfo.value;
 	  
-	  categoryInfo = categoryInfo.replace(/^\s*|\s*$/g, '');
+	  categoryinfo = categoryinfo.replace(/^\s*|\s*$/g, '');
 	  
-	  if(categoryInfo.length == 0){
+	  if(categoryinfo.length == 0){
 	    alert("강좌설명을 입력해 주세요.");
 	    frm.subject.focus();
 	    return;
 	  }
 	  
-	  alert("강좌정보를 수정 하시겠습니까? ---");
+	  alert("강좌정보를 등록 하시겠습니까? ");
+	  
+	  frm.submit();
+}
+
+function cateInsert_validate(frm){
+	  var categoryinfo = frm.categoryinfo.value;
+	  
+	  categoryinfo = categoryinfo.replace(/^\s*|\s*$/g, '');
+	  
+	  if(categoryinfo.length == 0){
+	    alert("강좌설명을 입력해 주세요.");
+	    frm.subject.focus();
+	    return;
+	  }
+	  
+	  alert("강좌정보를 수정 하시겠습니까? ");
 	  
 	  frm.submit();
 }

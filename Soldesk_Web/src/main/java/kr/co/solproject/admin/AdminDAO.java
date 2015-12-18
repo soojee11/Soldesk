@@ -33,16 +33,6 @@ public class AdminDAO {
 		}
 		return mlevel;
 	}
-	
-	public List getLecList() {
-		List list=null;
-		try {
-			list=mybatis.queryForList("sol_admin.getLecList1");
-		}catch(Exception e) {
-			System.out.println("getLecList error: "+e);		
-		}
-		return list;
-	}//end
 
 // -----------------------------------------------------------------------------------------문제풀기부분 시작	
 	public boolean testInsert(TestDTO dto){
@@ -90,16 +80,6 @@ public class AdminDAO {
 		}
 		return list;
 	}//end
-	
-	public int getLecTotal() {
-		int count=0;
-		try {
-			count=(Integer) mybatis.queryForObject("sol_admin.getLecTotal1");
-		}	catch(Exception e) {
-			System.out.println("getLecTotal error: "+e);		
-		}
-		return count;
-	}
 	
 	public PlayerDTO lecRead(int lectureno){
 		
@@ -174,12 +154,12 @@ public class AdminDAO {
 		}
 	}//end
 	
-	public void questionDelete(Map map) {
+	public void questionUnSelect(Map map) {
 		try {
-			mybatis.update("sol_question.questionDelete", map);
+			mybatis.update("sol_question.questionUnSelect", map);
 			
 		}	catch(Exception e) {
-			System.out.println("questionDelete error: "+e);		
+			System.out.println("questionUnSelect error: "+e);		
 		}
 	}//end
 // -----------------------------------------------------------------------------------------문제풀기부분 끝
@@ -192,16 +172,6 @@ public class AdminDAO {
 			System.out.println("lecUpdate error: "+e);		
 		}
 	}//end
-	
-	public List getLecList(Map map) {
-		List list = null;
-		try {
-			list = mybatis.queryForList("sol_admin.getLecList",map);
-		} catch (Exception e) {
-			System.out.println("getLecList error"+e);
-		}
-		return list;
-	}// end
 	
 	public String getCategoryInfo(int grade, String gwamok){
 		String categoryInfo = null;
@@ -218,16 +188,26 @@ public class AdminDAO {
 		}
 		return categoryInfo;
 	}
-	
-	public int getLecTotal(Map map) {
-		int res=0;
+
+	public List getlecList(Map map) {
+		List list = null;
 		try {
-			res=(Integer) mybatis.queryForObject("sol_lecture.total",map);
-		}	catch(Exception e) {
-			System.out.println("getLecTotal error: "+e);		
+			list = mybatis.queryForList("sol_admin.getlecList",map);
+		} catch (Exception e) {
+			System.out.println("getlecList error"+e);
 		}
-		return res;
-	}
+		return list;
+	}// end
+	
+	public int getlecTotal(Map map) {
+		int total = 0;
+		try {
+			total = (Integer) mybatis.queryForObject("sol_admin.getlecTotal",map);
+		} catch (Exception e) {
+			System.out.println("getlecTotal error"+e);
+		}
+		return total;
+	}// end
 	
 	public List getMemList(Map map) {
 		List list = null;
@@ -270,6 +250,17 @@ public class AdminDAO {
 		}
 	}//end
 	
+public int testDeleteProc(Map map) {
+		int res=0;
+		try {
+			res=mybatis.delete("sol_test.testDeleteProc", map);
+		}catch(Exception e) {
+			System.out.println("testDeleteProc error: "+e);		
+
+		}
+		return res;
+	}//end
+
 	public List readCateInfo(Map map) {
 		List list = null;
 		try {
@@ -285,11 +276,10 @@ public class AdminDAO {
 		try {
 			res=(Integer) mybatis.queryForObject("sol_admin.getCateTotal",map);
 		}	catch(Exception e) {
-			System.out.println("getCateTotal error: "+e);		
+			System.out.println("getCateTotal error: "+e);
 		}
 		return res;
-	}//end
-	
+	}
 	public List getLectureno(int categoryno) {
 		List list = null;
 		try {
@@ -307,7 +297,33 @@ public class AdminDAO {
 		}	catch(Exception e) {
 			System.out.println("updateCateProc error: "+e);
 		}
+	}//end		
+	
+	public boolean cateIns(CategoryDTO dto){
+		boolean flag=false;
+		try {
+			int cnt=mybatis.update("sol_admin.cateIns",dto);
+			if(cnt>0)
+				flag=true;
+		}	catch(Exception e) {
+			System.out.println("cateIns error: "+e);
+		}
+		return flag;
 	}//end
 	
-	
+	public String checkCateinfo(int grade, String gwamok){
+		String categoryInfo = null;
+		try {
+			Map map = new HashMap();
+			map.put("grade", grade);
+			map.put("gwamok", gwamok);
+			
+			categoryInfo = (String) mybatis.queryForObject("sol_admin.checkCateinfo",map);
+			
+		} catch (Exception e) {
+			System.out.println("categoryInfo error: "+e);		
+		}
+		return categoryInfo;
+	}
+
 }

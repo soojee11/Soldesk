@@ -131,13 +131,12 @@ public class PlayerCont {
 		dto.setFilename(filename);
 		dto.setFilesize(filenameMF.getSize());
 		
-		System.out.println("---cateno:" +cdto.getCategoryno()+"-----cate grade: "+cdto.getGrade()+"------cate gwamok"+cdto.getGwamok());
+		//System.out.println("---cateno:" +cdto.getCategoryno()+"-----cate grade: "+cdto.getGrade()+"------cate gwamok"+cdto.getGwamok());
 		boolean flag = dao.playerInsert(dto);
 			
 		if (flag) {
-				req.setAttribute("flag", true);
-				
-				return "redirect:./leclist.do?col1="+cdto.getGrade()+"&col2="+cdto.getGwamok();
+			//System.out.println(dto.getCategoryno());
+			return "redirect:./leclist.do?categoryno="+dto.getCategoryno();
 			} else {
 				req.setAttribute("msg1", "동영상 업로드 실패<br/><br/>");
 				req.setAttribute("link1", "<input type='button' value='다시시도' onclick=\"history.back();\">");

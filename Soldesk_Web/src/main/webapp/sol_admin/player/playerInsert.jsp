@@ -45,15 +45,15 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-sm-2 control-label">동영상 시간(초)</label>
+					<label class="col-sm-2 control-label">동영상 시간(분)</label>
 					<div class="col-sm-10">
-						<input type="text" class="form-control" name="lecturetime"  placeholder="1020(초)">
+						<input type="text" class="form-control" name="lecturetime"  placeholder="4(분)">
 					</div>
 				</div>	
 				<div align="center">
 					<button type="button" class="btn btn-danger btn-sm" onclick="player_validate(this.form)">등록</button>
 					<button type="reset" class="btn btn-danger btn-sm" >취소</button>
-					<button type="button" class="btn btn-danger btn-sm"  onclick="javascript:history.go(-1)">강의목록</button>
+					<button type="button" class="btn btn-danger btn-sm"  onclick="javascript:history.go(-1)">강좌목록</button>
 				</div>
 			</form>
 		</div>
