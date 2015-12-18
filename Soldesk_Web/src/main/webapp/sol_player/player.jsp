@@ -46,9 +46,9 @@ function memoSaveResponse(data, status) { //callback함수
     <td style="background-color: #ffffff; padding-left: 10%;">
       <div class="container">
           <div class="video_player" style="width: 80%;">
-            <video id="video" controls="controls" poster="../sol_storage/${dto.poster }"
+            <video id="video" controls="controls" poster="../sol_admin/player/storage/${dto.poster }"
               style="width: 100%;">
-              <source src="../sol_storage/${dto.filename }" type="video/mp4" />
+              <source src="../sol_admin/player/storage/${dto.filename }" type="video/mp4" />
             </video>
             <div class="custom_controls" >
               <a class="pause" title="Pause"></a>
