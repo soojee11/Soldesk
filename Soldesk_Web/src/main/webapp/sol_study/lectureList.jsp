@@ -4,11 +4,23 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!-- page start-->
+<script src="js/postscript.js"></script>
+
 <script language="javascript">
 function lectureGo(lectureno){
 	  str = "/solproject/sol_player/player.do?lectureno="+lectureno;
 	  r = window.open(str, "학습하기", 'scrollbars=yes, resizeable=no, width=1500, height=700');
 	}
+</script>
+
+<script language="javascript">
+function cancel(){
+	document.frm.content.value='';
+	document.frm.btnCreate.style.display='';
+	document.frm.btnDelete.style.display='none';
+	document.frm.btnUpdate.style.display='none';
+	document.frm.btnCancel.style.display='none';		
+}
 </script>
 
 <link href="./css/style.css" rel="stylesheet" type="text/css">
@@ -149,12 +161,12 @@ function lectureGo(lectureno){
 		<th>평점</th>
 	</tr>
 
-<c:set var="postNo" value="${postNo+1 }" />	
+<c:set var="postscriptNo" value="${postscriptNo+1 }" />	
 <c:forEach var="postDto" items="${postList }" >
-<c:set var="postNo" value="${postNo-1 }" />
+<c:set var="postscriptNo" value="${postscriptNo-1 }" />
 
 	<tr align="center">
-		<td>${postNo }</td>
+		<td>${postscriptNo }</td>
 		<td>${postDto.id }</td>
 		<td>${postDto.content }</td>
 		<td>${postDto.regdate }</td>
@@ -167,6 +179,42 @@ function lectureGo(lectureno){
 	</tr>
 
 </table>
+
+ <div style='width: 90%; margin: 5px auto; text-align: center;'>
+  <form name='postForm' id='postForm' method='post'>  
+  <c:forEach var="postDto" items="${postList }" >
+    <input type='hidden' name='postscriptno' id='postscriptno' value='${postDto.postscriptno }'>
+    <input type='hidden' name='categoryno' id='categoryno' value='${postDto.categoryno }'>
+  </c:forEach>
+    <hr>
+    <textarea name='content' id='content' rows="2" ></textarea>
+    <span class="star-input">
+  		<span class="input">
+    		<input type="radio" name="star-input" id="p1" value="1"><label for="p1">1</label>
+    		<input type="radio" name="star-input" id="p2" value="2"><label for="p2">2</label>
+    		<input type="radio" name="star-input" id="p3" value="3"><label for="p3">3</label>
+    		<input type="radio" name="star-input" id="p4" value="4"><label for="p4">4</label>
+    		<input type="radio" name="star-input" id="p5" value="5"><label for="p5">5</label>
+    		<input type="radio" name="star-input" id="p6" value="6"><label for="p6">6</label>
+    		<input type="radio" name="star-input" id="p7" value="7"><label for="p7">7</label>
+    		<input type="radio" name="star-input" id="p8" value="8"><label for="p8">8</label>
+    		<input type="radio" name="star-input" id="p9" value="9"><label for="p9">9</label>
+    		<input type="radio" name="star-input" id="p10" value="10"><label for="p10">10</label>
+  		</span>
+  		<output for="star-input"><!-- <b>0</b>점 --></output>
+	</span><br><br>
+	
+	<a href="javascript:postApply()"><img src='img/btn_apply.gif'></a>
+	<a href="javascript:postCancel()"><img src='img/btn_cancel02.gif'></a>
+	<a style='display:none' href="javascript:postUpdate()"><img src='img/btn_mod.gif'></a>
+	<a style='display:none' href="javascript:postDelete()"><img src='img/btn_del.gif'></a>
+	
+    <!-- <input type='button' name='btnCreate' value='등록'      onclick='createProc()'>  
+    <input type='button' name='btnDelete' value='삭제'  onclick='deleteProc()' style='display:none'>
+    <input type='button' name='btnUpdate' value='수정'  onclick='updateProc()' style='display:none'>
+    <input type='button' name='btnCancel' value='취소'      onclick='cancel()'> -->
+  </form>
+ </div>
 </div>
 
 </div>
