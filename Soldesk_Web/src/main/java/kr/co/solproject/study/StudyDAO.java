@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
 import kr.co.solproject.GetSqlMapClient;
+import kr.co.solproject.mypage.MypageDTO;
 
 @Component
 public class StudyDAO {
@@ -72,5 +73,6 @@ private SqlMapClient mybatis; // Connection con
    
    return sdto;
   }
-  
+
+
 }

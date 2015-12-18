@@ -73,12 +73,14 @@ public class PlayerCont {
     
     // 캘린더 테이블에 동영상 본 기록 집어넣기(학습테이블 생성된 날짜가 여기에  저장됨)
     mdao.calinsert(id, lectureno); //하나)추가  -> 계속insert, update는없음.
-    
-    
+   
     sdto = sdao.read(id, lectureno);  // id      와 lectureno 이 같은 레코드 memo 가져오기 
   //  System.out.println("---------------------"+sdto.getMemo());
     
+    
     req.setAttribute("sdto", sdto);
+    
+    
     
     return "sol_player/player";
 } // player.do end

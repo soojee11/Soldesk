@@ -7,8 +7,32 @@ public class MypageDTO {
 	private String regdate; 	    
 	private int lectureno; 	
 	
+	//------------------------------------------------------
+    private String memo;
+    private String memodate; // memo 殿废老 
+	
+    public String getMemo() {
+		return memo;
+	}
+
+
+	public void setMemo(String memo) {
+		this.memo = memo;
+	}
+
+
+	public String getMemodate() {
+		return memodate;
+	}
+
+
+	public void setMemodate(String memodate) {
+		this.memodate = memodate;
+	}
+
+	//--------------------------------------------------------
 	public MypageDTO() {
-		System.out.println("⒑------MypageDTO()按眉 积己凳...");
+		//System.out.println("⒑------MypageDTO()按眉 积己凳...");
 	}
 
 	
@@ -36,6 +60,10 @@ public class MypageDTO {
 	public void setLectureno(int lectureno) {
 		this.lectureno = lectureno;
 	}
-	
+	@Override
+	public String toString() {
+		return "MypageDTO [calno=" + calno + ", id=" + id + ", regdate=" + regdate + ", lectureno=" + lectureno
+				+ ", memo=" + memo + ", memodate=" + memodate + "]";
+	}
 	
 }

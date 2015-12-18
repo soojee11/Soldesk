@@ -1,221 +1,213 @@
+<%@ page import="java.util.*" %>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <%@ include file="../sol_header.jsp"%>
 
-<br /><br />
-<div align="left">
-|  '<strong>${name }</strong>(${id })'님의 스터디캘린더 <Br/>
-|나의다짐:&nbsp;"<STRONG>${promise }"</strong>
-</div>
+<script type="text/javascript">
+function selectCheck(form){
+	form.submit();
+}
+function monthDown(form){
+ if(form.month.value>1){
+	 form.month.value--;
+ }else {
+	 form.month.value=12;
+	 form.year.value--;
+ }
+ form.submit();
+}
+function monthUp(form){
+ if(form.month.value<12){
+	 form.month.value++;
+ }else {
+	 form.month.value=1;
+	 form.year.value++;
+ }
+ form.submit();
+}
+</script>
+<%
+//현재 날짜 정보 
+Calendar cr = Calendar.getInstance();
+int year = cr.get(Calendar.YEAR);
+int month = cr.get(Calendar.MONTH);
+int date = cr.get(Calendar.DATE);
+ 
+//오늘 날짜
+String today = year + ":" +(month+1)+ ":"+date; 
+ 
+//선택한 연도 / 월
+String input_year = request.getParameter("year");
+String input_month = request.getParameter("month");
+ 
+if(input_month != null){
+ month = Integer.parseInt(input_month)-1;
+}
+if(input_year != null){
+ year = Integer.parseInt(input_year);
+}
+// 1일부터 시작하는 달력을 만들기 위해 오늘의 연도,월을 셋팅하고 일부분은 1을 셋팅한다.
+cr.set(year, month, 1);
+ 
+// 셋팅한 날짜로 부터 아래 내용을 구함
+ 
+// 해당 월의 첫날를 구함
+int startDate = cr.getMinimum(Calendar.DATE);
+ 
+// 해당 월의 마지막 날을 구함
+int endDate = cr.getActualMaximum(Calendar.DATE);
+ 
+// 1일의 요일을 구함
+int startDay = cr.get(Calendar.DAY_OF_WEEK);
+ 
+int count = 0;
+%>
+
+<form method="post" action="calendar.do?s_id=${id }" name="change">
 <br/>
-
-<!-- *************************************************************** -->
-
-
-<table align="center" cellpadding="2" cellspacing="1" 
-         style="font-weight: bold; width:100%; font-size: 20px;">
-	<tr>
-		<td align="center"><a
-			href="calendar.do?year=${preYear }&month=${preMonth }&s_id=${id } "
-			target="_self">◀</a> <b>&nbsp;${year }년&nbsp;&nbsp;${month }월 </b> <a
-			href="calendar.do?year=${nextYear }&month=${nextMonth}&s_id=${id }"
-			target="_self">▶</a></td>
-	</tr>
-	<tr><td align="center" style="font-size: 12px;">
-	<a href="calendar.do?year=${nowYear }&month=${nowMonth }&s_id=${id }">  Today : ${nowYear }/${nowMonth }/${nowDay }
-	</a> </td>
-	</tr>
-</table>
-<br />
-
-<!-- *************************************************************** -->
-
-<!-- 달력표시 -->
-<div id=Cal>
-	<table align="center" width=100% cellpadding="0" cellspacing="1"
-		bgcolor="#cccccc" border="1">
-		<tr style="font-weight: bold; width:100%; height:25px; " bgcolor="#89c236" align="center">
-			<td><font color="red">일</font></td>
-			<td><font color="#000000">월</font></td>
-			<td><font color="#000000">화</font></td>
-			<td><font color="#000000">수</font></td>
-			<td><font color="#000000">목</font></td>
-			<td><font color="#000000">금</font></td>
-			<td><font color="blue">토</font></td>
-		</tr>
-
-<!-- *************************************************************** -->
-
-		<c:set var="newLine" value="0" />
-		<tr height='15px'>
-			<c:forEach begin="1" end="${week-1 }" var="i">
-				<td bgcolor='#ffffff'>&nbsp;</td>
-				<c:set var="newLine">${ newLine+1}</c:set>
-			</c:forEach>
-			<c:set var="cnt" value="0" />
-			<c:set var="b" value="${startDay }" />
-			<c:forEach begin="${startDay}" end="${endDay}" var="i">
-				<c:choose>
-					<c:when test="${newLine==0 }"> <!-- 일 -->
-						<c:set var="fontColor" value="red" />
-					</c:when>
-					<c:when test="${newLine==6 }"> <!-- 토 -->
-						<c:set var="fontColor" value="blue" />
-					</c:when>
-					<c:otherwise>
-						<c:set var="fontColor" value="black" /> <!-- 평일 -->
-					</c:otherwise>
-				</c:choose>
-				
-				<c:choose>
-					<c:when
-						test="${nowYear }==${year }&&${nowMonth}==${month }&&${nowDay }==${i }">
-						<c:set var="bgColor" value="#e6e6e6" />
-					</c:when>
-					<c:otherwise>
-						<c:set var="bgColor" value="#ffffff" />
-					</c:otherwise>
-				</c:choose>
-				<td align='center' bgcolor='${bgColor }'><font
-					color='${fontColor}'><c:out value="${i }" /></font> <c:set
-						var="newLine">${ newLine+1}</c:set> <c:if test="${i eq endDay }">
-						<c:choose>
-							<c:when test="${newLine gt 0 && newLine lt 7}">
-								<c:forEach begin='${newLine }' end="6">
-									<td bgcolor='#ffffff'>&nbsp;</td>
-									<c:set var="newLine">${ newLine+1}</c:set>
-								</c:forEach>
-							</c:when>
-						</c:choose>
-
-					</c:if> <c:if test="${newLine==7}">
-		</tr>
-		
-<!-- *************************************************************** -->
-	<!-- 빈공간  -->	
-
-
-		<tr height='40px'>
-			<c:set var="newLine" value="0" />
-			<c:if test="${i < 7}">
-				<c:forEach begin="1" end="${week-1}" var="z">
-					<td bgcolor='#ffffff'>&nbsp;</td>
-					<c:set var="newLine">${ newLine+1}</c:set>
-				</c:forEach>
-			</c:if>
-			<c:set var="doneLoop" value="false" />
-
-			<c:forEach begin="${b }" end="${endDay }" var="a" varStatus="z">
-				<c:if test="${not doneLoop}">
-					<c:set var="cnt">${cnt+1}</c:set>
-					<c:set var="c_day">
-						<c:choose>
-							<c:when test="${a<10 }">
-											0${a }
-										</c:when>
-							<c:otherwise>
-											${a }
-										</c:otherwise>
-						</c:choose>
-					</c:set>
-					<c:set var="c_month">
-						<c:choose>
-							<c:when test="${month<10 }">
-											0${month }
-										</c:when>
-							<c:otherwise>
-											${month }
-										</c:otherwise>
-						</c:choose>
-					</c:set>
-					<c:set var="r_d">
-								${year}${c_month }${c_day }
-								</c:set>
-
-					<%--이후 년도 표시 --%>
-					<c:if test="${year gt nowYear}">
-						<td align='center' bgcolor=${bgColor }>
-						<font color="#8C8C8C">
-					<!-- 	 미래 -->
-						</font>
-						</td>
-						<c:set var="newLine">${ newLine+1}</c:set>
-					</c:if>
-
-					<%--현재 년도 --%>
-					<c:if test="${year eq nowYear }">
-						<c:if test="${month gt nowMonth }">
-							<td align='center' bgcolor=${bgColor }>
-							<font color="#8C8C8C"> 
-						%%%	
-						</font>
-						</td>
-							<c:set var="newLine">${ newLine+1}</c:set>
-						</c:if>
-						<c:if test="${month eq nowMonth }">
-							<c:if test="${a ge nowDay }">
-								<td align='center' bgcolor=${bgColor }>
-								<font color="#8C8C8C"> 
-								<!-- 현재 -->
-								</font>
-								</td>
-								<c:set var="newLine">${ newLine+1}</c:set>
-							</c:if>
-						</c:if>
-
-
-       <!-- 이전달까지 표시 -->
-						<c:if test="${month lt nowMonth }">
-							<td align='center' bgcolor=${bgColor }>
-							<font color="#5D5D5D">
-						<!-- 	과거 -->
-							</font>
-							</td>
-							<c:set var="newLine">${ newLine+1}</c:set>
-						</c:if>
-					</c:if>
-
-
-					<%--이전 년도 --%>
-					<c:if test="${year lt nowYear }">
-						<td align='center' bgcolor=${bgColor }><font color="#5D5D5D">
-						</font></td>
-						<c:set var="newLine">${ newLine+1}</c:set>
-					</c:if>
-
-					<c:set var="r_status" value="" />
-					<c:if test="${newLine==7 }">
-		</tr>
-		
-<!-- *************************************************************** -->
-		
-		
-		<tr height='15px'>
-			<c:set var="b">${i+1 }</c:set>
-			<c:set var="doneLoop" value="true" />
-			</c:if>
-			</c:if>
-			</c:forEach>
-
-			<c:choose>
-				<c:when test="${newLine gt 0 && newLine lt 7}">
-					<c:forEach begin='${newLine }' end="6">
-						<td bgcolor='#ffffff'>&nbsp;</td>
-						<c:set var="newLine">${ newLine+1}</c:set>
-					</c:forEach>
-				</c:when>
-			</c:choose>
-
-			<c:set var="newLine" value="0" />
-			</c:if>
-			</c:forEach>
-			
-	</table>
+<div align="left">
+	 '<strong>${name }</strong>(${id })'님의 한줄다짐  |  &nbsp;<STRONG>"${promise }"</strong>
+	
 </div>
+<br/><br/>
 
-<Br />
-<Br />
-<Br />
-<!-- page end-->
+<table width="400" cellpadding="2" cellspacing="0" border="0" align="center">
+ <tr>
+   <td align="center"><input type="button" value="◁" onClick="monthDown(this.form)"></td>
+   
+      <td  align="center">
+      <select name="year" onchange="selectCheck(this.form)">
+      <%
+      for(int i=year-5;i<year+6;i++){
+       String selected = (i == year)?"selected":"";
+       String color = (i == year)?"#CCCCCC":"#FFFFFF";
+         out.print("<option value="+i+" "+selected+" style=background:"+color+">"+i+"</option>");       
+      }
+      %>
+      </select>
+      
+      <select name="month" onchange="selectCheck(this.form)">
+      <%
+      for(int i=1;i<=12;i++){
+       String selected = (i == month+1)?"selected":"";
+       String color = (i == month+1)?"#CCCCCC":"#FFFFFF";
+         out.print("<option value="+i+" "+selected+" style=background:"+color+">"+i+"</option>");       
+      }
+      %>
+      </select></td>
+      
+      <td><input type="button" value="▷" onClick="monthUp(this.form)"></td>
+      
+    </tr>
+    <tr>
+      <td align="center" colspan="3" style="font-weight: bold; width: 100%; font-size: 20px;"><a href="calendar.do?s_id=${id }">TODAY ${nowregdate} <%--  <%=today %> --%></font></a></td>
+    </tr>
+</table> 
+</form>
+<div align="right">(메모아이콘)메모 | (강의아이콘)강의 | (도장아이콘)학습도장</div>
+        
+<table align="center" width=100% cellpadding="0" cellspacing="1"
+	bgcolor="#cccccc" border="1">
+		<tr style="font-weight: bold; width: 100%; height: 25px;"
+		bgcolor="#89c236" align="center">
+  <td><font color="red">일</font></td>
+  <td><font color="#000000">월</font></td>
+  <td><font color="#000000">화</font></td>
+  <td><font color="#000000">수</font></td>
+  <td><font color="#000000">목</font></td>
+  <td><font color="#000000">금</font></td>
+  <td><font color="blue">토</font></td>
+ </tr>
+ 
+ 
+ <tr style='height: 50px; font-weight: bold;'>
+ 
+ <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+ 
+		
+		<c:forEach var="dto" items="${regdatelist }">
+				<c:set var="regdate" value="${fn:substring(dto.regdate, 8 ,10) }" />
+			 <fmt:parseNumber var="parsedate" type="number"  value="${fn:substring(dto.regdate, 8 ,10) }" />
+			 <fmt:parseNumber var="parseyear" type="number" integerOnly="true"  value="${fn:substring(dto.regdate, 0 ,4) }" />
+			 <fmt:parseNumber var="parsemonth" type="number" integerOnly="true"  value="${fn:substring(dto.regdate, 5 ,7) }" />
+			${parseyear } :	${parsemonth } : ${parsedate } |
+			   	
+		</c:forEach>
+
+ 
+<%
+for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
+ count++;
+%>
+        <td>&nbsp;</td>
+<% 
+}
+%>
+
+
+	
+<%
+for (int i=startDate;i<=endDate;i++){
+ String bgcolor = (today.equals(year+":"+(month+1)+":"+i))? "#89c236" : "#FFFFFF";/* 오늘날짜음영 */
+ String color=null; 
+ if(count%7 == 0) color="red";
+ else if(count%7 == 6) color="blue";
+ else color="black";
+ 
+ count++;
+%> 
+  <td bgcolor="<%=bgcolor %>">
+  <font color=<%=color %>>
+
+      <%=i %>)
+  
+   <!-- 오늘날짜랑 디비에들어있는 날짜가 같으면 출력해주기 --> 
+  <c:forEach var="dto" items="${regdatelist }">
+  <c:set var="regdate" value="${fn:substring(dto.regdate, 0 ,10) }" />
+  <c:set var="ii" value="<%=i %>"/>
+  <c:set var="iy" value="<%=input_year %>"/>
+  <c:set var="im" value="<%=input_month %>"/>
+  
+ 	<fmt:parseNumber var="parsedate" type="number" integerOnly="true"  value="${fn:substring(dto.regdate, 8 ,10) }" />
+	<fmt:parseNumber var="parseyear" type="number" integerOnly="true"  value="${fn:substring(dto.regdate, 0 ,4) }" />
+	<fmt:parseNumber var="parsemonth" type="number" integerOnly="true"  value="${fn:substring(dto.regdate, 5 ,7) }" />
+	
+	
+		<c:if test="${ii == parsedate && iy == parseyear && im == parsemonth}">
+			${parsedate }
+		</c:if>
+
+  </c:forEach>
+  
+  </font>
+  </td>
+<%
+  if(count%7 == 0 && i < endDate){
+%> 
+ </tr>
+ 
+ 
+ <tr  style='height: 50px; font-weight: bold;'>
+<%
+  }
+}
+
+
+while(count%7 != 0){ /* 날짜끝나고 빈공간 */
+%>
+       <td>&nbsp;</td>
+<% 
+count++;
+ }
+%>
+
+
+
+<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+</tr>  
+</table>
 <%@ include file="../sol_footer.jsp"%>
