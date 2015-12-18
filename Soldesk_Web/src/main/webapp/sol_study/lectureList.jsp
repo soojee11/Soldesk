@@ -11,6 +11,10 @@ function lectureGo(lectureno){
 	  str = "/solproject/sol_player/player.do?lectureno="+lectureno;
 	  r = window.open(str, "학습하기", 'scrollbars=yes, resizeable=no, width=1500, height=700');
 	}
+
+function lectureNotGo(){
+	alert("로그인 후 이용해 주세요.");
+}
 </script>
 
 <script language="javascript">
@@ -88,7 +92,7 @@ function cancel(){
 		<th>학습하기</th>
 	</tr>
 
-<c:set var="lectureNo" value="${lectureNo+1 }" />	
+<c:set var="lectureNo" value="${lectureNo }" />	
 <c:forEach var="dto" items="${list }" >
 <c:set var="lectureNo" value="${lectureNo-1 }" />
 
@@ -96,9 +100,18 @@ function cancel(){
 		<td>${lectureNo }</td>
 		<td>${dto.subject }</td>
 		<td>${dto.poster }</td>
-		<td>${dto.lecturetime }</td>
+		<td>${dto.lecturetime }분</td>
 		<td>${dto.teacher }</td>
-		<td align="center"><a href="javascript:lectureGo(${dto.lectureno })"><img src='img/btn_study_play.png' width="30" height="20"></a></td>
+		<td align="center">
+		<c:choose>
+		  <c:when test="${s_id != null }">
+		     <a href="javascript:lectureGo(${dto.lectureno })">
+		  </c:when>
+		  <c:otherwise>
+		    <a href="javascript:lectureNotGo()">
+		  </c:otherwise>
+     </c:choose>
+		<img src='img/btn_study_play.png' width="30" height="20"></a></td>
 	</tr>
 </c:forEach>
 

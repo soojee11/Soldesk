@@ -15,7 +15,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script> 
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script src="../sol_js/playerScript.js"></script>
-
 <script>
 function reset(){
 	$("#memo").val('');
@@ -46,9 +45,9 @@ function memoSaveResponse(data, status) { //callback함수
     <td style="background-color: #ffffff; padding-left: 10%;">
       <div class="container">
           <div class="video_player" style="width: 80%;">
-            <video id="video" controls="controls" poster="../sol_storage/${dto.poster }"
+            <video id="video" controls="controls" poster="../sol_admin/player/storage/${dto.poster }"
               style="width: 100%;">
-              <source src="../sol_storage/${dto.filename }" type="video/mp4" />
+              <source src="../sol_admin/player/storage/${dto.filename }" type="video/mp4" />
             </video>
             <div class="custom_controls" >
               <a class="pause" title="Pause"></a>
@@ -75,12 +74,12 @@ function memoSaveResponse(data, status) { //callback함수
          <br/><br/><br/>
          <div class="tab-content" style="width: 90%; color: black; height: 400px;">
            <div id="menu1" class="tab-pane fade in active">
-           <table width="100%" border="1" align="center" class="lecturelist">
+           <table width="100%" border="0" align="center" class="table">
             <c:set var="lecNo" value="${lecNo+1 }"/>
              <c:forEach var="lecturelist" items="${list }">
              <c:set var="lecNo" value="${lecNo-1 }"></c:set>
              <br>
-               <tr height="30px;" style="vertical-align: center; <c:if test="${dto.lectureno == lecturelist.lectureno }">color: red;</c:if>">
+               <tr  style="vertical-align: center; <c:if test="${dto.lectureno == lecturelist.lectureno }">color: red;</c:if>">
                <td>${lecNo }강.</td>
                <td>
                <form action="./player.do">
@@ -89,7 +88,7 @@ function memoSaveResponse(data, status) { //callback함수
                  <c:if test="${dto.lectureno == lecturelist.lectureno }">color: red;</c:if>">
                </form>
                </td>
-               <td>${lecturelist.lecturetime }초</td>
+               <td>${lecturelist.lecturetime }분</td>
                </tr>
              </c:forEach>
              </table>

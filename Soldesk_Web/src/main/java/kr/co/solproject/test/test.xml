@@ -7,7 +7,8 @@
 	<typeAlias alias="TestDTO" type="kr.co.solproject.test.TestDTO" />
 
 	<update id="insert" parameterClass="TestDTO">
-		insert into sol_test(grade,subject,testtitle)
+		insert into
+		sol_test(grade,subject,testtitle)
 		values(#grade#,#subject#,#testtitle#)
 	</update>
 
@@ -41,4 +42,13 @@
 		</dynamic>
 	</select>
 
+	<delete id="testDeleteProc" parameterClass="Map">
+		delete from sol_test
+		where testno
+		<iterate prepend="IN" property="testDeleteList" open="(" close=")"
+			conjunction=",">
+			#testDeleteList[]#
+		</iterate>
+	</delete>
+	
 </sqlMap>

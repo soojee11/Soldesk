@@ -134,9 +134,8 @@
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
                         <ul class="sub">
-                          <li><a  href="leclist.do">Lecture_list</a></li>
-                          <li><a  href="lecinsert.do">Lecture_insert</a></li>                          
-                          <li><a  href="lecdelete.do">Lecture_delete</a></li>
+                          <li><a  href="readCateInfo.do">Lecture_insert</a></li>                          
+                          <li><a  href="cateDelete.do">Update&Delete</a></li>
                       </ul>
                   </li>
                    <li class="sub-menu">
@@ -148,9 +147,7 @@
                         <ul class="sub">
 
                           <li><a  href="testList.do">Test_insert</a></li>
-                          <li><a  href="testIns.do">Test_update</a></li>                          
-
-                          <li><a  href="testDel.do">Test_delete</a></li>
+                          <li><a  href="testDelete.do">Update&Delete</a></li>
                       </ul>
                   </li>
                   <li>

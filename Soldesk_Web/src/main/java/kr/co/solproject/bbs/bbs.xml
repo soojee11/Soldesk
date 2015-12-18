@@ -12,8 +12,33 @@
     values (#subject#, #content#, #passwd#, now())
   </insert>
   
-  <select id="list" resultClass="BbsDTO">
+  <select id="list" parameterClass="Map" resultClass="BbsDTO">
      select bbsno, subject, content, passwd, regdt, readcnt from sol_bbs
-     order by bbsno DESC;
+     order by bbsno DESC
+     limit #sno#, #numPerPage#
   </select>
+  
+  <select id="total" resultClass="Integer">
+      select count(*) from sol_bbs
+  </select>
+  
+  <select id="read" parameterClass="Integer" resultClass="BbsDTO">
+    select bbsno, subject, content, passwd, regdt, readcnt from sol_bbs
+    where bbsno=#bbsno#
+  </select>
+  
+  <update id="increment" parameterClass="Integer">
+    update sol_bbs set readcnt = readcnt + 1
+    where bbsno=#bbsno#
+  </update>
+  
+  <update id="update" parameterClass="BbsDTO">
+    update sol_bbs set subject=#subject# , content=#content#
+    where bbsno=#bbsno#
+  </update>
+  
+  <delete id="delete" parameterClass="Integer">
+     delete from sol_bbs where bbsno=#bbsno#
+  </delete>
+  
 </sqlMap>

@@ -151,7 +151,7 @@
 </tr>
 <tr align="left" >  
   <th >한줄다짐</th>
-  <td><input type="text" name="promise" size="30" value="study hard!" style="background-color:#f7f4f5;"></td>
+  <td><input type="text" name="promise" size="30" value="fighting!" style="background-color:#f7f4f5;"></td>
 </tr>
 </table>
 <br/>

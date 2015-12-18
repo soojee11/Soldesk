@@ -61,7 +61,7 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-sm-2 control-label">동영상 시간(초)</label>
+					<label class="col-sm-2 control-label">동영상 시간(분)</label>
 					<div class="col-sm-10">
 						<input type="text" class="form-control" name="lecturetime" value="${dto.lecturetime }">
 					</div>

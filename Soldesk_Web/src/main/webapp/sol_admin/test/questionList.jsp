@@ -23,7 +23,7 @@
 		</ol>
 	</div>
 </div>
-<div style="text-align:center; font-size:33px; color: black;">
+<div style="text-align:center; font-size:33px;">
 <strong>${param.testtitle }</strong>
 </div>
 <div class="row">
@@ -52,7 +52,7 @@
 <a href="questionForm.do?testno=${param.testno }"><button class="btn btn-info btn-sm">문제 등록</button></a>
 </div>
 
-<form method="post" action="questionDelete.do?testno=${param.testno }">
+<form method="post" action="questionUnSelect.do?testno=${param.testno }">
 <table class="table" style="text-align: center;">
 	<tr>
 		<td colspan="9" align="left"> 

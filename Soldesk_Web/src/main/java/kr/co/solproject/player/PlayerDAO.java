@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.stereotype.Component;
 import com.ibatis.sqlmap.client.SqlMapClient;
 import kr.co.solproject.GetSqlMapClient;
+import kr.co.solproject.category.CategoryDTO;
 import kr.co.solproject.test.TestDTO;
 
 @Component
@@ -46,7 +47,7 @@ public class PlayerDAO {
     boolean flag = false;
 
 	    try{
-	    	dto.getCategoryno();
+	    	//dto.getCategoryno();
 	    	int cnt=mybatis.update("sol_category.insert",dto);
 			if(cnt>0)
 				flag=true;
@@ -76,5 +77,15 @@ public class PlayerDAO {
     }
     return list;
   }
+  
+  public CategoryDTO getCategory(int categoryno){
+	   CategoryDTO dto = null;
+	    try{
+	      dto = (CategoryDTO) mybatis.queryForObject("sol_category.getCategory", categoryno);
+	    }catch (Exception e){
+	      System.out.println("read ½ÇÆÐ´Ù: "+e);
+	    }
+	    return dto;
+	  }//end
   
 }

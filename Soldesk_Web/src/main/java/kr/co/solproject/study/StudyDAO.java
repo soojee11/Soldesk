@@ -25,7 +25,7 @@ private SqlMapClient mybatis; // Connection con
     map.put("id", id);
     map.put("lectureno", lectureno);
     map.put("memo", "");
-    map.put("regdate", "");
+    map.put("memodate", "");
     
     try{
       cnt = (Integer) mybatis.queryForObject("sol_study.check", map);
@@ -42,6 +42,7 @@ private SqlMapClient mybatis; // Connection con
   public void insert(Map map){
     try{
       mybatis.update("sol_study.insert", map);
+      
     }
     catch (Exception e){
       System.out.println("insert ½ÇÆÐ: "+e);
