@@ -15,7 +15,7 @@ public class StudyDAO {
 private SqlMapClient mybatis; // Connection con
   public StudyDAO(){
     mybatis = GetSqlMapClient.get();  // con = dbopen.getConnection()
-    System.out.println("StudyDAO 梓端 持失");
+    System.out.println("---------------StudyDAO 梓端 持失");
   }
   
   public void check(String id, int lectureno){

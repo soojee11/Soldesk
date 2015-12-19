@@ -7,8 +7,39 @@ public class MypageDTO {
 	private String regdate; 	    
 	private int lectureno; 	
 	
-	//------------------------------------------------------
-    private String memo;
+	//------------------------------------------------------sol_lecture
+    private String subject;     // 강의제목
+    private String poster;		// 캡쳐화면 
+	private String teacher;		// 선생님 이름 
+    
+    public String getSubject() {
+		return subject;
+	}
+
+	public void setSubject(String subject) {
+		this.subject = subject;
+	}
+    
+	public String getPoster() {
+		return poster;
+	}
+
+	public void setPoster(String poster) {
+		this.poster = poster;
+	}
+
+
+	public String getTeacher() {
+		return teacher;
+	}
+
+
+	public void setTeacher(String teacher) {
+		this.teacher = teacher;
+	}
+
+	//------------------------------------------------------sol_study
+    private String memo;     // memo
     private String memodate; // memo 등록일 
 	
     public String getMemo() {
@@ -60,10 +91,16 @@ public class MypageDTO {
 	public void setLectureno(int lectureno) {
 		this.lectureno = lectureno;
 	}
+
 	@Override
 	public String toString() {
 		return "MypageDTO [calno=" + calno + ", id=" + id + ", regdate=" + regdate + ", lectureno=" + lectureno
-				+ ", memo=" + memo + ", memodate=" + memodate + "]";
+				+ ", subject=" + subject + ", poster=" + poster + ", teacher=" + teacher + ", memo=" + memo
+				+ ", memodate=" + memodate + "]";
 	}
+
+
+	
+	
 	
 }

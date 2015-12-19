@@ -43,24 +43,48 @@ public class MypageDAO {
 		return res;
 	}// end
 
-	// 캘린더 테이블에 동영상 본 기록 집어넣기->insert(update는없음,계속insert)
 	public void calinsert(String id, int lectureno,String nowregdate) {
-		int cnt = 0;
-		String rdt=null;
+		int cnt = 0,cnt2=0;
+		String rdt=null,rdt2=null,calno=null;
 		Map map = new HashMap();
 		map.put("id", id);
 		map.put("lectureno", lectureno);
+		map.put("nowregdate", nowregdate);
 
 		try {
-			rdt = (String) mybatis.queryForObject("sol_calendar.check", map);//regdate가져와
-			System.out.println("##rdt: "+rdt);
-			System.out.println("##nowregdate: "+nowregdate);
-			String rdt2 = rdt.substring(0, 10);
-			if (rdt == null && rdt2 != nowregdate  ){
-				//rdt가  삽입 , 있으면 아무동작 안함.
-				cnt = mybatis.update("sol_calendar.calinsert", map); 
+			cnt = (Integer) mybatis.queryForObject("sol_calendar.checkcount", map);
+			
+			System.out.println(id+" "+lectureno+" "+nowregdate);
+			System.out.println("##cnt: "+cnt);
+			
+			if(cnt == 0){
+				cnt2 = mybatis.update("sol_calendar.calinsert", map); 
 			}
-
+			else{
+				rdt =  (String) mybatis.queryForObject("sol_calendar.checkrdt", map);
+				System.out.println("##rdt: "+rdt); //regdate중 max최신값가져온다.
+				calno =  (String) mybatis.queryForObject("sol_calendar.checkcalno", map);
+				System.out.println("##calno: "+calno); //regdate중 max최신값가져온다.
+				rdt2 =  rdt.substring(0, 10);
+				System.out.println("##rdt2: "+rdt2);//시간제외해줌.
+				
+				Map map2 = new HashMap();
+				map2.put("id", id);
+				map2.put("lectureno", lectureno);
+				map2.put("regdate", rdt);
+				map2.put("calno", calno);
+				
+				if(nowregdate.equals(rdt2) ){
+					cnt2 = mybatis.update("sol_calendar.calupdate", map2); 
+					System.out.println("##calupdate: "+cnt2);
+				}else{
+					cnt2 = mybatis.update("sol_calendar.calinsert", map); 
+					System.out.println("##calinsert: "+cnt2);
+				}
+			}
+			
+			
+			
 		} catch (Exception e) {
 			System.out.println("calinsert: " + e);
 		}
@@ -87,5 +111,16 @@ public class MypageDAO {
 		}
 		return list;
 	}// end
+	
+	public List getLectureList() { //calendar,study,lecture조인해서 강의제목리스트GET
+		List list = null;
+		try {
+			list = mybatis.queryForList("sol_calendar.getLectureList");
 
+		} catch (Exception e) {
+			System.out.println("getLectureList: " + e);
+		}
+		return list;
+	}// end
+	
 }

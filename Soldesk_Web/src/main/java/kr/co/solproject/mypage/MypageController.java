@@ -47,12 +47,12 @@ public class MypageController {
 		List regdatelist = null;
 	    regdatelist = dao.getregdate(s_id); //강좌를들은날짜들을 LIST로 가져오자
 	    
-
-		//sol_study와 조인해서 memo내용을 가져오자
-		List memolist=dao.getMemoList();
+		
+		List memolist=dao.getMemoList();//sol_study와 조인해서 memo내용을 가져오자
 		System.out.println(memolist);
 		
-		
+		List lecturelist=dao.getLectureList();//sol_lecture와 조인해서 강의제목을 가져오자
+		System.out.println(lecturelist);
 		
 		
 		
@@ -66,14 +66,31 @@ public class MypageController {
 		req.setAttribute("regdatelist", regdatelist);
 		req.setAttribute("nowregdate", nowregdate);
 		req.setAttribute("memolist", memolist);
+		req.setAttribute("lecturelist", lecturelist);
+
 		
 		
 		return "/sol_mypage/calendar";
 	}//end
 	
+	@RequestMapping(value = "sol_mypage/memoGo.do", method = RequestMethod.GET)
+	public String memoGo(String lectureno,String memodate,HttpServletRequest req, HttpSession session) {
 	
+		
+		return "/sol_mypage/memo";
+		
+	}
 	
+	@RequestMapping(value = "sol_mypage/videoGo.do", method = RequestMethod.GET)
+	public String videoGo(String lectureno,HttpServletRequest req, HttpSession session) {
 	
+		
+		return "/sol_mypage/video";
+		
+	}
+	// --------------------------------------------------------------------
+	
+	/*
 	
 	@RequestMapping(value = "sol_mypage/calendar.do", method = RequestMethod.GET)
 	public String calendar(String s_id,HttpServletRequest req, HttpSession session) {
@@ -179,7 +196,7 @@ public class MypageController {
 		}
 		
 	}// end
-
+*/
 	
 	
 }

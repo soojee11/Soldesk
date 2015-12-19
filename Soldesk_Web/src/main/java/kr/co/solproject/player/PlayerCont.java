@@ -39,7 +39,7 @@ public class PlayerCont {
 	 
 	 
 	public PlayerCont() {
-		System.out.println("PlayerCont 객체 생성");
+		System.out.println("---------------PlayerCont 객체 생성");
 	}
 
 	@RequestMapping(value="/sol_player/player.do", method=RequestMethod.GET)
@@ -83,9 +83,10 @@ public class PlayerCont {
 	//월은 0부터 시작하므로 1월 표시를 위해 1을 더해 줍니다.
 	int nowDay = cal.get(Calendar.DAY_OF_MONTH);
 	String nowregdate = (String)(nowYear+"-"+nowMonth+"-"+nowDay);
-	System.out.println("##nowregdate :"+nowregdate);
-    mdao.calinsert(id, lectureno, nowregdate); //하나)추가  -> 계속insert, update는없음.
+    mdao.calinsert(id, lectureno, nowregdate); //하나)추가 
    
+    
+    
     sdto = sdao.read(id, lectureno);  // id      와 lectureno 이 같은 레코드 memo 가져오기 
   //  System.out.println("---------------------"+sdto.getMemo());
     

@@ -29,6 +29,17 @@ function monthUp(form){
  form.submit();
 }
 </script>
+<script language="javascript">
+function memoGo(lectureno,memodate){
+      str = "/solproject/sol_mypage/memoGo.do?lectureno="+lectureno+"&memodate="+memodate;
+      r = window.open(str, "메모목록", 'scrollbars=yes, resizeable=no, width=700, height=700');
+    }
+function videoGo(lectureno){
+    str = "/solproject/sol_mypage/videoGo.do?lectureno="+lectureno;
+    r = window.open(str, "강의목록", 'scrollbars=yes, resizeable=no, width=700, height=700');
+  }
+</script>
+
 <%
 //현재 날짜 정보 
 Calendar cr = Calendar.getInstance();
@@ -107,7 +118,48 @@ int count = 0;
     </tr>
 </table> 
 </form>
-<div align="right">(메모아이콘)메모 | (강의아이콘)강의 | (도장아이콘)학습도장</div>
+ <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+ 
+      <%--    강의들은날짜<br/>
+        <c:forEach var="dto" items="${regdatelist }">
+                <c:set var="regdate" value="${dto.regdate }" />
+             <fmt:parseNumber var="parsedate" type="number"  value="${fn:substring(dto.regdate, 8 ,10) }" />
+             <fmt:parseNumber var="parseyear" type="number" integerOnly="true"  value="${fn:substring(dto.regdate, 0 ,4) }" />
+             <fmt:parseNumber var="parsemonth" type="number" integerOnly="true"  value="${fn:substring(dto.regdate, 5 ,7) }" />
+         ${regdate }<br/>
+        </c:forEach> 
+
+        <br/> --%>
+        
+    들은강의목록<br/>
+        <c:forEach var="lto" items="${lecturelist }">
+        <c:set var="lregdate" value="${lto.regdate }" />
+         <c:set var="lectureno" value="${lto.lectureno }" />
+         <c:set var="subject" value="${lto.subject }" />
+         <c:set var="poster" value="${lto.poster }" />
+         <c:set var="teacher" value="${lto.teacher }" />
+         
+         ${lectureno } : ${subject } : ${poster } : ${teacher }: ${lregdate }<br/>
+        </c:forEach> 
+        
+        <br/>     
+        메모리스트<br/>
+        <c:forEach var="list" items="${memolist }">
+                <c:set var="memodate" value="${list.memodate }" />
+                <c:set var="memo" value="${list.memo }" />
+                <c:set var="lectureno" value="${list.lectureno }" />
+             <fmt:parseNumber var="parsemdate" type="number"  value="${fn:substring(list.memodate, 8 ,10) }" />
+             <fmt:parseNumber var="parsemyear" type="number" integerOnly="true"  value="${fn:substring(list.memodate, 0 ,4) }" />
+             <fmt:parseNumber var="parsemmonth" type="number" integerOnly="true"  value="${fn:substring(list.memodate, 5 ,7) }" />
+            
+             
+             ${memodate } : ${memo } : ${lectureno }<br/>
+        </c:forEach>
+
+
+ <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+ 
+<div align="right"><img src="image/memo.png" width=20px height=28px/> 메모 | <img src="image/video.png" width=20px height=20px/>강의 |  <img src="image/thumb.png" width=18px height=18px/>학습도장</div>
         
 <table align="center" width=100% cellpadding="0" cellspacing="1"
 	bgcolor="#cccccc" border="1">
@@ -128,25 +180,7 @@ int count = 0;
  <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
  
 		
-		<c:forEach var="dto" items="${regdatelist }">
-				<c:set var="regdate" value="${fn:substring(dto.regdate, 8 ,10) }" />
-			 <fmt:parseNumber var="parsedate" type="number"  value="${fn:substring(dto.regdate, 8 ,10) }" />
-			 <fmt:parseNumber var="parseyear" type="number" integerOnly="true"  value="${fn:substring(dto.regdate, 0 ,4) }" />
-			 <fmt:parseNumber var="parsemonth" type="number" integerOnly="true"  value="${fn:substring(dto.regdate, 5 ,7) }" />
-			${parseyear } :	${parsemonth } : ${parsedate } |
-		</c:forEach>
-		<br/>
-		<c:forEach var="list" items="${memolist }">
-				<c:set var="memodate" value="${list.memodate }" />
-			 	<c:set var="memo" value="${list.memo }" />
-			 	<c:set var="lectureno" value="${list.lectureno }" />
-			 <fmt:parseNumber var="parsemdate" type="number"  value="${fn:substring(list.memodate, 8 ,10) }" />
-			 <fmt:parseNumber var="parsemyear" type="number" integerOnly="true"  value="${fn:substring(list.memodate, 0 ,4) }" />
-			 <fmt:parseNumber var="parsemmonth" type="number" integerOnly="true"  value="${fn:substring(list.memodate, 5 ,7) }" />
-			
-			 
-			 ${memodate } : ${memo } : ${lectureno }|
-		</c:forEach>
+
 		
  
 <%
@@ -175,29 +209,53 @@ for (int i=startDate;i<=endDate;i++){
 
       <%=i %>)
   
+
+  
    <!-- 오늘날짜랑 디비에들어있는 날짜가 같으면 출력해주기 --> 
   <c:forEach var="list" items="${memolist }">
-  <c:set var="regdate" value="${fn:substring(dto.regdate, 0 ,10) }" />
+  <c:set var="regdate" value="${fn:substring(list.regdate, 0 ,10) }" />
   <c:set var="ii" value="<%=i %>"/>
   <c:set var="iy" value="<%=input_year %>"/>
   <c:set var="im" value="<%=input_month %>"/>
   <c:set var="memodate" value="${list.memodate }" />
-			 	<c:set var="memo" value="${list.memo }" />
-			 	<c:set var="lectureno" value="${list.lectureno }" />
-			 	
- 	<fmt:parseNumber var="parsedate" type="number" integerOnly="true"  value="${fn:substring(dto.regdate, 8 ,10) }" />
-	<fmt:parseNumber var="parseyear" type="number" integerOnly="true"  value="${fn:substring(dto.regdate, 0 ,4) }" />
-	<fmt:parseNumber var="parsemonth" type="number" integerOnly="true"  value="${fn:substring(dto.regdate, 5 ,7) }" />
-	
-	
-		<c:if test="${ii == parsemdate && iy == parsemyear && im == parsemmonth}">
-			${memo }|${memodate }|${lectureno } <br/>
-		</c:if>
+  <c:set var="memo" value="${list.memo }" />
+  <c:set var="lectureno" value="${list.lectureno }" /> 
+  <fmt:parseNumber var="lregdate" type="number"  value="${lto.regdate}" />
+  <fmt:parseNumber var="parsedate" type="number"  value="${fn:substring(list.regdate, 8 ,10) }" />
+  <fmt:parseNumber var="parseyear" type="number" integerOnly="true"  value="${fn:substring(list.regdate, 0 ,4) }" />
+  <fmt:parseNumber var="parsemonth" type="number" integerOnly="true"  value="${fn:substring(list.regdate, 5 ,7) }" />
+  
+  <fmt:parseNumber var="parsemdate" type="number"  value="${fn:substring(list.memodate, 8 ,10) }" />
+  <fmt:parseNumber var="parsemyear" type="number" integerOnly="true"  value="${fn:substring(list.memodate, 0 ,4) }" />
+  <fmt:parseNumber var="parsemmonth" type="number" integerOnly="true"  value="${fn:substring(list.memodate, 5 ,7) }" />
+                      		
+		<c:if test="${ii == parsedate && iy == parseyear && im == parsemonth}">
+		
+             <a href="javascript:memoGo(${lectureno },${memodate })">
+             <img src="image/memo.png" width=20px height=28px/></a>
+		
+			<a href=""> </a>
+			${memo }|${memodate } <br/>
+		
+		
+		     <a href="javascript:videoGo(${lectureno })">
+             <img src="image/video.png" width=20px height=28px/></a>
+		
+            <a href=""></a>
+             ${lectureno } , ${subject } , ${poster } , ${teacher }, ${lregdate }<br/>
+        </c:if>
 
   </c:forEach>
   
+  
+  
+
+  
   </font>
   </td>
+  
+  
+  
 <%
   if(count%7 == 0 && i < endDate){
 %> 
