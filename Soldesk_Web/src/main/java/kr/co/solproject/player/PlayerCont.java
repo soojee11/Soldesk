@@ -1,6 +1,7 @@
 package kr.co.solproject.player;
 
 import java.io.PrintWriter;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -71,8 +72,19 @@ public class PlayerCont {
     // 학습 테이블에 동영상 본 기록 집어넣기( id와 lecturno이 같은 레코드가 존재하면 insert 하지 않음 )
     sdao.check(id, lectureno);        // id 와 lectureno 이 같은 레코드가 존재하는 지 검사 -> insert O / X
     
+  
+    
     // 캘린더 테이블에 동영상 본 기록 집어넣기(학습테이블 생성된 날짜가 여기에  저장됨)
-    mdao.calinsert(id, lectureno); //하나)추가  -> 계속insert, update는없음.
+    
+    Calendar cal = Calendar.getInstance();
+	//오늘 날짜 구하기
+	int nowYear = cal.get(Calendar.YEAR);
+	int nowMonth = cal.get(Calendar.MONTH) + 1;
+	//월은 0부터 시작하므로 1월 표시를 위해 1을 더해 줍니다.
+	int nowDay = cal.get(Calendar.DAY_OF_MONTH);
+	String nowregdate = (String)(nowYear+"-"+nowMonth+"-"+nowDay);
+	System.out.println("##nowregdate :"+nowregdate);
+    mdao.calinsert(id, lectureno, nowregdate); //하나)추가  -> 계속insert, update는없음.
    
     sdto = sdao.read(id, lectureno);  // id      와 lectureno 이 같은 레코드 memo 가져오기 
   //  System.out.println("---------------------"+sdto.getMemo());

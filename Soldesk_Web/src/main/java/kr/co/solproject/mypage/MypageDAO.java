@@ -44,27 +44,23 @@ public class MypageDAO {
 	}// end
 
 	// 캘린더 테이블에 동영상 본 기록 집어넣기->insert(update는없음,계속insert)
-	public void calinsert(String id, int lectureno) {
-		int cnt = 0,cnt2 = 0;
-		 boolean flag = false;
+	public void calinsert(String id, int lectureno,String nowregdate) {
+		int cnt = 0;
+		String rdt=null;
 		Map map = new HashMap();
 		map.put("id", id);
 		map.put("lectureno", lectureno);
 
 		try {
-			cnt = (Integer) mybatis.queryForObject("sol_calendar.check", map);
-		      if(cnt>0) flag = true;
-		      
-		      if(flag == false){
-		    	  cnt = mybatis.update("sol_calendar.calinsert", map); 
-		      }
-		      else{
-		    	  String regdate =(String) mybatis.queryForObject("sol_calendar.getregdate", map);
-		    	  System.out.println("regdate : "+regdate);
-		    	  
-		    	  cnt2 = mybatis.update("sol_calendar.calupdate", map);
-		      }
-			
+			rdt = (String) mybatis.queryForObject("sol_calendar.check", map);//regdate가져와
+			System.out.println("##rdt: "+rdt);
+			System.out.println("##nowregdate: "+nowregdate);
+			String rdt2 = rdt.substring(0, 10);
+			if (rdt == null && rdt2 != nowregdate  ){
+				//rdt가  삽입 , 있으면 아무동작 안함.
+				cnt = mybatis.update("sol_calendar.calinsert", map); 
+			}
+
 		} catch (Exception e) {
 			System.out.println("calinsert: " + e);
 		}
@@ -81,17 +77,15 @@ public class MypageDAO {
 		return res;
 	}// end
 
+	public List getMemoList() {
+		List list = null;
+		try {
+			list = mybatis.queryForList("sol_calendar.getMemoList");
 
-		public List getMemoList() {
-			List list = null;
-			try {
-				list = mybatis.queryForList("sol_calendar.getMemoList");
+		} catch (Exception e) {
+			System.out.println("getMemoList: " + e);
+		}
+		return list;
+	}// end
 
-			} catch (Exception e) {
-				System.out.println("getMemoList: " + e);
-			}
-			return list;
-		}// end
-	 
-	 
 }

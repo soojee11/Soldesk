@@ -33,7 +33,7 @@ private SqlMapClient mybatis; // Connection con
       if(cnt>0) flag = true;
       
       if(flag == false){
-       insert(map);  // 없으면 학습테이블에 isnert
+       insert(map);  // 없으면 학습테이블에 insert
       }
     }catch (Exception e){
       System.out.println("check 실패: "+e);

@@ -134,9 +134,20 @@ int count = 0;
 			 <fmt:parseNumber var="parseyear" type="number" integerOnly="true"  value="${fn:substring(dto.regdate, 0 ,4) }" />
 			 <fmt:parseNumber var="parsemonth" type="number" integerOnly="true"  value="${fn:substring(dto.regdate, 5 ,7) }" />
 			${parseyear } :	${parsemonth } : ${parsedate } |
-			   	
 		</c:forEach>
-
+		<br/>
+		<c:forEach var="list" items="${memolist }">
+				<c:set var="memodate" value="${list.memodate }" />
+			 	<c:set var="memo" value="${list.memo }" />
+			 	<c:set var="lectureno" value="${list.lectureno }" />
+			 <fmt:parseNumber var="parsemdate" type="number"  value="${fn:substring(list.memodate, 8 ,10) }" />
+			 <fmt:parseNumber var="parsemyear" type="number" integerOnly="true"  value="${fn:substring(list.memodate, 0 ,4) }" />
+			 <fmt:parseNumber var="parsemmonth" type="number" integerOnly="true"  value="${fn:substring(list.memodate, 5 ,7) }" />
+			
+			 
+			 ${memodate } : ${memo } : ${lectureno }|
+		</c:forEach>
+		
  
 <%
 for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
@@ -165,19 +176,22 @@ for (int i=startDate;i<=endDate;i++){
       <%=i %>)
   
    <!-- 오늘날짜랑 디비에들어있는 날짜가 같으면 출력해주기 --> 
-  <c:forEach var="dto" items="${regdatelist }">
+  <c:forEach var="list" items="${memolist }">
   <c:set var="regdate" value="${fn:substring(dto.regdate, 0 ,10) }" />
   <c:set var="ii" value="<%=i %>"/>
   <c:set var="iy" value="<%=input_year %>"/>
   <c:set var="im" value="<%=input_month %>"/>
-  
+  <c:set var="memodate" value="${list.memodate }" />
+			 	<c:set var="memo" value="${list.memo }" />
+			 	<c:set var="lectureno" value="${list.lectureno }" />
+			 	
  	<fmt:parseNumber var="parsedate" type="number" integerOnly="true"  value="${fn:substring(dto.regdate, 8 ,10) }" />
 	<fmt:parseNumber var="parseyear" type="number" integerOnly="true"  value="${fn:substring(dto.regdate, 0 ,4) }" />
 	<fmt:parseNumber var="parsemonth" type="number" integerOnly="true"  value="${fn:substring(dto.regdate, 5 ,7) }" />
 	
 	
-		<c:if test="${ii == parsedate && iy == parseyear && im == parsemonth}">
-			${parsedate }
+		<c:if test="${ii == parsemdate && iy == parsemyear && im == parsemmonth}">
+			${memo }|${memodate }|${lectureno } <br/>
 		</c:if>
 
   </c:forEach>

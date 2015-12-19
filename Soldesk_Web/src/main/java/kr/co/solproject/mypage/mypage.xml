@@ -29,8 +29,8 @@
 		where id = #id#
 	</select>
 
- <select id="check" parameterClass="Map" resultClass="int">
-    SELECT count(*) FROM sol_calendar
+ <select id="check" parameterClass="Map" resultClass="String">
+    SELECT regdate FROM sol_calendar
     WHERE id=#id# AND lectureno=#lectureno#
   </select>
 <!--   
@@ -42,14 +42,14 @@
 	<insert id="calinsert" parameterClass="Map">
 		INSERT INTO
 		sol_calendar(lectureno, id, regdate)
-		VALUES (#lectureno#, #id#, now())
+		VALUES (#lectureno#, #id#, curdate())
 	</insert>
 	
-		<update id="calupdate" parameterClass="Map">
+<!-- 		<update id="calupdate" parameterClass="Map">
 		update  sol_calendar
-		set regdate = now()
+		set regdate = curdate()
 		where id=#id# and lectureno = #lectureno#
-	</update>
+	</update> -->
 	
 
 	<select id="getregdate" parameterClass="String" resultClass="MypageDTO">
@@ -61,7 +61,7 @@
 
 
 	<select id="getMemoList" resultClass="MypageDTO">
-		SELECT study.id,study.lectureno,study.memo,study.regdate
+		SELECT study.id,study.lectureno,study.memo,study.memodate
 		FROM sol_calendar calendar join sol_study study
 		ON calendar.lectureno = study.lectureno
 		where calendar.id=study.id

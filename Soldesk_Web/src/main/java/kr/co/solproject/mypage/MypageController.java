@@ -44,15 +44,18 @@ public class MypageController {
 		int nowDay = cal.get(Calendar.DAY_OF_MONTH);
 		String nowregdate = (String)(nowYear+"-"+nowMonth+"-"+nowDay);
 		
+		List regdatelist = null;
+	    regdatelist = dao.getregdate(s_id); //강좌를들은날짜들을 LIST로 가져오자
+	    
+
 		//sol_study와 조인해서 memo내용을 가져오자
 		List memolist=dao.getMemoList();
 		System.out.println(memolist);
 		
-		List regdatelist = null;
-	    regdatelist = dao.getregdate(s_id); //강좌를들은날짜들을 LIST로 가져오자
-	    
-	    
-	    
+		
+		
+		
+		
 		String promise = null;
 		String name = null;
 		promise = dao.getpromise(s_id);
@@ -62,6 +65,7 @@ public class MypageController {
 		req.setAttribute("id", s_id);
 		req.setAttribute("regdatelist", regdatelist);
 		req.setAttribute("nowregdate", nowregdate);
+		req.setAttribute("memolist", memolist);
 		
 		
 		return "/sol_mypage/calendar";
