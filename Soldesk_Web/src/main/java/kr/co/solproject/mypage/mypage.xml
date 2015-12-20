@@ -86,7 +86,7 @@
 	 -->
 	<select id="getLectureList" resultClass="MypageDTO">
         SELECT
-        lecture.lectureno, lecture.subject,lecture.poster,lecture.teacher,calendar.regdate
+        lecture.lectureno, lecture.subject,lecture.poster,lecture.teacher,calendar.regdate,calendar.id,study.memo,study.memodate
         FROM sol_calendar calendar join sol_study study
         ON calendar.lectureno =  study.lectureno
         join sol_lecture lecture on study.lectureno = lecture.lectureno
