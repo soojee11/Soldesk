@@ -123,4 +123,14 @@ public class MypageDAO {
 		return list;
 	}// end
 	
+	public List getMaxrdtList(String id) { //calendar,study,lecture조인해서 max(regdate)리스트GET
+		List list = null;
+		try {
+			list = mybatis.queryForList("sol_calendar.getMaxrdtList",id);
+
+		} catch (Exception e) {
+			System.out.println("getMaxrdtList: " + e);
+		}
+		return list;
+	}// end
 }
