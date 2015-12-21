@@ -42,7 +42,7 @@ function videoGo(now){
   }
 </script>
 
-<%
+<%-- <%
 //현재 날짜 정보 
 Calendar cr = Calendar.getInstance();
 int year = cr.get(Calendar.YEAR);
@@ -51,33 +51,15 @@ int date = cr.get(Calendar.DATE);
  
 //오늘 날짜
 String today = year + ":" +(month+1)+ ":"+date; 
- 
-//선택한 연도 / 월
-String input_year = request.getParameter("year");
-String input_month = request.getParameter("month");
- 
-if(input_month != null){
- month = Integer.parseInt(input_month)-1;
-}
-if(input_year != null){
- year = Integer.parseInt(input_year);
-}
-// 1일부터 시작하는 달력을 만들기 위해 오늘의 연도,월을 셋팅하고 일부분은 1을 셋팅한다.
 cr.set(year, month, 1);
- 
-// 셋팅한 날짜로 부터 아래 내용을 구함
- 
 // 해당 월의 첫날를 구함
 int startDate = cr.getMinimum(Calendar.DATE);
- 
 // 해당 월의 마지막 날을 구함
 int endDate = cr.getActualMaximum(Calendar.DATE);
- 
 // 1일의 요일을 구함
 int startDay = cr.get(Calendar.DAY_OF_WEEK);
- 
 int count = 0;
-%>
+%> --%>
 
 <form method="post" action="calendar.do?s_id=${id }" name="change">
 <br/>
@@ -85,42 +67,54 @@ int count = 0;
 <br/><br/>
 
 <table width="100%" cellpadding="2" cellspacing="0" border="0" align="center">
+<tr><td align="center" style="color:#000000">
+     '<strong>${name }</strong>(${id })'님의 한줄다짐  |  &nbsp;<STRONG>"${promise }"</strong>
+</td>
+</tr>
  <tr>
       <td  align="center">
       <input type="button" value="◁" onClick="monthDown(this.form)">
       <select name="year" onchange="selectCheck(this.form)">
-      <%
+<%--       <%
       for(int i=year-5;i<year+6;i++){
        String selected = (i == year)?"selected":"";
        String color = (i == year)?"#CCCCCC":"#FFFFFF";
          out.print("<option value="+i+" "+selected+" style=background:"+color+">"+i+"</option>");       
       }
-      %>
+      %>  --%>
+      
+      <c:forEach begin="${year -5 }" end="${year +5 }" var="val">
+      <option value="${val}" ${val == year ? 'selected="selected"' : '' }> <c:out value="${val}"/></option>
+       </c:forEach>
       </select>
       
       <select name="month" onchange="selectCheck(this.form)">
-      <%
-      for(int i=1;i<=12;i++){
-       String selected = (i == month+1)?"selected":"";
-       String color = (i == month+1)?"#CCCCCC":"#FFFFFF";
-         out.print("<option value="+i+" "+selected+" style=background:"+color+">"+i+"</option>");       
+<%--    <%
+      for(int j=1;j<=12;j++){
+       String selected = (j == month+1)?"selected":"";
+       String color = (j == month+1)?"#CCCCCC":"#FFFFFF";
+         out.print("<option value="+j+" "+selected+" style=background:"+color+">"+j+"</option>");       
+      
       }
-      %>
+      %> --%>
+      
+       <c:forEach begin="1" end="12" var="mth">
+      <option value="${mth}" ${mth == month+1 ? 'selected="selected"' : '' }> <c:out value="${mth}"/></option>
+       </c:forEach> 
+      
       </select>
-      <input type="button" value="▷" onClick="monthUp(this.form)"></td>
+      
+      <input type="button" value="▷" onClick="monthUp(this.form)"/></td>
     </tr>
     <tr>
       <td align="center" colspan="3" style="font-weight: bold; width: 100%; font-size: 20px;">
       <a href="calendar.do?s_id=${id }"> < TODAY ${nowregdate2}> </a></td>
     </tr>
-    <tr><td align="center" >
-     '<strong>${name }</strong>(${id })'님의 한줄다짐  |  &nbsp;<STRONG>"${promise }"</strong>
-</td>
-</tr>
+    
+    
 </table> 
 </form>
  <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-
 
         <c:forEach var="list" items="${lecturelist }">
         <c:if test="${list.id == id }">
@@ -143,8 +137,6 @@ int count = 0;
         
         <br/>     
  
-
-
  <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
  
 <div align="right"><img src="image/memo.png" width=20px height=28px/> 메모 | <img src="image/video.png" width=20px height=20px/>강의 |  <img src="image/thumb.png" width=18px height=18px/>학습도장</div>
@@ -166,14 +158,128 @@ int count = 0;
  
  <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
  
-<%
+<%-- <%
 for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
  count++;
 %>
         <td>&nbsp;</td>
 <% 
 }
+%> --%>
+
+      <c:forEach begin="1" end="${startDay-1}" var="count"> <!-- 날짜시작전 빈공간 -->
+             <td>&nbsp;</td>
+             <c:set var="count" value="${count + 1}"/>
+             <%-- <c:out value="${count}"/> --%>
+       </c:forEach> 
+      
+      <c:forEach begin="${startDate}" end="${endDate}" var="i">
+                  <c:if test="${year eq val && month eq mth }">
+                     <c:set var="bgcolor" value="#99cc66"/>
+                  </c:if>
+                  <c:if test="${year ne val && month ne mth}">
+                     <c:set var="bgcolor" value="#FFFFFF"/>
+                  </c:if>
+     
+                  <c:if test="${count%7 eq 0 }">
+                     <c:set var="color" value="red"/>
+                  </c:if>
+                  <c:if test="${count%7 eq 6}">
+                     <c:set var="color" value="blue"/>
+                  </c:if>
+                   <c:if test="${count%7 ne 6  &&  count%7 ne 0 }">
+                     <c:set var="color" value="black"/>
+                  </c:if>
+                  
+                   <%-- <c:set var="count" value="${count + 1}"/> --%>
+                   <c:set var="count" value="${count + 1}" scope="page"/>
+                   
+                    <td bgcolor="${bgcolor}" width="14.285%" >
+                    <font color="${count}">
+                    
+      ${i })
+      
+      <!-- +++++++++++++++++++++++++++++++++++++++아이콘++++++++++++++++++++++++++++++++++++ --> 
+      
+  <c:forEach var="rdt" items="${maxrdtlist }">
+   <c:set var="rdt_id" value="${rdt.id }" />
+   <fmt:parseNumber var="parsedate" type="number"  value="${fn:substring(rdt.regdate, 8 ,10) }" />
+   <fmt:parseNumber var="parseyear" type="number" integerOnly="true"  value="${fn:substring(rdt.regdate, 0 ,4) }" />
+   <fmt:parseNumber var="parsemonth" type="number" integerOnly="true"  value="${fn:substring(rdt.regdate, 5 ,7) }" />
+   <c:set var="regdate" value="${fn:substring(rdt.regdate, 0 ,10) }" />
+   
+   <c:if test="${parsemonth <10 && parsedate <10 }">
+   <c:set var="now" value="${parseyear }00${parsemonth }00${parsedate }"/>
+   </c:if>
+   <c:if test="${parsemonth >=10 && parsedate >=10 }">
+   <c:set var="now" value="${parseyear }0${parsemonth }0${parsedate }"/>
+   </c:if>
+   <c:if test="${parsemonth <10 && parsedate >=10 }">
+   <c:set var="now" value="${parseyear }00${parsemonth }0${parsedate }"/>
+   </c:if>
+   <c:if test="${parsemonth >=10 && parsedate <10 }">
+   <c:set var="now" value="${parseyear }0${parsemonth }00${parsedate }"/>
+   </c:if>
+   
+   <c:set var="ii" value="${i }"/>
+   <c:set var="iy" value="${year }"/>
+   <c:set var="im" value="${month +1 }"/>
+         <c:if test="${rdt_id == id }">
+            <c:if test="${lecturelist != null}">
+            <c:if test="${ii == parsedate && iy == parseyear && im == parsemonth}">
+               <img src="image/thumb.png" width=18px height=18px/><!-- 학습도장 -->
+           
+               <a href="javascript:videoGo(${now })">
+                 <img src="image/video.png" width=20px height=28px/></a> <!-- 강의리스트 -->
+             
+               <a href="javascript:memoGo(${now })">
+                 <img src="image/memo.png" width=20px height=28px/></a> <!-- 메모리스트 -->
+           </c:if>
+           </c:if>
+          </c:if>
+          
+  </c:forEach>
+   
+    <!-- +++++++++++++++++++++++++++++++++++++++++아이콘+++++++++++++++++++++++++++++++ -->
+                    
+ </font>
+ </td>
+
+ <c:if test="${count%7 eq 0 && i lt endDate}">
+ </tr>
+ <tr  style='height: 50px; font-weight: bold;'>
+  
+ </c:if>
+ </c:forEach> 
+   
+   
+   
+<%--    while(count%7 != 0){ /* 날짜끝나고 빈공간 */
 %>
+       <td>&nbsp;</td>
+<% 
+count++;
+ }
+%> 
+    --%>
+   
+ <c:if test="${count%7 ne 0 }">
+       <c:forEach begin="${startDate}" end="${endDate}" var="count">
+       
+         <td>&nbsp;</td>
+     
+        <c:set var="count" value="${count }"/>
+       </c:forEach> 
+ </c:if>
+ 
+ </tr>
+</table>
+<%@ include file="../sol_footer.jsp"%>
+  
+  
+  
+<%--      
+
 	
 <%
 for (int i=startDate;i<=endDate;i++){
@@ -200,23 +306,18 @@ for (int i=startDate;i<=endDate;i++){
    <c:set var="regdate" value="${fn:substring(rdt.regdate, 0 ,10) }" />
    <c:set var="now" value="${parseyear }0${parsemonth }0${parsedate }"/>
    <c:set var="ii" value="<%=i %>"/>
-   <c:set var="iy" value="<%=input_year %>"/>
-   <c:set var="im" value="<%=input_month %>"/>
-   <c:set var="dd" value="<%=date %>"/>
-   <c:set var="yy" value="<%=year %>"/>
-   <c:set var="mm" value="<%=month %>"/>
-
-       
+   <c:set var="iy" value="${year }"/>
+   <c:set var="im" value="${month +1 }"/>
          <c:if test="${rdt_id == id }">
             <c:if test="${lecturelist != null}">
             <c:if test="${ii == parsedate && iy == parseyear && im == parsemonth}">
-                  <img src="image/thumb.png" width=18px height=18px/><!-- 학습도장 -->
+               <img src="image/thumb.png" width=18px height=18px/><!-- 학습도장 -->
            
-           <a href="javascript:videoGo(${now })">
-             <img src="image/video.png" width=20px height=28px/></a> <!-- 강의리스트 -->
-         
-           <a href="javascript:memoGo(${now })">
-             <img src="image/memo.png" width=20px height=28px/></a> <!-- 메모리스트 -->
+	           <a href="javascript:videoGo(${now })">
+	             <img src="image/video.png" width=20px height=28px/></a> <!-- 강의리스트 -->
+	         
+	           <a href="javascript:memoGo(${now })">
+	             <img src="image/memo.png" width=20px height=28px/></a> <!-- 메모리스트 -->
            </c:if>
           </c:if>
           </c:if>
@@ -246,8 +347,4 @@ while(count%7 != 0){ /* 날짜끝나고 빈공간 */
 <% 
 count++;
  }
-%>
-
-</tr>  
-</table>
-<%@ include file="../sol_footer.jsp"%>
+%> --%>

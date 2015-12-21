@@ -31,6 +31,10 @@ public class MypageController {
 		System.out.println("▶------MypageController()객체 생성됨...");
 	}
 
+	
+	
+	/*int year, int month,*/
+	
 	// --------------------------------------------------------------------
 	@RequestMapping(value = "sol_mypage/calendar.do", method = RequestMethod.POST)
 	public String calendar2(String s_id,HttpServletRequest req, HttpSession session) {
@@ -51,15 +55,56 @@ public class MypageController {
 		List regdatelist = null;
 	    regdatelist = dao.getregdate(s_id); //강좌를들은날짜들을 LIST로 가져오자
 	    
-		
 		List memolist=dao.getMemoList();//sol_study와 조인해서 memo내용을 가져오자
-		System.out.println(memolist);
+		System.out.println("1"+memolist);
 		
 		List lecturelist=dao.getLectureList();//sol_lecture와 조인해서 강의제목을 가져오자
-		System.out.println(lecturelist);
+		System.out.println("1"+lecturelist);
 		
 		List maxrdtlist=dao.getMaxrdtList(s_id);//각 날짜마다 max(regdate)가져오기
-		System.out.println("#"+maxrdtlist);
+		System.out.println("1#"+maxrdtlist);
+		
+		//################################################################
+		
+		//현재 날짜 정보 
+		Calendar cr = Calendar.getInstance();
+		int year = cr.get(Calendar.YEAR);
+		int month = cr.get(Calendar.MONTH);
+		int date = cr.get(Calendar.DATE);
+		//오늘 날짜
+		String today = year + ":" +(month+1)+ ":"+date; 
+		//선택한 연도 / 월
+		String input_year = req.getParameter("year");
+		String input_month = req.getParameter("month"); 
+		 
+		if(input_month != null){
+		 month = Integer.parseInt(input_month)-1;
+		}
+		if(input_year != null){
+		 year = Integer.parseInt(input_year);
+		}
+		// 1일부터 시작하는 달력을 만들기 위해 오늘의 연도,월을 셋팅하고 일부분은 1을 셋팅한다.
+		cr.set(year, month, 1);
+		 
+		// 해당 월의 첫날를 구함
+		int startDate = cr.getMinimum(Calendar.DATE);
+		// 해당 월의 마지막 날을 구함
+		int endDate = cr.getActualMaximum(Calendar.DATE);
+		// 1일의 요일을 구함
+		int startDay = cr.get(Calendar.DAY_OF_WEEK);
+		int count = 0;
+		int plus = 1;
+		req.setAttribute("year", year);
+		req.setAttribute("month", month);
+		req.setAttribute("date", date);
+		req.setAttribute("today", today);
+		req.setAttribute("startDate", startDate);
+		req.setAttribute("endDate", endDate);
+		req.setAttribute("startDay", startDay);
+		req.setAttribute("count", count);
+		
+		
+		//################################################################
 		
 		
 		String promise = null;
@@ -75,7 +120,7 @@ public class MypageController {
 		req.setAttribute("memolist", memolist);
 		req.setAttribute("lecturelist", lecturelist);
 		req.setAttribute("maxrdtlist", maxrdtlist);
-		
+		req.setAttribute("plus", plus);	
 		return "/sol_mypage/calendar";
 	}
 	else{
@@ -90,7 +135,7 @@ public class MypageController {
 	/*@RequestMapping( "sol_mypage/calendar.do")*/
 	@RequestMapping(value = "sol_mypage/calendar.do", method = RequestMethod.GET)
 	public String calendar(String s_id,HttpServletRequest req, HttpSession session) {
-	
+		System.out.println(s_id);
 		if(s_id != ""){
 			
 			Calendar cal = Calendar.getInstance();
@@ -108,14 +153,58 @@ public class MypageController {
 		    
 			
 			List memolist=dao.getMemoList();//sol_study와 조인해서 memo내용을 가져오자
-			System.out.println(memolist);
+			System.out.println("0"+memolist);
 			
 			List lecturelist=dao.getLectureList();//sol_lecture와 조인해서 강의제목을 가져오자
-			System.out.println(lecturelist);
+			System.out.println("0"+lecturelist);
 			
 			List maxrdtlist=dao.getMaxrdtList(s_id);//각 날짜마다 max(regdate)가져오기
-			System.out.println("#"+maxrdtlist);
+			System.out.println("0#"+maxrdtlist);
 			
+			//################################################################
+			
+			//현재 날짜 정보 
+			Calendar cr = Calendar.getInstance();
+			int year = cr.get(Calendar.YEAR);
+			int month = cr.get(Calendar.MONTH);
+			int date = cr.get(Calendar.DATE);
+			//오늘 날짜
+			String today = year + ":" +(month+1)+ ":"+date; 
+			//선택한 연도 / 월
+			String input_year = req.getParameter("year");
+			String input_month = req.getParameter("month"); 
+			 
+			if(input_month != null){
+			 month = Integer.parseInt(input_month)-1;
+			}
+			if(input_year != null){
+			 year = Integer.parseInt(input_year);
+			}
+			// 1일부터 시작하는 달력을 만들기 위해 오늘의 연도,월을 셋팅하고 일부분은 1을 셋팅한다.
+			cr.set(year, month, 1);
+			 
+			// 해당 월의 첫날를 구함
+			int startDate = cr.getMinimum(Calendar.DATE);
+			// 해당 월의 마지막 날을 구함
+			int endDate = cr.getActualMaximum(Calendar.DATE);
+			// 1일의 요일을 구함
+			int startDay = cr.get(Calendar.DAY_OF_WEEK);
+			int count = 0;
+			int plus = 1;
+			
+			req.setAttribute("year", year);
+			req.setAttribute("month", month);
+			req.setAttribute("date", date);
+			req.setAttribute("today", today);
+			req.setAttribute("input_year", input_year);
+			req.setAttribute("input_month", input_month);
+			req.setAttribute("startDate", startDate);
+			req.setAttribute("endDate", endDate);
+			req.setAttribute("startDay", startDay);
+			req.setAttribute("count", count);
+			req.setAttribute("plus", plus);			
+			
+			//################################################################
 			
 			String promise = null;
 			String name = null;

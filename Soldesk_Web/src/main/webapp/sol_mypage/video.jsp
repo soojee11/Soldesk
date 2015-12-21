@@ -118,9 +118,9 @@ function lectureGo(lectureno){
    
 
 <br/>
-<table cellpadding=3 border=0 cellspacing=1 width=100% bgcolor=c0c0c0>
+<table cellpadding=3 border=0 cellspacing=1 width=100% bgcolor=#dddddd>
     <thead>
-        <tr bgcolor=#e3e3e3>
+        <tr bgcolor=#e3e3e3 style="font-size: 14px;">
             <th>회차</th>
             <th>강의명</th>
             <th>선생님</th>
@@ -155,11 +155,11 @@ function lectureGo(lectureno){
         <tr
          bgcolor="#ffffff" 
          onmouseover="this.style.backgroundColor='#fafafa'"
-         onmouseout="this.style.backgroundColor='#ffffff'">
+         onmouseout="this.style.backgroundColor='#ffffff'"  style="font-size: 14px;">
 
             <td align="center">${lectureno }</td>
-            <td>${subject }</td>
-            <td>${teacher }</td>
+            <td align="center">${subject }</td>
+            <td align="center">${teacher }</td>
             <td align="center">${lregdate }</td>
             <td align="center">  <a href="javascript:lectureGo(${lectureno })">
                 <img src='image/btn_study_play.png' width="30" height="30"></a>
