@@ -15,7 +15,7 @@
 		</h3>
 		<ol class="breadcrumb">
 
-			<li><i class="fa fa-home"></i><a href="adminIndex.do">Home</a></li>
+			<li><i class="fa fa-home"></i><a href="../../sol_admin/adminIndex.do">Home</a></li>
 			<li>문제풀기 게시판 관리 페이지</li>
 
 		</ol>
@@ -34,21 +34,21 @@
 
 <table class="table" style="text-align: left; width:750px;">
 	<tr>
-		<th width="60">번호</th>
-		<td width="60">${dto.questno }</td>
-		<th width="60">종류</th>
-		<td width="60">${dto.qtype }</td>
-		<th width="60">답</th>
+		<th width="100">번호</th>
+		<td width="100">${dto.questno }</td>
+		<th width="100">종류</th>
+		<td width="100">${dto.qtype }</td>
+		<th width="100">답</th>
 		<td>${dto.answer }</td>
 	</tr>
 	<tr>
-		<th width="60">제목</th>
+		<th width="100">제목</th>
 		<td colspan="5">${dto.qtitle }</td>
 	</tr>
 
 	<c:if test="${dto.qtype eq 'G' }">
 	<tr>
-		<th width="60">보기</th>
+		<th width="100">보기</th>
 		<td colspan="5">
 			<c:set var="example" value="${dto.example }" />
 		 	<%
@@ -74,16 +74,34 @@
 	</c:if>
 
 	<tr>
-		<th width="60">해설</th>
+		<th width="100">상세문제</th>
+		<td colspan="5">${dto.poster }</td>
+	</tr>
+	
+	<tr>
+		<th width="100">해설</th>
 		<td colspan="5">${dto.comment }</td>
 	</tr>
+	
 </table>
+<script>
+function questionReadDelete() {
+
+	msg = "문제를 삭제하시겠습니까?\n삭제한 문제는 되돌릴 수 없습니다.\n원치 않으시면 취소를 눌러주세요";
+	   if (confirm(msg)!=0){
+		   location.href='questionReadDelete.do?testno=${dto.testno}&questno=${dto.questno }&testtitle=${param.testtitle }';
+	   }
+	   else
+		   return; 
+
+}
+</script>
+
 <div align="center">
 	<button type="submit" class="btn btn-danger btn-sm" onclick="location.href='questionUpdateForm.do?testno=${dto.testno}&questno=${dto.questno }&testtitle=${param.testtitle }'">수정</button>
-	<button type="button" class="btn btn-danger btn-sm" onclick="">삭제</button>
+	<button type="button" class="btn btn-danger btn-sm" onclick="questionReadDelete()">삭제</button>
 	<button type="button" class="btn btn-danger btn-sm" onclick="location.href='questionDeleteList.do?testno=${dto.testno}&testtitle=${param.testtitle }'">목록</button>
 </div>
-
 </div>
 
 <%@ include file="../footer.jsp"%>

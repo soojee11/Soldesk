@@ -18,7 +18,7 @@ public class QuestionCont {
 		System.out.println("---------------QuestionCont°´Ã¼ »ý¼ºµÊ");
 	}
 	
-	@RequestMapping(value="/sol_test/questionList.do")
+	@RequestMapping(value="/sol_test/test/questionList.do")
 	public String questionList(String testtitle, int testno, QuestionDTO dto, HttpServletRequest request,HttpSession session) {
 		
 		request.setAttribute("testtitle", testtitle);
@@ -31,7 +31,7 @@ public class QuestionCont {
 		
 		
 		
-		return "sol_test/questionList";
+		return "sol_test/test/questionList";
 	}
 
 }

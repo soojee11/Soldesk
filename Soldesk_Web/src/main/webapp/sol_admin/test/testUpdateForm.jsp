@@ -9,7 +9,7 @@
 			<i class="fa fa-file-text-o"></i> Test
 		</h3>
 		<ol class="breadcrumb">
-			<li><i class="fa fa-home"></i><a href="adminIndex.do">Home</a></li>
+			<li><i class="fa fa-home"></i><a href="../../sol_admin/adminIndex.do">Home</a></li>
 			<li>문제풀기 게시판 관리 페이지</li>
 		</ol>
 	</div>
@@ -42,8 +42,9 @@
 				<div class="col-sm-10">
 				<select class="form-control input-sm m-bot15" name="subject">
 					<option value="kor" <c:if test="${dto.subject eq 'kor'}">selected</c:if>>국어</option>
-					<option value="eng" <c:if test="${dto.subject eq 'eng'}">selected</c:if>>영어</option>
 					<option value="mat" <c:if test="${dto.subject eq 'mat'}">selected</c:if>>수학</option>
+					<option value="soc" <c:if test="${dto.subject eq 'soc'}">selected</c:if>>사회</option>
+					<option value="sic" <c:if test="${dto.subject eq 'sic'}">selected</c:if>>과학</option>
 				</select>
 				</div>
 				</div>

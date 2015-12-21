@@ -17,7 +17,7 @@
 		</h3>
 		<ol class="breadcrumb">
 
-			<li><i class="fa fa-home"></i><a href="adminIndex.do">Home</a></li>
+			<li><i class="fa fa-home"></i><a href="../../sol_admin/adminIndex.do">Home</a></li>
 			<li>문제풀기 게시판 관리 페이지</li>
 
 		</ol>
@@ -68,9 +68,6 @@
 		<th width="200">답</th>
 		<th>문제제목</th>
 		<th width="100">수정상세보기</th>
-		<!-- <th>보기</th>
-		<th>해설</th> -->
-		<!-- <th width="100">첨부파일</th> -->
 	</tr>
 	
 	<c:if test="${total ==0 }">
@@ -89,13 +86,6 @@
 		<td>
 		<button type="button" class="btn btn-danger btn-sm" onclick="javascript:location.href='questionRead.do?testno=${dto.testno }&questno=${dto.questno }&testtitle=${param.testtitle }'">수정상세보기</button>
 		</td>
-		<%-- <td style="text-align: left;">${dto.example }</td>
-		<td style="text-align: left;">${dto.comment }</td> --%>
-		<%-- <td>
-		<c:if test="${dto.poster != '' }">${dto.poster }
-		<img src="../sol_admin/test/storage/${dto.poster }" >
-		</c:if>
-		</td> --%>
 	</tr>
 
 	</c:forEach>

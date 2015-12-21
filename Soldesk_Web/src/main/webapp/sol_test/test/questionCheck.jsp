@@ -13,8 +13,8 @@
 <head>
 <meta charset="UTF-8">
 <title>EBS 초중학</title>
-<script src="js/test.js"></script>
-<link href="css/test.css" rel="stylesheet">
+<script src="../js/test.js"></script>
+<link href="../css/test.css" rel="stylesheet">
 </head>
 
 <body>
@@ -23,14 +23,14 @@
 			<tr>
 				<td
 					style="text-align: left; padding-left: 20px; padding-right: 20px;">
-					<img src="img/ebslogo.PNG" align="left" />
+					<img src="../img/ebslogo.PNG" align="left" />
 				</td>
 				<td
 					style="text-align: center; font-size: 25px; padding-left: 20px; padding-right: 20px;">
 					${param.testtitle }</td>
 				<td
 					style="text-align: right; padding-left: 20px; padding-right: 20px;">
-					<img src="img/alarm.png" />경과시간<br /> <span id="clock"
+					<img src="../img/alarm.png" />경과시간<br /> <span id="clock"
 					style="font: 20px bold;">${usetime }</span>
 				</td>
 			</tr>
@@ -40,7 +40,6 @@
 	<div id="layer_fixed2">
 		<table cellspacing="0" cellpadding="0" style="width:100%; height:100%; color:white;">
 			<tr>
-				<!-- <td align="left">답안지</td> -->
 				<td align="center" valign="middle" style="font-size:24px;">${s_id }님의 점수는: <span style="color:red;"><strong>${myscore}점</strong></span> 입니다.</td>
 			</tr>
 		</table>
@@ -58,24 +57,19 @@
 			<c:forEach var="dto" items="${list }">
 				<c:set var="recNo" value="${recNo+1 }" />
 				<tr>
-
-					<td><c:if test="${recNo > 1 }">
-							<br />
-							<br />
-							<br />
-							<br />
-						</c:if> <%-- <c:if test="${dto.poster != '' }">
-							<div style="border: 1px dotted; padding: 10px;">
-								<img src="../sol_admin/test/storage/${dto.poster }" />
-							</div>
-						</c:if> --%></td>
+				<td><c:if test="${recNo > 1 }"><br /><br /><br /><br /></c:if>
+					<c:if test="${dto.poster ne '<p>&nbsp;</p>'}">
+					<div style="border:1px dotted; padding: 10px;">${dto.poster }</div>
+					</c:if>
+				</td>
+				</tr>
 				<tr>
 					<td><br />
 					<c:forEach var="img2" items="${img }" varStatus="status">
 					<c:if test="${status.count eq recNo }">
-					<c:if test="${img2 eq 'wrong' }"><img src="img/wrong.png"/>
+					<c:if test="${img2 eq 'wrong' }"><img src="../img/wrong.png"/>
 					</c:if>
-					<c:if test="${img2 eq 'ok' }"><img src="img/ok.png"/></c:if>
+					<c:if test="${img2 eq 'ok' }"><img src="../img/ok.png"/></c:if>
 					</c:if>
 					</c:forEach>
 					<span><strong>${recNo }. </strong></span>${dto.qtitle }</td>

@@ -10,7 +10,7 @@
 		</h3>
 		<ol class="breadcrumb">
 
-			<li><i class="fa fa-home"></i><a href="adminIndex.do">Home</a></li>
+			<li><i class="fa fa-home"></i><a href="../../sol_admin/adminIndex.do">Home</a></li>
 			<li>문제풀기 게시판 관리 페이지</li>
 
 		</ol>
@@ -29,11 +29,11 @@
 
 <table class="table" style="text-align: left; width:750px;">
 	<tr>
-		<th width="60">번호</th>
-		<td width="60">${dto.questno }</td>
-		<th width="60">종류</th>
-		<td width="60">${dto.qtype }</td>
-		<th width="60">답</th>
+		<th width="100">번호</th>
+		<td width="100">${dto.questno }</td>
+		<th width="100">종류</th>
+		<td width="100">${dto.qtype }</td>
+		<th width="100">답</th>
 		<td>${dto.answer }</td>
 	</tr>
 	<tr>
@@ -43,7 +43,8 @@
 
 	<c:if test="${dto.qtype eq 'G' }">
 	<tr>
-		<th width="60">보기</th>
+		
+		<th width="100">보기</th>
 		<td colspan="5">
 			<c:set var="example" value="${dto.example }" />
 		 	<%
@@ -67,9 +68,14 @@
 		</td>
 		</tr> 
 	</c:if>
-
+	
 	<tr>
-		<th width="60">해설</th>
+		<th width="100">상세문제</th>
+		<td colspan="5">${dto.poster }</td>
+	</tr>
+	
+	<tr>
+		<th width="100">해설</th>
 		<td colspan="5">${dto.comment }</td>
 	</tr>
 </table>

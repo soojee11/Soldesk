@@ -34,8 +34,8 @@ public class AdminDAO {
 		return mlevel;
 	}
 
-	// -----------------------------------------------------------------------------------------문제풀기부분
-	// 시작
+//-------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------TEST START
 	public boolean testInsert(TestDTO dto) {
 		boolean flag = false;
 		try {
@@ -82,46 +82,6 @@ public class AdminDAO {
 		return list;
 	}// end
 
-	public PlayerDTO lecRead(int lectureno) {
-
-		PlayerDTO dto = null;
-
-		try {
-			dto = (PlayerDTO) mybatis.queryForObject("sol_admin.lecRead", lectureno);
-		} catch (Exception e) {
-			System.out.println("lecRead error: " + e);
-		}
-		return dto;
-	}// end
-
-	public CategoryDTO categoryRead(int categoryno) {
-
-		CategoryDTO dto = null;
-
-		try {
-			dto = (CategoryDTO) mybatis.queryForObject("sol_admin.categoryRead", categoryno);
-		} catch (Exception e) {
-			System.out.println("CategoryDTO error: " + e);
-		}
-		return dto;
-	}// end
-
-	public void categoryDelProc(int categoryno) {
-		try {
-			mybatis.update("sol_admin.categoryDelProc", categoryno);
-		} catch (Exception e) {
-			System.out.println("categoryDelProc error: " + e);
-		}
-	}// end
-
-	public void lecDelProc(int lectureno) {
-		try {
-			mybatis.update("sol_admin.lecDelProc", lectureno);
-		} catch (Exception e) {
-			System.out.println("categoryDelProc error: " + e);
-		}
-	}// end
-
 	public int questionTotal(Map map) {
 		int count = 0;
 		try {
@@ -163,8 +123,143 @@ public class AdminDAO {
 			System.out.println("questionUnSelect error: " + e);
 		}
 	}// end
-	// -----------------------------------------------------------------------------------------문제풀기부분
-	// 끝
+	
+	public int testDeleteProc(Map map) {
+		int res = 0;
+		try {
+			res = mybatis.delete("sol_test.testDeleteProc", map);
+		} catch (Exception e) {
+			System.out.println("testDeleteProc error: " + e);
+
+		}
+		return res;
+	}// end
+	
+	public int questionDeleteProc(Map map) {
+		int res = 0;
+		try {
+			res = mybatis.delete("sol_question.questionDeleteProc", map);
+		} catch (Exception e) {
+			System.out.println("questionDeleteProc error: " + e);
+
+		}
+		return res;
+	}// end
+
+	public int testQuestDelete(Map map) {
+		int res = 0;
+		try {
+			res = mybatis.delete("sol_question.testQuestDelete", map);
+		} catch (Exception e) {
+			System.out.println("testQuestDelete error: " + e);
+
+		}
+		return res;
+	}// end
+	
+	public int questionReadDelete(QuestionDTO dto) {
+		int res = 0;
+		try {
+			res = mybatis.delete("sol_question.questionReadDelete", dto);
+		} catch (Exception e) {
+			System.out.println("questionReadDelete error: " + e);
+		}
+		return res;
+	}// end
+	
+	public TestDTO testObject(int testno) {
+		TestDTO dto = null;
+		try {
+			dto = (TestDTO) mybatis.queryForObject("sol_test.testObject", testno);
+		} catch (Exception e) {
+			System.out.println("testObject error: " + e);
+		}
+		return dto;
+	}// end
+
+	public int testUpdate(TestDTO dto) {
+		int res = 0;
+		try {
+			res = mybatis.update("sol_test.testUpdate", dto);
+		} catch (Exception e) {
+			System.out.println("testUpdate error: " + e);
+		}
+		return res;
+	}// end
+	
+	public QuestionDTO questObject(QuestionDTO dto) {
+		try {
+			dto = (QuestionDTO) mybatis.queryForObject("sol_question.questObject", dto);
+		} catch (Exception e) {
+			System.out.println("testObject error: " + e);
+		}
+		return dto;
+	}// end
+	
+	public boolean questionUpdate(QuestionDTO dto) {
+		boolean flag = false;
+		try {
+			int cnt = mybatis.update("sol_question.questionUpdate", dto);
+			if (cnt > 0)
+				flag = true;
+		} catch (Exception e) {
+			System.out.println("questionUpdate error: " + e);
+		}
+		return flag;
+	}// end
+	
+	public void testShowUpdate(TestDTO dto) {
+		try {
+			mybatis.update("sol_test.testShowUpdate", dto);
+		} catch (Exception e) {
+			System.out.println("testShowUpdate error: " + e);
+		}
+	}// end
+//-------------------------------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------------------------TEST END
+
+//-------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------PLAYER START
+	public PlayerDTO lecRead(int lectureno) {
+
+		PlayerDTO dto = null;
+
+		try {
+			dto = (PlayerDTO) mybatis.queryForObject("sol_admin.lecRead", lectureno);
+		} catch (Exception e) {
+			System.out.println("lecRead error: " + e);
+		}
+		return dto;
+	}// end
+
+	public CategoryDTO categoryRead(int categoryno) {
+
+		CategoryDTO dto = null;
+
+		try {
+			dto = (CategoryDTO) mybatis.queryForObject("sol_admin.categoryRead", categoryno);
+		} catch (Exception e) {
+			System.out.println("CategoryDTO error: " + e);
+		}
+		return dto;
+	}// end
+
+	public void categoryDelProc(int categoryno) {
+		try {
+			mybatis.update("sol_admin.categoryDelProc", categoryno);
+		} catch (Exception e) {
+			System.out.println("categoryDelProc error: " + e);
+		}
+	}// end
+
+	public void lecDelProc(int lectureno) {
+		try {
+			mybatis.update("sol_admin.lecDelProc", lectureno);
+		} catch (Exception e) {
+			System.out.println("categoryDelProc error: " + e);
+		}
+	}// end
+
 
 	public void lecUpdate(PlayerDTO dto) {
 		try {
@@ -209,58 +304,6 @@ public class AdminDAO {
 			System.out.println("getlecTotal error" + e);
 		}
 		return total;
-	}// end
-
-	public List getMemList(Map map) {
-		List list = null;
-		try {
-			list = mybatis.queryForList("sol_admin.getMemList", map);
-		} catch (Exception e) {
-			System.out.println("getMemList error" + e);
-		}
-		return list;
-	}// end
-
-	public int getMemTotal(Map map) {
-		int res = 0;
-		try {
-			res = (Integer) mybatis.queryForObject("sol_admin.getMemTotal", map);
-		} catch (Exception e) {
-			System.out.println("getMemTotal error: " + e);
-		}
-		return res;
-	}
-
-	public boolean memLevelProc(Map map) {
-		boolean flag = false;
-		try {
-			int cnt = mybatis.update("sol_admin.memLevelProc", map);
-			if (cnt > 0)
-				flag = true;
-		} catch (Exception e) {
-			System.out.println("memLevelProc error: " + e);
-		}
-		return flag;
-	}// end
-
-	public void memDelProc(Map map) {
-		try {
-			// System.out.println(map.toString());
-			mybatis.update("sol_admin.memDelProc", map);
-		} catch (Exception e) {
-			System.out.println("memDelProc error: " + e);
-		}
-	}// end
-
-	public int testDeleteProc(Map map) {
-		int res = 0;
-		try {
-			res = mybatis.delete("sol_test.testDeleteProc", map);
-		} catch (Exception e) {
-			System.out.println("testDeleteProc error: " + e);
-
-		}
-		return res;
 	}// end
 
 	public List readCateInfo(Map map) {
@@ -328,79 +371,52 @@ public class AdminDAO {
 		}
 		return categoryInfo;
 	}// end
+//-------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------PLAYER END
 
-	public int questionDeleteProc(Map map) {
+//-------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------MEMBER START
+	public List getMemList(Map map) {
+		List list = null;
+		try {
+			list = mybatis.queryForList("sol_admin.getMemList", map);
+		} catch (Exception e) {
+			System.out.println("getMemList error" + e);
+		}
+		return list;
+	}// end
+
+	public int getMemTotal(Map map) {
 		int res = 0;
 		try {
-			res = mybatis.delete("sol_question.questionDeleteProc", map);
+			res = (Integer) mybatis.queryForObject("sol_admin.getMemTotal", map);
 		} catch (Exception e) {
-			System.out.println("questionDeleteProc error: " + e);
-
+			System.out.println("getMemTotal error: " + e);
 		}
 		return res;
-	}// end
+	}
 
-	public int testQuestDelete(Map map) {
-		int res = 0;
-		try {
-			res = mybatis.delete("sol_question.testQuestDelete", map);
-		} catch (Exception e) {
-			System.out.println("testQuestDelete error: " + e);
-
-		}
-		return res;
-	}// end
-
-	public TestDTO testObject(int testno) {
-		TestDTO dto = null;
-
-		try {
-			dto = (TestDTO) mybatis.queryForObject("sol_test.testObject", testno);
-		} catch (Exception e) {
-			System.out.println("testObject error: " + e);
-		}
-		return dto;
-	}// end
-
-	public int testUpdate(TestDTO dto) {
-		int res = 0;
-		try {
-			res = mybatis.update("sol_test.testUpdate", dto);
-		} catch (Exception e) {
-			System.out.println("testUpdate error: " + e);
-		}
-		return res;
-	}// end
-	
-	public QuestionDTO questObject(QuestionDTO dto) {
-		try {
-			dto = (QuestionDTO) mybatis.queryForObject("sol_question.questObject", dto);
-		} catch (Exception e) {
-			System.out.println("testObject error: " + e);
-		}
-		return dto;
-	}// end
-	
-	public boolean questionUpdate(QuestionDTO dto) {
+	public boolean memLevelProc(Map map) {
 		boolean flag = false;
 		try {
-			int cnt = mybatis.update("sol_question.questionUpdate", dto);
+			int cnt = mybatis.update("sol_admin.memLevelProc", map);
 			if (cnt > 0)
 				flag = true;
 		} catch (Exception e) {
-			System.out.println("questionUpdate error: " + e);
+			System.out.println("memLevelProc error: " + e);
 		}
 		return flag;
 	}// end
-	
-	public int testShowUpdate(TestDTO dto) {
-		int res = 0;
+
+	public void memDelProc(Map map) {
 		try {
-			res = mybatis.update("sol_test.testShowUpdate", dto);
+			// System.out.println(map.toString());
+			mybatis.update("sol_admin.memDelProc", map);
 		} catch (Exception e) {
-			System.out.println("testShowUpdate error: " + e);
+			System.out.println("memDelProc error: " + e);
 		}
-		return res;
 	}// end
+//-------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------MEMBER START
 	
 }

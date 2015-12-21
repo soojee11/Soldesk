@@ -7,7 +7,7 @@
 			<i class="fa fa-file-text-o"></i> Test
 		</h3>
 		<ol class="breadcrumb">
-			<li><i class="fa fa-home"></i><a href="adminIndex.do">Home</a></li>
+			<li><i class="fa fa-home"></i><a href="../../sol_admin/adminIndex.do">Home</a></li>
 			<li>문제풀기 게시판 관리 페이지</li>
 		</ol>
 	</div>
@@ -40,8 +40,9 @@
 				<div class="col-sm-10">
 				<select class="form-control input-sm m-bot15" name="subject">
 					<option value="kor">국어</option>
-					<option value="eng">영어</option>
 					<option value="mat">수학</option>
+					<option value="soc">사회</option>
+					<option value="sci">과학</option>
 				</select>
 				</div>
 				</div>

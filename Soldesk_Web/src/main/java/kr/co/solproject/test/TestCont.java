@@ -25,8 +25,8 @@ public class TestCont {
 		System.out.println("---------------testCont객체 생성됨");
 	}
 	
-	//http://localhost:9090/solproject/sol_test/list.do
-	@RequestMapping(value="/sol_test/list.do")
+	//http://localhost:9090/solproject/sol_test/test/list.do
+	@RequestMapping(value="/sol_test/test/list.do")
 	public String list(HttpServletRequest request,HttpSession session) {
 
 		String url="list.do";	// page링크시 이동할 페이지
@@ -84,7 +84,7 @@ public class TestCont {
 	
 		//System.out.println(list.toString());
 		// 3. 결과값을 보여줄 view 리턴
-		return "sol_test/testList";
+		return "sol_test/test/testList";
 	}
 
 }

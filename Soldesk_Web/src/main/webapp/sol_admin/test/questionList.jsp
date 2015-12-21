@@ -17,7 +17,7 @@
 		</h3>
 		<ol class="breadcrumb">
 
-			<li><i class="fa fa-home"></i><a href="adminIndex.do">Home</a></li>
+			<li><i class="fa fa-home"></i><a href="../../sol_admin/adminIndex.do">Home</a></li>
 			<li>문제풀기 게시판 관리 페이지</li>
 
 		</ol>
@@ -67,10 +67,7 @@
 		<th width="50">종류</th>
 		<th width="200">답</th>
 		<th>제목</th>
-		<th width="100">상세보기</th>		
-<!-- 		<th>보기</th>
-		<th>해설</th> -->
-		<!-- <th>첨부파일</th> -->
+		<th width="100">상세보기</th>
 	</tr>
 	
 	<c:forEach var ="dto" items="${list }">
@@ -82,16 +79,8 @@
 				<td style="text-align: left;">${dto.answer }</td>
 				<td style="text-align: left;">${dto.qtitle }</td>
 				<td>
-				<button type="button" class="btn btn-danger btn-sm" onclick="javascript:location.href='questionRead2.do?testno=${dto.testno }&questno=${dto.questno }&testtitle=${param.testtitle }'">수정상세보기</button>
+				<button type="button" class="btn btn-danger btn-sm" onclick="javascript:location.href='questionRead2.do?testno=${dto.testno }&questno=${dto.questno }&testtitle=${param.testtitle }'">문제상세보기</button>
 				</td>				
-				<%-- 
-				<td style="text-align: left;">${dto.example }</td>
-				<td style="text-align: left;">${dto.comment }</td> --%>
-				<%-- <td>
-				<c:if test="${dto.poster != '' }">${dto.poster }
-				<img src="../sol_admin/test/storage/${dto.poster }" align="left">
-				</c:if>
-				</td> --%>
 			</tr>
 	</c:if>
 	<c:if test="${dto.qynshow eq 'N'}">
@@ -116,10 +105,6 @@
 		<th width="200">답</th>
 		<th>제목</th>
 		<th width="100">상세보기</th>
-<!-- 	
-		<th>보기</th>
-		<th>해설</th> -->
-		<!-- <th>첨부파일</th> -->
 	</tr>
 
 	<c:forEach var ="dto" items="${list }">
@@ -133,16 +118,8 @@
 				<td style="text-align: left;">${dto.answer }</td>
 				<td style="text-align: left;">${dto.qtitle }</td>
 				<td>
-				<button type="button" class="btn btn-danger btn-sm" onclick="javascript:location.href='questionRead2.do?testno=${dto.testno }&questno=${dto.questno }&testtitle=${param.testtitle }'">상세보기</button>
+				<button type="button" class="btn btn-danger btn-sm" onclick="javascript:location.href='questionRead2.do?testno=${dto.testno }&questno=${dto.questno }&testtitle=${param.testtitle }'">문제상세보기</button>
 				</td>
-				<%-- 
-				<td style="text-align: left;">${dto.example }</td>
-				<td style="text-align: left;">${dto.comment }</td> --%>
-				<%-- <td>
-				<c:if test="${dto.poster != '' }">${dto.poster }
-				<img src="../sol_admin/test/storage/${dto.poster }" align="left">
-				</c:if>
-				</td> --%>
 			</tr>
 	</c:if>	
 	</c:forEach>
