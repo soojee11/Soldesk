@@ -42,4 +42,15 @@ public class PostscriptDAO {
 		}
 		return res;
 	}
+
+	public int postInsert(PostscriptDTO dto) {
+		int res = 0;
+		try {
+			res = mybatis.update("sol_postscript.insert", dto);
+		} catch (Exception e) {
+			System.out.println("post create error: " + e);
+		}
+		return res;
+
+	}
 }
