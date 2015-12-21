@@ -13,8 +13,8 @@
   </select>
   
   <insert id="insert" parameterClass="Map">
-      INSERT INTO sol_study (lectureno, id, memo, memodate)
-      VALUES (#lectureno#, #id#, #memo#, now())
+      INSERT INTO sol_study (lectureno, id, memo)
+      VALUES (#lectureno#, #id#, #memo#)
   </insert>
   
   <update id="insertMemo" parameterClass="Map">

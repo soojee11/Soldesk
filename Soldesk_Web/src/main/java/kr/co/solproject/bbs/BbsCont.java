@@ -70,9 +70,13 @@ public class BbsCont {
   @RequestMapping(value="/sol_bbs/create.do", method=RequestMethod.POST)
   public String bbsFormProc(BbsDTO dto, HttpServletRequest req, HttpSession session){
     // bbs insert 
-    String subject = dto.getSubject().trim();
-    String content = dto.getContent().trim();
+    String subject = req.getParameter("subject");
+    String content = req.getParameter("content");
     String passwd = (String) session.getAttribute("s_id");
+    
+    if(content.equals("<p>&nbsp;</p>")){
+      content = "³»¿ë ¾øÀ½";
+    }
     
     dto.setSubject(subject);
     dto.setContent(content);
@@ -125,5 +129,14 @@ public class BbsCont {
       req.setAttribute("nowPage", req.getParameter("nowPage"));
     }
     return "/sol_bbs/bbsDelete";
+  }
+  
+  //---------------------------------------------------------------------------------
+  
+  @RequestMapping(value="/sol_bbs/edittest.do", method=RequestMethod.POST)
+  public String editTest(HttpServletRequest req){
+    System.out.println("content ÄÁÅÙÃ÷°ª:"+req.getParameter("content"));
+    
+    return "/sol_bbs/test1";
   }
 }
