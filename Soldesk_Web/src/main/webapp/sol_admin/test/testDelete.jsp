@@ -23,7 +23,7 @@
 			<i class="fa fa-file-text-o"></i> Test
 		</h3>
 		<ol class="breadcrumb">
-			<li><i class="fa fa-home"></i><a href="adminIndex.do">Home</a></li>
+			<li><i class="fa fa-home"></i><a href="../../sol_admin/adminIndex.do">Home</a></li>
 			<li>문제풀기 게시판 관리 페이지</li>
 		</ol>
 	</div>
@@ -57,10 +57,12 @@
 						<c:choose><c:when  test="${col2 eq '' }" >selected</c:when></c:choose>>과목전체</option>
 					<option value="kor"
 						<c:choose><c:when  test="${col2 eq 'kor' }" >selected</c:when></c:choose>>국어</option>
-					<option value="eng"
-						<c:choose><c:when  test="${col2 eq 'eng' }" >selected</c:when></c:choose>>영어</option>
 					<option value="mat"
 						<c:choose><c:when  test="${col2 eq 'mat' }" >selected</c:when></c:choose>>수학</option>
+					<option value="soc"
+						<c:choose><c:when  test="${col2 eq 'soc' }" >selected</c:when></c:choose>>사회</option>
+					<option value="sci"
+						<c:choose><c:when  test="${col2 eq 'sci' }" >selected</c:when></c:choose>>과학</option>
 				</select>
 			</div>
 				<button class="btn btn-success btn-sm">검색</button>
@@ -94,13 +96,16 @@
 			<td><c:set var="subject" value="${dto.subject }" /> <c:choose>
 					<c:when test="${subject eq 'kor'}">
 					국어
-				</c:when>
-					<c:when test="${subject eq 'eng'}">
-					영어
-				</c:when>
+					</c:when>
 					<c:when test="${subject eq 'mat'}">
 					수학
-				</c:when>
+					</c:when>
+					<c:when test="${subject eq 'soc'}">
+					사회
+					</c:when>
+					<c:when test="${subject eq 'sic'}">
+					과학
+					</c:when>
 				</c:choose></td>
 			<td>${dto.testtitle }</td>
 			<td><button type="button" class="btn btn-danger btn-sm" onclick="javascript:location.href='testUpdate.do?testno=${dto.testno }'">문제지수정</button></td>

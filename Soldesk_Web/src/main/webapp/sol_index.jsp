@@ -120,7 +120,7 @@
 			          		<div class="nav-collapse collapse">
 			            		<ul class="nav">
 			              			<li><a href="sol_study/lectureList.do">학습하기</a></li>
-									<li><a href="sol_test/list.do">문제풀기</a></li>
+									<li><a href="sol_test/test/list.do">문제풀기</a></li>
 									<li><a href="sol_bbs/bbslist.do">자유게시판</a></li>
 									<li><a href="sol_mypage/calendar.do?s_id=${s_id}">내정보</a></li>
 									<li><a href="sol_total/total.jsp">전체보기</a></li>
@@ -292,81 +292,12 @@
 
 			<!-- start: Hero Unit - Main hero unit for a primary marketing message or call to action -->
 			<div class="hero-unit">
-				<p>This is a template for a simple marketing or informational
-					website. It includes a large callout called the hero unit and three
-					supporting pieces of content. Use it as a starting point to create
-					something more unique.</p>
+				<p> 더 많은 지식채널을 보고싶다면 이곳을 방문해보세요~</p>
 				<p>
-					<a class="btn btn-success btn-large">Learn more &raquo;</a>
+					<a class="btn btn-success btn-large" href="http://home.ebs.co.kr/jisike/index">방문하기 &raquo;</a>
 				</p>
 			</div>
 			<!-- end: Hero Unit -->
-
-			<!-- start: Row -->
-			<div class="row">
-
-				<div class="span4">
-					<div class="icons-box">
-						<i class="ico-ok circle big"></i>
-						<div class="title">
-							<h3>Easy to use</h3>
-						</div>
-						<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
-							sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna
-							aliquam erat volutpat.</p>
-						<div class="clear"></div>
-					</div>
-				</div>
-
-				<div class="span4">
-					<div class="icons-box">
-						<i class="ico-ipad circle big"></i>
-						<div class="title">
-							<h3>Responsive</h3>
-						</div>
-						<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
-							sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna
-							aliquam erat volutpat.</p>
-						<div class="clear"></div>
-					</div>
-				</div>
-
-				<div class="span4">
-					<div class="icons-box">
-						<i class="ico-heart circle big"></i>
-						<div class="title">
-							<h3>User friendly</h3>
-						</div>
-						<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
-							sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna
-							aliquam erat volutpat.</p>
-						<div class="clear"></div>
-					</div>
-				</div>
-
-			</div>
-			<!-- end: Row -->
-
-			<hr>
-
-			<!-- start Clients List -->
-			<div class="clients-carousel">
-
-				<ul class="slides clients">
-					<li><img src="sol_img/logos/1.png" alt="" /></li>
-					<li><img src="sol_img/logos/2.png" alt="" /></li>
-					<li><img src="sol_img/logos/3.png" alt="" /></li>
-					<li><img src="sol_img/logos/4.png" alt="" /></li>
-					<li><img src="sol_img/logos/5.png" alt="" /></li>
-					<li><img src="sol_img/logos/6.png" alt="" /></li>
-					<li><img src="sol_img/logos/7.png" alt="" /></li>
-					<li><img src="sol_img/logos/8.png" alt="" /></li>
-					<li><img src="sol_img/logos/9.png" alt="" /></li>
-					<li><img src="sol_img/logos/10.png" alt="" /></li>
-				</ul>
-
-			</div>
-			<!-- end Clients List -->
 
 			<hr>
 
@@ -443,6 +374,25 @@
 			<!-- end: Row -->
 
 			<hr>
+			
+			<!-- start Clients List -->
+			<div class="clients-carousel">
+
+				<ul class="slides clients">
+					<li><img src="sol_img/logos/1.png" alt="" /></li>
+					<li><img src="sol_img/logos/2.png" alt="" /></li>
+					<li><img src="sol_img/logos/3.png" alt="" /></li>
+					<li><img src="sol_img/logos/4.png" alt="" /></li>
+					<li><img src="sol_img/logos/5.png" alt="" /></li>
+					<li><img src="sol_img/logos/6.png" alt="" /></li>
+					<li><img src="sol_img/logos/7.png" alt="" /></li>
+					<li><img src="sol_img/logos/8.png" alt="" /></li>
+					<li><img src="sol_img/logos/9.png" alt="" /></li>
+					<li><img src="sol_img/logos/10.png" alt="" /></li>
+				</ul>
+
+			</div>
+			<!-- end Clients List -->
 
 		</div>
 		<!--end: Container-->
@@ -523,26 +473,15 @@
 				<div class="span3">
 
 					<h3>About Us</h3>
-					<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
-						sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna
-						aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud
-						exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea
-						commodo consequat.</p>
+					<p>이 사이트는 2015년 솔데스크로부터 시작되어...</p>
 
 				</div>
 				<!-- end: About -->
 
 				<!-- start: Photo Stream -->
 				<div class="span3">
-
 					<h3>We are here!</h3>
-					<div id="small-map-container">
-						<a href="contact.jsp"></a>
-					</div>
-					<iframe id="small-map" width="210" height="210" frameborder="0"
-						scrolling="yes" marginheight="0" marginwidth="0"
-						src="https://maps.google.pl/maps?f=q&amp;source=s_q&amp;hl=pl&amp;geocode=&amp;q=Los+Angeles,+Kalifornia,+Stany+Zjednoczone&amp;aq=0&amp;oq=Los&amp;sll=50.143066,18.85267&amp;sspn=0.057207,0.168915&amp;t=m&amp;ie=UTF8&amp;hq=&amp;hnear=Los+Angeles,+Hrabstwo+Los+Angeles,+Kalifornia,+Stany+Zjednoczone&amp;ll=34.052234,-118.243685&amp;spn=0.036979,0.084457&amp;z=14&amp;iwloc=near&amp;output=embed"></iframe>
-
+						<div id="map-canvas" style="width: 210px; height: 210px"></div>
 				</div>
 				<!-- end: Photo Stream -->
 
@@ -610,16 +549,6 @@
 					</ul>
 					<!-- end: Follow Us -->
 
-					<!-- start: Newsletter -->
-					<form id="newsletter">
-						<h3>Newsletter</h3>
-						<p>Please leave us your email</p>
-						<label for="newsletter_input">@:</label> <input type="text"
-							id="newsletter_input" /> <input type="submit"
-							id="newsletter_submit" value="submit">
-					</form>
-					<!-- end: Newsletter -->
-
 				</div>
 
 			</div>
@@ -638,10 +567,7 @@
 		<div class="container">
 
 			<p>
-				&copy; 2013, creativeLabs. <a href="http://bootstrapmaster.com"
-					alt="Bootstrap Themes">Bootstrap Themes</a> designed by
-				BootstrapMaster in Poland <img src="img/poland2.png" alt="Poland"
-					style="margin-top: -4px">
+				&copy; 2015, soldesk created by no.5
 			</p>
 
 		</div>
@@ -660,6 +586,53 @@
 	<script src="sol_js/slider.js"></script>
 	<script defer="defer" src="sol_js/custom.js"></script>
 	<!-- end: Java Script -->
+	  <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+  <script type="text/javascript">
+      function initialize() {
+        var mapLocation = new google.maps.LatLng('37.5693255','126.9860066'); // 지도에서 가운데로 위치할 위도와 경도
+        var markLocation = new google.maps.LatLng('37.5693255','126.9860066'); // 마커가 위치할 위도와 경도
+         
+        var mapOptions = {
+          center: mapLocation, // 지도에서 가운데로 위치할 위도와 경도(변수)
+          zoom: 18, // 지도 zoom단계
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        var map = new google.maps.Map(document.getElementById("map-canvas"), // id: map-canvas, body에 있는 div태그의 id와 같아야 함
+            mapOptions);
+         
+        var size_x = 60; // 마커로 사용할 이미지의 가로 크기
+        var size_y = 60; // 마커로 사용할 이미지의 세로 크기
+         
+        // 마커로 사용할 이미지 주소
+        var image = new google.maps.MarkerImage( 'http://www.larva.re.kr/home/img/boximage3.png',
+                            new google.maps.Size(size_x, size_y),
+                            '',
+                            '',
+                            new google.maps.Size(size_x, size_y));
+         
+        var marker;
+        marker = new google.maps.Marker({
+               position: markLocation, // 마커가 위치할 위도와 경도(변수)
+               map: map,
+               icon: image, // 마커로 사용할 이미지(변수)
+//             info: '말풍선 안에 들어갈 내용',
+               title: '솔데스크' // 마커에 마우스 포인트를 갖다댔을 때 뜨는 타이틀
+        });
+         
+        var content = "우리 여기있다~~"; // 말풍선 안에 들어갈 내용
+         
+        // 마커를 클릭했을 때의 이벤트. 말풍선 뿅~
+        var infowindow = new google.maps.InfoWindow({ content: content});
+ 
+        google.maps.event.addListener(marker, "click", function() {
+            infowindow.open(map,marker);
+        });
+         
+ 
+         
+      }
+      google.maps.event.addDomListener(window, 'load', initialize);
+</script>
 
 </body>
 </html>

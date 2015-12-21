@@ -14,7 +14,7 @@ create table sol_question(
 	qtype		VARCHAR(10)		NOT NULL,		
 	answer		VARCHAR(500)	NOT NULL,			
 	comment		VARCHAR(600)	NOT NULL,			
-	poster		VARCHAR(500)	NULL,			
+	poster		VARCHAR(600)	NULL,			
 	example		VARCHAR(500)	NULL,			
 	qynshow		VARCHAR(10)		NOT NULL default 'Y',		
 	primary key(testno,questno)						

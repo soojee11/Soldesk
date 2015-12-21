@@ -3,15 +3,15 @@
 <%@ include file="../sol_header.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<script src="js/test.js"></script>
+<script src="../js/test.js"></script>
 
 <!-- page start-->
 <br />
-<h3><img src="img/go_right.png" width="20px"/>
-EBS 추천 문제지&nbsp;&nbsp;<span style="font-size: 12px;">함께 풀고 학습해 봅시다</span></h3>
+<h3><img src="../img/go_right.png" width="20px"/>
+추천 문제지&nbsp;&nbsp;<span style="font-size: 12px;">함께 풀고 학습해 봅시다</span></h3>
 <hr>
 <div>
-<img src="img/test_info.jpg" />
+<img src="../img/test_info.jpg" />
 </div>
 <br />
 <div align="right">
@@ -57,16 +57,19 @@ EBS 추천 문제지&nbsp;&nbsp;<span style="font-size: 12px;">함께 풀고 학
 				<c:when test="${subject eq 'kor'}">
 					국어
 				</c:when>
-				<c:when test="${subject eq 'eng'}">
-					영어
-				</c:when>
 				<c:when test="${subject eq 'mat'}">
 					수학
+				</c:when>
+				<c:when test="${subject eq 'soc'}">
+					사회
+				</c:when>
+				<c:when test="${subject eq 'sic'}">
+					과학
 				</c:when>
 			</c:choose>
 		</td>
 		<td>${dto.testtitle }</td>
-		<td><img src="img/test_ok.PNG" onclick="questionList('${s_id }','${dto.testno }','${dto.testtitle }')"/>
+		<td><img src="../img/test_ok.PNG" onclick="questionList('${s_id }','${dto.testno }','${dto.testtitle }')"/>
 		<%-- <input type="button" value="응시하기" onclick="questionList('${dto.testno }','${dto.testtitle }')"/> --%></td>
 	</tr>
 </c:if>

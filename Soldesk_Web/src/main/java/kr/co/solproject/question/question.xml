@@ -9,10 +9,10 @@
 	<update id="insert" parameterClass="QuestionDTO">
 		insert into
 		sol_question(testno, questno, qtitle, qtype, answer,
-		comment,example,qynshow)
+		comment,example,qynshow,poster)
 		values(#testno#,(select
 		ifnull(max(questno),0)+1 from sol_question as SQ where
-		testno=#testno#),#qtitle#,#qtype#,#answer#,#comment#,#example#,'Y')
+		testno=#testno#),#qtitle#,#qtype#,#answer#,#comment#,#example#,'Y',#poster#)
 	</update>
 
 	<select id="list" resultClass="QuestionDTO" parameterClass="Map">
@@ -69,7 +69,7 @@
 	<select id="questionList" resultClass="QuestionDTO"
 		parameterClass="int">
 		select testno, questno, qtitle, qtype, answer,
-		comment,qynshow, example
+		comment,qynshow, example, poster
 		from sol_question
 		where qynshow='Y' and
 		testno=#testno#
@@ -117,7 +117,7 @@
 	<select id="questObject" parameterClass="QuestionDTO"
 		resultClass="QuestionDTO">
 		select testno, questno, qtitle, qtype, answer, comment,
-		qynshow, example
+		qynshow, example,poster
 		from sol_question
 		where testno=#testno# and
 		questno=#questno#
@@ -125,8 +125,15 @@
 
 	<update id="questionUpdate" parameterClass="QuestionDTO">
 		update sol_question
-		set qtitle=#qtitle#, answer=#answer#, comment=#comment#, example=#example#
-		where testno=#testno# and questno = #questno#
+		set qtitle=#qtitle#, answer=#answer#, comment=#comment#,
+		example=#example#, poster=#poster#
+		where testno=#testno# and questno =
+		#questno#
 	</update>
-	
+
+	<delete id="questionReadDelete" parameterClass="QuestionDTO">
+		delete from sol_question
+		where testno=#testno# and questno=#questno#
+	</delete>
+
 </sqlMap>
