@@ -7,7 +7,7 @@
 			<i class="fa fa-file-text-o"></i> Test
 		</h3>
 		<ol class="breadcrumb">
-			<li><i class="fa fa-home"></i><a href="../adminindex.do">Home</a></li>
+			<li><i class="fa fa-home"></i><a href="adminIndex.do">Home</a></li>
 			<li>문제풀기 게시판 관리 페이지</li>
 		</ol>
 	</div>

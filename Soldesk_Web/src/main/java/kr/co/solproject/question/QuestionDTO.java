@@ -1,7 +1,5 @@
 package kr.co.solproject.question;
 
-import org.springframework.web.multipart.MultipartFile;
-
 public class QuestionDTO {
 	
 	private int testno;			//일련번호	
@@ -14,7 +12,7 @@ public class QuestionDTO {
 	private String example;		//보기
 	private String qynshow;		//문제선택(Y/N)
 	
-	private MultipartFile posterMF;		// <input type="file" name="posterMF">
+	//private MultipartFile posterMF;		// <input type="file" name="posterMF">
 	
 	
 	public QuestionDTO() {	}
@@ -74,7 +72,7 @@ public class QuestionDTO {
 	public void setPoster(String poster) {
 		this.poster = poster;
 	}
-
+/*
 	public MultipartFile getPosterMF() {
 		return posterMF;
 	}
@@ -82,7 +80,7 @@ public class QuestionDTO {
 	public void setPosterMF(MultipartFile posterMF) {
 		this.posterMF = posterMF;
 	}
-
+*/
 	public String getExample() {
 		return example;
 	}
@@ -104,7 +102,7 @@ public class QuestionDTO {
 	public String toString() {
 		return "QuestionDTO [testno=" + testno + ", questno=" + questno + ", qtitle=" + qtitle + ", qtype=" + qtype
 				+ ", answer=" + answer + ", comment=" + comment + ", poster=" + poster + ", example=" + example
-				+ ", qynshow=" + qynshow + ", posterMF=" + posterMF + "]";
+				+ ", qynshow=" + qynshow+"]";
 	}
 	
 }

@@ -37,7 +37,7 @@ function show(value) {
 			<i class="fa fa-file-text-o"></i> Test
 		</h3>
 		<ol class="breadcrumb">
-			<li><i class="fa fa-home"></i><a href="../adminindex.do">Home</a></li>
+			<li><i class="fa fa-home"></i><a href="adminIndex.do">Home</a></li>
 			<li>문제풀기 게시판 관리 페이지</li>
 		</ol>
 	</div>
@@ -49,8 +49,10 @@ function show(value) {
 			<header class="panel-heading"> 시험 문제지 등록 </header>
 			<div class="panel-body">
 			
-				<form class="form-horizontal " method="post" action="questionInsert.do" enctype="multipart/form-data">
+				<!-- <form class="form-horizontal " method="post" action="questionInsert.do" enctype="multipart/form-data"> -->
+				<form class="form-horizontal " method="post" action="questionInsert.do">
 				<input type="hidden" name="testno" value="${param.testno }">
+				<input type="hidden" name="testtitle" value="${param.testtitle }">
 				<div class="form-group">
 					<label class="col-sm-2 control-label">문제제목</label>
 					<div class="col-sm-10">
@@ -140,7 +142,7 @@ function show(value) {
 						<textarea class="form-control ckeditor" name="comment" rows="6"></textarea>
 					</div>
 				</div>
-					
+				<!-- 	
 				<div class="form-group">
 					<label class="col-sm-2 control-label" for="exampleInputFile">첨부파일</label>
 					<div class="col-sm-10">
@@ -148,7 +150,7 @@ function show(value) {
 					<span class="help-block">이미지 파일만 등록가능(.exe,.jsp,.html불가)</span>						
 					</div>
 				</div>
-					
+					 -->
 				<div align="center">
 					<button type="button" class="btn btn-danger btn-sm" onclick="javascript:history.back();">취소</button>
 					<button type="button" class="btn btn-danger btn-sm" onclick="questionFormCheck(this.form)">문제등록</button>

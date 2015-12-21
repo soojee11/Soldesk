@@ -64,11 +64,11 @@
 							<br />
 							<br />
 							<br />
-						</c:if> <c:if test="${dto.poster != '' }">
+						</c:if> <%-- <c:if test="${dto.poster != '' }">
 							<div style="border: 1px dotted; padding: 10px;">
 								<img src="../sol_admin/test/storage/${dto.poster }" />
 							</div>
-						</c:if></td>
+						</c:if> --%></td>
 				<tr>
 					<td><br />
 					<c:forEach var="img2" items="${img }" varStatus="status">

@@ -5,8 +5,7 @@
 <c:if test="${res==false}">
 	<script>
 		alert("문제를 모두 풀어야 점수확인이 가능합니다.");
-		location.href="questionList.do?testno=${param.testno}&testtitle=${param.testtitle}";
-		//history.go(-1);
+		history.go(-1);
 	</script>
 </c:if>
 
@@ -62,11 +61,11 @@
 <tr>
 
 	<td><c:if test="${recNo > 1 }"><br /><br /><br /><br /></c:if>
-		<c:if test="${dto.poster != '' }">
+		<%-- <c:if test="${dto.poster != '' }">
 		<div style="border:1px dotted; padding: 10px;">
 		<img src="../sol_admin/test/storage/${dto.poster }" />
 		</div>
-		</c:if>
+		</c:if> --%>
 	</td>
 
 	<tr>

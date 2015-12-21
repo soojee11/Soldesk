@@ -7,20 +7,18 @@
 	<typeAlias alias="QuestionDTO" type="kr.co.solproject.question.QuestionDTO" />
 
 	<update id="insert" parameterClass="QuestionDTO">
-
 		insert into
-		sol_question(testno, questno, qtitle, qtype, answer, comment,
-		poster,
-		example)
-		values(#testno#,(select ifnull(max(questno),0)+1 from
-		sol_question as SQ where
-		testno=#testno#),#qtitle#,#qtype#,#answer#,#comment#,#poster#,#example#)
-
+		sol_question(testno, questno, qtitle, qtype, answer,
+		comment,example,qynshow)
+		values(#testno#,(select
+		ifnull(max(questno),0)+1 from sol_question as SQ where
+		testno=#testno#),#qtitle#,#qtype#,#answer#,#comment#,#example#,'Y')
 	</update>
 
 	<select id="list" resultClass="QuestionDTO" parameterClass="Map">
-		select testno, questno, qtitle, qtype, answer, comment, poster,
-		qynshow, example
+		select testno, questno, qtitle, qtype, answer, comment,
+		qynshow,
+		example
 		from sol_question
 
 		<dynamic prepend="WHERE">
@@ -70,8 +68,8 @@
 
 	<select id="questionList" resultClass="QuestionDTO"
 		parameterClass="int">
-		select testno, questno, qtitle, qtype, answer, comment,
-		poster, qynshow, example
+		select testno, questno, qtitle, qtype, answer,
+		comment,qynshow, example
 		from sol_question
 		where qynshow='Y' and
 		testno=#testno#
@@ -97,4 +95,38 @@
 		</iterate>
 		order by questno asc
 	</select>
+
+	<delete id="questionDeleteProc" parameterClass="Map">
+		delete from sol_question
+		where testno=#testno# and questno
+		<iterate prepend="IN" property="questionDeleteList" open="("
+			close=")" conjunction=",">
+			#questionDeleteList[]#
+		</iterate>
+	</delete>
+
+	<delete id="testQuestDelete" parameterClass="Map">
+		delete from sol_question
+		where testno
+		<iterate prepend="IN" property="testDeleteList" open="("
+			close=")" conjunction=",">
+			#testDeleteList[]#
+		</iterate>
+	</delete>
+
+	<select id="questObject" parameterClass="QuestionDTO"
+		resultClass="QuestionDTO">
+		select testno, questno, qtitle, qtype, answer, comment,
+		qynshow, example
+		from sol_question
+		where testno=#testno# and
+		questno=#questno#
+	</select>
+
+	<update id="questionUpdate" parameterClass="QuestionDTO">
+		update sol_question
+		set qtitle=#qtitle#, answer=#answer#, comment=#comment#, example=#example#
+		where testno=#testno# and questno = #questno#
+	</update>
+	
 </sqlMap>

@@ -46,6 +46,7 @@ EBS 추천 문제지&nbsp;&nbsp;<span style="font-size: 12px;">함께 풀고 학
 	
 <c:set var="recNo" value="${recNo+1 }" />
 <c:forEach var="dto" items="${list }" >
+<c:if test="${dto.testshow eq 'Y' }">
 <c:set var="recNo" value="${recNo-1 }" />
 	<tr>
 		<td>${recNo }</td>
@@ -68,6 +69,7 @@ EBS 추천 문제지&nbsp;&nbsp;<span style="font-size: 12px;">함께 풀고 학
 		<td><img src="img/test_ok.PNG" onclick="questionList('${s_id }','${dto.testno }','${dto.testtitle }')"/>
 		<%-- <input type="button" value="응시하기" onclick="questionList('${dto.testno }','${dto.testtitle }')"/> --%></td>
 	</tr>
+</c:if>
 </c:forEach>
 
 	<tr>
