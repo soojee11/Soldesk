@@ -36,6 +36,8 @@ public class MypageController {
 	public String calendar2(String s_id,HttpServletRequest req, HttpSession session) {
 	System.out.println(s_id);
 		
+	if(s_id != ""){
+	
 		Calendar cal = Calendar.getInstance();
 		//오늘 날짜 구하기
 		int nowYear = cal.get(Calendar.YEAR);
@@ -43,6 +45,8 @@ public class MypageController {
 		//월은 0부터 시작하므로 1월 표시를 위해 1을 더해 줍니다.
 		int nowDay = cal.get(Calendar.DAY_OF_MONTH);
 		String nowregdate = (String)(nowYear+"0"+nowMonth+"0"+nowDay);
+		String nowregdate2 = (String)(nowYear+"-"+nowMonth+"-"+nowDay);
+		
 		
 		List regdatelist = null;
 	    regdatelist = dao.getregdate(s_id); //강좌를들은날짜들을 LIST로 가져오자
@@ -54,6 +58,9 @@ public class MypageController {
 		List lecturelist=dao.getLectureList();//sol_lecture와 조인해서 강의제목을 가져오자
 		System.out.println(lecturelist);
 		
+		List maxrdtlist=dao.getMaxrdtList(s_id);//각 날짜마다 max(regdate)가져오기
+		System.out.println("#"+maxrdtlist);
+		
 		
 		String promise = null;
 		String name = null;
@@ -64,13 +71,76 @@ public class MypageController {
 		req.setAttribute("id", s_id);
 		req.setAttribute("regdatelist", regdatelist);
 		req.setAttribute("nowregdate", nowregdate);
+		req.setAttribute("nowregdate2", nowregdate2);
 		req.setAttribute("memolist", memolist);
 		req.setAttribute("lecturelist", lecturelist);
-
-		
+		req.setAttribute("maxrdtlist", maxrdtlist);
 		
 		return "/sol_mypage/calendar";
+	}
+	else{
+		//로그인안한경우
+		return "/sol_mypage/calendarError";
+	    }
 	}//end
+	
+	
+	// --------------------------------------------------------------------
+	
+	/*@RequestMapping( "sol_mypage/calendar.do")*/
+	@RequestMapping(value = "sol_mypage/calendar.do", method = RequestMethod.GET)
+	public String calendar(String s_id,HttpServletRequest req, HttpSession session) {
+	
+		if(s_id != ""){
+			
+			Calendar cal = Calendar.getInstance();
+			//오늘 날짜 구하기
+			int nowYear = cal.get(Calendar.YEAR);
+			int nowMonth = cal.get(Calendar.MONTH) + 1;
+			//월은 0부터 시작하므로 1월 표시를 위해 1을 더해 줍니다.
+			int nowDay = cal.get(Calendar.DAY_OF_MONTH);
+			String nowregdate = (String)(nowYear+"0"+nowMonth+"0"+nowDay);
+			String nowregdate2 = (String)(nowYear+"-"+nowMonth+"-"+nowDay);
+			
+			
+			List regdatelist = null;
+		    regdatelist = dao.getregdate(s_id); //강좌를들은날짜들을 LIST로 가져오자
+		    
+			
+			List memolist=dao.getMemoList();//sol_study와 조인해서 memo내용을 가져오자
+			System.out.println(memolist);
+			
+			List lecturelist=dao.getLectureList();//sol_lecture와 조인해서 강의제목을 가져오자
+			System.out.println(lecturelist);
+			
+			List maxrdtlist=dao.getMaxrdtList(s_id);//각 날짜마다 max(regdate)가져오기
+			System.out.println("#"+maxrdtlist);
+			
+			
+			String promise = null;
+			String name = null;
+			promise = dao.getpromise(s_id);
+			name = dao.getname(s_id);
+			req.setAttribute("promise", promise);
+			req.setAttribute("name", name);
+			req.setAttribute("id", s_id);
+			req.setAttribute("regdatelist", regdatelist);
+			req.setAttribute("nowregdate", nowregdate);
+			req.setAttribute("nowregdate2", nowregdate2);
+			req.setAttribute("memolist", memolist);
+			req.setAttribute("lecturelist", lecturelist);
+			req.setAttribute("maxrdtlist", maxrdtlist);
+			
+			return "/sol_mypage/calendar";
+		}
+		else{
+			//로그인안한경우
+			return "/sol_mypage/calendarError";
+		    }
+		}//end
+	
+	// --------------------------------------------------------------------
+	
 	
 	@RequestMapping(value = "sol_mypage/memoGo.do", method = RequestMethod.GET)
 	public String memoGo(String now,HttpServletRequest req, HttpSession session) {
@@ -92,7 +162,7 @@ public class MypageController {
 			req.setAttribute("now", now);
 		return "/sol_mypage/memo";
 		
-	}
+	}//end
 	
 	@RequestMapping(value = "sol_mypage/videoGo.do", method = RequestMethod.GET)
 	public String videoGo(String now,HttpServletRequest req, HttpSession session) {
@@ -114,45 +184,7 @@ public class MypageController {
 			req.setAttribute("videolist", videolist);
 		return "/sol_mypage/video";
 		
-	}
+	}//end
 	
-	// --------------------------------------------------------------------
-	
-	@RequestMapping(value = "sol_mypage/calendar.do", method = RequestMethod.GET)
-	public String calendar(String s_id,HttpServletRequest req, HttpSession session) {
-		
-	
-		if(s_id != ""){
-		
 
-		//오늘 날짜 구하기
-	    Calendar cal = Calendar.getInstance();
-		int nowYear = cal.get(Calendar.YEAR);
-		int nowMonth = cal.get(Calendar.MONTH) + 1;
-		//월은 0부터 시작하므로 1월 표시를 위해 1을 더해 줍니다.
-		int nowDay = cal.get(Calendar.DAY_OF_MONTH);
-		
-		String nowregdate = (String)(nowYear+"-"+nowMonth+"-"+nowDay);
-
-		String promise = null;
-		String name = null;
-		promise = dao.getpromise(s_id);
-		name = dao.getname(s_id);
-	
-		
-		req.setAttribute("id", s_id);
-		req.setAttribute("promise", promise);
-		req.setAttribute("name", name);
-		req.setAttribute("nowregdate", nowregdate);
-		
-		return "/sol_mypage/calendar";
-		}
-		else{
-			//로그인안한경우
-			return "/sol_mypage/calendarError";
-		}
-		
-	}// end
-	
-	
 }
