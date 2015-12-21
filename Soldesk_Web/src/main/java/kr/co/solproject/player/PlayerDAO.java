@@ -16,7 +16,7 @@ public class PlayerDAO {
   
   public PlayerDAO(){
     mybatis = GetSqlMapClient.get(); 
-    System.out.println("PlayerDAO 梓端 持失");
+    System.out.println("---------------PlayerDAO 梓端 持失");
   }
   
   public Boolean categoryIns(Map map){
