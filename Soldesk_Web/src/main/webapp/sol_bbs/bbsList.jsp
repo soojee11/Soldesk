@@ -11,7 +11,7 @@ function denywrite(){
 </script>
 <br/>
 <h5>
-  <img src="img/cont.JPG"><img src="img/pna.JPG">| 무엇이든 물어보세요
+  <img src="bbs_img/cont.JPG"><img src="bbs_img/pna.JPG">| 무엇이든 물어보세요
 </h5>
 <hr>
 총 <strong>${recNo-1 }</strong>개의 등록된 글이 있습니다. | 현재 페이지 : <strong>${nowPage }/${totalPage }</strong>
@@ -36,7 +36,7 @@ function denywrite(){
         <td>${recNo }</td>
         <td>${dto.passwd }</td>
         <td>
-          <a href="./bbsread.do?bbsno=${dto.bbsno }&nowPage=${nowPage }">${dto.subject }</a>
+          <a href="bbsread.do?bbsno=${dto.bbsno }&nowPage=${nowPage }">${dto.subject }</a>
         </td>
         <td>${dto.regdt }</td>
         <td>${dto.readcnt }</td>

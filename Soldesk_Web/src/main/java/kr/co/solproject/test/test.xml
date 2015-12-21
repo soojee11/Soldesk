@@ -8,12 +8,12 @@
 
 	<update id="insert" parameterClass="TestDTO">
 		insert into
-		sol_test(grade,subject,testtitle)
-		values(#grade#,#subject#,#testtitle#)
+		sol_test(grade,subject,testtitle,testshow)
+		values(#grade#,#subject#,#testtitle#,'N')
 	</update>
 
 	<select id="list" parameterClass="Map" resultClass="TestDTO">
-		select testno,grade,subject,testtitle
+		select testno,grade,subject,testtitle,testshow
 		from sol_test
 		<dynamic prepend="WHERE">
 			<isNotEmpty property="col1" prepend="AND">
@@ -45,10 +45,31 @@
 	<delete id="testDeleteProc" parameterClass="Map">
 		delete from sol_test
 		where testno
-		<iterate prepend="IN" property="testDeleteList" open="(" close=")"
-			conjunction=",">
+		<iterate prepend="IN" property="testDeleteList" open="("
+			close=")" conjunction=",">
 			#testDeleteList[]#
 		</iterate>
 	</delete>
+
+	<select id="testObject" parameterClass="int" resultClass="TestDTO">
+		select
+		testno,grade,subject,testtitle
+		from sol_test
+		where testno=#testno#
+	</select>
+
+	<update id="testUpdate" parameterClass="TestDTO">
+		update sol_test
+		set
+		grade=#grade#,subject=#subject#,testtitle=#testtitle#
+		where
+		testno=#testno#
+	</update>
+
+	<update id="testShowUpdate" parameterClass="TestDTO">
+		update sol_test
+		set testshow=#testshow#
+		where testno=#testno#
+	</update>
 	
 </sqlMap>

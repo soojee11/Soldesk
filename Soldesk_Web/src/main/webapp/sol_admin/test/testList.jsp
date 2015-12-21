@@ -4,13 +4,20 @@
 <%@ include file="../header.jsp"%>
 <!-- page start-->
 
+<c:if test="${res == 1 }">
+	<script>
+		alert("해당 문제지를 등록하였습니다.");
+		location.href="testList.do";
+	</script>
+</c:if>
+
 <div class="row">
 	<div class="col-lg-12">
 		<h3 class="page-header">
 			<i class="fa fa-file-text-o"></i> Test
 		</h3>
 		<ol class="breadcrumb">
-			<li><i class="fa fa-home"></i><a href="../adminindex.do">Home</a></li>
+			<li><i class="fa fa-home"></i><a href="adminIndex.do">Home</a></li>
 			<li>문제풀기 게시판 관리 페이지</li>
 		</ol>
 	</div>
@@ -61,6 +68,7 @@
 
 <table class="table">
 	<tr>
+		<th width="80">보여주기</th>
 		<th width="60">순번</th>
 		<th width="60">학년</th>
 		<th width="60">과목</th>
@@ -72,6 +80,15 @@
 	<c:forEach var="dto" items="${list }">
 		<c:set var="recNo" value="${recNo-1 }" />
 		<tr>
+			<td>
+			<form action="testShowUpdate.do" method="POST">
+			<input type="hidden" name="testno" value="${dto.testno }" />
+			<select name="testshow" class="form-control input-sm m-bot15">
+				<option value="Y" <c:if test="${dto.testshow eq 'Y'}">selected</c:if>>Y</option>
+				<option value="N" <c:if test="${dto.testshow eq 'N'}">selected</c:if>>N</option>
+			</select>
+			</form>
+			</td>
 			<td>${recNo }</td>
 			<td>${dto.grade }</td>
 			<td><c:set var="subject" value="${dto.subject }" /> <c:choose>

@@ -338,8 +338,8 @@ public class AdminCont {
 		boolean flag = dao.testInsert(dto);
 
 		if (flag) {
-			request.setAttribute("flag", "true");
-			return "redirect:testList.do";
+			request.setAttribute("res", 1);
+			return "sol_admin/test/testList";
 		} else {
 			request.setAttribute("msg", "문제지 등록에 실패하였습니다.<br /><br /> 다시 시도해 주십시오.");
 			request.setAttribute("link1", "<input type='button' value='다시시도' onclick=\"history.back();\">");
@@ -396,6 +396,7 @@ public class AdminCont {
 	
 	@RequestMapping(value = "sol_admin/questionInsert.do", method = RequestMethod.POST)
 	public String questionInsert(QuestionDTO dto, HttpServletRequest request) {
+		/*
 		// -------------------------------------------------------------
 		// 전송된 파일이 저장될 실제 물리적인 경로 파악
 		String basePath = Utility.getRealPath(request, "/sol_admin/test/storage");
@@ -407,7 +408,7 @@ public class AdminCont {
 		String poster = UploadSaveManager.saveFileSpring30(posterMF, basePath);
 		dto.setPoster(poster);
 		// -------------------------------------------------------------
-		
+		*/
 		if(dto.getQtype().equals("OX"))
 			dto.setAnswer(request.getParameter("OXAnswer"));
 		
@@ -435,9 +436,14 @@ public class AdminCont {
 		
 
 		if (flag) {
-			request.setAttribute("flag", "true");
-			return "redirect:questionList.do?testno="+dto.getTestno();
+			request.setAttribute("res", 1);
+			request.setAttribute("testno", request.getAttribute("testno"));
+			request.setAttribute("testtitle", request.getAttribute("testtitle"));
+			
+			return "sol_admin/test/questionList";
 		} else {
+			request.setAttribute("testno", request.getAttribute("testno"));
+			request.setAttribute("testtitle", request.getAttribute("testtitle"));
 			request.setAttribute("msg", "문제 등록에 실패하였습니다.<br /><br /> 다시 시도해 주십시오.");
 			request.setAttribute("link1", "<input type='button' value='다시시도' onclick=\"history.back();\">");
 			request.setAttribute("link2", "<input type='button' value='문제 목록' onclick=\"location.href='questionList.do';\">");
@@ -932,7 +938,7 @@ public class AdminCont {
 	} //end
 	
 	@RequestMapping(value = "sol_admin/testDeleteProc.do")
-	public String testDeleteProc(QuestionDTO dto, HttpServletRequest request) {
+	public String testDeleteProc(TestDTO dto, HttpServletRequest request) {
 
 		String[] checks=request.getParameterValues("check3");
 		
@@ -956,9 +962,22 @@ public class AdminCont {
 		Map map=new HashMap();
 		map.put("testDeleteList", testDeleteList);
 		
+		//1)해당 문제지에 포함된 문제 삭제
+		int questres=dao.testQuestDelete(map);
+		//2)문제지삭제
 		int res=dao.testDeleteProc(map);
+		if(res>0) {
+			request.setAttribute("res", 1);
+			return "sol_admin/test/testDelete";
+		}
+		else {
+			request.setAttribute("msg", "문제지 삭제에 실패하였습니다.<br /><br /> 다시 시도해 주십시오.");
+			request.setAttribute("link1", "<input type='button' value='다시시도' onclick=\"history.back();\">");
+			request.setAttribute("link2", "<input type='button' value='문제지 목록' onclick=\"location.href='testDelete.do';\">");
+
+			return "sol_admin/error";
+		}		
 		
-		return "redirect:testDelete.do";
 	}
 
 	@RequestMapping(value="sol_admin/readCateInfo.do", method=RequestMethod.GET)
@@ -1125,5 +1144,178 @@ public class AdminCont {
 		return "sol_admin/player/cateUpDelete";
 	}//end
 	
+	@RequestMapping(value = "sol_admin/questionDeleteProc.do")
+	public String questionDeleteProc(QuestionDTO dto, HttpServletRequest request) {
+		
+		int testno=Integer.parseInt(request.getParameter("testno"));
+		String testtitle=request.getParameter("testtitle");
+		String[] checks=request.getParameterValues("check4");
+		
+		String str=""; 
+		for(int idx=0; idx<checks.length; idx++) {
+			str+=checks[idx]+",";
+		}
+		str=str.substring(0,str.length()-1);
+		System.out.println(str);
+		
+		List questionDeleteList = new ArrayList();
+		int delno;
+		String[] str2 = str.split(",");		// ","을 기준으로 분리
+		for (int idx = 0; idx < str2.length; idx++) {
+			//System.out.println(str2[idx]);
+			delno=Integer.parseInt(str2[idx]);
+			questionDeleteList.add(delno);
+		}
+		//System.out.println("questionDeleteList:" +questionDeleteList);
+		
+		Map map=new HashMap();
+		map.put("questionDeleteList", questionDeleteList);
+		map.put("testno", testno);
+		
+		int res=dao.questionDeleteProc(map);
+		if(res>0) {
+			request.setAttribute("res", 1);
+			request.setAttribute("testtitle", testtitle);
+			request.setAttribute("testno", testno);
+			return "sol_admin/test/questionDeleteList";
+		}
+		else {
+			request.setAttribute("testtitle", testtitle);
+			request.setAttribute("testno", testno);
+			request.setAttribute("msg", "문제 삭제에 실패하였습니다.<br /><br /> 다시 시도해 주십시오.");
+			request.setAttribute("link1", "<input type='button' value='다시시도' onclick=\"history.back();\">");
+			request.setAttribute("link2", "<input type='button' value='강좌 목록' onclick=\"location.href='questionDeleteList.do';\">");
+
+			return "sol_admin/error";
+		}
+
+	}
+	
+	@RequestMapping(value="sol_admin/testUpdate.do", method=RequestMethod.GET)
+	public String testUpdate(TestDTO dto, HttpServletRequest request) {
+		
+		int testno=Integer.parseInt(request.getParameter("testno"));
+		dto=dao.testObject(testno);
+		request.setAttribute("dto", dto);
+		
+		return "sol_admin/test/testUpdateForm";
+		
+	}//end
+	
+	@RequestMapping(value = "sol_admin/testUpdateProc.do", method = RequestMethod.POST)
+	public String testUpdateProc(TestDTO dto, HttpServletRequest request) {
+
+		int res = dao.testUpdate(dto);
+
+		if (res>0) {
+			request.setAttribute("res", 2);
+			return "sol_admin/test/testDelete";
+		} else {
+			request.setAttribute("msg", "문제지 수정에 실패하였습니다.<br /><br /> 다시 시도해 주십시오.");
+			request.setAttribute("link1", "<input type='button' value='다시시도' onclick=\"history.back();\">");
+			request.setAttribute("link2", "<input type='button' value='문제지 목록' onclick=\"location.href='testList.do';\">");
+
+			return "sol_admin/error";
+		}
+
+	}// end
+
+	@RequestMapping(value="sol_admin/questionRead.do", method=RequestMethod.GET)
+	public String questionRead(QuestionDTO dto, HttpServletRequest request) {
+		
+		dto.setTestno(Integer.parseInt(request.getParameter("testno")));
+		dto.setQuestno(Integer.parseInt(request.getParameter("questno")));
+
+		dto=dao.questObject(dto);
+		request.setAttribute("dto", dto);
+		
+		return "sol_admin/test/questionRead";
+		
+	}//end
+	
+	@RequestMapping(value="sol_admin/questionRead2.do", method=RequestMethod.GET)
+	public String questionRead2(QuestionDTO dto, HttpServletRequest request) {
+		
+		dto.setTestno(Integer.parseInt(request.getParameter("testno")));
+		dto.setQuestno(Integer.parseInt(request.getParameter("questno")));
+
+		dto=dao.questObject(dto);
+		request.setAttribute("dto", dto);
+		
+		return "sol_admin/test/questionRead2";
+		
+	}//end
+	
+	@RequestMapping(value="sol_admin/questionUpdateForm.do", method=RequestMethod.GET)
+	public String questionUpdateForm(QuestionDTO dto, HttpServletRequest request) {
+		
+		dto.setTestno(Integer.parseInt(request.getParameter("testno")));
+		dto.setQuestno(Integer.parseInt(request.getParameter("questno")));
+		
+
+		dto=dao.questObject(dto);
+		request.setAttribute("dto", dto);
+		
+		return "sol_admin/test/questionUpdateForm";
+		
+	}//end
+	
+	@RequestMapping(value="sol_admin/questionUpdateProc.do", method=RequestMethod.POST)
+	public String questionUpdateProc(QuestionDTO dto, HttpServletRequest request) {
+		
+		if(dto.getQtype().equals("OX"))
+			dto.setAnswer(request.getParameter("OXAnswer"));
+		
+		if(dto.getQtype().equals("G")) {
+			StringBuffer example = new StringBuffer();
+			example.append(request.getParameter("example1").trim());
+			example.append("/");
+			example.append(request.getParameter("example2").trim());
+			example.append("/");
+			example.append(request.getParameter("example3").trim());
+			example.append("/");
+			example.append(request.getParameter("example4").trim());
+			example.append("/");
+			example.append(request.getParameter("example5").trim());
+			//System.out.println("example보기:" +example);
+
+			String exampleCheck=request.getParameter("exampleCheck");
+			dto.setAnswer(request.getParameter(exampleCheck));
+			String str = example.toString();
+			dto.setExample(str);
+			
+		}
+		
+		boolean flag = dao.questionUpdate(dto);
+		if (flag) {
+			request.setAttribute("res", 1);
+			request.setAttribute("testno", dto.getTestno());
+			request.setAttribute("questno", dto.getQuestno());
+			request.setAttribute("testtitle", request.getParameter("testtitle"));
+
+			return "sol_admin/test/questionRead";
+		} else {
+			request.setAttribute("testno", request.getAttribute("testno"));
+			request.setAttribute("testtitle", request.getAttribute("testtitle"));
+			request.setAttribute("msg", "문제 수정에 실패하였습니다.<br /><br /> 다시 시도해 주십시오.");
+			request.setAttribute("link1", "<input type='button' value='다시시도' onclick=\"history.back();\">");
+			request.setAttribute("link2", "<input type='button' value='문제 목록' onclick=\"location.href='questionList.do';\">");
+
+			return "sol_admin/error";
+		}
+		
+	}//end
+	
+	@RequestMapping(value="sol_admin/testShowUpdate.do", method=RequestMethod.GET)
+	public String testShowUpdate(TestDTO dto, HttpServletRequest request) {
+		
+		dto.setTestno(Integer.parseInt(request.getParameter("testno")));
+		dto.setTestshow(request.getParameter("testshow"));
+		int res=dao.testShowUpdate(dto);
+		System.out.println("testshow="+request.getParameter("testshow"));
+		
+		return "redirect:testList.do";
+		
+	}//end
 	
 }

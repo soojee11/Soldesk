@@ -3,10 +3,10 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ include file="../header.jsp"%>
 
-<c:if test="${flag == true }">
+<c:if test="${res == 1 }">
 	<script>
-		flag = false;
 		alert("문제 등록에 성공하였습니다. ");
+		location.href="questionList.do?testno=${param.testno }&testtitle=${param.testtitle }";
 	</script>
 </c:if>
 
@@ -17,7 +17,7 @@
 		</h3>
 		<ol class="breadcrumb">
 
-			<li><i class="fa fa-home"></i><a href="../adminindex.do">Home</a></li>
+			<li><i class="fa fa-home"></i><a href="adminIndex.do">Home</a></li>
 			<li>문제풀기 게시판 관리 페이지</li>
 
 		</ol>
@@ -49,7 +49,7 @@
 
 <div align="left">
 <a href="testList.do"><button class="btn btn-info btn-sm">문제지 목록</button></a>
-<a href="questionForm.do?testno=${param.testno }"><button class="btn btn-info btn-sm">문제 등록</button></a>
+<a href="questionForm.do?testno=${param.testno }&testtitle=${param.testtitle }"><button class="btn btn-info btn-sm">문제 등록</button></a>
 </div>
 
 <form method="post" action="questionUnSelect.do?testno=${param.testno }">
@@ -62,33 +62,36 @@
 	</td>
 	</tr>
 	<tr>
-		<th width="50">선택</th>
-		<th width="90">문제지번호</th>
-		<th width="90">문제번호</th>
-		<th width="90">문제종류</th>
-		<th>문제제목</th>
-		<th>답</th>
-		<th>보기</th>
-		<th>해설</th>
-		<th width="100">첨부파일</th>
+		<th width="45">선택</th>
+		<th width="45">번호</th>
+		<th width="50">종류</th>
+		<th width="200">답</th>
+		<th>제목</th>
+		<th width="100">상세보기</th>		
+<!-- 		<th>보기</th>
+		<th>해설</th> -->
+		<!-- <th>첨부파일</th> -->
 	</tr>
 	
 	<c:forEach var ="dto" items="${list }">
 	<c:if test="${dto.qynshow eq 'Y'}">
 			<tr>
 				<td><input type="checkbox" name="check2" value="${dto.questno }" <c:if test="${dto.qynshow eq 'Y'}">checked</c:if>/></td>
-				<td>${dto.testno }</td>
 				<td>${dto.questno }</td>
 				<td>${dto.qtype }</td>
-				<td style="text-align: left;">${dto.qtitle }</td>
 				<td style="text-align: left;">${dto.answer }</td>
-				<td style="text-align: left;">${dto.example }</td>
-				<td style="text-align: left;">${dto.comment }</td>
+				<td style="text-align: left;">${dto.qtitle }</td>
 				<td>
+				<button type="button" class="btn btn-danger btn-sm" onclick="javascript:location.href='questionRead2.do?testno=${dto.testno }&questno=${dto.questno }&testtitle=${param.testtitle }'">수정상세보기</button>
+				</td>				
+				<%-- 
+				<td style="text-align: left;">${dto.example }</td>
+				<td style="text-align: left;">${dto.comment }</td> --%>
+				<%-- <td>
 				<c:if test="${dto.poster != '' }">${dto.poster }
-				<%-- <img src="../sol_admin/test/storage/${dto.poster }" > --%>
+				<img src="../sol_admin/test/storage/${dto.poster }" align="left">
 				</c:if>
-				</td>
+				</td> --%>
 			</tr>
 	</c:if>
 	<c:if test="${dto.qynshow eq 'N'}">
@@ -107,22 +110,17 @@
 	</td>
 	</tr>
 	<tr>
-		<th width="50">선택</th>
-		<th width="90">문제지번호</th>
-		<th width="90">문제번호</th>
-		<th width="90">문제종류</th>
-		<th>문제제목</th>
-		<th>답</th>
+		<th width="45">선택</th>
+		<th width="45">번호</th>
+		<th width="50">종류</th>
+		<th width="200">답</th>
+		<th>제목</th>
+		<th width="100">상세보기</th>
+<!-- 	
 		<th>보기</th>
-		<th>해설</th>
-		<th width="100">첨부파일</th>
+		<th>해설</th> -->
+		<!-- <th>첨부파일</th> -->
 	</tr>
-	
-	<c:if test="${total ==0 }">
-		<tr>
-			<td colspan="9" align="center">관련된 문제가 없습니다. </td>
-		</tr>
-	</c:if>
 
 	<c:forEach var ="dto" items="${list }">
 	<c:if test="${dto.qynshow eq 'Y'}">
@@ -130,23 +128,25 @@
 	<c:if test="${dto.qynshow eq 'N'}">
 				<tr>
 				<td><input type="checkbox" name="check" value="${dto.questno }" <c:if test="${dto.qynshow eq 'Y'}">checked</c:if>/></td>
-				<td>${dto.testno }</td>
 				<td>${dto.questno }</td>
 				<td>${dto.qtype }</td>
-				<td style="text-align: left;">${dto.qtitle }</td>
 				<td style="text-align: left;">${dto.answer }</td>
-				<td style="text-align: left;">${dto.example }</td>
-				<td style="text-align: left;">${dto.comment }</td>
+				<td style="text-align: left;">${dto.qtitle }</td>
 				<td>
-				<c:if test="${dto.poster != '' }">${dto.poster }
-				<%-- <img src="../sol_admin/test/storage/${dto.poster }" > --%>
-				</c:if>
+				<button type="button" class="btn btn-danger btn-sm" onclick="javascript:location.href='questionRead2.do?testno=${dto.testno }&questno=${dto.questno }&testtitle=${param.testtitle }'">상세보기</button>
 				</td>
+				<%-- 
+				<td style="text-align: left;">${dto.example }</td>
+				<td style="text-align: left;">${dto.comment }</td> --%>
+				<%-- <td>
+				<c:if test="${dto.poster != '' }">${dto.poster }
+				<img src="../sol_admin/test/storage/${dto.poster }" align="left">
+				</c:if>
+				</td> --%>
 			</tr>
 	</c:if>	
 	</c:forEach>
 </table>
 </form>
  
-
 <%@ include file="../footer.jsp"%>
