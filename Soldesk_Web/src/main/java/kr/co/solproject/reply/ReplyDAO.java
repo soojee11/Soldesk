@@ -88,5 +88,17 @@ public class ReplyDAO {
 			}
 		  return res;
 	  }//end
+	  
+	  public boolean replyUpdate(ReplyDTO dto){
+		  boolean flag = false;
+			try {
+			   int cnt =	mybatis.update("sol_reply.replyUpdate", dto);
+				if(cnt>0)
+		    		flag=true;
+			}catch(Exception e) {
+				System.out.println("replyUpdate error: "+e);		
+			}
+			return flag;
+		}//end
 
 }
