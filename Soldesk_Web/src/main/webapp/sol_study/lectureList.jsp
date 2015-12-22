@@ -15,16 +15,20 @@ function lectureGo(lectureno){
 function lectureNotGo(){
 	alert("로그인 후 이용해 주세요.");
 }
-</script>
 
-<script language="javascript">
-function cancel(){
-	document.frm.content.value='';
-	document.frm.btnCreate.style.display='';
-	document.frm.btnDelete.style.display='none';
-	document.frm.btnUpdate.style.display='none';
-	document.frm.btnCancel.style.display='none';		
+function postApply(){
+	$("#categoryno").val(0);
+	var param=$("#postForm").serialize();  //<form id=frm> 전송할 데이터가 있는 폼
+	$.ajaxSetup({datatype: "text"});  //AJAX객체준비
+	//post방식. 응답이 성공하면 실행할 callback함수
+	$.post("./create.do", param, postApplyResponse);
 }
+
+function postApplyResponse(data, status) { //callback함수
+	alert(data.replace(/^\s+|\s+$/gm,''));
+	window.location.reload(); //현재 페이지 새로고침
+}
+
 </script>
 
 <link href="./css/style.css" rel="stylesheet" type="text/css">
@@ -105,13 +109,13 @@ function cancel(){
 		<td align="center">
 		<c:choose>
 		  <c:when test="${s_id != null }">
-		     <a href="javascript:lectureGo(${dto.lectureno })">
+		     <a href="javascript:lectureGo(${dto.lectureno })"></a>
 		  </c:when>
 		  <c:otherwise>
-		    <a href="javascript:lectureNotGo()">
+		    <a href="javascript:lectureNotGo()"></a>
 		  </c:otherwise>
-     </c:choose>
-		<img src='img/btn_study_play.png' width="30" height="20"></a></td>
+    	 </c:choose>
+		<img src='img/btn_study_play.png' width="30" height="20"></td>
 	</tr>
 </c:forEach>
 
@@ -216,13 +220,18 @@ function cancel(){
   		</span>
   		<output for="star-input"><!-- <b>0</b>점 --></output>
 	</span><br><br>
-	
-	<a href="javascript:postApply()"><img src='img/btn_apply.gif'></a>
-	<a href="javascript:postCancel()"><img src='img/btn_cancel02.gif'></a>
-	<a style='display:none' href="javascript:postUpdate()"><img src='img/btn_mod.gif'></a>
-	<a style='display:none' href="javascript:postDelete()"><img src='img/btn_del.gif'></a>
-	
-    <!-- <input type='button' name='btnCreate' value='등록'      onclick='createProc()'>  
+	<c:choose>
+	<c:when test="${s_id != null }">
+		<a href="javascript:postApply()"></a>		  
+	</c:when>
+	<c:otherwise>
+		<a href="javascript:lectureNotGo()"></a>
+	</c:otherwise>
+    </c:choose>
+	<img src='img/btn_apply.gif'>
+<!--
+ 	<a href="javascript:postCancel()"><img src='img/btn_cancel02.gif'></a>
+	<input type='button' name='btnCreate' value='등록'      onclick='createProc()'>  
     <input type='button' name='btnDelete' value='삭제'  onclick='deleteProc()' style='display:none'>
     <input type='button' name='btnUpdate' value='수정'  onclick='updateProc()' style='display:none'>
     <input type='button' name='btnCancel' value='취소'      onclick='cancel()'> -->
