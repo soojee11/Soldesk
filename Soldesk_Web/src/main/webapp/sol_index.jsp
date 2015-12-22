@@ -5,6 +5,15 @@
 <!DOCTYPE html>
 <html>
 <head>
+<!--  한글 웹 폰트 적용-->
+		<link rel='stylesheet' href='http://fonts.googleapis.com/earlyaccess/jejugothic.css'>
+		<style type="text/css">
+		header, .hero-unit{
+		  font-family:'Jeju Gothic', sans-serif;
+		  font-size:20pt;
+		}
+		</style>
+<!-- 한글 웹 폰트 적용 끝 -->
 
 <!-- start: Meta -->
 <meta charset="utf-8">
@@ -46,7 +55,7 @@
 <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-
+    
 
 <!-- 하나)로그인추가 -->
 <script language="javascript">
@@ -228,62 +237,19 @@
 		</div>
 
 	</c:if>
-
-
-
-
-	<!-- start: Slider -->
-	<div class="slider-wrapper">
-
-		<div id="da-slider" class="da-slider">
-			<div class="da-slide">
-				<h2>Twitter Bootstrap</h2>
-				<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed
-					diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam
-					erat volutpat.</p>
-				<a href="#" class="da-link">Read more</a>
-				<div class="da-img">
-					<img src="sol_img/parallax-slider/twitter.png" alt="image01" />
-				</div>
-			</div>
-			<div class="da-slide">
-				<h2>Responsive Design</h2>
-				<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed
-					diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam
-					erat volutpat.</p>
-				<a href="#" class="da-link">Read more</a>
-				<div class="da-img">
-					<img src="sol_img/parallax-slider/responsive.png" alt="image02" />
-				</div>
-			</div>
-			<div class="da-slide">
-				<h2>HTML5</h2>
-				<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed
-					diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam
-					erat volutpat.</p>
-				<a href="#" class="da-link">Read more</a>
-				<div class="da-img">
-					<img src="sol_img/parallax-slider/html5.png" alt="image03" />
-				</div>
-			</div>
-			<div class="da-slide">
-				<h2>CSS3</h2>
-				<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed
-					diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam
-					erat volutpat.</p>
-				<a href="#" class="da-link">Read more</a>
-				<div class="da-img">
-					<img src="sol_img/parallax-slider/css3.png" alt="image04" />
-				</div>
-			</div>
-			<nav class="da-arrows">
-				<span class="da-arrows-prev"></span> <span class="da-arrows-next"></span>
-			</nav>
-		</div>
-
-	</div>
-	<!-- end: Slider -->
-
+  <!-- start : Video Player -->
+  
+		  <!--start: Wrapper-->
+		  <div id="wrapper">
+		      
+		  
+		  
+		  
+		  </div>
+		  <!--end: Wrapper-->
+		   
+  <!-- end : Video Player -->
+  
 	<!--start: Wrapper-->
 	<div id="wrapper">
 
