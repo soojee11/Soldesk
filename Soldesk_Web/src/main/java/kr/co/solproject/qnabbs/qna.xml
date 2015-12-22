@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE sqlMap       
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"       
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+    
+<sqlMap namespace="sol_qna">
+  <typeAlias alias="QnaDTO" type="kr.co.solproject.qnabbs.QnaDTO" />
+  
+  <select id="getQnaList" parameterClass="Map" resultClass="QnaDTO">
+		select qnano,id,subject,content,passwd,readcnt,regdt,replyok,qnashow
+		from sol_qna
+		<dynamic prepend="where">
+				<isEqual property="col1" compareValue="subject">
+					subject LIKE CONCAT('%',#col2#,'%')
+				</isEqual>
+				<isEqual property="col1" compareValue="id">
+					id LIKE CONCAT('%',#col2#,'%')	
+				</isEqual>
+		</dynamic>
+		order by qnano desc
+		limit #sno#, #numPerPage#
+	</select>
+	
+	<select id="getQnaTotal" parameterClass="Map" resultClass="Integer">
+		select count(*) as cnt
+		from sol_qna
+		<dynamic prepend="where">
+				<isEqual property="col1" compareValue="subject">
+					subject LIKE CONCAT('%',#col2#,'%')
+				</isEqual>
+				<isEqual property="col1" compareValue="id">
+					id LIKE CONCAT('%',#col2#,'%')	
+				</isEqual>
+		</dynamic>
+	</select>
+	
+	<update id="qnaInsert" parameterClass="QnaDTO">
+		insert into sol_qna(id,subject,content,passwd,readcnt,regdt,replyok,qnashow)
+		values(#id#,#subject#,#content#,#passwd#,default,now(),default,#qnashow#)
+	</update>
+	
+	<select id="readId" parameterClass="Integer" resultClass="String">
+		select id 
+		from sol_qna
+		where qnano = #qnano#
+	</select>
+	
+	<select id="qnaRead" parameterClass="Integer" resultClass="QnaDTO">
+		select id,subject, content, passwd, readcnt, regdt, replyok, qnashow
+		from sol_qna
+		where qnano = #qnano#
+	</select>
+	
+	<update id ="readCount"  parameterClass="Integer">
+		update sol_qna
+		set readcnt = readcnt + 1
+		where qnano = #qnano#
+	</update>
+  
+  	<select id="getMlevel" parameterClass="String" resultClass="String">
+		select mlevel
+		from sol_member
+		where id = #s_id#
+	</select>
+	
+	<update id ="replyDelete"  parameterClass="Map">
+		delete from sol_reply
+		where tableno = #tableno# and tablename= #tablename#
+	</update>
+	
+	<update id ="qnaDelete"  parameterClass="Integer">
+		delete from sol_qna
+		where qnano = #qnano#
+	</update>
+	
+	<update id ="qnaUpdate"  parameterClass="QnaDTO">
+		update sol_qna
+		set subject = #subject# , content = #content#, regdt = now(), qnashow = #qnashow#
+		where qnano = #qnano#
+	</update>
+
+  
+</sqlMap>
