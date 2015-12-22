@@ -139,7 +139,7 @@ int count = 0;
  
  <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
  
-<div align="right"><img src="image/memo.png" width=20px height=28px/> 메모 | <img src="image/video.png" width=20px height=20px/>강의 |  <img src="image/thumb.png" width=18px height=18px/>학습도장</div>
+<div align="right"><img src="image/pink.png" width=20px height=28px/> 메모 | <img src="image/btn_study_play.png" width=20px height=20px/>강의 |  <img src="image/thumb.png" width=18px height=18px/>학습도장</div>
         
 <table align="center" width=100% cellpadding="0" cellspacing="1"
 	bgcolor="#cccccc" border="1">
@@ -154,7 +154,7 @@ int count = 0;
   <td><font color="blue">토</font></td>
  </tr>
  
- <tr style='height: 50px; font-weight: bold;'>
+ <tr style='height: 70px; font-weight: bold;'> <!-- 첫쨰줄 -->
  
  <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
  
@@ -167,21 +167,41 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
 }
 %> --%>
 
-      <c:forEach begin="1" end="${startDay-1}" var="count"> <!-- 날짜시작전 빈공간 -->
-             <td>&nbsp;</td>
-             <c:set var="count" value="${count + 1}"/>
-             <%-- <c:out value="${count}"/> --%>
+      <c:set var="newLine" value="0"/>
+
+      <c:forEach begin="1" end="${startDay-1}" var="count"> <!-- 날짜시작전 빈공간 ->밀린다!!! -->
+           <td>&nbsp;</td>
+           <c:set var="count" value="${count}"/>
+            <c:set var="newLine">${ newLine+1}</c:set> 
+            
+           <%--   <c:out value="${count}"/>  --%>
        </c:forEach> 
+       
+   <%--     <c:forEach begin="1" end="${week-1 }" var="i">
+                        <td bgcolor='#ffffff'>&nbsp;</td>
+                        <c:set var="newLine">${ newLine+1}</c:set> 
+                    </c:forEach>
+ --%>
       
       <c:forEach begin="${startDate}" end="${endDate}" var="i">
-                  <c:if test="${year eq val && month eq mth }">
+                <%--   <c:if test="${year eq val && month eq mth && date eq i }">
                      <c:set var="bgcolor" value="#99cc66"/>
                   </c:if>
                   <c:if test="${year ne val && month ne mth}">
                      <c:set var="bgcolor" value="#FFFFFF"/>
-                  </c:if>
+                  </c:if> --%>
      
-                  <c:if test="${count%7 eq 0 }">
+                      <c:choose>
+                            <c:when test="${val } == ${year }&&${mth}==${month }&&${date }==${i }">
+                                <c:set var="bgcolor" value="#99cc66"/>
+                            </c:when>
+                            <c:otherwise>
+                                <c:set var="bgcolor" value="#ffffff"/>
+                            </c:otherwise>
+                        </c:choose>
+     
+     
+      <%--             <c:if test="${count%7 eq 0 }">
                      <c:set var="color" value="red"/>
                   </c:if>
                   <c:if test="${count%7 eq 6}">
@@ -189,15 +209,48 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
                   </c:if>
                    <c:if test="${count%7 ne 6  &&  count%7 ne 0 }">
                      <c:set var="color" value="black"/>
-                  </c:if>
+                  </c:if> --%>
+                  
+                    <%--    <c:choose>
+                            <c:when test="${count%7 eq 0 }">
+                                <c:set var="color" value="red"/>
+                            </c:when>
+                            <c:when test="${count%7 eq 6}">
+                                <c:set var="color" value="blue"/>
+                            </c:when>
+                            <c:when test="${i eq startDate}">
+                                <c:set var="color" value="black"/>
+                            </c:when>
+                            <c:otherwise>
+                                <c:set var="color" value="black"/>
+                            </c:otherwise>
+                        </c:choose> --%>
+                  
+                  
+                  
+                  <c:set var="newLine">${ newLine+1}</c:set>
+                        
+                        <c:if test="${i eq endDate }">
+                            <c:choose>
+                                <c:when test="${newLine gt 0 && newLine lt 7}">
+                                    <c:forEach begin='${newLine }' end="6">
+                                    <td bgcolor='#ffffff'>&nbsp;</td>
+                                    <c:set var="newLine">${ newLine+1}</c:set>
+                                    </c:forEach> 
+                                </c:when>
+                            </c:choose>
+                        
+                        </c:if>
+                  
                   
                    <%-- <c:set var="count" value="${count + 1}"/> --%>
-                   <c:set var="count" value="${count + 1}" scope="page"/>
+                   <c:set var="count" value="${count + 1}" />
                    
                     <td bgcolor="${bgcolor}" width="14.285%" >
-                    <font color="${count}">
+                    <font color="${color}">
                     
       ${i })
+      
       
       <!-- +++++++++++++++++++++++++++++++++++++++아이콘++++++++++++++++++++++++++++++++++++ --> 
       
@@ -230,10 +283,10 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
                <img src="image/thumb.png" width=18px height=18px/><!-- 학습도장 -->
            
                <a href="javascript:videoGo(${now })">
-                 <img src="image/video.png" width=20px height=28px/></a> <!-- 강의리스트 -->
+                 <img src="image/btn_study_play.png" width=20px height=28px/></a> <!-- 강의리스트 -->
              
                <a href="javascript:memoGo(${now })">
-                 <img src="image/memo.png" width=20px height=28px/></a> <!-- 메모리스트 -->
+                 <img src="image/pink.png" width=20px height=28px/></a> <!-- 메모리스트 -->
            </c:if>
            </c:if>
           </c:if>
@@ -245,14 +298,27 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
  </font>
  </td>
 
- <c:if test="${count%7 eq 0 && i lt endDate}">
+
+
+
+
+ <c:if test="${count%7 eq 0 && i lt endDate}"> <!--둘째줄부터  -->
  </tr>
- <tr  style='height: 50px; font-weight: bold;'>
+ <tr  style='height: 70px; font-weight: bold;'>
   
  </c:if>
+      
  </c:forEach> 
    
-   
+          <c:choose>
+                                <c:when test="${newLine gt 0 && newLine lt 7}">
+                                    <c:forEach begin='${newLine }' end="6"> 
+                                    <td bgcolor='#ffffff'>&nbsp;</td>
+                                    <c:set var="newLine">${ newLine+1}</c:set>
+                                     <c:set var="newLine" value="0"/>
+                                    </c:forEach> 
+                                </c:when>
+                              </c:choose> 
    
 <%--    while(count%7 != 0){ /* 날짜끝나고 빈공간 */
 %>
@@ -263,14 +329,37 @@ count++;
 %> 
     --%>
    
- <c:if test="${count%7 ne 0 }">
-       <c:forEach begin="${startDate}" end="${endDate}" var="count">
-       
-         <td>&nbsp;</td>
-     
-        <c:set var="count" value="${count }"/>
+   <%--   <c:forEach begin="1" end="${startDay-1}" var="count"> <!-- 날짜시작전 빈공간 -->
+             <td>&nbsp;</td>
+           <c:set var="count" value="${count}"/>
+             <c:out value="${count}"/> |
        </c:forEach> 
- </c:if>
+ --%>
+   
+   
+ 
+       
+<%--        <c:if test="${count%7 ne 0 }"> <!--  날짜끝나고 빈공간 -->
+         <c:forEach begin="${startDate}" end="${endDate}" var="count">
+         <td>&nbsp;</td>
+         </c:forEach> 
+         +<c:out value="${count}"/>
+        </c:if> 
+         --%>
+      
+                                
+        
+<%--         
+      <c:choose>
+         <c:when test="${count%7 ne 0}">
+         <c:forEach begin='${count }' end="6"> 
+         <td bgcolor='#ffffff'>&nbsp;</td>
+         </c:forEach> 
+         </c:when>
+      </c:choose> --%>
+
+ 
+
  
  </tr>
 </table>
@@ -314,10 +403,10 @@ for (int i=startDate;i<=endDate;i++){
                <img src="image/thumb.png" width=18px height=18px/><!-- 학습도장 -->
            
 	           <a href="javascript:videoGo(${now })">
-	             <img src="image/video.png" width=20px height=28px/></a> <!-- 강의리스트 -->
+	             <img src="image/btn_study_play.png" width=20px height=28px/></a> <!-- 강의리스트 -->
 	         
 	           <a href="javascript:memoGo(${now })">
-	             <img src="image/memo.png" width=20px height=28px/></a> <!-- 메모리스트 -->
+	             <img src="image/pink.png" width=20px height=28px/></a> <!-- 메모리스트 -->
            </c:if>
           </c:if>
           </c:if>

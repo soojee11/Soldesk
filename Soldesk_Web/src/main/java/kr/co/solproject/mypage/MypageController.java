@@ -92,8 +92,9 @@ public class MypageController {
 		int endDate = cr.getActualMaximum(Calendar.DATE);
 		// 1일의 요일을 구함
 		int startDay = cr.get(Calendar.DAY_OF_WEEK);
+		System.out.println("startDay-"+startDay);
 		int count = 0;
-		int plus = 1;
+		
 		req.setAttribute("year", year);
 		req.setAttribute("month", month);
 		req.setAttribute("date", date);
@@ -120,7 +121,6 @@ public class MypageController {
 		req.setAttribute("memolist", memolist);
 		req.setAttribute("lecturelist", lecturelist);
 		req.setAttribute("maxrdtlist", maxrdtlist);
-		req.setAttribute("plus", plus);	
 		return "/sol_mypage/calendar";
 	}
 	else{
@@ -189,8 +189,9 @@ public class MypageController {
 			int endDate = cr.getActualMaximum(Calendar.DATE);
 			// 1일의 요일을 구함
 			int startDay = cr.get(Calendar.DAY_OF_WEEK);
+			System.out.println("startDay-"+startDay);
 			int count = 0;
-			int plus = 1;
+			
 			
 			req.setAttribute("year", year);
 			req.setAttribute("month", month);
@@ -202,7 +203,6 @@ public class MypageController {
 			req.setAttribute("endDate", endDate);
 			req.setAttribute("startDay", startDay);
 			req.setAttribute("count", count);
-			req.setAttribute("plus", plus);			
 			
 			//################################################################
 			

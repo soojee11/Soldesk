@@ -31,6 +31,7 @@
 	<sqlMap resource="kr/co/solproject/question/question.xml" />
 	<sqlMap resource="kr/co/solproject/test/test.xml" />
 	<sqlMap resource="kr/co/solproject/member/member.xml" />
+	<sqlMap resource="kr/co/solproject/member/video.xml" />
 	<sqlMap resource="kr/co/solproject/admin/admin.xml" />
 	<sqlMap resource="kr/co/solproject/category/category.xml" />
 	<sqlMap resource="kr/co/solproject/lecture/lecture.xml" />
