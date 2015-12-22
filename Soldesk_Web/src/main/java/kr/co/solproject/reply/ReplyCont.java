@@ -77,19 +77,41 @@ public class ReplyCont {
 			resp.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = resp.getWriter();
 			String s_id = (String) session.getAttribute("s_id");
+			int tableno = dto.getTableno();
 			
 			Map map = new HashMap();
 			map.put("passwd", s_id);
 			map.put("replyno", dto.getReplyno());
 			
 			int res = dao.checkPasswd(map,"Q");
+			String str="";
 			if(res == 1){
-				out.print("success/답변글을 수정하시겠습니까? ");
+				dto=dao.getReply(tableno, "Q");
+				str+="<textarea name='content' id='content' rows='5' cols='70'>"+dto.getContent()+"</textarea>";
+				str+="<input type='button' value='수정진행' onclick='replyUpdateProc("+dto.getReplyno()+")'>";
+				str+="<input type='button' value='목록' onclick='location.href=\"./list.do\"'>";
+				out.print("success|"+str);
 			}else{
-				out.print("fail/본인이 작성한 글이 아닙니다.\n\n 다시시도 해주세요. ");
+				out.print("fail|본인이 작성한 글이 아닙니다.\n\n 다시시도 해주세요. ");
 			}
 		} catch (Exception e) {
 			System.out.println(e);
+		}
+	}//end
+	
+	@RequestMapping(value = "/sol_qna/replyUpdateProc.do", method = RequestMethod.GET)
+	public void replyUpdateProc(ReplyDTO dto, HttpServletResponse resp) {
+		try {
+				resp.setContentType("text/html; charset=UTF-8");
+				PrintWriter out = resp.getWriter();
+				boolean flag = dao.replyUpdate(dto);
+				if(flag){
+					out.print("success|답변글 수정 완료! ");
+					}else{
+						out.print("fail|답변글 수정 실패! \n\n 다시시도 해주세요. ");
+					}
+		}catch (Exception e) {
+				System.out.println(e);
 		}
 	}//end
 

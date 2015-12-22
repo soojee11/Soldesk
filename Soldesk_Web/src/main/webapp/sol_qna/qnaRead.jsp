@@ -47,21 +47,41 @@ function deletePrcoResponse(data,status){
 		alert(result[1]);
 	}
 } 
-function updateReply(replyno){
+function updateReply(replyno,qnano){
 	$("#replyno").val(replyno);
-	var param = "replyno="+replyno;
-	$.get("./replyUpdate.do", param, updatePrcoResponse);
+	var param = "replyno="+replyno+"&tableno="+qnano;
+	$.get("./replyUpdate.do", param, updateResponse);
 }
-function updatePrcoResponse(data,status){
+function updateResponse(data,status){
 	var str =data.replace(/^\s+|\s+$/gm,'');
-	var result = str.split("/");
+	var result = str.split("|");
 	if(result[0]=="success"){
-			alert(result[1]);
-			window.location.reload();
+			//alert(result[1]);
+		document.getElementById("demo").innerHTML = "";
+		document.getElementById("demo").innerHTML = result[1];
 	}else{	
 		alert(result[1]);
 	}
 } 
+
+function replyUpdateProc(replyno){
+	var param = $("#frm").serialize();
+	alert("답변글을 수정하시겠습니까? ");
+	$.ajaxSetup({datatype:"text"});
+	$.get("./replyUpdateProc.do", param, updatePrcoResponse);
+}
+
+function updatePrcoResponse(data,status){
+	var str =data.replace(/^\s+|\s+$/gm,'');
+	var result = str.split("|");
+	if(result[0]=="success"){
+			alert(result[1]);
+			window.location.reload();		
+	}else{	
+		alert(result[1]);
+	}
+} 
+
 
 function deleteQna(qnano){
 	
@@ -111,6 +131,7 @@ Q&A&nbsp;&nbsp;<span style="font-size: 12px;">| 무엇이든 물어보세요. </
 	<div align="right">	
 		<input type="button" value="수정" onclick="updateQna(${param.qnano },${param.recNo })">
 		<input type="button" value="삭제" onclick="deleteQna(${param.qnano })">
+		<input type="button" value="목록" onclick="location.href='./list.do'">
 	</div>
 </c:if>
 <c:if test="${dto.replyok=='Y' }">
@@ -127,8 +148,9 @@ Q&A&nbsp;&nbsp;<span style="font-size: 12px;">| 무엇이든 물어보세요. </
 	<c:if test="${mlevel=='A'  }">
 	<div align="right">	
 	<br><br>
-		<input type="button" value="수정" onclick="updateReply(${rdto.replyno })">
+		<input type="button" value="수정" onclick="updateReply(${rdto.replyno },${param.qnano })">
 		<input type="button" value="삭제" onclick="deleteReply(${rdto.replyno },${param.qnano })">
+		<input type="button" value="목록" onclick="location.href='./list.do'">
 	</div>
 	</c:if>	
 	</div>
@@ -139,15 +161,21 @@ Q&A&nbsp;&nbsp;<span style="font-size: 12px;">| 무엇이든 물어보세요. </
 <input type="hidden" name="tableno" id="tableno" value="${param.qnano }">
 <input type="hidden" name="passwd" id="passwd" value="${s_id }">
 <input type="hidden" name="replyno" id="replyno">
-	<c:if test="${mlevel=='A' and replyok=='N'}">
-	※ 답변을 달아주세요. ※
-		<textarea name="content" id="content" rows="5" cols="70"></textarea>
-		<input type="button" value="답변달기" onclick="replyForm()">
-	</c:if>
-		<input type="button" value="목록으로" onclick="location.href='./list.do'">
+	<div id ="demo">
+		<c:if test="${mlevel=='A' and replyok=='N'}">
+			※ 답변을 달아주세요. ※
+			<textarea name="content" id="content" rows="5" cols="70"></textarea>
+			<input type="button" value="답변" onclick="replyForm()">
+			<input type="button" value="목록" onclick="location.href='./list.do'">
+		</c:if>
+	</div>
 </form>
 </div>
-
+<div align="center">
+	<c:if test="${mlevel!='A' and dto.replyok=='Y'}">
+		<input type="button" value="목록" onclick="location.href='./list.do'">
+	</c:if>
+</div>
 
 <!-- page end-->
 <%@ include file="../sol_footer.jsp"%>
