@@ -9,7 +9,7 @@
 			<i class="fa fa-file-text-o"></i> Lecture
 		</h3>
 		<ol class="breadcrumb">
-			<li><i class="fa fa-home"></i><a href="adminindex.do">Home</a></li>
+			<li><i class="fa fa-home"></i><a href="../../sol_admin/adminIndex.do">Home</a></li>
 			<li>동영상 교육 관리자페이지</li>
 		</ol>
 	</div>
@@ -39,7 +39,7 @@
 				<div class="form-group">
 					<label class="col-sm-2 control-label">등록된 포스터</label>
 					<div class="col-sm-10">
-						<img src="./player/storage/${dto.poster }" width="60px">
+						<img src="storage/${dto.poster }" width="60px">
 					</div>
 				</div>
 				<div class="form-group">

@@ -9,7 +9,7 @@
 			<i class="fa fa-file-text-o"></i> Lecture
 		</h3>
 		<ol class="breadcrumb">
-			<li><i class="fa fa-home"></i><a href="adminIndex.do">Home</a></li>
+			<li><i class="fa fa-home"></i><a href="../../sol_admin/adminIndex.do">Home</a></li>
 			<li>동영상 교육 관리자페이지</li>
 		</ol>
 	</div>
@@ -50,7 +50,7 @@
 				<td>${dto.subject }</td>
 				<td><a href="lecread.do?lectureno=${dto.lectureno }">${dto.filename }</a></td>
 				<td>${dto.filesize/(1024)-((dto.filesize/(1024))%1) }KB</td>
-				<td><a href="lecread.do?lectureno=${dto.lectureno }"><img src="./player/storage/${dto.poster }" width="60px"></a></td>
+				<td><a href="lecread.do?lectureno=${dto.lectureno }"><img src="storage/${dto.poster }" width="60px"></a></td>
 				<td>${dto.teacher }</td>
 				<td>${dto.lecturetime }</td>
 			</tr>
@@ -61,7 +61,7 @@
 				<td>${dto.subject }</td>
 				<td><a href="lecread2.do?lectureno=${dto.lectureno }">${dto.filename }</a></td>
 				<td>${dto.filesize/(1024)-((dto.filesize/(1024))%1) }KB</td>
-				<td><a href="lecread2.do?lectureno=${dto.lectureno }"><img src="./player/storage/${dto.poster }" width="60px"></a></td>
+				<td><a href="lecread2.do?lectureno=${dto.lectureno }"><img src="storage/${dto.poster }" width="60px"></a></td>
 				<td>${dto.teacher }</td>
 				<td>${dto.lecturetime }</td>
 			</tr>

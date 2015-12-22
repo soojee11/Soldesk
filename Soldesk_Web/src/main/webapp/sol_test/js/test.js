@@ -8,8 +8,10 @@ function questionList(s_id,testno,testtitle)
 	}
 
 	alert('"채점하기"를 완료해야 성적현황 및 오답노트에 시험지가 저장됩니다 ');
-	userwidth = (screen.width-500); 
-	userheight = (screen.height-150); 
+/*	userwidth = (screen.width-500); 
+	userheight = (screen.height-150); */
+	userwidth = (screen.width-400); 
+	userheight = (screen.height-150);
 	
 	var tops = Number(((screen.height/2)-(userheight/2))-50);
 	var left = Number((screen.width/2)-(userwidth/2));

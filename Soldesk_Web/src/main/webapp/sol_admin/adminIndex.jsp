@@ -131,7 +131,7 @@
                       </a>
                         <ul class="sub">
                           <li><a  href="player/readCateInfo.do">Lecture_insert</a></li>                          
-                          <li><a  href="player/cateDelete.do">Update&Delete</a></li>
+                          <li><a  href="player/updelete.do">Update&Delete</a></li>
                       </ul>
                   </li>
                    <li class="sub-menu">

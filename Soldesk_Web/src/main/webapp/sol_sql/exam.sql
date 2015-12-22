@@ -30,15 +30,18 @@ create table sol_myscore(
 	primary key(mytestno)						
 )ENGINE=MyISAM DEFAULT CHARSET="euckr";							
 
-CREATE TABLE sol_qna(		
-qnano		int(11)		NOT NULL	auto_increment,		
-subject		varchar(100)    NOT NULL,       		
-content		text		NOT NULL,		
-passwd 		varchar(15)	NOT NULL,		
-regdt		datetime	NOT  NULL,		
-qnashow		varchar(10)     NOT NULL	default 'N',	
-PRIMARY KEY  (qnano)		
-)ENGINE=MyISAM DEFAULT CHARSET="euckr";			
+create table sol_qna(		
+qnano INT NOT NULL auto_increment,		
+id VARCHAR(20) NOT NULL,		
+subject VARCHAR(100) NOT NULL,		
+content text NOT NULL,		
+passwd VARCHAR(15) NOT NULL,		
+readcnt int default 0 not null,		
+regdt DATETIME NOT NULL,		
+replyok VARCHAR(10) NOT NULL default 'N',		
+qnashow VARCHAR(10) NOT NULL default 'N',		
+primary key(qnano)		
+)ENGINE=MyISAM DEFAULT CHARSET="euckr";				
 		
 CREATE TABLE sol_bbs(
 bbsno		int(11)		NOT NULL	auto_increment,

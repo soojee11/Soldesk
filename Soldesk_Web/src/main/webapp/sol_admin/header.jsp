@@ -149,7 +149,7 @@
                       </ul>
                   </li>
                   <li>
-                  	<a class="" href="logout.do">
+                  	<a class="" href="../logout.do">
                           <i class="icon_genius"></i>
                           <span>Logout</span>
                     </a>
