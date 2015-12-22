@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import com.ibatis.sqlmap.client.SqlMapClient;
 
 import kr.co.solproject.GetSqlMapClient;
+import kr.co.solproject.category.CategoryDTO;
 
 @Component
 public class PostscriptDAO {
@@ -43,6 +44,17 @@ public class PostscriptDAO {
 		return res;
 	}
 
+	public CategoryDTO getCategory(int categoryno) {
+		CategoryDTO dto = null;
+		try {
+			dto = (CategoryDTO) mybatis.queryForObject("sol_category.getCategory", categoryno);
+		} catch (Exception e) {
+			System.out.println("read 실패다: " + e);
+		}
+		return dto;
+	}// end
+
+	/** 후기 등록 **/
 	public int postInsert(PostscriptDTO dto) {
 		int res = 0;
 		try {
