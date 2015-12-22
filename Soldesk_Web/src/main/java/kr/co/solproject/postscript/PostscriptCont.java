@@ -30,10 +30,11 @@ public class PostscriptCont {
 
 	@RequestMapping(value = "/sol_study/create.do", method = RequestMethod.POST)
 	public void createProc(PostscriptDTO dto, HttpServletResponse resp, HttpServletRequest request) {
-		System.out.println(request.getParameter("param"));
+		System.out.println(">>>>>"+request.getParameter("param"));
 		CategoryDTO cdto = null;
 		cdto = postDao.getCategory(dto.getCategoryno());
 		try {
+			System.out.println("dto>>>>>>"+dto.toString());
 			int cnt = postDao.postInsert(dto);
 			resp.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = resp.getWriter();
