@@ -8,7 +8,7 @@
 			<i class="fa fa-file-text-o"></i> Lecture
 		</h3>
 		<ol class="breadcrumb">
-			<li><i class="fa fa-home"></i><a href="adminindex.do">Home</a></li>
+			<li><i class="fa fa-home"></i><a href="adminIndex.do">Home</a></li>
 			<li>동영상 교육 관리자페이지</li>
 		</ol>
 	</div>

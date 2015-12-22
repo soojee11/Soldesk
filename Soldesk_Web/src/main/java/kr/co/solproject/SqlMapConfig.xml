@@ -40,5 +40,7 @@
 	<sqlMap resource="kr/co/solproject/lectureqna/lectureqna.xml" />
 	<sqlMap resource="kr/co/solproject/postscript/postscript.xml" />
 	<sqlMap resource="kr/co/solproject/bbs/bbs.xml" />
+	<sqlMap resource="kr/co/solproject/qnabbs/qna.xml" />
+	<sqlMap resource="kr/co/solproject/reply/reply.xml" />
 
 </sqlMapConfig> 

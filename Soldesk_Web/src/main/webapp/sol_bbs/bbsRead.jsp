@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="css/style.css" />
 <br/>
 <h5>
-	<img src="img/cont.JPG"><img src="img/pna.JPG">| 무엇이든 물어보세요
+	<img src="bbs_img/cont.JPG"><img src="bbs_img/pna.JPG">| 무엇이든 물어보세요
 </h5>
 <hr>
 <div align="center"><h3>상세 보기</h3></div>

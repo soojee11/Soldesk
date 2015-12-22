@@ -37,11 +37,7 @@
       <!--header start-->
       
       <header class="header dark-bg">
-            <div class="toggle-nav">
-                <div class="icon-reorder tooltips" data-original-title="Toggle Navigation" data-placement="bottom"><i class="icon_menu"></i></div>
-            </div>
-
-            <!--logo start-->
+              <!--logo start-->
             <a href="adminIndex.do" class="logo">SolProject <span class="lite">Admin</span></a>
             <!--logo end-->
             <div class="nav search-row" id="top_menu">
@@ -102,9 +98,9 @@
                       </a>
                       <ul class="sub">
                       
-                          <li><a  href="memlist.do">Member_list</a></li>
-                          <li><a  href="memdelete.do">Member_delete</a></li>                          
-                          <li><a  href="memmlevel.do">Member_mlevel</a></li>
+                          <li><a  href="member/memlist.do">Member_list</a></li>
+                          <li><a  href="member/memdelete.do">Member_delete</a></li>                          
+                          <li><a  href="member/memmlevel.do">Member_mlevel</a></li>
                       </ul>
                   </li>  
 				  <li class="sub-menu">
@@ -114,7 +110,7 @@
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
                       <ul class="sub">
-                          <li><a  href="boarddelete.do">Board_delete</a></li>
+                          <li><a  href="bbs/boarddelete.do">Board_delete</a></li>
                       </ul>
                   </li>       
                   <li class="sub-menu">
@@ -124,7 +120,7 @@
                         	<span class="menu-arrow arrow_carrot-right"></span>
                       </a>
                       <ul class="sub">
-                          <li><a  href="qnadelete.do">Q&A_delete</a></li>
+                          <li><a  href="qna/qnadelete.do">Q&A_delete</a></li>
                       </ul>
                   </li>
                   <li class="sub-menu">                     
@@ -134,8 +130,8 @@
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
                         <ul class="sub">
-                          <li><a  href="readCateInfo.do">Lecture_insert</a></li>                          
-                          <li><a  href="cateDelete.do">Update&Delete</a></li>
+                          <li><a  href="player/readCateInfo.do">Lecture_insert</a></li>                          
+                          <li><a  href="player/cateDelete.do">Update&Delete</a></li>
                       </ul>
                   </li>
                    <li class="sub-menu">
@@ -146,8 +142,8 @@
                       </a>
                         <ul class="sub">
 
-                          <li><a  href="testList.do">Test_insert</a></li>
-                          <li><a  href="testDelete.do">Update&Delete</a></li>
+                          <li><a  href="test/testList.do">Test_insert</a></li>
+                          <li><a  href="test/testDelete.do">Update&Delete</a></li>
                       </ul>
                   </li>
                   <li>

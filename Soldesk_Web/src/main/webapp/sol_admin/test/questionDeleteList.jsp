@@ -3,6 +3,13 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ include file="../header.jsp"%>
 
+<c:if test="${res==1 }">
+	<script>
+		alert("선택한 문제를 모두 삭제하였습니다.");
+		location.href="questionDeleteList.do?testno=${param.testno }&testtitle=${param.testtitle }";
+	</script>
+</c:if>
+
 <div class="row">
 	<div class="col-lg-12">
 		<h3 class="page-header">
@@ -10,12 +17,13 @@
 		</h3>
 		<ol class="breadcrumb">
 
-			<li><i class="fa fa-home"></i><a href="../adminindex.do">Home</a></li>
+			<li><i class="fa fa-home"></i><a href="../../sol_admin/adminIndex.do">Home</a></li>
 			<li>문제풀기 게시판 관리 페이지</li>
 
 		</ol>
 	</div>
 </div>
+
 <div style="text-align:center; font-size:33px;">
 <strong>${param.testtitle }</strong>
 </div>
@@ -44,19 +52,7 @@
 <a href="testDelete.do"><button class="btn btn-info btn-sm">문제지 목록</button></a>
 </div>
 
-<script>
-function questionDeleteCheck(frm) {
-	
-	msg = "문제를 삭제하시겠습니까?\n삭제한 문제는 되돌릴 수 없습니다.";
-    if (confirm(msg)!=0) {
-         frm.submit();
-    } else {
-        return;
-	} 
-    
-}
-</script>
-<form method="post" action="questionDelete.do?testno=${param.testno }">
+<form method="post" action="questionDeleteProc.do?testno=${param.testno }&testtitle=${param.testtitle }">
 <table class="table" style="text-align: center;">
 	<tr>
 		<td colspan="9" align="left"> 
@@ -67,14 +63,11 @@ function questionDeleteCheck(frm) {
 	</tr>
 	<tr>
 		<th width="50">선택</th>
-		<th width="90">문제지번호</th>
 		<th width="90">문제번호</th>
 		<th width="90">문제종류</th>
+		<th width="200">답</th>
 		<th>문제제목</th>
-		<th>답</th>
-		<th>보기</th>
-		<th>해설</th>
-		<th width="100">첨부파일</th>
+		<th width="100">수정상세보기</th>
 	</tr>
 	
 	<c:if test="${total ==0 }">
@@ -85,18 +78,13 @@ function questionDeleteCheck(frm) {
 
 	<c:forEach var ="dto" items="${list }">
 	<tr>
-		<td><input type="checkbox" name="check4" value="${dto.questno }" <c:if test="${dto.qynshow eq 'Y'}">checked</c:if>/></td>
-		<td>${dto.testno }</td>
+		<td><input type="checkbox" name="check4" value="${dto.questno }"/></td>
 		<td>${dto.questno }</td>
 		<td>${dto.qtype }</td>
-		<td style="text-align: left;">${dto.qtitle }</td>
 		<td style="text-align: left;">${dto.answer }</td>
-		<td style="text-align: left;">${dto.example }</td>
-		<td style="text-align: left;">${dto.comment }</td>
+		<td style="text-align: left;">${dto.qtitle }</td>
 		<td>
-		<c:if test="${dto.poster != '' }">${dto.poster }
-		<%-- <img src="../sol_admin/test/storage/${dto.poster }" > --%>
-		</c:if>
+		<button type="button" class="btn btn-danger btn-sm" onclick="javascript:location.href='questionRead.do?testno=${dto.testno }&questno=${dto.questno }&testtitle=${param.testtitle }'">수정상세보기</button>
 		</td>
 	</tr>
 

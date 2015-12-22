@@ -3,6 +3,19 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ include file="../header.jsp"%>
 <!-- page start-->
+<c:if test="${res==1 }">
+	<script>
+		alert("해당 문제지와 문제를 모두 삭제하였습니다.");
+		location.href="testDelete.do";
+	</script>
+</c:if>
+
+<c:if test="${res == 2 }">
+	<script>
+		alert("해당 문제지를 수정하였습니다.");
+		location.href="testDelete.do";
+	</script>
+</c:if>
 
 <div class="row">
 	<div class="col-lg-12">
@@ -10,7 +23,7 @@
 			<i class="fa fa-file-text-o"></i> Test
 		</h3>
 		<ol class="breadcrumb">
-			<li><i class="fa fa-home"></i><a href="../adminindex.do">Home</a></li>
+			<li><i class="fa fa-home"></i><a href="../../sol_admin/adminIndex.do">Home</a></li>
 			<li>문제풀기 게시판 관리 페이지</li>
 		</ol>
 	</div>
@@ -44,39 +57,18 @@
 						<c:choose><c:when  test="${col2 eq '' }" >selected</c:when></c:choose>>과목전체</option>
 					<option value="kor"
 						<c:choose><c:when  test="${col2 eq 'kor' }" >selected</c:when></c:choose>>국어</option>
-					<option value="eng"
-						<c:choose><c:when  test="${col2 eq 'eng' }" >selected</c:when></c:choose>>영어</option>
 					<option value="mat"
 						<c:choose><c:when  test="${col2 eq 'mat' }" >selected</c:when></c:choose>>수학</option>
+					<option value="soc"
+						<c:choose><c:when  test="${col2 eq 'soc' }" >selected</c:when></c:choose>>사회</option>
+					<option value="sci"
+						<c:choose><c:when  test="${col2 eq 'sci' }" >selected</c:when></c:choose>>과학</option>
 				</select>
 			</div>
 				<button class="btn btn-success btn-sm">검색</button>
 		</form>
 	</div>
 </div>
-<script>
-function testDeleteCheck(frm) {
-	var flag=false;
-	var check = document.getElementsByName('check3');
-	for (var i = 0; i < check.length; i++) {
-		if (check[i].checked) flag=true;
-	}
-	
-	if(flag==false) {
-		alert('삭제할 문제지를 체크해주세요');
-		return false;
-	}
-	if(flag==true) {
-		msg = "문제지를 삭제하시겠습니까?\n삭제를 하시면 문제지에 포함된 문제가 모두 삭제됩니다.\n삭제한 문제는 되돌릴 수 없습니다.\n원치 않으시면 취소를 눌러주세요";
-	    if (confirm(msg)!=0) {
-	         frm.submit();
-	    } else {
-	        return;
-		} 
-	}
-    
-}
-</script>
 
 <form method="post" action="testDeleteProc.do">
 <input type="checkbox" name="allck3" id="allck3" onclick="checkboxEnable3()"/>
@@ -90,6 +82,7 @@ function testDeleteCheck(frm) {
 		<th width="60">학년</th>
 		<th width="60">과목</th>
 		<th>문제지 제목</th>
+		<th width="120">문제지수정</th>
 		<th width="100">문제 보기</th>
 	</tr>
 
@@ -103,15 +96,19 @@ function testDeleteCheck(frm) {
 			<td><c:set var="subject" value="${dto.subject }" /> <c:choose>
 					<c:when test="${subject eq 'kor'}">
 					국어
-				</c:when>
-					<c:when test="${subject eq 'eng'}">
-					영어
-				</c:when>
+					</c:when>
 					<c:when test="${subject eq 'mat'}">
 					수학
-				</c:when>
+					</c:when>
+					<c:when test="${subject eq 'soc'}">
+					사회
+					</c:when>
+					<c:when test="${subject eq 'sic'}">
+					과학
+					</c:when>
 				</c:choose></td>
 			<td>${dto.testtitle }</td>
+			<td><button type="button" class="btn btn-danger btn-sm" onclick="javascript:location.href='testUpdate.do?testno=${dto.testno }'">문제지수정</button></td>
 			<td><button
 						class="btn btn-info btn-sm" type="button" 
 						onclick="javascript:location.href='questionDeleteList.do?testno=${dto.testno }&testtitle=${dto.testtitle }'">문제 보기</button></td>

@@ -7,8 +7,63 @@ public class MypageDTO {
 	private String regdate; 	    
 	private int lectureno; 	
 	
+	//------------------------------------------------------sol_lecture
+    private String subject;     // 碍狼力格
+    private String poster;		// 母媚拳搁 
+	private String teacher;		// 急积丛 捞抚 
+    
+    public String getSubject() {
+		return subject;
+	}
+
+	public void setSubject(String subject) {
+		this.subject = subject;
+	}
+    
+	public String getPoster() {
+		return poster;
+	}
+
+	public void setPoster(String poster) {
+		this.poster = poster;
+	}
+
+
+	public String getTeacher() {
+		return teacher;
+	}
+
+
+	public void setTeacher(String teacher) {
+		this.teacher = teacher;
+	}
+
+	//------------------------------------------------------sol_study
+    private String memo;     // memo
+    private String memodate; // memo 殿废老 
+	
+    public String getMemo() {
+		return memo;
+	}
+
+
+	public void setMemo(String memo) {
+		this.memo = memo;
+	}
+
+
+	public String getMemodate() {
+		return memodate;
+	}
+
+
+	public void setMemodate(String memodate) {
+		this.memodate = memodate;
+	}
+
+	//--------------------------------------------------------
 	public MypageDTO() {
-		System.out.println("⒑------MypageDTO()按眉 积己凳...");
+		//System.out.println("⒑------MypageDTO()按眉 积己凳...");
 	}
 
 	
@@ -36,6 +91,16 @@ public class MypageDTO {
 	public void setLectureno(int lectureno) {
 		this.lectureno = lectureno;
 	}
+
+	@Override
+	public String toString() {
+		return "MypageDTO [calno=" + calno + ", id=" + id + ", regdate=" + regdate + ", lectureno=" + lectureno
+				+ ", subject=" + subject + ", poster=" + poster + ", teacher=" + teacher + ", memo=" + memo
+				+ ", memodate=" + memodate + "]";
+	}
+
+
+	
 	
 	
 }

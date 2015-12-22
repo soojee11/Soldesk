@@ -5,7 +5,7 @@ public class TestDTO {
 	private int grade;			//학년
 	private String subject;		//과목	
 	private String testtitle;	//문제지제목
-	private String eynshow;
+	private String testshow;
 	
 	public TestDTO() {	}
 
@@ -41,18 +41,18 @@ public class TestDTO {
 		this.testtitle = testtitle;
 	}
 
-	public String getEynshow() {
-		return eynshow;
+	public String getTestshow() {
+		return testshow;
 	}
 
-	public void setEynshow(String eynshow) {
-		this.eynshow = eynshow;
+	public void setTestshow(String testshow) {
+		this.testshow = testshow;
 	}
 
 	@Override
 	public String toString() {
 		return "TestDTO [testno=" + testno + ", grade=" + grade + ", subject=" + subject + ", testtitle=" + testtitle
-				+ ", eynshow=" + eynshow + "]";
+				+ ", testshow=" + testshow + "]";
 	}
 		
 }

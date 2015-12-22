@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
 import kr.co.solproject.GetSqlMapClient;
+import kr.co.solproject.mypage.MypageDTO;
 
 @Component
 public class StudyDAO {
@@ -14,7 +15,7 @@ public class StudyDAO {
 private SqlMapClient mybatis; // Connection con
   public StudyDAO(){
     mybatis = GetSqlMapClient.get();  // con = dbopen.getConnection()
-    System.out.println("StudyDAO 객체 생성");
+    System.out.println("---------------StudyDAO 객체 생성");
   }
   
   public void check(String id, int lectureno){
@@ -32,7 +33,7 @@ private SqlMapClient mybatis; // Connection con
       if(cnt>0) flag = true;
       
       if(flag == false){
-       insert(map);  // 없으면 학습테이블에 isnert
+       insert(map);  // 없으면 학습테이블에 insert
       }
     }catch (Exception e){
       System.out.println("check 실패: "+e);
@@ -72,5 +73,6 @@ private SqlMapClient mybatis; // Connection con
    
    return sdto;
   }
-  
+
+
 }
