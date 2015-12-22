@@ -41,7 +41,7 @@
       
       <header class="header dark-bg">
             <!--logo start-->
-            <a href="adminIndex.do" class="logo">SolProject <span class="lite">Admin</span></a>
+            <a href="../adminIndex.do" class="logo">SolProject <span class="lite">Admin</span></a>
             <!--logo end-->
             <div class="nav search-row" id="top_menu">
                 <!--  search form start -->
