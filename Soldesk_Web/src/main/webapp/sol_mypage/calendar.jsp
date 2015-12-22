@@ -166,17 +166,17 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
 <% 
 }
 %> --%>
-
+ 
       <c:set var="newLine" value="0"/>
-
+ 
       <c:forEach begin="1" end="${startDay-1}" var="count"> <!-- 날짜시작전 빈공간 ->밀린다!!! -->
            <td>&nbsp;</td>
            <c:set var="count" value="${count}"/>
             <c:set var="newLine">${ newLine+1}</c:set> 
             
-           <%--   <c:out value="${count}"/>  --%>
+            
        </c:forEach> 
-       
+     
    <%--     <c:forEach begin="1" end="${week-1 }" var="i">
                         <td bgcolor='#ffffff'>&nbsp;</td>
                         <c:set var="newLine">${ newLine+1}</c:set> 
@@ -184,6 +184,7 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
  --%>
       
       <c:forEach begin="${startDate}" end="${endDate}" var="i">
+       
                 <%--   <c:if test="${year eq val && month eq mth && date eq i }">
                      <c:set var="bgcolor" value="#99cc66"/>
                   </c:if>
@@ -241,20 +242,32 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
                             </c:choose>
                         
                         </c:if>
+                        
+                    <c:set var="count">${ count+1}</c:set> 
+                  <%--   <c:out value="${count}"/>   --%>
                   
-                  
-                   <%-- <c:set var="count" value="${count + 1}"/> --%>
-                   <c:set var="count" value="${count + 1}" />
-                   
-                    <td bgcolor="${bgcolor}" width="14.285%" >
-                    <font color="${color}">
-                    
+    <!-- +++++++++++++++++++++++++++++++++++++++아이콘++++++++++++++++++++++++++++++++++++ --> 
+             
+    <!-- ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★ --> 
+             
+          <c:set var="count2" value="0"/>             
+   <td bgcolor="${bgcolor}" width="14.285%" >
+    
+      
+           
+    
+    <font color="${color}">
+    
       ${i })
       
       
-      <!-- +++++++++++++++++++++++++++++++++++++++아이콘++++++++++++++++++++++++++++++++++++ --> 
-      
+     
   <c:forEach var="rdt" items="${maxrdtlist }">
+  
+  
+ <%--    <c:set var="count2">${count2+1}</c:set>
+  ${count2 } --%>
+  
    <c:set var="rdt_id" value="${rdt.id }" />
    <fmt:parseNumber var="parsedate" type="number"  value="${fn:substring(rdt.regdate, 8 ,10) }" />
    <fmt:parseNumber var="parseyear" type="number" integerOnly="true"  value="${fn:substring(rdt.regdate, 0 ,4) }" />
@@ -296,21 +309,23 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
     <!-- +++++++++++++++++++++++++++++++++++++++++아이콘+++++++++++++++++++++++++++++++ -->
                     
  </font>
+ 
+      
+ 
+                   
  </td>
+ 
+<!-- && i lt endDate -->
 
-
-
-
-
- <c:if test="${count%7 eq 0 && i lt endDate}"> <!--둘째줄부터  -->
+ <c:if test="${(count-(7-(startDay-1)))%7 == 0 }"> 
  </tr>
- <tr  style='height: 70px; font-weight: bold;'>
-  
+ <tr  style='height: 70px; font-weight: bold;'> <!--둘째줄부터  -->
  </c:if>
+      
       
  </c:forEach> 
    
-          <c:choose>
+                             <c:choose>
                                 <c:when test="${newLine gt 0 && newLine lt 7}">
                                     <c:forEach begin='${newLine }' end="6"> 
                                     <td bgcolor='#ffffff'>&nbsp;</td>
