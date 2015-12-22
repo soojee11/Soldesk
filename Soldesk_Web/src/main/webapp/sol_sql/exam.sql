@@ -57,7 +57,7 @@ CREATE TABLE sol_study(
 lectureno	int(11)		NOT NULL,
 id		VARCHAR(200) 	NOT NULL,      
 memo		VARCHAR(500)	NULL,
-regdate		datetime	NULL,
+memodate		datetime	NULL,
 PRIMARY KEY  (lectureno,id)
 )ENGINE=MyISAM DEFAULT CHARSET="euckr";	
 

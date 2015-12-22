@@ -11,7 +11,7 @@ function denywrite(){
 </script>
 <br/>
 <h5>
-  <img src="bbs_img/cont.JPG"><img src="bbs_img/pna.JPG">| 무엇이든 물어보세요
+  <img src="bbs_img/cont.JPG"><img src="bbs_img/pna.JPG">| 자유롭게 말해보세요
 </h5>
 <hr>
 총 <strong>${recNo-1 }</strong>개의 등록된 글이 있습니다. | 현재 페이지 : <strong>${nowPage }/${totalPage }</strong>

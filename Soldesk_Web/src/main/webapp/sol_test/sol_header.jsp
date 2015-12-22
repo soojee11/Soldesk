@@ -3,7 +3,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-
+<!--  한글 웹 폰트 적용-->
+		<link rel='stylesheet' href='http://fonts.googleapis.com/earlyaccess/jejugothic.css'>
+		<style type="text/css">
+		header, .hero-unit{
+		  font-family:'Jeju Gothic', sans-serif;
+		  font-size:20pt;
+		}
+		</style>
+<!-- 한글 웹 폰트 적용 끝 -->
 <!-- start: Meta -->
 <meta charset="utf-8">
 <title>SOLPROJECT</title>
@@ -182,12 +190,12 @@
 							</form>
 						</td>
 						<td>
-							<form class="form-inline" action="../sol_member/joinagree.do">
+							<form class="form-inline" action="../../sol_member/joinagree.do">
 								<button type="submit" class="btn btn-primary">회원가입</button>
 							</form>
 						</td>
 						<td>
-							<form class="form-inline" method="post" action="../sol_member/findform.do">
+							<form class="form-inline" method="post" action="../../sol_member/findform.do">
 								<button type="submit" class="btn btn-primary">ID/PW찾기</button>
 							</form>
 						</td>
@@ -208,14 +216,14 @@
 				<table>
 					<tr>
 						<td>
-							<form class="form-inline" method="post" action="../sol_member/logout.do">
+							<form class="form-inline" method="post" action="../../sol_member/logout.do">
 								${s_id }님 환영합니다. <input type="button" name="logout"
 									class="btn btn-primary" value="로그아웃"
 									onclick="check2(this.form)" />
 							</form>
 						</td>
 						<td>
-							<form class="form-inline" method="post" action="../sol_member/update.do">
+							<form class="form-inline" method="post" action="../../sol_member/update.do">
 								<input type="hidden" name="id" value="${s_id }" /> <input
 									type="button" name="update" class="btn btn-primary"
 									value="정보수정" onclick="check3(this.form)" />

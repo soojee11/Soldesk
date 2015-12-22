@@ -1417,7 +1417,7 @@ form#newsletter input[type=submit] {
 
 .btn-success:active,
 .btn-success.active {
-  background-color: #408140 \9;
+  background-color: #408140;
 }
 
 .btn-info {
