@@ -658,7 +658,7 @@ public class AdminCont {
 
 //-----------------------------------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------------------PLAYER START
-	@RequestMapping(value="sol_admin/leclist.do")
+	@RequestMapping(value="sol_admin/player/leclist.do")
 	public String lecList(HttpServletRequest request) {
 		
 		int categoryno = Integer.parseInt(request.getParameter("categoryno"));
@@ -703,7 +703,7 @@ public class AdminCont {
 		return "sol_admin/player/playerList";
 	}//end
 	
-	@RequestMapping(value="sol_admin/leclist2.do")
+	@RequestMapping(value="sol_admin/player/leclist2.do")
 	public String lecList2(HttpServletRequest request) {
 		
 		int categoryno = Integer.parseInt(request.getParameter("categoryno"));
@@ -748,7 +748,7 @@ public class AdminCont {
 		return "sol_admin/player/playerList";
 	}//end
 	
-	@RequestMapping(value="sol_admin/lecread.do", method=RequestMethod.GET)
+	@RequestMapping(value="sol_admin/player/lecread.do", method=RequestMethod.GET)
 	public String lecRead(PlayerDTO dto, HttpServletRequest request) {
 		
 		dto = dao.lecRead(dto.getLectureno());
@@ -775,7 +775,7 @@ public class AdminCont {
 		return "sol_admin/player/playerRead";
 	}//end
 	
-	@RequestMapping(value="sol_admin/lecread2.do", method=RequestMethod.GET)
+	@RequestMapping(value="sol_admin/player/lecread2.do", method=RequestMethod.GET)
 	public String lecRead2(PlayerDTO dto, HttpServletRequest request) {
 		
 		dto = dao.lecRead(dto.getLectureno());
@@ -801,7 +801,7 @@ public class AdminCont {
 		return "sol_admin/player/playerRead";
 	}//end
 	
-	@RequestMapping(value="sol_admin/lecDel.do", method=RequestMethod.GET)
+	@RequestMapping(value="sol_admin/player/lecDel.do", method=RequestMethod.GET)
 	public String lecDel(HttpServletRequest request) {
 		
 		PlayerDTO dto = null;
@@ -822,7 +822,7 @@ public class AdminCont {
 		return "sol_admin/player/playerDel";
 	}//end
 	
-	@RequestMapping(value="sol_admin/lecDelProc.do", method=RequestMethod.GET)
+	@RequestMapping(value="sol_admin/player/lecDelProc.do", method=RequestMethod.GET)
 	public String lecDelProc(int lectureno, int categoryno, HttpServletRequest request) {
 		
 		//dao.categoryDelProc(categoryno);
@@ -842,7 +842,7 @@ public class AdminCont {
 		return "redirect:leclist2.do?categoryno="+categoryno;
 	}//end
 	
-	@RequestMapping(value = "sol_admin/lecUpdate.do", method = RequestMethod.GET)
+	@RequestMapping(value = "sol_admin/player/lecUpdate.do", method = RequestMethod.GET)
 	public String lecUpdate(int lectureno, int categoryno, HttpServletRequest request) {
 		
 		//System.out.println("lectureno---"+lectureno);
@@ -860,7 +860,7 @@ public class AdminCont {
 		return "sol_admin/player/playerUpdate";
 	}//end
 	
-	@RequestMapping(value = "sol_admin/lecUpdate.do", method = RequestMethod.POST)
+	@RequestMapping(value = "sol_admin/player/lecUpdate.do", method = RequestMethod.POST)
 	public String lecUpdateProc(PlayerDTO dto, HttpServletRequest request) {
 		
 		System.out.println("lectureno: "+dto.getLectureno());
@@ -901,7 +901,7 @@ public class AdminCont {
 		return "redirect:leclist2.do?categoryno="+oldDTO.getCategoryno();
 	}//end
 
-	@RequestMapping(value="sol_admin/readCateInfo.do", method=RequestMethod.GET)
+	@RequestMapping(value="sol_admin/player/readCateInfo.do", method=RequestMethod.GET)
 	public String readCateInfo(HttpServletRequest request) {
 		
 		String url = "./readCateInfo.do";
@@ -939,7 +939,7 @@ public class AdminCont {
 		return "sol_admin/player/readCateInfo";
 	}//end
 	
-	@RequestMapping(value="sol_admin/cateUpdate.do", method=RequestMethod.GET)
+	@RequestMapping(value="sol_admin/player/cateUpdate.do", method=RequestMethod.GET)
 	public String updateCateInfo(int categoryno, HttpServletRequest request) {
 		CategoryDTO dto = null;
 		dto = dao.categoryRead(categoryno);
@@ -950,14 +950,14 @@ public class AdminCont {
 		return "sol_admin/player/updateCateInfo";
 	}//end
 	
-	@RequestMapping(value="sol_admin/cateUpdate.do", method=RequestMethod.POST)
+	@RequestMapping(value="sol_admin/player/cateUpdate.do", method=RequestMethod.POST)
 	public String updateCateProc(CategoryDTO dto, HttpServletRequest request) {
 		dao.updateCateProc(dto);
 		return "redirect:./updelete.do";
 	}//end
 	
 	
-	@RequestMapping(value="sol_admin/cateDel.do", method=RequestMethod.GET)
+	@RequestMapping(value="sol_admin/player/cateDel.do", method=RequestMethod.GET)
 	public String delCateInfo(int categoryno, HttpServletRequest request) {
 		CategoryDTO dto = null;
 		
@@ -969,7 +969,7 @@ public class AdminCont {
 		return "sol_admin/player/delCateInfo";
 	}//end
 	
-	@RequestMapping(value="sol_admin/cateDelProc.do", method=RequestMethod.GET)
+	@RequestMapping(value="sol_admin/player/cateDelProc.do", method=RequestMethod.GET)
 	public String delCateProc(int categoryno, HttpServletRequest request) {
 		System.out.println(categoryno);
 		List list = new ArrayList();
@@ -995,12 +995,12 @@ public class AdminCont {
 		return "redirect:./updelete.do";
 	}//end
 	
-	@RequestMapping(value="sol_admin/cateInsert.do", method=RequestMethod.GET)
+	@RequestMapping(value="sol_admin/player/cateInsert.do", method=RequestMethod.GET)
 	public String cateInsert(HttpServletRequest request) {
 		return "sol_admin/player/categoryIns";
 	}//end
 	
-	@RequestMapping(value="sol_admin/cateInsert.do", method=RequestMethod.POST)
+	@RequestMapping(value="sol_admin/player/cateInsert.do", method=RequestMethod.POST)
 	public String cateInsProc(CategoryDTO dto, HttpServletRequest request) {
 		//System.out.println("grade;" + dto.getGrade());
 		//System.out.println("getGwamok;" + dto.getGwamok());
@@ -1027,7 +1027,7 @@ public class AdminCont {
 		}
 	}//end
 	
-	@RequestMapping(value="sol_admin/updelete.do", method=RequestMethod.GET)
+	@RequestMapping(value="sol_admin/player/updelete.do", method=RequestMethod.GET)
 	public String cateupdelete(HttpServletRequest request) {
 		
 		String url = "./readCateInfo.do";
@@ -1069,7 +1069,7 @@ public class AdminCont {
 	
 //-----------------------------------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------------------MEMBER START	
-	@RequestMapping(value="sol_admin/memlist.do", method=RequestMethod.GET)
+	@RequestMapping(value="sol_admin/member/memlist.do", method=RequestMethod.GET)
 	public String memList(HttpServletRequest request) {
 		
 		String url = "./memlist.do";
@@ -1115,7 +1115,7 @@ public class AdminCont {
 		return "sol_admin/member/memberList";
 	}//end
 	
-	@RequestMapping(value="sol_admin/memmlevel.do", method=RequestMethod.GET)
+	@RequestMapping(value="sol_admin/member/memmlevel.do", method=RequestMethod.GET)
 	public String memLevelList(HttpServletRequest request) {
 		
 		String url = "./memmlevel.do";
@@ -1161,7 +1161,7 @@ public class AdminCont {
 		return "sol_admin/member/memLevel";
 	}//end
 	
-	@RequestMapping(value="sol_admin/memmlevel.do", method=RequestMethod.POST)
+	@RequestMapping(value="sol_admin/member/memmlevel.do", method=RequestMethod.POST)
 	public String memLevelProc(String mlevel, String id, HttpServletRequest request) {	
 		
 		System.out.println(mlevel);
@@ -1219,7 +1219,7 @@ public class AdminCont {
 		return "sol_admin/member/memLevel";
 	}//end
 	
-	@RequestMapping(value="sol_admin/memdelete.do", method=RequestMethod.GET)
+	@RequestMapping(value="sol_admin/member/memdelete.do", method=RequestMethod.GET)
 	public String memDelete(HttpServletRequest request) {	
 		
 		String url = "./memdelete.do";
@@ -1265,7 +1265,7 @@ public class AdminCont {
 		return "sol_admin/member/memDelete";
 	}//end
 	
-	@RequestMapping(value="sol_admin/memdelete.do", method=RequestMethod.POST)
+	@RequestMapping(value="sol_admin/member/memdelete.do", method=RequestMethod.POST)
 	public String memDelProc(MemberDTO dto, HttpServletRequest request) {	
 
 			String[] checks=request.getParameterValues("check2");

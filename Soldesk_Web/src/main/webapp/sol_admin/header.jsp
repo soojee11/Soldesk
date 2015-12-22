@@ -101,9 +101,9 @@
                       </a>
                       <ul class="sub">
                       
-                          <li><a  href="memlist.do">Member_list</a></li>
-                          <li><a  href="memdelete.do">Member_delete</a></li>                          
-                          <li><a  href="memmlevel.do">Member_mlevel</a></li>
+                          <li><a  href="../member/memlist.do">Member_list</a></li>
+                          <li><a  href="../member/memdelete.do">Member_delete</a></li>                          
+                          <li><a  href="../member/memmlevel.do">Member_mlevel</a></li>
                       </ul>
                   </li>  
 				  <li class="sub-menu">
@@ -113,7 +113,7 @@
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
                       <ul class="sub">
-                          <li><a  href="boarddelete.do">Board_delete</a></li>
+                          <li><a  href="../bbs/boarddelete.do">Board_delete</a></li>
                       </ul>
                   </li>       
                   <li class="sub-menu">
@@ -123,7 +123,7 @@
                         	<span class="menu-arrow arrow_carrot-right"></span>
                       </a>
                       <ul class="sub">
-                          <li><a  href="qnadelete.do">Q&A_delete</a></li>
+                          <li><a  href="../qna/qnadelete.do">Q&A_delete</a></li>
                       </ul>
                   </li>
                   <li class="sub-menu">                     
@@ -133,8 +133,8 @@
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
                         <ul class="sub">
-                          <li><a  href="readCateInfo.do">Lecture_insert</a></li>                          
-                          <li><a  href="updelete.do">Update&Delete</a></li>
+                          <li><a  href="../player/readCateInfo.do">Lecture_insert</a></li>                          
+                          <li><a  href="../player/updelete.do">Update&Delete</a></li>
                       </ul>
                   </li>
                    <li class="sub-menu">
