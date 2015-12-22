@@ -5,7 +5,7 @@
 <c:if test="${msg != null }">
 	<script>
 		alert("게시물 삭제 성공");
-		location.href="bbslist.do";
+		location.href="bbslist.do?nowPage=${nowPage }";
 	</script>
 </c:if>
 <!--  -->

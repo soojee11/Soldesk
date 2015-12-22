@@ -11,10 +11,10 @@ function denywrite(){
 </script>
 <br/>
 <h5>
-  <img src="img/cont.JPG"><img src="img/pna.JPG">| 무엇이든 물어보세요
+  <img src="bbs_img/cont.JPG"><img src="bbs_img/pna.JPG">| 무엇이든 물어보세요
 </h5>
 <hr>
-총 <strong>${recNo }</strong>개의 등록된 글이 있습니다. | 현재 페이지 : <strong>1/89</strong>
+총 <strong>${recNo-1 }</strong>개의 등록된 글이 있습니다. | 현재 페이지 : <strong>${nowPage }/${totalPage }</strong>
 <div align="right"><input type="button" value="글쓰기" class="btn btn-default" 
           <c:if test="${s_id == null }">onclick="denywrite()"</c:if>
           <c:if test="${s_id != null }">onclick="location.href='./create.do'"</c:if>></div>
@@ -29,19 +29,22 @@ function denywrite(){
     <td >작성일</td>
     <td width="50px">조회수</td>
   </tr>
-  <c:set var ="recNo" value="${recNo+1 }"/>
+  <c:set var ="recNo" value="${recNo }"/>
   <c:forEach var ="dto" items="${list }">
     <c:set var ="recNo" value="${recNo-1 }"/>
       <tr align="center">
         <td>${recNo }</td>
         <td>${dto.passwd }</td>
         <td>
-          <a href="./bbsread.do?bbsno=${dto.bbsno }">${dto.subject }</a>
+          <a href="bbsread.do?bbsno=${dto.bbsno }&nowPage=${nowPage }">${dto.subject }</a>
         </td>
         <td>${dto.regdt }</td>
         <td>${dto.readcnt }</td>
       </tr>
   </c:forEach>
+    <tr>
+      <td colspan="5"><div align="center">${paging }</div></td>
+     </tr>
 </table>
 
 <!-- page end-->

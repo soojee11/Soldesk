@@ -37,11 +37,7 @@
       <!--header start-->
       
       <header class="header dark-bg">
-            <div class="toggle-nav">
-                <div class="icon-reorder tooltips" data-original-title="Toggle Navigation" data-placement="bottom"><i class="icon_menu"></i></div>
-            </div>
-
-            <!--logo start-->
+              <!--logo start-->
             <a href="adminIndex.do" class="logo">SolProject <span class="lite">Admin</span></a>
             <!--logo end-->
             <div class="nav search-row" id="top_menu">
@@ -146,8 +142,8 @@
                       </a>
                         <ul class="sub">
 
-                          <li><a  href="testList.do">Test_insert</a></li>
-                          <li><a  href="testDelete.do">Update&Delete</a></li>
+                          <li><a  href="test/testList.do">Test_insert</a></li>
+                          <li><a  href="test/testDelete.do">Update&Delete</a></li>
                       </ul>
                   </li>
                   <li>

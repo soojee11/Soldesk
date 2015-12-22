@@ -29,21 +29,88 @@
 		where id = #id#
 	</select>
 
-	<select id="check" parameterClass="Map" resultClass="int">
-		SELECT count(*) FROM sol_calendar
+	<select id="checkcount" parameterClass="Map" resultClass="int">
+		SELECT
+		count(*) FROM sol_calendar
 		WHERE id=#id# AND lectureno=#lectureno#
 	</select>
 
-	<insert id="insert" parameterClass="Map">
-		INSERT INTO sol_calendar (lectureno, id, regdate)
+	<select id="checkrdt" parameterClass="Map" resultClass="String">
+		SELECT
+		max(regdate) FROM sol_calendar
+		WHERE id=#id# AND lectureno=#lectureno#
+	</select>
+
+	<select id="checkcalno" parameterClass="Map" resultClass="String">
+		SELECT
+		max(calno) FROM sol_calendar
+		WHERE id=#id# AND lectureno=#lectureno#
+	</select>
+
+	<select id="check" parameterClass="Map" resultClass="String">
+		SELECT
+		regdate FROM sol_calendar
+		WHERE id=#id# AND lectureno=#lectureno#
+	</select>
+
+
+	<insert id="calinsert" parameterClass="Map">
+		INSERT INTO
+		sol_calendar(lectureno, id, regdate)
 		VALUES (#lectureno#, #id#, now())
 	</insert>
 
-<select id="getregdate" parameterClass="String" resultClass="String">
+	<update id="calupdate" parameterClass="Map">
+		update sol_calendar
+		set
+		regdate = now()
+		where id=#id# and lectureno = #lectureno# and
+		calno=#calno#
+	</update>
+
+
+	<select id="getregdate" parameterClass="String" resultClass="MypageDTO">
 		select
 		regdate
 		from sol_calendar
 		where id = #id#
 	</select>
+
+
+	<select id="getMemoList" resultClass="MypageDTO">
+		SELECT
+		study.id,study.lectureno,study.memo,study.memodate,calendar.regdate
+		FROM sol_calendar calendar join sol_study study
+		ON calendar.lectureno =
+		study.lectureno
+		where calendar.id=study.id
+	</select>
+
+	<!-- SELECT t1.col, t3.col FROM table1 join table2 ON table1.primarykey 
+		= table2.foreignkey join table3 ON table2.primarykey = table3.foreignkey -->
+	
+	<select id="getLectureList" resultClass="MypageDTO">
+		SELECT
+		lecture.lectureno,
+		lecture.subject,lecture.poster,lecture.teacher,calendar.regdate,calendar.id,study.memo,study.memodate
+		FROM sol_calendar calendar join sol_study study
+		ON calendar.lectureno = study.lectureno
+		join sol_lecture lecture on study.lectureno = lecture.lectureno
+		where calendar.id=study.id
+	</select>
+
+
+	<select id="getMaxrdtList" parameterClass="String" resultClass="MypageDTO">
+		select id,regdate from sol_calendar where id=#id# group by left(regdate,10);
+	</select>
+
+
+
+
+
+
+
+
+
 
 </sqlMap> 

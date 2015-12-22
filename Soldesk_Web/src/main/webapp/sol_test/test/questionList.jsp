@@ -5,8 +5,7 @@
 <c:if test="${res==false}">
 	<script>
 		alert("문제를 모두 풀어야 점수확인이 가능합니다.");
-		location.href="questionList.do?testno=${param.testno}&testtitle=${param.testtitle}";
-		//history.go(-1);
+		history.go(-1);
 	</script>
 </c:if>
 
@@ -15,8 +14,8 @@
 <head>
 <meta charset="UTF-8">
 <title>EBS 초중학</title>
-<script src="js/test.js"></script>
-<link href="css/test.css" rel="stylesheet">
+<script src="../js/test.js"></script>
+<link href="../css/test.css" rel="stylesheet">
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 </head>
 
@@ -26,13 +25,13 @@
 <table cellspacing="0" cellpadding="0" style="width:100%; height:100%;">
 <tr>
 	<td style="text-align:left; padding-left: 20px; padding-right: 20px;">
-		<img src="img/ebslogo.PNG" align="left"/>
+		<img src="../img/ebslogo.PNG" align="left"/>
 	</td>
 	<td style="text-align: center; font-size:25px; padding-left: 20px; padding-right: 20px;">
 		${testtitle }
 	</td>
 		<td style="text-align:right; padding-left: 20px; padding-right: 20px;">
-		<img src="img/alarm.png" /> 경과시간<br />
+		<img src="../img/alarm.png" /> 경과시간<br />
 		<span id="clock" style="font: 20px bold;"></span>
 	</td>
 </tr>
@@ -59,20 +58,17 @@
 <c:set var="recNo" value="${recNo2-1 }" />
 <c:forEach var="dto" items="${list }" >
 <c:set var="recNo" value="${recNo+1 }" />
-<tr>
-
-	<td><c:if test="${recNo > 1 }"><br /><br /><br /><br /></c:if>
-		<c:if test="${dto.poster != '' }">
-		<div style="border:1px dotted; padding: 10px;">
-		<img src="../sol_admin/test/storage/${dto.poster }" />
-		</div>
-		</c:if>
-	</td>
-
+	<tr>
+		<td><c:if test="${recNo > 1 }"><br /><br /><br /><br /></c:if>
+			<c:if test="${dto.poster ne '<p>&nbsp;</p>'}">
+			<div style="border:1px dotted; padding: 10px;">${dto.poster }</div>
+			</c:if>
+		</td>
+	</tr>
 	<tr>
 	<td><br />
 	<span><strong>${recNo }. </strong></span>${dto.qtitle }</td>
-</tr>
+	</tr>
 	<c:if test="${dto.qtype eq 'G' }">
 	<tr>
 		<td>

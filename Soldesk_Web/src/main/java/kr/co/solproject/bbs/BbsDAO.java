@@ -1,6 +1,7 @@
 package kr.co.solproject.bbs;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Component;
 
@@ -32,14 +33,25 @@ public class BbsDAO {
   }
   
   // 게시물 목록 불러오기 
-  public List list(){
+  public List list(Map map){
     List list = null;
     try{
-      list = mybatis.queryForList("sol_bbs.list");
+      list = mybatis.queryForList("sol_bbs.list", map);
     }catch (Exception e){
       System.out.println("실패: "+e);
     }
     return list;
+  }
+  
+  // 게시물 전체 개수 불러오기
+  public int getTotal(){
+    int cnt=0;
+    try{
+      cnt = (Integer) mybatis.queryForObject("sol_bbs.total");
+    }catch (Exception e){
+      System.out.println("getTotal() 실패: "+e);
+    }
+    return cnt;
   }
   
   // bbs 상세보기

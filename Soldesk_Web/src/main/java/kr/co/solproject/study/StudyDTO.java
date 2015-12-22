@@ -4,7 +4,7 @@ public class StudyDTO {
     private int lectureno;
     private String id;
     private String memo;
-    private String regdate; // memo 등록일 
+    private String memodate; // memo 등록일 
     
     public StudyDTO(){}
 
@@ -32,12 +32,12 @@ public class StudyDTO {
       this.memo = memo;
     }
 
-    public String getRegdate() {
-      return regdate;
+    public String getmemodate() {
+      return memodate;
     }
 
-    public void setRegdate(String regdate) {
-      this.regdate = regdate;
+    public void setmemodate(String memodate) {
+      this.memodate = memodate;
     }
     
     
