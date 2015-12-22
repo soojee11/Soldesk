@@ -3,6 +3,15 @@
 <!DOCTYPE html>
 <html>
 <head>
+<!--  한글 웹 폰트 적용-->
+		<link rel='stylesheet' href='http://fonts.googleapis.com/earlyaccess/jejugothic.css'>
+		<style type="text/css">
+		header, .hero-unit{
+		  font-family:'Jeju Gothic', sans-serif;
+		  font-size:20pt;
+		}
+		</style>
+<!-- 한글 웹 폰트 적용 끝 -->
 
 <!-- start: Meta -->
 <meta charset="utf-8">
@@ -122,7 +131,7 @@
 									<li><a href="../sol_test/test/list.do">문제풀기</a></li>
 									<li><a href="../sol_bbs/bbslist.do">자유게시판</a></li>
 									<li><a href="../sol_qna/list.do">Q&A</a></li>
-									<li><a href="../sol_mypage/calendar.do?s_id=${s_id}">내정보</a></li>
+									<li><a href="../sol_mypage/calendar.do?s_id=${s_id}">캘린더</a></li>
 								</ul>
 							</div>
 						</div>
