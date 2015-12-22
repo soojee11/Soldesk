@@ -6,10 +6,12 @@
 <script src="../js/test.js"></script>
 
 <!-- page start-->
-<br />
-<h3><img src="../img/go_right.png" width="20px"/>
-추천 문제지&nbsp;&nbsp;<span style="font-size: 12px;">함께 풀고 학습해 봅시다</span></h3>
-<hr>
+<h4>
+<img src="../img/go_right.png" width="20px"/>
+<img src="../../sol_img/logos/test_desc.png" width="150px" height="50px"> 
+<!-- 추천 문제지&nbsp;&nbsp;
+<span style="font-size: 12px;">함께 풀고 학습해 봅시다</span> -->
+</h4>
 <div>
 <img src="../img/test_info.jpg" />
 </div>

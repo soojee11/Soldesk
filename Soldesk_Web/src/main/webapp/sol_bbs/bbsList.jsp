@@ -9,10 +9,10 @@ function denywrite(){
   alert("로그인 후 이용해주세요.");
 }
 </script>
-<br/>
-<h5>
-  <img src="bbs_img/cont.JPG"><img src="bbs_img/pna.JPG">| 무엇이든 물어보세요
-</h5>
+<h4>
+<img src="../sol_img/go_right.png" width="20px"/>
+<img src="../sol_img/logos/bbs_desc.png" width="190px" height="50px"> 
+</h4>
 <hr>
 총 <strong>${recNo-1 }</strong>개의 등록된 글이 있습니다. | 현재 페이지 : <strong>${nowPage }/${totalPage }</strong>
 <div align="right"><input type="button" value="글쓰기" class="btn btn-default" 
