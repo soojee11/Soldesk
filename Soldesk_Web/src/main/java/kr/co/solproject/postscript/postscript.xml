@@ -5,6 +5,7 @@
 
 <sqlMap namespace="sol_postscript">
 	<typeAlias alias="PostscriptDTO" type="kr.co.solproject.postscript.PostscriptDTO" />
+ 	<typeAlias alias="CategoryDTO" type="kr.co.solproject.category.CategoryDTO" />
 
 	<select id="postList" parameterClass="Map" resultClass="PostscriptDTO">
 		SELECT post.postscriptno, post.id, post.content, post.regdate, post.postgrade
@@ -20,5 +21,20 @@
 		ON post.categoryno = category.categoryno
 		WHERE category.grade = #grade# AND category.gwamok = #gwamok#
 	</select>
+	
+	<insert id="insert" parameterClass="PostscriptDTO" >
+    	INSERT INTO sol_postscript(postscriptno, categoryno, id, content, regdate)
+    	VALUES (#postscriptno#, #categoryno#, #id#, #content#, now())
+ 	 </insert>
+ 	 
+ 	 <select id="read" parameterClass="Map" resultClass="Integer">
+    	SELECT max(categoryno) FROM sol_category
+   	 	WHERE grade=#grade# AND gwamok=#gwamok#
+  	</select>
+  	
+  	<select id="getCategory" parameterClass="Integer" resultClass="CategoryDTO">
+   		SELECT grade, gwamok from sol_category
+    	WHERE categoryno=#categoryno#
+ 	 </select>
 
 </sqlMap>

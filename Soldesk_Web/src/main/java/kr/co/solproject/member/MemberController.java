@@ -15,14 +15,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-
-
-
 @Controller
 public class MemberController {
 
 	@Autowired
 	private MemberDAO dao = null;
+	
+	@Autowired
+  private VideoDAO vdao = null;
 
 	public MemberController() {
 		System.out.println("▶------MemberController()객체 생성됨...");
@@ -32,6 +32,16 @@ public class MemberController {
 	// --------------------------------------------------------------------
 	@RequestMapping(value = "/sol_index.do")
 	public String index(HttpServletRequest req, HttpSession session) {
+	  // 동영상 로딩 정보 
+	  int videono = (int) (Math.random()*2+1); 
+	  VideoDTO vdto = null;
+	  vdto = vdao.getVideo(videono);
+	  
+	  String link = vdto.getTitle();         // 공부하는 아이.mp4
+	  
+	  req.setAttribute("link", link);
+	  req.setAttribute("title", link.substring(0, link.indexOf(".")));
+	  
 		return "/sol_index";
 	}// end	
 	

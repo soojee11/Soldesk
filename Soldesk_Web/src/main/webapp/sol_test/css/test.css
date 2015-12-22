@@ -28,6 +28,7 @@
 
 .mytable {
 	border-collapse: collapse;
+	font-size:12px;
 }
 
 .mytable th {
