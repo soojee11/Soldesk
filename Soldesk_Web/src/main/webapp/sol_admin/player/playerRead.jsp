@@ -9,7 +9,7 @@
 			<i class="fa fa-file-text-o"></i> Lecture
 		</h3>
 		<ol class="breadcrumb">
-			<li><i class="fa fa-home"></i><a href="adminIndex.do">Home</a></li>
+			<li><i class="fa fa-home"></i><a href="../../sol_admin/adminIndex.do">Home</a></li>
 			<li>동영상 교육 관리자페이지</li>
 		</ol>
 	</div>
@@ -38,10 +38,10 @@
 	<tr align="center" >
 		<td rowspan="3">
 			<c:if test="${file_end eq 'MP3' }">
-				<audio controls autoplay id="audio1" src="./player/storage/${dto.filename }"></audio>	
+				<audio controls autoplay id="audio1" src="storage/${dto.filename }"></audio>	
 			</c:if>
 			<c:if test="${file_end eq 'MP4' }">
-				<video controls src="./player/storage/${dto.filename }"  width="300px"></video>
+				<video controls src="storage/${dto.filename }"  width="300px"></video>
 			</c:if>
 		
 		</td>
