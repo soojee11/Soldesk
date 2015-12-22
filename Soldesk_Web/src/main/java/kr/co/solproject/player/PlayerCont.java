@@ -123,12 +123,12 @@ public class PlayerCont {
   }// memoSave.do end 
 	
 	// 동영상 등록 
-	@RequestMapping(value = "sol_admin/lecinsert.do", method = RequestMethod.GET)
+	@RequestMapping(value = "sol_admin/player/lecinsert.do", method = RequestMethod.GET)
 	public String adminPlayInsert() {
 		return "sol_admin/player/playerInsert";
 	}
 
-	@RequestMapping(value = "sol_admin/lecinsert.do", method = RequestMethod.POST)
+	@RequestMapping(value = "sol_admin/player/lecinsert.do", method = RequestMethod.POST)
 	public String adminPlayInsertForm(PlayerDTO dto, HttpServletRequest req) {
 
 		CategoryDTO cdto = null;

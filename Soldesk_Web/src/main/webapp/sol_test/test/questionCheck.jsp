@@ -51,8 +51,8 @@
 
 	</c:forEach>
 
-	<div align="center" style="margin-top: 120px;">
-		<table align="center" text-align="center">
+	<div align="center" style="margin-top: 130px;">
+		<table align="center" text-align="center" width="600px"  style="font-size:12px;">
 			<c:set var="recNo" value="${recNo2-1 }" />
 			<c:forEach var="dto" items="${list }">
 				<c:set var="recNo" value="${recNo+1 }" />
