@@ -3,6 +3,15 @@
 <!DOCTYPE html>
 <html>
 <head>
+<!--  한글 웹 폰트 적용-->
+		<link rel='stylesheet' href='http://fonts.googleapis.com/earlyaccess/jejugothic.css'>
+		<style type="text/css">
+		header, .hero-unit{
+		  font-family:'Jeju Gothic', sans-serif;
+		  font-size:20pt;
+		}
+		</style>
+<!-- 한글 웹 폰트 적용 끝 -->
 
 <!-- start: Meta -->
 <meta charset="utf-8">
