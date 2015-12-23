@@ -2,9 +2,10 @@
 <%@ include file="../sol_header.jsp"%>
 <!-- page start-->
 <script src="js/my.js"></script>
-<br />
-<h3><img src="../sol_img/go_right.png" width="20px"/>
-Q&A&nbsp;&nbsp;<span style="font-size: 12px;">| 무엇이든 물어보세요. </span></h3>
+<h4>
+<img src="../sol_img/go_right.png" width="20px"/>
+<img src="../sol_img/logos/qna_desc.png" width="120px" height="50px"><span style="font-size: 12px;">| 무엇이든 물어보세요</span>
+</h4>
 <hr>
 <div align="center" >
 <form action="insert.do" method="post">
@@ -32,8 +33,8 @@ Q&A&nbsp;&nbsp;<span style="font-size: 12px;">| 무엇이든 물어보세요. </
 	</tr>
 </table>
  <div align="right">
-	<input type="submit" value="등록" >
- 	<input type="button" value="취소" onclick="javascript:history.go(-1)">
+	<input type="submit" class="btn btn-default" value="등록" >
+ 	<input type="button" class="btn btn-default" value="취소" onclick="javascript:history.go(-1)">
   </div>
 </form>
 </div>

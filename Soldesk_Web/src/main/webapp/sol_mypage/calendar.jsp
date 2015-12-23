@@ -61,21 +61,20 @@ int startDay = cr.get(Calendar.DAY_OF_WEEK);
 int count = 0;
 %> --%>
 
+
+
 <h4>
 <img src="../sol_img/go_right.png" width="20px"/>
-<img src="../sol_img/logos/cal_desc.png" width="140px" height="50px"> 
+<img src="../sol_img/logos/cal_desc.png" width="140px" height="50px">| <span style="font-size: 12px;">'<strong>${name }</strong>(${id })'님의 한줄다짐   &nbsp;<STRONG>"${promise }"</strong></span>
 </h4>
 
 <form method="post" action="calendar.do?s_id=${id }" name="change">
-<br/>
-
-<br/><br/>
 
 <table width="100%" cellpadding="2" cellspacing="0" border="0" align="center">
-<tr><td align="center" style="color:#000000">
+<%-- <tr><td align="center" style="color:#000000">
      '<strong>${name }</strong>(${id })'님의 한줄다짐  |  &nbsp;<STRONG>"${promise }"</strong>
 </td>
-</tr>
+</tr> --%>
  <tr>
       <td  align="center">
       <input type="button" value="◁" onClick="monthDown(this.form)">

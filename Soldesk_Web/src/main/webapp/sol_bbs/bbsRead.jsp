@@ -18,7 +18,7 @@ function replyCreate() {
     	var param=$("#frm").serialize();
     	
     	$.ajaxSetup({datatype:"text"});
-    	$.post("./bbaReplyCreate.do",param,replyCreateResponse);
+    	$.post("./bbsReplyCreate.do",param,replyCreateResponse);
     	
     } else {
         return;
@@ -36,9 +36,9 @@ function deleteReply(replyno){
     	$("#replyno").val(replyno);
     	
     	var param=$("#frm").serialize();
-  
+    	alert(param);
     	$.ajaxSetup({datatype:"text"});
-    	$.post("./bbaReplyDelete.do",param,deleteReplyResponse);
+    	$.post("./bbsReplyDelete.do",param,deleteReplyResponse);
     	
     } else {
         return;
@@ -46,9 +46,9 @@ function deleteReply(replyno){
   
 }
 function deleteReplyResponse(data,status) {
-	//alert("댓글삭제서옹");
 	var str=data.replace(/^\s+|\s+$/gm,'');
 	var result=str.split("/");
+	alert(data.replace(/^\s+|\s+$/gm,''));
 	if(result[0]=="SUCCESS") {//댓글 삭제 성공
 		alert(result[1]);
 		window.location.reload();
@@ -57,25 +57,34 @@ function deleteReplyResponse(data,status) {
 		alert(result[1]);
 	}
 }
-//댓글수정
+
+//댓글가져오기
 function updateReply(replyno,bbsno){
 	$("#replyno").val(replyno);
-	var param = "replyno="+replyno+"&tableno="+bbsno;
+	var param = "replyno="+replyno;
 	alert(param);
-	$.get("./bbaReplyUpdate.do", param, updateReplyResponse);
+	
+	$.get("./bbsReplyUpdate.do", param, updateReplyResponse);
+	
 }
+
 function updateReplyResponse(data,status){
 	var str =data.replace(/^\s+|\s+$/gm,'');
-	
-	var result = str.split("|");
-	if(result[0]=="success"){
-		document.getElementById("demo").style.display='';
-		$("#updateContent").val(str);
-		
+
+	var result = str.split("/");
+	if(result[0]=="SUCCESS"){
+		document.getElementById("content1").style.display = "none";
+		document.getElementById("content2").style.display = "";
+
+		$("#updateContent").val(result[1]);
+		alert(result[1]);
+		alert(result[2]);
+
 	}else{	
 		alert(result[1]);
 	}
-} 
+}
+
 </script>
 <style>
 .replydiv {
@@ -86,11 +95,10 @@ function updateReplyResponse(data,status){
 	padding-left: 50px;
 }
 </style>
-<br />
-<h3>
-	<img src="../sol_img/go_right.png" width="20px" /> 자유게시판&nbsp;&nbsp;<span
-		style="font-size: 12px;">| 자유롭게 말해보세요 </span>
-</h3>
+<h4>
+<img src="../sol_img/go_right.png" width="20px"/>
+<img src="../sol_img/logos/bbs_desc.png" width="190px" height="50px"><span style="font-size: 12px;">| 자유롭게 말해보세요 </span>
+</h4>
 <hr>
 <br />
 <table class="table">
@@ -136,27 +144,29 @@ function updateReplyResponse(data,status){
 <div style="background-color: #f8f8f8; padding: 25px;">
 	<c:forEach var="rdto" items="${list }">
 		<table style="border: 0; width:100%;">
+		
 		<tr>
 			<td>
 			<img src="../sol_img/answer.png" width="15">&nbsp;&nbsp;<strong>${rdto.passwd }님</strong>
 			<c:set var="regdt2" value="${rdto.rdate }" />&nbsp;<sup>${fn:substring(regdt2,0,16) }</sup>
 			</td>
 			<c:if test="${s_id eq rdto.passwd}">
-			<td style="text-align:right;"><a href="" onclick="UpdateReply(${rdto.replyno },${param.bbsno })">수정</a> | 
-			<a href="" onclick="deleteReply(${rdto.replyno })">삭제</a></td>
+			<td style="text-align:right;">
+			<a href="javascript:updateReply(${rdto.replyno },${param.bbsno });">수정</a> | 
+			<a href="javascript:deleteReply(${rdto.replyno });">삭제</a>
+			</td>
 			</c:if>
 		</tr>
 		<tr>
 			<td colspan="2">${rdto.content }
-			<form name="updatefrm" id="updatefrm" method="post">
-			<div id="demo" style="display:none">
+<%-- 			<span id="content1" style="display: ;">${rdto.content }</span>
+			<div id="content2" style="display: none;">
 			<textarea name="content" id="updateContent" rows="5" cols="50" style="width: 89%; height:53px;"></textarea>
-			<img src="img/btn.gif" onclick="replyCreate()"/>
-			</div>
-			</form>
+			</div> --%>
 			</td>
 		</tr>
 		</table>
+		
 		<hr>
 	</c:forEach>
 

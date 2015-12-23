@@ -88,8 +88,8 @@ public class ReplyCont {
 			if (res == 1) {
 				dto = dao.getReply(tableno, "Q");
 				str += "<textarea name='content' id='content' rows='5' cols='70'>" + dto.getContent() + "</textarea>";
-				str += "<input type='button' value='수정진행' onclick='replyUpdateProc(" + dto.getReplyno() + ")'>";
-				str += "<input type='button' value='목록' onclick='location.href=\"./list.do\"'>";
+				str += "<input type='button' class='btn btn-default' value='수정진행' onclick='replyUpdateProc(" + dto.getReplyno() + ")'>";
+				str += "<input type='button' class='btn btn-default' value='목록' onclick='location.href=\"./list.do\"'>";
 				out.print("success|" + str);
 			} else {
 				out.print("fail|본인이 작성한 글이 아닙니다.\n\n 다시시도 해주세요. ");
@@ -115,12 +115,12 @@ public class ReplyCont {
 		}
 	}// end
 
-	@RequestMapping(value = "/sol_bbs/bbaReplyCreate.do", method = RequestMethod.POST)
-	public void bbaReplyCreate(ReplyDTO dto, HttpServletResponse resp) {
+	@RequestMapping(value = "/sol_bbs/bbsReplyCreate.do", method = RequestMethod.POST)
+	public void bbsReplyCreate(ReplyDTO dto, HttpServletResponse resp) {
 		try {
 			dto.setTablename("B");
-			System.out.println(dto.toString());
-			int res = dao.bbaReplyCreate(dto);
+			//System.out.println(dto.toString());
+			int res = dao.bbsReplyCreate(dto);
 			resp.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = resp.getWriter();
 			if (res == 1) {
@@ -133,8 +133,8 @@ public class ReplyCont {
 		}
 	}// end
 	
-	@RequestMapping(value = "/sol_bbs/bbaReplyDelete.do", method = RequestMethod.POST)
-	public void bbaReplyDelete(ReplyDTO dto, HttpServletResponse resp) {
+	@RequestMapping(value = "/sol_bbs/bbsReplyDelete.do", method = RequestMethod.POST)
+	public void bbsReplyDelete(ReplyDTO dto, HttpServletResponse resp) {
 		try {
 			resp.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = resp.getWriter();
@@ -148,7 +148,7 @@ public class ReplyCont {
 				out.print("FAIL/패스워드가 일치하지 않습니다.\n\n패스워드를 다시 입력해주세요");
 			}
 			else {
-				check_res=dao.bbaReplyDelete(dto.getReplyno());
+				check_res=dao.bbsReplyDelete(dto.getReplyno());
 				if(check_res==1) {
 					out.print("SUCCESS/댓글을 삭제했습니다");
 				}
@@ -162,8 +162,8 @@ public class ReplyCont {
 		}
 	}// end
 	
-	@RequestMapping(value = "/sol_bbs/bbaReplyUpdate.do", method = RequestMethod.GET)
-	public void bbaReplyUpdate(ReplyDTO dto, HttpServletResponse resp, HttpSession session) {
+	@RequestMapping(value = "/sol_bbs/bbsReplyUpdate.do", method = RequestMethod.GET)
+	public void bbsReplyUpdate(ReplyDTO dto, HttpServletResponse resp, HttpSession session) {
 		try {
 			resp.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = resp.getWriter();
@@ -179,9 +179,9 @@ public class ReplyCont {
 				out.print("FAIL/패스워드가 일치하지 않습니다.\n\n패스워드를 다시 입력해주세요");
 			}
 			else {
-				dto = dao.getReply(tableno, "B");
-				if(check_res==1) {
-					out.print("SUCCESS/"+dto);
+				dto = dao.getBbsReply(dto.getReplyno());
+				if(dto.getContent() != null){
+					out.print("SUCCESS/"+dto.getContent()+"/"+dto.getPasswd());
 				}
 				else {
 					out.print("FAIL/댓글 가져오기에 실패했습니다. 다시 시도해 주세요");
