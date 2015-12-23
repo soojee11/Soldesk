@@ -2,46 +2,89 @@
 <!DOCTYPE sqlMap       
     PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"       
     "http://ibatis.apache.org/dtd/sql-map-2.dtd">
-    
+
 <sqlMap namespace="sol_reply">
 
-  <typeAlias alias="ReplyDTO" type="kr.co.solproject.reply.ReplyDTO" />
-  
-  	<update id="QnaReplyCreate" parameterClass="ReplyDTO">
-		insert into sol_reply(content,passwd,rdate,tablename,tableno)
+	<typeAlias alias="ReplyDTO" type="kr.co.solproject.reply.ReplyDTO" />
+
+	<update id="QnaReplyCreate" parameterClass="ReplyDTO">
+		insert into
+		sol_reply(content,passwd,rdate,tablename,tableno)
 		values(#content#,#passwd#,now(),#tablename#,#tableno#)
 	</update>
-	
-	 <update id="setQnaReplyOk" parameterClass="Integer">
-		update sol_qna set replyok='Y' where qnano=#tableno#
+
+	<update id="setQnaReplyOk" parameterClass="Integer">
+		update sol_qna set
+		replyok='Y' where qnano=#tableno#
 	</update>
-	
+
 	<update id="setQnaReplyNo" parameterClass="Integer">
-		update sol_qna set replyok='N' where qnano=#tableno#
+		update sol_qna set
+		replyok='N' where qnano=#tableno#
 	</update>
-	
+
 	<select id="getQnaReply" parameterClass="Integer" resultClass="ReplyDTO">
 		select replyno,content,passwd,rdate,tablename,tableno
 		from sol_reply
 		where tableno = #number#
 	</select>
-	
+
 	<update id="replyDel" parameterClass="Integer">
 		delete from sol_reply
-		where replyno = #replyno#
+		where
+		replyno = #replyno#
 	</update>
-	
+
 	<select id="checkQPasswd" parameterClass="Map" resultClass="Integer">
 		select count(*) as cnt
 		from sol_reply
-		where  replyno = #replyno# and passwd = #passwd# 
+		where replyno = #replyno# and
+		passwd = #passwd#
 	</select>
-	
-	<update id ="replyUpdate"  parameterClass="ReplyDTO">
+
+	<update id="replyUpdate" parameterClass="ReplyDTO">
 		update sol_reply
-		set content = #content# , rdate =now()
+		set
+		content = #content# , rdate =now()
 		where replyno = #replyno#
 	</update>
+
+	<select id="bbsReplyList" parameterClass="Integer" resultClass="ReplyDTO">
+		select replyno,content,passwd,rdate,tablename,tableno
+		from sol_reply
+		where tableno = #tableno# and tableName='B'
+		order by rdate
+	</select>
+
+	<select id="bbsReplyCnt" parameterClass="Integer" resultClass="Integer">
+		select count(*) as cnt
+		from sol_reply
+		where tableno = #bbsno# and
+		tablename='B'
+	</select>
+
+	<update id="bbaReplyCreate" parameterClass="ReplyDTO">
+		insert into
+		sol_reply(content,passwd,rdate,tablename,tableno)
+		values(#content#,#passwd#,now(),#tablename#,#tableno#)
+	</update>
+
+	<select id="checkBPasswd" parameterClass="Map" resultClass="Integer">
+		select count(*) as cnt
+		from sol_reply
+		where replyno = #replyno# and
+		passwd = #passwd#
+	</select>
 	
-  
+	<delete id="bbaReplyDelete" parameterClass="Integer">
+		delete from sol_reply
+		where replyno = #replyno#
+	</delete>
+
+	<select id="setBbsReply" parameterClass="Integer" resultClass="ReplyDTO">
+		select replyno,content,passwd,rdate,tablename,tableno
+		from sol_reply
+		where tableno = #tableno#
+	</select>
+
 </sqlMap>

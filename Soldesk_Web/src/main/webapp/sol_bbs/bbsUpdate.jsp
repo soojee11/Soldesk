@@ -45,31 +45,38 @@
 	 location.href="bbsread.do?bbsno=${dto.bbsno}&nowPage=${nowPage }";
 	</script>
 </c:if>
-<h5>
-	<img src="bbs_img/cont.JPG"><img src="bbs_img/pna.JPG">| 무엇이든 물어보세요
-</h5>
+<br />
+<h3>
+	<img src="../sol_img/go_right.png" width="20px" /> 자유게시판&nbsp;&nbsp;<span
+		style="font-size: 12px;">| 자유롭게 말해보세요 </span>
+</h3>
 <hr>
-<div align="center"><h3>Q & A 수정</h3></div>
-<form method="post" action="./bbsupdate.do" name="frm" id="frm">
-  <input type="hidden"  name="nowPage" value="${nowPage }">
-  <input type="hidden" name="bbsno" value="${dto.bbsno }">
-	<table width="100%">
-	<tr>
-		<td>제목</td>
-		<td><input type="text" id="subject" name="subject" value="${dto.subject }"></td>
-	</tr>
-	<tr>
-		<td>내용</td>
-		 <td><textarea name="content" id="content" style="width:766px; height:412px;">${dto.content }</textarea></td>
-	</tr>
-	<tr>
-	   <td colspan="2" align="center">
+<div align="center">
+	<form method="post" action="./bbsupdate.do" name="frm" id="frm">
+  	<input type="hidden"  name="nowPage" value="${nowPage }">
+  	<input type="hidden" name="bbsno" value="${dto.bbsno }">
+		<table class="table" style="text-align: center">
+			<tr bgcolor="#f5f7f9">
+				<th style="text-align: center" valign="bottom">제목</th>
+				<td bgcolor="#ffffff"><input type="text" name="subject"
+					id="subject" value="${dto.subject }"></td>
+			</tr>
+			<tr bgcolor="#f5f7f9">
+				<th style="text-align: center" valign="bottom">아이디</th>
+				<td bgcolor="#ffffff">${s_id }</td>
+			</tr>
+			<tr bgcolor="#f5f7f9">
+				<th style="text-align: center" valign="bottom">내용</th>
+				<td bgcolor="#ffffff"><textarea name="content" id="content"
+						style="width: 100%; height: 412px;">${dto.content }</textarea></td>
+			</tr>
+		</table>
+		<div align="right">
 	      <input type="button" class="btn btn-default" name="list" value="목록" onclick="location.href='bbslist.do?nowPage=${nowPage }'">
-	      <input type="button" class="btn btn-default" id="savebutton" value="수정">
-	      <input type="reset" class="btn btn-default" name="reset" value="취소">
-	   </td>
-	</tr>
-	</table>
-</form>
+	      <input type="button" class="btn btn-default" id="savebutton" value="수정"> 
+		</div>
+	</form>
+</div>
+
 <!-- page end-->
 <%@ include file="../sol_footer.jsp"%>

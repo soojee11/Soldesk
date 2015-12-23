@@ -6,15 +6,14 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.tools.DocumentationTool.Location;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import kr.co.solproject.reply.ReplyDTO;
 import net.utility.Paging;
-import net.utility.Utility;
 
 @Controller
 public class BbsCont {
@@ -92,11 +91,21 @@ public class BbsCont {
   }
   
   @RequestMapping(value="/sol_bbs/bbsread.do")
-  public String bbsRead(BbsDTO dto, HttpServletRequest req){
+  public String bbsRead(BbsDTO dto, ReplyDTO rdto, HttpServletRequest req){
     dao.increment(dto);
     dto = dao.read(dto); // dto ¿¡ ÀúÀåµÈ bbsno ³Ñ±è
     req.setAttribute("nowPage", req.getParameter("nowPage"));
     req.setAttribute("dto", dto);
+    
+    //´ñ±Û¸®½ºÆ®
+    List list=null;
+    list=dao.bbsReplyList(dto.getBbsno());
+    req.setAttribute("list", list);
+    
+    //´ñ±Û¼ö
+    int replycnt=dao.bbsReplyCnt(dto.getBbsno());
+    req.setAttribute("replycnt", replycnt);
+
     return "/sol_bbs/bbsRead";
   }
   
