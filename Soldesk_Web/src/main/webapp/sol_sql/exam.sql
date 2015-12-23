@@ -26,7 +26,8 @@ create table sol_myscore(
 	testno		INT				NOT NULL,
 	usetime		VARCHAR(20)		NOT NULL,
 	answerno	VARCHAR(200)	NOT NULL,				
-	regdt		datetime		NOT NULL,	
+	regdt		datetime		NOT NULL,
+	myscore		INT				NOT NULL,
 	primary key(mytestno)						
 )ENGINE=MyISAM DEFAULT CHARSET="euckr";							
 
