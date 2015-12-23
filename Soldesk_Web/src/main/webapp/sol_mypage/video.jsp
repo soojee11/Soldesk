@@ -122,6 +122,7 @@ function lectureGo(lectureno){
 
 
 <table cellpadding=3 border=0 cellspacing=1 width=100% bgcolor=#dddddd class="table">
+          <thead>
         <tr style="font-size: 14px; font-weight: bold;" bgcolor=#fafafa align="center">
             <td >회차</td>
             <td>강의명</td>
@@ -129,6 +130,7 @@ function lectureGo(lectureno){
             <td >수강일</td>
             <td >복습하기</td>
         </tr>
+        </thead>
     <c:forEach var="list" items="${videolist }">
         <c:if test="${list.id == id }">
        
@@ -150,6 +152,7 @@ function lectureGo(lectureno){
         <fmt:parseNumber var="nowmonth" type="number" integerOnly="true"  value="${fn:substring(now, 5 ,7) }" />
      
        <c:if test="${parseyear == nowyear && parsemonth==nowmonth && parsedate==nowdate }">
+        <tbody>
         <tr
          bgcolor="#ffffff" 
          onmouseover="this.style.backgroundColor='#fafafa'"
@@ -163,6 +166,7 @@ function lectureGo(lectureno){
                 <img src='image/btn_study_play.png' width="30" height="30"></a>
             </td>
         </tr>
+        </tbody>
           </c:if>  
           </c:if>
         </c:forEach>
