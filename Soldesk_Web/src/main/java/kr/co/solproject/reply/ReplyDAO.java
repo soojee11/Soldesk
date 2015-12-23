@@ -131,4 +131,16 @@ public class ReplyDAO {
 		  return dto;
 	  }//end
 	  
+	  public boolean bbsReplyUpdate(ReplyDTO dto){
+		  boolean flag = false;
+			try {
+			   int cnt = mybatis.update("sol_reply.bbsReplyUpdate", dto);
+				if(cnt>0)
+		    		flag=true;
+			}catch(Exception e) {
+				System.out.println("bbsReplyUpdate error: "+e);		
+			}
+			return flag;
+		}//end
+	  
 }

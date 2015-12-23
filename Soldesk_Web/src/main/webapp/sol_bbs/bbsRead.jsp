@@ -29,6 +29,7 @@ function replyCreateResponse(data, status) {//callback
 	//alert(data.replace(/^\s+|\s+$/gm,''));
 	window.location.reload();
 }
+
 //댓글삭제
 function deleteReply(replyno){
 	msg = "답변을 삭제하시겠습니까?";
@@ -67,16 +68,15 @@ function updateReply(replyno,bbsno){
 	$.get("./bbsReplyUpdate.do", param, updateReplyResponse);
 	
 }
-
 function updateReplyResponse(data,status){
 	var str =data.replace(/^\s+|\s+$/gm,'');
 
 	var result = str.split("/");
 	if(result[0]=="SUCCESS"){
-		document.getElementById("content1").style.display = "none";
-		document.getElementById("content2").style.display = "";
-
-		$("#updateContent").val(result[1]);
+		var content = document.getElementById(result[2]).style.display;
+		document.getElementById(result[2]).style.display = "";
+		
+		document.getElementById(result[2]).updateContent.value = result[1];
 		alert(result[1]);
 		alert(result[2]);
 
@@ -85,6 +85,31 @@ function updateReplyResponse(data,status){
 	}
 }
 
+//댓글수정
+function updateReplyProc(replyno){
+	msg = "답변을 수정하시겠습니까?";
+    if (confirm(msg)!=0) {
+    	document.getElementById(replyno).replyno.value = replyno;
+    	
+    	var param=$('#'+replyno).serialize();
+    	alert(param);
+    	$.ajaxSetup({datatype:"text"});
+    	$.post("./bbsReplyUpdateProc.do",param,updateProcReplyResponse);
+    	
+    } else {
+        return;
+	}
+}
+function updateProcReplyResponse(data,status){
+	var str =data.replace(/^\s+|\s+$/gm,'');
+	var result = str.split("/");
+	if(result[0]=="SUCCESS"){
+		alert(result[1]);
+		window.location.reload();		
+	}else{	
+		alert(result[1]);
+	}
+} 
 </script>
 <style>
 .replydiv {
@@ -159,10 +184,13 @@ function updateReplyResponse(data,status){
 		</tr>
 		<tr>
 			<td colspan="2">${rdto.content }
-<%-- 			<span id="content1" style="display: ;">${rdto.content }</span>
-			<div id="content2" style="display: none;">
-			<textarea name="content" id="updateContent" rows="5" cols="50" style="width: 89%; height:53px;"></textarea>
-			</div> --%>
+				<form name="updatefrm" id="${rdto.replyno }" method="post" style="display:none">
+				<input type="hidden" name="replyno" id="replyno" />
+				<div id="demo">
+				<textarea name="updateContent" id="updateContent" rows="5" cols="50" style="width: 89%; height:53px;"></textarea>
+				<img src="img/btn.gif" onclick="updateReplyProc(${rdto.replyno})"/>
+				</div> 
+				</form>
 			</td>
 		</tr>
 		</table>
