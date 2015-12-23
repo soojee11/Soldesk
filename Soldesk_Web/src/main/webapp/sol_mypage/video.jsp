@@ -4,8 +4,10 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <html>
 <head>
-    
-    <style type="text/css">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<!--     <style type="text/css">
 
     #ads{
         margin-top:20px;
@@ -30,7 +32,7 @@
         color:#000;
     }
     
-    </style>
+    </style> -->
 <script type="text/javascript">
 var arrayOfRolloverClasses = new Array();
 var arrayOfClickClasses = new Array();
@@ -113,23 +115,20 @@ function lectureGo(lectureno){
 </script> 
 </head>
 <body>
-       <p><div style="color: White;height:50px;padding-top: 11px; font: 20px arial, sans-serif;background-color: #99cc66; font-weight: bold;">
-       &nbsp;&nbsp;&nbsp;<font size="9px">Lecture List</font>_${name}(${id })</div>
-   
+       <p><div style="color: White;height:60px;padding-top: 12px; font: 20px arial, sans-serif;background-color: #99cc66; font-weight: bold;">
+       &nbsp;&nbsp;&nbsp;<font size="9px">Lecture List</font>_${name}(${id })
+       </div>
+ 
 
-<br/>
-<table cellpadding=3 border=0 cellspacing=1 width=100% bgcolor=#dddddd>
-    <thead>
-        <tr bgcolor=#e3e3e3 style="font-size: 14px;">
-            <th>회차</th>
-            <th>강의명</th>
-            <th>선생님</th>
-            <th>강의수강일</th>
-            <th>복습하기</th>
+
+<table cellpadding=3 border=0 cellspacing=1 width=100% bgcolor=#dddddd class="table">
+        <tr style="font-size: 14px; font-weight: bold;" bgcolor=#fafafa align="center">
+            <td >회차</td>
+            <td>강의명</td>
+            <td >선생님</td>
+            <td >수강일</td>
+            <td >복습하기</td>
         </tr>
-    </thead>
-
-  
     <c:forEach var="list" items="${videolist }">
         <c:if test="${list.id == id }">
        
@@ -151,7 +150,6 @@ function lectureGo(lectureno){
         <fmt:parseNumber var="nowmonth" type="number" integerOnly="true"  value="${fn:substring(now, 5 ,7) }" />
      
        <c:if test="${parseyear == nowyear && parsemonth==nowmonth && parsedate==nowdate }">
-      <tbody>
         <tr
          bgcolor="#ffffff" 
          onmouseover="this.style.backgroundColor='#fafafa'"
@@ -165,7 +163,6 @@ function lectureGo(lectureno){
                 <img src='image/btn_study_play.png' width="30" height="30"></a>
             </td>
         </tr>
-      </tbody>
           </c:if>  
           </c:if>
         </c:forEach>
