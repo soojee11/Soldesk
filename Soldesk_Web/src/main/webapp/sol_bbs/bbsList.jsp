@@ -12,20 +12,8 @@
 
 <h4>
 <img src="../sol_img/go_right.png" width="20px"/>
-<img src="../sol_img/logos/bbs_desc.png" width="190px" height="50px"> 
+<img src="../sol_img/logos/bbs_desc.png" width="190px" height="50px"><span style="font-size: 12px;">| 자유롭게 말해보세요 </span>
 </h4>
-
-<hr>
-총 <strong>${recNo-1 }</strong>개의 등록된 글이 있습니다. | 현재 페이지 : <strong>${nowPage }/${totalPage }</strong>
-<div align="right"><input type="button" value="글쓰기" class="btn btn-default" 
-          <c:if test="${s_id == null }">onclick="denywrite()"</c:if>
-          <c:if test="${s_id != null }">onclick="location.href='./create.do'"</c:if>></div>
-
-
-<br />
-<h3><img src="../sol_img/go_right.png" width="20px"/>
-자유게시판&nbsp;&nbsp;<span style="font-size: 12px;">| 자유롭게 말해보세요 </span></h3>
-<hr>
 <div>
 총 <strong>${recNo-1 }</strong> 개의 등록된 글이 있습니다. | 현재 페이지 : <strong>${nowPage }/${totalPage }</strong>
 </div>
