@@ -4,8 +4,11 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <html>
 <head>
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     
-    <style type="text/css">
+   <!--  <style type="text/css">
 
     #ads{
         margin-top:20px;
@@ -30,7 +33,7 @@
         color:#000;
     }
     
-    </style>
+    </style> -->
 <script type="text/javascript">
 var arrayOfRolloverClasses = new Array();
 var arrayOfClickClasses = new Array();
@@ -113,19 +116,18 @@ function lectureGo(lectureno){
 </script> 
 </head>
 <body>
-       <p><div style="color: White;height:50px;padding-top: 11px; font: 20px arial, sans-serif;background-color: #99cc66; font-weight: bold;">
+       <p><div style="color: White;height:60px;padding-top: 12px; font: 20px arial, sans-serif;background-color: #99cc66; font-weight: bold;">
        &nbsp;&nbsp;&nbsp;<font size="9px">Memo List</font>_${name}(${id })</div>
    
 
-<br/>
-<table cellpadding=3 border=0 cellspacing=1 width=100% bgcolor=#dddddd>
+<table cellpadding=3 border=0 cellspacing=1 width=100% bgcolor=#dddddd class="table">
     <thead>
-        <tr bgcolor=#e3e3e3 style="font-size: 14px;">
-            <th>회차</th>
-            <th>강의명</th>
-            <th>메모</th>
-            <th>메모등록일</th>
-            <th>복습하기</th>
+        <tr align="center" bgcolor="#fafafa" style="font-weight: bold; font-size: 14px;">
+            <td >회차</td>
+            <td >강의명</td>
+            <td width="45%">메모</td>
+            <td>등록일</td>
+            <td>복습하기</td>
         </tr>
     </thead>
 

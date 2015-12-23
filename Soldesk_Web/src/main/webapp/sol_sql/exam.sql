@@ -1,26 +1,32 @@
 create table sol_test(							
-	testno		INT NOT NULL auto_increment,				
-	grade		INT NOT NULL,				
-	subject		VARCHAR(200)	NOT NULL,			
-	testtitle	VARCHAR(500)	NOT NULL,
-	testshow	VARCHAR(10)		NOT NULL default 'N',
+	testno INT NOT NULL auto_increment,				
+	grade INT NOT NULL,				
+	subject VARCHAR(200) NOT NULL,			
+	testtitle VARCHAR(500) NOT NULL,
+	testshow VARCHAR(10) NOT NULL default 'N',
 	primary key(testno)						
 )ENGINE=MyISAM DEFAULT CHARSET="euckr";			
 							
 create table sol_question(							
-	testno		INT	NOT NULL,			
-	questno		INT				NOT NULL,
-	qtitle		VARCHAR(500)	NOT NULL,			
-	qtype		VARCHAR(10)		NOT NULL,		
-	answer		VARCHAR(500)	NOT NULL,			
-	comment		VARCHAR(600)	NOT NULL,			
-	poster		VARCHAR(600)	NULL,			
-	example		VARCHAR(500)	NULL,			
-	qynshow		VARCHAR(10)		NOT NULL default 'Y',		
+	testno INT NOT NULL,			
+	questno INT NOT NULL,
+	qtitle VARCHAR(500) NOT NULL,			
+	qtype VARCHAR(10)	 NOT NULL,		
+	answer VARCHAR(500) NOT NULL,			
+	comment VARCHAR(600) NOT NULL,			
+	poster VARCHAR(600) NULL,			
+	example VARCHAR(500) NULL,			
+	qynshow VARCHAR(10)	 NOT NULL default 'Y',		
 	primary key(testno,questno)						
 )ENGINE=MyISAM DEFAULT CHARSET="euckr";							
 											
 create table sol_myscore(							
+	mytestno INT NOT NULL auto_increment,
+	id VARCHAR(10) NOT NULL,	
+	testno INT NOT NULL,
+	usetime VARCHAR(20) NOT NULL,
+	answerno VARCHAR(200) NOT NULL,				
+	regdt datetime NOT NULL,		
 	mytestno	INT				NOT NULL	auto_increment,
 	id			VARCHAR(10)		NOT NULL,	
 	testno		INT				NOT NULL,
@@ -30,6 +36,8 @@ create table sol_myscore(
 	myscore		INT				NOT NULL,
 	primary key(mytestno)						
 )ENGINE=MyISAM DEFAULT CHARSET="euckr";							
+
+
 
 create table sol_qna(		
 qnano INT NOT NULL auto_increment,		

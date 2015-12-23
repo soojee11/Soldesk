@@ -141,12 +141,17 @@ function playCheck2(frm) {
 	}
 }
 
-function checkLevelForm(frm){
-	  
+function checkLevelForm(id,mlevel){
+	id = id.replace(/^\s*|\s*$/g, '');
+	mlevel = mlevel.replace(/^\s*|\s*$/g, '');
+	
 	var mess="회원 등급 변경 하시겠습니까?"
 		
-	if(confirm(mess)){ frm.submit(); }
+	if(confirm(mess)){ 
+		location.href="memmlevel.do?id="+id+"&mlevel="+mlevel;
+	}
 }
+
 function memCheck2(frm) {
 	var flag=false;
 	var check = document.getElementsByName('check2');
@@ -160,7 +165,10 @@ function memCheck2(frm) {
 		return false;
 	}
 	if(flag==true) {
-		frm.submit();
+		var mess="선택하신 회원을 삭제하시겠습니까?"
+		if(confirm(mess)){ 
+			frm.submit();
+		}
 	}
 }
 
