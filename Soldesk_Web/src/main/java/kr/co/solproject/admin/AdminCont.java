@@ -1116,56 +1116,7 @@ public class AdminCont {
 	}//end
 	
 	@RequestMapping(value="sol_admin/member/memmlevel.do", method=RequestMethod.GET)
-	public String memLevelList(HttpServletRequest request) {
-		
-		String url = "./memmlevel.do";
-		
-		int numPerPage=5;	
-		int recNo=1;
-		
-		String nowPage = request.getParameter("nowPage");
-		if (nowPage == null) {
-			nowPage = "1";
-		}
-		
-		int sno = ((Integer.parseInt(nowPage) - 1) * numPerPage);
-		int intNowPage = Integer.parseInt(nowPage);
-		
-		String col = null;
-		if(request.getParameter("col") != null){
-			col = request.getParameter("col");
-			System.out.println("검색컬럼: "+col);
-		}
-		
-		Map map = new HashMap();
-		map.put("col", col);
-		map.put("sno", sno);
-		map.put("numPerPage", numPerPage);
-		
-		List list = dao.getMemList(map);
-		String dbean = Utility.getDate();
-		int total = dao.getMemTotal(map);
-		
-		String paging = Paging.paging4(total, intNowPage, numPerPage, url);
-		
-		recNo = total - (intNowPage - 1) * numPerPage + 1 ;
-		
-		request.setAttribute("list", list);
-		request.setAttribute("dbean", dbean);
-		request.setAttribute("paging", paging);
-		request.setAttribute("recNo", recNo);
-		request.setAttribute("nowPage", nowPage);
-		request.setAttribute("col", col);
-		request.setAttribute("total", total);
-		
-		return "sol_admin/member/memLevel";
-	}//end
-	
-	@RequestMapping(value="sol_admin/member/memmlevel.do", method=RequestMethod.POST)
 	public String memLevelProc(String mlevel, String id, HttpServletRequest request) {	
-		
-		System.out.println(mlevel);
-		System.out.println(id);
 		
 		Map map = new HashMap();
 		map.put("mlevel", mlevel);
@@ -1173,96 +1124,7 @@ public class AdminCont {
 		
 		Boolean flag = dao.memLevelProc(map);
 			
-		String url = "./memmlevel.do";
-			
-		int numPerPage=5;	
-		int recNo=1;
-			
-		String nowPage = request.getParameter("nowPage");
-		if (nowPage == null) {
-			nowPage = "1";
-		}
-			
-		int sno = ((Integer.parseInt(nowPage) - 1) * numPerPage);
-		int intNowPage = Integer.parseInt(nowPage);
-
-		String col = request.getParameter("col");
-		String paging ="";
-		
-		Map map2 = new HashMap();
-		map2.put("col", col);
-		map2.put("sno", sno);
-		map2.put("numPerPage", numPerPage);
-			
-		List list = dao.getMemList(map2);
-		String dbean = Utility.getDate();
-		int total = dao.getMemTotal(map2);
-			
-		recNo = total - (intNowPage - 1) * numPerPage + 1 ;
-		
-		if(col==null){
-			col="mdate";
-			paging = Paging.paging4(total, intNowPage, numPerPage, url);
-		}else{
-			col = request.getParameter("col");
-			System.out.println("검색컬럼: "+col);
-		}
-			
-		request.setAttribute("list", list);
-		request.setAttribute("dbean", dbean);
-		request.setAttribute("paging", paging);
-		request.setAttribute("recNo", recNo);
-		request.setAttribute("nowPage", nowPage);
-		request.setAttribute("col", col);
-		request.setAttribute("total", total);
-	
-		return "sol_admin/member/memLevel";
-	}//end
-	
-	@RequestMapping(value="sol_admin/member/memdelete.do", method=RequestMethod.GET)
-	public String memDelete(HttpServletRequest request) {	
-		
-		String url = "./memdelete.do";
-		
-		int numPerPage=5;	
-		int recNo=1;
-		
-		String nowPage = request.getParameter("nowPage");
-		if (nowPage == null) {
-			nowPage = "1";
-		}
-		
-		int sno = ((Integer.parseInt(nowPage) - 1) * numPerPage);
-		int intNowPage = Integer.parseInt(nowPage);
-		
-		String col = null;
-		if(request.getParameter("col") != null){
-			col = request.getParameter("col");
-			System.out.println("검색컬럼: "+col);
-		}
-		
-		Map map = new HashMap();
-		map.put("col", col);
-		map.put("sno", sno);
-		map.put("numPerPage", numPerPage);
-		
-		List list = dao.getMemList(map);
-		String dbean = Utility.getDate();
-		int total = dao.getMemTotal(map);
-		
-		String paging = Paging.paging4(total, intNowPage, numPerPage, url);
-		
-		recNo = total - (intNowPage - 1) * numPerPage + 1 ;
-		
-		request.setAttribute("list", list);
-		request.setAttribute("dbean", dbean);
-		request.setAttribute("paging", paging);
-		request.setAttribute("recNo", recNo);
-		request.setAttribute("nowPage", nowPage);
-		request.setAttribute("col", col);
-		request.setAttribute("total", total);
-		
-		return "sol_admin/member/memDelete";
+		return "redirect:memlist.do";
 	}//end
 	
 	@RequestMapping(value="sol_admin/member/memdelete.do", method=RequestMethod.POST)
@@ -1275,8 +1137,7 @@ public class AdminCont {
 				str+=checks[idx]+",";
 			}
 			str=str.substring(0,str.length()-1);
-			System.out.println(str);
-			
+
 			List list2 = new ArrayList();
 			String id = "";
 			String[] str2 = str.split(",");		// ","을 기준으로 분리
@@ -1285,54 +1146,13 @@ public class AdminCont {
 				id=str2[idx];
 				list2.add(id);
 			}
-			System.out.println("list:" +list2);
 			
 			Map map=new HashMap();
 			map.put("list", list2);
 			
 			dao.memDelProc(map);
 			
-			String url = "./memdelete.do";
-			
-			int numPerPage=5;	
-			int recNo=1;
-			
-			String nowPage = request.getParameter("nowPage");
-			if (nowPage == null) {
-				nowPage = "1";
-			}
-			
-			int sno = ((Integer.parseInt(nowPage) - 1) * numPerPage);
-			int intNowPage = Integer.parseInt(nowPage);
-			
-			String col = null;
-			if(request.getParameter("col") != null){
-				col = request.getParameter("col");
-				System.out.println("검색컬럼: "+col);
-			}
-			
-			Map map2 = new HashMap();
-			map2.put("col", col);
-			map2.put("sno", sno);
-			map2.put("numPerPage", numPerPage);
-			
-			List list = dao.getMemList(map2);
-			String dbean = Utility.getDate();
-			int total = dao.getMemTotal(map2);
-			
-			String paging = Paging.paging4(total, intNowPage, numPerPage, url);
-			
-			recNo = total - (intNowPage - 1) * numPerPage + 1 ;
-			
-			request.setAttribute("list", list);
-			request.setAttribute("dbean", dbean);
-			request.setAttribute("paging", paging);
-			request.setAttribute("recNo", recNo);
-			request.setAttribute("nowPage", nowPage);
-			request.setAttribute("col", col);
-			request.setAttribute("total", total);
-			
-			return "sol_admin/member/memDelete";
+			return "redirect:memlist.do";
 			
 	}//end
 //-----------------------------------------------------------------------------------------------------------
