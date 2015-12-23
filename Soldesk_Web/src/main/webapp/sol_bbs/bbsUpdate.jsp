@@ -38,18 +38,16 @@
       })
   })
 </script>
-<br/>
 <c:if test="${msg != null}">
 	<script type="text/javascript">
 	 alert("게시물 수정 성공");
 	 location.href="bbsread.do?bbsno=${dto.bbsno}&nowPage=${nowPage }";
 	</script>
 </c:if>
-<br />
-<h3>
-	<img src="../sol_img/go_right.png" width="20px" /> 자유게시판&nbsp;&nbsp;<span
-		style="font-size: 12px;">| 자유롭게 말해보세요 </span>
-</h3>
+<h4>
+<img src="../sol_img/go_right.png" width="20px"/>
+<img src="../sol_img/logos/bbs_desc.png" width="190px" height="50px"><span style="font-size: 12px;">| 자유롭게 말해보세요 </span>
+</h4>
 <hr>
 <div align="center">
 	<form method="post" action="./bbsupdate.do" name="frm" id="frm">

@@ -7,6 +7,7 @@ public class MyscoreDTO {
 	private String usetime;		//경과시간
 	private String answerno;	//문제번호,답
 	private String regdt;		//시험일
+	private String myscore;		//나의점수
 	
 	public MyscoreDTO() { }
 
@@ -58,10 +59,19 @@ public class MyscoreDTO {
 		this.regdt = regdt;
 	}
 
+	
+	public String getMyscore() {
+		return myscore;
+	}
+
+	public void setMyscore(String myscore) {
+		this.myscore = myscore;
+	}
+
 	@Override
 	public String toString() {
 		return "MyscoreDTO [mytestno=" + mytestno + ", id=" + id + ", testno=" + testno + ", usetime=" + usetime
-				+ ", answerno=" + answerno + ", regdt=" + regdt + "]";
+				+ ", answerno=" + answerno + ", regdt=" + regdt + ", myscore=" + myscore + "]";
 	}
 	
 }

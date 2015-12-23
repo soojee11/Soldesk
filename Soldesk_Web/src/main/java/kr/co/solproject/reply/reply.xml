@@ -63,7 +63,7 @@
 		tablename='B'
 	</select>
 
-	<update id="bbaReplyCreate" parameterClass="ReplyDTO">
+	<update id="bbsReplyCreate" parameterClass="ReplyDTO">
 		insert into
 		sol_reply(content,passwd,rdate,tablename,tableno)
 		values(#content#,#passwd#,now(),#tablename#,#tableno#)
@@ -76,15 +76,15 @@
 		passwd = #passwd#
 	</select>
 	
-	<delete id="bbaReplyDelete" parameterClass="Integer">
+	<delete id="bbsReplyDelete" parameterClass="Integer">
 		delete from sol_reply
 		where replyno = #replyno#
 	</delete>
 
-	<select id="setBbsReply" parameterClass="Integer" resultClass="ReplyDTO">
+	<select id="getBbsReply" parameterClass="Integer" resultClass="ReplyDTO">
 		select replyno,content,passwd,rdate,tablename,tableno
 		from sol_reply
-		where tableno = #tableno#
+		where replyno = #replyno#
 	</select>
 
 </sqlMap>

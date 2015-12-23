@@ -77,7 +77,7 @@
 </table>
 <div align="right">
 <form action="insert.do" method="get">
-	<input type="button" value="글쓰기"  onclick="checkLogin(this.form,'${s_id }')"> 
+	<input type="button" class="btn btn-default" value="글쓰기"  onclick="checkLogin(this.form,'${s_id }')"> 
 </form>
 </div>
 <div align="center">
@@ -89,7 +89,7 @@
 			<option value="id" <c:choose><c:when  test="${col1 eq 'id' }" >selected</c:when></c:choose>>ID</option>
 		</select>
 		<input type="text" name="col2" size = "30" <c:if test="${col2 !='' }">value="${param.col2 }"</c:if>>
-		<input type="button" value="검색"  onclick="checkSearch(this.form)">
+		<input type="button" class="btn btn-default" value="검색"  onclick="checkSearch(this.form)">
 	</form>
 </div>
 

@@ -9,7 +9,7 @@
 			<i class="fa fa-file-text-o"></i> Member
 		</h3>
 		<ol class="breadcrumb">
-			<li><i class="fa fa-home"></i><a href="adminindex.do">Home</a></li>
+			<li><i class="fa fa-home"></i><a href="../../sol_admin/adminIndex.do">Home</a></li>
 			<li>회원 정보 관리자페이지</li>
 		</ol>
 	</div>

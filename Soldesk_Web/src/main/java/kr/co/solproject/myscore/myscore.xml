@@ -7,8 +7,8 @@
 	<typeAlias alias="MyscoreDTO" type="kr.co.solproject.myscore.MyscoreDTO" />
 
 	<update id="insert" parameterClass="Map">
-	insert into sol_myscore(id,testno,usetime,answerno,regdt)
-	values(#id#,#testno#,#usetime#,#answerno#,now())
+	insert into sol_myscore(id,testno,usetime,answerno,regdt,myscore)
+	values(#id#,#testno#,#usetime#,#answerno#,now(),#myscore#)
 	</update>
 	
 </sqlMap>

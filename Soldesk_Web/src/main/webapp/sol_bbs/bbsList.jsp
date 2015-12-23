@@ -9,7 +9,6 @@
 		alert("로그인 후 이용해주세요.");
 	}
 </script>
-
 <h4>
 <img src="../sol_img/go_right.png" width="20px"/>
 <img src="../sol_img/logos/bbs_desc.png" width="190px" height="50px"><span style="font-size: 12px;">| 자유롭게 말해보세요 </span>

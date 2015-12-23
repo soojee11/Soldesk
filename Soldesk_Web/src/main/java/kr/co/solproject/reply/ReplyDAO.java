@@ -43,7 +43,7 @@ public class ReplyDAO {
 			  if(tablename.equals("Q"))
 				dto = (ReplyDTO) mybatis.queryForObject("sol_reply.getQnaReply",tableno);
 			  if(tablename.equals("B")){
-				dto = (ReplyDTO) mybatis.queryForObject("sol_reply.setBbsReply",tableno);
+				dto = (ReplyDTO) mybatis.queryForObject("sol_reply.getBbsReply",tableno);
 			  }
 			}	catch(Exception e) {
 				System.out.println("QnaReplyCreate error: "+e);		
@@ -101,24 +101,34 @@ public class ReplyDAO {
 			return flag;
 		}//end
 	  
-	  public int bbaReplyCreate(ReplyDTO dto) {
+	  public int bbsReplyCreate(ReplyDTO dto) {
 			int res=0;
 			try {
-				res=(Integer) mybatis.update("sol_reply.bbaReplyCreate",dto);
+				res=(Integer) mybatis.update("sol_reply.bbsReplyCreate",dto);
 			}	catch(Exception e) {
-				System.out.println("bbaReplyCreate error: "+e);		
+				System.out.println("bbsReplyCreate error: "+e);		
 			}
 			return res;
 	  }//end
 	  
-	  public int bbaReplyDelete(int replyno){
+	  public int bbsReplyDelete(int replyno){
 		  int res = 0;
 		  try {
-			  res = mybatis.delete("sol_reply.bbaReplyDelete", replyno);
+			  res = mybatis.delete("sol_reply.bbsReplyDelete", replyno);
 			}catch(Exception e) {
-				System.out.println("bbaReplyDelete error: "+e);		
+				System.out.println("bbsReplyDelete error: "+e);		
 			}
 		  return res;
+	  }//end
+	  
+	  public ReplyDTO getBbsReply(int replyno){
+		  ReplyDTO dto = null;
+		  try {
+				dto = (ReplyDTO) mybatis.queryForObject("sol_reply.getBbsReply",replyno);
+			}	catch(Exception e) {
+				System.out.println("getBbsReply error: "+e);		
+			}
+		  return dto;
 	  }//end
 	  
 }

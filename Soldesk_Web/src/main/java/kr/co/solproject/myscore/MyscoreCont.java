@@ -92,15 +92,6 @@ public class MyscoreCont {
 				
 			}
 			else {
-				Map map=new HashMap();
-				map.put("usetime", usetime);
-				map.put("testno", testno);
-				map.put("id", s_id);
-				map.put("answerno", str);
-				
-				int res=dao.getAnswer(map);
-				request.setAttribute("res", res);
-				
 				List list=dao2.getQuestionList(testno);
 				request.setAttribute("list", list);
 	
@@ -165,6 +156,16 @@ public class MyscoreCont {
 				}
 				*/
 				request.setAttribute("img", img);
+				
+				Map map=new HashMap();
+				map.put("usetime", usetime);
+				map.put("testno", testno);
+				map.put("id", s_id);
+				map.put("answerno", str);
+				map.put("myscore", myscore);
+				
+				int res=dao.getAnswer(map);
+				request.setAttribute("res", res);
 				return "sol_test/test/questionCheck";
 			}
 		}

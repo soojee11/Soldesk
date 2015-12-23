@@ -105,9 +105,10 @@ function updateQna(qnano,recNo){
 		alert("답변글 존재! 수정불가 ");
 	</script>
 </c:if>
-<br />
-<h3><img src="../sol_img/go_right.png" width="20px"/>
-Q&A&nbsp;&nbsp;<span style="font-size: 12px;">| 무엇이든 물어보세요. </span></h3>
+<h4>
+<img src="../sol_img/go_right.png" width="20px"/>
+<img src="../sol_img/logos/qna_desc.png" width="120px" height="50px"><span style="font-size: 12px;">| 무엇이든 물어보세요</span>
+</h4>
 <hr>
 <br />
 <table class="table">
@@ -135,9 +136,14 @@ Q&A&nbsp;&nbsp;<span style="font-size: 12px;">| 무엇이든 물어보세요. </
 <br/><br/>
 <c:if test="${dto.id == s_id }">
 	<div align="right">	
-		<input type="button" value="수정" onclick="updateQna(${param.qnano },${param.recNo })">
-		<input type="button" value="삭제" onclick="deleteQna(${param.qnano })">
-		<input type="button" value="목록" onclick="location.href='./list.do'">
+		<input type="button" class="btn btn-default" value="수정" onclick="updateQna(${param.qnano },${param.recNo })">
+		<input type="button" class="btn btn-default" value="삭제" onclick="deleteQna(${param.qnano })">
+		<input type="button" class="btn btn-default" value="목록" onclick="location.href='./list.do'">
+	</div>
+</c:if>
+<c:if test="${dto.id != s_id }">
+	<div align="right">	
+		<input type="button" class="btn btn-default" value="목록" onclick="location.href='./list.do'">
 	</div>
 </c:if>
 <c:if test="${dto.replyok=='Y' }">
@@ -154,9 +160,9 @@ Q&A&nbsp;&nbsp;<span style="font-size: 12px;">| 무엇이든 물어보세요. </
 	<c:if test="${mlevel=='A'  }">
 	<div align="right">	
 	<br><br>
-		<input type="button" value="수정" onclick="updateReply(${rdto.replyno },${param.qnano })">
-		<input type="button" value="삭제" onclick="deleteReply(${rdto.replyno },${param.qnano })">
-		<input type="button" value="목록" onclick="location.href='./list.do'">
+		<input type="button" class="btn btn-default" value="수정" onclick="updateReply(${rdto.replyno },${param.qnano })">
+		<input type="button" class="btn btn-default"value="삭제" onclick="deleteReply(${rdto.replyno },${param.qnano })">
+		<input type="button" class="btn btn-default" value="목록" onclick="location.href='./list.do'">
 	</div>
 	</c:if>	
 	</div>
@@ -171,16 +177,11 @@ Q&A&nbsp;&nbsp;<span style="font-size: 12px;">| 무엇이든 물어보세요. </
 		<c:if test="${mlevel=='A' and replyok=='N'}">
 			※ 답변을 달아주세요. ※
 			<textarea name="content" id="content" rows="5" cols="70"></textarea>
-			<input type="button" value="답변" onclick="replyForm()">
-			<input type="button" value="목록" onclick="location.href='./list.do'">
+			<input type="button" class="btn btn-default"value="답변" onclick="replyForm()">
+			<input type="button" class="btn btn-default" value="목록" onclick="location.href='./list.do'">
 		</c:if>
 	</div>
 </form>
-</div>
-<div align="center">
-	<c:if test="${mlevel!='A' and dto.replyok=='Y'}">
-		<input type="button" value="목록" onclick="location.href='./list.do'">
-	</c:if>
 </div>
 
 <!-- page end-->
