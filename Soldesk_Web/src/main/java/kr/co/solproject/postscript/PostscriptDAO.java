@@ -47,7 +47,7 @@ public class PostscriptDAO {
 	public CategoryDTO getCategory(int categoryno) {
 		CategoryDTO dto = null;
 		try {
-			dto = (CategoryDTO) mybatis.queryForObject("sol_category.getCategory", categoryno);
+			dto = (CategoryDTO) mybatis.queryForObject("sol_postscript.getCategory", categoryno);
 		} catch (Exception e) {
 			System.out.println("read ½ÇÆÐ´Ù: " + e);
 		}

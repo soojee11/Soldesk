@@ -1,3 +1,4 @@
+<%@ page contentType="text/html; charset=UTF-8"%>
 			</div>
 		<!--end: Container-->
 	
@@ -12,8 +13,9 @@
 		<div class="container">
 
 			<p>
-				&copy; 2015, soldesk created by no.5
+				&copy; 2015, soldesk created by no.5&nbsp;&nbsp;&nbsp;<a href="http://localhost:9090/solproject/sol_admin/login.do">관리자 페이지</a>
 			</p>
+
 
 		</div>
 		<!-- end: Container  -->

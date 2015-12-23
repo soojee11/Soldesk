@@ -148,7 +148,7 @@
 									<li><a href="sol_test/test/list.do">문제풀기</a></li>
 									<li><a href="sol_bbs/bbslist.do">자유게시판</a></li>
 									<li><a href="sol_qna/list.do">Q&A</a></li>
-									<li><a href="sol_mypage/calendar.do?s_id=${s_id}">내정보</a></li>
+									<li><a href="sol_mypage/calendar.do?s_id=${s_id}">캘린더</a></li>
 
 								</ul>
 							</div>
@@ -570,7 +570,7 @@
 		<div class="container">
 
 			<p>
-				&copy; 2015, soldesk created by no.5
+				&copy; 2015, soldesk created by no.5&nbsp;&nbsp;&nbsp;<a href="http://localhost:9090/solproject/sol_admin/login.do">관리자 페이지</a>
 			</p>
 
 		</div>

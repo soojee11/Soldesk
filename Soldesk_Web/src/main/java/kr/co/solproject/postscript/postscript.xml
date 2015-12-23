@@ -24,12 +24,17 @@
 	
 	<insert id="insert" parameterClass="PostscriptDTO" >
     	INSERT INTO sol_postscript(postscriptno, categoryno, id, content, regdate)
-    	VALUES (#postscriptno#, #categoryno#, #id#, #content#, #regdate#)
+    	VALUES (#postscriptno#, #categoryno#, #id#, #content#, now())
  	 </insert>
  	 
  	 <select id="read" parameterClass="Map" resultClass="Integer">
     	SELECT max(categoryno) FROM sol_category
    	 	WHERE grade=#grade# AND gwamok=#gwamok#
   	</select>
+  	
+  	<select id="getCategory" parameterClass="Integer" resultClass="CategoryDTO">
+   		SELECT grade, gwamok from sol_category
+    	WHERE categoryno=#categoryno#
+ 	 </select>
 
 </sqlMap>

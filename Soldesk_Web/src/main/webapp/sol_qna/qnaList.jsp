@@ -21,10 +21,10 @@
 		location.href="list.do";
 	</script>
 </c:if>
-<br />
-<h3><img src="../sol_img/go_right.png" width="20px"/>
-Q&A&nbsp;&nbsp;<span style="font-size: 12px;">| 무엇이든 물어보세요. </span></h3>
-<hr>
+<h4>
+<img src="../sol_img/go_right.png" width="20px"/>
+<img src="../sol_img/logos/qna_desc.png" width="120px" height="50px"><span style="font-size: 12px;">| 무엇이든 물어보세요</span>
+</h4>
 <div>
 총 <strong>${total }</strong> 개의 등록된 글이 있습니다. | 현재 페이지 : <strong>${nowPage }/${totalPage }</strong>
 </div>

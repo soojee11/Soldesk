@@ -45,5 +45,10 @@ public class ReplyDTO {
 		this.tableno = tableno;
 	}
 	
+	@Override
+	public String toString() {
+		return "ReplyDTO [replyno=" + replyno + ", content=" + content + ", passwd=" + passwd + ", rdate=" + rdate
+				+ ", tablename=" + tablename + ", tableno=" + tableno + "]";
+	}
 	
 }

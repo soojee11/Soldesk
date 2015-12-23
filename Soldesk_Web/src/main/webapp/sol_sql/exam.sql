@@ -27,6 +27,12 @@ create table sol_myscore(
 	usetime VARCHAR(20) NOT NULL,
 	answerno VARCHAR(200) NOT NULL,				
 	regdt datetime NOT NULL,		
+	mytestno	INT				NOT NULL	auto_increment,
+	id			VARCHAR(10)		NOT NULL,	
+	testno		INT				NOT NULL,
+	usetime		VARCHAR(20)		NOT NULL,
+	answerno	VARCHAR(200)	NOT NULL,				
+	regdt		datetime		NOT NULL,	
 	primary key(mytestno)						
 )ENGINE=MyISAM DEFAULT CHARSET="euckr";							
 
@@ -59,7 +65,7 @@ CREATE TABLE sol_study(
 lectureno	int(11)		NOT NULL,
 id		VARCHAR(200) 	NOT NULL,      
 memo		VARCHAR(500)	NULL,
-regdate		datetime	NULL,
+memodate		datetime	NULL,
 PRIMARY KEY  (lectureno,id)
 )ENGINE=MyISAM DEFAULT CHARSET="euckr";	
 
@@ -103,4 +109,14 @@ create table sol_lecture(
 	lecturetime	INT(11)	NOT NULL,
 	categoryno	INT(11)	NOT NULL,
 	primary key(lectureno)		
+)ENGINE=MyISAM DEFAULT CHARSET="euckr";	
+
+CREATE TABLE sol_reply(	
+  replyno INT NOT NULL auto_increment, -- 댓글 번호	
+  content VARCHAR(500) NOT NULL,    -- 댓글 내용 	
+  passwd VARCHAR(15) NOT NULL,      -- 패스워드  	
+  rdate DATETIME NOT NULL,          -- 등록일	
+  tablename VARCHAR(10) NOT NULL,   -- B자게 Q질게	
+  tableno INT NOT NULL,	
+  primary key(replyno)	
 )ENGINE=MyISAM DEFAULT CHARSET="euckr";	
