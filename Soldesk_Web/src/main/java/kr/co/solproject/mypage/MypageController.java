@@ -62,7 +62,16 @@ public class MypageController {
 		System.out.println("1"+lecturelist);
 		
 		List maxrdtlist=dao.getMaxrdtList(s_id);//각 날짜마다 max(regdate)가져오기
-		System.out.println("1#"+maxrdtlist);
+		System.out.println("1"+maxrdtlist);
+		
+		List maxregdtlist=dao.getMaxregdtList(s_id);//sol_Study에서 max(regdt)가져오기
+		System.out.println("0"+maxregdtlist);
+		req.setAttribute("maxregdatelist", maxregdtlist);
+		
+		
+		List myscorelist=dao.getMyscoretList();//myscore,test,calendar조인
+		System.out.println("1**"+myscorelist);
+		req.setAttribute("myscorelist", myscorelist);
 		
 		//################################################################
 		
@@ -159,7 +168,18 @@ public class MypageController {
 			System.out.println("0"+lecturelist);
 			
 			List maxrdtlist=dao.getMaxrdtList(s_id);//각 날짜마다 max(regdate)가져오기
-			System.out.println("0#"+maxrdtlist);
+			System.out.println("0"+maxrdtlist);
+			
+			
+			List maxregdtlist=dao.getMaxregdtList(s_id);//sol_Study에서 max(regdt)가져오기
+			System.out.println("0"+maxregdtlist);
+			req.setAttribute("maxregdatelist", maxregdtlist);
+			
+			
+			List myscorelist=dao.getMyscoretList();//myscore,test,calendar조인
+			System.out.println("0**"+myscorelist);
+			req.setAttribute("myscorelist", myscorelist);
+			
 			
 			//################################################################
 			
@@ -272,6 +292,28 @@ public class MypageController {
 			req.setAttribute("now", now);
 			req.setAttribute("videolist", videolist);
 		return "/sol_mypage/video";
+		
+	}//end
+	
+	@RequestMapping(value = "sol_mypage/mystudyGo.do", method = RequestMethod.GET)
+	public String MystudyGo(String now,HttpServletRequest req, HttpSession session) {
+	System.out.println("mystudy: "+now);
+		
+		 String s_id = (String) session.getAttribute("s_id");
+		 
+		 List mystudylist=dao.getMyscoretList();//myscore,test,calendar조인
+			System.out.println("##"+mystudylist);
+			
+			String promise = null;
+			String name = null;
+			promise = dao.getpromise(s_id);
+			name = dao.getname(s_id);
+			req.setAttribute("promise", promise);
+			req.setAttribute("name", name);
+			req.setAttribute("id", s_id);
+			req.setAttribute("now", now);
+			req.setAttribute("mystudylist", mystudylist);
+		return "/sol_mypage/mystudy";
 		
 	}//end
 	

@@ -88,23 +88,50 @@
 
 	<!-- SELECT t1.col, t3.col FROM table1 join table2 ON table1.primarykey 
 		= table2.foreignkey join table3 ON table2.primarykey = table3.foreignkey -->
-	
+
 	<select id="getLectureList" resultClass="MypageDTO">
 		SELECT
 		lecture.lectureno,
 		lecture.subject,lecture.poster,lecture.teacher,calendar.regdate,calendar.id,study.memo,study.memodate
 		FROM sol_calendar calendar join sol_study study
-		ON calendar.lectureno = study.lectureno
-		join sol_lecture lecture on study.lectureno = lecture.lectureno
+		ON calendar.lectureno =
+		study.lectureno
+		join sol_lecture lecture on study.lectureno =
+		lecture.lectureno
 		where calendar.id=study.id
 	</select>
 
 
 	<select id="getMaxrdtList" parameterClass="String" resultClass="MypageDTO">
-		select id,regdate from sol_calendar where id=#id# group by left(regdate,10);
+		select id,regdate from sol_calendar where id=#id# group by
+		left(regdate,10);
 	</select>
 
+<!-- sol_study에서 regdt가져오기 -->
+    <select id="getMaxregdtList" parameterClass="String" resultClass="MypageDTO">
+        select calendar.id,myscore.regdt 
+        
+        FROM sol_calendar calendar join sol_myscore myscore
+        ON calendar.id = myscore.id
+                
+        where calendar.id=#id# 
+        group by left(myscore.regdt,10);
+    
+    
+    
+    
+    </select>
 
+
+	<select id="getMyscoretList" resultClass="MypageDTO">
+		SELECT
+		myscore.mytestno ,myscore.id ,myscore.testno ,
+		myscore.usetime ,myscore.answerno ,myscore.regdt ,
+		test.grade,test.subject,test.testtitle
+		FROM sol_calendar calendar join sol_myscore myscore
+		ON calendar.id = myscore.id
+		join sol_test test on myscore.testno = test.testno
+	</select>
 
 
 
