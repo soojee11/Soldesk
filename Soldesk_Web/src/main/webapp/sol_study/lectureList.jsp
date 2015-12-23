@@ -32,10 +32,10 @@ function postApplyResponse(data, status) { //callback함수
 </script>
 
 <link href="./css/style.css" rel="stylesheet" type="text/css">
-<h5>
+<h4>
 	<!-- <img src="img/cont.JPG"> -->
 	<img src="../sol_img/go_right.png" width="20px"/><img src="img/study.png" width="150px" height="50px"> 
-</h5>
+</h4>
 
 <div class="column">
 	 <div class="menu1">
@@ -114,7 +114,7 @@ function postApplyResponse(data, status) { //callback함수
 		  </c:when>
 		  <c:otherwise>
 		    <a href="javascript:lectureNotGo()">
-		    <img src='img/btn_study_play.png' width="30" height="20"></a>
+		     <img src='img/btn_study_play.png' width="30" height="20"></a>
 		  </c:otherwise>
     	 </c:choose>
 		</td>

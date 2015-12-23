@@ -61,6 +61,11 @@ int startDay = cr.get(Calendar.DAY_OF_WEEK);
 int count = 0;
 %> --%>
 
+<h4>
+<img src="../sol_img/go_right.png" width="20px"/>
+<img src="../sol_img/logos/cal_desc.png" width="140px" height="50px"> 
+</h4>
+
 <form method="post" action="calendar.do?s_id=${id }" name="change">
 <br/>
 
