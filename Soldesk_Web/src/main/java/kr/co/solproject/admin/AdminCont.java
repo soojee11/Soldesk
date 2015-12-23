@@ -15,9 +15,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 
+import kr.co.solproject.bbs.BbsDAO;
+import kr.co.solproject.bbs.BbsDTO;
 import kr.co.solproject.category.CategoryDTO;
 import kr.co.solproject.member.MemberDTO;
 import kr.co.solproject.player.PlayerDTO;
+import kr.co.solproject.qnabbs.QnaDAO;
 import kr.co.solproject.question.QuestionDTO;
 import kr.co.solproject.test.TestDTO;
 import net.utility.Paging;
@@ -30,6 +33,12 @@ public class AdminCont {
 	
 	@Autowired
 	private AdminDAO dao=null;
+	
+	@Autowired
+	private BbsDAO bbsdao=null;
+	
+	@Autowired
+	private QnaDAO qnadao=null;
 	
 	public AdminCont() {
 		System.out.println("--------------AdminCont객체 생성됨");
@@ -1158,5 +1167,171 @@ public class AdminCont {
 //-----------------------------------------------------------------------------------------------------------
 //-------------------------------------------------------------------------------------------------MEMBER EDN
 
+//-----------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------BBS START
+	@RequestMapping(value="sol_admin/bbs/bbsDel.do", method=RequestMethod.GET)
+	public String bbsDel(BbsDTO dto, HttpServletRequest request) {	
+		
+		String url = "./bbsDel.do";
+		int numPerPage=7;	
+		int recNo=1;
+		
+		String nowPage = request.getParameter("nowPage");
+		if (nowPage == null) {
+			nowPage = "1";
+		}
+		
+		int sno = ((Integer.parseInt(nowPage) - 1) * numPerPage);
+		int intNowPage = Integer.parseInt(nowPage);
+		
+	    List list = null;
+	    
+	    Map map = new HashMap();
+	    map.put("sno", sno);
+	    map.put("numPerPage", numPerPage);
+	    
+	    list=bbsdao.list(map); // BbsDAO에서 list 가져오기 
+	    int total=bbsdao.getTotal();
+	    String paging=Paging.paging4(total,intNowPage,numPerPage,url);
+	    
+	    recNo = total - (intNowPage - 1) * numPerPage + 1 ;
+		int totalPage = (int) Math.ceil((double)total/(double)numPerPage);
+			    
+	    request.setAttribute("list", list);
+	    request.setAttribute("recNo", recNo);
+	    request.setAttribute("paging", paging);
+	    request.setAttribute("nowPage", nowPage);
+	    request.setAttribute("totalPage", totalPage);
+	    request.setAttribute("total", total);
+	    
+	    return "sol_admin/bbs/bbsDelete";
 	
+	}//end
+	
+	@RequestMapping(value="sol_admin/bbs/bbsDel.do", method=RequestMethod.POST)
+	public String bbsDelProc(BbsDTO dto, HttpServletRequest request) {	
+		
+		String[] checks=request.getParameterValues("check2");
+		
+		String str=""; 
+		for(int idx=0; idx<checks.length; idx++) {
+			str+=checks[idx]+",";
+		}
+		str=str.substring(0,str.length()-1);
+
+		List list2 = new ArrayList();
+		String id = "";
+		String[] str2 = str.split(",");		// ","을 기준으로 분리
+		for (int idx = 0; idx < str2.length; idx++) {
+			System.out.println(str2[idx]);
+			id=str2[idx];
+			list2.add(id);
+		}
+		
+		Map map=new HashMap();
+		map.put("list", list2);
+		map.put("tablename", "B");
+		
+		dao.replyDelProc(map);
+		dao.bbsDelProc(map);
+		
+		return "redirect:bbsDel.do";
+
+	}//end
+//-----------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------BBS EDN
+
+//-----------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------QNA START
+
+	@RequestMapping(value="sol_admin/qna/qnaDel.do", method=RequestMethod.GET)
+	public String qnaDel(BbsDTO dto, HttpServletRequest request) {	
+		
+		String url="qnaDel.do";
+		int nowPage=1;	
+		int numPerPage=5;	
+		
+		int recNo=1;
+		
+		String col1=null;
+		if(request.getParameter("col1")!="") {
+			col1=request.getParameter("col1");
+			System.out.println("컬럼: "+col1);
+		}
+		
+		String col2=null;
+		if(request.getParameter("col2")!="") {
+			col2=request.getParameter("col2");
+			System.out.println("컬럼: "+col2);
+		}
+
+		if(request.getParameter("nowPage")!=null) {
+			nowPage=Integer.parseInt(request.getParameter("nowPage"));
+		}
+		
+		int sno=((nowPage-1)*numPerPage);
+		
+		Map map=new HashMap();
+		map.put("col1", col1);
+		map.put("col2", col2);
+		map.put("sno", sno);
+		map.put("numPerPage", numPerPage);
+		
+		List list=qnadao.getQnaList(map);
+		String dbean=Utility.getDate();
+		int total=qnadao.getQnaTotal(map);
+		
+		String paging=Paging.paging(total,nowPage,numPerPage,col1,col2,url);
+		
+		recNo=total-(nowPage-1)*numPerPage;
+		
+		int totalPage = (total / numPerPage)+1;
+		
+		request.setAttribute("list", list);
+		request.setAttribute("dbean", dbean);
+		request.setAttribute("paging", paging);
+		request.setAttribute("recNo", recNo);
+		request.setAttribute("nowPage", nowPage);
+		request.setAttribute("totalPage", totalPage);
+		request.setAttribute("col1", col1);
+		request.setAttribute("col2", col2);
+		request.setAttribute("total", total);
+	
+		return "sol_admin/qna/qnaDelete";
+	}//end
+	
+	@RequestMapping(value="sol_admin/qna/qnaDel.do", method=RequestMethod.POST)
+	public String qnaDelProc(BbsDTO dto, HttpServletRequest request) {	
+		
+		String[] checks=request.getParameterValues("check2");
+		
+		String str=""; 
+		for(int idx=0; idx<checks.length; idx++) {
+			str+=checks[idx]+",";
+		}
+		str=str.substring(0,str.length()-1);
+
+		List list2 = new ArrayList();
+		String id = "";
+		String[] str2 = str.split(",");		// ","을 기준으로 분리
+		for (int idx = 0; idx < str2.length; idx++) {
+			System.out.println(str2[idx]);
+			id=str2[idx];
+			list2.add(id);
+		}
+		
+		Map map=new HashMap();
+		map.put("list", list2);
+		map.put("tablename", "Q");
+		
+		dao.replyDelProc(map);
+		dao.qnaDelProc(map);
+		
+		return "redirect:qnaDel.do";
+
+	}//end
+		
+//-----------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------QNA EDN
+		
 }

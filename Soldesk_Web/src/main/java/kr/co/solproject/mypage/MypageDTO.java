@@ -7,6 +7,75 @@ public class MypageDTO {
 	private String regdate; 	    
 	private int lectureno; 	
 	
+	//------------------------------------------------------sol_test&myscore
+    
+	private int mytestno;
+	private int testno;
+	private String usetime;
+	private String answerno;
+	private String regdt;
+	private int grade;
+	private String testtitle;
+	
+	public int getMytestno() {
+		return mytestno;
+	}
+
+	public void setMytestno(int mytestno) {
+		this.mytestno = mytestno;
+	}
+
+	public int getTestno() {
+		return testno;
+	}
+
+	public void setTestno(int testno) {
+		this.testno = testno;
+	}
+
+	public String getUsetime() {
+		return usetime;
+	}
+
+	public void setUsetime(String usetime) {
+		this.usetime = usetime;
+	}
+
+	public String getAnswerno() {
+		return answerno;
+	}
+
+	public void setAnswerno(String answerno) {
+		this.answerno = answerno;
+	}
+
+	public String getRegdt() {
+		return regdt;
+	}
+
+	public void setRegdt(String regdt) {
+		this.regdt = regdt;
+	}
+
+	public int getGrade() {
+		return grade;
+	}
+
+	public void setGrade(int grade) {
+		this.grade = grade;
+	}
+
+	public String getTesttitle() {
+		return testtitle;
+	}
+
+	public void setTesttitle(String testtitle) {
+		this.testtitle = testtitle;
+	}
+
+	
+	
+	
 	//------------------------------------------------------sol_lecture
     private String subject;     // 강의제목
     private String poster;		// 캡쳐화면 
@@ -94,9 +163,10 @@ public class MypageDTO {
 
 	@Override
 	public String toString() {
-		return "MypageDTO [calno=" + calno + ", id=" + id + ", regdate=" + regdate + ", lectureno=" + lectureno
-				+ ", subject=" + subject + ", poster=" + poster + ", teacher=" + teacher + ", memo=" + memo
-				+ ", memodate=" + memodate + "]";
+		return "Calendar [calno=" + calno + ", id=" + id + ", regdate=" + regdate + ", lectureno=" + lectureno
+				+ ", mytestno=" + mytestno + ", testno=" + testno + ", usetime=" + usetime + ", answerno=" + answerno
+				+ ", regdt=" + regdt + ", grade=" + grade + ", testtitle=" + testtitle + ", subject=" + subject
+				+ ", poster=" + poster + ", teacher=" + teacher + ", memo=" + memo + ", memodate=" + memodate + "]";
 	}
 
 
