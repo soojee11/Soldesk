@@ -57,6 +57,7 @@ function deleteReplyResponse(data,status) {
 		alert(result[1]);
 	}
 }
+
 //댓글가져오기
 function updateReply(replyno,bbsno){
 	$("#replyno").val(replyno);
@@ -151,16 +152,18 @@ function updateReplyResponse(data,status){
 			</td>
 			<c:if test="${s_id eq rdto.passwd}">
 			<td style="text-align:right;">
-			<span onclick="updateReply(${rdto.replyno },${param.bbsno })">수정</span> | 
-			<span onclick="deleteReply(${rdto.replyno })">삭제</span>
+			<a href="javascript:updateReply(${rdto.replyno },${param.bbsno });">수정</a> | 
+			<a href="javascript:deleteReply(${rdto.replyno });">삭제</a>
 			</td>
 			</c:if>
 		</tr>
 		<tr>
-			<td colspan="2"><span id="content1" style="display: ;">${rdto.content }</span>
+			<td colspan="2">${rdto.content }
+<%-- 			<span id="content1" style="display: ;">${rdto.content }</span>
 			<div id="content2" style="display: none;">
 			<textarea name="content" id="updateContent" rows="5" cols="50" style="width: 89%; height:53px;"></textarea>
-			</div></td>
+			</div> --%>
+			</td>
 		</tr>
 		</table>
 		
