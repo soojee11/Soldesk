@@ -9,6 +9,7 @@
   <typeAlias alias="PlayerDTO" type="kr.co.solproject.player.PlayerDTO" />
   <typeAlias alias="CategoryDTO" type="kr.co.solproject.category.CategoryDTO" />
   <typeAlias alias="MemberDTO" type="kr.co.solproject.member.MemberDTO" />
+  <typeAlias alias="BbsDTO" type="kr.co.solproject.bbs.BbsDTO" />
   
   <select id="getCategoryno" parameterClass="Map" resultClass="PlayerDTO">
   		select categoryno
@@ -156,5 +157,18 @@
 			#list[]#
 		</iterate>
 	</update>
+	
+	<select id="noticeList" parameterClass="Map" resultClass="BbsDTO">
+		select bbsno, subject, content, passwd, regdt, readcnt
+		from sol_bbs
+		where passwd = #passwd#
+		limit #sno#, #numPerPage#
+	</select>
+	
+	<select id="getNoticeTotal" parameterClass="Map" resultClass="Integer">
+		select count(*) as cnt
+		from sol_bbs
+		where passwd = #passwd#
+	</select>
 	
 </sqlMap>
