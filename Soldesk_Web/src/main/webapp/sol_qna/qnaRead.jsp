@@ -17,6 +17,12 @@
 function replyForm(){
 	//$("#replyno").val(0);
 	$("#replyno").remove();
+	if($.trim($("#content").val()) == "") {
+		alert("답변을 입력해주세요");
+		$("#content").focus();
+		return;
+	}
+	
 	
 	var param = $("#frm").serialize();
 	alert("답변을 등록하시겠습니까? ");
