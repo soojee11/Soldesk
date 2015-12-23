@@ -99,11 +99,8 @@
                           <span>Member</span>
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
-                      <ul class="sub">
-                      
-                          <li><a  href="../member/memlist.do">Member_list</a></li>
-                          <li><a  href="../member/memdelete.do">Member_delete</a></li>                          
-                          <li><a  href="../member/memmlevel.do">Member_mlevel</a></li>
+                      <ul class="sub">                      
+                          <li><a  href="../member/memlist.do">Delete&Level_Update</a></li>
                       </ul>
                   </li>  
 				  <li class="sub-menu">

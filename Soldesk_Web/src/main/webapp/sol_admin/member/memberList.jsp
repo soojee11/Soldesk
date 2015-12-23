@@ -31,42 +31,60 @@
 	</div>
 </div>
 
-
+<form method="post" action="memdelete.do">
 <table border="0" cellspacing="0" cellpadding="0" align="center" class="table">
+	<tr>
+		<td colspan="9" align="left"> 
+			<input type="checkbox" name="allck2" id="allck2" onclick="checkboxEnable2()"/>
+			<strong><span style="font-size:12px; color:#1717ff;">모두체크</span></strong>
+			<button type="button" class="btn btn-danger btn-sm" onclick="memCheck2(this.form)">선택 삭제</button>
+		</td>
+	</tr>
 	<tr align ="center">
+		<th><div align="center">선택</div></th>
 		<th><div align="center">ID</div></th>
 		<th><div align="center">이름</div></th>
 		<th><div align="center">email</div></th>
 		<th><div align="center">전화번호</div></th>
 		<th><div align="center">등록일</div></th>
-		<th><div align="center">등급</div></th>
+		<th><div align="center">등급조정</div></th>
 		<th><div align="center">한마디 각오</div></th>
 	</tr>
 	<c:if test="${total ==0 }">
 		<tr>
-			<td colspan="7" align="center">등록된 회원정보가 존재하지 않습니다. </td>
+			<td colspan="8" align="center">등록된 회원정보가 존재하지 않습니다. </td>
 		</tr>
 	</c:if>
 	<c:set var ="recNo" value="${recNo }"/>
 	<c:forEach var ="dto" items="${list }">
 		<c:set var ="recNo" value="${recNo-1 }"/>
 			<tr align ="center">
+				<td><input type="checkbox" name="check2" value="${dto.id }"  /></td>	
 				<td>${dto.id }</td>
 				<td>${dto.name }</td>
 				<td>${dto.email }</td>
 				<td>${dto.tel }</td>
 				<td>${dto.mdate }</td>
-				<td>${dto.mlevel }</td>
+				<td>
+					<div class="form-group">
+						<select class="form-control input-sm m-bot15" name="mlevel" onchange="checkLevelForm('${dto.id }',this.value)">
+							<option value='A' <c:choose><c:when  test="${dto.mlevel eq 'A' }" >selected</c:when></c:choose>>A</option>
+							<option value='B' <c:choose><c:when  test="${dto.mlevel eq 'B' }" >selected</c:when></c:choose>>B</option>
+							<option value='D' <c:choose><c:when  test="${dto.mlevel eq 'D' }" >selected</c:when></c:choose>>D</option>
+						</select>
+					</div>	
+				</td>
 				<td>${dto.promise }</td>
 			</tr>
 	</c:forEach>
 	<tr>
-		<td colspan="7" align="right" ><strong>total:</strong>${total }</td>
+		<td colspan="8" align="right" ><strong>total:</strong>${total }</td>
 	</tr>
 	<tr>
-		<td colspan="7"><div align="center">${paging }</div></td>
+		<td colspan="8"><div align="center">${paging }</div></td>
 	</tr>
 </table>
+</form>
 
 
 
