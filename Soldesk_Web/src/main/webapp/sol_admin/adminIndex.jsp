@@ -107,7 +107,9 @@
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
                       <ul class="sub">
-                          <li><a  href="bbs/boarddelete.do">Board_delete</a></li>
+                      	  <li><a href="bbs/noticeIns.do">Notice_insert</a></li>
+                      	  <li><a href="bbs/noticeUpDel.do">Notice_Update&Del</a></li>
+                          <li><a href="bbs/bbsDel.do">Board_delete</a></li>
                       </ul>
                   </li>       
                   <li class="sub-menu">
@@ -117,7 +119,7 @@
                         	<span class="menu-arrow arrow_carrot-right"></span>
                       </a>
                       <ul class="sub">
-                          <li><a  href="qna/qnadelete.do">Q&A_delete</a></li>
+                          <li><a  href="qna/qnaDel.do">Q&A_delete</a></li>
                       </ul>
                   </li>
                   <li class="sub-menu">                     

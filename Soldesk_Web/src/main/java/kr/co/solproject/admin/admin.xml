@@ -129,4 +129,32 @@
 		</iterate>
 	</update>
 	
+	<update id="bbsDelProc" parameterClass="Map">
+		delete from sol_bbs
+		where bbsno 
+		<iterate prepend="IN" property="list" open="(" close=")"
+			conjunction=",">
+			#list[]#
+		</iterate>
+	</update>
+	
+	<update id="replyDelProc" parameterClass="Map">
+		delete from sol_reply
+		where tableno
+		<iterate prepend="IN" property="list" open="(" close=")"
+			conjunction=",">
+			#list[]#
+		</iterate>
+		and tablename = #tablename#
+	</update>
+	
+	<update id="qnaDelProc" parameterClass="Map">
+		delete from sol_qna
+		where qnano
+		<iterate prepend="IN" property="list" open="(" close=")"
+			conjunction=",">
+			#list[]#
+		</iterate>
+	</update>
+	
 </sqlMap>

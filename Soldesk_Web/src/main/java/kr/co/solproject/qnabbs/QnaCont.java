@@ -42,9 +42,6 @@ public class QnaCont {
 		String col1=null;
 		if(request.getParameter("col1")!="") {
 			col1=request.getParameter("col1");
-			if(col1 == "name"){
-				System.out.println("이름검색");
-			}
 			System.out.println("컬럼: "+col1);
 		}
 		
