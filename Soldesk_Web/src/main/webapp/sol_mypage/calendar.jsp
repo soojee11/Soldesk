@@ -40,6 +40,11 @@ function videoGo(now){
     str = "/solproject/sol_mypage/videoGo.do?now="+now;
     r = window.open(str, "Lecture List", 'scrollbars=yes, resizeable=no, width=700, height=500');
   }
+  
+function mystudyGo(now){
+    str = "/solproject/sol_mypage/mystudyGo.do?now="+now;
+    r = window.open(str, "MyStudy List", 'scrollbars=yes, resizeable=no, width=700, height=500');
+  }
 </script>
 
 <%-- <%
@@ -65,7 +70,7 @@ int count = 0;
 
 <h4>
 <img src="../sol_img/go_right.png" width="20px"/>
-<img src="../sol_img/logos/cal_desc.png" width="140px" height="50px">| <span style="font-size: 12px;">'<strong>${name }</strong>(${id })'님의 한줄다짐   &nbsp;<STRONG>"${promise }"</strong></span>
+<img src="../sol_img/logos/cal_desc.png" width="140px" height="50px">| <span style="font-size: 12px;">'<strong>${name }</strong>(${id })'님의 한줄다짐   &nbsp;"<STRONG>${promise }</strong>"</span>
 </h4>
 
 <form method="post" action="calendar.do?s_id=${id }" name="change">
@@ -144,7 +149,7 @@ int count = 0;
     
  <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
  
-<div align="right"> <img src="image/btn_study_play.png" width=20px height=20px/> 강의 | <img src="image/pink.png" width=20px height=28px/> 메모  <!-- |  <img src="image/thumb.png" width=18px height=18px/>학습도장 --></div>
+<div align="right"> <img src="image/btn_study_play.png" width=20px height=20px/> 강의 | <img src="image/pink.png" width=20px height=28px/> 메모   |  <img src="image/test.png" width=21px height=22px/>학습결과</div>
         
 <table align="center" width=100% cellpadding="0" cellspacing="1"
 	bgcolor="#cccccc" border="1">
@@ -312,14 +317,26 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
             <c:if test="${ii == parsedate && iy == parseyear && im == parsemonth}">
          <!--       <img src="image/thumb.png" width=18px height=18px/>학습도장
                 -->
-                &nbsp;
-               <a href="javascript:videoGo(${now })">
-                 <img src="image/btn_study_play.png" width=25px height=33px/></a> <!-- 강의리스트 -->
-             
-               &nbsp;
-               <a href="javascript:memoGo(${now })">
-                <img src="image/pink.png" width=25px height=33px/></a> <!-- 메모리스트 -->
                 
+               <a href="javascript:videoGo(${now })">
+                 <img src="image/btn_study_play.png" width=20px height=28px/></a> <!-- 강의리스트 -->
+             
+               <a href="javascript:memoGo(${now })">
+                <img src="image/pink.png" width=20px height=28px/></a> <!-- 메모리스트 -->
+               
+                <c:if test="${maxregdatelist != null }">
+                <c:forEach var="msl" items="${maxregdatelist }">
+    <fmt:parseNumber var="msldate" type="number"  value="${fn:substring(msl.regdt, 8 ,10) }" />
+   <fmt:parseNumber var="mslyear" type="number" integerOnly="true"  value="${fn:substring(msl.regdt, 0 ,4) }" />
+   <fmt:parseNumber var="mslmonth" type="number" integerOnly="true"  value="${fn:substring(msl.regdt, 5 ,7) }" />
+     <c:if test="${ii == msldate && iy == mslyear && im == mslmonth}">
+        
+               <a href="javascript:mystudyGo(${now })">
+                <img src="image/test.png" width=21px height=22px/></a> <!-- 학습결과리스트 -->
+                </c:if>
+                
+                </c:forEach>
+                 </c:if>               
            </c:if>
            </c:if>
           </c:if>

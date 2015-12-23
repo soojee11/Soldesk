@@ -181,7 +181,7 @@ public class ReplyCont {
 			else {
 				dto = dao.getBbsReply(dto.getReplyno());
 				if(dto.getContent() != null){
-					out.print("SUCCESS/"+dto.getContent()+"/"+dto.getPasswd());
+					out.print("SUCCESS/"+dto.getContent()+"/"+dto.getReplyno());
 				}
 				else {
 					out.print("FAIL/댓글 가져오기에 실패했습니다. 다시 시도해 주세요");
@@ -192,4 +192,21 @@ public class ReplyCont {
 		}
 	}// end
 	
+	@RequestMapping(value = "/sol_bbs/bbsReplyUpdateProc.do", method = RequestMethod.POST)
+	public void bbsReplyUpdateProc(ReplyDTO dto, HttpServletResponse resp) {
+		try {
+			resp.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = resp.getWriter();
+			
+			dto.setContent(dto.getUpdateContent());
+			boolean flag = dao.bbsReplyUpdate(dto);
+			if (flag) {
+				out.print("SUCCESS/댓글을 수정했습니다 ");
+			} else {
+				out.print("FAIL/댓글 수정에 실패했습니다. 다시시도 해주세요");
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+	}// end
 }

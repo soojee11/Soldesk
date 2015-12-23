@@ -133,4 +133,28 @@ public class MypageDAO {
 		}
 		return list;
 	}// end
+	
+	
+	public List getMaxregdtList(String id) { //calendar,study,lecture조인해서 max(regdate)리스트GET
+		List list = null;
+		try {
+			list = mybatis.queryForList("sol_calendar.getMaxregdtList",id);
+
+		} catch (Exception e) {
+			System.out.println("getMaxregdtList: " + e);
+		}
+		return list;
+	}// end
+	
+	public List getMyscoretList() { //myscore,test,calendar조인
+		List list = null;
+		try {
+			list = mybatis.queryForList("sol_calendar.getMyscoretList");
+
+		} catch (Exception e) {
+			System.out.println("getMyscoretList: " + e);
+		}
+		return list;
+	}// end	
+	
 }
