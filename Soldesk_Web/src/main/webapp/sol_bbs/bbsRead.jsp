@@ -6,7 +6,7 @@
 <script>
 //댓글추가
 function replyCreate() {
-	$("#replyno").remove();
+	$("#createReplyno").remove();
 	if($.trim($("#content").val()) == "") {
 		alert("답변을 입력해주세요");
 		$("#content").focus();
@@ -16,7 +16,7 @@ function replyCreate() {
 	msg = "답변을 등록하시겠습니까?";
     if (confirm(msg)!=0) {
     	var param=$("#frm").serialize();
-    	
+    	alert(param);
     	$.ajaxSetup({datatype:"text"});
     	$.post("./bbsReplyCreate.do",param,replyCreateResponse);
     	
@@ -34,7 +34,7 @@ function replyCreateResponse(data, status) {//callback
 function deleteReply(replyno){
 	msg = "답변을 삭제하시겠습니까?";
     if (confirm(msg)!=0) {
-    	$("#replyno").val(replyno);
+    	$("#createReplyno").val(replyno);
     	
     	var param=$("#frm").serialize();
     	alert(param);
@@ -49,7 +49,7 @@ function deleteReply(replyno){
 function deleteReplyResponse(data,status) {
 	var str=data.replace(/^\s+|\s+$/gm,'');
 	var result=str.split("/");
-	alert(data.replace(/^\s+|\s+$/gm,''));
+	//alert(data.replace(/^\s+|\s+$/gm,''));
 	if(result[0]=="SUCCESS") {//댓글 삭제 성공
 		alert(result[1]);
 		window.location.reload();
@@ -63,7 +63,7 @@ function deleteReplyResponse(data,status) {
 function updateReply(replyno,bbsno){
 	$("#replyno").val(replyno);
 	var param = "replyno="+replyno;
-	alert(param);
+	//alert(param);
 	
 	$.get("./bbsReplyUpdate.do", param, updateReplyResponse);
 	
@@ -77,8 +77,8 @@ function updateReplyResponse(data,status){
 		document.getElementById(result[2]).style.display = "";
 		
 		document.getElementById(result[2]).updateContent.value = result[1];
-		alert(result[1]);
-		alert(result[2]);
+		//alert(result[1]);
+		//alert(result[2]);
 
 	}else{	
 		alert(result[1]);
@@ -92,7 +92,7 @@ function updateReplyProc(replyno){
     	document.getElementById(replyno).replyno.value = replyno;
     	
     	var param=$('#'+replyno).serialize();
-    	alert(param);
+    	//alert(param);
     	$.ajaxSetup({datatype:"text"});
     	$.post("./bbsReplyUpdateProc.do",param,updateProcReplyResponse);
     	
@@ -104,7 +104,7 @@ function updateProcReplyResponse(data,status){
 	var str =data.replace(/^\s+|\s+$/gm,'');
 	var result = str.split("/");
 	if(result[0]=="SUCCESS"){
-		alert(result[1]);
+		//alert(result[1]);
 		window.location.reload();		
 	}else{	
 		alert(result[1]);
@@ -201,7 +201,7 @@ function updateProcReplyResponse(data,status){
 	<form name="frm" id="frm" method="post">
 		<input type="hidden" name="tableno" id="tableno" value="${param.bbsno }"> 
 		<input type="hidden" name="passwd" id="passwd" value="${s_id }">
-		<input type="hidden" name="replyno" id="replyno" />
+		<input type="hidden" name="replyno" id="createReplyno" />
 		<div>
 			<c:if test="${s_id ne null}">
 			<textarea name="content" id="content" rows="5" cols="50" style="width: 89%; height:53px;"></textarea>
