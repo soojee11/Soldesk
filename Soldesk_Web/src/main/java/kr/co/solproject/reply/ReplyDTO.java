@@ -7,6 +7,7 @@ public class ReplyDTO {
 	private String rdate;
 	private String tablename;
 	private int tableno;
+	private String updateContent;	//bbs댓글업데이트할내용저장할 변수(db는 없음)
 	
 	public int getReplyno() {
 		return replyno;
@@ -44,11 +45,17 @@ public class ReplyDTO {
 	public void setTableno(int tableno) {
 		this.tableno = tableno;
 	}
+	public String getUpdateContent() {
+		return updateContent;
+	}
+	public void setUpdateContent(String updateContent) {
+		this.updateContent = updateContent;
+	}
 	
 	@Override
 	public String toString() {
 		return "ReplyDTO [replyno=" + replyno + ", content=" + content + ", passwd=" + passwd + ", rdate=" + rdate
-				+ ", tablename=" + tablename + ", tableno=" + tableno + "]";
+				+ ", tablename=" + tablename + ", tableno=" + tableno + ", updateContent=" + updateContent + "]";
 	}
 	
 }

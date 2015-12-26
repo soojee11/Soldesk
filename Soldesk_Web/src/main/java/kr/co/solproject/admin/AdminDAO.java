@@ -438,6 +438,27 @@ public class AdminDAO {
 		}
 	}// end
 	
+	public List noticeList(Map map) {
+		List list = null;
+		try {
+			list = mybatis.queryForList("sol_admin.noticeList", map);
+		} catch (Exception e) {
+			System.out.println("noticeList error" + e);
+		}
+		return list;
+	}// end
+	
+	
+	public int getNoticeTotal(Map map) {
+		int res = 0;
+		try {
+			res = (Integer) mybatis.queryForObject("sol_admin.getNoticeTotal", map);
+		} catch (Exception e) {
+			System.out.println("getNoticeTotal error: " + e);
+		}
+		return res;
+	}
+
 //-----------------------------------------------------------------------------------------------------------
 //-------------------------------------------------------------------------------------------------BBS EDN
 	

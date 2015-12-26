@@ -1238,6 +1238,94 @@ public class AdminCont {
 		return "redirect:bbsDel.do";
 
 	}//end
+	
+	@RequestMapping(value="sol_admin/bbs/noticeList.do", method=RequestMethod.GET)
+	public String noticeList(HttpServletRequest request) {
+		
+		String url = "./noticeList.do";
+		int numPerPage=7;	
+		int recNo=1;
+		
+		String nowPage = request.getParameter("nowPage");
+		if (nowPage == null) {
+			nowPage = "1";
+		}
+		
+		int sno = ((Integer.parseInt(nowPage) - 1) * numPerPage);
+		int intNowPage = Integer.parseInt(nowPage);
+		
+	    List list = null;
+	    
+	    Map map = new HashMap();
+	    map.put("sno", sno);
+	    map.put("numPerPage", numPerPage);
+	    map.put("passwd", "관리자");
+	    
+	    list=dao.noticeList(map);
+	    int total=dao.getNoticeTotal(map);
+	    
+	    String paging=Paging.paging4(total,intNowPage,numPerPage,url);
+	    
+	    recNo = total - (intNowPage - 1) * numPerPage + 1 ;
+		int totalPage = (int) Math.ceil((double)total/(double)numPerPage);
+			    
+	    request.setAttribute("list", list);
+	    request.setAttribute("recNo", recNo);
+	    request.setAttribute("paging", paging);
+	    request.setAttribute("nowPage", nowPage);
+	    request.setAttribute("totalPage", totalPage);
+	    request.setAttribute("total", total);
+	
+		return "sol_admin/bbs/noticeList";
+	}//end
+	
+	@RequestMapping(value="sol_admin/bbs/noticeIns.do", method=RequestMethod.GET)
+	public String noticeIns(HttpServletRequest request) {
+		return "sol_admin/bbs/noticeInsert";
+	}//end
+	
+	@RequestMapping(value="sol_admin/bbs/noticeIns.do", method=RequestMethod.POST)
+	public String noticeInsProc(BbsDTO dto, HttpServletRequest request) {
+		
+		dto.setPasswd("관리자");
+		boolean flag = bbsdao.insert(dto);
+		
+		if(flag){
+			request.setAttribute("msg", 1);
+			return "sol_admin/bbs/noticeList";
+		}else{
+			request.setAttribute("msg", "공지사항 등록에 실패하였습니다.<br /><br /> 다시 시도해 주십시오.");
+			request.setAttribute("link1", "<input type='button' value='다시시도' onclick=\"history.back();\">");
+			request.setAttribute("link2", "<input type='button' value='공지사항 목록' onclick=\"location.href='noticeList.do';\">");
+
+			return "sol_admin/error";
+		}
+		
+		
+	}//end
+	
+	@RequestMapping(value="sol_admin/bbs/noticeDel.do", method=RequestMethod.GET)
+	public String noticeDel(BbsDTO dto, HttpServletRequest request) {
+		
+		List list2 = new ArrayList();
+		list2.add(dto.getBbsno());
+		
+		Map map=new HashMap();
+		map.put("tablename", "B");
+		map.put("tableno", list2);
+		
+		dao.replyDelProc(map);
+		boolean flag = bbsdao.delete(dto);
+		if(flag){
+			request.setAttribute("msg", 2);
+			return "sol_admin/bbs/noticeList";
+		}else{
+			request.setAttribute("msg", 2);
+			return "sol_admin/bbs/noticeInsert";
+		}
+	}//end
+	
+	
 //-----------------------------------------------------------------------------------------------------------
 //-------------------------------------------------------------------------------------------------BBS EDN
 

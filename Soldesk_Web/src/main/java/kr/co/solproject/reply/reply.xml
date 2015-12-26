@@ -75,7 +75,7 @@
 		where replyno = #replyno# and
 		passwd = #passwd#
 	</select>
-	
+
 	<delete id="bbsReplyDelete" parameterClass="Integer">
 		delete from sol_reply
 		where replyno = #replyno#
@@ -87,4 +87,10 @@
 		where replyno = #replyno#
 	</select>
 
+	<update id="bbsReplyUpdate" parameterClass="ReplyDTO">
+		update sol_reply
+		set content = #content#
+		where replyno = #replyno#
+	</update>
+	
 </sqlMap>
