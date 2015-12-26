@@ -132,6 +132,7 @@ function lectureGo(lectureno){
             <td >학습일</td>
         </tr>
         </thead>
+        
     <c:forEach var="list" items="${mystudylist }">
         <c:if test="${list.id == id }">
        

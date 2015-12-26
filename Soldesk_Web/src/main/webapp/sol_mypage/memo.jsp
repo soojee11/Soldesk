@@ -119,8 +119,12 @@ function lectureGo(lectureno){
        <p><div style="color: White;height:60px;padding-top: 12px; font: 20px arial, sans-serif;background-color: #99cc66; font-weight: bold;">
        &nbsp;&nbsp;&nbsp;<font size="9px">Memo List</font>_${name}(${id })</div>
    
-
+   
+   
 <table cellpadding=3 border=0 cellspacing=1 width=100% bgcolor=#dddddd class="table">
+    
+
+    
     <thead>
         <tr align="center" bgcolor="#fafafa" style="font-weight: bold; font-size: 14px;">
             <td >회차</td>
@@ -130,17 +134,18 @@ function lectureGo(lectureno){
             <td>복습하기</td>
         </tr>
     </thead>
-
-  
-    <c:forEach var="list" items="${memolist }">
+    
+       <c:forEach var="list" items="${memolist }">
+    <c:set var="memodate" value="${list.memodate }" />
+    
+    <c:if test="${memodate ne null }">
         <c:if test="${list.id == id }">
-       
         <c:set var="lregdate" value="${list.regdate }" />
         <c:set var="lectureno" value="${list.lectureno }" />
         <c:set var="subject" value="${list.subject }" />
         <c:set var="poster" value="${list.poster }" />
         <c:set var="teacher" value="${list.teacher }" />
-        <c:set var="memodate" value="${list.memodate }" />
+        
         <c:set var="memo" value="${list.memo }" />
         <c:set var="id" value="${list.id }" />
         <c:set var="lectureno" value="${list.lectureno }" />
@@ -169,6 +174,11 @@ function lectureGo(lectureno){
       </tbody>
           </c:if>  
           </c:if>
+          
+          </c:if>
+          
+
+          
         </c:forEach>
  
 </table><br>

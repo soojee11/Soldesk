@@ -275,21 +275,17 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
           <c:set var="count2" value="0"/>             
    <td bgcolor="${bgcolor}" width="14.28571428%" >
     
-      
-           
-    
     <font color="${color}">
     
       ${i })
       
       
+      
+         <c:set var="ii" value="${i }"/>
+   <c:set var="iy" value="${year }"/>
+   <c:set var="im" value="${month +1 }"/>
+      
       <c:if test="${maxregdtlist ne null || maxrdtlist ne null}">
-  
-  
-  
-
-  
-  
   
   <c:forEach var="rdt" items="${maxrdtlist }">
   
@@ -315,14 +311,14 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
    <c:set var="now" value="${parseyear }0${parsemonth }00${parsedate }"/>
    </c:if>
    
-   <c:set var="ii" value="${i }"/>
-   <c:set var="iy" value="${year }"/>
-   <c:set var="im" value="${month +1 }"/>
+
          <c:if test="${rdt_id == id }">
             <c:if test="${lecturelist != null}">
             <c:if test="${ii == parsedate && iy == parseyear && im == parsemonth}">
          <!--       <img src="image/thumb.png" width=18px height=18px/>학습도장
                 -->
+
+                
                 
                <a href="javascript:videoGo(${now })">
                  <img src="image/btn_study_play.png" width=20px height=28px/></a> <!-- 강의리스트 -->
@@ -330,26 +326,42 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
                <a href="javascript:memoGo(${now })">
                 <img src="image/pink.png" width=20px height=28px/></a> <!-- 메모리스트 -->
          
-                             <c:if test="${maxregdtlist ne null }">
-                <c:forEach var="msl" items="${maxregdtlist }">
-    <fmt:parseNumber var="msldate" type="number"  value="${fn:substring(msl.regdt, 8 ,10) }" />
-   <fmt:parseNumber var="mslyear" type="number" integerOnly="true"  value="${fn:substring(msl.regdt, 0 ,4) }" />
-   <fmt:parseNumber var="mslmonth" type="number" integerOnly="true"  value="${fn:substring(msl.regdt, 5 ,7) }" />
-     <c:if test="${ii eq msldate && iy eq mslyear && im eq mslmonth }">
-               <a href="javascript:mystudyGo(${now })">
-                <img src="image/test.png" width=21px height=22px/></a> <!-- 학습결과리스트 -->
-                </c:if>
-              </c:forEach> 
-                 </c:if>
-                        
-           
+         
+         
            
            </c:if>
            </c:if>
           </c:if>
           
   </c:forEach>
+                
    </c:if>
+   
+    <c:if test="${maxregdtlist ne null }">
+   <c:forEach var="msl" items="${maxregdtlist }">
+    <fmt:parseNumber var="msldate" type="number"  value="${fn:substring(msl.regdt, 8 ,10) }" />
+   <fmt:parseNumber var="mslyear" type="number" integerOnly="true"  value="${fn:substring(msl.regdt, 0 ,4) }" />
+   <fmt:parseNumber var="mslmonth" type="number" integerOnly="true"  value="${fn:substring(msl.regdt, 5 ,7) }" />
+   
+    <c:if test="${mslmonth <10 && msldate <10 }">
+   <c:set var="now" value="${mslyear }00${mslmonth }00${msldate }"/>
+   </c:if>
+   <c:if test="${mslmonth >=10 && msldate >=10 }">
+   <c:set var="now" value="${mslyear }0${mslmonth }0${msldate }"/>
+   </c:if>
+   <c:if test="${mslmonth <10 && msldate >=10 }">
+   <c:set var="now" value="${mslyear }00${mslmonth }0${msldate }"/>
+   </c:if>
+   <c:if test="${mslmonth >=10 && msldate <10 }">
+   <c:set var="now" value="${mslyear }0${mslmonth }00${msldate }"/>
+   </c:if>
+   
+     <c:if test="${ii eq msldate && iy eq mslyear && im eq mslmonth }">
+               <a href="javascript:mystudyGo(${now })">
+                <img src="image/test.png" width=21px height=22px/></a> <!-- 학습결과리스트 -->
+                </c:if>
+              </c:forEach> 
+                 </c:if> 
     <!-- ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★ --> 
     <!-- +++++++++++++++++++++++++++++++++++++++++아이콘+++++++++++++++++++++++++++++++ -->
                    
