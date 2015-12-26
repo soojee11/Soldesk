@@ -138,7 +138,7 @@
 	SELECT
         myscore.mytestno ,myscore.id ,myscore.testno , myscore.myscore ,
         myscore.usetime ,myscore.answerno ,myscore.regdt ,
-        test.grade,test.subject,test.testtitle
+        test.grade,test.subject,test.testtitle,myscore.mytestno
         FROM sol_calendar calendar join sol_myscore myscore
         ON calendar.id = myscore.id
         join sol_test test on myscore.testno = test.testno 

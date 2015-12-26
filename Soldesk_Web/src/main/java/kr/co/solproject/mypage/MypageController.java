@@ -38,7 +38,7 @@ public class MypageController {
 	// --------------------------------------------------------------------
 	@RequestMapping(value = "sol_mypage/calendar.do", method = RequestMethod.POST)
 	public String calendar2(String s_id,HttpServletRequest req, HttpSession session) {
-	System.out.println(s_id);
+	System.out.println("1s_id= "+s_id);
 		
 	if(s_id != ""){
 	
@@ -101,7 +101,7 @@ public class MypageController {
 		int endDate = cr.getActualMaximum(Calendar.DATE);
 		// 1일의 요일을 구함
 		int startDay = cr.get(Calendar.DAY_OF_WEEK);
-		System.out.println("startDay-"+startDay);
+		//System.out.println("startDay-"+startDay);
 		int count = 0;
 		
 		req.setAttribute("year", year);
@@ -144,7 +144,7 @@ public class MypageController {
 	/*@RequestMapping( "sol_mypage/calendar.do")*/
 	@RequestMapping(value = "sol_mypage/calendar.do", method = RequestMethod.GET)
 	public String calendar(String s_id,HttpServletRequest req, HttpSession session) {
-		System.out.println(s_id);
+		System.out.println("0s_id= "+s_id);
 		if(s_id != ""){
 			
 			Calendar cal = Calendar.getInstance();
@@ -209,7 +209,7 @@ public class MypageController {
 			int endDate = cr.getActualMaximum(Calendar.DATE);
 			// 1일의 요일을 구함
 			int startDay = cr.get(Calendar.DAY_OF_WEEK);
-			System.out.println("startDay-"+startDay);
+			//System.out.println("startDay-"+startDay);
 			int count = 0;
 			
 			

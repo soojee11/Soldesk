@@ -47,31 +47,9 @@ function mystudyGo(now){
   }
 </script>
 
-<%-- <%
-//현재 날짜 정보 
-Calendar cr = Calendar.getInstance();
-int year = cr.get(Calendar.YEAR);
-int month = cr.get(Calendar.MONTH);
-int date = cr.get(Calendar.DATE);
- 
-//오늘 날짜
-String today = year + ":" +(month+1)+ ":"+date; 
-cr.set(year, month, 1);
-// 해당 월의 첫날를 구함
-int startDate = cr.getMinimum(Calendar.DATE);
-// 해당 월의 마지막 날을 구함
-int endDate = cr.getActualMaximum(Calendar.DATE);
-// 1일의 요일을 구함
-int startDay = cr.get(Calendar.DAY_OF_WEEK);
-int count = 0;
-%> --%>
 
-
-
-<h4>
 <img src="../sol_img/go_right.png" width="20px"/>
-<img src="../sol_img/logos/cal_desc.png" width="140px" height="50px">| <span style="font-size: 12px;">'<strong>${name }</strong>(${id })'님의 한줄다짐   &nbsp;"<STRONG>${promise }</strong>"</span>
-</h4>
+<img src="../sol_img/logos/cal_desc.png" width="140px" height="50px">| <span style="font-size: 12px;">'<strong>${name }</strong>(${id })'님의 다짐   &nbsp;"<STRONG>${promise }</strong>"</span>
 
 <form method="post" action="calendar.do?s_id=${id }" name="change">
 
@@ -93,8 +71,10 @@ int count = 0;
       %>  --%>
       
       <c:forEach begin="${year -5 }" end="${year +5 }" var="val">
-      <option value="${val}" ${val == year ? 'selected="selected"' : '' }> <c:out value="${val}"/></option>
-       </c:forEach>
+      <option value="${val}" ${val == year ? 'selected="selected"' : '' }> 
+      <c:out value="${val}"/>
+      </option>
+      </c:forEach>
       </select>
       
       <select name="month" onchange="selectCheck(this.form)">
@@ -108,7 +88,9 @@ int count = 0;
       %> --%>
       
        <c:forEach begin="1" end="12" var="mth">
-      <option value="${mth}" ${mth == month+1 ? 'selected="selected"' : '' }> <c:out value="${mth}"/></option>
+       <option value="${mth}" ${mth == month+1 ? 'selected="selected"' : '' }> 
+       <c:out value="${mth}"/>
+       </option>
        </c:forEach> 
       
       </select>
@@ -116,7 +98,7 @@ int count = 0;
       <input type="button" value="▷" onClick="monthUp(this.form)"/></td>
     </tr>
     <tr>
-      <td align="center" colspan="3" style="font-weight: bold; width: 100%; font-size: 20px;">
+      <td align="center" colspan="3" style="font-weight: bold; width: 100%; font-size: 18px;">
       <a href="calendar.do?s_id=${id }"> < TODAY ${nowregdate2}> </a></td>
     </tr>
     
@@ -141,20 +123,24 @@ int count = 0;
             
                 
      <%--     ${lectureno } : ${subject } : ${poster } : ${teacher }: ${lregdate } || ${memodate } : ${memo } : ${lectureno }<br/>
-       --%> </c:if>
+       --%> 
+       </c:if>
         </c:forEach> 
         
         <br/>     
      <c:set var="stamp" value="0"/>
+    
     
  <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
  
 <div align="right"> <img src="image/btn_study_play.png" width=20px height=20px/> 강의 | <img src="image/pink.png" width=20px height=28px/> 메모   |  <img src="image/test.png" width=21px height=22px/>학습결과</div>
         
 <table align="center" width=100% cellpadding="0" cellspacing="1"
-	bgcolor="#cccccc" border="1">
+	 border="1">
+	
 		<tr style="font-weight: bold; width: 100%; height: 25px;"
 		bgcolor="#99cc66" align="center">
+		
   <td><font color="red">일</font></td>
   <td><font color="#000000">월</font></td>
   <td><font color="#000000">화</font></td>
@@ -181,7 +167,7 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
  
       <c:set var="newLine" value="0"/>
 
-      <c:forEach begin="1" end="${startDay-1}" var="count"> <!-- 날짜시작전 빈공간 ->밀린다!!! -->
+      <c:forEach begin="1" end="${startDay-1}" var="count"> <!-- 날짜시작전 빈공간  -->
            <td>&nbsp;</td>
            <c:set var="count" value="${count}"/>
             <c:set var="newLine">${ newLine+1}</c:set> 
@@ -198,6 +184,43 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
                     </c:forEach>
  --%>
 
+
+   
+   
+   <fmt:parseNumber var="todaydate" type="number"  value="${fn:substring(today, 8 ,10) }" />
+   <fmt:parseNumber var="todayyear" type="number" integerOnly="true"  value="${fn:substring(today, 0 ,4) }" />
+   <fmt:parseNumber var="todaymonth" type="number" integerOnly="true"  value="${fn:substring(today, 5 ,7) }" />
+   
+    <!-- 고정년월일  -->
+   <c:if test="${todaymonth <10 && todaydate <10 }">
+   <c:set var="todaynow" value="${todayyear }00${todaymonth }00${todaydate }"/>
+   </c:if>
+   <c:if test="${todaymonth >=10 && todaydate >=10 }">
+   <c:set var="todaynow" value="${todayyear }0${todaymonth }0${todaydate }"/>
+   </c:if>
+   <c:if test="${todaymonth <10 && todaydate >=10 }">
+   <c:set var="todaynow" value="${todayyear }00${todaymonth }0${todaydate }"/>
+   </c:if>
+   <c:if test="${todaymonth >=10 && todaydate <10 }">
+   <c:set var="todaynow" value="${todayyear }0${todaymonth }00${todaydate }"/>
+   </c:if>
+   
+   <!-- 변경년월일  -->
+   <c:if test="${month+1 <10 && date <10 }">
+   <c:set var="nowymd" value="${year }00${month+1 }00${date }"/>
+   </c:if>
+   <c:if test="${month+1 >=10 && date >=10 }">
+    <c:set var="nowymd" value="${year }0${month+1 }0${date }"/>
+   </c:if>
+   <c:if test="${month+1 <10 && date >=10 }">
+    <c:set var="nowymd" value="${year }00${month+1 }0${date }"/>
+   </c:if>
+   <c:if test="${month+1 >=10 && date <10 }">
+    <c:set var="nowymd" value="${year }0${month+1 }00${date }"/>
+   </c:if>
+
+  <!-- \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ -->
+   
    
       <c:forEach begin="${startDate}" end="${endDate}" var="i">
        
@@ -210,12 +233,14 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
                   </c:if> 
       --%>
      
- 
+    <c:if test="${(count-(7-(startDay-1)))%7 eq 6}">
+        <c:set var="color" value="blue"/>
+   </c:if>
      
-                     <c:choose>
-                            <c:when test="${year eq val && month eq mth && date eq i }">
+                       <c:choose>
+                            <c:when test="${nowymd eq  todaynow && date eq i}">
                                 <c:set var="bgcolor" value="#99cc66"/>
-                            </c:when>
+                            </c:when> 
                             <c:otherwise>
                                 <c:set var="bgcolor" value="#ffffff"/>
                             </c:otherwise>
@@ -250,44 +275,30 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
                   
                   
                   <c:set var="newLine">${ newLine+1}</c:set>
-                        
-                        <c:if test="${i eq endDate }">
-                            <c:choose>
-                                <c:when test="${newLine gt 0 && newLine lt 7}">
-                                    <c:forEach begin='${newLine }' end="6">
-                                    <td bgcolor='#ffffff'>&nbsp;</td>
-                                    <c:set var="newLine">${ newLine+1}</c:set>
-                                    </c:forEach> 
-                                </c:when>
-                            </c:choose>
-                        
-                        </c:if>
-                        
-                        
-                        
-                    <c:set var="count">${ count+1}</c:set> 
+                  <c:set var="count">${ count+1}</c:set> 
                   <%--   <c:out value="${count}"/>   --%>
                   
+                  
+                  
     <!-- +++++++++++++++++++++++++++++++++++++++아이콘++++++++++++++++++++++++++++++++++++ --> 
-             
     <!-- ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★ --> 
              
-          <c:set var="count2" value="0"/>             
-   <td bgcolor="${bgcolor}" width="14.28571428%" >
+    <c:set var="count2" value="0"/>             
+    <td bgcolor="${bgcolor}" width="14.28571428%" >
     
     <font color="${color}">
     
       ${i })
+   
+   
       
-      
-      
-         <c:set var="ii" value="${i }"/>
+   <c:set var="ii" value="${i }"/>
    <c:set var="iy" value="${year }"/>
    <c:set var="im" value="${month +1 }"/>
       
-      <c:if test="${maxregdtlist ne null || maxrdtlist ne null}">
+   <c:if test="${maxregdtlist ne null || maxrdtlist ne null}">
   
-  <c:forEach var="rdt" items="${maxrdtlist }">
+   <c:forEach var="rdt" items="${maxrdtlist }">
   
  <%--    <c:set var="count2">${count2+1}</c:set>
   ${count2 } --%>
@@ -325,18 +336,15 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
              
                <a href="javascript:memoGo(${now })">
                 <img src="image/pink.png" width=20px height=28px/></a> <!-- 메모리스트 -->
-         
-         
-         
            
            </c:if>
            </c:if>
           </c:if>
           
   </c:forEach>
-                
    </c:if>
    
+    <!-- 학습결과리스트 -->
     <c:if test="${maxregdtlist ne null }">
    <c:forEach var="msl" items="${maxregdtlist }">
     <fmt:parseNumber var="msldate" type="number"  value="${fn:substring(msl.regdt, 8 ,10) }" />
@@ -376,124 +384,34 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
  <tr  style='height: 70px; font-weight: bold;'> <!--둘째줄부터  -->
  </c:if>
       
-      
-      
  </c:forEach> 
-     
-                  
 
-
-
-                              <c:choose>
-                                <c:when test="${(count-(7-(startDay-1)))%7gt 0 && (count-(7-(startDay-1)))%7 lt 7}">
-                                    <c:forEach begin='${newLine }' end="6"> 
-                                    <td bgcolor='#ffffff'>&nbsp;</td>
-                                    <c:set var="newLine">${ newLine+1}</c:set>
-                                     <c:set var="newLine" value="0"/>
-                                    </c:forEach> 
-                                </c:when>
-                              </c:choose> 
+   <%--      <c:choose>    <!--  날짜끝나고 빈공간 -->
+         <c:when test="${(count-(7-(startDay-1)))%7 gt 0 && (count-(7-(startDay-1)))%7 lt 7}">
+        <c:when test="${(count-(7-(startDay-1)))%7 gt 0 && (count-(7-(startDay-1)))%7 lt 7}">
+          <c:forEach begin='${newLine }' end="6"> 
+             <td bgcolor='#ffffff'>&nbsp;</td>
+             <c:set var="newLine">${ newLine+1}</c:set>
+             <c:set var="newLine" value="0"/>
+          </c:forEach> 
+         </c:when>
+        </c:choose>  --%>
    
-        
-<%--    while(count%7 != 0){ /* 날짜끝나고 빈공간 */
-%>
-       <td>&nbsp;</td>
-<% 
-count++;
- }
-%> 
-    --%>
-   
-   <%--   <c:forEach begin="1" end="${startDay-1}" var="count"> <!-- 날짜시작전 빈공간 -->
-             <td>&nbsp;</td>
-           <c:set var="count" value="${count}"/>
-             <c:out value="${count}"/> |
-       </c:forEach> 
- --%>
-   
-   
- 
-       
-<%--        <c:if test="${count%7 ne 0 }"> <!--  날짜끝나고 빈공간 -->
-         <c:forEach begin="${startDate}" end="${endDate}" var="count">
+      <c:if test="${(count-(7-(startDay-1)))%7  ne 0 }"> <!--  날짜끝나고 빈공간 -->
+         <c:forEach begin="${endDate+1 }" end="${count }" >
          <td>&nbsp;</td>
          </c:forEach> 
-         +<c:out value="${count}"/>
         </c:if> 
-         --%>
-      
-                                
-        
-<%--         
-      <c:choose>
-         <c:when test="${count%7 ne 0}">
-         <c:forEach begin='${count }' end="6"> 
-         <td bgcolor='#ffffff'>&nbsp;</td>
-         </c:forEach> 
-         </c:when>
-      </c:choose> --%>
-
- 
-
- 
- </tr>
+  
+   
+</tr>
 </table>
 <%@ include file="../sol_footer.jsp"%>
-  
-  
-  
-<%--      
 
-	
-<%
-for (int i=startDate;i<=endDate;i++){
- String bgcolor = (today.equals(year+":"+(month+1)+":"+i))? "#99cc66" : "#FFFFFF";/* 오늘날짜음영 */
- String color=null; 
- if(count%7 == 0) color="red";
- else if(count%7 == 6) color="blue";
- else color="black";
- 
- count++;
-%> 
-  <td bgcolor="<%=bgcolor %>" width="14.285%" >
-  <font color=<%=color %>>
-
-      <%=i %>)
-      <!-- +++++++++++++++++++++++++++++++++++++++아이콘++++++++++++++++++++++++++++++++++++ --> 
-      
-  <c:forEach var="rdt" items="${maxrdtlist }">
-   <c:set var="rdt_id" value="${rdt.id }" />
-  <fmt:parseNumber var="parsedate" type="number"  value="${fn:substring(rdt.regdate, 8 ,10) }" />
-  <fmt:parseNumber var="parseyear" type="number" integerOnly="true"  value="${fn:substring(rdt.regdate, 0 ,4) }" />
-  <fmt:parseNumber var="parsemonth" type="number" integerOnly="true"  value="${fn:substring(rdt.regdate, 5 ,7) }" />
-  
-   <c:set var="regdate" value="${fn:substring(rdt.regdate, 0 ,10) }" />
-   <c:set var="now" value="${parseyear }0${parsemonth }0${parsedate }"/>
-   <c:set var="ii" value="<%=i %>"/>
-   <c:set var="iy" value="${year }"/>
-   <c:set var="im" value="${month +1 }"/>
-         <c:if test="${rdt_id == id }">
-            <c:if test="${lecturelist != null}">
-            <c:if test="${ii == parsedate && iy == parseyear && im == parsemonth}">
-               <img src="image/thumb.png" width=18px height=18px/><!-- 학습도장 -->
-           
-	           <a href="javascript:videoGo(${now })">
-	             <img src="image/btn_study_play.png" width=20px height=28px/></a> <!-- 강의리스트 -->
-	         
-	           <a href="javascript:memoGo(${now })">
-	             <img src="image/pink.png" width=20px height=28px/></a> <!-- 메모리스트 -->
-           </c:if>
-          </c:if>
-          </c:if>
-     </c:forEach>
-   
-    <!-- +++++++++++++++++++++++++++++++++++++++++아이콘+++++++++++++++++++++++++++++++ -->
-  </font>
-  </td>
   
   
   
-<%
+<%-- <%
   if(count%7 == 0 && i < endDate){
 %> 
  </tr>
@@ -511,4 +429,4 @@ while(count%7 != 0){ /* 날짜끝나고 빈공간 */
 <% 
 count++;
  }
-%> --%>
+%>  --%>
