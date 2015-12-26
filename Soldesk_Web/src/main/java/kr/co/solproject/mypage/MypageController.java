@@ -38,7 +38,7 @@ public class MypageController {
 	// --------------------------------------------------------------------
 	@RequestMapping(value = "sol_mypage/calendar.do", method = RequestMethod.POST)
 	public String calendar2(String s_id,HttpServletRequest req, HttpSession session) {
-	System.out.println("1s_id= "+s_id);
+	System.out.println("1)s_id= "+s_id);
 		
 	if(s_id != ""){
 	
@@ -144,7 +144,7 @@ public class MypageController {
 	/*@RequestMapping( "sol_mypage/calendar.do")*/
 	@RequestMapping(value = "sol_mypage/calendar.do", method = RequestMethod.GET)
 	public String calendar(String s_id,HttpServletRequest req, HttpSession session) {
-		System.out.println("0s_id= "+s_id);
+		System.out.println("0)s_id= "+s_id);
 		if(s_id != ""){
 			
 			Calendar cal = Calendar.getInstance();
@@ -257,7 +257,7 @@ public class MypageController {
 		 String s_id = (String) session.getAttribute("s_id");
 		
 		 List memolist=dao.getLectureList();//sol_lecture와 조인해서 강의제목을 가져오자
-			System.out.println(memolist);
+			//System.out.println(memolist);
 			req.setAttribute("memolist", memolist);
 
 			
@@ -275,12 +275,12 @@ public class MypageController {
 	
 	@RequestMapping(value = "sol_mypage/videoGo.do", method = RequestMethod.GET)
 	public String videoGo(String now,HttpServletRequest req, HttpSession session) {
-	System.out.println("video: "+now);
+		System.out.println("video: "+now);
 		
 		 String s_id = (String) session.getAttribute("s_id");
 		 
 		 List videolist=dao.getLectureList();//sol_lecture와 조인해서 강의제목을 가져오자
-			System.out.println("##"+videolist);
+			//System.out.println("##"+videolist);
 			
 			String promise = null;
 			String name = null;
@@ -297,12 +297,12 @@ public class MypageController {
 	
 	@RequestMapping(value = "sol_mypage/mystudyGo.do", method = RequestMethod.GET)
 	public String MystudyGo(String now,HttpServletRequest req, HttpSession session) {
-	System.out.println("mystudy: "+now);
+		System.out.println("mystudy: "+now);
 		
 		 String s_id = (String) session.getAttribute("s_id");
 		 
 		 List mystudylist=dao.getMyscoretList();//myscore,test,calendar조인
-			System.out.println("##"+mystudylist);
+			//System.out.println("##"+mystudylist);
 			
 			String promise = null;
 			String name = null;
