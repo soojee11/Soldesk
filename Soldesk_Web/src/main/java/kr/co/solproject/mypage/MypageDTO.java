@@ -16,6 +16,9 @@ public class MypageDTO {
 	private String regdt;
 	private int grade;
 	private String testtitle;
+	private String myscore;
+	
+		
 	
 	public int getMytestno() {
 		return mytestno;
@@ -73,9 +76,14 @@ public class MypageDTO {
 		this.testtitle = testtitle;
 	}
 
-	
-	
-	
+	public String getMyscore() {
+		return myscore;
+	}
+
+	public void setMyscore(String myscore) {
+		this.myscore = myscore;
+	}
+
 	//------------------------------------------------------sol_lecture
     private String subject;     // 강의제목
     private String poster;		// 캡쳐화면 
@@ -165,11 +173,15 @@ public class MypageDTO {
 	public String toString() {
 		return "Calendar [calno=" + calno + ", id=" + id + ", regdate=" + regdate + ", lectureno=" + lectureno
 				+ ", mytestno=" + mytestno + ", testno=" + testno + ", usetime=" + usetime + ", answerno=" + answerno
-				+ ", regdt=" + regdt + ", grade=" + grade + ", testtitle=" + testtitle + ", subject=" + subject
-				+ ", poster=" + poster + ", teacher=" + teacher + ", memo=" + memo + ", memodate=" + memodate + "]";
-	}
+				+ ", regdt=" + regdt + ", grade=" + grade + ", testtitle=" + testtitle + ", myscore=" + myscore
+				+ ", subject=" + subject + ", poster=" + poster + ", teacher=" + teacher + ", memo=" + memo
+				+ ", memodate=" + memodate + "] \n";
+		
+			}
 
 
+	
+	
 	
 	
 	

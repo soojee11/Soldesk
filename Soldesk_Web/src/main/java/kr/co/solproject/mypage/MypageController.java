@@ -66,7 +66,7 @@ public class MypageController {
 		
 		List maxregdtlist=dao.getMaxregdtList(s_id);//sol_Study에서 max(regdt)가져오기
 		System.out.println("0"+maxregdtlist);
-		req.setAttribute("maxregdatelist", maxregdtlist);
+		req.setAttribute("maxregdtlist", maxregdtlist);
 		
 		
 		List myscorelist=dao.getMyscoretList();//myscore,test,calendar조인
@@ -162,22 +162,22 @@ public class MypageController {
 		    
 			
 			List memolist=dao.getMemoList();//sol_study와 조인해서 memo내용을 가져오자
-			System.out.println("0"+memolist);
+			//System.out.println("0"+memolist);
 			
 			List lecturelist=dao.getLectureList();//sol_lecture와 조인해서 강의제목을 가져오자
-			System.out.println("0"+lecturelist);
+			//System.out.println("0"+lecturelist);
 			
 			List maxrdtlist=dao.getMaxrdtList(s_id);//각 날짜마다 max(regdate)가져오기
-			System.out.println("0"+maxrdtlist);
+			//System.out.println("0"+maxrdtlist);
 			
 			
 			List maxregdtlist=dao.getMaxregdtList(s_id);//sol_Study에서 max(regdt)가져오기
 			System.out.println("0"+maxregdtlist);
-			req.setAttribute("maxregdatelist", maxregdtlist);
+			req.setAttribute("maxregdtlist", maxregdtlist);
 			
 			
 			List myscorelist=dao.getMyscoretList();//myscore,test,calendar조인
-			System.out.println("0**"+myscorelist);
+			//System.out.println("0**"+myscorelist);
 			req.setAttribute("myscorelist", myscorelist);
 			
 			

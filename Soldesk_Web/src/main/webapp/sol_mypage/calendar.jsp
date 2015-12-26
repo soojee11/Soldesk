@@ -283,9 +283,15 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
       ${i })
       
       
-     
-  <c:forEach var="rdt" items="${maxrdtlist }">
+      <c:if test="${maxregdtlist ne null || maxrdtlist ne null}">
   
+  
+  
+
+  
+  
+  
+  <c:forEach var="rdt" items="${maxrdtlist }">
   
  <%--    <c:set var="count2">${count2+1}</c:set>
   ${count2 } --%>
@@ -323,28 +329,30 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
              
                <a href="javascript:memoGo(${now })">
                 <img src="image/pink.png" width=20px height=28px/></a> <!-- 메모리스트 -->
-               
-                <c:if test="${maxregdatelist != null }">
-                <c:forEach var="msl" items="${maxregdatelist }">
+         
+                             <c:if test="${maxregdtlist ne null }">
+                <c:forEach var="msl" items="${maxregdtlist }">
     <fmt:parseNumber var="msldate" type="number"  value="${fn:substring(msl.regdt, 8 ,10) }" />
    <fmt:parseNumber var="mslyear" type="number" integerOnly="true"  value="${fn:substring(msl.regdt, 0 ,4) }" />
    <fmt:parseNumber var="mslmonth" type="number" integerOnly="true"  value="${fn:substring(msl.regdt, 5 ,7) }" />
-     <c:if test="${ii == msldate && iy == mslyear && im == mslmonth}">
-        
+     <c:if test="${ii eq msldate && iy eq mslyear && im eq mslmonth }">
                <a href="javascript:mystudyGo(${now })">
                 <img src="image/test.png" width=21px height=22px/></a> <!-- 학습결과리스트 -->
                 </c:if>
-                
-                </c:forEach>
-                 </c:if>               
+              </c:forEach> 
+                 </c:if>
+                        
+           
+           
            </c:if>
            </c:if>
           </c:if>
           
   </c:forEach>
-   
+   </c:if>
+    <!-- ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★ --> 
     <!-- +++++++++++++++++++++++++++++++++++++++++아이콘+++++++++++++++++++++++++++++++ -->
-                    
+                   
  </font>
                    
  </td>
@@ -358,9 +366,8 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
       
       
       
-      
  </c:forEach> 
-   
+     
                   
 
 

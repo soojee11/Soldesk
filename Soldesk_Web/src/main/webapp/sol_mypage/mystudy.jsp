@@ -120,33 +120,32 @@ function lectureGo(lectureno){
        </div>
  
 
-<!-- 학년/과목/과목제목/경과시간/학습한날짜 -->
+<!-- 학년/과목/과목제목/내점수/경과시간/학습한날짜  -->
 <table cellpadding=3 border=0 cellspacing=1 width=100% bgcolor=#dddddd class="table">
           <thead>
         <tr style="font-size: 14px; font-weight: bold;" bgcolor=#fafafa align="center">
-            <td >회차</td>
-            <td>강의명</td>
-            <td >선생님</td>
-            <td >수강일</td>
-            <td >복습하기</td>
+            <td >학년</td>
+            <td>과목</td>
+            <td >문제지</td>
+            <td >내점수</td>
+            <td >경과시간</td>
+            <td >학습일</td>
         </tr>
         </thead>
-    <c:forEach var="list" items="${videolist }">
+    <c:forEach var="list" items="${mystudylist }">
         <c:if test="${list.id == id }">
        
-        <c:set var="lregdate" value="${list.regdate }" />
-        <c:set var="lectureno" value="${list.lectureno }" />
+        <c:set var="regdt" value="${list.regdt }" />
+        <c:set var="grade" value="${list.grade }" />
         <c:set var="subject" value="${list.subject }" />
-        <c:set var="poster" value="${list.poster }" />
-        <c:set var="teacher" value="${list.teacher }" />
-        <c:set var="memodate" value="${list.memodate }" />
-        <c:set var="memo" value="${list.memo }" />
+        <c:set var="testtitle" value="${list.testtitle }" />
+        <c:set var="usetime" value="${list.usetime }" />
         <c:set var="id" value="${list.id }" />
-        <c:set var="lectureno" value="${list.lectureno }" />
+        <c:set var="myscore" value="${list.myscore }" />
         
-        <fmt:parseNumber var="parsedate" type="number"  value="${fn:substring(list.regdate, 8 ,10) }" />
-        <fmt:parseNumber var="parseyear" type="number" integerOnly="true"  value="${fn:substring(list.regdate, 0 ,4) }" />
-        <fmt:parseNumber var="parsemonth" type="number" integerOnly="true"  value="${fn:substring(list.regdate, 5 ,7) }" />
+        <fmt:parseNumber var="parsedate" type="number"  value="${fn:substring(list.regdt, 8 ,10) }" />
+        <fmt:parseNumber var="parseyear" type="number" integerOnly="true"  value="${fn:substring(list.regdt, 0 ,4) }" />
+        <fmt:parseNumber var="parsemonth" type="number" integerOnly="true"  value="${fn:substring(list.regdt, 5 ,7) }" />
         <fmt:parseNumber var="nowdate" type="number"  value="${fn:substring(now, 8 ,10) }" />
         <fmt:parseNumber var="nowyear" type="number" integerOnly="true"  value="${fn:substring(now, 0 ,4) }" />
         <fmt:parseNumber var="nowmonth" type="number" integerOnly="true"  value="${fn:substring(now, 5 ,7) }" />
@@ -158,13 +157,39 @@ function lectureGo(lectureno){
          onmouseover="this.style.backgroundColor='#fafafa'"
          onmouseout="this.style.backgroundColor='#ffffff'"  style="font-size: 14px;">
 
-            <td align="center">${lectureno }</td>
-            <td align="center">${subject }</td>
-            <td align="center">${teacher }</td>
-            <td align="center">${lregdate }</td>
-            <td align="center">
-            </td>
+            <td align="center">${grade }</td>
+
+            <td>
+                      <c:choose>
+                            <c:when test="${subject eq 'kor' }">
+                                                                   국어
+                            </c:when>
+                            <c:when test="${subject eq 'mat' }">
+                                                                    수학
+                            </c:when>
+                             <c:when test="${subject eq 'soc' }">
+                                                                        사회
+                            </c:when>
+                            <c:otherwise>
+                                                                          과학
+                            </c:otherwise>
+                        </c:choose> 
+
+           </td>
+            <td align="center">${testtitle }</td>
+            <c:if test="${myscore eq 100 }">
+            <td align="center"><font color="red">${myscore }점<img src="image/thumb.png" width=14px height=14px/></font></td>
+            </c:if>
+            <c:if test="${myscore lt  100}">
+            <td align="center" ><font color="black">${myscore }점</font></td>
+            </c:if>
+            
+            <td align="center">${usetime }</td>
+            <td align="center">${regdt }</td>
+
+
         </tr>
+        
         </tbody>
           </c:if>  
           </c:if>

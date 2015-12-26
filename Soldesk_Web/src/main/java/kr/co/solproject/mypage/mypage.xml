@@ -125,12 +125,12 @@
 
 	<select id="getMyscoretList" resultClass="MypageDTO">
 		SELECT
-		myscore.mytestno ,myscore.id ,myscore.testno ,
-		myscore.usetime ,myscore.answerno ,myscore.regdt ,
+		ms.mytestno ,ms.id ,ms.testno , ms.myscore ,
+		ms.usetime ,ms.answerno ,ms.regdt ,
 		test.grade,test.subject,test.testtitle
-		FROM sol_calendar calendar join sol_myscore myscore
-		ON calendar.id = myscore.id
-		join sol_test test on myscore.testno = test.testno
+		FROM sol_calendar calendar join sol_myscore ms
+		ON calendar.id = ms.id
+		join sol_test test on ms.testno = test.testno
 	</select>
 
 
