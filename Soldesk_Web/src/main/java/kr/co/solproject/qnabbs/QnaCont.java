@@ -101,6 +101,7 @@ public class QnaCont {
 	    boolean flag = dao.qnaInsert(dto);
 	    if(flag == true){
 	      request.setAttribute("msg", 1);
+	      return "redirect:list.do";
 	    }else{
 	    	request.setAttribute("msg", "게시글 등록에 실패하였습니다.<br /><br /> 다시 시도해 주십시오.");
 			request.setAttribute("link1", "<input type='button' value='다시시도' onclick=\"history.back();\">");
@@ -108,7 +109,6 @@ public class QnaCont {
 			return "sol_qna/error";
 	    }
 		
-		return "sol_qna/qnaList";
 	}//end
 	
 	@RequestMapping(value="/sol_qna/read.do",method=RequestMethod.GET)

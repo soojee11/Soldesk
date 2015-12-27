@@ -87,9 +87,9 @@ public class ReplyCont {
 			String str = "";
 			if (res == 1) {
 				dto = dao.getReply(tableno, "Q");
-				str += "<textarea name='content' id='content' rows='5' cols='70'>" + dto.getContent() + "</textarea>";
-				str += "<input type='button' class='btn btn-default' value='수정진행' onclick='replyUpdateProc(" + dto.getReplyno() + ")'>";
-				str += "<input type='button' class='btn btn-default' value='목록' onclick='location.href=\"./list.do\"'>";
+				str += "<textarea name='content' id='content' rows='5' cols='70' style='width: 89%; height:53px;'>" + dto.getContent() + "</textarea>";
+				str += "<img src='img/btn.gif' onclick='replyUpdateProc(" + dto.getReplyno() + ")'/>";
+				//str += "<input type='button' class='btn btn-default' value='목록' onclick='location.href=\"./list.do\"'>";
 				out.print("success|" + str);
 			} else {
 				out.print("fail|본인이 작성한 글이 아닙니다.\n\n 다시시도 해주세요. ");

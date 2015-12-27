@@ -1,5 +1,26 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="../sol_header.jsp"%>
+<script>
+function update_validate(frm){
+	  var subject = frm.subject.value;
+	  var content = frm.content.value;
+	  subject = subject.replace(/^\s*|\s*$/g, '');
+	  content = content.replace(/^\s*|\s*$/g, '');
+	  if(subject.length == 0){
+	    alert("제목을 입력해 주세요.");
+	    frm.subject.focus();
+	    return;
+	  }
+	  if(content.length == 0){
+	    alert("내용을 입력해 주세요.");
+	    frm.content.focus();
+	    return;
+	  }
+	  alert("수정 하시겠습니까? ");
+	  
+	  frm.submit();
+}//end
+</script>
 <script src="js/my.js"></script>
 <!-- page start-->
 <h4>
@@ -35,7 +56,7 @@
 	</tr>
 </table>
  <div align="right">
-	<input type="submit" class="btn btn-default" value="수정" >
+	<input type="button" class="btn btn-default" value="수정" onclick="update_validate(this.form)">
  	<input type="button" class="btn btn-default" value="취소" onclick="javascript:history.go(-1)">
   </div>
 </form>

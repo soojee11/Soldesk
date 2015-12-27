@@ -33,7 +33,7 @@
 	</tr>
 </table>
  <div align="right">
-	<input type="submit" class="btn btn-default" value="등록" >
+	<input type="button" class="btn btn-default" value="등록" onclick="validate(this.form)">
  	<input type="button" class="btn btn-default" value="취소" onclick="javascript:history.go(-1)">
   </div>
 </form>
