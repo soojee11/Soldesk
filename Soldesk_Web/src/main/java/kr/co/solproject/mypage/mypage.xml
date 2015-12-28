@@ -111,6 +111,10 @@
 		left(regdate,10); 
 	</select>
 
+    <select id="getmemodateList" parameterClass="String" resultClass="MypageDTO">
+    select memodate from sol_study where id=#id# group by
+        left(memodate,10); 
+    </select>
 
 
 
