@@ -1325,6 +1325,29 @@ public class AdminCont {
 		}
 	}//end
 	
+	@RequestMapping(value="sol_admin/bbs/noticeRead.do", method=RequestMethod.GET)
+	public String noticeRead(BbsDTO dto, HttpServletRequest request) {
+		
+		dto = bbsdao.read(dto);
+		request.setAttribute("dto", dto);
+	
+		return "sol_admin/bbs/noticeRead";
+	}//end
+	
+	@RequestMapping(value="sol_admin/bbs/noticeUpdate.do", method=RequestMethod.GET)
+	public String noticeUpdate(BbsDTO dto, HttpServletRequest request) {
+	
+		dto = bbsdao.read(dto);
+		request.setAttribute("dto", dto);
+		
+		return "sol_admin/bbs/noticeUpdate";
+	}//end
+	
+	@RequestMapping(value="sol_admin/bbs/noticeUpdate.do", method=RequestMethod.POST)
+	public String noticeUpdateProc(BbsDTO dto, HttpServletRequest request) {
+		bbsdao.update(dto);
+		return "redirect:noticeRead.do?bbsno="+dto.getBbsno();
+	}//end
 	
 //-----------------------------------------------------------------------------------------------------------
 //-------------------------------------------------------------------------------------------------BBS EDN

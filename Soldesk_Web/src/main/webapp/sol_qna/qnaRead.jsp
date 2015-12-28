@@ -22,23 +22,21 @@ function replyForm(){
 		$("#content").focus();
 		return;
 	}
-	
-	
 	var param = $("#frm").serialize();
-	alert("답변을 등록하시겠습니까? ");
+	msg="답변을 등록하시겠습니까? ";
+	if(confirm(msg)!=0){
 	$.ajaxSetup({datatype:"text"});
-	
 	$.post("./create.do", param, createPrcoResponse);
+	}else{
+		return;
+	}
 }
 function createPrcoResponse(data,status){	
-	alert(data.replace(/^\s+|\s+$/gm,'')); 
 	window.location.reload();			
 }
 function deleteReply(replyno,qnano){
 	$("#replyno").val(replyno);
-	
 	var param = "replyno="+replyno+"&tableno="+qnano;
-	
 	$.post("./replyDel.do", param, deletePrcoResponse);
 }
 function deletePrcoResponse(data,status){
@@ -72,32 +70,40 @@ function updateResponse(data,status){
 
 function replyUpdateProc(replyno){
 	var param = $("#frm").serialize();
-	alert("답변글을 수정하시겠습니까? ");
-	$.ajaxSetup({datatype:"text"});
-	$.get("./replyUpdateProc.do", param, updatePrcoResponse);
+	msg = "답변글을 수정하시겠습니까?";
+	if (confirm(msg)!=0) {
+		$.ajaxSetup({datatype:"text"});
+		$.get("./replyUpdateProc.do", param, updatePrcoResponse);
+	}else{
+		return;
+	}
 }
 
 function updatePrcoResponse(data,status){
 	var str =data.replace(/^\s+|\s+$/gm,'');
 	var result = str.split("|");
 	if(result[0]=="success"){
-			alert(result[1]);
 			window.location.reload();		
 	}else{	
 		alert(result[1]);
 	}
 } 
 
-
 function deleteQna(qnano){
-	
-	alert("게시글을 삭제하시겠습니까? ( 답변글이 있을경우 답변글도 모두 삭제됩니다. )");
-	location.href="delete.do?qnano="+qnano;
+	msg="게시글을 삭제하시겠습니까? ( 답변글이 있을경우 답변글도 모두 삭제됩니다. )";
+	if (confirm(msg)!=0) {
+		location.href="delete.do?qnano="+qnano;
+	}else{
+		return;
+	}
 }
 function updateQna(qnano,recNo){
-	
-	alert("게시글을 수정하시겠습니까? ( 답변글이 있을경우 수정은 불가합니다. )");
-	location.href="update.do?qnano="+qnano+"&recNo="+recNo;
+	msg="게시글을 수정하시겠습니까? ( 답변글이 있을경우 수정은 불가합니다. )";
+	if(confirm(msg)!=0){
+		location.href="update.do?qnano="+qnano+"&recNo="+recNo;
+	}else{
+		return;
+	}
 }
 </script>
 <c:if test="${msg==2 }">
@@ -113,25 +119,30 @@ function updateQna(qnano,recNo){
 <br />
 <table class="table">
 	<tr bgcolor="#f8f8f8">
-		<td>${recNo }</td>
-		<td><img src="../sol_img/question.png" width="15">&nbsp;&nbsp;<strong>${dto.subject }</strong></td>
-		<td>
+		<td width="60px">제목</td>
+		<td ><strong>${dto.subject }</strong></td>
+		<td></td>
+		<td></td>
+		<td colspan="2">
 			<c:if test="${dto.replyok=='N' }">미답변</c:if>
 			<c:if test="${dto.replyok=='Y' }">답변완료</c:if>
+	
 		</td>
-		<td>${dto.id }</td>
 	</tr>
 	<tr>
-		<td>작성일</td>
-		<td>
-			<c:set var="regdt" value="${dto.regdt }"/> ${fn:substring(regdt,0,10) }
-		</td>
-		<td>조회수</td>
+		<td width="60px">ID</td>
+		<td>${dto.passwd }</td>
+		<td width="60px">작성일</td>
+		<td><c:set var="regdt" value="${dto.regdt }" />
+			${fn:substring(regdt,0,16) }</td>
+		<td width="60px">조회수</td>
 		<td>${dto.readcnt }</td>
 	</tr>
+
 	<tr>
-		<td colspan="4">${dto.subject }</td>
+		<td colspan="6">${dto.content }</td>
 	</tr>
+
 </table>
 <br/><br/>
 <c:if test="${dto.id == s_id }">
@@ -146,29 +157,26 @@ function updateQna(qnano,recNo){
 		<input type="button" class="btn btn-default" value="목록" onclick="location.href='./list.do'">
 	</div>
 </c:if>
+<br/>
+<div align="left" style="background-color: #f8f8f8; padding: 25px;">
 <c:if test="${dto.replyok=='Y' }">
-	<div align="left" class="replydiv">
-		<table class="table">
-			<tr bgcolor="#f8f8f8">
- 				<td>${recNo }</td>
- 				<td><img src="../sol_img/answer.png" width="15">&nbsp;&nbsp;<strong>답변 입니다.</strong></td>
- 				<td>작성일</td>
- 				<td><c:set var="regdt2" value="${rdto.rdate }"/> ${fn:substring(regdt2,0,10) }</td>
+	<table style="border: 0; width:100%;">
+			<tr>
+ 				<td>
+ 					<img src="../sol_img/answer.png" width="15">&nbsp;&nbsp;<strong>답변 입니다.</strong>
+ 					<c:set var="regdt2" value="${rdto.rdate }" />&nbsp;<sup>${fn:substring(regdt2,0,16) }</sup>
+ 				</td>
+ 				<c:if test="${mlevel=='A'  }">
+				<td style="text-align:right;">
+					<a href="javascript:updateReply(${rdto.replyno },${param.qnano });">수정</a> | 
+					<a href="javascript:deleteReply(${rdto.replyno },${param.qnano });">삭제</a>
+				</td>
+				</c:if>
  			</tr>
 		</table>
 		${rdto.content }
-	<c:if test="${mlevel=='A'  }">
-	<div align="right">	
-	<br><br>
-		<input type="button" class="btn btn-default" value="수정" onclick="updateReply(${rdto.replyno },${param.qnano })">
-		<input type="button" class="btn btn-default"value="삭제" onclick="deleteReply(${rdto.replyno },${param.qnano })">
-		<input type="button" class="btn btn-default" value="목록" onclick="location.href='./list.do'">
-	</div>
-	</c:if>	
-	</div>
 </c:if>
-<hr>
-<div align="center">
+
 <form name="frm" id ="frm" method="post">
 <input type="hidden" name="tableno" id="tableno" value="${param.qnano }">
 <input type="hidden" name="passwd" id="passwd" value="${s_id }">
@@ -176,12 +184,17 @@ function updateQna(qnano,recNo){
 	<div id ="demo">
 		<c:if test="${mlevel=='A' and replyok=='N'}">
 			※ 답변을 달아주세요. ※
-			<textarea name="content" id="content" rows="5" cols="70"></textarea>
-			<input type="button" class="btn btn-default"value="답변" onclick="replyForm()">
-			<input type="button" class="btn btn-default" value="목록" onclick="location.href='./list.do'">
+			<textarea name="content" id="content" rows="5" cols="70" style="width: 89%; height:53px;"></textarea>
+			<img src="img/btn.gif" onclick="replyForm()"/>
 		</c:if>
 	</div>
 </form>
+<c:if test="${mlevel!='A' and replyok=='N'}">
+	<div align="center">
+		<img src="img/sad.png" width="20">
+		<strong>아직 등록된 답변이 없습니다. </strong>
+	</div>
+</c:if>
 </div>
 
 <!-- page end-->

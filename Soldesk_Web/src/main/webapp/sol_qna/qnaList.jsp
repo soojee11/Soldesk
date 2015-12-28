@@ -3,12 +3,6 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ include file="../sol_header.jsp"%>
 <script src="js/my.js"></script>
-<c:if test="${msg==1 }">
-	<script>
-		alert(" 게시글등록 성공! ");
-		location.href="list.do";
-	</script>
-</c:if>
 <c:if test="${msg==2 }">
 	<script>
 		alert("비공개 글 입니다.");
@@ -17,7 +11,7 @@
 </c:if>
 <c:if test="${msg==3 }">
 	<script>
-		alert(" 게시글삭제 성공! ");
+		alert(" 게시글이 삭제되었습니다. ");
 		location.href="list.do";
 	</script>
 </c:if>
@@ -31,12 +25,12 @@
 <br />
 <table class ="table">
 	<tr align ="center">
-		<td>번호</td>
+		<td width="60">번호</td>
 		<td>제목</td>
-		<td>답변여부</td>
-		<td>ID</td>
-		<td>작성일</td>
-		<td>조회수</td>
+		<td width="100">답변여부</td>
+		<td width="100">ID</td>
+		<td width="100">작성일</td>
+		<td width="60">조회수</td>
 	</tr>
 	<c:if test="${total ==0 }">
 		<tr>
