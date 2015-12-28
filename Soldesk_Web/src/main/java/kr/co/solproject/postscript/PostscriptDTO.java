@@ -60,6 +60,11 @@ public class PostscriptDTO {
 	public void setPostgrade(int postgrade) {
 		this.postgrade = postgrade;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "PostscriptDTO [postscriptno=" + postscriptno + ", categoryno=" + categoryno + ", id=" + id
+				+ ", content=" + content + ", regdate=" + regdate + ", postgrade=" + postgrade + "]";
+	}
 	
 }
