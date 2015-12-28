@@ -113,13 +113,22 @@ function lectureGo(lectureno){
       r = window.open(str, "학습하기", 'scrollbars=yes, resizeable=no, width=1500, height=700');
 }
 </script> 
+
+
+
+<!-- 모달 -->
+
+<!-- //모달 -->
+
+
+
+
 </head>
 <body>
        <p><div style="color: White;height:60px;padding-top: 12px; font: 20px arial, sans-serif;background-color: #99cc66; font-weight: bold;">
        &nbsp;&nbsp;&nbsp;<font size="9px">Lecture List</font>_${name}(${id })
        </div>
  
-
 
 <table cellpadding=3 border=0 cellspacing=1 width=100% bgcolor=#dddddd class="table">
           <thead>
@@ -172,7 +181,6 @@ function lectureGo(lectureno){
         </c:forEach>
  
 </table><br>
-
 
 
 <script type="text/javascript">

@@ -5,6 +5,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ include file="../sol_header.jsp"%>
 
+
 <script type="text/javascript">
 function selectCheck(form){
 	form.submit();
@@ -34,11 +35,9 @@ function memoGo(now){
     str = "/solproject/sol_mypage/memoGo.do?now="+now;
     r = window.open(str, "Memo List", 'scrollbars=yes, resizeable=no, width=700, height=500');
   }
-
-
 function videoGo(now){
-    str = "/solproject/sol_mypage/videoGo.do?now="+now;
-    r = window.open(str, "Lecture List", 'scrollbars=yes, resizeable=no, width=700, height=500');
+     str = "/solproject/sol_mypage/videoGo.do?now="+now;
+    r = window.open(str, "Lecture List", 'scrollbars=yes, resizeable=no, width=700, height=500'); 
   }
   
 function mystudyGo(now){
@@ -46,6 +45,11 @@ function mystudyGo(now){
     r = window.open(str, "MyStudy List", 'scrollbars=yes, resizeable=no, width=700, height=500');
   }
 </script>
+
+
+
+
+
 
 
 <img src="../sol_img/go_right.png" width="20px"/>
@@ -220,7 +224,8 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
    
  
    
-      <c:forEach begin="${startDate}" end="${endDate}" var="i">
+ <%--      <c:forEach begin="${startDate}" end="${endDate}" var="i"> --%>
+   <c:forEach begin="${startDate}" end="${42-newLine}" var="i">
        
    <%--     
                   <c:if test="${year eq val && month eq mth && date eq i }">
@@ -234,11 +239,16 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
                             <c:when test="${nowymd eq  todaynow && date eq i}">
                                 <c:set var="bgcolor" value="#99cc66"/>
                             </c:when> 
-                            <c:otherwise>
+                            <c:when test="${i gt endDate}">
                                 <c:set var="bgcolor" value="#ffffff"/>
+                            </c:when> 
+                            <c:otherwise>
+                                <c:set var="bgcolor" value="#fafafa"/>
                             </c:otherwise>
                         </c:choose>
-     
+                        
+                        
+                        
      
       <%--             <c:if test="${count%7 eq 0 }">
                      <c:set var="color" value="red"/>
@@ -271,6 +281,18 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
                             <c:set var="color" value="blue"/>
                         </c:if> 
                   
+                  
+                  
+                        <c:if test="${i gt endDate }">
+   
+                            <c:set var="color" value="white"/>
+                            <c:set var="i">0 </c:set> 
+                            
+                        </c:if> 
+                  
+                  
+                  
+                  
                   <c:set var="newLine">${ newLine+1}</c:set>
                   <c:set var="count">${ count+1}</c:set> 
                   <%--   <c:out value="${count}"/>   --%>
@@ -282,14 +304,9 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
              
         
     <td bgcolor="${bgcolor}" width="14.28571428%" >
-    
-    
-    
-    
     <font color="${color}">
     
       ${i })
-   
    
       
    <c:set var="ii" value="${i }"/>
@@ -307,6 +324,9 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
    <fmt:parseNumber var="parsedate" type="number"  value="${fn:substring(rdt.regdate, 8 ,10) }" />
    <fmt:parseNumber var="parseyear" type="number" integerOnly="true"  value="${fn:substring(rdt.regdate, 0 ,4) }" />
    <fmt:parseNumber var="parsemonth" type="number" integerOnly="true"  value="${fn:substring(rdt.regdate, 5 ,7) }" />
+   
+  
+   
    <c:set var="regdate" value="${fn:substring(rdt.regdate, 0 ,10) }" />
    
    <c:if test="${parsemonth <10 && parsedate <10 }">
@@ -327,18 +347,27 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
             <c:if test="${lecturelist != null}">
             <c:if test="${ii == parsedate && iy == parseyear && im == parsemonth}">
                 
-               <a href="javascript:videoGo(${now })">
-                 <img src="image/btn_study_play.png" width=20px height=28px/></a> <!-- 강의리스트 -->
+             <%--   <a href="javascript:videoGo(${now })">
+                 <img src="image/btn_study_play.png" width=20px height=28px/></a> <!-- 강의리스트 --> 
+              --%>
              
-               <a href="javascript:memoGo(${now })">
+             <a href="javascript:videoGo(${now });">
+             <img src="image/btn_study_play.png" width=20px height=28px/></a> <!-- 강의리스트 --> 
+             
+                <a href="javascript:memoGo(${now })">
                 <img src="image/pink.png" width=20px height=28px/></a> <!-- 메모리스트 -->
-           
+             
            </c:if>
            </c:if>
           </c:if>
           
    </c:forEach>
    </c:if>
+   
+   
+  
+   
+   
    
     <!-- 학습결과리스트 -->
    <c:if test="${maxregdtlist ne null }">
@@ -375,7 +404,11 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
  
 <!-- && i lt endDate -->
 
+
  <c:if test="${(count-(7-(startDay-1)))%7 == 0 }"> 
+ 
+
+ 
  </tr>
  <tr  style='height: 70px; font-weight: bold;'> <!--둘째줄부터  -->
  </c:if>
@@ -395,20 +428,22 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
          </c:when>
         </c:choose>  --%>
    
-      <c:if test="${(count-(7-(startDay-1)))%7  ne 0 }"> <!--  날짜끝나고 빈공간 -->
-         <c:forEach begin="${endDate+1 }" end="${count }" >
+   
+          
+ 
+       
+        
+     <%--     <c:if test="${(count-(7-(startDay-1)))%7  ne 0 }"> <!--  날짜끝나고 빈공간 -->
+         <c:forEach begin="${endDate }" end="${42-newLine }" >
          <td>&nbsp;</td>
          </c:forEach> 
-        </c:if> 
+        </c:if>  --%>
   
-   
 </tr>
 </table>
 
-${count2 }
 <%@ include file="../sol_footer.jsp"%>
 
-  
   
   
 <%-- <%

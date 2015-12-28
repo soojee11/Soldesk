@@ -135,6 +135,20 @@ public class MypageDAO {
 	}// end
 	
 	
+	
+	
+	public List getmemodateList(String id) { //max(memodate)리스트GET
+		List list = null;
+		try {
+			list = mybatis.queryForList("sol_calendar.getmemodateList",id);
+
+		} catch (Exception e) {
+			System.out.println("getmemodateList: " + e);
+		}
+		return list;
+	}// end
+		
+	
 	public List getMaxregdtList(String id) { //calendar,study,lecture조인해서 max(regdate)리스트GET
 		List list = null;
 		try {
@@ -145,6 +159,8 @@ public class MypageDAO {
 		}
 		return list;
 	}// end
+	
+	
 	
 	public List getMyscoretList() { //myscore,test,calendar조인
 		List list = null;
