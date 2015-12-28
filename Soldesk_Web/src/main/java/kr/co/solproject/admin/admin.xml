@@ -162,6 +162,7 @@
 		select bbsno, subject, content, passwd, regdt, readcnt
 		from sol_bbs
 		where passwd = #passwd#
+		order by bbsno DESC
 		limit #sno#, #numPerPage#
 	</select>
 	

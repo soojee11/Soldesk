@@ -10,13 +10,6 @@ function noticeDel(bbsno){
 	}
 }
 </script>
-
-<c:if test="${msg==1 }">
-	<script>
-		alert("등록 성공!");
-		location.href="noticeList.do";
-	</script>
-</c:if>
 <c:if test="${msg==2 }">
 	<script>
 		alert("삭제 성공!");

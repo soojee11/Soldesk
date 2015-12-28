@@ -1291,8 +1291,7 @@ public class AdminCont {
 		boolean flag = bbsdao.insert(dto);
 		
 		if(flag){
-			request.setAttribute("msg", 1);
-			return "sol_admin/bbs/noticeList";
+			return "redirect:noticeList.do";
 		}else{
 			request.setAttribute("msg", "공지사항 등록에 실패하였습니다.<br /><br /> 다시 시도해 주십시오.");
 			request.setAttribute("link1", "<input type='button' value='다시시도' onclick=\"history.back();\">");
