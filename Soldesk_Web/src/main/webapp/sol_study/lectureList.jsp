@@ -16,18 +16,31 @@ function lectureNotGo(){
 	alert("로그인 후 이용해 주세요.");
 }
 
+// 후기 등록
 function postApply(){
 	$("#categoryno").val(0);
 	var param=$("#postForm").serialize();  //<form id=frm> 전송할 데이터가 있는 폼
 	$.ajaxSetup({datatype: "text"});  //AJAX객체준비
+	//alert(param);
 	//post방식. 응답이 성공하면 실행할 callback함수
 	$.post("./create.do", param, postApplyResponse);
 }
+
+// 후기 삭제
+function postDelete(postscriptno) {
+	alert("후기를 삭제하시겠습니까?");
+	var param="postscriptno="+postscriptno;         //전송 데이터
+	//alert(param);
+	$.ajaxSetup({datatype: "text"});
+	$.get("./delete.do", param, postApplyResponse); //get방식	
+}
+
 
 function postApplyResponse(data, status) { //callback함수
 	alert(data.replace(/^\s+|\s+$/gm,''));
 	window.location.reload(); //현재 페이지 새로고침
 }
+
 
 </script>
 
@@ -56,8 +69,9 @@ function postApplyResponse(data, status) { //callback함수
 			<ul>				
 				<li style="background-color: #99cc66">과목</li>
 				<li><a href="lectureList.do?grade=${grade }&gwamok=국어">국어</a></li>
-				<li><a href="lectureList.do?grade=${grade }&gwamok=영어">영어</a></li>
 				<li><a href="lectureList.do?grade=${grade }&gwamok=수학">수학</a></li>
+				<li><a href="lectureList.do?grade=${grade }&gwamok=사회">사회</a></li>
+				<li><a href="lectureList.do?grade=${grade }&gwamok=과학">과학</a></li>
 			</ul>		
 	</div>
 	
@@ -177,19 +191,22 @@ function postApplyResponse(data, status) { //callback함수
 		<th >작성자</th>
 		<th>내용</th>
 		<th>등록일</th>
-		<th>평점</th>
+		<th>수정/삭제</th>
 	</tr>
 
-<c:set var="postscriptNo" value="${postscriptNo+1 }" />	
+<c:set var="postNo" value="${postNo+1 }" />	
 <c:forEach var="postDto" items="${postList }" >
-<c:set var="postscriptNo" value="${postscriptNo-1 }" />
+<c:set var="postNo" value="${postNo-1 }" />
 
 	<tr align="center">
-		<td>${postscriptNo }</td>
+		<td>${postNo }</td>
 		<td>${postDto.id }</td>
 		<td>${postDto.content }</td>
 		<td>${postDto.regdate }</td>
-		<td>${postDto.postgrade }</td>
+		<td>
+		<a href="javascript:postApply()"><img src='img/bt_mod.gif'></a>
+		<a href="javascript:postDelete(${postDto.postscriptno })"><img src='img/bt_del.gif'></a>
+		</td>
 	</tr>
 </c:forEach>
 
@@ -199,15 +216,16 @@ function postApplyResponse(data, status) { //callback함수
 
 </table>
 
- <div style='width: 90%; margin: 5px auto; text-align: center;'>
+
+ <div style='background-color:#f8f8f8; padding:25px; text-align: center;'>
   <form name='postForm' id='postForm' method='post'>  
-  <c:forEach var="postDto" items="${postList }" >
-    <input type='hidden' name='postscriptno' id='postscriptno' value='${postDto.postscriptno }'>
-    <input type='hidden' name='categoryno' id='categoryno' value='${postDto.categoryno }'>
-  </c:forEach>
-    <hr>
-    <textarea name='content' id='content' rows="2" ></textarea>
-    <span class="star-input">
+  <%-- <c:forEach var="postDto" items="${postList }" > --%>
+      <input type='hidden' name='gwamok' id='gwamok' value='${gwamok}'>
+      <input type='hidden' name='grade' id='grade' value='${grade}'>
+      
+  <%-- </c:forEach> --%>
+    <textarea name='content' id='content' rows="2" style="width:70%; height:53px;"></textarea>
+    <!-- <span class="star-input">
   		<span class="input">
     		<input type="radio" name="star-input" id="p1" value="1"><label for="p1">1</label>
     		<input type="radio" name="star-input" id="p2" value="2"><label for="p2">2</label>
@@ -220,15 +238,15 @@ function postApplyResponse(data, status) { //callback함수
     		<input type="radio" name="star-input" id="p9" value="9"><label for="p9">9</label>
     		<input type="radio" name="star-input" id="p10" value="10"><label for="p10">10</label>
   		</span>
-  		<output for="star-input"><!-- <b>0</b>점 --></output>
-	</span><br><br>
+  		<output for="star-input"><b>0</b>점</output>
+	</span><br><br> -->
 	<c:choose>
 	<c:when test="${s_id != null }">
-		<a href="javascript:postApply()">	<img src='img/btn_apply.gif'>
+		<a href="javascript:postApply()">	<img src='img/btn.gif'>
 		</a>		  
 	</c:when>
 	<c:otherwise>
-		<a href="javascript:lectureNotGo()">	<img src='img/btn_apply.gif'>
+		<a href="javascript:lectureNotGo()">	<img src='img/btn.gif'>
 		</a>
 	</c:otherwise>
     </c:choose>
