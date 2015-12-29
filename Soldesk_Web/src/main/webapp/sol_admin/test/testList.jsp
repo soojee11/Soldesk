@@ -59,7 +59,7 @@
 						<c:choose><c:when  test="${col2 eq 'sci' }" >selected</c:when></c:choose>>과학</option>
 				</select>
 			</div>
-				<button class="btn btn-success btn-sm">검색</button>
+				<button class="btn btn-warning button">검색</button>
 		</form>
 	</div>
 </div>

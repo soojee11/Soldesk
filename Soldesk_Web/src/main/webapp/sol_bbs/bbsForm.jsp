@@ -68,9 +68,9 @@
 			</tr>
 		</table>
 		<div align="right">
-		<input type="button" class="btn btn-default" name="list" value="목록"
+		<input type="button" class="btn btn-warning button" name="list" value="목록"
 				onclick="location.href='bbslist.do'"> 
-		<input type="button" class="btn btn-default" id="savebutton" value="등록"> 
+		<input type="button" class="btn btn-warning button" id="savebutton" value="등록"> 
 		</div>
 	</form>
 </div>
