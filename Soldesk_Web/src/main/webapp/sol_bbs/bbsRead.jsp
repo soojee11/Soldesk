@@ -16,7 +16,7 @@ function replyCreate() {
 	msg = "답변을 등록하시겠습니까?";
     if (confirm(msg)!=0) {
     	var param=$("#frm").serialize();
-    	alert(param);
+    	//alert(param);
     	$.ajaxSetup({datatype:"text"});
     	$.post("./bbsReplyCreate.do",param,replyCreateResponse);
     	
@@ -37,7 +37,7 @@ function deleteReply(replyno){
     	$("#createReplyno").val(replyno);
     	
     	var param=$("#frm").serialize();
-    	alert(param);
+    	//alert(param);
     	$.ajaxSetup({datatype:"text"});
     	$.post("./bbsReplyDelete.do",param,deleteReplyResponse);
     	
@@ -60,38 +60,42 @@ function deleteReplyResponse(data,status) {
 }
 
 //댓글가져오기
-function updateReply(replyno,bbsno){
-	$("#replyno").val(replyno);
-	var param = "replyno="+replyno;
-	//alert(param);
-	
-	$.get("./bbsReplyUpdate.do", param, updateReplyResponse);
-	
-}
-function updateReplyResponse(data,status){
-	var str =data.replace(/^\s+|\s+$/gm,'');
+function updateReply(replyno){
+	$.ajax({
+		cache:false,
+		type: "get",	//요청방식
+		url: "bbsReplyUpdate.do?replyno="+replyno,//서버측페이지
+		datatype:"text",	//응답페이지 타입 설정
+		success:function(data){
+			var str =data.replace(/^\s+|\s+$/gm,'');
+			//alert(str);
+			var result = str.split("/");
+			if(result[0]=="SUCCESS"){
+				
+				document.getElementById("content"+ result[2]).style.display = "none";
+				document.getElementById("updateReply" + result[2]).style.display = "";
+				document.getElementById("cancel"+ result[2]).style.display = "";
+				document.getElementById("update" + result[2]).style.display = "none";
+				document.getElementById("updateReply" +result[2]).updateContent.value = result[1];
+				//alert(result[1]);
+				//alert(result[2]);
 
-	var result = str.split("/");
-	if(result[0]=="SUCCESS"){
-		var content = document.getElementById(result[2]).style.display;
-		document.getElementById(result[2]).style.display = "";
-		
-		document.getElementById(result[2]).updateContent.value = result[1];
-		//alert(result[1]);
-		//alert(result[2]);
 
-	}else{	
-		alert(result[1]);
-	}
+			}
+		},
+		error:function(err){	//응답 결과 상태코드가 실패했을때
+			alert(err+"오류발생");
+		}
+	});
 }
 
 //댓글수정
 function updateReplyProc(replyno){
 	msg = "답변을 수정하시겠습니까?";
     if (confirm(msg)!=0) {
-    	document.getElementById(replyno).replyno.value = replyno;
+    	document.getElementById('updateReply'+replyno).replyno.value = replyno;
     	
-    	var param=$('#'+replyno).serialize();
+    	var param=$('#updateReply'+replyno).serialize();
     	//alert(param);
     	$.ajaxSetup({datatype:"text"});
     	$.post("./bbsReplyUpdateProc.do",param,updateProcReplyResponse);
@@ -105,11 +109,18 @@ function updateProcReplyResponse(data,status){
 	var result = str.split("/");
 	if(result[0]=="SUCCESS"){
 		//alert(result[1]);
-		window.location.reload();		
+		window.location.reload();
 	}else{	
 		alert(result[1]);
 	}
 } 
+
+function cancel(replyno) {
+	document.getElementById("content"+ replyno).style.display = "";
+	document.getElementById("updateReply" + replyno).style.display = "none";
+	document.getElementById("cancel"+ replyno).style.display = "none";
+	document.getElementById("update" + replyno).style.display = "";
+}
 </script>
 <style>
 .replydiv {
@@ -176,20 +187,28 @@ function updateProcReplyResponse(data,status){
 			</td>
 			<c:if test="${s_id eq rdto.passwd}">
 			<td style="text-align:right;">
-			<a href="javascript:updateReply(${rdto.replyno },${param.bbsno });">수정</a> | 
-			<a href="javascript:deleteReply(${rdto.replyno });">삭제</a>
+				<div id="update${rdto.replyno }" style="display: ;">
+				<a href="javascript:updateReply(${rdto.replyno });">수정</a> | 
+				<a href="javascript:deleteReply(${rdto.replyno });">삭제</a>
+				</div>
+ 				<div id="cancel${rdto.replyno }" style="display: none;">
+				<a href="javascript:cancel(${rdto.replyno });">수정취소</a>
+				</div>
 			</td>
 			</c:if>
 		</tr>
 		<tr>
-			<td colspan="2">${rdto.content }
-				<form name="updatefrm" id="${rdto.replyno }" method="post" style="display:none">
+			<td colspan="2">
+			<div id="content${rdto.replyno }">
+			${rdto.content }
+			</div>
+				
+				<form name="updatefrm" id="updateReply${rdto.replyno }" method="post" style="display:none">
 				<input type="hidden" name="replyno" id="replyno" />
-				<div id="demo">
 				<textarea name="updateContent" id="updateContent" rows="5" cols="50" style="width: 89%; height:53px;"></textarea>
 				<img src="img/btn.gif" onclick="updateReplyProc(${rdto.replyno})"/>
-				</div> 
 				</form>
+
 			</td>
 		</tr>
 		</table>
