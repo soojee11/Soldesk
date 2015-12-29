@@ -34,14 +34,14 @@
 				<td><a href="bbsread.do?bbsno=${ndto.bbsno }&nowPage=${nowPage }">${ndto.subject }</a>
 				</td>
 				<td width="100">${ndto.passwd }</td>
-				<td width="100"><c:set var="nregdt" value="${ndto.regdt }"/> ${fn:substring(nregdt,0,16) }</td>
+				<td width="100"><c:set var="nregdt" value="${ndto.regdt }"/> ${fn:substring(nregdt,0,10) }</td>
 				<td width="60">${ndto.readcnt }</td>
 			</tr>
 		</c:if>
 	</c:forEach>
 	
 	<!-- 게시판 -->
-	<c:set var="recNo" value="${recNo-ntotal }" />
+	<c:set var="recNo" value="${recNo }" />
 	<c:forEach var="dto" items="${list }">
 	<c:if test="${dto.passwd ne '관리자' }">
 		<c:set var="recNo" value="${recNo-1 }" />
@@ -50,7 +50,7 @@
 			<td><a href="bbsread.do?bbsno=${dto.bbsno }&nowPage=${nowPage }">${dto.subject }</a>
 			</td>
 			<td width="100">${dto.passwd }</td>
-			<td width="100"><c:set var="regdt" value="${dto.regdt }"/> ${fn:substring(regdt,0,16) }</td>
+			<td width="100"><c:set var="regdt" value="${dto.regdt }"/> ${fn:substring(regdt,0,10) }</td>
 			<td width="60">${dto.readcnt }</td>
 		</tr>
 	</c:if>

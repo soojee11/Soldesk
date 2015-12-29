@@ -39,8 +39,7 @@ public class BbsCont {
 	  List noticeList = null;
 	  noticeList=admindao.noticeList(noticemap); 
 	  int noticeTotal=admindao.getNoticeTotal(noticemap);
-	  
-	  
+
 	// bbs list
     int nowPage=1;      // 현재페이지, 페이지 시작번호 0->1page
     int numPerPage=10-noticeTotal;   // 페이지당 레코드 수
@@ -54,16 +53,18 @@ public class BbsCont {
     int sno=((nowPage-1)*numPerPage);
     
     List list = null;
-    
     Map map = new HashMap();
     map.put("sno", sno);
     map.put("numPerPage", numPerPage);
+    map.put("passwd", "관리자");
     
     list=dao.list(map); // BbsDAO에서 list 가져오기 
-    int total=dao.getTotal();
+    int total=dao.getTotal(noticemap);
+    
     String paging=Paging.paging4(total,nowPage,numPerPage,url);
     
     int recNo = total - (nowPage - 1) * numPerPage + 1 ;
+    
     int totalPage = (int) Math.ceil((double)total/(double)numPerPage);
     
     req.setAttribute("list", list);

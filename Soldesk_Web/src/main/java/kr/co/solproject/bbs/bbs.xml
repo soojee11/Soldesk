@@ -13,13 +13,27 @@
   </insert>
   
   <select id="list" parameterClass="Map" resultClass="BbsDTO">
-     select bbsno, subject, content, passwd, regdt, readcnt from sol_bbs
+     select a.bbsno, a.subject, a.content, a.passwd, a.regdt, a.readcnt 
+     from (
+		select bbsno, subject, content, passwd, regdt, readcnt
+		from sol_bbs
+		<dynamic prepend="where">
+      		<isNotEqual property="passwd" compareValue="관리자">
+      			passwd != #passwd#
+      		</isNotEqual>
+     	 </dynamic>     
+     )a
      order by bbsno DESC
      limit #sno#, #numPerPage#
   </select>
   
-  <select id="total" resultClass="Integer">
+  <select id="total" parameterClass="Map" resultClass="Integer">
       select count(*) from sol_bbs
+      <dynamic prepend="where">
+      	<isNotEqual property="passwd" compareValue="관리자">
+      		passwd != #passwd#
+      	</isNotEqual>
+      </dynamic>
   </select>
   
   <select id="read" parameterClass="Integer" resultClass="BbsDTO">
