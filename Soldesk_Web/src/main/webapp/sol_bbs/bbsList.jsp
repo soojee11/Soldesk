@@ -28,14 +28,16 @@
 	
 	<!-- 공지사항 -->
 	<c:forEach var="ndto" items="${nlist }">
-		<tr bgcolor="#f8f8f8">
-			<td width="60"><div align="center"><img src="bbs_img/notice.png" width="20"></div></td>
-			<td><a href="bbsread.do?bbsno=${ndto.bbsno }&nowPage=${nowPage }">${ndto.subject }</a>
-			</td>
-			<td width="100">${ndto.passwd }</td>
-			<td width="100"><c:set var="nregdt" value="${ndto.regdt }"/> ${fn:substring(nregdt,0,16) }</td>
-			<td width="60">${ndto.readcnt }</td>
-		</tr>
+		<c:if test="${ndto.noticeshow=='Y' }">
+			<tr bgcolor="#f8f8f8">
+				<td width="60"><div align="center"><img src="bbs_img/notice.png" width="20"></div></td>
+				<td><a href="bbsread.do?bbsno=${ndto.bbsno }&nowPage=${nowPage }">${ndto.subject }</a>
+				</td>
+				<td width="100">${ndto.passwd }</td>
+				<td width="100"><c:set var="nregdt" value="${ndto.regdt }"/> ${fn:substring(nregdt,0,16) }</td>
+				<td width="60">${ndto.readcnt }</td>
+			</tr>
+		</c:if>
 	</c:forEach>
 	
 	<!-- 게시판 -->

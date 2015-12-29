@@ -7,6 +7,7 @@ public class BbsDTO {
   private String passwd;
   private String regdt;
   private int readcnt;
+  private String noticeshow;
   
   public BbsDTO(){}
 
@@ -58,10 +59,21 @@ public class BbsDTO {
     this.readcnt = readcnt;
   }
 
+  public String getNoticeshow() {
+	return noticeshow;
+  }
+
+  public void setNoticeshow(String noticeshow) {
+	this.noticeshow = noticeshow;
+  }
+
   @Override
   public String toString() {
-    return "BbsDTO [bbsno=" + bbsno + ", subject=" + subject + ", content=" + content + ", passwd=" + passwd
-        + ", regdt=" + regdt + ", readcnt=" + readcnt + "]";
+	return "BbsDTO [bbsno=" + bbsno + ", subject=" + subject + ", content=" + content + ", passwd=" + passwd
+			+ ", regdt=" + regdt + ", readcnt=" + readcnt + ", noticeshow=" + noticeshow + "]";
   }
+  
+  
+
   
 }

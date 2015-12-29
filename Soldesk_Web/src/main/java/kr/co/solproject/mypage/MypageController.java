@@ -38,7 +38,7 @@ public class MypageController {
 	// --------------------------------------------------------------------
 	@RequestMapping(value = "sol_mypage/calendar.do", method = RequestMethod.POST)
 	public String calendar2(String s_id,HttpServletRequest req, HttpSession session) {
-	System.out.println("1)s_id= "+s_id);
+	//System.out.println("1)s_id= "+s_id);
 		
 	if(s_id != ""){
 	
@@ -117,6 +117,16 @@ public class MypageController {
 		//################################################################
 		
 		
+
+		 List videolist=dao.getLectureList();//sol_lecture와 조인해서 강의제목을 가져오자
+		 req.setAttribute("videolist", videolist);
+		 List modalmemolist=dao.getLectureList();//sol_lecture와 조인해서 강의제목을 가져오자
+		 req.setAttribute("modalmemolist", modalmemolist);
+		 List mystudylist=dao.getMyscoretList();//myscore,test,calendar조인
+		 req.setAttribute("mystudylist", mystudylist);
+			
+		
+		
 		String promise = null;
 		String name = null;
 		promise = dao.getpromise(s_id);
@@ -144,7 +154,7 @@ public class MypageController {
 	/*@RequestMapping( "sol_mypage/calendar.do")*/
 	@RequestMapping(value = "sol_mypage/calendar.do", method = RequestMethod.GET)
 	public String calendar(String s_id,HttpServletRequest req, HttpSession session) {
-		System.out.println("0)s_id= "+s_id);
+		//System.out.println("0)s_id= "+s_id);
 		if(s_id != ""){
 			
 			Calendar cal = Calendar.getInstance();
@@ -245,6 +255,18 @@ public class MypageController {
 			req.setAttribute("lecturelist", lecturelist);
 			req.setAttribute("maxrdtlist", maxrdtlist);
 			
+			
+			 List videolist=dao.getLectureList();//sol_lecture와 조인해서 강의제목을 가져오자
+			 req.setAttribute("videolist", videolist);
+			 List modalmemolist=dao.getLectureList();//sol_lecture와 조인해서 강의제목을 가져오자
+			 req.setAttribute("modalmemolist", modalmemolist);
+			 List mystudylist=dao.getMyscoretList();//myscore,test,calendar조인
+			 req.setAttribute("mystudylist", mystudylist);
+				
+		
+
+				
+			 
 			return "/sol_mypage/calendar";
 		}
 		else{
@@ -286,7 +308,7 @@ public class MypageController {
 		 
 		 List videolist=dao.getLectureList();//sol_lecture와 조인해서 강의제목을 가져오자
 			//System.out.println("##"+videolist);
-			
+		 
 			String promise = null;
 			String name = null;
 			promise = dao.getpromise(s_id);
@@ -308,6 +330,7 @@ public class MypageController {
 		 
 		 List mystudylist=dao.getMyscoretList();//myscore,test,calendar조인
 			//System.out.println("##"+mystudylist);
+			req.setAttribute("mystudylist", mystudylist);
 			
 			String promise = null;
 			String name = null;
@@ -317,7 +340,7 @@ public class MypageController {
 			req.setAttribute("name", name);
 			req.setAttribute("id", s_id);
 			req.setAttribute("now", now);
-			req.setAttribute("mystudylist", mystudylist);
+		
 		return "/sol_mypage/mystudy";
 		
 	}//end

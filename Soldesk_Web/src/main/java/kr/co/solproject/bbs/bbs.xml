@@ -23,7 +23,7 @@
   </select>
   
   <select id="read" parameterClass="Integer" resultClass="BbsDTO">
-    select bbsno, subject, content, passwd, regdt, readcnt from sol_bbs
+    select bbsno, subject, content, passwd, regdt, readcnt, noticeshow from sol_bbs
     where bbsno=#bbsno#
   </select>
   
@@ -40,5 +40,12 @@
   <delete id="delete" parameterClass="Integer">
      delete from sol_bbs where bbsno=#bbsno#
   </delete>
+  
+  <update id="noticeShowUpdate" parameterClass="BbsDTO">
+	update sol_bbs
+	set noticeshow=#noticeshow#
+	where bbsno=#bbsno#
+  </update>
+	
   
 </sqlMap>
