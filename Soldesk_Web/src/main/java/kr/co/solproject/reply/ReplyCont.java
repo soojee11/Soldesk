@@ -171,7 +171,6 @@ public class ReplyCont {
 			resp.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = resp.getWriter();
 			String s_id = (String) session.getAttribute("s_id");
-			int tableno = dto.getTableno();
 
 			Map map = new HashMap();
 			map.put("passwd", s_id);

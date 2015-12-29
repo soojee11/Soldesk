@@ -19,7 +19,7 @@ function noticeDel(bbsno){
 <div class="row">
 	<div class="col-lg-12">
 		<h3 class="page-header">
-			<i class="fa fa-file-text-o"></i> Board
+			<i class="fa fa-file-text-o"></i> Notice
 		</h3>
 		<ol class="breadcrumb">
 			<li><i class="fa fa-home"></i><a href="../../sol_admin/adminIndex.do">Home</a></li>

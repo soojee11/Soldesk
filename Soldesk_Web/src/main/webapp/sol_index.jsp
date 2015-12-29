@@ -18,6 +18,16 @@
       font-family:'Jeju Gothic', sans-serif;
       font-size:12pt;
     }
+    
+    .button, input{
+        font-family:'Jeju Gothic', sans-serif;
+        font-size:11pt;
+    }
+    
+    div, p{
+        font-family:'Jeju Gothic', sans-serif;
+        font-size:10pt;
+    }
 		</style>
 <!-- 한글 웹 폰트 적용 끝 -->
 
@@ -150,11 +160,10 @@
 			          		<div class="nav-collapse collapse">
 			            		<ul class="nav">
 			              			<li><a href="sol_study/lectureList.do">학습하기</a></li>
-									<li><a href="sol_test/test/list.do">문제풀기</a></li>
-									<li><a href="sol_bbs/bbslist.do">자유게시판</a></li>
-									<li><a href="sol_qna/list.do">Q&A</a></li>
-									<li><a href="sol_mypage/calendar.do?s_id=${s_id}">캘린더</a></li>
-
+													<li><a href="sol_test/test/list.do">문제풀기</a></li>
+													<li><a href="sol_bbs/bbslist.do">자유게시판</a></li>
+													<li><a href="sol_qna/list.do">Q&A</a></li>
+													<li><a href="sol_mypage/calendar.do?s_id=${s_id}">캘린더</a></li>
 								</ul>
 							</div>
 						</div>
@@ -206,19 +215,19 @@
 										<%if (!c_id.isEmpty()) {
 					out.print("checked");
 				}%> />ID저장
-									<input type="button" name="login" class="btn btn-primary"
+									<input type="button" name="login" class="btn btn-primary button"
 										value="로그인" onclick="check1(this.form)" />
 								</div>
 							</form>
 						</td>
 						<td>
 							<form class="form-inline" action="sol_member/joinagree.do">
-								<button type="submit" class="btn btn-primary">회원가입</button>
+								<button type="submit" class="btn btn-primary button">회원가입</button>
 							</form>
 						</td>
 						<td>
 							<form class="form-inline" method="post" action="sol_member/findform.do">
-								<button type="submit" class="btn btn-primary">ID/PW찾기</button>
+								<button type="submit" class="btn btn-primary button">ID/PW찾기</button>
 							</form>
 						</td>
 					</tr>
@@ -240,14 +249,14 @@
 						<td>
 							<form class="form-inline" method="post" action="sol_member/logout.do">
 								${s_id }님 환영합니다. <input type="button" name="logout"
-									class="btn btn-primary" value="로그아웃"
+									class="btn btn-primary button" value="로그아웃"
 									onclick="check2(this.form)" />
 							</form>
 						</td>
 						<td>
 							<form class="form-inline" method="post" action="sol_member/update.do">
 								<input type="hidden" name="id" value="${s_id }" /> <input
-									type="button" name="update" class="btn btn-primary"
+									type="button" name="update" class="btn btn-primary button"
 									value="정보수정" onclick="check3(this.form)" />
 							</form>
 						</td>
@@ -468,15 +477,15 @@
 
 						<ul id="footer-nav">
 
-							<li><a href="sol_index.jsp">Start</a></li>
+							<li><a href="sol_study/lectureList.do">학습하기</a></li>
 
-							<li><a href="sol_about.jsp">About</a></li>
+							<li><a href="sol_test/test/list.do">문제풀기</a></li>
 
-							<li><a href="sol_services.jsp">Services</a></li>
+							<li><a href="sol_bbs/bbslist.do">자유게시판</a></li>
 
-							<li><a href="sol_pricing.jsp">Pricing</a></li>
+							<li><a href="sol_qna/list.do">Q & A</a></li>
 
-							<li><a href="sol_contact.jsp">Contact</a></li>
+							<li><a href="sol_mypage/calendar.do?s_id=${s_id}">캘린더</a></li>
 
 						</ul>
 

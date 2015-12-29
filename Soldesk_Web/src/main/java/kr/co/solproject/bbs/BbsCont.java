@@ -162,12 +162,4 @@ public class BbsCont {
     return "/sol_bbs/bbsDelete";
   }
   
-/*  //---------------------------------------------------------------------------------
-  
-  @RequestMapping(value="/sol_bbs/edittest.do", method=RequestMethod.POST)
-  public String editTest(HttpServletRequest req){
-    System.out.println("content ÄÁÅÙÃ÷°ª:"+req.getParameter("content"));
-    
-    return "/sol_bbs/test1";
-  }*/
 }
