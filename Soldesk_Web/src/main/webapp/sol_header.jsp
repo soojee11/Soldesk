@@ -45,6 +45,7 @@
 
 <!-- start: CSS -->
 <link href="../sol_css/bootstrap.css" rel="stylesheet">
+<!-- <link href="../sol_css/bootstrap.min.css" rel="stylesheet"> -->
 <link href="../sol_css/bootstrap-responsive.css" rel="stylesheet">
 <link href="../sol_css/style.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css"
