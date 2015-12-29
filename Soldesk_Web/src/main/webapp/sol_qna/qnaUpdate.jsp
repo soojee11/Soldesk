@@ -56,8 +56,8 @@ function update_validate(frm){
 	</tr>
 </table>
  <div align="right">
-	<input type="button" class="btn btn-default" value="수정" onclick="update_validate(this.form)">
- 	<input type="button" class="btn btn-default" value="취소" onclick="javascript:history.go(-1)">
+	<input type="button" class="btn btn-default button" value="수정" onclick="update_validate(this.form)">
+ 	<input type="button" class="btn btn-default button" value="취소" onclick="javascript:history.go(-1)">
   </div>
 </form>
 </div>

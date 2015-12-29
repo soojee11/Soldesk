@@ -14,6 +14,10 @@
         font-family:'Jeju Gothic', sans-serif;
         font-size:11pt;
     }
+     div, p{
+        font-family:'Jeju Gothic', sans-serif;
+        font-size:10pt;
+    }
 		</style>
 <!-- 한글 웹 폰트 적용 끝 -->
 <!-- start: Meta -->

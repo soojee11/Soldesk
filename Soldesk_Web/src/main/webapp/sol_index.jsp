@@ -23,6 +23,11 @@
         font-family:'Jeju Gothic', sans-serif;
         font-size:11pt;
     }
+    
+    div, p{
+        font-family:'Jeju Gothic', sans-serif;
+        font-size:10pt;
+    }
 		</style>
 <!-- 한글 웹 폰트 적용 끝 -->
 
@@ -155,11 +160,10 @@
 			          		<div class="nav-collapse collapse">
 			            		<ul class="nav">
 			              			<li><a href="sol_study/lectureList.do">학습하기</a></li>
-									<li><a href="sol_test/test/list.do">문제풀기</a></li>
-									<li><a href="sol_bbs/bbslist.do">자유게시판</a></li>
-									<li><a href="sol_qna/list.do">Q&A</a></li>
-									<li><a href="sol_mypage/calendar.do?s_id=${s_id}">캘린더</a></li>
-
+													<li><a href="sol_test/test/list.do">문제풀기</a></li>
+													<li><a href="sol_bbs/bbslist.do">자유게시판</a></li>
+													<li><a href="sol_qna/list.do">Q&A</a></li>
+													<li><a href="sol_mypage/calendar.do?s_id=${s_id}">캘린더</a></li>
 								</ul>
 							</div>
 						</div>
@@ -473,15 +477,15 @@
 
 						<ul id="footer-nav">
 
-							<li><a href="sol_index.jsp">Start</a></li>
+							<li><a href="sol_study/lectureList.do">학습하기</a></li>
 
-							<li><a href="sol_about.jsp">About</a></li>
+							<li><a href="sol_test/test/list.do">문제풀기</a></li>
 
-							<li><a href="sol_services.jsp">Services</a></li>
+							<li><a href="sol_bbs/bbslist.do">자유게시판</a></li>
 
-							<li><a href="sol_pricing.jsp">Pricing</a></li>
+							<li><a href="sol_qna/list.do">Q & A</a></li>
 
-							<li><a href="sol_contact.jsp">Contact</a></li>
+							<li><a href="sol_mypage/calendar.do?s_id=${s_id}">캘린더</a></li>
 
 						</ul>
 
