@@ -48,8 +48,8 @@
 </div>
 
 <div align="left">
-<a href="testList.do"><button class="btn btn-info btn-sm">문제지 목록</button></a>
-<a href="questionForm.do?testno=${param.testno }&testtitle=${param.testtitle }"><button class="btn btn-info btn-sm">문제 등록</button></a>
+<a href="testList.do"><button class="btn btn-danger btn-sm">문제지 목록</button></a>
+<a href="questionForm.do?testno=${param.testno }&testtitle=${param.testtitle }"><button class="btn btn-danger btn-sm">문제 만들기</button></a>
 </div>
 
 <form method="post" action="questionUnSelect.do?testno=${param.testno }">
@@ -57,8 +57,8 @@
 	<tr>
 		<td colspan="9" align="left"> 
 		<input type="checkbox" name="allck2" id="allck2" onclick="checkboxEnable2()"/>
-		<strong><span style="font-size:12px; color:#1717ff;">모두체크</span></strong>
-		<button type="button" class="btn btn-danger btn-sm" onclick="questionCheck2(this.form)">문제제외</button>
+		<strong><span style="font-size:12px; color:#1717ff;">모두체크</span></strong>&nbsp;&nbsp;
+		<button type="button" class="btn btn-info btn-sm" onclick="questionCheck2(this.form)">문제제외</button>
 	</td>
 	</tr>
 	<tr>
@@ -79,7 +79,7 @@
 				<td style="text-align: left;">${dto.answer }</td>
 				<td style="text-align: left;">${dto.qtitle }</td>
 				<td>
-				<button type="button" class="btn btn-danger btn-sm" onclick="javascript:location.href='questionRead2.do?testno=${dto.testno }&questno=${dto.questno }&testtitle=${param.testtitle }'">문제상세보기</button>
+				<button type="button" class="btn btn-info btn-sm" onclick="javascript:location.href='questionRead2.do?testno=${dto.testno }&questno=${dto.questno }&testtitle=${param.testtitle }'">문제상세보기</button>
 				</td>				
 			</tr>
 	</c:if>
@@ -94,8 +94,8 @@
 	<tr>
 		<td colspan="9" align="left"> 
 		<input type="checkbox" name="allck" id="allck" onclick="checkboxEnable()"/>
-		<strong><span style="font-size:12px; color:#1717ff;">모두체크</span></strong>
-		<button type="button" class="btn btn-danger btn-sm" onclick="questionCheck(this.form)">문제추가</button>
+		<strong><span style="font-size:12px; color:#1717ff;">모두체크</span></strong>&nbsp;&nbsp;
+		<button type="button" class="btn btn-info btn-sm" onclick="questionCheck(this.form)">문제추가</button>
 	</td>
 	</tr>
 	<tr>
@@ -118,7 +118,7 @@
 				<td style="text-align: left;">${dto.answer }</td>
 				<td style="text-align: left;">${dto.qtitle }</td>
 				<td>
-				<button type="button" class="btn btn-danger btn-sm" onclick="javascript:location.href='questionRead2.do?testno=${dto.testno }&questno=${dto.questno }&testtitle=${param.testtitle }'">문제상세보기</button>
+				<button type="button" class="btn btn-info btn-sm" onclick="javascript:location.href='questionRead2.do?testno=${dto.testno }&questno=${dto.questno }&testtitle=${param.testtitle }'">문제상세보기</button>
 				</td>
 			</tr>
 	</c:if>	
