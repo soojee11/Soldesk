@@ -171,6 +171,11 @@ public class MypageController {
 			//System.out.println("0"+maxrdtlist);
 			
 			
+			List getmemodateList=dao.getmemodateList(s_id);//각 날짜마다 max(memodate)가져오기
+			req.setAttribute("getmemodateList", getmemodateList);
+			
+			
+			
 			List maxregdtlist=dao.getMaxregdtList(s_id);//sol_Study에서 max(regdt)가져오기
 			//System.out.println("0"+maxregdtlist);
 			req.setAttribute("maxregdtlist", maxregdtlist);
@@ -253,7 +258,7 @@ public class MypageController {
 	
 	@RequestMapping(value = "sol_mypage/memoGo.do", method = RequestMethod.GET)
 	public String memoGo(String now,HttpServletRequest req, HttpSession session) {
-		System.out.println("memo: "+now);
+		//System.out.println("memo: "+now);
 		 String s_id = (String) session.getAttribute("s_id");
 		
 		 List memolist=dao.getLectureList();//sol_lecture와 조인해서 강의제목을 가져오자
@@ -275,7 +280,7 @@ public class MypageController {
 	
 	@RequestMapping(value = "sol_mypage/videoGo.do", method = RequestMethod.GET)
 	public String videoGo(String now,HttpServletRequest req, HttpSession session) {
-		System.out.println("video: "+now);
+		//System.out.println("video: "+now);
 		
 		 String s_id = (String) session.getAttribute("s_id");
 		 
@@ -297,7 +302,7 @@ public class MypageController {
 	
 	@RequestMapping(value = "sol_mypage/mystudyGo.do", method = RequestMethod.GET)
 	public String MystudyGo(String now,HttpServletRequest req, HttpSession session) {
-		System.out.println("mystudy: "+now);
+		//System.out.println("mystudy: "+now);
 		
 		 String s_id = (String) session.getAttribute("s_id");
 		 

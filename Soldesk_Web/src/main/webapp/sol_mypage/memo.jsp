@@ -127,18 +127,19 @@ function lectureGo(lectureno){
     
     <thead>
         <tr align="center" bgcolor="#fafafa" style="font-weight: bold; font-size: 14px;">
-            <td >회차</td>
+            <td  width="8%" >회차</td>
             <td >강의명</td>
             <td width="45%">메모</td>
             <td>등록일</td>
-            <td>복습하기</td>
+            <td width="14%">복습하기</td>
         </tr>
     </thead>
     
        <c:forEach var="list" items="${memolist }">
     <c:set var="memodate" value="${list.memodate }" />
     
-    <c:if test="${memodate ne null }">
+    <%-- <c:if test="${memodate ne null }">
+     --%>
         <c:if test="${list.id == id }">
         <c:set var="lregdate" value="${list.regdate }" />
         <c:set var="lectureno" value="${list.lectureno }" />
@@ -165,7 +166,19 @@ function lectureGo(lectureno){
          onmouseout="this.style.backgroundColor='#ffffff'" style="font-size: 14px;">
             <td align="center">${lectureno }</td>
             <td align="center">${subject }</td>
-            <td align="center">${memo }</td>
+            
+            
+                        <c:choose>
+                            <c:when test="${memodate ne null}">
+                               <td align="center" width="45%">${memo }</td>
+                            </c:when>
+                             <c:otherwise>
+                              <td align="center" width="45%">등록된 메모가 없습니다.</td>
+                            </c:otherwise>
+                        </c:choose> 
+                      
+            
+            
             <td align="center">${memodate }</td>
             <td align="center">  <a href="javascript:lectureGo(${lectureno })">
                 <img src='image/btn_study_play.png' width="30" height="30"></a>
@@ -175,8 +188,8 @@ function lectureGo(lectureno){
           </c:if>  
           </c:if>
           
-          </c:if>
-          
+          <%-- </c:if>
+           --%>
 
           
         </c:forEach>

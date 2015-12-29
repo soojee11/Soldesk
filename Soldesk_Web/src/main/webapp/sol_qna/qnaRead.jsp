@@ -25,20 +25,28 @@ function replyForm(){
 	var param = $("#frm").serialize();
 	msg="답변을 등록하시겠습니까? ";
 	if(confirm(msg)!=0){
-	$.ajaxSetup({datatype:"text"});
-	$.post("./create.do", param, createPrcoResponse);
+		$.ajaxSetup({datatype:"text"});
+		$.post("./create.do", param, createPrcoResponse);
 	}else{
 		return;
 	}
 }
+
 function createPrcoResponse(data,status){	
 	window.location.reload();			
 }
+
 function deleteReply(replyno,qnano){
-	$("#replyno").val(replyno);
-	var param = "replyno="+replyno+"&tableno="+qnano;
-	$.post("./replyDel.do", param, deletePrcoResponse);
+	msg="답변을 삭제하시겠습니까? ";
+	if(confirm(msg)!=0){
+		$("#replyno").val(replyno);
+		var param = "replyno="+replyno+"&tableno="+qnano;
+		$.post("./replyDel.do", param, deletePrcoResponse);
+	}else{
+		return;
+	}
 }
+
 function deletePrcoResponse(data,status){
 	var str =data.replace(/^\s+|\s+$/gm,'');
 	var result = str.split("/");
@@ -50,8 +58,9 @@ function deletePrcoResponse(data,status){
 	}else{
 		alert(result[1]);
 	}
-} 
-function updateReply(replyno,qnano){
+}
+
+function updateReply(replyno,qnano,show){
 	$("#replyno").val(replyno);
 	$.ajax({
 		cache:false,
@@ -76,6 +85,19 @@ function updateReply(replyno,qnano){
 	
 	
 }
+
+
+function updateResponse(data,status){
+	var str =data.replace(/^\s+|\s+$/gm,'');
+	var result = str.split("|");
+	if(result[0]=="success"){
+		document.getElementById("demo").innerHTML = "";
+		document.getElementById("demo").innerHTML = result[1];
+	}else{	
+		alert(result[1]);
+	}
+} 
+
 
 function replyUpdateProc(replyno){
 	var param = $("#frm").serialize();
@@ -106,6 +128,8 @@ function deleteQna(qnano){
 		return;
 	}
 }
+
+
 function updateQna(qnano,recNo){
 	msg="게시글을 수정하시겠습니까? ( 답변글이 있을경우 수정은 불가합니다. )";
 	if(confirm(msg)!=0){
@@ -114,7 +138,13 @@ function updateQna(qnano,recNo){
 		return;
 	}
 }
+
+function cancelReply(){
+	document.getElementById("demo").innerHTML = "";
+	document.getElementById("demo").innerHTML = "${rdto.content }";
+}
 </script>
+
 <c:if test="${msg==2 }">
 	<script>
 		alert("답변글 존재! 수정불가 ");
@@ -154,6 +184,7 @@ function updateQna(qnano,recNo){
 
 </table>
 <br/><br/>
+
 <c:if test="${dto.id == s_id }">
 	<div align="right">	
 		<input type="button" class="btn btn-default" value="수정" onclick="updateQna(${param.qnano },${param.recNo })">
@@ -161,6 +192,7 @@ function updateQna(qnano,recNo){
 		<input type="button" class="btn btn-default" value="목록" onclick="location.href='./list.do'">
 	</div>
 </c:if>
+
 <c:if test="${dto.id != s_id }">
 	<div align="right">	
 		<input type="button" class="btn btn-default" value="목록" onclick="location.href='./list.do'">
@@ -168,8 +200,9 @@ function updateQna(qnano,recNo){
 </c:if>
 <br/>
 <div align="left" style="background-color: #f8f8f8; padding: 25px;">
-<c:if test="${dto.replyok=='Y' }">
-	<table style="border: 0; width:100%;">
+	
+	<c:if test="${dto.replyok=='Y' }">
+		<table style="border: 0; width:100%;">
 			<tr>
  				<td>
  					<img src="../sol_img/answer.png" width="15">&nbsp;&nbsp;<strong>답변 입니다.</strong>
@@ -177,33 +210,36 @@ function updateQna(qnano,recNo){
  				</td>
  				<c:if test="${mlevel=='A'  }">
 				<td style="text-align:right;">
-					<a href="javascript:updateReply(${rdto.replyno },${param.qnano });">수정</a> | 
-					<a href="javascript:deleteReply(${rdto.replyno },${param.qnano });">삭제</a>
+						<a href="javascript:updateReply(${rdto.replyno },${param.qnano },'Y');">수정</a> | 
+						<a href="javascript:deleteReply(${rdto.replyno },${param.qnano });">삭제</a> |
+						<a href="javascript:cancelReply();">취소</a>
 				</td>
 				</c:if>
  			</tr>
 		</table>
-		${rdto.content }
-</c:if>
+		<div id ="demo">
+			${rdto.content }
+		</div>
+	</c:if>
 
-<form name="frm" id ="frm" method="post">
-<input type="hidden" name="tableno" id="tableno" value="${param.qnano }">
-<input type="hidden" name="passwd" id="passwd" value="${s_id }">
-<input type="hidden" name="replyno" id="replyno">
-	<div id ="demo">
-		<c:if test="${mlevel=='A' and replyok=='N'}">
-			※ 답변을 달아주세요. ※
-			<textarea name="content" id="content" rows="5" cols="70" style="width: 89%; height:53px;"></textarea>
-			<img src="img/btn.gif" onclick="replyForm()"/>
-		</c:if>
-	</div>
-</form>
-<c:if test="${mlevel!='A' and replyok=='N'}">
-	<div align="center">
-		<img src="img/sad.png" width="20">
-		<strong>아직 등록된 답변이 없습니다. </strong>
-	</div>
-</c:if>
+	<form name="frm" id ="frm" method="post">
+		<input type="hidden" name="tableno" id="tableno" value="${param.qnano }">
+		<input type="hidden" name="passwd" id="passwd" value="${s_id }">
+		<input type="hidden" name="replyno" id="replyno">
+			<c:if test="${mlevel=='A' and replyok=='N'}">
+				※ 답변을 달아주세요. ※
+				<textarea name="content" id="content" rows="5" cols="70" style="width: 89%; height:53px;"></textarea>
+				<img src="img/btn.gif" onclick="replyForm()"/>
+			</c:if>
+	</form>
+
+	<c:if test="${mlevel!='A' and replyok=='N'}">
+		<div align="center">
+			<img src="img/sad.png" width="20">
+			<strong>아직 등록된 답변이 없습니다. </strong>
+		</div>
+	</c:if>
+
 </div>
 
 <!-- page end-->
