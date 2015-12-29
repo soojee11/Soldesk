@@ -179,7 +179,7 @@
 				<table>
 					<tr>
 						<td>
-							<form class="form-inline" method="post" action="../sol_member/login.do">
+							<form class="form-inline" method="post" action="../../sol_member/login.do">
 
 								<div class="form-group">
 									<input type="text" name="id" size="10" value="<%=c_id%>" /> <input
