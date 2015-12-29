@@ -118,7 +118,9 @@
 						class="btn btn-info btn-sm">문제 보기</button></a></td>
 		</tr>
 	</c:forEach>
-
+	<tr>
+		<td colspan="6" align="right" ><strong>total:</strong>${total }</td>
+	</tr>
 	<tr>
 		<td colspan="6"><div align="center">${paging }</div></td>
 	</tr>
