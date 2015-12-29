@@ -159,7 +159,7 @@
 	</update>
 	
 	<select id="noticeList" parameterClass="Map" resultClass="BbsDTO">
-		select bbsno, subject, content, passwd, regdt, readcnt
+		select bbsno, subject, content, passwd, regdt, readcnt, noticeshow
 		from sol_bbs
 		where passwd = #passwd#
 		order by bbsno DESC
