@@ -152,7 +152,7 @@
 <body>
 
 	<!--start: Header -->
-	<header style="height: 69px">
+	<header>
 
 		<!--start: Container -->
 		<div class="container">
@@ -287,7 +287,6 @@
 
 	</c:if>
   <!-- start : Video Player -->
-  
 		  <!--start: Wrapper-->
 		  <div id="wrapper" >
 				 <div class="videoContainer" >
