@@ -201,7 +201,7 @@
                           out.print("checked");
                         }%> />ID저장
                     <input type="button" name="login" class="btn btn-primary button"
-                      value="로그인" onclick="check1(this.form, 'sol_member/login.do')" />
+                      value="로그인" onclick="check1(this.form, '../../sol_member/login.do')" />
                     <button type="submit" class="btn btn-primary button" onclick="joinagree(this.form,'../../sol_member/joinagree.do')">회원가입</button>
                     <button type="submit" class="btn btn-primary button" onclick="find(this.form,'../../sol_member/findform.do')">ID/PW찾기</button>
                   </form>

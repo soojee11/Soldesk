@@ -33,8 +33,8 @@
 	</tr>
 </table>
  <div align="right">
-	<input type="button" class="btn btn-default button" value="등록" onclick="validate(this.form)">
- 	<input type="button" class="btn btn-default button" value="취소" onclick="javascript:history.go(-1)">
+	<input type="button" class="btn btn-warning button" value="등록" onclick="validate(this.form)">
+ 	<input type="button" class="btn btn-warning button" value="취소" onclick="javascript:history.go(-1)">
   </div>
 </form>
 </div>

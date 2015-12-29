@@ -74,8 +74,4 @@ function noticeDel(bbsno){
 	</c:forEach>
 </table>
 
-<div align="center">
-	${paging }
-</div>
-
 <%@ include file="../footer.jsp"%>

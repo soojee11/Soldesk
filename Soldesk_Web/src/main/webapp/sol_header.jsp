@@ -48,6 +48,7 @@
 <!-- <link href="../sol_css/bootstrap.min.css" rel="stylesheet"> -->
 <link href="../sol_css/bootstrap-responsive.css" rel="stylesheet">
 <link href="../sol_css/style.css" rel="stylesheet">
+
 <link rel="stylesheet" type="text/css"
 	href="http://fonts.googleapis.com/css?family=Droid+Sans:400,700">
 <link rel="stylesheet" type="text/css"
@@ -114,7 +115,7 @@
 <body>
 
 	<!--start: Header -->
-	<header>
+	<header style="border-bottom: 0px solid #f6f6f6;">
 
 		<!--start: Container -->
 		<div class="container">
@@ -130,9 +131,6 @@
 
 				</div>
 				<!--end: Logo -->
-
-
-
 
 				<!--start: Navigation -->
 				<div class="span9">

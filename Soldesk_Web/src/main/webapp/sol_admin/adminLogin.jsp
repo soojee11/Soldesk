@@ -63,6 +63,7 @@
 <c:if test="${flag==false }">
 	<script>
 		alert("등업 후 로그인이 가능합니다. ");
+		location.href="login.do";
 	</script>
 </c:if>
 <body>

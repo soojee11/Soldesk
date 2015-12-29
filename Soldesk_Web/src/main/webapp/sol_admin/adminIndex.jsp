@@ -1,4 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -30,8 +32,9 @@
       <script src="js/lte-ie7.js"></script>
     <![endif]-->
   </head>
-
+  
   <body>
+  <c:if test ="${s_admin_id != null }">
   <!-- container section start -->
   <section id="container" class="">
       <!--header start-->
@@ -174,6 +177,12 @@
     <script src="js/jquery.nicescroll.js" type="text/javascript"></script><!--custome script for all page-->
     <script src="js/scripts.js"></script>
 
-
+	</c:if>
+	<c:if test="${s_admin_id == null  }">
+		<script>
+			alert("로그인 후 이용가능합니다. ");
+			location.href="login.do";
+		</script>
+	</c:if>
   </body>
 </html>

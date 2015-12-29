@@ -190,15 +190,15 @@ function cancel(){
 
 <c:if test="${dto.id == s_id }">
 	<div align="right">	
-		<input type="button" class="btn btn-default button" value="수정" onclick="updateQna(${param.qnano },${param.recNo })">
-		<input type="button" class="btn btn-default button" value="삭제" onclick="deleteQna(${param.qnano })">
-		<input type="button" class="btn btn-default button" value="목록" onclick="location.href='./list.do'">
+		<input type="button" class="btn btn-warning button" value="수정" onclick="updateQna(${param.qnano },${param.recNo })">
+		<input type="button" class="btn btn-warning button" value="삭제" onclick="deleteQna(${param.qnano })">
+		<input type="button" class="btn btn-warning button" value="목록" onclick="location.href='./list.do'">
 	</div>
 </c:if>
 
 <c:if test="${dto.id != s_id }">
 	<div align="right">	
-		<input type="button" class="btn btn-default button" value="목록" onclick="location.href='./list.do'">
+		<input type="button" class="btn btn-warning button" value="목록" onclick="location.href='./list.do'">
 	</div>
 </c:if>
 <br/>
