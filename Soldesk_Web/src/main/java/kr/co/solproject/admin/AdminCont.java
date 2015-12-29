@@ -1243,7 +1243,7 @@ public class AdminCont {
 	public String noticeList(HttpServletRequest request) {
 		
 		String url = "./noticeList.do";
-		int numPerPage=7;	
+		int numPerPage=15;	
 		int recNo=1;
 		
 		String nowPage = request.getParameter("nowPage");
@@ -1286,7 +1286,15 @@ public class AdminCont {
 	
 	@RequestMapping(value="sol_admin/bbs/noticeIns.do", method=RequestMethod.POST)
 	public String noticeInsProc(BbsDTO dto, HttpServletRequest request) {
-		
+		 // notice insert 
+	    String subject = request.getParameter("subject");
+	    String content = request.getParameter("content");
+	    
+	    if(content.equals("<p>&nbsp;</p>")){
+	      content = "내용 없음";
+	    }
+	    dto.setSubject(subject);
+	    dto.setContent(content);
 		dto.setPasswd("관리자");
 		boolean flag = bbsdao.insert(dto);
 		
