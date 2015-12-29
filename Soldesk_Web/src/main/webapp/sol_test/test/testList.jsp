@@ -30,8 +30,9 @@
 	<select name="col2">
 		<option value="" <c:choose><c:when  test="${col2 eq '' }" >selected</c:when></c:choose>>과목전체</option>
 		<option value="kor" <c:choose><c:when  test="${col2 eq 'kor' }" >selected</c:when></c:choose>>국어</option>
-		<option value="eng" <c:choose><c:when  test="${col2 eq 'eng' }" >selected</c:when></c:choose>>영어</option>
 		<option value="mat" <c:choose><c:when  test="${col2 eq 'mat' }" >selected</c:when></c:choose>>수학</option>
+		<option value="soc" <c:choose><c:when  test="${col2 eq 'soc' }" >selected</c:when></c:choose>>사회</option>
+		<option value="sic" <c:choose><c:when  test="${col2 eq 'sic' }" >selected</c:when></c:choose>>과학</option>
 	</select>
 	<button class="btn btn-primary">검색</button>
 </form>
