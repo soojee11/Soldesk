@@ -2,25 +2,43 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ include file="../header.jsp"%>
+<script type="text/javascript"
+	src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="./js/HuskyEZCreator.js"
+	charset="utf-8"></script>
 <script>
-function notice_update(frm){
-	var subject = frm.subject.value;
-	var content = frm.content.value;
-	subject = subject.replace(/^\s*|\s*$/g, '');
-	content = content.replace(/^\s*|\s*$/g, '');
-	if(subject.length == 0){
-	  alert("제목을 입력해 주세요.");
-	  frm.subject.focus();
-	  return;
-	}
-	if(content.length == 0){
-	  alert("내용을 입력해 주세요.");
-	  frm.content.focus();
-	  return;
-	}
-	alert("수정 하시겠습니까? ");
-	frm.submit();
-}
+	$(function() {
+		//전역변수
+		var obj = [];
+		//스마트에디터 프레임생성
+		nhn.husky.EZCreator.createInIFrame({
+			oAppRef : obj,
+			elPlaceHolder : "content",
+			sSkinURI : "./SmartEditor2Skin.html",
+			htParams : {
+				// 툴바 사용 여부 (true:사용/ false:사용하지 않음)
+				bUseToolbar : true,
+				// 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)
+				bUseVerticalResizer : true,
+				// 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
+				bUseModeChanger : false,
+			}
+		});
+
+		//전송버튼
+		$("#savebutton").click(function() {
+			if ($("#subject").val() == "") {
+				alert("제목을 입력해 주세요.");
+				$("#subject").focus();
+				return;
+			}
+			//id가 smarteditor인 textarea에 에디터에서 대입
+			obj.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
+			//폼 submit
+			alert("수정 하시겠습니까? ");
+			$("#frm").submit();
+		})
+	})
 </script>
 <div class="row">
 	<div class="col-lg-12">
@@ -38,22 +56,22 @@ function notice_update(frm){
 		<section class="panel">
 			<header class="panel-heading"> 공지사항 수정	</header>
 			<div class="panel-body">
-			<form class="form-horizontal" action="noticeUpdate.do" method="post">
+			<form class="form-horizontal" action="noticeUpdate.do" method="post" id="frm" name="frm">
 			<input type="hidden" name="bbsno" value="${param.bbsno }">
 				<div class="form-group">
 					<label class="col-sm-2 control-label">제목</label>
 					<div class="col-sm-10">
-						<input type="text" class="form-control" name="subject" value="${dto.subject }">
+						<input type="text" class="form-control" name="subject" id="subject" value="${dto.subject }">
 					</div>
 				</div> 
 				<div class="form-group">
 					<label class="col-sm-2 control-label">내용</label>
 					<div class="col-sm-10">
-						<textarea rows="5" cols="100" name ="content">${dto.content }</textarea>
+						<textarea style="width: 100%; height: 412px;" name ="content" id="content">${dto.content }</textarea>
 					</div>
 				</div>
 				<div align="center">
-					<button type="button" class="btn btn-danger btn-sm" onclick="notice_update(this.form)">수정</button>
+					<button type="button" id="savebutton" class="btn btn-danger btn-sm">수정</button>
 					<button type="reset" class="btn btn-danger btn-sm" >취소</button>
 					<button type="button" class="btn btn-danger btn-sm"  onclick="location.href='noticeList.do'">목록</button>
 				</div>

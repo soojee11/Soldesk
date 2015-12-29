@@ -14,7 +14,7 @@
 <img src="../sol_img/logos/bbs_desc.png" width="190px" height="50px"><span style="font-size: 12px;">| 자유롭게 말해보세요 </span>
 </h4>
 <div>
-총 <strong>${recNo-1 }</strong> 개의 등록된 글이 있습니다. | 현재 페이지 : <strong>${nowPage }/${totalPage }</strong>
+총 <strong>${total }</strong> 개의 등록된 글이 있습니다. | 현재 페이지 : <strong>${nowPage }/${totalPage }</strong>
 </div>
 <br />
 <table class="table">
@@ -25,8 +25,25 @@
 		<td width="100">작성일</td>
 		<td width="60">조회수</td>
 	</tr>
-	<c:set var="recNo" value="${recNo }" />
+	
+	<!-- 공지사항 -->
+	<c:forEach var="ndto" items="${nlist }">
+		<c:if test="${ndto.noticeshow=='Y' }">
+			<tr bgcolor="#f8f8f8">
+				<td width="60"><div align="center"><img src="bbs_img/notice.png" width="20"></div></td>
+				<td><a href="bbsread.do?bbsno=${ndto.bbsno }&nowPage=${nowPage }">${ndto.subject }</a>
+				</td>
+				<td width="100">${ndto.passwd }</td>
+				<td width="100"><c:set var="nregdt" value="${ndto.regdt }"/> ${fn:substring(nregdt,0,16) }</td>
+				<td width="60">${ndto.readcnt }</td>
+			</tr>
+		</c:if>
+	</c:forEach>
+	
+	<!-- 게시판 -->
+	<c:set var="recNo" value="${recNo-ntotal }" />
 	<c:forEach var="dto" items="${list }">
+	<c:if test="${dto.passwd ne '관리자' }">
 		<c:set var="recNo" value="${recNo-1 }" />
 		<tr>
 			<td width="60">${recNo }</td>
@@ -36,11 +53,12 @@
 			<td width="100"><c:set var="regdt" value="${dto.regdt }"/> ${fn:substring(regdt,0,16) }</td>
 			<td width="60">${dto.readcnt }</td>
 		</tr>
+	</c:if>
 	</c:forEach>
 </table>
 
 <div align="right">
-	<input type="button" value="글쓰기" class="btn btn-default"
+	<input type="button" value="글쓰기" class="btn btn-default button"
 		<c:if test="${s_id == null }">onclick="denywrite()"</c:if>
 		<c:if test="${s_id != null }">onclick="location.href='./create.do'"</c:if>>
 </div>

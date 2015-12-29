@@ -58,7 +58,7 @@ public class LectureCont {
 		
 		int lectureNo=1;	// 게시판 목록에 출력될 글 번호
 		int QnAno = 1;
-		int postscriptNo = 1;
+		int postNo = 1;
 		
 		// 현재 페이지의 정보를 가져옴		
 		if(request.getParameter("nowPage")!=null) {
@@ -119,7 +119,8 @@ public class LectureCont {
 		
 		lectureNo=total - (nowPage - 1) * numPerPage + 1; // 수지야 이 부분 수정했당
 		QnAno = qnaList.size();
-		postscriptNo = postList.size();
+		//postscriptNo = postTotal - (postNowPage - 1) * postNumPerPage + 1;
+		postNo = postTotal - (postNowPage - 1) * postNumPerPage + 1;
 		
 		// 2. model사용후 결과값을 request영역에 저장
 		request.setAttribute("categoryInfo", categoryInfo);
@@ -142,7 +143,8 @@ public class LectureCont {
 		// post
 		request.setAttribute("postList", postList);
 		request.setAttribute("postPaging", postPaging);
-		request.setAttribute("postscriptNo", postscriptNo);
+		request.setAttribute("postNo", postNo);
+		//request.setAttribute("postscriptNo", postscriptNo);
 		request.setAttribute("postNowPage", postNowPage);
 		request.setAttribute("postTotal", postTotal);
 		

@@ -6,7 +6,7 @@
 <div class="row">
 	<div class="col-lg-12">
 		<h3 class="page-header">
-			<i class="fa fa-file-text-o"></i> Board
+			<i class="fa fa-file-text-o"></i> Q&A
 		</h3>
 		<ol class="breadcrumb">
 			<li><i class="fa fa-home"></i><a href="../../sol_admin/adminIndex.do">Home</a></li>
@@ -64,14 +64,20 @@
 
 <div align="center">
 	${paging }<br/>
-	<form action ="qnaDel.do" >
-		<select name="col1">
+	<form action ="qnaDel.do" class="form-inline">
+	<div class="form-group">
+		<select name="col1" class="form-control input-sm m-bot15">
 			<option value="" >선택</option>
 			<option value="subject" <c:choose><c:when  test="${col1 eq 'subject' }" >selected</c:when></c:choose>>제목</option>
 			<option value="id" <c:choose><c:when  test="${col1 eq 'id' }" >selected</c:when></c:choose>>ID</option>
 		</select>
-		<input type="text" name="col2" size = "30" <c:if test="${col2 !='' }">value="${param.col2 }"</c:if>>
-		<input type="button" value="검색"  onclick="checkSearch(this.form)">
+	</div>
+	<div class="form-group">
+		<input type="text" class="form-control" name="col2" size = "30" <c:if test="${col2 !='' }">value="${param.col2 }"</c:if>>
+	</div>
+	<div class="form-group">
+		<input type="button" class="btn btn-success btn-sm" value="검색"  onclick="checkSearch(this.form)">
+	</div>
 	</form>
 </div>
 

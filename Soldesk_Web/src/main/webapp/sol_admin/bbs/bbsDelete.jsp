@@ -25,12 +25,12 @@
 		</td>
 	</tr>
 	<tr>
-		<th><div align="center">선택</div></th>
-		<th><div align="center">번호</div></th>
-		<th><div align="center">제목</div></th>
+		<th width="60"><div align="center">선택</div></th>
+		<th width="100"><div align="center">번호</div></th>
+		<th width="300"><div align="center">제목</div></th>
 		<th><div align="center">내용</div></th>
-		<th><div align="center">ID</div></th>
-		<th><div align="center">작성일</div></th>
+		<th width="100"><div align="center">ID</div></th>
+		<th width="200"><div align="center">작성일</div></th>
 	</tr>
 	<c:if test="${total ==0 }">
 		<tr>
@@ -39,6 +39,7 @@
 	</c:if>
 	<c:set var="recNo" value="${recNo }" />
 	<c:forEach var="dto" items="${list }">
+	<c:if test="${dto.passwd ne '관리자' }">
 		<c:set var="recNo" value="${recNo-1 }" />
 		<tr>
 			<td><div align="center"><input type="checkbox" name="check2" value="${dto.bbsno }"  /></div></td>	
@@ -48,6 +49,7 @@
 			<td><div align="center">${dto.passwd }</div></td>
 			<td><div align="center"><c:set var="regdt" value="${dto.regdt }"/> ${fn:substring(regdt,0,16) }</div></td>
 		</tr>
+	</c:if>
 	</c:forEach>
 </table>
 </form>

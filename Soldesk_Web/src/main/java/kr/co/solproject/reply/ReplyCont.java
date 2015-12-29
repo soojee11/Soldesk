@@ -18,7 +18,7 @@ public class ReplyCont {
 	private ReplyDAO dao = null;
 
 	public ReplyCont() {
-		System.out.println("----------sol-----ReplyCont按眉 积己");
+		System.out.println("---------------ReplyCont按眉 积己");
 	}
 
 	@RequestMapping(value = "/sol_qna/create.do", method = RequestMethod.POST)
@@ -87,8 +87,11 @@ public class ReplyCont {
 			String str = "";
 			if (res == 1) {
 				dto = dao.getReply(tableno, "Q");
-				str += "<textarea name='content' id='content' rows='5' cols='70' style='width: 89%; height:53px;'>" + dto.getContent() + "</textarea>";
-				str += "<img src='img/btn.gif' onclick='replyUpdateProc(" + dto.getReplyno() + ")'/>";
+				str += "<form name='frm' id ='frm' method='post'>";
+				str += "<input type='hidden' name='replyno' id='replyno' value='"+dto.getReplyno()+"'>";
+				str += "	<textarea name='content' id='content' rows='5' cols='70' style='width: 89%; height:53px;'>" + dto.getContent() + "</textarea>";
+				str += "	<img src='img/btn.gif' onclick='replyUpdateProc(" + dto.getReplyno() + ")'/>";
+				str += "</form>";
 				//str += "<input type='button' class='btn btn-default' value='格废' onclick='location.href=\"./list.do\"'>";
 				out.print("success|" + str);
 			} else {
@@ -168,7 +171,6 @@ public class ReplyCont {
 			resp.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = resp.getWriter();
 			String s_id = (String) session.getAttribute("s_id");
-			int tableno = dto.getTableno();
 
 			Map map = new HashMap();
 			map.put("passwd", s_id);

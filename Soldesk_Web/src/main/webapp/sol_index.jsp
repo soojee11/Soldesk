@@ -13,6 +13,21 @@
 		  font-family:'Jeju Gothic', sans-serif;
 		  font-size:20pt;
 		}
+		
+		.icons-box-vert-info{
+      font-family:'Jeju Gothic', sans-serif;
+      font-size:12pt;
+    }
+    
+    .button, input{
+        font-family:'Jeju Gothic', sans-serif;
+        font-size:11pt;
+    }
+    
+    div, p{
+        font-family:'Jeju Gothic', sans-serif;
+        font-size:10pt;
+    }
 		</style>
 <!-- 한글 웹 폰트 적용 끝 -->
 
@@ -145,11 +160,10 @@
 			          		<div class="nav-collapse collapse">
 			            		<ul class="nav">
 			              			<li><a href="sol_study/lectureList.do">학습하기</a></li>
-									<li><a href="sol_test/test/list.do">문제풀기</a></li>
-									<li><a href="sol_bbs/bbslist.do">자유게시판</a></li>
-									<li><a href="sol_qna/list.do">Q&A</a></li>
-									<li><a href="sol_mypage/calendar.do?s_id=${s_id}">캘린더</a></li>
-
+													<li><a href="sol_test/test/list.do">문제풀기</a></li>
+													<li><a href="sol_bbs/bbslist.do">자유게시판</a></li>
+													<li><a href="sol_qna/list.do">Q&A</a></li>
+													<li><a href="sol_mypage/calendar.do?s_id=${s_id}">캘린더</a></li>
 								</ul>
 							</div>
 						</div>
@@ -201,19 +215,19 @@
 										<%if (!c_id.isEmpty()) {
 					out.print("checked");
 				}%> />ID저장
-									<input type="button" name="login" class="btn btn-primary"
+									<input type="button" name="login" class="btn btn-primary button"
 										value="로그인" onclick="check1(this.form)" />
 								</div>
 							</form>
 						</td>
 						<td>
 							<form class="form-inline" action="sol_member/joinagree.do">
-								<button type="submit" class="btn btn-primary">회원가입</button>
+								<button type="submit" class="btn btn-primary button">회원가입</button>
 							</form>
 						</td>
 						<td>
 							<form class="form-inline" method="post" action="sol_member/findform.do">
-								<button type="submit" class="btn btn-primary">ID/PW찾기</button>
+								<button type="submit" class="btn btn-primary button">ID/PW찾기</button>
 							</form>
 						</td>
 					</tr>
@@ -235,14 +249,14 @@
 						<td>
 							<form class="form-inline" method="post" action="sol_member/logout.do">
 								${s_id }님 환영합니다. <input type="button" name="logout"
-									class="btn btn-primary" value="로그아웃"
+									class="btn btn-primary button" value="로그아웃"
 									onclick="check2(this.form)" />
 							</form>
 						</td>
 						<td>
 							<form class="form-inline" method="post" action="sol_member/update.do">
 								<input type="hidden" name="id" value="${s_id }" /> <input
-									type="button" name="update" class="btn btn-primary"
+									type="button" name="update" class="btn btn-primary button"
 									value="정보수정" onclick="check3(this.form)" />
 							</form>
 						</td>
@@ -311,14 +325,15 @@
 				<div class="icons-box-vert-container">
 
 					<!-- start: Icon Box Start -->
-					<div class="span6">
+					<div class="span4">
 						<div class="icons-box-vert">
 							<i class="ico-ok ico-color circle-color big"></i>
 							<div class="icons-box-vert-info">
-								<h3>Easy to use</h3>
-								<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
-									sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna
-									aliquam erat volutpat.</p>
+								<p style="font-size: 15pt">1학년</p><br/>
+								<p><a href="sol_study/lectureList.do?grade=1&gwamok=국어">국어</a> 
+								   <a href="sol_study/lectureList.do?grade=1&gwamok=수학">수학</a>  
+								   <a href="sol_study/lectureList.do?grade=1&gwamok=사회">사회</a> 
+								   <a href="sol_study/lectureList.do?grade=1&gwamok=과학">과학</a></p>
 							</div>
 							<div class="clear"></div>
 						</div>
@@ -326,14 +341,15 @@
 					<!-- end: Icon Box-->
 
 					<!-- start: Icon Box Start -->
-					<div class="span6">
+					<div class="span4">
 						<div class="icons-box-vert">
 							<i class="ico-cup  ico-white circle-color-full big-color"></i>
 							<div class="icons-box-vert-info">
-								<h3>Best choice</h3>
-								<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
-									sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna
-									aliquam erat volutpat.</p>
+								<p style="font-size: 15pt">2학년</p><br/>
+                <p><a href="sol_study/lectureList.do?grade=2&gwamok=국어">국어</a> 
+                   <a href="sol_study/lectureList.do?grade=2&gwamok=수학">수학</a>  
+                   <a href="sol_study/lectureList.do?grade=2&gwamok=사회">사회</a> 
+                   <a href="sol_study/lectureList.do?grade=2&gwamok=과학">과학</a></p>
 							</div>
 							<div class="clear"></div>
 						</div>
@@ -341,14 +357,15 @@
 					<!-- end: Icon Box -->
 
 					<!-- start: Icon Box Start -->
-					<div class="span6">
+					<div class="span4">
 						<div class="icons-box-vert">
 							<i class="ico-ipad ico-color circle-color big"></i>
 							<div class="icons-box-vert-info">
-								<h3>Fully Responsive</h3>
-								<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
-									sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna
-									aliquam erat volutpat.</p>
+								<p style="font-size: 15pt">3학년</p><br/>
+                <p><a href="sol_study/lectureList.do?grade=3&gwamok=국어">국어</a> 
+                   <a href="sol_study/lectureList.do?grade=3&gwamok=수학">수학</a>  
+                   <a href="sol_study/lectureList.do?grade=3&gwamok=사회">사회</a> 
+                   <a href="sol_study/lectureList.do?grade=3&gwamok=과학">과학</a></p>
 							</div>
 							<div class="clear"></div>
 						</div>
@@ -356,19 +373,52 @@
 					<!-- end: Icon Box -->
 
 					<!-- start: Icon Box Start -->
-					<div class="span6">
+					<div class="span4">
 						<div class="icons-box-vert">
 							<i class="ico-thumbs-up  ico-white circle-color-full big-color"></i>
 							<div class="icons-box-vert-info">
-								<h3>Social Network</h3>
-								<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
-									sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna
-									aliquam erat volutpat.</p>
+								<p style="font-size: 15pt">4학년</p><br/>
+                <p><a href="sol_study/lectureList.do?grade=4&gwamok=국어">국어</a> 
+                   <a href="sol_study/lectureList.do?grade=4&gwamok=수학">수학</a>  
+                   <a href="sol_study/lectureList.do?grade=4&gwamok=사회">사회</a> 
+                   <a href="sol_study/lectureList.do?grade=4&gwamok=과학">과학</a></p>
 							</div>
 							<div class="clear"></div>
 						</div>
 					</div>
 					<!-- end: Icon Box -->
+					
+					<!-- start: Icon Box Start -->
+          <div class="span4">
+            <div class="icons-box-vert">
+              <i class="ico-ipad ico-color circle-color big"></i>
+              <div class="icons-box-vert-info">
+                <p style="font-size: 15pt">5학년</p><br/>
+                <p><a href="sol_study/lectureList.do?grade=5&gwamok=국어">국어</a> 
+                   <a href="sol_study/lectureList.do?grade=5&gwamok=수학">수학</a>  
+                   <a href="sol_study/lectureList.do?grade=5&gwamok=사회">사회</a> 
+                   <a href="sol_study/lectureList.do?grade=5&gwamok=과학">과학</a></p>
+              </div>
+              <div class="clear"></div>
+            </div>
+          </div>
+          <!-- end: Icon Box -->
+
+          <!-- start: Icon Box Start -->
+          <div class="span4">
+            <div class="icons-box-vert">
+              <i class="ico-thumbs-up  ico-white circle-color-full big-color"></i>
+              <div class="icons-box-vert-info">
+                <p style="font-size: 15pt">6학년</p><br/>
+                <p><a href="sol_study/lectureList.do?grade=6&gwamok=국어">국어</a> 
+                   <a href="sol_study/lectureList.do?grade=6&gwamok=수학">수학</a>  
+                   <a href="sol_study/lectureList.do?grade=6&gwamok=사회">사회</a> 
+                   <a href="sol_study/lectureList.do?grade=6&gwamok=과학">과학</a></p>
+              </div>
+              <div class="clear"></div>
+            </div>
+          </div>
+          <!-- end: Icon Box -->
 
 				</div>
 				<!-- end: Icon Boxes -->
@@ -427,15 +477,15 @@
 
 						<ul id="footer-nav">
 
-							<li><a href="sol_index.jsp">Start</a></li>
+							<li><a href="sol_study/lectureList.do">학습하기</a></li>
 
-							<li><a href="sol_about.jsp">About</a></li>
+							<li><a href="sol_test/test/list.do">문제풀기</a></li>
 
-							<li><a href="sol_services.jsp">Services</a></li>
+							<li><a href="sol_bbs/bbslist.do">자유게시판</a></li>
 
-							<li><a href="sol_pricing.jsp">Pricing</a></li>
+							<li><a href="sol_qna/list.do">Q & A</a></li>
 
-							<li><a href="sol_contact.jsp">Contact</a></li>
+							<li><a href="sol_mypage/calendar.do?s_id=${s_id}">캘린더</a></li>
 
 						</ul>
 
@@ -494,14 +544,28 @@
 					<h3>Follow Us!</h3>
 					<ul class="social-grid">
 						<li>
+              <div class="social-item">
+                <div class="social-info-wrap">
+                  <div class="social-info">
+                    <div class="social-info-front social-dribbble-hover" style="color: white">
+                      하나
+                    </div>
+                    <div class="social-info-back social-dribbble">
+                      하나
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+						<li>
 							<div class="social-item">
 								<div class="social-info-wrap">
 									<div class="social-info">
-										<div class="social-info-front social-twitter">
-											<a href="http://twitter.com"></a>
+										<div class="social-info-front social-html5-hover" style="color: white">
+											 민경
 										</div>
-										<div class="social-info-back social-twitter-hover">
-											<a href="http://twitter.com"></a>
+										<div class="social-info-back social-html5">
+											민경
 										</div>
 									</div>
 								</div>
@@ -511,25 +575,11 @@
 							<div class="social-item">
 								<div class="social-info-wrap">
 									<div class="social-info">
-										<div class="social-info-front social-facebook">
-											<a href="http://facebook.com"></a>
+										<div class="social-info-front social-vimeo-hover" style="color: white">
+											미래
 										</div>
-										<div class="social-info-back social-facebook-hover">
-											<a href="http://facebook.com"></a>
-										</div>
-									</div>
-								</div>
-							</div>
-						</li>
-						<li>
-							<div class="social-item">
-								<div class="social-info-wrap">
-									<div class="social-info">
-										<div class="social-info-front social-dribbble">
-											<a href="http://dribbble.com"></a>
-										</div>
-										<div class="social-info-back social-dribbble-hover">
-											<a href="http://dribbble.com"></a>
+										<div class="social-info-back social-vimeo">
+											미래
 										</div>
 									</div>
 								</div>
@@ -539,16 +589,30 @@
 							<div class="social-item">
 								<div class="social-info-wrap">
 									<div class="social-info">
-										<div class="social-info-front social-flickr">
-											<a href="http://flickr.com"></a>
+										<div class="social-info-front social-myspace-hover" style="color: white">
+											수지
 										</div>
-										<div class="social-info-back social-flickr-hover">
-											<a href="http://flickr.com"></a>
+										<div class="social-info-back social-myspace">
+											수지
 										</div>
 									</div>
 								</div>
 							</div>
 						</li>
+						<li>
+              <div class="social-item">
+                <div class="social-info-wrap">
+                  <div class="social-info">
+                    <div class="social-info-front social-rss-hover" style="color: white">
+                      혜림
+                    </div>
+                    <div class="social-info-back social-rss">
+                      혜림
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
 					</ul>
 					<!-- end: Follow Us -->
 
@@ -591,7 +655,8 @@
 	<script src="sol_js/video.js"></script>
 	<script defer="defer" src="sol_js/custom.js"></script>
 	<!-- end: Java Script -->
-	  <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+	
+	<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
   <script type="text/javascript">
       function initialize() {
         var mapLocation = new google.maps.LatLng('37.5693255','126.9860066'); // 지도에서 가운데로 위치할 위도와 경도

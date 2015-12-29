@@ -40,16 +40,7 @@
               <!--logo start-->
             <a href="adminIndex.do" class="logo">SolProject <span class="lite">Admin</span></a>
             <!--logo end-->
-            <div class="nav search-row" id="top_menu">
-                <!--  search form start -->
-                <ul class="nav top-menu">                    
-                    <li>
-                        <form class="navbar-form">
-                            <input class="form-control" placeholder="Search" type="text">
-                        </form>
-                    </li>                    
-                </ul>
-                <!--  search form end -->                
+            <div class="nav search-row" id="top_menu">             
             </div>
             <div class="top-nav notification-row">                
                 <!-- notificatoin dropdown start-->
