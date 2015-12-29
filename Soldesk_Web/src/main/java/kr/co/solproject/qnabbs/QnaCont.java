@@ -35,7 +35,7 @@ public class QnaCont {
 		
 		String url="list.do";
 		int nowPage=1;	
-		int numPerPage=5;	
+		int numPerPage=10;	
 		
 		int recNo=1;
 		

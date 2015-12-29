@@ -1356,6 +1356,14 @@ public class AdminCont {
 		return "redirect:noticeRead.do?bbsno="+dto.getBbsno();
 	}//end
 	
+	@RequestMapping(value="sol_admin/bbs/noticeShowUpdate.do", method=RequestMethod.POST)
+	public String noticeShowUpdate(BbsDTO dto, HttpServletRequest request) {
+		dto.setBbsno(Integer.parseInt(request.getParameter("bbsno")));
+		dto.setNoticeshow(request.getParameter("noticeshow"));
+		dao.noticeShowUpdate(dto);
+		return "redirect:noticeList.do";
+	}//end
+	
 //-----------------------------------------------------------------------------------------------------------
 //-------------------------------------------------------------------------------------------------BBS EDN
 

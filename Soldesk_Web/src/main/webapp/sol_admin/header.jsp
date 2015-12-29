@@ -44,15 +44,6 @@
             <a href="../adminIndex.do" class="logo">SolProject <span class="lite">Admin</span></a>
             <!--logo end-->
             <div class="nav search-row" id="top_menu">
-                <!--  search form start -->
-                <ul class="nav top-menu">                    
-                    <li>
-                        <form class="navbar-form">
-                            <input class="form-control" placeholder="Search" type="text">
-                        </form>
-                    </li>                    
-                </ul>
-                <!--  search form end -->                
             </div>
             <div class="top-nav notification-row">                
                 <!-- notificatoin dropdown start-->
@@ -110,7 +101,7 @@
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
                       <ul class="sub">
-                      	  <li><a href="../bbs/noticeIns.do">Notice</a></li>
+                      	  <li><a href="../bbs/noticeList.do">Notice</a></li>
                           <li><a  href="../bbs/bbsDel.do">Board_delete</a></li>
                       </ul>
                   </li>       
