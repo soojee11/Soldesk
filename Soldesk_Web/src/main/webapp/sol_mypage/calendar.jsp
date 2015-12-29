@@ -156,7 +156,7 @@ function lectureGo(lectureno){
 <table align="center" width=100% cellpadding="0" cellspacing="1"
 	 border="1">
 	
-		<tr style="font-weight: bold; width: 100%; height: 25px;"
+		<tr style=" width: 100%; height: 25px;"
 		bgcolor="#99cc66" align="center">
 		
   <td><font color="red">일</font></td>
@@ -168,7 +168,7 @@ function lectureGo(lectureno){
   <td><font color="blue">토</font></td>
  </tr>
  
- <tr style='height: 70px; font-weight: bold;'> <!-- 첫쨰줄 -->
+ <tr style='height: 70px; '> <!-- 첫쨰줄 -->
  
  
  
@@ -253,6 +253,7 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
                        <c:choose>
                             <c:when test="${nowymd eq  todaynow && date eq i}">
                                 <c:set var="bgcolor" value="#99cc66"/>
+                                
                             </c:when> 
                             <c:when test="${i gt endDate}"> <!-- 달력외부 -->
                                 <c:set var="bgcolor" value="#fafafa"/>
@@ -374,9 +375,14 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
      
        <!--Lecture Modal -->
  <span class="container">
-  <button type="button" class="btn btn-lecture btn-sm" data-toggle="modal" data-target="#${now }lecture">
+<!--   <button type="button" class="btn btn-lecture btn-sm" data-toggle="modal" data-target="#${now }lecture">
 <img src="image/btn_study_play.png" width=20px height=28px/>
-</button>
+</button> -->
+
+  <span   data-toggle="modal" data-target="#${now }lecture">
+<img src="image/btn_study_play.png" width=20px height=28px/>
+</span>
+
 
   <span class="modal fade" id="${now }lecture" role="dialog">
     <span class="modal-dialog">
@@ -462,9 +468,14 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
      
        <!--Lecture Modal -->
  <span class="container">
-  <button type="button" class="btn btn-memo btn-sm" data-toggle="modal" data-target="#${now }memo">
+<!--   <button type="button" class="btn btn-memo btn-sm" data-toggle="modal" data-target="#${now }memo">
 <img src="image/pink.png" width=20px height=28px/>
-</button>
+</button> -->
+
+  <span   data-toggle="modal" data-target="#${now }lecture">
+<img src="image/pink.png" width=20px height=28px/>
+</span>
+
 
   <span class="modal fade" id="${now }memo" role="dialog">
     <span class="modal-dialog">
@@ -608,9 +619,13 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
      
        <!--mystudy Modal -->
  <span class="container">
-  <button type="button" class="btn btn-mystudy btn-sm" data-toggle="modal" data-target="#${now }study">
+<!--   <button type="button" class="btn btn-mystudy btn-sm" data-toggle="modal" data-target="#${now }study">
   <img src="image/test.png" width=20px height=20px/>
-</button>
+</button> -->
+
+  <span   data-toggle="modal" data-target="#${now }lecture">
+<img src="image/test.png" width=20px height=28px/>
+</span>
 
   <span class="modal fade" id="${now }study" role="dialog">
     <span class="modal-dialog">
@@ -739,7 +754,7 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
 
  <c:if test="${(count-(7-(startDay-1)))%7 == 0 }"> 
  </tr>
- <tr  style='height: 70px; font-weight: bold;'> <!--둘째줄부터  -->
+ <tr  style='height: 70px; '> <!--둘째줄부터  -->
  </c:if>
       
      
