@@ -767,11 +767,11 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
  </tr>
  <tr  style='height: 70px; '> <!--둘째줄부터  -->
  </c:if>
-      
-     
-      
  </c:forEach> 
-
+</tr>
+<div align="right">*${month+1 }월에 학습한 강의수강 총<font color="#0088cc" >${modalcnt}</font>일/ 문제풀기 총<font color="#0088cc">${modalcnt2}</font>일</div>
+</table>
+<hr/>
 
 
    <%--      <c:choose>    <!--  날짜끝나고 빈공간 -->
@@ -792,10 +792,220 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
          <td>&nbsp;</td>
          </c:forEach> 
         </c:if>  --%>
-  
-</tr>
-<div align="right">*${month+1 }월에 학습한 강의수강 총<font color="#0088cc" >${modalcnt}</font>일/ 문제풀기 총<font color="#0088cc">${modalcnt2}</font>일</div>
+
+<!-- ♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥캘린더 끝♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥ -->
+
+
+<style>
+.seaTabs * {
+    box-sizing: border-box;
+}
+
+.seaTabs_switch {
+    overflow: hidden;
+}
+
+.seaTabs_tab {
+    float: left;
+    cursor: pointer;
+    width: 50%
+}
+
+.seaTabs_switch_active {
+    cursor: default;
+}
+
+.seaTabs_item {
+    display: none;
+}
+
+.seaTabs_content_active {
+    display: block;
+}
+
+.seaTabs_switch {
+    
+}
+
+.seaTabs_tab {
+    padding: 10px 20px;
+    border-width: 1px 1px 1px 0;
+    border-style: solid;
+    border-color: #ccc;
+    background: #fff;
+}
+
+.seaTabs_tab:first-child {
+    border-left: 1px solid #ccc;
+    border-top-left-radius: 5px;
+}
+
+.seaTabs_tab:last-child {
+    border-top-right-radius: 5px;
+}
+
+.seaTabs_content {
+    margin-top: -1px;
+}
+
+.seaTabs_item {
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 0 0 5px 5px;
+}
+
+.seaTabs_switch_active {
+    border-bottom: 1px solid #fff;
+    background: #f1f8f4;
+}
+</style>
+
+
+<div class="seaTabs" >
+    <div class="seaTabs_switch">
+        <div class="seaTabs_tab seaTabs_switch_active">자유게시판</div>
+        <div class="seaTabs_tab">Q&A</div>
+    </div>
+    <div class="seaTabs_content">
+        <div class="seaTabs_item seaTabs_content_active" style="background-color: #f1f8f4">
+
+<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■자유게시판■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
+           
+           <table class="table"  style="background-color: #ffffff">
+    <tr>
+        <td width="60">번호</td>
+        <td>제목</td>
+        <td width="100">ID</td>
+        <td width="100">작성일</td>
+        <td width="60">조회수</td>
+    </tr>
+    
+    <!-- 공지사항 -->
+    <c:forEach var="ndto" items="${nlist }">
+        <c:if test="${ndto.noticeshow=='Y' }">
+            <tr bgcolor="#f8f8f8">
+                <td width="60"><div align="center"><img src="bbs_img/notice.png" width="20"></div></td>
+                <td><a href="bbsread.do?bbsno=${ndto.bbsno }&nowPage=${nowPage }">${ndto.subject }</a>
+                </td>
+                <td width="100">${ndto.passwd }</td>
+                <td width="100"><c:set var="nregdt" value="${ndto.regdt }"/> ${fn:substring(nregdt,0,16) }</td>
+                <td width="60">${ndto.readcnt }</td>
+            </tr>
+        </c:if>
+    </c:forEach>
+    
+    <!-- 게시판 -->
+    <c:set var="recNo" value="${recNo-ntotal }" />
+    <c:forEach var="dto" items="${list }">
+    <c:if test="${dto.passwd ne '관리자' }">
+        <c:set var="recNo" value="${recNo-1 }" />
+        <tr>
+            <td width="60">${recNo }</td>
+            <td><a href="bbsread.do?bbsno=${dto.bbsno }&nowPage=${nowPage }">${dto.subject }</a>
+            </td>
+            <td width="100">${dto.passwd }</td>
+            <td width="100"><c:set var="regdt" value="${dto.regdt }"/> ${fn:substring(regdt,0,16) }</td>
+            <td width="60">${dto.readcnt }</td>
+        </tr>
+    </c:if>
+    </c:forEach>
 </table>
+                     
+ <!-- ■■■■■■■■■■■■■■■■■■■■■//■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
+    
+        </div>
+
+        <div class="seaTabs_item" style="background-color: #f1f8f4">
+            
+            
+<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■Q&A■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
+ 
+            <table class ="table" style="background-color: #ffffff">
+    <tr align ="center" >
+        <td width="60">번호</td>
+        <td>제목</td>
+        <td width="100">답변여부</td>
+        <td width="100">ID</td>
+        <td width="100">작성일</td>
+        <td width="60">조회수</td>
+    </tr>
+    <c:if test="${total ==0 }">
+        <tr>
+            <td colspan="6" align="center">관련된 QNA글이 존재하지않습니다. </td>
+        </tr>
+    </c:if>
+<c:set var ="recNo" value="${recNo }"/>
+    <c:forEach var ="dto" items="${list }">
+    <c:set var ="recNo" value="${recNo-1 }"/>
+        <tr align ="center">
+            <td>
+                ${recNo+1 }
+            </td>
+                <td>
+                    <span>
+                        <c:if test="${dto.qnashow=='N' }"><img src="../sol_img/lock.png" width="15"></c:if>
+                        <a href="JavaScript:goRead('${dto.qnano }','${recNo+1 }','${s_id }')">${dto.subject }</a>
+                    </span>
+                </td>
+            <td>
+                <c:if test="${dto.replyok=='N' }">미답변</c:if>
+                <c:if test="${dto.replyok=='Y' }">답변완료</c:if>
+            </td>
+            <td>
+                <c:set var="id" value="${dto.id }"/>
+                    ${fn:substring(id,0,2) }
+                <c:forEach var="i" begin="1" end="${fn:length(dto.id)-4}" step="1">
+                    <c:out value="*" />
+                </c:forEach>
+                 ${fn:substring(id,fn:length(dto.id)-2,fn:length(dto.id)) }
+            </td>
+            <td>
+                <c:set var="regdt" value="${dto.regdt }"/> ${fn:substring(regdt,0,10) }
+            </td>
+            <td>${dto.readcnt }</td>
+        </tr>
+    </c:forEach>
+</table>
+            
+ <!-- ■■■■■■■■■■■■■■■■■■■■■//■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
+        </div>
+    </div>
+</div>
+
+
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script>
+    $(function() {
+        $('.seaTabs_tab').each(
+                function(item) {
+                    $(this).click(
+                            function() {
+                                $(this).addClass('seaTabs_switch_active')
+                                        .siblings().removeClass(
+                                                'seaTabs_switch_active');
+                                $($('.seaTabs_item')[item]).addClass(
+                                        'seaTabs_content_active').siblings()
+                                        .removeClass('seaTabs_content_active');
+                            });
+                });
+    });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 <%@ include file="../sol_footer.jsp"%>
