@@ -44,10 +44,12 @@ public class PostscriptDAO {
 		return res;
 	}
 
-	public CategoryDTO getCategory(int categoryno) {
-		CategoryDTO dto = null;
+	/** 카테고리DTO 가져옴 **/
+	public CategoryDTO getCategory(CategoryDTO dto) {
+		//CategoryDTO dto = null;
 		try {
-			dto = (CategoryDTO) mybatis.queryForObject("sol_postscript.getCategory", categoryno);
+			dto = (CategoryDTO) mybatis.queryForObject("sol_postscript.getCategory", dto);
+			//System.out.println("77777777777777777777"+dto.toString());
 		} catch (Exception e) {
 			System.out.println("read 실패다: " + e);
 		}
@@ -58,11 +60,24 @@ public class PostscriptDAO {
 	public int postInsert(PostscriptDTO dto) {
 		int res = 0;
 		try {
+			//System.out.println("-----dao"+dto.toString());
+			
 			res = mybatis.update("sol_postscript.insert", dto);
 		} catch (Exception e) {
 			System.out.println("post create error: " + e);
 		}
 		return res;
 
+	}
+	
+	/** 후기 삭제 **/
+	public int postDelete(PostscriptDTO dto){
+		int res = 0;
+		try {
+			res = mybatis.delete("sol_postscript.delete", dto);
+		} catch (Exception e) {
+			System.out.println("post delete error: " + e);
+		}
+		return res;
 	}
 }

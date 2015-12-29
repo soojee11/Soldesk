@@ -88,17 +88,17 @@
 </script>
 <br/><Br/>
 <div class="title" style="text-align: center">
+ <h3>회원 정보 수정</h3>
 <form name="joinForm" 
       method="post"
       action="updatego.do"><!--name=> register form -->
-<div style="text-align:center;">(*필수 입력)</div>
+<br/><div style="text-align:center;">(*필수 입력)</div>
 
-<table align="center" border="1" >
+<table align="center" border="0" >
 <tr align="left"> 
-  <th>아이디</th>
+  <th width="100px">아이디</th>
   <td> 
      <input type="text" value="${id }" name="id" size="15" readonly="readonly" style="background-color:#f7f4f5;">
-    
   </td>
 </tr>
 <tr align="left"> 
@@ -129,7 +129,7 @@
   <th >우편번호</th>
   <td>
       <input type="text" value="${zipcode }" name="zipcode" size="7" readonly="readonly" style="background-color:#f7f4f5;">
-      <input  class="btn btn-primary"    type="button" value="우편번호찾기" 
+      &nbsp;&nbsp;&nbsp;&nbsp;<input  class="btn btn-primary"    type="button" value="우편번호찾기" 
              onclick="zipCheck()">
   </td>
 </tr>
@@ -163,13 +163,13 @@
 </form>	
 
  <form method='get'>
-      <input type="button" class="btn btn-primary"  value="홈으로" onclick="move(this.form, 'index.do') " /> 
+      <input type="button" class="btn btn-primary"  value="홈으로" onclick="move(this.form, '../sol_index.do')" /> 
         <script>
-									function move(frm, file) {
-										frm.action = file;
-										frm.submit();
-									}
-								</script>
+						function move(frm, file) {
+							frm.action = file;
+							frm.submit();
+						}
+				</script>
     </form> 
    
 
