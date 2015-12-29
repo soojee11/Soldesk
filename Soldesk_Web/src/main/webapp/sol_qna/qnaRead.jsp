@@ -60,7 +60,7 @@ function deletePrcoResponse(data,status){
 	}
 }
 
-function updateReply(replyno,qnano,show){
+function updateReply(replyno,qnano){
 	$("#replyno").val(replyno);
 	$.ajax({
 		cache:false,
@@ -74,6 +74,8 @@ function updateReply(replyno,qnano,show){
 					//alert(result[1]);
 				document.getElementById("demo").innerHTML = "";
 				document.getElementById("demo").innerHTML = result[1];
+				document.getElementById("update").style.display = "none";
+				document.getElementById("cancel").style.display = "";
 			}else{	
 				alert(result[1]);
 			}
@@ -82,10 +84,7 @@ function updateReply(replyno,qnano,show){
 			alert(err+"오류발생");
 		}
 	});
-	
-	
 }
-
 
 function updateResponse(data,status){
 	var str =data.replace(/^\s+|\s+$/gm,'');
@@ -121,7 +120,7 @@ function updatePrcoResponse(data,status){
 } 
 
 function deleteQna(qnano){
-	msg="게시글을 삭제하시겠습니까? ( 답변글이 있을경우 답변글도 모두 삭제됩니다. )";
+	msg="게시글을 삭제하시겠습니까? \n ( 답변글이 존재할 경우 답변글도 모두 삭제됩니다. )";
 	if (confirm(msg)!=0) {
 		location.href="delete.do?qnano="+qnano;
 	}else{
@@ -131,25 +130,29 @@ function deleteQna(qnano){
 
 
 function updateQna(qnano,recNo){
-	msg="게시글을 수정하시겠습니까? ( 답변글이 있을경우 수정은 불가합니다. )";
+	msg="게시글을 수정하시겠습니까?";
 	if(confirm(msg)!=0){
 		location.href="update.do?qnano="+qnano+"&recNo="+recNo;
 	}else{
 		return;
 	}
 }
-
-function cancelReply(){
+function cancel(){
 	document.getElementById("demo").innerHTML = "";
 	document.getElementById("demo").innerHTML = "${rdto.content }";
+	document.getElementById("update").style.display = "";
+	document.getElementById("cancel").style.display = "none";
 }
+
 </script>
 
 <c:if test="${msg==2 }">
 	<script>
-		alert("답변글 존재! 수정불가 ");
+		alert("답변글이 존재하여 수정이 불가능합니다. ");
+		location.href="read.do?qnano="+${qnano}+"&recNo="+${recNo};
 	</script>
 </c:if>
+
 <h4>
 <img src="../sol_img/go_right.png" width="20px"/>
 <img src="../sol_img/logos/qna_desc.png" width="120px" height="50px"><span style="font-size: 12px;">| 무엇이든 물어보세요</span>
@@ -210,9 +213,14 @@ function cancelReply(){
  				</td>
  				<c:if test="${mlevel=='A'  }">
 				<td style="text-align:right;">
-						<a href="javascript:updateReply(${rdto.replyno },${param.qnano },'Y');">수정</a> | 
-						<a href="javascript:deleteReply(${rdto.replyno },${param.qnano });">삭제</a> |
-						<a href="javascript:cancelReply();">취소</a>
+				
+						<div id="update" style="display: ;">
+							<a href="javascript:updateReply(${rdto.replyno },${param.qnano },'Y');">수정</a> | 
+							<a href="javascript:deleteReply(${rdto.replyno },${param.qnano });">삭제</a> 
+						</div>
+ 						<div id="cancel" style="display: none;">
+							<a href="javascript:cancel(${rdto.replyno });">수정취소</a>
+						</div>
 				</td>
 				</c:if>
  			</tr>

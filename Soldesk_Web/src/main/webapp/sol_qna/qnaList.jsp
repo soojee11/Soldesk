@@ -63,7 +63,7 @@
     			 ${fn:substring(id,fn:length(dto.id)-2,fn:length(dto.id)) }
 			</td>
 			<td>
-				<c:set var="regdt" value="${dto.regdt }"/> ${fn:substring(regdt,0,16) }
+				<c:set var="regdt" value="${dto.regdt }"/> ${fn:substring(regdt,0,10) }
 			</td>
 			<td>${dto.readcnt }</td>
 		</tr>
