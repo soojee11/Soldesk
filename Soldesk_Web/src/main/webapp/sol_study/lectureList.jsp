@@ -40,14 +40,13 @@ function postApplyResponse(data, status) { //callback함수
 	alert(data.replace(/^\s+|\s+$/gm,''));
 	window.location.reload(); //현재 페이지 새로고침
 }
-
-
 </script>
 
 <link href="./css/style.css" rel="stylesheet" type="text/css">
 <h4>
 	<!-- <img src="img/cont.JPG"> -->
-	<img src="../sol_img/go_right.png" width="20px"/><img src="img/study.png" width="150px" height="50px"> 
+	<img src="../sol_img/go_right.png" width="20px"/>
+	<img src="img/study.png" width="150px" height="50px"><span style="font-size: 12px;">| 학습해 보세요 </span> 
 </h4>
 
 <div class="column">
