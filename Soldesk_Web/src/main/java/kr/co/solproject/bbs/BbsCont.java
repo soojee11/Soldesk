@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import kr.co.solproject.admin.AdminDAO;
 import kr.co.solproject.reply.ReplyDTO;
 import net.utility.Paging;
 
@@ -21,14 +22,28 @@ public class BbsCont {
   @Autowired
   private BbsDAO dao=null;
   
+  @Autowired
+  private AdminDAO admindao=null;
+  
   public BbsCont() {
     System.out.println("---------------BbsCont객체 생성");
   }
   
   @RequestMapping(value="/sol_bbs/bbslist.do")
   public String bbslist(HttpServletRequest req, HttpSession session){
+	
+	  //notice list
+	  Map noticemap = new HashMap();
+	  noticemap.put("passwd", "관리자");
+	  
+	  List noticeList = null;
+	  noticeList=admindao.noticeList(noticemap); 
+	  int noticeTotal=admindao.getNoticeTotal(noticemap);
+	  
+	  
+	// bbs list
     int nowPage=1;      // 현재페이지, 페이지 시작번호 0->1page
-    int numPerPage=5;   // 페이지당 레코드 수
+    int numPerPage=10-noticeTotal;   // 페이지당 레코드 수
     String url="bbslist.do";  // 이동할 페이지 
     
     // 현재 페이지의 정보를 가져옴    
@@ -52,11 +67,13 @@ public class BbsCont {
     int totalPage = (int) Math.ceil((double)total/(double)numPerPage);
     
     req.setAttribute("list", list);
+    req.setAttribute("nlist", noticeList);
     req.setAttribute("recNo", recNo);
     req.setAttribute("paging", paging);
     req.setAttribute("nowPage", nowPage);
     req.setAttribute("totalPage", totalPage);
     req.setAttribute("total", total);
+    req.setAttribute("ntotal", noticeTotal);
     
     return "/sol_bbs/bbsList";
   }
@@ -95,8 +112,13 @@ public class BbsCont {
     dao.increment(dto);
     dto = dao.read(dto); // dto 에 저장된 bbsno 넘김
     req.setAttribute("nowPage", req.getParameter("nowPage"));
+    String content = "";
+    if(dto.getPasswd().equals("관리자")){
+    	content =dto.getContent();
+    	content= content.replaceAll("=\"../", "=\"");
+    	dto.setContent(content);
+    }
     req.setAttribute("dto", dto);
-    
     //댓글리스트
     List list=null;
     list=dao.bbsReplyList(dto.getBbsno());

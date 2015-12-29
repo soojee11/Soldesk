@@ -5,7 +5,7 @@
 
 <!-- namespace : 주로 테이블 명 사용, 생략 가능 -->
 <sqlMap namespace="sol_admin">
-  <!-- 매개변수 NoticeDTO 사용 -->
+
   <typeAlias alias="PlayerDTO" type="kr.co.solproject.player.PlayerDTO" />
   <typeAlias alias="CategoryDTO" type="kr.co.solproject.category.CategoryDTO" />
   <typeAlias alias="MemberDTO" type="kr.co.solproject.member.MemberDTO" />
@@ -163,7 +163,6 @@
 		from sol_bbs
 		where passwd = #passwd#
 		order by bbsno DESC
-		limit #sno#, #numPerPage#
 	</select>
 	
 	<select id="getNoticeTotal" parameterClass="Map" resultClass="Integer">
