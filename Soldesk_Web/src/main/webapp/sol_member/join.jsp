@@ -1,6 +1,22 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="../sol_header.jsp"%>
 
+<!--  한글 웹 폰트 적용-->
+    <style type="text/css">
+    th, .must{
+      font-family:'Jeju Gothic', sans-serif;
+      font-size:10pt;
+    }
+    .h3{
+      font-family:'Jeju Gothic', sans-serif;
+      font-size:16pt;
+    }
+    .button, input{
+        font-family:'Jeju Gothic', sans-serif;
+        font-size:11pt;
+    }
+    </style>
+<!-- 한글 웹 폰트 적용 끝 -->
 
 <!-- 정렬금지!!!!!! -->
 
@@ -92,22 +108,22 @@
 </script>
 <br/><br/>
 <div class="title" style="text-align: center">
- <h3>회원 가입</h3>
+ <div class="h3">회원 가입</div>
 <form name="joinForm" 
       method="post"
       action="join.do"><!--name=> register form -->
-<br/><div style="text-align:center;">(*필수 입력)</div>
+<br/><div style="text-align:center;" class="must">(*필수 입력)</div>
 
 <table align="center" border="0" >
 <tr align="left"> 
   <th width="100px">아이디*</th>
   <td> 
-     <input type="text" name="id" size="15" readonly="readonly" style="background-color:#f7f4f5;">
-     &nbsp;&nbsp;&nbsp;&nbsp;<input  type="button" value="ID중복확인" class="btn btn-primary"  onclick="idCheck()">
+     <input type="text" name="id" size="15" readonly="readonly" style="background-color:#f7f4f5;" >
+     &nbsp;&nbsp;&nbsp;&nbsp;<input  type="button" value="ID중복확인" class="btn btn-primary button"  onclick="idCheck()">
   </td>
 </tr>
 <tr align="left"> 
-  <th  >비밀번호*</th>
+  <th>비밀번호*</th>
   <td> <input type="password" name="passwd" size="15" style="background-color:#f7f4f5;">
 </tr>
 <tr  align="left" > 
@@ -122,7 +138,7 @@
   <th>이메일*</th>
   <td>
       <input type="text" name="email" size="27" readonly="readonly" style="background-color:#f7f4f5;">
-       &nbsp;&nbsp;&nbsp;&nbsp;<input  type="button" value="Email중복확인" class="btn btn-primary" 
+       &nbsp;&nbsp;&nbsp;&nbsp;<input  type="button" value="Email중복확인" class="btn btn-primary button" 
              onclick="emailCheck()">   
   </td>
 </tr>         
@@ -136,7 +152,7 @@
   <th >우편번호</th>
   <td>
       <input type="text" name="zipcode" size="7" readonly="readonly" style="background-color:#f7f4f5;">
-      &nbsp;&nbsp;&nbsp;&nbsp;<input type="button" value="우편번호찾기" class="btn btn-primary" 
+      &nbsp;&nbsp;&nbsp;&nbsp;<input type="button" value="우편번호찾기" class="btn btn-primary button" 
              onclick="zipCheck()">
   </td>
 </tr>
@@ -155,14 +171,14 @@
 </table>
 <br/>
 <div style="text-align: center">
-  <input    type="button" class="btn btn-primary"  value="가입하기"
+  <input  type="button" class="btn btn-primary button"  value="가입하기"
          onclick="inputCheck(this.form)" > 
-  <input   type="reset" class="btn btn-primary"  value="취소">
+  <input type="reset" class="btn btn-primary button"  value="취소">
  
 </div>	
 </form>	
  <form method='get'>
-      <input type="button" class="btn btn-primary"  value="홈으로" onclick="move(this.form, '../sol_index.do') " /> 
+      <input type="button" class="btn btn-primary button"  value="홈으로" onclick="move(this.form, '../sol_index.do') " /> 
         <script>
 					function move(frm, file) {
 						frm.action = file;
