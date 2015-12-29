@@ -47,14 +47,22 @@ primary key(qnano)
 )ENGINE=MyISAM DEFAULT CHARSET="euckr";				
 		
 CREATE TABLE sol_bbs(
-bbsno		int(11)		NOT NULL	auto_increment,
-subject		varchar(100)    NOT NULL,       
-content		text		NOT NULL,
-passwd		varchar(15)	NOT NULL,
-regdt		datetime	NOT  NULL,
-readcnt		int(11)		NOT NULL	default 0,
-PRIMARY KEY  (bbsno)
+bbsno int(11) NOT NULL auto_increment,
+subject varchar(100) NOT NULL,       
+content text NOT NULL,
+passwd varchar(15) NOT NULL,
+regdt datetime NOT  NULL,
+readcnt int(11) NOT NULL default 0,
+noticeshow varchar(15) NOT NULL  default 'N', 
+PRIMARY KEY (bbsno)
 )ENGINE=MyISAM DEFAULT CHARSET="euckr";	
+
+//noticeshow 하나가 추가함. 자료형 맞는지 모름
+
+
+
+
+
 
 CREATE TABLE sol_study(
 lectureno	int(11)		NOT NULL,

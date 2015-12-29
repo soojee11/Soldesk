@@ -58,7 +58,7 @@
 </table>
 
 <div align="right">
-	<input type="button" value="글쓰기" class="btn btn-default button"
+	<input type="button" value="글쓰기" class="btn btn-warning button"
 		<c:if test="${s_id == null }">onclick="denywrite()"</c:if>
 		<c:if test="${s_id != null }">onclick="location.href='./create.do'"</c:if>>
 </div>

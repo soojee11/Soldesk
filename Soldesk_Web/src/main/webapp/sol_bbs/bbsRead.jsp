@@ -161,17 +161,17 @@ function cancel(replyno) {
 <br />
 <c:if test="${dto.passwd == s_id }">
 	<div align="right">
-		<input type="button" class="btn btn-default button" name="insert" value="수정"
+		<input type="button" class="btn btn-warning button" name="insert" value="수정"
 			onclick="location.href='bbsupdate.do?bbsno=${dto.bbsno }&nowPage=${nowPage }'">
-		<input type="button" class="btn btn-default button" name="reset" value="삭제"
+		<input type="button" class="btn btn-warning button" name="reset" value="삭제"
 			onclick="location.href='bbsdelete.do?bbsno=${dto.bbsno }&nowPage=${nowPage }'">
-		<input type="button" class="btn btn-default button" name="list" value="목록"
+		<input type="button" class="btn btn-warning button" name="list" value="목록"
 			onclick="location.href='bbslist.do?nowPage=${nowPage }'">
 	</div>
 </c:if>
 <c:if test="${dto.passwd != s_id }">
 	<div align="right">
-		<input type="button" class="btn btn-default button" name="list" value="목록"
+		<input type="button" class="btn btn-warning button" name="list" value="목록"
 			onclick="location.href='bbslist.do?nowPage=${nowPage }'">
 	</div>
 </c:if>

@@ -54,19 +54,19 @@ public class MypageDAO {
 		try {
 			cnt = (Integer) mybatis.queryForObject("sol_calendar.checkcount", map);
 			
-			System.out.println(id+" "+lectureno+" "+nowregdate);
-			System.out.println("##cnt: "+cnt);
+			//System.out.println(id+" "+lectureno+" "+nowregdate);
+			//System.out.println("##cnt: "+cnt);
 			
 			if(cnt == 0){
 				cnt2 = mybatis.update("sol_calendar.calinsert", map); 
 			}
 			else{
 				rdt =  (String) mybatis.queryForObject("sol_calendar.checkrdt", map);
-				System.out.println("##rdt: "+rdt); //regdate중 max최신값가져온다.
+				//System.out.println("##rdt: "+rdt); //regdate중 max최신값가져온다.
 				calno =  (String) mybatis.queryForObject("sol_calendar.checkcalno", map);
-				System.out.println("##calno: "+calno); //regdate중 max최신값가져온다.
+				//System.out.println("##calno: "+calno); //regdate중 max최신값가져온다.
 				rdt2 =  rdt.substring(0, 10);
-				System.out.println("##rdt2: "+rdt2);//시간제외해줌.
+				//System.out.println("##rdt2: "+rdt2);//시간제외해줌.
 				
 				Map map2 = new HashMap();
 				map2.put("id", id);
@@ -76,10 +76,10 @@ public class MypageDAO {
 				
 				if(nowregdate.equals(rdt2) ){
 					cnt2 = mybatis.update("sol_calendar.calupdate", map2); 
-					System.out.println("##calupdate: "+cnt2);
+					//System.out.println("##calupdate: "+cnt2);
 				}else{
 					cnt2 = mybatis.update("sol_calendar.calinsert", map); 
-					System.out.println("##calinsert: "+cnt2);
+					//System.out.println("###calinsert: "+cnt2);
 				}
 			}
 			
