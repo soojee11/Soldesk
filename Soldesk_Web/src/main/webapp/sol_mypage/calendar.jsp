@@ -8,11 +8,11 @@
    <meta name="viewport" content="width=device-width, initial-scale=1">
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-   <script src="http://code.jquery.com/jquery-latest.js"></script>
-   <script src="js/bootstrap.min.js"></script>
+ <script src="http://code.jquery.com/jquery-latest.js"></script>
+     <script src="js/bootstrap.min.js"></script> 
 
-
-
+<!--  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+ -->
 
 
 <script type="text/javascript">
@@ -379,12 +379,12 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
 <img src="image/btn_study_play.png" width=20px height=28px/>
 </button> -->
 
-  <span   data-toggle="modal" data-target="#${now }lecture">
+  <span data-toggle="modal" data-target="#${now }lecture">
 <img src="image/btn_study_play.png" width=20px height=28px/>
 </span>
 
 
-  <span class="modal fade" id="${now }lecture" role="dialog">
+  <span class="modal fade" id="${now }lecture" role="dialog"  ">
     <span class="modal-dialog">
     
       <!-- Lecture Modal content-->
@@ -472,7 +472,7 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
 <img src="image/pink.png" width=20px height=28px/>
 </button> -->
 
-  <span   data-toggle="modal" data-target="#${now }lecture">
+  <span   data-toggle="modal" data-target="#${now }memo">
 <img src="image/pink.png" width=20px height=28px/>
 </span>
 
@@ -492,8 +492,8 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
 		    
 		    <thead>
 		        <tr align="center" bgcolor="#fafafa" style="font-weight: bold; font-size: 14px;">
-		            <td  width="9%" >회차</td>
-		            <td  width="20%">강의명</td>
+		            <td width="9%" >회차</td>
+		            <td width="20%">강의명</td>
 		            <td width="40%">메모</td>
 		            <td>등록일</td>
 		            <td width="14%">복습하기</td>
@@ -521,9 +521,9 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
 		        <fmt:parseNumber var="nowyear" type="number" integerOnly="true"  value="${fn:substring(now, 0 ,4) }" />
 		        <fmt:parseNumber var="nowmonth" type="number" integerOnly="true"  value="${fn:substring(now, 5 ,7) }" />
 		     
-		       <fmt:parseNumber var="mdate" type="number"  value="${fn:substring(mlist.memodate, 8 ,10) }" />
-                    <fmt:parseNumber var="myear" type="number" integerOnly="true"  value="${fn:substring(mlist.memodate, 0 ,4) }" />
-                    <fmt:parseNumber var="mmonth" type="number" integerOnly="true"  value="${fn:substring(mlist.memodate, 5 ,7) }" />
+		        <fmt:parseNumber var="mdate" type="number"  value="${fn:substring(mlist.memodate, 8 ,10) }" />
+                <fmt:parseNumber var="myear" type="number" integerOnly="true"  value="${fn:substring(mlist.memodate, 0 ,4) }" />
+                <fmt:parseNumber var="mmonth" type="number" integerOnly="true"  value="${fn:substring(mlist.memodate, 5 ,7) }" />
                     
                    
 		     
@@ -548,7 +548,16 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
 		                      
 		            
 		            
-		            <td align="center">${myear }/${mmonth }/${mdate }</td>
+		                     <c:choose>
+                                    <c:when test="${memo eq ''}">
+                                        <td align="center"></td>
+                                    </c:when>
+                                     <c:otherwise>
+                                      <td align="center">${myear }/${mmonth }/${mdate }</td>
+                                    </c:otherwise>
+                                </c:choose> 
+		            
+		            
 		            <td align="center">  <a href="javascript:lectureGo(${lectureno })">
 		                <img src='image/btn_study_play.png' width="30" height="30"></a>
 		            </td>
@@ -618,12 +627,12 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
     <!-- ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●학습결과모달●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●● --> 
      
        <!--mystudy Modal -->
- <span class="container">
+ <span class="container" >
 <!--   <button type="button" class="btn btn-mystudy btn-sm" data-toggle="modal" data-target="#${now }study">
   <img src="image/test.png" width=20px height=20px/>
 </button> -->
 
-  <span   data-toggle="modal" data-target="#${now }lecture">
+  <span  data-toggle="modal" data-target="#${now }study">
 <img src="image/test.png" width=20px height=28px/>
 </span>
 
@@ -706,7 +715,7 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
 	           </c:if>
 	           
             <td align="center"  width="20%">${usetime }</td>
-            <td align="center">${regdt }</td>
+            <td align="center">${slistyear }/${slistmonth }/${slistdate }</td>
 
 
         </tr>
