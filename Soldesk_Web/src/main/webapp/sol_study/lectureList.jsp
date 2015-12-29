@@ -146,9 +146,8 @@ function postApplyResponse(data, status) { //callback함수
 <div id="menu2" class="tab-pane fade">
 총 <span style="color: red;"><strong>${qnaTotal}</strong></span>개의 Q&A가 있습니다.
 <br/>
-<div align="right"><a href="bbsform.do"><img src='./img/bt_write.gif' width="40" height="20"></a></div>
+<div align="right"><a href=""><img src='./img/bt_write.gif' width="40" height="20"></a></div>
 <br/>
-
 <table class="table">
 	<tr align="center" >
 		<th>순번</th>
