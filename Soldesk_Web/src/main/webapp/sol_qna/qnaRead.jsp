@@ -53,20 +53,29 @@ function deletePrcoResponse(data,status){
 } 
 function updateReply(replyno,qnano){
 	$("#replyno").val(replyno);
-	var param = "replyno="+replyno+"&tableno="+qnano;
-	$.get("./replyUpdate.do", param, updateResponse);
+	$.ajax({
+		cache:false,
+		type: "get",	//요청방식
+		url: "replyUpdate.do?replyno="+replyno+"&tableno="+qnano,//서버측페이지
+		datatype:"text",	//응답페이지 타입 설정
+		success:function(data){
+			var str =data.replace(/^\s+|\s+$/gm,'');
+			var result = str.split("|");
+			if(result[0]=="success"){
+					//alert(result[1]);
+				document.getElementById("demo").innerHTML = "";
+				document.getElementById("demo").innerHTML = result[1];
+			}else{	
+				alert(result[1]);
+			}
+		},
+		error:function(err){	//응답 결과 상태코드가 실패했을때
+			alert(err+"오류발생");
+		}
+	});
+	
+	
 }
-function updateResponse(data,status){
-	var str =data.replace(/^\s+|\s+$/gm,'');
-	var result = str.split("|");
-	if(result[0]=="success"){
-			//alert(result[1]);
-		document.getElementById("demo").innerHTML = "";
-		document.getElementById("demo").innerHTML = result[1];
-	}else{	
-		alert(result[1]);
-	}
-} 
 
 function replyUpdateProc(replyno){
 	var param = $("#frm").serialize();
