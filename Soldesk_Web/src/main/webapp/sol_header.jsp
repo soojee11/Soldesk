@@ -64,7 +64,7 @@
 
 <!-- 하나)로그인추가 -->
 <script language="javascript">
-	function check1(frm) {
+	function check1(frm, file) {
 		var id = frm.id.value;
 		var passwd = frm.passwd.value;
 		id = id.replace(/^\s*|\s*$/g, '');
@@ -80,6 +80,7 @@
 			frm.passwd.focus();
 			return;
 		}
+		frm.action = file;
 		frm.submit();
 	}//end
 
@@ -98,6 +99,14 @@
 			return;
 		}
 	}//end
+	
+	 function joinagree(frm,file){
+      frm.action=file;
+  }
+  
+  function find(frm, file){
+      frm.action=file;
+  }
 </script>
 
 </head>
@@ -183,31 +192,21 @@
 				<table>
 					<tr>
 						<td>
-							<form class="form-inline" method="post" action="../sol_member/login.do">
-
-								<div class="form-group">
-									<input type="text" name="id" size="10" value="<%=c_id%>" /> <input
-										type="password" name="passwd" size="10" value="" /> <input
-										type="checkbox" name="c_id" value="SAVE"
-										<%if (!c_id.isEmpty()) {
-					out.print("checked");
-				}%> />ID저장 <input
-										type="button" name="login" class="btn btn-primary button" value="로그인"
-										onclick="check1(this.form)" />
-								</div>
-
-							</form>
-						</td>
-						<td>
-							<form class="form-inline" action="../sol_member/joinagree.do">
-								<button type="submit" class="btn btn-primary button">회원가입</button>
-							</form>
-						</td>
-						<td>
-							<form class="form-inline" method="post" action="../sol_member/findform.do">
-								<button type="submit" class="btn btn-primary button">ID/PW찾기</button>
-							</form>
-						</td>
+                <div class="form-group">
+                <form class="form-inline" method="post">
+                    <input type="text" name="id" value="<%=c_id%>" placeholder="ID"/> 
+                    <input type="password" name="passwd" placeholder="Password" value="" /> 
+                    <input type="checkbox" name="c_id" value="SAVE"
+                      <%if (!c_id.isEmpty()) {
+                          out.print("checked");
+                        }%> />ID저장
+                    <input type="button" name="login" class="btn btn-primary button"
+                      value="로그인" onclick="check1(this.form, '../sol_member/login.do')" />
+                    <button type="submit" class="btn btn-primary button" onclick="joinagree(this.form,'../sol_member/joinagree.do')">회원가입</button>
+                    <button type="submit" class="btn btn-primary button" onclick="find(this.form,'../sol_member/findform.do')">ID/PW찾기</button>
+                  </form>
+                </div>
+            </td>
 					</tr>
 				</table>
 
