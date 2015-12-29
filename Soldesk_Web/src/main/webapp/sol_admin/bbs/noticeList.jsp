@@ -46,9 +46,9 @@ function noticeDel(bbsno){
 			<td colspan="7" align="center">관련된 공지사항이 존재하지않습니다. </td>
 		</tr>
 	</c:if>
-	<c:set var="recNo" value="${recNo }" />
+	<c:set var="total" value="${total+1 }" />
 	<c:forEach var="dto" items="${list }">
-		<c:set var="recNo" value="${recNo-1 }" />
+		<c:set var="total" value="${total-1 }" />
 		<tr>
 			<td>
 				<form action="noticeShowUpdate.do" method="post">
@@ -64,7 +64,7 @@ function noticeDel(bbsno){
 					}
 				</script>	
 			</td>
-			<td><div align="center">${recNo}</div></td>
+			<td><div align="center">${total}</div></td>
 			<td><a href="noticeRead.do?bbsno=${dto.bbsno }"><div align="center">${dto.subject }</div></a></td>
 			<td><div align="center">${dto.passwd }</div></td>
 			<td><div align="center"><c:set var="regdt" value="${dto.regdt }"/> ${fn:substring(regdt,0,16) }</div></td>

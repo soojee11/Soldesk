@@ -1189,9 +1189,10 @@ public class AdminCont {
 	    Map map = new HashMap();
 	    map.put("sno", sno);
 	    map.put("numPerPage", numPerPage);
+	    map.put("passwd", "관리자");
 	    
 	    list=bbsdao.list(map); // BbsDAO에서 list 가져오기 
-	    int total=bbsdao.getTotal();
+	    int total=bbsdao.getTotal(map);
 	    String paging=Paging.paging4(total,intNowPage,numPerPage,url);
 	    
 	    recNo = total - (intNowPage - 1) * numPerPage + 1 ;
@@ -1242,38 +1243,15 @@ public class AdminCont {
 	@RequestMapping(value="sol_admin/bbs/noticeList.do", method=RequestMethod.GET)
 	public String noticeList(HttpServletRequest request) {
 		
-		String url = "./noticeList.do";
-		int numPerPage=15;	
-		int recNo=1;
-		
-		String nowPage = request.getParameter("nowPage");
-		if (nowPage == null) {
-			nowPage = "1";
-		}
-		
-		int sno = ((Integer.parseInt(nowPage) - 1) * numPerPage);
-		int intNowPage = Integer.parseInt(nowPage);
-		
 	    List list = null;
 	    
 	    Map map = new HashMap();
-	    map.put("sno", sno);
-	    map.put("numPerPage", numPerPage);
 	    map.put("passwd", "관리자");
 	    
 	    list=dao.noticeList(map);
 	    int total=dao.getNoticeTotal(map);
-	    
-	    String paging=Paging.paging4(total,intNowPage,numPerPage,url);
-	    
-	    recNo = total - (intNowPage - 1) * numPerPage + 1 ;
-		int totalPage = (int) Math.ceil((double)total/(double)numPerPage);
-			    
+	     
 	    request.setAttribute("list", list);
-	    request.setAttribute("recNo", recNo);
-	    request.setAttribute("paging", paging);
-	    request.setAttribute("nowPage", nowPage);
-	    request.setAttribute("totalPage", totalPage);
 	    request.setAttribute("total", total);
 	
 		return "sol_admin/bbs/noticeList";
