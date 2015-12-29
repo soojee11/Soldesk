@@ -161,17 +161,17 @@ function cancel(replyno) {
 <br />
 <c:if test="${dto.passwd == s_id }">
 	<div align="right">
-		<input type="button" class="btn btn-default" name="insert" value="수정"
+		<input type="button" class="btn btn-default button" name="insert" value="수정"
 			onclick="location.href='bbsupdate.do?bbsno=${dto.bbsno }&nowPage=${nowPage }'">
-		<input type="button" class="btn btn-default" name="reset" value="삭제"
+		<input type="button" class="btn btn-default button" name="reset" value="삭제"
 			onclick="location.href='bbsdelete.do?bbsno=${dto.bbsno }&nowPage=${nowPage }'">
-		<input type="button" class="btn btn-default" name="list" value="목록"
+		<input type="button" class="btn btn-default button" name="list" value="목록"
 			onclick="location.href='bbslist.do?nowPage=${nowPage }'">
 	</div>
 </c:if>
 <c:if test="${dto.passwd != s_id }">
 	<div align="right">
-		<input type="button" class="btn btn-default" name="list" value="목록"
+		<input type="button" class="btn btn-default button" name="list" value="목록"
 			onclick="location.href='bbslist.do?nowPage=${nowPage }'">
 	</div>
 </c:if>
@@ -180,7 +180,6 @@ function cancel(replyno) {
 <div style="background-color: #f8f8f8; padding: 25px;">
 	<c:forEach var="rdto" items="${list }">
 		<table style="border: 0; width:100%;">
-		
 		<tr>
 			<td>
 			<img src="../sol_img/answer.png" width="15">&nbsp;&nbsp;<strong>${rdto.passwd }님</strong>

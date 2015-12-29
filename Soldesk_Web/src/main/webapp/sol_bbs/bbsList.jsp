@@ -14,7 +14,7 @@
 <img src="../sol_img/logos/bbs_desc.png" width="190px" height="50px"><span style="font-size: 12px;">| 자유롭게 말해보세요 </span>
 </h4>
 <div>
-총 <strong>${recNo-1 }</strong> 개의 등록된 글이 있습니다. | 현재 페이지 : <strong>${nowPage }/${totalPage }</strong>
+총 <strong>${total }</strong> 개의 등록된 글이 있습니다. | 현재 페이지 : <strong>${nowPage }/${totalPage }</strong>
 </div>
 <br />
 <table class="table">
@@ -56,7 +56,7 @@
 </table>
 
 <div align="right">
-	<input type="button" value="글쓰기" class="btn btn-default"
+	<input type="button" value="글쓰기" class="btn btn-default button"
 		<c:if test="${s_id == null }">onclick="denywrite()"</c:if>
 		<c:if test="${s_id != null }">onclick="location.href='./create.do'"</c:if>>
 </div>
