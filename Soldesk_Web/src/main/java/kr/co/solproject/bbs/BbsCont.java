@@ -35,13 +35,27 @@ public class BbsCont {
 	  //notice list
 	  Map noticemap = new HashMap();
 	  noticemap.put("passwd", "관리자");
+	  noticemap.put("noticeshow", "Y");
 	  
 	  List noticeList = null;
 	  noticeList=admindao.noticeList(noticemap); 
 	  int noticeTotal=admindao.getNoticeTotal(noticemap);
-	  
-	  
+
 	// bbs list
+	  
+	  //검색
+	  String col1=null;
+		if(req.getParameter("col1")!="") {
+			col1=req.getParameter("col1");
+			System.out.println("컬럼: "+col1);
+		}
+		
+		String col2=null;
+		if(req.getParameter("col2")!="") {
+			col2=req.getParameter("col2");
+			System.out.println("컬럼: "+col2);
+		}
+	  
     int nowPage=1;      // 현재페이지, 페이지 시작번호 0->1page
     int numPerPage=10-noticeTotal;   // 페이지당 레코드 수
     String url="bbslist.do";  // 이동할 페이지 
@@ -54,14 +68,20 @@ public class BbsCont {
     int sno=((nowPage-1)*numPerPage);
     
     List list = null;
-    
     Map map = new HashMap();
     map.put("sno", sno);
     map.put("numPerPage", numPerPage);
+    map.put("passwd", "관리자");
+    map.put("col1", col1);
+	map.put("col2", col2);
     
     list=dao.list(map); // BbsDAO에서 list 가져오기 
-    int total=dao.getTotal();
-    String paging=Paging.paging4(total,nowPage,numPerPage,url);
+    int total=dao.getTotal(map);
+    
+    String paging=Paging.paging4(total, nowPage, numPerPage, url);
+    if(col1 != null){
+    	paging=Paging.paging(total,nowPage,numPerPage,col1,col2,url);
+    }
     
     int recNo = total - (nowPage - 1) * numPerPage + 1 ;
     int totalPage = (int) Math.ceil((double)total/(double)numPerPage);
@@ -70,6 +90,8 @@ public class BbsCont {
     req.setAttribute("nlist", noticeList);
     req.setAttribute("recNo", recNo);
     req.setAttribute("paging", paging);
+    req.setAttribute("col1", col1);
+    req.setAttribute("col2", col2);
     req.setAttribute("nowPage", nowPage);
     req.setAttribute("totalPage", totalPage);
     req.setAttribute("total", total);

@@ -67,7 +67,10 @@ public class QnaCont {
 		String dbean=Utility.getDate();
 		int total=dao.getQnaTotal(map);
 		
-		String paging=Paging.paging(total,nowPage,numPerPage,col1,col2,url);
+		String paging=Paging.paging4(total, nowPage, numPerPage, url);
+	    if(col1 != null){
+	    	paging=Paging.paging(total,nowPage,numPerPage,col1,col2,url);
+	    }
 		
 		recNo=total-(nowPage-1)*numPerPage;
 		

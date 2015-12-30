@@ -30,17 +30,29 @@
  	 
  	 <select id="read" parameterClass="Map" resultClass="Integer">
     	SELECT max(categoryno) FROM sol_category
-   	 	WHERE grade=#grade# AND gwamok=#gwamok#
+   	 	WHERE grade = #grade# AND gwamok = #gwamok#
   	</select>
   	
   	<select id="getCategory" parameterClass="CategoryDTO" resultClass="CategoryDTO">
    		SELECT categoryno from sol_category
-    	WHERE grade=#grade# AND gwamok=#gwamok#
+    	WHERE grade = #grade# AND gwamok = #gwamok#
  	 </select>
  	 
  	 <update id="delete" parameterClass="PostscriptDTO">
  	 	DELETE FROM sol_postscript
- 	 	WHERE postscriptno=#postscriptno#
+ 	 	WHERE postscriptno = #postscriptno#
+ 	 </update>
+ 	 
+ 	 <select id="postRead" parameterClass="PostscriptDTO" resultClass="PostscriptDTO">
+ 	 	SELECT postscriptno, id, content, regdate
+ 	 	FROM sol_postscript
+ 	 	WHERE postscriptno = #postscriptno#
+ 	 </select>
+ 	 
+ 	 <update id="postUpdate" parameterClass="PostscriptDTO">
+ 	 	UPDATE sol_postscript 
+ 	 	SET content = #content#
+ 	 	WHERE postscriptno = #postscriptno#
  	 </update>
 
 </sqlMap>

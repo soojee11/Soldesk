@@ -171,6 +171,11 @@
 		select count(*) as cnt
 		from sol_bbs
 		where passwd = #passwd#
+		<dynamic>
+      		<isEqual prepend="and" property="noticeshow" compareValue="Y">
+      			noticeshow = #noticeshow#
+      		</isEqual>
+     	 </dynamic>
 	</select>
 	
 </sqlMap>

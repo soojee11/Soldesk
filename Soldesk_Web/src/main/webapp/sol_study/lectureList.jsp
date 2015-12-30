@@ -18,7 +18,7 @@ function lectureNotGo(){
 
 // 후기 등록
 function postApply(){
-	$("#categoryno").val(0);
+	$("#postscriptno").val(0);
 	var param=$("#postForm").serialize();  //<form id=frm> 전송할 데이터가 있는 폼
 	$.ajaxSetup({datatype: "text"});  //AJAX객체준비
 	//alert(param);
@@ -36,6 +36,31 @@ function postDelete(postscriptno) {
 }
 
 
+//수정할 댓글 조회
+function postUpdate(postscriptno){
+	$("#postscriptno").val(postscriptno);
+	var param="postscriptno="+postscriptno; // 전달할 데이터
+	$.ajaxSetup({dataType:"text"});
+	$.get("./read.do",param,updateFormResponse); // get방식
+}
+
+function updateFormResponse(data,status){
+	//alert(data);
+	$("#content").val(data.replace(/^\s*|\s*$/g, ''));
+	document.getElementById("btnCreate").style.display = 'none';
+	document.getElementById("btnUpdate").style.display = '';
+}
+
+//수정 저장
+function updateProc() {
+	alert("후기를 수정하시겠습니까?");
+	//$("#postscriptno").val(0);
+	var param=$("#postForm").serialize();
+	alert(param);
+	$.ajaxSetup({dataType:"text"});
+	$.post("./update.do",param,postApplyResponse);	
+}
+
 function postApplyResponse(data, status) { //callback함수
 	alert(data.replace(/^\s+|\s+$/gm,''));
 	window.location.reload(); //현재 페이지 새로고침
@@ -43,6 +68,7 @@ function postApplyResponse(data, status) { //callback함수
 </script>
 
 <link href="./css/style.css" rel="stylesheet" type="text/css">
+<link rel='stylesheet' type='text/css' href='css/star.css'>
 <h4>
 	<!-- <img src="img/cont.JPG"> -->
 	<img src="../sol_img/go_right.png" width="20px"/>
@@ -202,8 +228,16 @@ function postApplyResponse(data, status) { //callback함수
 		<td>${postDto.content }</td>
 		<td>${postDto.regdate }</td>
 		<td>
-		<a href="javascript:postApply()"><img src='img/bt_mod.gif'></a>
+		<c:choose>
+		<c:when test="${s_id != null }">
+		<a href="javascript:postUpdate(${postDto.postscriptno })"><img src='img/bt_mod.gif'></a>
 		<a href="javascript:postDelete(${postDto.postscriptno })"><img src='img/bt_del.gif'></a>
+		</c:when>
+		<c:otherwise>
+		<a href="javascript:lectureNotGo()"><img src='img/bt_mod.gif'></a>
+		<a href="javascript:lectureNotGo()"><img src='img/bt_del.gif'></a>
+	</c:otherwise>
+    </c:choose>
 		</td>
 	</tr>
 </c:forEach>
@@ -215,33 +249,32 @@ function postApplyResponse(data, status) { //callback함수
 </table>
 
 
- <div style='background-color:#f8f8f8; padding:25px; text-align: center;'>
-  <form name='postForm' id='postForm' method='post'>  
-  <%-- <c:forEach var="postDto" items="${postList }" > --%>
-      <input type='hidden' name='gwamok' id='gwamok' value='${gwamok}'>
-      <input type='hidden' name='grade' id='grade' value='${grade}'>
+<div style='background-color:#f8f8f8; padding:25px;'>
+<form name='postForm' id='postForm' method='post'>  
+	<input type='hidden' name='postscriptno' id='postscriptno' value='${postscriptno}'>
+	<input type='hidden' name='gwamok' id='gwamok' value='${gwamok}'>
+	<input type='hidden' name='grade' id='grade' value='${grade}'>
       
-  <%-- </c:forEach> --%>
-    <textarea name='content' id='content' rows="2" style="width:70%; height:53px;"></textarea>
-    <!-- <span class="star-input">
-  		<span class="input">
-    		<input type="radio" name="star-input" id="p1" value="1"><label for="p1">1</label>
-    		<input type="radio" name="star-input" id="p2" value="2"><label for="p2">2</label>
-    		<input type="radio" name="star-input" id="p3" value="3"><label for="p3">3</label>
-    		<input type="radio" name="star-input" id="p4" value="4"><label for="p4">4</label>
-    		<input type="radio" name="star-input" id="p5" value="5"><label for="p5">5</label>
-    		<input type="radio" name="star-input" id="p6" value="6"><label for="p6">6</label>
-    		<input type="radio" name="star-input" id="p7" value="7"><label for="p7">7</label>
-    		<input type="radio" name="star-input" id="p8" value="8"><label for="p8">8</label>
-    		<input type="radio" name="star-input" id="p9" value="9"><label for="p9">9</label>
-    		<input type="radio" name="star-input" id="p10" value="10"><label for="p10">10</label>
-  		</span>
-  		<output for="star-input"><b>0</b>점</output>
-	</span><br><br> -->
+	<span class="star-cb-group">
+		<input type="radio" id="rating-5" name="rating" value="5" onclick="alert1(this.value)" checked="checked"/><label for="rating-5">5</label>
+		<input type="radio" id="rating-4" name="rating" value="4" onclick="alert1(this.value)" /><label for="rating-4">4</label>
+		<input type="radio" id="rating-3" name="rating" value="3" onclick="alert1(this.value)" /><label for="rating-3">3</label>
+		<input type="radio" id="rating-2" name="rating" value="2" onclick="alert1(this.value)" /><label for="rating-2">2</label>
+		<input type="radio" id="rating-1" name="rating" value="1" onclick="alert1(this.value)" /><label for="rating-1">1</label>
+	</span>
+	<span id="demo" style="font-size:12px;">&nbsp;별점:&nbsp;5</span><br />
+	<script>
+	function alert1(val) {
+		alert(val);
+		document.getElementById("demo").innerHTML = '&nbsp;별점:&nbsp;'+val;
+	}
+	</script>
+    <textarea name='content' id='content' rows="5" cols="50" style="width: 88%; height:53px;"></textarea>
+    <!-- <br><br> -->
 	<c:choose>
 	<c:when test="${s_id != null }">
-		<a href="javascript:postApply()">	<img src='img/btn.gif'>
-		</a>		  
+		<a id="btnCreate" href="javascript:postApply()">	<img src='img/btn.gif'></a>
+		<a id="btnUpdate" href="javascript:updateProc()" style="display:none">	<img src='img/btn.gif'></a>		  
 	</c:when>
 	<c:otherwise>
 		<a href="javascript:lectureNotGo()">	<img src='img/btn.gif'>
@@ -254,8 +287,8 @@ function postApplyResponse(data, status) { //callback함수
     <input type='button' name='btnDelete' value='삭제'  onclick='deleteProc()' style='display:none'>
     <input type='button' name='btnUpdate' value='수정'  onclick='updateProc()' style='display:none'>
     <input type='button' name='btnCancel' value='취소'      onclick='cancel()'> -->
-  </form>
- </div>
+</form>
+</div>
 </div>
 
 </div>

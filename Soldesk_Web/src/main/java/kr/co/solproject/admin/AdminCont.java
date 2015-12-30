@@ -1172,39 +1172,49 @@ public class AdminCont {
 	@RequestMapping(value="sol_admin/bbs/bbsDel.do", method=RequestMethod.GET)
 	public String bbsDel(BbsDTO dto, HttpServletRequest request) {	
 		
-		String url = "./bbsDel.do";
-		int numPerPage=7;	
-		int recNo=1;
-		
-		String nowPage = request.getParameter("nowPage");
-		if (nowPage == null) {
-			nowPage = "1";
-		}
-		
-		int sno = ((Integer.parseInt(nowPage) - 1) * numPerPage);
-		int intNowPage = Integer.parseInt(nowPage);
-		
-	    List list = null;
-	    
-	    Map map = new HashMap();
-	    map.put("sno", sno);
-	    map.put("numPerPage", numPerPage);
-	    
-	    list=bbsdao.list(map); // BbsDAO에서 list 가져오기 
-	    int total=bbsdao.getTotal();
-	    String paging=Paging.paging4(total,intNowPage,numPerPage,url);
-	    
-	    recNo = total - (intNowPage - 1) * numPerPage + 1 ;
+		String col1=null;
+		if(request.getParameter("col1")!="") {
+			col1=request.getParameter("col1"); }
+		String col2=null;
+		if(request.getParameter("col2")!="") {
+			col2=request.getParameter("col2"); }
+	  
+		int nowPage=1;      
+		int numPerPage=7;   		
+		String url="bbsDel.do";  
+    
+		if(request.getParameter("nowPage")!=null) {
+			nowPage=Integer.parseInt(request.getParameter("nowPage")); }
+    
+		int sno=((nowPage-1)*numPerPage);
+    
+		List list = null;
+		Map map = new HashMap();
+		map.put("sno", sno);
+		map.put("numPerPage", numPerPage);
+		map.put("passwd", "관리자");
+		map.put("col1", col1);
+		map.put("col2", col2);
+    
+		list=bbsdao.list(map); 
+		int total=bbsdao.getTotal(map);
+    
+		String paging=Paging.paging4(total, nowPage, numPerPage, url);
+		if(col1 != null){
+			paging=Paging.paging(total,nowPage,numPerPage,col1,col2,url); }
+    
+		int recNo = total - (nowPage - 1) * numPerPage + 1 ;
 		int totalPage = (int) Math.ceil((double)total/(double)numPerPage);
-			    
-	    request.setAttribute("list", list);
-	    request.setAttribute("recNo", recNo);
-	    request.setAttribute("paging", paging);
-	    request.setAttribute("nowPage", nowPage);
-	    request.setAttribute("totalPage", totalPage);
-	    request.setAttribute("total", total);
-	    
-	    return "sol_admin/bbs/bbsDelete";
+    
+		request.setAttribute("list", list);
+		request.setAttribute("recNo", recNo);
+		request.setAttribute("paging", paging);
+		request.setAttribute("col1", col1);
+		request.setAttribute("col2", col2);
+		request.setAttribute("nowPage", nowPage);
+		request.setAttribute("total", total);
+    
+		return "sol_admin/bbs/bbsDelete";
 	
 	}//end
 	
@@ -1235,45 +1245,23 @@ public class AdminCont {
 		dao.replyDelProc(map);
 		dao.bbsDelProc(map);
 		
-		return "redirect:bbsDel.do";
+		request.setAttribute("msg", 2);
+		return "sol_admin/bbs/bbsDelete";
 
 	}//end
 	
 	@RequestMapping(value="sol_admin/bbs/noticeList.do", method=RequestMethod.GET)
 	public String noticeList(HttpServletRequest request) {
 		
-		String url = "./noticeList.do";
-		int numPerPage=15;	
-		int recNo=1;
-		
-		String nowPage = request.getParameter("nowPage");
-		if (nowPage == null) {
-			nowPage = "1";
-		}
-		
-		int sno = ((Integer.parseInt(nowPage) - 1) * numPerPage);
-		int intNowPage = Integer.parseInt(nowPage);
-		
 	    List list = null;
 	    
 	    Map map = new HashMap();
-	    map.put("sno", sno);
-	    map.put("numPerPage", numPerPage);
 	    map.put("passwd", "관리자");
 	    
 	    list=dao.noticeList(map);
 	    int total=dao.getNoticeTotal(map);
-	    
-	    String paging=Paging.paging4(total,intNowPage,numPerPage,url);
-	    
-	    recNo = total - (intNowPage - 1) * numPerPage + 1 ;
-		int totalPage = (int) Math.ceil((double)total/(double)numPerPage);
-			    
+	     
 	    request.setAttribute("list", list);
-	    request.setAttribute("recNo", recNo);
-	    request.setAttribute("paging", paging);
-	    request.setAttribute("nowPage", nowPage);
-	    request.setAttribute("totalPage", totalPage);
 	    request.setAttribute("total", total);
 	
 		return "sol_admin/bbs/noticeList";
@@ -1375,7 +1363,7 @@ public class AdminCont {
 		
 		String url="qnaDel.do";
 		int nowPage=1;	
-		int numPerPage=5;	
+		int numPerPage=10;	
 		
 		int recNo=1;
 		
@@ -1407,7 +1395,10 @@ public class AdminCont {
 		String dbean=Utility.getDate();
 		int total=qnadao.getQnaTotal(map);
 		
-		String paging=Paging.paging(total,nowPage,numPerPage,col1,col2,url);
+		String paging=Paging.paging4(total, nowPage, numPerPage, url);
+	    if(col1 != null){
+	    	paging=Paging.paging(total,nowPage,numPerPage,col1,col2,url);
+	    }
 		
 		recNo=total-(nowPage-1)*numPerPage;
 		
@@ -1453,7 +1444,8 @@ public class AdminCont {
 		dao.replyDelProc(map);
 		dao.qnaDelProc(map);
 		
-		return "redirect:qnaDel.do";
+		request.setAttribute("msg", 2);
+		return "sol_admin/qna/qnaDelete";
 
 	}//end
 		

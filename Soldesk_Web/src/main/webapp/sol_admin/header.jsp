@@ -40,6 +40,11 @@
       <!--header start-->
       
       <header class="header dark-bg">
+      		<div class="toggle-nav">
+                <div data-original-title="Toggle Navigation" data-placement="bottom"><i class="icon_menu"></i></div>
+            </div>
+
+      
             <!--logo start-->
             <a href="../adminIndex.do" class="logo">SolProject <span class="lite">Admin</span></a>
             <!--logo end-->
