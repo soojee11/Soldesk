@@ -100,6 +100,45 @@ function qnaCreate(){
 	document.getElementById("qnaCreate").style.display = '';
 }// end
 
+function validate(frm){
+	  var subject = frm.subject.value;
+	  var content = frm.content.value;
+	  
+	  subject = subject.replace(/^\s*|\s*$/g, '');
+	  content = content.replace(/^\s*|\s*$/g, '');
+	  
+	  if(subject.length == 0){
+	    alert("제목을 입력해 주세요.");
+	    frm.subject.focus();
+	    return;
+	  }
+	  
+	  if(content.length == 0){
+	    alert("내용을 입력해 주세요.");
+	    frm.content.focus();
+	    return;
+	  }
+
+	  msg="등록 하시겠습니까? ";
+	  if(confirm(msg)!=0){
+	  frm.submit();
+	  }else{
+		  return;
+	  }
+	  $.post("./create.do", param, postApplyResponse);
+}//end
+
+//후기 등록
+function qnaApply(){
+	alert("QnA를 등록하시겠습니까?");
+	$("#lectureqnano").val(0);
+	var param=$("#qnaCreateForm").serialize();  //<form id=frm> 전송할 데이터가 있는 폼
+	$.ajaxSetup({datatype: "text"});  //AJAX객체준비
+	//alert(param);
+	//post방식. 응답이 성공하면 실행할 callback함수
+	$.post("./create.do", param, postApplyResponse);
+}
+
 </script>
 
 <link href="./css/style.css" rel="stylesheet" type="text/css">
@@ -248,7 +287,7 @@ function qnaCreate(){
 
 <!--  QnA 등록  -->
 <div id="qnaCreate" align="center" style="display:none">
-<form action="insert.do" method="post">
+<form name='qnaCreateForm' method="post">  <!-- action="insert.do" -->
 <table border ="0" width="100%" class="table" style="text-align:center">
 	<tr bgcolor="#f5f7f9">
 		<th style="text-align:center" valign="bottom">제목</th>

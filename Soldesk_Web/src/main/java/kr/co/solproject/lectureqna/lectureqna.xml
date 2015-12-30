@@ -5,6 +5,7 @@
 
 <sqlMap namespace="sol_lectureqna">
 	<typeAlias alias="LectureQnADTO" type="kr.co.solproject.lectureqna.LectureQnADTO" />
+	<typeAlias alias="CategoryDTO" type="kr.co.solproject.category.CategoryDTO" />
 
 	<select id="qnaList" parameterClass="Map" resultClass="LectureQnADTO">
 		SELECT qna.lectureqnano, qna.id, qna.subject, qna.readcnt, qna.regdate
@@ -20,5 +21,16 @@
 		ON qna.categoryno = category.categoryno
 		WHERE category.grade = #grade# AND category.gwamok = #gwamok#
 	</select>
+	
+	<select id="getCategory" parameterClass="CategoryDTO" resultClass="CategoryDTO">
+   		SELECT categoryno from sol_category
+    	WHERE grade = #grade# AND gwamok = #gwamok#
+ 	 </select>
+ 	 
+ 	 <insert id="insert" parameterClass="LectureQnADTO" >
+    	INSERT INTO sol_category(categoryno, id, subject, content, regdate)
+    	VALUES (#categoryno#, #id#, #subject#, #content#, now())
+ 	 </insert>
+ 	 
 
 </sqlMap>
