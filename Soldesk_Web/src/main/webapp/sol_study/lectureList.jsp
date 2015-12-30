@@ -234,8 +234,8 @@ function postApplyResponse(data, status) { //callback함수
 		<a href="javascript:postDelete(${postDto.postscriptno })"><img src='img/bt_del.gif'></a>
 		</c:when>
 		<c:otherwise>
-		<a href="javascript:postUpdate(${postDto.postscriptno })"><img src='img/bt_mod.gif'></a>
-		<a href="javascript:postDelete(${postDto.postscriptno })"><img src='img/bt_del.gif'></a>
+		<a href="javascript:lectureNotGo()"><img src='img/bt_mod.gif'></a>
+		<a href="javascript:lectureNotGo()"><img src='img/bt_del.gif'></a>
 	</c:otherwise>
     </c:choose>
 		</td>
