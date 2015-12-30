@@ -173,4 +173,54 @@ public class MypageDAO {
 		return list;
 	}// end	
 	
+	
+	
+	
+	public List getbbslist(Map map) { //sol_Bbs
+		List list = null;
+		try {
+			list = mybatis.queryForList("sol_calendar.getbbslist",map);
+
+		} catch (Exception e) {
+			System.out.println("getbbslist: " + e);
+		}
+		return list;
+	}// end	
+	
+	
+	
+	public List getqnalist() { //sol_qna
+		List list = null;
+		try {
+			list = mybatis.queryForList("sol_calendar.getqnalist");
+
+		} catch (Exception e) {
+			System.out.println("getqnalist: " + e);
+		}
+		return list;
+	}// end	
+	
+	
+	
+	// 게시물 전체 개수 불러오기
+		public int getTotal() {
+			int cnt = 0;
+			try {
+				cnt = (Integer) mybatis.queryForObject("sol_calendar.total");
+			} catch (Exception e) {
+				System.out.println("getTotal() 실패: " + e);
+			}
+			return cnt;
+		}
+	
+		// 게시물 전체 개수 불러오기
+				public int getTotal2() {
+					int cnt = 0;
+					try {
+						cnt = (Integer) mybatis.queryForObject("sol_calendar.total2");
+					} catch (Exception e) {
+						System.out.println("getTotal2() 실패: " + e);
+					}
+					return cnt;
+				}
 }

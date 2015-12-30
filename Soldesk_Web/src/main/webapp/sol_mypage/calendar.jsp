@@ -418,6 +418,7 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
 			        <c:set var="id" value="${list.id }" />
 			        <c:set var="lectureno" value="${list.lectureno }" />
                     
+                    
 			        <fmt:parseNumber var="listdate" type="number"  value="${fn:substring(list.regdate, 8 ,10) }" />
 			        <fmt:parseNumber var="listyear" type="number" integerOnly="true"  value="${fn:substring(list.regdate, 0 ,4) }" />
 			        <fmt:parseNumber var="listmonth" type="number" integerOnly="true"  value="${fn:substring(list.regdate, 5 ,7) }" />
@@ -433,7 +434,7 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
 			            <td align="center" width="9%">${lectureno }</td>
 			            <td align="center" width="40%">${subject }</td>
 			            <td align="center">${teacher }</td>
-			            <td align="center">${listyear }/${listmonth }/${listdate }</td>
+			            <td align="center">${fn:substring(list.regdate, 0 ,16) }</td>
 			            <td align="center">  <a href="javascript:lectureGo(${lectureno })">
 			               <img src='image/btn_study_play.png' width="30" height="30"></a>
 			            </td>
@@ -477,8 +478,8 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
             <thead>
                 <tr align="center" bgcolor="#fafafa" style="font-weight: bold; font-size: 14px;">
                     <td width="9%" >회차</td>
-                    <td width="20%">강의명</td>
-                    <td width="40%">메모</td>
+                    <td width="18%">강의명</td>
+                    <td width="35%">메모</td>
                     <td>등록일</td>
                     <td width="14%">복습하기</td>
                 </tr>
@@ -537,7 +538,7 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
                                         <td align="center"></td>
                                     </c:when>
                                      <c:otherwise>
-                                      <td align="center">${myear }/${mmonth }/${mdate }</td>
+                                      <td align="center">${fn:substring(mlist.memodate, 0 ,16)}</td>
                                     </c:otherwise>
                                 </c:choose> 
                     
@@ -585,8 +586,6 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
    </c:forEach>
    </c:if>
    
-   
-  
    
    
    
@@ -706,7 +705,7 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
 	           </c:if>
 	           
             <td align="center"  width="20%">${usetime }</td>
-            <td align="center">${slistyear }/${slistmonth }/${slistdate }</td>
+            <td align="center">${fn:substring(slist.regdt, 0 ,16) }</td>
 
 
         </tr>
@@ -863,84 +862,108 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
 
 <div class="seaTabs" >
     <div class="seaTabs_switch">
-        <div class="seaTabs_tab seaTabs_switch_active">자유게시판</div>
-        <div class="seaTabs_tab">Q&A</div>
+        <div class="seaTabs_tab seaTabs_switch_active"><font color="#000000">자유게시판</font></div>
+        <div class="seaTabs_tab"><font color="#000000">Q&A</font></div>
     </div>
     <div class="seaTabs_content">
         <div class="seaTabs_item seaTabs_content_active" style="background-color: #f1f8f4">
 
 <!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■자유게시판■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
            
+           <div>
+총 <strong>${total }</strong> 개의 등록된 글이 있습니다. | 현재 페이지 : <strong>${nowPage }/${totalPage }</strong>
+</div>
+           
+           
            <table class="table"  style="background-color: #ffffff">
     <tr>
-        <td width="60">번호</td>
         <td>제목</td>
         <td width="100">ID</td>
         <td width="100">작성일</td>
         <td width="60">조회수</td>
     </tr>
     
-    <!-- 공지사항 -->
-    <c:forEach var="ndto" items="${nlist }">
-        <c:if test="${ndto.noticeshow=='Y' }">
-            <tr bgcolor="#f8f8f8">
-                <td width="60"><div align="center"><img src="bbs_img/notice.png" width="20"></div></td>
-                <td><a href="bbsread.do?bbsno=${ndto.bbsno }&nowPage=${nowPage }">${ndto.subject }</a>
-                </td>
-                <td width="100">${ndto.passwd }</td>
-                <td width="100"><c:set var="nregdt" value="${ndto.regdt }"/> ${fn:substring(nregdt,0,16) }</td>
-                <td width="60">${ndto.readcnt }</td>
-            </tr>
-        </c:if>
-    </c:forEach>
+
+       <c:if test="${total eq 0 }">
+        <tr>
+            <td colspan="4" align="center">내가 작성한 글이 존재하지않습니다. </td>
+        </tr>
+       </c:if>
+    
+    
     
     <!-- 게시판 -->
     <c:set var="recNo" value="${recNo-ntotal }" />
-    <c:forEach var="dto" items="${list }">
-    <c:if test="${dto.passwd ne '관리자' }">
+    <c:forEach var="dto" items="${bbslist }">
+     <c:set var="dtoid" value="${dto.id }" />
+    
+        <c:if test="${id eq dtoid }">
+    
         <c:set var="recNo" value="${recNo-1 }" />
-        <tr>
-            <td width="60">${recNo }</td>
-            <td><a href="bbsread.do?bbsno=${dto.bbsno }&nowPage=${nowPage }">${dto.subject }</a>
+         <tr
+         bgcolor="#ffffff" 
+         onmouseover="this.style.backgroundColor='#f1f8f4'"
+         onmouseout="this.style.backgroundColor='#ffffff'"  align="center">
+            <td><a href="/solproject/sol_bbs/bbsread.do?bbsno=${dto.bbsno }&nowPage=${nowPage }">${dto.subject }</a>
             </td>
             <td width="100">${dto.passwd }</td>
             <td width="100"><c:set var="regdt" value="${dto.regdt }"/> ${fn:substring(regdt,0,16) }</td>
             <td width="60">${dto.readcnt }</td>
         </tr>
+    
     </c:if>
     </c:forEach>
 </table>
+<div align="center">
+    ${paging }
+</div>
                      
  <!-- ■■■■■■■■■■■■■■■■■■■■■//■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
-    
         </div>
 
+
+<!-- ////////////////////////////////////////////////////////////////////////////////////////// -->
+
+
         <div class="seaTabs_item" style="background-color: #f1f8f4">
-            
-            
 <!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■Q&A■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
- 
-            <table class ="table" style="background-color: #ffffff">
+            <div>
+총 <strong>${total2 }</strong> 개의 등록된 글이 있습니다. | 현재 페이지 : <strong>${nowPage }/${totalPage }</strong>
+</div>
+
+    <table class ="table" style="background-color: #ffffff">
     <tr align ="center" >
-        <td width="60">번호</td>
         <td>제목</td>
         <td width="100">답변여부</td>
         <td width="100">ID</td>
         <td width="100">작성일</td>
         <td width="60">조회수</td>
     </tr>
-    <c:if test="${total ==0 }">
+    
+    <c:set var ="recNo" value=""/>
+    
+    
+    
+    <c:if test="${total2 eq 0  }">
         <tr>
-            <td colspan="6" align="center">관련된 QNA글이 존재하지않습니다. </td>
+            <td colspan="5" align="center">내가 작성한 글이 존재하지않습니다. </td>
         </tr>
     </c:if>
-<c:set var ="recNo" value="${recNo }"/>
-    <c:forEach var ="dto" items="${list }">
+    
+    
+    
+    <c:set var ="recNo" value="${recNo }"/>
+
+    <c:forEach var ="dto" items="${qnalist }">
+    <c:set var ="dtoid" value="${dto.id }"/>
+    <c:if test="${id eq dtoid }">
+    
+    
     <c:set var ="recNo" value="${recNo-1 }"/>
-        <tr align ="center">
-            <td>
-                ${recNo+1 }
-            </td>
+         <tr
+         bgcolor="#ffffff" 
+         onmouseover="this.style.backgroundColor='#f1f8f4'"
+         onmouseout="this.style.backgroundColor='#ffffff'"  align="center">
                 <td>
                     <span>
                         <c:if test="${dto.qnashow=='N' }"><img src="../sol_img/lock.png" width="15"></c:if>
@@ -952,21 +975,24 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
                 <c:if test="${dto.replyok=='Y' }">답변완료</c:if>
             </td>
             <td>
-                <c:set var="id" value="${dto.id }"/>
-                    ${fn:substring(id,0,2) }
-                <c:forEach var="i" begin="1" end="${fn:length(dto.id)-4}" step="1">
-                    <c:out value="*" />
-                </c:forEach>
-                 ${fn:substring(id,fn:length(dto.id)-2,fn:length(dto.id)) }
+                 ${dto.id }
             </td>
             <td>
-                <c:set var="regdt" value="${dto.regdt }"/> ${fn:substring(regdt,0,10) }
+                <c:set var="regdt" value="${dto.regdt }"/> ${fn:substring(regdt,0,16) }
             </td>
             <td>${dto.readcnt }</td>
         </tr>
+        
+        
+        </c:if>
     </c:forEach>
 </table>
             
+            
+            
+            <div align="center">
+    ${paging2 }
+</div>
  <!-- ■■■■■■■■■■■■■■■■■■■■■//■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
         </div>
     </div>

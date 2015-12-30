@@ -7,6 +7,96 @@ public class MypageDTO {
 	private String regdate; 	    
 	private int lectureno; 	
 	
+	
+	
+	//------------------------------------------------------sol_bbs
+		  private int bbsno;
+		  private String content;
+		  private String passwd;
+		  private int readcnt;
+		  private String noticeshow;
+	
+	
+    //------------------------------------------------------sol_qna
+			
+			private int qnano;
+			private String replyok;
+			private String qnashow;
+			public int getBbsno() {
+			return bbsno;
+		}
+
+		public void setBbsno(int bbsno) {
+			this.bbsno = bbsno;
+		}
+
+		public String getContent() {
+			return content;
+		}
+
+		public void setContent(String content) {
+			this.content = content;
+		}
+
+		public String getPasswd() {
+			return passwd;
+		}
+
+		public void setPasswd(String passwd) {
+			this.passwd = passwd;
+		}
+
+		public int getReadcnt() {
+			return readcnt;
+		}
+
+		public void setReadcnt(int readcnt) {
+			this.readcnt = readcnt;
+		}
+
+		public String getNoticeshow() {
+			return noticeshow;
+		}
+
+		public void setNoticeshow(String noticeshow) {
+			this.noticeshow = noticeshow;
+		}
+
+		public int getQnano() {
+			return qnano;
+		}
+
+		public void setQnano(int qnano) {
+			this.qnano = qnano;
+		}
+
+		public String getReplyok() {
+			return replyok;
+		}
+
+		public void setReplyok(String replyok) {
+			this.replyok = replyok;
+		}
+
+		public String getQnashow() {
+			return qnashow;
+		}
+
+		public void setQnashow(String qnashow) {
+			this.qnashow = qnashow;
+		}
+	
+  
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	//------------------------------------------------------sol_test&myscore
     
 	private int mytestno;
@@ -170,15 +260,21 @@ public class MypageDTO {
 		this.lectureno = lectureno;
 	}
 
+	
+	
+	
 	@Override
 	public String toString() {
 		return "MypageDTO [calno=" + calno + ", id=" + id + ", regdate=" + regdate + ", lectureno=" + lectureno
+				+ ", bbsno=" + bbsno + ", content=" + content + ", passwd=" + passwd + ", readcnt=" + readcnt
+				+ ", noticeshow=" + noticeshow + ", qnano=" + qnano + ", replyok=" + replyok + ", qnashow=" + qnashow
 				+ ", mytestno=" + mytestno + ", testno=" + testno + ", usetime=" + usetime + ", answerno=" + answerno
 				+ ", regdt=" + regdt + ", grade=" + grade + ", testtitle=" + testtitle + ", myscore=" + myscore
 				+ ", subject=" + subject + ", poster=" + poster + ", teacher=" + teacher + ", memo=" + memo
-				+ ", memodate=" + memodate + "]";
+				+ ", memodate=" + memodate + "] \n" ;
 	}
 
+	
 
 	
 	

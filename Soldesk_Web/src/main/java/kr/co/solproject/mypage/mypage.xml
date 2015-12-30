@@ -102,58 +102,104 @@
 	</select>
 
 
-<!-- SELECT t1.col, t3.col FROM table1 join table2 ON table1.primarykey 
-        = table2.foreignkey join table3 ON table2.primarykey = table3.foreignkey -->
+	<!-- SELECT t1.col, t3.col FROM table1 join table2 ON table1.primarykey 
+		= table2.foreignkey join table3 ON table2.primarykey = table3.foreignkey -->
 
 
 	<select id="getMaxrdtList" parameterClass="String" resultClass="MypageDTO">
-  	select id,regdate from sol_calendar where id=#id# group by
-		left(regdate,10); 
+		select id,regdate from sol_calendar where id=#id# group by
+		left(regdate,10);
 	</select>
 
-    <select id="getmemodateList" parameterClass="String" resultClass="MypageDTO">
-    select memodate from sol_study where id=#id# group by
-        left(memodate,10); 
-    </select>
+	<select id="getmemodateList" parameterClass="String"
+		resultClass="MypageDTO">
+		select memodate from sol_study where id=#id# group by
+		left(memodate,10);
+	</select>
 
 
 
-<!-- sol_study에서 regdt가져오기 -->
-    <select id="getMaxregdtList" parameterClass="String" resultClass="MypageDTO">
-        select calendar.id,myscore.regdt 
-        
-        FROM sol_calendar calendar join sol_myscore myscore
-        ON calendar.id = myscore.id
-                
-         where calendar.id=#id# 
-        group by left(myscore.regdt,10);
-    </select>
+	<!-- sol_study에서 regdt가져오기 -->
+	<select id="getMaxregdtList" parameterClass="String"
+		resultClass="MypageDTO">
+		select calendar.id,myscore.regdt
+
+		FROM sol_calendar calendar join sol_myscore myscore
+		ON calendar.id = myscore.id
+
+		where calendar.id=#id#
+		group by left(myscore.regdt,10);
+	</select>
 
 
 	<select id="getMyscoretList" resultClass="MypageDTO">
-		<!-- SELECT
+		<!-- SELECT myscore.mytestno ,myscore.id ,myscore.testno , myscore.myscore 
+			, myscore.usetime ,myscore.answerno ,myscore.regdt , test.grade,test.subject,test.testtitle 
+			FROM sol_calendar calendar join sol_myscore myscore ON calendar.id = myscore.id 
+			join sol_test test on myscore.testno = test.testno -->
+
+		SELECT
 		myscore.mytestno ,myscore.id ,myscore.testno , myscore.myscore ,
 		myscore.usetime ,myscore.answerno ,myscore.regdt ,
-		test.grade,test.subject,test.testtitle
+		test.grade,test.subject,test.testtitle,myscore.mytestno
 		FROM sol_calendar calendar join sol_myscore myscore
 		ON calendar.id = myscore.id
-		join sol_test test on myscore.testno = test.testno -->
-		
-	SELECT
-        myscore.mytestno ,myscore.id ,myscore.testno , myscore.myscore ,
-        myscore.usetime ,myscore.answerno ,myscore.regdt ,
-        test.grade,test.subject,test.testtitle,myscore.mytestno
-        FROM sol_calendar calendar join sol_myscore myscore
-        ON calendar.id = myscore.id
-        join sol_test test on myscore.testno = test.testno 
-         group by myscore.mytestno
+		join sol_test test on myscore.testno = test.testno
+		group by myscore.mytestno
 	</select>
 
 
 
 
+    <!-- SELECT t1.col, t3.col FROM table1 join table2 ON table1.primarykey 
+        = table2.foreignkey join table3 ON table2.primarykey = table3.foreignkey -->
+
+<!-- 	<select id="getbbslist" resultClass="MypageDTO" parameterClass="String">  자유게시판
+            select bbs.bbsno,bbs.subject,bbs.content,bbs.passwd,bbs.regdt,bbs.readcnt,bbs.noticeshow,calendar.id
+            FROM sol_calendar calendar join sol_bbs bbs
+            ON calendar.id = #id#
+            group by bbs.bbsno
+            limit #sno# , #numPerPage#
+
+	</select>
+ -->
+ 
+ 
+  <select id="getbbslist" parameterClass="Map" resultClass="MypageDTO">
+        select bbs.bbsno,bbs.subject,bbs.content,bbs.passwd,bbs.regdt,bbs.readcnt,bbs.noticeshow,calendar.id
+            FROM sol_calendar calendar join sol_bbs bbs
+            ON calendar.id = #id#
+        <dynamic prepend="where">
+                <isEqual property="col1" compareValue="subject">
+                    subject LIKE CONCAT('%',#col2#,'%')
+                </isEqual>
+                <isEqual property="col1" compareValue="id">
+                    id LIKE CONCAT('%',#col2#,'%')  
+                </isEqual>
+        </dynamic>
+         group by bbs.bbsno
+        limit #sno#, #numPerPage#
+    </select>
+    
+    
 
 
+	<select id="getqnalist" resultClass="MypageDTO">  <!-- qna게시판 -->
 
+           select qna.qnano,qna.id,qna.subject,qna.passwd,qna.readcnt,qna.regdt,qna.replyok,qna.qnashow,qna.content
+            FROM sol_calendar calendar join sol_qna qna 
+            ON calendar.id = qna.id
+            group by qna.qnano
+	</select>
+	
+	  <select id="total" resultClass="Integer">
+      select count(*) from sol_bbs
+  </select>
+  
+	     <select id="total2" resultClass="Integer">
+      select count(*) from sol_qna
+  </select>
+    
+	
 
 </sqlMap> 

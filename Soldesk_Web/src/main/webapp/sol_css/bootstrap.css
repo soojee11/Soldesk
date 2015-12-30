@@ -4952,8 +4952,9 @@ input[type="submit"].btn.btn-mini {
   max-height: 400px;
   padding: 15px;
   overflow-y: auto;
-  -webkit-overflow-scrolling: touch; /* 하나추가 */
-  position: relative; /* 하나추가 */
+  /* 하나추가 */
+ /*  -webkit-overflow-scrolling: touch;   */
+  position: relative; 
 }
 
 .modal-form {
