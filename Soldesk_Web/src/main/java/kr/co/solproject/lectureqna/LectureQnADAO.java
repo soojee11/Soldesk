@@ -71,38 +71,6 @@ public class LectureQnADAO {
 
 	}
 	
-	/** 후기 삭제 **/
-	public int qnaDelete(LectureQnADTO dto) {
-		int res = 0;
-		try {
-			res = mybatis.delete("sol_lectureqna.delete", dto);
-		} catch (Exception e) {
-			System.out.println("post delete error: " + e);
-		}
-		return res;
-	}
-
-	/** 후기 수정: 후기 조회 **/
-	public LectureQnADTO qnaRead(LectureQnADTO dto) {
-		try {
-			dto = (LectureQnADTO) mybatis.queryForObject("sol_lectureqna.postRead", dto);
-		} catch (Exception e) {
-			System.out.println("postscript read error: " + e);
-		}
-		return dto;
-	}
-
-	/** 후기 수정 **/
-	public int qnaUpdate(LectureQnADTO dto){
-		int res = 0;
-		try {
-			//System.out.println("포스트컨ㄷ틀ㄹ::"+dto.toString());
-			res = mybatis.update("sol_lectureqna.postUpdate", dto);
-		} catch (Exception e) {
-			System.out.println("post update error: " + e);
-		}
-		return res;
-	}
 
 
 
