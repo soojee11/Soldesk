@@ -66,7 +66,7 @@ public class BbsCont {
     }
     
     int sno=((nowPage-1)*numPerPage);
-    System.out.println("sno: "+sno);
+    
     List list = null;
     Map map = new HashMap();
     map.put("sno", sno);
@@ -82,7 +82,7 @@ public class BbsCont {
     if(col1 != null){
     	paging=Paging.paging(total,nowPage,numPerPage,col1,col2,url);
     }
-    System.out.println("bbs total: "+total);
+    
     int recNo = total - (nowPage - 1) * numPerPage + 1 ;
     int totalPage = (int) Math.ceil((double)total/(double)numPerPage);
     

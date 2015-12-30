@@ -149,6 +149,8 @@ function checkLevelForm(id,mlevel){
 		
 	if(confirm(mess)){ 
 		location.href="memmlevel.do?id="+id+"&mlevel="+mlevel;
+	}else{
+		location.href ="memlist.do";
 	}
 }
 

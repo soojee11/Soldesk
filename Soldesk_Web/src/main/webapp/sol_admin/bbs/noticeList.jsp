@@ -12,10 +12,11 @@ function noticeDel(bbsno){
 </script>
 <c:if test="${msg==2 }">
 	<script>
-		alert("삭제 성공!");
+		alert("삭제가 완료되었습니다. ");
 		location.href="noticeList.do";
 	</script>
 </c:if>
+
 <div class="row">
 	<div class="col-lg-12">
 		<h3 class="page-header">
@@ -60,7 +61,12 @@ function noticeDel(bbsno){
 				</form>
 				<script>
 					function noticeShow(frm) {
-						frm.submit();
+						var mess = "보여주기를 변경하시겠습니까? ";
+						if(confirm(mess)){ 
+							frm.submit();
+						}else{
+							location.href="noticeList.do";
+						}
 					}
 				</script>	
 			</td>

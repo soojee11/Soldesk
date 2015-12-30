@@ -2,6 +2,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ include file="../header.jsp"%>
+<c:if test ="${msg == 2 }">
+	<script>
+		alert("삭제가 완료되었습니다. ");
+		location.href="qnaDel.do";
+	</script>
+</c:if>
 
 <div class="row">
 	<div class="col-lg-12">
@@ -77,6 +83,9 @@
 	</div>
 	<div class="form-group">
 		<input type="button" class="btn btn-success btn-sm" value="검색"  onclick="checkSearch(this.form)">
+		<c:if test="${col1 != null }">
+		<input type="button" class="btn btn-success btn-sm" value="전체목록"  onclick="location.href='qnaDel.do'">
+		</c:if>
 	</div>
 	</form>
 </div>

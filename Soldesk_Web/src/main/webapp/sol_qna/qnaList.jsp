@@ -85,6 +85,9 @@ ${paging }<br/>
 	</select>
 	<input type="text" name="col2" size = "30" <c:if test="${col2 !='' }">value="${param.col2 }"</c:if>>
 	<input type="button" class="btn btn-warning button" value="검색"  onclick="checkSearch(this.form)">
+	<c:if test="${col1 != null }">
+		<input type="button" class="btn btn-warning button" value="전체목록"  onclick="location.href='list.do'">
+	</c:if>
 </form>
 </div>
 
