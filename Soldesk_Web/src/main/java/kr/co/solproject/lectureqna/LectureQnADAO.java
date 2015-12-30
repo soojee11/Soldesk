@@ -23,9 +23,9 @@ public class LectureQnADAO {
 	public List getList(Map map) {
 		List list = null;
 		try {
-			System.out.println(map.toString());
+			//System.out.println(map.toString());
 			list = mybatis.queryForList("sol_lectureqna.qnaList", map);
-			System.out.println(list.toString());
+			//System.out.println(list.toString());
 		} catch (Exception e) {
 			System.out.println("qnaList error" + e);
 		}

@@ -36,6 +36,31 @@ function postDelete(postscriptno) {
 }
 
 
+//수정할 댓글 조회
+function postUpdate(postscriptno){
+	$("#postscriptno").val(postscriptno);
+	var param="postscriptno="+postscriptno; // 전달할 데이터
+	$.ajaxSetup({dataType:"text"});
+	$.get("./read.do",param,updateFormResponse); // get방식
+}
+
+function updateFormResponse(data,status){
+	//alert(data);
+	$("#content").val(data.replace(/^\s*|\s*$/g, ''));
+	document.getElementById("btnCreate").style.display = 'none';
+	document.getElementById("btnUpdate").style.display = '';
+}
+
+//수정 저장
+function updateProc() {
+	alert("후기를 수정하시겠습니까?");
+	//$("#postscriptno").val(0);
+	var param=$("#postForm").serialize();
+	alert(param);
+	$.ajaxSetup({dataType:"text"});
+	$.post("./update.do",param,postApplyResponse);	
+}
+
 function postApplyResponse(data, status) { //callback함수
 	alert(data.replace(/^\s+|\s+$/gm,''));
 	window.location.reload(); //현재 페이지 새로고침
@@ -204,8 +229,16 @@ function postApplyResponse(data, status) { //callback함수
 		<td>${postDto.content }</td>
 		<td>${postDto.regdate }</td>
 		<td>
-		<a href="javascript:postApply()"><img src='img/bt_mod.gif'></a>
+		<c:choose>
+		<c:when test="${s_id != null }">
+		<a href="javascript:postUpdate(${postDto.postscriptno })"><img src='img/bt_mod.gif'></a>
 		<a href="javascript:postDelete(${postDto.postscriptno })"><img src='img/bt_del.gif'></a>
+		</c:when>
+		<c:otherwise>
+		<a href="javascript:postUpdate(${postDto.postscriptno })"><img src='img/bt_mod.gif'></a>
+		<a href="javascript:postDelete(${postDto.postscriptno })"><img src='img/bt_del.gif'></a>
+	</c:otherwise>
+    </c:choose>
 		</td>
 	</tr>
 </c:forEach>
@@ -220,12 +253,12 @@ function postApplyResponse(data, status) { //callback함수
  <div style='background-color:#f8f8f8; padding:25px; text-align: center;'>
   <form name='postForm' id='postForm' method='post'>  
   <%-- <c:forEach var="postDto" items="${postList }" > --%>
+      <input type='hidden' name='postscriptno' id='postscriptno' value='${postscriptno}'>
       <input type='hidden' name='gwamok' id='gwamok' value='${gwamok}'>
       <input type='hidden' name='grade' id='grade' value='${grade}'>
       
   <%-- </c:forEach> --%>
-    <textarea name='content' id='content' rows="2" style="width:70%; height:53px;"></textarea>
-    <!-- <span class="star-input">
+  <span class="star-input">
   		<span class="input">
     		<input type="radio" name="star-input" id="p1" value="1"><label for="p1">1</label>
     		<input type="radio" name="star-input" id="p2" value="2"><label for="p2">2</label>
@@ -239,11 +272,13 @@ function postApplyResponse(data, status) { //callback함수
     		<input type="radio" name="star-input" id="p10" value="10"><label for="p10">10</label>
   		</span>
   		<output for="star-input"><b>0</b>점</output>
-	</span><br><br> -->
+	</span>
+    <textarea name='content' id='content' rows="2" style="width:65%; height:53px;"></textarea>
+    <!-- <br><br> -->
 	<c:choose>
 	<c:when test="${s_id != null }">
-		<a href="javascript:postApply()">	<img src='img/btn.gif'>
-		</a>		  
+		<a id="btnCreate" href="javascript:postApply()">	<img src='img/btn.gif'></a>
+		<a id="btnUpdate" href="javascript:updateProc()" style="display:none">	<img src='img/btn.gif'></a>		  
 	</c:when>
 	<c:otherwise>
 		<a href="javascript:lectureNotGo()">	<img src='img/btn.gif'>
