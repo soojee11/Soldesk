@@ -24,7 +24,7 @@ public class PostscriptDAO {
 	public List getList(Map map) {
 		List list = null;
 		try {
-			System.out.println(map.toString());
+			//System.out.println(map.toString());
 			list = mybatis.queryForList("sol_postscript.postList", map);
 			System.out.println(list.toString());
 		} catch (Exception e) {
@@ -46,10 +46,10 @@ public class PostscriptDAO {
 
 	/** 카테고리DTO 가져옴 **/
 	public CategoryDTO getCategory(CategoryDTO dto) {
-		//CategoryDTO dto = null;
+		// CategoryDTO dto = null;
 		try {
 			dto = (CategoryDTO) mybatis.queryForObject("sol_postscript.getCategory", dto);
-			//System.out.println("77777777777777777777"+dto.toString());
+			// System.out.println("77777777777777777777"+dto.toString());
 		} catch (Exception e) {
 			System.out.println("read 실패다: " + e);
 		}
@@ -60,8 +60,8 @@ public class PostscriptDAO {
 	public int postInsert(PostscriptDTO dto) {
 		int res = 0;
 		try {
-			//System.out.println("-----dao"+dto.toString());
-			
+			// System.out.println("-----dao"+dto.toString());
+
 			res = mybatis.update("sol_postscript.insert", dto);
 		} catch (Exception e) {
 			System.out.println("post create error: " + e);
@@ -69,14 +69,36 @@ public class PostscriptDAO {
 		return res;
 
 	}
-	
+
 	/** 후기 삭제 **/
-	public int postDelete(PostscriptDTO dto){
+	public int postDelete(PostscriptDTO dto) {
 		int res = 0;
 		try {
 			res = mybatis.delete("sol_postscript.delete", dto);
 		} catch (Exception e) {
 			System.out.println("post delete error: " + e);
+		}
+		return res;
+	}
+
+	/** 후기 수정: 후기 조회 **/
+	public PostscriptDTO postRead(PostscriptDTO dto) {
+		try {
+			dto = (PostscriptDTO) mybatis.queryForObject("sol_postscript.postRead", dto);
+		} catch (Exception e) {
+			System.out.println("postscript read error: " + e);
+		}
+		return dto;
+	}
+
+	/** 후기 수정 **/
+	public int postUpdate(PostscriptDTO dto){
+		int res = 0;
+		try {
+			//System.out.println("포스트컨ㄷ틀ㄹ::"+dto.toString());
+			res = mybatis.update("sol_postscript.postUpdate", dto);
+		} catch (Exception e) {
+			System.out.println("post update error: " + e);
 		}
 		return res;
 	}
