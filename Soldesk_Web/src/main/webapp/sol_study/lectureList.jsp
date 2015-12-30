@@ -354,7 +354,7 @@ function qnaApply(){
 	<th width='100'>강의만족도</th>
 </tr>
 
-<c:set var="postNo" value="${postNo+1 }" />	
+<c:set var="postNo" value="${postNo }" />	
 <c:forEach var="postDto" items="${postList }" >
 <c:set var="postNo" value="${postNo-1 }" />
 <tr align="center">

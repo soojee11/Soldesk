@@ -114,7 +114,7 @@ public class LectureCont {
 		
 		// post
 		List postList = postDao.getList(postMap);
-		int postTotal = qnaDao.getTotal(postMap);
+		int postTotal = postDao.getTotal(postMap);
 		String postPaging = Paging.paging4(postTotal, postNowPage, postNumPerPage, url);
 		
 		lectureNo=total - (nowPage - 1) * numPerPage + 1; // 수지야 이 부분 수정했당
