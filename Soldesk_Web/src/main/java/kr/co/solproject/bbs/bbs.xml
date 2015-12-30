@@ -23,17 +23,36 @@
       		</isNotEqual>
      	 </dynamic>     
      )a
+     <dynamic prepend="where">
+		<isEqual property="col1" compareValue="subject">
+			subject LIKE CONCAT('%',#col2#,'%')
+		</isEqual>
+		<isEqual property="col1" compareValue="passwd">
+			passwd LIKE CONCAT('%',#col2#,'%')	
+		</isEqual>
+	</dynamic>
      order by bbsno DESC
      limit #sno#, #numPerPage#
   </select>
   
   <select id="total" parameterClass="Map" resultClass="Integer">
-      select count(*) from sol_bbs
+      select count(a.bbsno) as cnt
+      from (select bbsno, subject, content, passwd, regdt, readcnt
+      		from sol_bbs
+     		<dynamic prepend="where">
+      			<isNotEqual property="passwd" compareValue="관리자">
+      			passwd != #passwd#
+      			</isNotEqual>
+      		</dynamic>
+      )a
       <dynamic prepend="where">
-      	<isNotEqual property="passwd" compareValue="관리자">
-      		passwd != #passwd#
-      	</isNotEqual>
-      </dynamic>
+		<isEqual property="col1" compareValue="subject">
+			subject LIKE CONCAT('%',#col2#,'%')
+		</isEqual>
+		<isEqual property="col1" compareValue="passwd">
+			passwd LIKE CONCAT('%',#col2#,'%')	
+		</isEqual>
+	</dynamic>
   </select>
   
   <select id="read" parameterClass="Integer" resultClass="BbsDTO">

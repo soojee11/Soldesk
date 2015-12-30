@@ -170,10 +170,10 @@
 	<select id="getNoticeTotal" parameterClass="Map" resultClass="Integer">
 		select count(*) as cnt
 		from sol_bbs
-		<dynamic prepend="where">
-			passwd = #passwd#
+		where passwd = #passwd#
+		<dynamic>
       		<isEqual prepend="and" property="noticeshow" compareValue="Y">
-      			noticeshow = 'Y'
+      			noticeshow = #noticeshow#
       		</isEqual>
      	 </dynamic>
 	</select>

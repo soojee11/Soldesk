@@ -8,6 +8,23 @@
 	function denywrite() {
 		alert("로그인 후 이용해주세요.");
 	}
+	function checkSearch(frm){
+		var col1 = frm.col1.value;
+		var col2 = frm.col2.value;
+		col1 = col1.replace(/^\s*|\s*$/g, '');
+		col2 = col2.replace(/^\s*|\s*$/g, '');
+		if(col1.length==0){
+			alert("검색조건을 선택하세요.");
+			frm.col1.focus();
+			return;
+		}
+		if(col2.length==0){
+			alert("검색어를 입력하세요.");
+			frm.col2.focus();
+			return;
+		}
+		frm.submit();
+	}//end
 </script>
 <h4>
 <img src="../sol_img/go_right.png" width="20px"/>
@@ -64,7 +81,20 @@
 </div>
 
 <div align="center">
-	${paging }
+	${paging }<br>
+	<form class="form-inline" action="bbslist.do">
+		<select name="col1">
+			<option value="" >선택</option>
+			<option value="subject" <c:choose><c:when  test="${param.col1 eq 'subject' }" >selected</c:when></c:choose>>제목</option>
+			<option value="passwd" <c:choose><c:when  test="${param.col1 eq 'passwd' }" >selected</c:when></c:choose>>ID</option>
+		</select>
+		<input type="text" name="col2" size = "30" <c:if test="${param.col2 !='' }">value="${param.col2 }"</c:if>>
+		<input type="button" class="btn btn-warning button" value="검색"  onclick="checkSearch(this.form)">
+		<c:if test="${param.col1 != null }">
+			<input type="button" class="btn btn-warning button" value="전체목록"  onclick="location.href='bbslist.do'">
+		</c:if>
+	</form>
 </div>
+
 <!-- page end-->
 <%@ include file="../sol_footer.jsp"%>
