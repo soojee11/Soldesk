@@ -8,12 +8,17 @@
 <!-- page start-->
 <h4>
 <img src="../img/go_right.png" width="20px"/>
-<img src="../../sol_img/logos/test_desc.png" width="150px" height="50px"> 
-<!-- 추천 문제지&nbsp;&nbsp;
-<span style="font-size: 12px;">함께 풀고 학습해 봅시다</span> -->
+<img src="../../sol_img/logos/test_desc.png" width="150px" height="50px"><span style="font-size: 12px;">| 문제를 풀어보세요 </span>
 </h4>
 <div>
-<img src="../img/test_info.jpg" />
+<table>
+<tr>
+<td><span style="color: #FF3336;font-size: 18px;"><strong>EBS가 추천하는</strong></span> 필수 문제지!<br />
+<span style="color: #909090;font-size: 15px;">문제은행의 문항을 EBS가 랜덤 추출하여 제공하는<br />
+문제지를 풀어보고 다른 친구들에 비해 취약 분류를 확인해 보세요</span></td>
+<td>&nbsp;&nbsp;&nbsp;<img src="../img/testImg.PNG" /></td>
+</tr>
+</table>
 </div>
 <br />
 <div align="right">
@@ -30,10 +35,11 @@
 	<select name="col2">
 		<option value="" <c:choose><c:when  test="${col2 eq '' }" >selected</c:when></c:choose>>과목전체</option>
 		<option value="kor" <c:choose><c:when  test="${col2 eq 'kor' }" >selected</c:when></c:choose>>국어</option>
-		<option value="eng" <c:choose><c:when  test="${col2 eq 'eng' }" >selected</c:when></c:choose>>영어</option>
 		<option value="mat" <c:choose><c:when  test="${col2 eq 'mat' }" >selected</c:when></c:choose>>수학</option>
+		<option value="soc" <c:choose><c:when  test="${col2 eq 'soc' }" >selected</c:when></c:choose>>사회</option>
+		<option value="sic" <c:choose><c:when  test="${col2 eq 'sic' }" >selected</c:when></c:choose>>과학</option>
 	</select>
-	<button class="btn btn-primary">검색</button>
+	<button class="btn btn-warning button">검색</button>
 </form>
 </div>
 	

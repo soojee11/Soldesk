@@ -1,4 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -30,26 +32,21 @@
       <script src="js/lte-ie7.js"></script>
     <![endif]-->
   </head>
-
+  
   <body>
+  <c:if test ="${s_admin_id != null }">
   <!-- container section start -->
   <section id="container" class="">
       <!--header start-->
       
       <header class="header dark-bg">
-              <!--logo start-->
+             <div class="toggle-nav">
+                <div data-original-title="Toggle Navigation" data-placement="bottom"><i class="icon_menu"></i></div>
+            </div>
+             <!--logo start-->
             <a href="adminIndex.do" class="logo">SolProject <span class="lite">Admin</span></a>
             <!--logo end-->
-            <div class="nav search-row" id="top_menu">
-                <!--  search form start -->
-                <ul class="nav top-menu">                    
-                    <li>
-                        <form class="navbar-form">
-                            <input class="form-control" placeholder="Search" type="text">
-                        </form>
-                    </li>                    
-                </ul>
-                <!--  search form end -->                
+            <div class="nav search-row" id="top_menu">             
             </div>
             <div class="top-nav notification-row">                
                 <!-- notificatoin dropdown start-->
@@ -183,6 +180,12 @@
     <script src="js/jquery.nicescroll.js" type="text/javascript"></script><!--custome script for all page-->
     <script src="js/scripts.js"></script>
 
-
+	</c:if>
+	<c:if test="${s_admin_id == null  }">
+		<script>
+			alert("로그인 후 이용가능합니다. ");
+			location.href="login.do";
+		</script>
+	</c:if>
   </body>
 </html>

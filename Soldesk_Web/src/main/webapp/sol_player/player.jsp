@@ -5,8 +5,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset=UTF-8">
+<meta charset="UTF-8">
 <title>학습하기</title>
+<!--  한글 웹 폰트 적용-->
+    <link rel='stylesheet' href='http://fonts.googleapis.com/earlyaccess/jejugothic.css'>
+    <style type="text/css">
+     td, .memo{
+        font-family:'Jeju Gothic', sans-serif;
+        font-size:10pt;
+    }
+    .button{
+        font-family:'Jeju Gothic', sans-serif;
+        font-size:11pt;
+    }
+    </style>
+<!-- 한글 웹 폰트 적용 끝 -->
 <link href="../sol_css/bootstrap.min.css" rel="stylesheet" type="text/css">
 <link href="../sol_css/player.css" rel="stylesheet" type="text/css">
 <link href="../sol_css/main.css" rel="stylesheet" type="text/css">
@@ -100,9 +113,9 @@ function memoSaveResponse(data, status) { //callback함수
                </div><br/>
               <div>
                 <input type="hidden" name="lectureno" id="lectureno" value="${dto.lectureno }">
-                <textarea rows="10" cols="50" name="memo" id="memo">${sdto.memo }</textarea><br/>
-                <input type="button" name="save"  value="저장" class="btn" onclick="save()">
-                <input type="button" name="reset"  value="취소" class="btn" onclick="reset()" >
+                <textarea rows="10" cols="50" name="memo" id="memo" class="memo">${sdto.memo }</textarea><br/>
+                <input type="button" name="save"  value="저장" class="btn button" onclick="save()">
+                <input type="button" name="reset"  value="취소" class="btn button" onclick="reset()" >
               </div>
            </div>
          </div>

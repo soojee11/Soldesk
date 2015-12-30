@@ -2,10 +2,23 @@
 <%@ page import="java.sql.Timestamp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-
 <!DOCTYPE html>
 <html>
 <head>
+<!-- start : 지식채널 e 화면 띄우기 -->
+<script>
+  function chanelE() {//아이디중복확인
+    var sx = parseInt(screen.width);//팝업창 나타내는 위치
+    var sy = parseInt(screen.height);
+    var x = (sx / 2) - 400;
+    var y = (sy / 2) - 300;
+
+    var win = window.open("http://home.ebs.co.kr/jisike/index", "", "width=900, height=700");
+    win.moveTo(x, y);//화면이동
+  }//end
+ </script>
+ 
+<!-- end : 지식채널 e 화면 띄우기 -->
 <!--  한글 웹 폰트 적용-->
 		<link rel='stylesheet' href='http://fonts.googleapis.com/earlyaccess/jejugothic.css'>
 		<style type="text/css">
@@ -17,6 +30,16 @@
 		.icons-box-vert-info{
       font-family:'Jeju Gothic', sans-serif;
       font-size:12pt;
+    }
+    
+    .button, input{
+        font-family:'Jeju Gothic', sans-serif;
+        font-size:11pt;
+    }
+    
+    div, p{
+        font-family:'Jeju Gothic', sans-serif;
+        font-size:10pt;
     }
 		</style>
 <!-- 한글 웹 폰트 적용 끝 -->
@@ -80,7 +103,7 @@
 
 <!-- 하나)로그인추가 -->
 <script language="javascript">
-	function check1(frm) {
+	function check1(frm, file) {
 		var id = frm.id.value;
 		var passwd = frm.passwd.value;
 		id = id.replace(/^\s*|\s*$/g, '');
@@ -96,6 +119,7 @@
 			frm.passwd.focus();
 			return;
 		}
+		frm.action = file;
 		frm.submit();
 	}//end
 
@@ -114,6 +138,14 @@
 			return;
 		}
 	}//end
+	
+	function joinagree(frm,file){
+	    frm.action=file;
+	}
+	
+	function find(frm, file){
+		  frm.action=file;
+	}
 </script>
 
 </head>
@@ -150,11 +182,10 @@
 			          		<div class="nav-collapse collapse">
 			            		<ul class="nav">
 			              			<li><a href="sol_study/lectureList.do">학습하기</a></li>
-									<li><a href="sol_test/test/list.do">문제풀기</a></li>
-									<li><a href="sol_bbs/bbslist.do">자유게시판</a></li>
-									<li><a href="sol_qna/list.do">Q&A</a></li>
-									<li><a href="sol_mypage/calendar.do?s_id=${s_id}">캘린더</a></li>
-
+													<li><a href="sol_test/test/list.do">문제풀기</a></li>
+													<li><a href="sol_bbs/bbslist.do">자유게시판</a></li>
+													<li><a href="sol_qna/list.do">Q&A</a></li>
+													<li><a href="sol_mypage/calendar.do?s_id=${s_id}">캘린더</a></li>
 								</ul>
 							</div>
 						</div>
@@ -197,30 +228,28 @@
 
 				<table>
 					<tr>
-						<td style="height: 30px;">
-							<form class="form-inline" method="post" action="sol_member/login.do">
+						<td>
 								<div class="form-group">
-									<input type="text" name="id" size="10" value="<%=c_id%>" /> <input
-										type="password" name="passwd" size="10" value="" /> <input
-										type="checkbox" name="c_id" value="SAVE"
-										<%if (!c_id.isEmpty()) {
-					out.print("checked");
-				}%> />ID저장
-									<input type="button" name="login" class="btn btn-primary"
-										value="로그인" onclick="check1(this.form)" />
+								<form class="form-inline" method="post">
+										<input type="text" name="id" value="<%=c_id%>" placeholder="ID" style="height: 30px"/> 
+										<input type="password" name="passwd" placeholder="Password" value="" style="height: 30px"/> 
+										<input type="checkbox" name="c_id" value="SAVE"
+											<%if (!c_id.isEmpty()) {
+													out.print("checked");
+												}%> />ID저장
+										<input type="button" name="login" class="btn btn-primary button"
+											value="로그인" onclick="check1(this.form, 'sol_member/login.do')" />
+										<button type="submit" class="btn btn-primary button" onclick="joinagree(this.form,'sol_member/joinagree.do')">회원가입</button>
+										<button type="submit" class="btn btn-primary button" onclick="find(this.form,'sol_member/findform.do')">ID/PW찾기</button>
+									</form>
 								</div>
-							</form>
+						</td>
+<!-- 						<td>
+							
 						</td>
 						<td>
-							<form class="form-inline" action="sol_member/joinagree.do">
-								<button type="submit" class="btn btn-primary">회원가입</button>
-							</form>
-						</td>
-						<td>
-							<form class="form-inline" method="post" action="sol_member/findform.do">
-								<button type="submit" class="btn btn-primary">ID/PW찾기</button>
-							</form>
-						</td>
+							
+						</td> -->
 					</tr>
 				</table>
 
@@ -240,14 +269,14 @@
 						<td>
 							<form class="form-inline" method="post" action="sol_member/logout.do">
 								${s_id }님 환영합니다. <input type="button" name="logout"
-									class="btn btn-primary" value="로그아웃"
+									class="btn btn-primary button" value="로그아웃"
 									onclick="check2(this.form)" />
 							</form>
 						</td>
 						<td>
 							<form class="form-inline" method="post" action="sol_member/update.do">
 								<input type="hidden" name="id" value="${s_id }" /> <input
-									type="button" name="update" class="btn btn-primary"
+									type="button" name="update" class="btn btn-primary button"
 									value="정보수정" onclick="check3(this.form)" />
 							</form>
 						</td>
@@ -258,7 +287,6 @@
 
 	</c:if>
   <!-- start : Video Player -->
-  
 		  <!--start: Wrapper-->
 		  <div id="wrapper" >
 				 <div class="videoContainer" >
@@ -302,7 +330,7 @@
 			  <p> 하루 한 번! 지식채널 </p>
 				<p> 더 많은 지식채널을 보고싶다면 이곳을 방문해보세요~</p>
 				<p>
-					<a class="btn btn-success btn-large" href="http://home.ebs.co.kr/jisike/index">방문하기 &raquo;</a>
+					<a class="btn btn-success btn-large" href="javascript:chanelE()">방문하기 &raquo;</a>
 				</p>
 			</div>
 			<!-- end: Hero Unit -->
@@ -468,15 +496,15 @@
 
 						<ul id="footer-nav">
 
-							<li><a href="sol_index.jsp">Start</a></li>
+							<li><a href="sol_study/lectureList.do">학습하기</a></li>
 
-							<li><a href="sol_about.jsp">About</a></li>
+							<li><a href="sol_test/test/list.do">문제풀기</a></li>
 
-							<li><a href="sol_services.jsp">Services</a></li>
+							<li><a href="sol_bbs/bbslist.do">자유게시판</a></li>
 
-							<li><a href="sol_pricing.jsp">Pricing</a></li>
+							<li><a href="sol_qna/list.do">Q & A</a></li>
 
-							<li><a href="sol_contact.jsp">Contact</a></li>
+							<li><a href="sol_mypage/calendar.do?s_id=${s_id}">캘린더</a></li>
 
 						</ul>
 

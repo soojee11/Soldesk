@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import com.ibatis.sqlmap.client.SqlMapClient;
 
 import kr.co.solproject.GetSqlMapClient;
+import kr.co.solproject.bbs.BbsDTO;
 import kr.co.solproject.category.CategoryDTO;
 import kr.co.solproject.member.MemberDTO;
 import kr.co.solproject.player.PlayerDTO;
@@ -421,7 +422,6 @@ public class AdminDAO {
 
 //-----------------------------------------------------------------------------------------------------------
 //-------------------------------------------------------------------------------------------------BBS START
-	
 	public void bbsDelProc(Map map) {
 		try {
 			mybatis.update("sol_admin.bbsDelProc", map);
@@ -448,7 +448,6 @@ public class AdminDAO {
 		return list;
 	}// end
 	
-	
 	public int getNoticeTotal(Map map) {
 		int res = 0;
 		try {
@@ -458,6 +457,14 @@ public class AdminDAO {
 		}
 		return res;
 	}
+	
+	public void noticeShowUpdate(BbsDTO dto) {
+		try {
+			mybatis.update("sol_bbs.noticeShowUpdate", dto);
+		} catch (Exception e) {
+			System.out.println("noticeShowUpdate error: " + e);
+		}
+	}// end
 
 //-----------------------------------------------------------------------------------------------------------
 //-------------------------------------------------------------------------------------------------BBS EDN

@@ -65,14 +65,13 @@ function postApplyResponse(data, status) { //callback함수
 	alert(data.replace(/^\s+|\s+$/gm,''));
 	window.location.reload(); //현재 페이지 새로고침
 }
-
-
 </script>
 
 <link href="./css/style.css" rel="stylesheet" type="text/css">
 <h4>
 	<!-- <img src="img/cont.JPG"> -->
-	<img src="../sol_img/go_right.png" width="20px"/><img src="img/study.png" width="150px" height="50px"> 
+	<img src="../sol_img/go_right.png" width="20px"/>
+	<img src="img/study.png" width="150px" height="50px"><span style="font-size: 12px;">| 학습해 보세요 </span> 
 </h4>
 
 <div class="column">
@@ -171,9 +170,8 @@ function postApplyResponse(data, status) { //callback함수
 <div id="menu2" class="tab-pane fade">
 총 <span style="color: red;"><strong>${qnaTotal}</strong></span>개의 Q&A가 있습니다.
 <br/>
-<div align="right"><a href="bbsform.do"><img src='./img/bt_write.gif' width="40" height="20"></a></div>
+<div align="right"><a href=""><img src='./img/bt_write.gif' width="40" height="20"></a></div>
 <br/>
-
 <table class="table">
 	<tr align="center" >
 		<th>순번</th>

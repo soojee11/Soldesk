@@ -35,7 +35,7 @@ public class QnaCont {
 		
 		String url="list.do";
 		int nowPage=1;	
-		int numPerPage=5;	
+		int numPerPage=10;	
 		
 		int recNo=1;
 		
@@ -159,7 +159,10 @@ public class QnaCont {
 		int qnano = dto.getQnano();
 		dto = dao.qnaRead(qnano);
 		if(dto.getReplyok().equals("Y")){
-			return "redirect:read.do?qnano="+qnano+"&recNo="+recNo;
+			request.setAttribute("msg", 2);
+			request.setAttribute("qnano", qnano);
+			request.setAttribute("recNo", recNo);
+			return "sol_qna/qnaRead";
 		}else{
 			request.setAttribute("dto", dto);
 			return "sol_qna/qnaUpdate";

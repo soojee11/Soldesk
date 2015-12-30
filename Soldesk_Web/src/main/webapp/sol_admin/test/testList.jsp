@@ -59,7 +59,7 @@
 						<c:choose><c:when  test="${col2 eq 'sci' }" >selected</c:when></c:choose>>과학</option>
 				</select>
 			</div>
-				<button class="btn btn-success btn-sm">검색</button>
+				<button class="btn btn-warning button">검색</button>
 		</form>
 	</div>
 </div>
@@ -118,7 +118,9 @@
 						class="btn btn-info btn-sm">문제 보기</button></a></td>
 		</tr>
 	</c:forEach>
-
+	<tr>
+		<td colspan="6" align="right" ><strong>total:</strong>${total }</td>
+	</tr>
 	<tr>
 		<td colspan="6"><div align="center">${paging }</div></td>
 	</tr>

@@ -6,7 +6,7 @@ session.removeAttribute("s_admin_mlevel");
 %>
 
 <script>
-alert("정말로 로그아웃 하시겠습니까?");
+alert("정말 로그아웃 하시겠습니까?");
 location.href="login.do";
 </script>
 

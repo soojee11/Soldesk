@@ -4,6 +4,21 @@
 <head>
 <meta charset="UTF-8">
 <title>emailcheckForm.jsp</title>
+
+<!-- start: CSS -->
+<link href="../sol_css/bootstrap.css" rel="stylesheet">
+<link href="../sol_css/bootstrap-responsive.css" rel="stylesheet">
+<link href="../sol_css/style.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css"
+  href="http://fonts.googleapis.com/css?family=Droid+Sans:400,700">
+<link rel="stylesheet" type="text/css"
+  href="http://fonts.googleapis.com/css?family=Droid+Serif">
+<link rel="stylesheet" type="text/css"
+  href="http://fonts.googleapis.com/css?family=Boogaloo">
+<link rel="stylesheet" type="text/css"
+  href="http://fonts.googleapis.com/css?family=Economica:700,400italic">
+<!-- end: CSS -->
+
 <script>
 	function frmSubmit() {
 		var frm = document.emailcheck;
@@ -23,11 +38,10 @@
 	<div style="text-align: center">
 		<form name="emailcheck" method="post"
 			action="checkemail.do" onsubmit="return frmSubmit()">
-			EMAIL <input type="text" name="email" size="20">
-			<br/><Br/> <input
-				class="button white" type="submit" value="검색">
-		<a href="javascript:window.close()"> <input
-			class="button white" type='button' value='닫기'></a>
+			<Br/>
+			EMAIL&nbsp;&nbsp;<input type="text" name="email" size="20"><br/> 
+			<input class="btn btn-primary" type="submit" value="검색" >
+		  <a href="javascript:window.close()"> <input type='button' value='닫기' class="btn btn-primary"></a>
 		</form>
 		<br /> 
 	</div>

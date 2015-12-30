@@ -10,6 +10,14 @@
 		  font-family:'Jeju Gothic', sans-serif;
 		  font-size:20pt;
 		}
+		.button, input{
+        font-family:'Jeju Gothic', sans-serif;
+        font-size:11pt;
+    }
+     div, p, span{
+        font-family:'Jeju Gothic', sans-serif;
+        font-size:10pt;
+    }
 		</style>
 <!-- 한글 웹 폰트 적용 끝 -->
 
@@ -37,8 +45,10 @@
 
 <!-- start: CSS -->
 <link href="../sol_css/bootstrap.css" rel="stylesheet">
+<!-- <link href="../sol_css/bootstrap.min.css" rel="stylesheet"> -->
 <link href="../sol_css/bootstrap-responsive.css" rel="stylesheet">
 <link href="../sol_css/style.css" rel="stylesheet">
+
 <link rel="stylesheet" type="text/css"
 	href="http://fonts.googleapis.com/css?family=Droid+Sans:400,700">
 <link rel="stylesheet" type="text/css"
@@ -56,7 +66,7 @@
 
 <!-- 하나)로그인추가 -->
 <script language="javascript">
-	function check1(frm) {
+	function check1(frm, file) {
 		var id = frm.id.value;
 		var passwd = frm.passwd.value;
 		id = id.replace(/^\s*|\s*$/g, '');
@@ -72,6 +82,7 @@
 			frm.passwd.focus();
 			return;
 		}
+		frm.action = file;
 		frm.submit();
 	}//end
 
@@ -90,13 +101,21 @@
 			return;
 		}
 	}//end
+	
+	 function joinagree(frm,file){
+      frm.action=file;
+  }
+  
+  function find(frm, file){
+      frm.action=file;
+  }
 </script>
 
 </head>
 <body>
 
 	<!--start: Header -->
-	<header>
+	<header style="border-bottom: 0px solid #f6f6f6;">
 
 		<!--start: Container -->
 		<div class="container">
@@ -112,9 +131,6 @@
 
 				</div>
 				<!--end: Logo -->
-
-
-
 
 				<!--start: Navigation -->
 				<div class="span9">
@@ -175,31 +191,21 @@
 				<table>
 					<tr>
 						<td>
-							<form class="form-inline" method="post" action="../sol_member/login.do">
-
-								<div class="form-group">
-									<input type="text" name="id" size="10" value="<%=c_id%>" /> <input
-										type="password" name="passwd" size="10" value="" /> <input
-										type="checkbox" name="c_id" value="SAVE"
-										<%if (!c_id.isEmpty()) {
-					out.print("checked");
-				}%> />ID저장 <input
-										type="button" name="login" class="btn btn-primary" value="로그인"
-										onclick="check1(this.form)" />
-								</div>
-
-							</form>
-						</td>
-						<td>
-							<form class="form-inline" action="../sol_member/joinagree.do">
-								<button type="submit" class="btn btn-primary">회원가입</button>
-							</form>
-						</td>
-						<td>
-							<form class="form-inline" method="post" action="../sol_member/findform.do">
-								<button type="submit" class="btn btn-primary">ID/PW찾기</button>
-							</form>
-						</td>
+                <div class="form-group">
+                <form class="form-inline" method="post">
+                    <input type="text" name="id" value="<%=c_id%>" placeholder="ID"/> 
+                    <input type="password" name="passwd" placeholder="Password" value="" /> 
+                    <input type="checkbox" name="c_id" value="SAVE"
+                      <%if (!c_id.isEmpty()) {
+                          out.print("checked");
+                        }%> />ID저장
+                    <input type="button" name="login" class="btn btn-primary button"
+                      value="로그인" onclick="check1(this.form, '../sol_member/login.do')" />
+                    <button type="submit" class="btn btn-primary button" onclick="joinagree(this.form,'../sol_member/joinagree.do')">회원가입</button>
+                    <button type="submit" class="btn btn-primary button" onclick="find(this.form,'../sol_member/findform.do')">ID/PW찾기</button>
+                  </form>
+                </div>
+            </td>
 					</tr>
 				</table>
 
@@ -219,14 +225,14 @@
 						<td>
 							<form class="form-inline" method="post" action="../sol_member/logout.do">
 								${s_id }님 환영합니다. <input type="button" name="logout"
-									class="btn btn-primary" value="로그아웃"
+									class="btn btn-primary button" value="로그아웃"
 									onclick="check2(this.form)" />
 							</form>
 						</td>
 						<td>
 							<form class="form-inline" method="post" action="../sol_member/update.do">
 								<input type="hidden" name="id" value="${s_id }" /> <input
-									type="button" name="update" class="btn btn-primary"
+									type="button" name="update" class="btn btn-primary button"
 									value="정보수정" onclick="check3(this.form)" />
 							</form>
 						</td>

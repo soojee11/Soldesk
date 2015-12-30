@@ -63,7 +63,7 @@
     			 ${fn:substring(id,fn:length(dto.id)-2,fn:length(dto.id)) }
 			</td>
 			<td>
-				<c:set var="regdt" value="${dto.regdt }"/> ${fn:substring(regdt,0,16) }
+				<c:set var="regdt" value="${dto.regdt }"/> ${fn:substring(regdt,0,10) }
 			</td>
 			<td>${dto.readcnt }</td>
 		</tr>
@@ -71,20 +71,21 @@
 </table>
 <div align="right">
 <form action="insert.do" method="get">
-	<input type="button" class="btn btn-default" value="글쓰기"  onclick="checkLogin(this.form,'${s_id }')"> 
+	<input type="button" class="btn btn-warning button" value="글쓰기"  onclick="checkLogin(this.form,'${s_id }')"> 
 </form>
 </div>
+
 <div align="center">
-	${paging }<br/>
-	<form action ="list.do" >
-		<select name="col1">
-			<option value="" >선택</option>
-			<option value="subject" <c:choose><c:when  test="${col1 eq 'subject' }" >selected</c:when></c:choose>>제목</option>
-			<option value="id" <c:choose><c:when  test="${col1 eq 'id' }" >selected</c:when></c:choose>>ID</option>
-		</select>
-		<input type="text" name="col2" size = "30" <c:if test="${col2 !='' }">value="${param.col2 }"</c:if>>
-		<input type="button" class="btn btn-default" value="검색"  onclick="checkSearch(this.form)">
-	</form>
+${paging }<br/>
+<form class="form-inline" action="list.do">
+	<select name="col1">
+		<option value="" >선택</option>
+		<option value="subject" <c:choose><c:when  test="${col1 eq 'subject' }" >selected</c:when></c:choose>>제목</option>
+		<option value="id" <c:choose><c:when  test="${col1 eq 'id' }" >selected</c:when></c:choose>>ID</option>
+	</select>
+	<input type="text" name="col2" size = "30" <c:if test="${col2 !='' }">value="${param.col2 }"</c:if>>
+	<input type="button" class="btn btn-warning button" value="검색"  onclick="checkSearch(this.form)">
+</form>
 </div>
 
 <!-- page end-->

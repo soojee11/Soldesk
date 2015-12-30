@@ -44,10 +44,10 @@ public class BbsDAO {
 	}
 
 	// 게시물 전체 개수 불러오기
-	public int getTotal() {
+	public int getTotal(Map map) {
 		int cnt = 0;
 		try {
-			cnt = (Integer) mybatis.queryForObject("sol_bbs.total");
+			cnt = (Integer) mybatis.queryForObject("sol_bbs.total",map);
 		} catch (Exception e) {
 			System.out.println("getTotal() 실패: " + e);
 		}

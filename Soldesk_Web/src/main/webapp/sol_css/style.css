@@ -1420,6 +1420,58 @@ form#newsletter input[type=submit] {
   background-color: #408140;
 }
 
+
+/* 하나추가 */
+
+.btn-lecture{
+	
+  background-color: #ffa244;
+  color: #ffffff;
+  
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffc68c), to(#ffc68c));
+  background-image: -webkit-linear-gradient(top, #ffa244, #ffa244);
+  
+  
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#'5bc0de, endColorstr='#'ffffff, GradientType=0);
+  border-color: #ffffff #ffffff #ffffff;
+  border-color: rgba(1 , 1, 1, 1) rgba(1, 1, 1, 1) rgba(1, 1, 0.2, 0.25);
+   filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+}
+
+.btn-memo{
+    
+  background-color: #ff9bcd;
+  color: #ffffff;
+  
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ff9dce), to(#ff9dce));
+  background-image: -webkit-linear-gradient(top, #ff9bcd, #ff9bcd);
+  
+  
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#'ff9dce, endColorstr='#'ff9dce, GradientType=0);
+  border-color: #ffffff #ffffff #ffffff;
+ border-color: rgba(1 , 1, 1, 1) rgba(1, 1, 1, 1) rgba(1, 1, 0.2, 0.25);
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+}
+
+.btn-mystudy{
+   
+  background-color: #ccdd00;
+  color: #ffffff;
+   
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#fdfbb7), to(#fdfbb7));
+  background-image: -webkit-linear-gradient(top, #ccdd00, #ccdd00);
+ 
+  
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#'fdfbb7, endColorstr='#'fdfbb7, GradientType=0);
+  border-color: #ffffff #ffffff #ffffff;
+  border-color: rgba(1 , 1, 1, 1) rgba(1, 1, 1, 1) rgba(1, 1, 0.2, 0.25);
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+}
+
+/* 하나추가끝 */
+
+/* #49afcd
+ */
 .btn-info {
   background-color: #49afcd;
   color: #ffffff;
@@ -1432,7 +1484,7 @@ form#newsletter input[type=submit] {
   background-repeat: repeat-x;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#'5bc0de, endColorstr='#'5bc0de, GradientType=0);
   border-color: #2f96b4 #2f96b4 #1f6377;
-  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+  border-color: rgba(0, 0, 0, 2) rgba(0, 0, 0, 1) rgba(0, 0, 0, 1);
   filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
 }
 .btn-info:hover,
