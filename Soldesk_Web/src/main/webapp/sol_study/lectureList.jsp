@@ -4,7 +4,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!-- page start-->
-<script src="js/postscript.js"></script>
+<!-- <script src="js/postscript.js"></script>-->
+<script src="js/my.js"></script>
 
 <script language="javascript">
 function lectureGo(lectureno){
@@ -16,8 +17,15 @@ function lectureNotGo(){
 	alert("로그인 후 이용해 주세요.");
 }
 
-// 후기 등록
+
+function postApplyResponse(data, status) { //callback함수
+	alert(data.replace(/^\s+|\s+$/gm,''));
+	window.location.reload(); //현재 페이지 새로고침
+}
+
+//후기 등록
 function postApply(){
+	alert("후기를 등록하시겠습니까?");
 	$("#postscriptno").val(0);
 	var param=$("#postForm").serialize();  //<form id=frm> 전송할 데이터가 있는 폼
 	$.ajaxSetup({datatype: "text"});  //AJAX객체준비
@@ -56,15 +64,42 @@ function updateProc() {
 	alert("후기를 수정하시겠습니까?");
 	//$("#postscriptno").val(0);
 	var param=$("#postForm").serialize();
-	alert(param);
+	//alert(param);
 	$.ajaxSetup({dataType:"text"});
 	$.post("./update.do",param,postApplyResponse);	
 }
 
-function postApplyResponse(data, status) { //callback함수
-	alert(data.replace(/^\s+|\s+$/gm,''));
-	window.location.reload(); //현재 페이지 새로고침
-}
+//강의목록리스트
+function listShow(){
+	document.getElementById("a").style.display = '';
+	document.getElementById("b").style.display = 'none';
+	document.getElementById("c").style.display = 'none';
+}// end
+
+
+// 후기 리스트
+function postShow(){
+	document.getElementById("a").style.display = 'none';
+	document.getElementById("b").style.display = 'none';
+	document.getElementById("c").style.display = '';
+}// end
+
+//학습qna리스트
+function qnaShow(){
+	document.getElementById("a").style.display = 'none';
+	document.getElementById("b").style.display = '';
+	document.getElementById("c").style.display = 'none';
+	document.getElementById("qnaList").style.display = '';
+	document.getElementById("qnaCreate").style.display = 'none';
+	
+}//end
+
+//학습QnA 글쓰기
+function qnaCreate(){
+	document.getElementById("qnaList").style.display = 'none';
+	document.getElementById("qnaCreate").style.display = '';
+}// end
+
 </script>
 
 <link href="./css/style.css" rel="stylesheet" type="text/css">
@@ -114,14 +149,15 @@ function postApplyResponse(data, status) { //callback함수
 			<!-- 강의 카테고리 -->
 			<ul>				
 				<li style="background-color: #99cc66">강의</li>
-				<li class="active"><a data-toggle="tab" href="#menu1">목록</a></li>
-				<li><a data-toggle="tab" href="#menu2">학습Q&A</a></li>
-				<li><a data-toggle="tab" href="#menu3">수강후기</a></li>
+				<li class="active"><a data-toggle="tab" href="#menu1" onclick="listShow()">목록</a></li>
+				<li><a data-toggle="tab" href="#menu2" onclick="qnaShow()">학습Q&A</a></li>
+				<li><a data-toggle="tab" href="#menu3" onclick="postShow()">수강후기</a></li>
 			</ul>		
 	</div>
 	<hr>
 <div class="tab-content" style="width: 90%; color: black; height: 400px;">
 <div  id="menu1" class="tab-pane fade in active">
+<div id="a">
 총 <span style="color: red;"><strong>${total}</strong></span>개의 강좌가 있습니다.
 <br/><br/>
 
@@ -166,12 +202,18 @@ function postApplyResponse(data, status) { //callback함수
 
 </table>
 </div>
+</div>
+
 
 <!-- 학습QnA 탭 -->
 <div id="menu2" class="tab-pane fade">
+
+<div id="b">
+<!-- 학습QnA List탭 -->
+<div id="qnaList">
 총 <span style="color: red;"><strong>${qnaTotal}</strong></span>개의 Q&A가 있습니다.
 <br/>
-<div align="right"><a href=""><img src='./img/bt_write.gif' width="40" height="20"></a></div>
+<div align="right"><a href="javascript:qnaCreate()"><img src='./img/bt_write.gif' width="40" height="20"></a></div>
 <br/>
 <table class="table">
 	<tr align="center" >
@@ -202,8 +244,36 @@ function postApplyResponse(data, status) { //callback함수
 </table>
 </div>
 
+<!--  List 끝  -->
+
+<!--  QnA 등록  -->
+<div id="qnaCreate" align="center" style="display:none">
+<form action="insert.do" method="post">
+<table border ="0" width="100%" class="table" style="text-align:center">
+	<tr bgcolor="#f5f7f9">
+		<th style="text-align:center" valign="bottom">제목</th>
+		<td bgcolor="#ffffff"><input type="text" name="subject" size="100"></td>
+	</tr>
+	<tr bgcolor="#f5f7f9">
+		<th style="text-align:center" valign="bottom">아이디</th>
+		<td bgcolor="#ffffff">${s_id }</td>
+	</tr>
+	<tr bgcolor="#f5f7f9">
+		<th style="text-align:center"  valign="bottom">내용</th>
+		<td bgcolor="#ffffff"><textarea cols="50" rows="7" name="content"></textarea></td>
+	</tr>
+</table>
+ <div align="right">
+	<input type="button" class="btn btn-warning button" value="등록" onclick="validate(this.form)">
+ 	<input type="button" class="btn btn-warning button" value="취소" onclick="javascript:history.go()">
+  </div>
+</form>
+</div>
+</div>
+</div>
 <!-- 후기 탭 -->
 <div id="menu3" class="tab-pane fade">
+<div id="c">
 총 <span style="color: red;"><strong>${postTotal}</strong></span>개의 후기가 있습니다.
 <br/>
 <div> </div>
@@ -290,7 +360,7 @@ function postApplyResponse(data, status) { //callback함수
 </form>
 </div>
 </div>
-
+</div>
 </div>
 </div>
 <!-- page end-->

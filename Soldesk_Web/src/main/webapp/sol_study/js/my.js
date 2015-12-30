@@ -65,7 +65,3 @@ function validate(frm){
 		  return;
 	  }
 }//end
-
-
-
-
