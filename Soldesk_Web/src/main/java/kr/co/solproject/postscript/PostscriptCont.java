@@ -49,9 +49,9 @@ public class PostscriptCont {
 			resp.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = resp.getWriter();
 			if (cnt == 1) {
-				out.write("후기 등록 완료!");
+				out.write("QnA 등록 완료!");
 			} else {
-				out.write("후기 등록 실패! 다시 시도해 주세요.");
+				out.write("QnA 등록 실패! 다시 시도해 주세요.");
 			}
 
 		} catch (Exception e) {
@@ -72,9 +72,9 @@ public class PostscriptCont {
 			resp.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = resp.getWriter();
 			if (cnt == 1) {
-				out.write("후기 삭제 완료!");
+				out.write("QnA 삭제 완료!");
 			} else {
-				out.write("후기 삭제 실패! 다시 시도해 주세요.");
+				out.write("QnA 삭제 실패! 다시 시도해 주세요.");
 			}
 
 		} catch (Exception e) {
@@ -115,9 +115,9 @@ public class PostscriptCont {
 			resp.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = resp.getWriter();
 			if (cnt == 1) {
-				out.write("후기 수정 완료!");
+				out.write("QnA 수정 완료!");
 			} else {
-				out.write("후기 수정 실패! 다시 시도해 주세요.");
+				out.write("QnA 수정 실패! 다시 시도해 주세요.");
 			}
 
 		} catch (Exception e) {

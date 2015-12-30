@@ -28,7 +28,7 @@
  	 </select>
  	 
  	 <insert id="insert" parameterClass="LectureQnADTO" >
-    	INSERT INTO sol_category(categoryno, id, subject, content, regdate)
+    	INSERT INTO sol_lectureqna(categoryno, id, subject, content, regdate)
     	VALUES (#categoryno#, #id#, #subject#, #content#, now())
  	 </insert>
  	 
