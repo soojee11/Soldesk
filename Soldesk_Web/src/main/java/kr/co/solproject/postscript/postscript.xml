@@ -13,6 +13,7 @@
 		ON post.categoryno = category.categoryno
 		WHERE category.grade = #grade# AND category.gwamok = #gwamok#
 		ORDER BY post.postscriptno DESC
+		limit #postno#, #postNumPerPage#
 	</select>
 
 	<select id="postTotal" resultClass="Integer" parameterClass="Map" >
