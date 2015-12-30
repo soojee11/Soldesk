@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset=UTF-8">
+<meta charset="UTF-8">
 <title>학습하기</title>
 <!--  한글 웹 폰트 적용-->
     <link rel='stylesheet' href='http://fonts.googleapis.com/earlyaccess/jejugothic.css'>
@@ -18,8 +18,6 @@
         font-family:'Jeju Gothic', sans-serif;
         font-size:11pt;
     }
-    </style>
-<!-- 한글 웹 폰트 적용 끝 -->
     </style>
 <!-- 한글 웹 폰트 적용 끝 -->
 <link href="../sol_css/bootstrap.min.css" rel="stylesheet" type="text/css">
