@@ -169,27 +169,21 @@
         select bbs.bbsno,bbs.subject,bbs.content,bbs.passwd,bbs.regdt,bbs.readcnt,bbs.noticeshow,calendar.id
             FROM sol_calendar calendar join sol_bbs bbs
             ON calendar.id = #id#
-        <dynamic prepend="where">
-                <isEqual property="col1" compareValue="subject">
-                    subject LIKE CONCAT('%',#col2#,'%')
-                </isEqual>
-                <isEqual property="col1" compareValue="id">
-                    id LIKE CONCAT('%',#col2#,'%')  
-                </isEqual>
-        </dynamic>
+          
          group by bbs.bbsno
+         order by bbs.bbsno desc
         limit #sno#, #numPerPage#
     </select>
     
     
-
-
-	<select id="getqnalist" resultClass="MypageDTO">  <!-- qna게시판 -->
+	<select id="getqnalist"  parameterClass="Map"  resultClass="MypageDTO">  <!-- qna게시판 -->
 
            select qna.qnano,qna.id,qna.subject,qna.passwd,qna.readcnt,qna.regdt,qna.replyok,qna.qnashow,qna.content
             FROM sol_calendar calendar join sol_qna qna 
             ON calendar.id = qna.id
             group by qna.qnano
+            order by  qna.qnano desc
+             limit #sno#, #numPerPage#
 	</select>
 	
 	  <select id="total" resultClass="Integer">

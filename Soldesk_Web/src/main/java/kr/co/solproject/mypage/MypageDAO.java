@@ -189,10 +189,10 @@ public class MypageDAO {
 	
 	
 	
-	public List getqnalist() { //sol_qna
+	public List getqnalist(Map map) { //sol_qna
 		List list = null;
 		try {
-			list = mybatis.queryForList("sol_calendar.getqnalist");
+			list = mybatis.queryForList("sol_calendar.getqnalist",map);
 
 		} catch (Exception e) {
 			System.out.println("getqnalist: " + e);

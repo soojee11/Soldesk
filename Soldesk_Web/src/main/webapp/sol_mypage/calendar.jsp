@@ -61,6 +61,15 @@ function lectureGo(lectureno){
       str = "/solproject/sol_player/player.do?lectureno="+lectureno;
       r = window.open(str, "학습하기", 'scrollbars=yes, resizeable=no, width=1500, height=700');
 }
+
+
+function goRead(qnano,recNo,s_id){
+    //alert(recNo);
+    
+    location.href="/solproject/sol_qna/read.do?qnano="+qnano+"&recNo="+recNo;
+}//end
+
+
 </script> 
 
 
@@ -951,7 +960,6 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
     </c:if>
     
     
-    
     <c:set var ="recNo" value="${recNo }"/>
 
     <c:forEach var ="dto" items="${qnalist }">
@@ -964,6 +972,8 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
          bgcolor="#ffffff" 
          onmouseover="this.style.backgroundColor='#f1f8f4'"
          onmouseout="this.style.backgroundColor='#ffffff'"  align="center">
+               
+               
                 <td>
                     <span>
                         <c:if test="${dto.qnashow=='N' }"><img src="../sol_img/lock.png" width="15"></c:if>
