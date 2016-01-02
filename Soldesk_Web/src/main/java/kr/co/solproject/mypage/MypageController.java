@@ -52,6 +52,23 @@ public class MypageController {
 		int nowDay = cal.get(Calendar.DAY_OF_MONTH);
 		String nowregdate = (String)(nowYear+"0"+nowMonth+"0"+nowDay);
 		String nowregdate2 = (String)(nowYear+"-"+nowMonth+"-"+nowDay);
+		String nowregdate3 = (String)(nowYear+"-"+nowMonth+"-"+nowDay);
+		req.setAttribute("nowregdate3", nowregdate3);
+		
+		if(nowMonth <10 && nowDay <10){
+			 nowregdate2 = (String)(nowYear+"00"+nowMonth+"00"+nowDay);
+		}
+		if(nowMonth >=10 && nowDay >=10){
+			 nowregdate2 = (String)(nowYear+"0"+nowMonth+"0"+nowDay);
+		}
+		if(nowMonth <10 && nowDay >=10){
+			 nowregdate2 = (String)(nowYear+"00"+nowMonth+"0"+nowDay);
+		}
+		if(nowMonth >=10 && nowDay <10){
+			 nowregdate2 = (String)(nowYear+"0"+nowMonth+"00"+nowDay);
+		}
+
+		
 		
 		
 		List regdatelist = null;
@@ -231,7 +248,21 @@ public class MypageController {
 			int nowDay = cal.get(Calendar.DAY_OF_MONTH);
 			String nowregdate = (String)(nowYear+"0"+nowMonth+"0"+nowDay);
 			String nowregdate2 = (String)(nowYear+"-"+nowMonth+"-"+nowDay);
+			String nowregdate3 = (String)(nowYear+"-"+nowMonth+"-"+nowDay);
+			req.setAttribute("nowregdate3", nowregdate3);
 			
+			if(nowMonth <10 && nowDay <10){
+				 nowregdate2 = (String)(nowYear+"00"+nowMonth+"00"+nowDay);
+			}
+			if(nowMonth >=10 && nowDay >=10){
+				 nowregdate2 = (String)(nowYear+"0"+nowMonth+"0"+nowDay);
+			}
+			if(nowMonth <10 && nowDay >=10){
+				 nowregdate2 = (String)(nowYear+"00"+nowMonth+"0"+nowDay);
+			}
+			if(nowMonth >=10 && nowDay <10){
+				 nowregdate2 = (String)(nowYear+"0"+nowMonth+"00"+nowDay);
+			}
 			
 			List regdatelist = null;
 		    regdatelist = dao.getregdate(s_id); //강좌를들은날짜들을 LIST로 가져오자
