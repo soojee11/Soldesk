@@ -101,42 +101,49 @@ function qnaCreate(){
 }// end
 
 function validate(frm){
-	  var subject = frm.subject.value;
-	  var content = frm.content.value;
+	var subject = frm.subject.value;
+	var content = frm.content.value;
+    
+	subject = subject.replace(/^\s*|\s*$/g, '');
+	content = content.replace(/^\s*|\s*$/g, '');
 	  
-	  subject = subject.replace(/^\s*|\s*$/g, '');
-	  content = content.replace(/^\s*|\s*$/g, '');
+	if(subject.length == 0){
+	  alert("제목을 입력해 주세요.");
+	  frm.subject.focus();
+	  return;
+	}
 	  
-	  if(subject.length == 0){
-	    alert("제목을 입력해 주세요.");
-	    frm.subject.focus();
-	    return;
-	  }
-	  
-	  if(content.length == 0){
-	    alert("내용을 입력해 주세요.");
-	    frm.content.focus();
-	    return;
-	  }
+	if(content.length == 0){
+	  alert("내용을 입력해 주세요.");
+	  frm.content.focus();
+	  return;
+	}
 
-	  msg="등록 하시겠습니까? ";
-	  if(confirm(msg)!=0){
+	/* msg="등록 하시겠습니까? ";
+	if(confirm(msg)!=0){
 	  frm.submit();
-	  }else{
-		  return;
-	  }
-	  $.post("./create.do", param, postApplyResponse);
-}//end
-
-//후기 등록
-function qnaApply(){
+	}else{
+	  return;
+	} */
+	  
 	alert("QnA를 등록하시겠습니까?");
 	$("#lectureqnano").val(0);
 	var param=$("#qnaCreateForm").serialize();  //<form id=frm> 전송할 데이터가 있는 폼
 	$.ajaxSetup({datatype: "text"});  //AJAX객체준비
-	//alert(param);
+	alert(param);
 	//post방식. 응답이 성공하면 실행할 callback함수
-	$.post("./create.do", param, postApplyResponse);
+	$.post("./qnaCreate.do", param, postApplyResponse);
+	  
+}//end
+
+function qnaApply() {
+	alert("QnA를 등록하시겠습니까?");
+	$("#lectureqnano").val(0);
+	var param=$("#qnaCreateForm").serialize();  //<form id=frm> 전송할 데이터가 있는 폼
+	$.ajaxSetup({datatype: "text"});  //AJAX객체준비
+	alert(param);
+	//post방식. 응답이 성공하면 실행할 callback함수
+	$.post("./qnaCreate.do", param, postApplyResponse);
 }
 
 </script>
@@ -252,7 +259,16 @@ function qnaApply(){
 <div id="qnaList">
 총 <span style="color: red;"><strong>${qnaTotal}</strong></span>개의 Q&A가 있습니다.
 <br/>
-<div align="right"><a href="javascript:qnaCreate()"><img src='./img/bt_write.gif' width="40" height="20"></a></div>
+<div align="right">
+<c:choose>
+<c:when test="${s_id != null }">
+<a href="javascript:qnaCreate()"><img src='./img/bt_write.gif' width="40" height="20"></a>
+</c:when>
+<c:otherwise>
+<a href="javascript:lectureNotGo()"><img src='./img/bt_write.gif' width="40" height="20"></a>
+</c:otherwise>
+</c:choose>
+</div>
 <br/>
 <table class="table">
 	<tr align="center" >
@@ -288,6 +304,10 @@ function qnaApply(){
 <!--  QnA 등록  -->
 <div id="qnaCreate" align="center" style="display:none">
 <form name='qnaCreateForm' method="post">  <!-- action="insert.do" -->
+	<input type="hidden" name='lectureqnano' id='postscriptno' value='${lectureqnano}'>
+	<input type='hidden' name='gwamok' id='gwamok' value='${gwamok}'>
+	<input type='hidden' name='grade' id='grade' value='${grade}'>
+ 
 <table border ="0" width="100%" class="table" style="text-align:center">
 	<tr bgcolor="#f5f7f9">
 		<th style="text-align:center" valign="bottom">제목</th>
@@ -303,7 +323,7 @@ function qnaApply(){
 	</tr>
 </table>
  <div align="right">
-	<input type="button" class="btn btn-warning button" value="등록" onclick="validate(this.form)">
+	<input type="button" class="btn btn-warning button" value="등록" onclick="javascript:validate(this.form)">
  	<input type="button" class="btn btn-warning button" value="취소" onclick="javascript:history.go()">
   </div>
 </form>

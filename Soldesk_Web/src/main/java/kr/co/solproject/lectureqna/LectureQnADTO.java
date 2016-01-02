@@ -78,4 +78,13 @@ public class LectureQnADTO {
 	public void setFilename(String filename) {
 		this.filename = filename;
 	}
+
+	@Override
+	public String toString() {
+		return "LectureQnADTO [lectureqnano=" + lectureqnano + ", categoryno=" + categoryno + ", id=" + id
+				+ ", subject=" + subject + ", content=" + content + ", readcnt=" + readcnt + ", regdate=" + regdate
+				+ ", filename=" + filename + "]";
+	}
+	
+	
 }

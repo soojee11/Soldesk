@@ -9,7 +9,6 @@ import com.ibatis.sqlmap.client.SqlMapClient;
 
 import kr.co.solproject.GetSqlMapClient;
 import kr.co.solproject.category.CategoryDTO;
-import kr.co.solproject.postscript.PostscriptDTO;
 
 @Component
 public class LectureQnADAO {
@@ -49,19 +48,21 @@ public class LectureQnADAO {
 	public CategoryDTO getCategory(CategoryDTO dto) {
 		// CategoryDTO dto = null;
 		try {
+			System.out.println("77777777777777777777"+dto.getGrade()+dto.getGwamok());
 			dto = (CategoryDTO) mybatis.queryForObject("sol_lectureqna.getCategory", dto);
-			// System.out.println("77777777777777777777"+dto.toString());
+			System.out.println("77777777777777777777"+dto.toString());
 		} catch (Exception e) {
 			System.out.println("read 실패다: " + e);
+			e.printStackTrace();
 		}
 		return dto;
 	}// end
 	
-	/** 후기 등록 **/
+	/** QnA 등록 **/
 	public int qnaInsert(LectureQnADTO dto) {
 		int res = 0;
 		try {
-			// System.out.println("-----dao"+dto.toString());
+			System.out.println("---질문--dao"+dto.toString());
 
 			res = mybatis.update("sol_lectureqna.insert", dto);
 		} catch (Exception e) {
