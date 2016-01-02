@@ -4,7 +4,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!-- page start-->
-<!-- <script src="js/postscript.js"></script>-->
 <script src="js/my.js"></script>
 
 <script language="javascript">
@@ -17,7 +16,6 @@ function lectureNotGo(){
 	alert("로그인 후 이용해 주세요.");
 }
 
-
 function postApplyResponse(data, status) { //callback함수
 	alert(data.replace(/^\s+|\s+$/gm,''));
 	window.location.reload(); //현재 페이지 새로고침
@@ -25,44 +23,74 @@ function postApplyResponse(data, status) { //callback함수
 
 //후기 등록
 function postApply(){
-	alert("후기를 등록하시겠습니까?");
-	$("#postscriptno").val(0);
-	var param=$("#postForm").serialize();  //<form id=frm> 전송할 데이터가 있는 폼
-	$.ajaxSetup({datatype: "text"});  //AJAX객체준비
-	//alert(param);
-	//post방식. 응답이 성공하면 실행할 callback함수
-	$.post("./create.do", param, postApplyResponse);
+	if($.trim($("#content").val()) == "") {
+		alert("후기내용을 입력해주세요");
+		$("#content").focus();
+		return;
+	}
+	
+	msg = "후기를 등록하시겠습니까?";
+    if (confirm(msg)!=0) {
+    	$("#postscriptno").remove();
+    	var param=$("#postForm").serialize();  //<form id=frm> 전송할 데이터가 있는 폼
+    	$.ajaxSetup({datatype: "text"});  //AJAX객체준비
+    	//alert(param);
+    	//post방식. 응답이 성공하면 실행할 callback함수
+    	$.post("./create.do", param, postApplyResponse);
+    	
+    } else {
+        return;
+	} 
 }
 
 // 후기 삭제
 function postDelete(postscriptno) {
-	alert("후기를 삭제하시겠습니까?");
-	var param="postscriptno="+postscriptno;         //전송 데이터
-	//alert(param);
-	$.ajaxSetup({datatype: "text"});
-	$.get("./delete.do", param, postApplyResponse); //get방식	
+	msg = "후기를 삭제하시겠습니까?";
+    if (confirm(msg)!=0) {
+    	var param="postscriptno="+postscriptno;         //전송 데이터
+    	//alert(param);
+    	$.ajaxSetup({datatype: "text"});
+    	$.get("./delete.do", param, postApplyResponse); //get방식	
+    	
+    } else {
+        return;
+	} 
 }
-
 
 //수정할 댓글 조회
 function postUpdate(postscriptno){
 	$("#postscriptno").val(postscriptno);
-	var param="postscriptno="+postscriptno; // 전달할 데이터
-	$.ajaxSetup({dataType:"text"});
-	$.get("./read.do",param,updateFormResponse); // get방식
-}
-
-function updateFormResponse(data,status){
-	//alert(data);
-	$("#content").val(data.replace(/^\s*|\s*$/g, ''));
-	document.getElementById("btnCreate").style.display = 'none';
-	document.getElementById("btnUpdate").style.display = '';
+	$.ajax({
+		cache:false,
+		type: "get",	//요청방식
+		url: "read.do?postscriptno="+postscriptno,//서버측페이지
+		datatype:"text",	//응답페이지 타입 설정
+		success:function(data){
+			var str =data.replace(/^\s+|\s+$/gm,'');
+			//alert(str);
+			var result = str.split("/");
+			if(result[0]=="SUCCESS"){
+			$("#content").val(result[1]);
+			//alert(result[1]);
+			//alert(result[2]);
+			document.getElementById("rating-"+ result[2]).checked='checked';
+			document.getElementById("demo").innerHTML = '&nbsp;별점:&nbsp;'+result[2];
+			document.getElementById("btnCreate").style.display = 'none';
+			document.getElementById("btnUpdate").style.display = '';
+			}
+			
+		},
+		error:function(err){	//응답 결과 상태코드가 실패했을때
+			alert(err+"오류발생");
+		}
+	});
 }
 
 //수정 저장
 function updateProc() {
+	$("#grade").remove();
+	$("#gwamok").remove();
 	alert("후기를 수정하시겠습니까?");
-	//$("#postscriptno").val(0);
 	var param=$("#postForm").serialize();
 	//alert(param);
 	$.ajaxSetup({dataType:"text"});
@@ -330,53 +358,42 @@ function qnaApply() {
 </div>
 </div>
 </div>
+
 <!-- 후기 탭 -->
 <div id="menu3" class="tab-pane fade">
 <div id="c">
 총 <span style="color: red;"><strong>${postTotal}</strong></span>개의 후기가 있습니다.
 <br/>
-<div> </div>
-<br/>
-
 <table class="table">
-	<tr align="center" >
-		<th>순번</th>
-		<th >작성자</th>
-		<th>내용</th>
-		<th>등록일</th>
-		<th>수정/삭제</th>
-	</tr>
+<tr align="center" >
+	<th width='60'>순번</th>
+	<th>내용</th>
+	<th width='60'></th>
+	<th width='60'>작성자</th>
+	<th width='100'>등록일</th>
+	<th width='100'>강의만족도</th>
+</tr>
 
-<c:set var="postNo" value="${postNo+1 }" />	
+<c:set var="postNo" value="${postNo }" />	
 <c:forEach var="postDto" items="${postList }" >
 <c:set var="postNo" value="${postNo-1 }" />
-
-	<tr align="center">
-		<td>${postNo }</td>
-		<td>${postDto.id }</td>
-		<td>${postDto.content }</td>
-		<td>${postDto.regdate }</td>
-		<td>
-		<c:choose>
-		<c:when test="${s_id != null }">
-		<a href="javascript:postUpdate(${postDto.postscriptno })"><img src='img/bt_mod.gif'></a>
-		<a href="javascript:postDelete(${postDto.postscriptno })"><img src='img/bt_del.gif'></a>
-		</c:when>
-		<c:otherwise>
-		<a href="javascript:lectureNotGo()"><img src='img/bt_mod.gif'></a>
-		<a href="javascript:lectureNotGo()"><img src='img/bt_del.gif'></a>
-	</c:otherwise>
-    </c:choose>
-		</td>
-	</tr>
+<tr align="center">
+	<td>${postNo }</td>
+	<td>${postDto.content }</td>
+	<td><c:if test="${s_id eq postDto.id}">
+		<a href="javascript:postUpdate(${postDto.postscriptno })"><span style="color:red;">수정</span></a> | 
+		<a href="javascript:postDelete(${postDto.postscriptno })"><span style="color:red;">삭제</span></a></c:if>
+	</td>
+	<td>${postDto.id }</td>
+	<td><c:set var="pregdt" value="${postDto.regdate }"/>${fn:substring(pregdt,0,10) }</td>
+	<td></td>
+</tr>
 </c:forEach>
 
-	<tr>
-		<td colspan="5"><div align="center">${postPaging }</div></td>
-	</tr>
-
+<tr>
+	<td colspan="6"><div align="center">${postPaging }</div></td>
+</tr>
 </table>
-
 
 <div style='background-color:#f8f8f8; padding:25px;'>
 <form name='postForm' id='postForm' method='post'>  
@@ -385,20 +402,21 @@ function qnaApply() {
 	<input type='hidden' name='grade' id='grade' value='${grade}'>
       
 	<span class="star-cb-group">
-		<input type="radio" id="rating-5" name="rating" value="5" onclick="alert1(this.value)" checked="checked"/><label for="rating-5">5</label>
-		<input type="radio" id="rating-4" name="rating" value="4" onclick="alert1(this.value)" /><label for="rating-4">4</label>
-		<input type="radio" id="rating-3" name="rating" value="3" onclick="alert1(this.value)" /><label for="rating-3">3</label>
-		<input type="radio" id="rating-2" name="rating" value="2" onclick="alert1(this.value)" /><label for="rating-2">2</label>
-		<input type="radio" id="rating-1" name="rating" value="1" onclick="alert1(this.value)" /><label for="rating-1">1</label>
+		<input type="radio" id="rating-5" name="postgrade" value="5" onclick="alert1(this.value)" checked="checked"/><label for="rating-5">5</label>
+		<input type="radio" id="rating-4" name="postgrade" value="4" onclick="alert1(this.value)" /><label for="rating-4">4</label>
+		<input type="radio" id="rating-3" name="postgrade" value="3" onclick="alert1(this.value)" /><label for="rating-3">3</label>
+		<input type="radio" id="rating-2" name="postgrade" value="2" onclick="alert1(this.value)" /><label for="rating-2">2</label>
+		<input type="radio" id="rating-1" name="postgrade" value="1" onclick="alert1(this.value)" /><label for="rating-1">1</label>
 	</span>
 	<span id="demo" style="font-size:12px;">&nbsp;별점:&nbsp;5</span><br />
 	<script>
 	function alert1(val) {
-		alert(val);
 		document.getElementById("demo").innerHTML = '&nbsp;별점:&nbsp;'+val;
 	}
 	</script>
+	
     <textarea name='content' id='content' rows="5" cols="50" style="width: 88%; height:53px;"></textarea>
+   
     <!-- <br><br> -->
 	<c:choose>
 	<c:when test="${s_id != null }">
@@ -410,16 +428,11 @@ function qnaApply() {
 		</a>
 	</c:otherwise>
     </c:choose>
-<!--
- 	<a href="javascript:postCancel()"><img src='img/btn_cancel02.gif'></a>
-	<input type='button' name='btnCreate' value='등록'      onclick='createProc()'>  
-    <input type='button' name='btnDelete' value='삭제'  onclick='deleteProc()' style='display:none'>
-    <input type='button' name='btnUpdate' value='수정'  onclick='updateProc()' style='display:none'>
-    <input type='button' name='btnCancel' value='취소'      onclick='cancel()'> -->
 </form>
 </div>
 </div>
 </div>
+<!-- 후기 탭 끝 -->
 </div>
 </div>
 <!-- page end-->

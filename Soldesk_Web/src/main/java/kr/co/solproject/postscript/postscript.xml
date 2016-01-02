@@ -13,6 +13,7 @@
 		ON post.categoryno = category.categoryno
 		WHERE category.grade = #grade# AND category.gwamok = #gwamok#
 		ORDER BY post.postscriptno DESC
+		limit #postno#, #postNumPerPage#
 	</select>
 
 	<select id="postTotal" resultClass="Integer" parameterClass="Map" >
@@ -24,8 +25,8 @@
 	</select>
 	
 	<insert id="insert" parameterClass="PostscriptDTO" >
-    	INSERT INTO sol_postscript(categoryno, id, content, regdate)
-    	VALUES (#categoryno#, #id#, #content#, now())
+    	INSERT INTO sol_postscript(categoryno, id, content, regdate, postgrade)
+    	VALUES (#categoryno#, #id#, #content#, now(),#postgrade#)
  	 </insert>
  	 
  	 <select id="read" parameterClass="Map" resultClass="Integer">
@@ -44,14 +45,14 @@
  	 </update>
  	 
  	 <select id="postRead" parameterClass="PostscriptDTO" resultClass="PostscriptDTO">
- 	 	SELECT postscriptno, id, content, regdate
+ 	 	SELECT postscriptno, id, content, regdate, postgrade
  	 	FROM sol_postscript
  	 	WHERE postscriptno = #postscriptno#
  	 </select>
  	 
  	 <update id="postUpdate" parameterClass="PostscriptDTO">
  	 	UPDATE sol_postscript 
- 	 	SET content = #content#
+ 	 	SET content = #content#, postgrade=#postgrade#
  	 	WHERE postscriptno = #postscriptno#
  	 </update>
 

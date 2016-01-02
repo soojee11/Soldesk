@@ -26,7 +26,7 @@ public class PostscriptDAO {
 		try {
 			//System.out.println(map.toString());
 			list = mybatis.queryForList("sol_postscript.postList", map);
-			System.out.println(list.toString());
+			//System.out.println(list.toString());
 		} catch (Exception e) {
 			System.out.println("postList error" + e);
 		}
@@ -61,7 +61,6 @@ public class PostscriptDAO {
 		int res = 0;
 		try {
 			// System.out.println("-----dao"+dto.toString());
-
 			res = mybatis.update("sol_postscript.insert", dto);
 		} catch (Exception e) {
 			System.out.println("post create error: " + e);
@@ -95,7 +94,7 @@ public class PostscriptDAO {
 	public int postUpdate(PostscriptDTO dto){
 		int res = 0;
 		try {
-			//System.out.println("포스트컨ㄷ틀ㄹ::"+dto.toString());
+			//System.out.println("포스트::"+dto.toString());
 			res = mybatis.update("sol_postscript.postUpdate", dto);
 		} catch (Exception e) {
 			System.out.println("post update error: " + e);

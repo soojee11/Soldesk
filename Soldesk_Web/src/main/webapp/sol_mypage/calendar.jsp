@@ -126,7 +126,7 @@ function goRead(qnano,recNo,s_id){
     </tr>
     <tr>
       <td align="center" colspan="3" style="font-weight: bold; width: 100%; font-size: 18px;">
-      <a href="calendar.do?s_id=${id }"> < TODAY ${nowregdate2}> </a></td>
+      <a href="calendar.do?s_id=${id }"> < TODAY ${nowregdate3}> </a></td>
     </tr>
     
     
@@ -216,7 +216,7 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
    <fmt:parseNumber var="todayyear" type="number" integerOnly="true"  value="${fn:substring(today, 0 ,4) }" />
    <fmt:parseNumber var="todaymonth" type="number" integerOnly="true"  value="${fn:substring(today, 5 ,7) }" />
    <!-- 고정년월일  -->
-   <c:if test="${todaymonth <10 && todaydate <10 }">
+  <%--  <c:if test="${todaymonth <10 && todaydate <10 }">
    <c:set var="todaynow" value="${todayyear }00${todaymonth }00${todaydate }"/>
    </c:if>
    <c:if test="${todaymonth >=10 && todaydate >=10 }">
@@ -227,7 +227,8 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
    </c:if>
    <c:if test="${todaymonth >=10 && todaydate <10 }">
    <c:set var="todaynow" value="${todayyear }0${todaymonth }00${todaydate }"/>
-   </c:if>
+   </c:if> --%>
+   
    
    <!-- 변경년월일  -->
    <c:if test="${month+1 <10 && date <10 }">
@@ -242,6 +243,7 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
    <c:if test="${month+1 >=10 && date <10 }">
     <c:set var="nowymd" value="${year }0${month+1 }00${date }"/>
    </c:if>
+
 
   <!-- \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ -->
    
@@ -260,7 +262,7 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
                   </c:if> 
       --%>
                        <c:choose>
-                            <c:when test="${nowymd eq  todaynow && date eq i}">
+                             <c:when test="${nowymd eq nowregdate2  && date eq i}">
                                 <c:set var="bgcolor" value="#99cc66"/>
                                 
                             </c:when> 
