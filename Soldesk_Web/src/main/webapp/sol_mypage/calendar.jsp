@@ -888,7 +888,7 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
 </div>
            
            <table class="table"  style="background-color: #ffffff">
-    <tr>
+    <tr align ="center" style="color: #000000;">
         <td>제목</td>
         <td width="100">ID</td>
         <td width="100">최신순</td>
@@ -953,7 +953,7 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
 </div>
 
     <table class ="table" style="background-color: #ffffff">
-    <tr align ="center" >
+    <tr align ="center" style="color: #000000;">
         <td>제목</td>
         <td width="100">답변여부</td>
         <td width="100">ID</td>
