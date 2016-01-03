@@ -31,34 +31,36 @@ public class LectureQnACont {
 
 	
 	/** 후기 등록 **/
-	/*@RequestMapping(value = "/sol_study/create.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/sol_study/qnaCreate.do", method = RequestMethod.POST)
 	public void createProc(LectureQnADTO dto, CategoryDTO cdto, HttpServletResponse resp, HttpServletRequest request, HttpSession session) {
 		//CategoryDTO cdto = null;
 		dto.setId((String) session.getAttribute("s_id"));
 		
-		cdto.setGrade(cdto.getGrade());
-		cdto.setGwamok(cdto.getGwamok());
+		/*cdto.setGrade(cdto.getGrade());
+		cdto.setGwamok(cdto.getGwamok());*/
 		System.out.println(cdto.getGrade());
 		System.out.println(cdto.getGwamok());
 		
 		cdto = qnaDao.getCategory(cdto);
 		try {
-			//System.out.println("dto>>>>>>"+dto.toString());
+			System.out.println("질문나와라dto>>>>>>"+dto.toString());
 			dto.setCategoryno(cdto.getCategoryno());
 			int cnt = qnaDao.qnaInsert(dto);
 			resp.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = resp.getWriter();
 			if (cnt == 1) {
-				out.write("후기 등록 완료!");
+				out.write("QnA 등록 완료!");
 			} else {
-				out.write("후기 등록 실패! 다시 시도해 주세요.");
+				out.write("QnA 등록 실패! 다시 시도해 주세요.");
 			}
 
 		} catch (Exception e) {
 			System.out.println(e);
+			e.printStackTrace();
 		}
+		
 
 	}// end
-	*/
+	
 		
 }
