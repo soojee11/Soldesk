@@ -36,14 +36,9 @@ public class LectureQnACont {
 		//CategoryDTO cdto = null;
 		dto.setId((String) session.getAttribute("s_id"));
 		
-		/*cdto.setGrade(cdto.getGrade());
-		cdto.setGwamok(cdto.getGwamok());*/
-		System.out.println(cdto.getGrade());
-		System.out.println(cdto.getGwamok());
-		
 		cdto = qnaDao.getCategory(cdto);
 		try {
-			System.out.println("질문나와라dto>>>>>>"+dto.toString());
+			//System.out.println("질문나와라dto>>>>>>"+dto.toString());
 			dto.setCategoryno(cdto.getCategoryno());
 			int cnt = qnaDao.qnaInsert(dto);
 			resp.setContentType("text/html; charset=UTF-8");
@@ -59,7 +54,6 @@ public class LectureQnACont {
 			e.printStackTrace();
 		}
 		
-
 	}// end
 	
 		
