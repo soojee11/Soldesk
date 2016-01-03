@@ -39,32 +39,7 @@ function goRead(qnano,recNo,s_id){
 	location.href="read.do?qnano="+qnano+"&recNo="+recNo;
 }//end
 
-function validate(frm){
-	  var subject = frm.subject.value;
-	  var content = frm.content.value;
-	  
-	  subject = subject.replace(/^\s*|\s*$/g, '');
-	  content = content.replace(/^\s*|\s*$/g, '');
-	  
-	  if(subject.length == 0){
-	    alert("제목을 입력해 주세요.");
-	    frm.subject.focus();
-	    return;
-	  }
-	  
-	  if(content.length == 0){
-	    alert("내용을 입력해 주세요.");
-	    frm.content.focus();
-	    return;
-	  }
 
-	  msg="등록 하시겠습니까? ";
-	  if(confirm(msg)!=0){
-	  frm.submit();
-	  }else{
-		  return;
-	  }
-}//end
 
 
 

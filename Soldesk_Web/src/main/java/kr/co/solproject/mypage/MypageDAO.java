@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.core.env.SystemEnvironmentPropertySource;
 import org.springframework.stereotype.Component;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
@@ -181,6 +182,8 @@ public class MypageDAO {
 		try {
 			list = mybatis.queryForList("sol_calendar.getbbslist",map);
 
+			System.out.println("0"+list);
+			
 		} catch (Exception e) {
 			System.out.println("getbbslist: " + e);
 		}
@@ -189,11 +192,12 @@ public class MypageDAO {
 	
 	
 	
-	public List getqnalist() { //sol_qna
+	public List getqnalist(Map map) { //sol_qna
 		List list = null;
 		try {
-			list = mybatis.queryForList("sol_calendar.getqnalist");
+			list = mybatis.queryForList("sol_calendar.getqnalist",map);
 
+			System.out.println(list);
 		} catch (Exception e) {
 			System.out.println("getqnalist: " + e);
 		}
@@ -203,10 +207,12 @@ public class MypageDAO {
 	
 	
 	// 게시물 전체 개수 불러오기
-		public int getTotal() {
+		public int getTotal(String id) {
 			int cnt = 0;
 			try {
-				cnt = (Integer) mybatis.queryForObject("sol_calendar.total");
+				cnt = (Integer) mybatis.queryForObject("sol_calendar.total",id);
+					//System.out.println(cnt);
+					
 			} catch (Exception e) {
 				System.out.println("getTotal() 실패: " + e);
 			}
@@ -214,10 +220,10 @@ public class MypageDAO {
 		}
 	
 		// 게시물 전체 개수 불러오기
-				public int getTotal2() {
+				public int getTotal2(String id) {
 					int cnt = 0;
 					try {
-						cnt = (Integer) mybatis.queryForObject("sol_calendar.total2");
+						cnt = (Integer) mybatis.queryForObject("sol_calendar.total2",id);
 					} catch (Exception e) {
 						System.out.println("getTotal2() 실패: " + e);
 					}

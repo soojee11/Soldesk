@@ -52,6 +52,23 @@ public class MypageController {
 		int nowDay = cal.get(Calendar.DAY_OF_MONTH);
 		String nowregdate = (String)(nowYear+"0"+nowMonth+"0"+nowDay);
 		String nowregdate2 = (String)(nowYear+"-"+nowMonth+"-"+nowDay);
+		String nowregdate3 = (String)(nowYear+"-"+nowMonth+"-"+nowDay);
+		req.setAttribute("nowregdate3", nowregdate3);
+		
+		if(nowMonth <10 && nowDay <10){
+			 nowregdate2 = (String)(nowYear+"00"+nowMonth+"00"+nowDay);
+		}
+		if(nowMonth >=10 && nowDay >=10){
+			 nowregdate2 = (String)(nowYear+"0"+nowMonth+"0"+nowDay);
+		}
+		if(nowMonth <10 && nowDay >=10){
+			 nowregdate2 = (String)(nowYear+"00"+nowMonth+"0"+nowDay);
+		}
+		if(nowMonth >=10 && nowDay <10){
+			 nowregdate2 = (String)(nowYear+"0"+nowMonth+"00"+nowDay);
+		}
+
+		
 		
 		
 		List regdatelist = null;
@@ -131,10 +148,10 @@ public class MypageController {
 		 
 		
 		//--------------------------------------------------------------------------------
-		//자유게시판
+			//자유게시판
 		    int nowPage=1;      // 현재페이지, 페이지 시작번호 0->1page
-		    int numPerPage=3;   // 페이지당 레코드 수
-		    String url="calendar.do";  // 이동할 페이지 
+		    int numPerPage=5;   // 페이지당 레코드 수
+		    String url="calendar.do?s_id="+s_id;  // 이동할 페이지 
 		    
 		    // 현재 페이지의 정보를 가져옴    
 		    if(req.getParameter("nowPage")!=null) {
@@ -151,55 +168,36 @@ public class MypageController {
 		    
 		    List bbslist=dao.getbbslist(map);
 		
-		    int total=dao.getTotal();
-		    String paging=Paging.bbspaging(total,nowPage,numPerPage,url,s_id);
+		    int total=dao.getTotal(s_id);
+		    String paging=Paging.paging5(total,nowPage,numPerPage,url);
+			
 		    
-		    int recNo = total - (nowPage - 1) * numPerPage + 1 ;
 		    int totalPage = (int) Math.ceil((double)total/(double)numPerPage);
 		    
 			 req.setAttribute("bbslist", bbslist);
-		    req.setAttribute("recNo", recNo);
 		    req.setAttribute("paging", paging);
 		    req.setAttribute("nowPage", nowPage);
 		    req.setAttribute("totalPage", totalPage);
 		    req.setAttribute("total", total);
 		 
 		 
-		 
-		 
 			
 		    //qna게시판
-				
-				
-				String col1=null;
-				if(req.getParameter("col1")!="") {
-					col1=req.getParameter("col1");
-					System.out.println("컬럼: "+col1);
-				}
-				
-				String col2=null;
-				if(req.getParameter("col2")!="") {
-					col2=req.getParameter("col2");
-					System.out.println("컬럼: "+col2);
-				}
-
-				
-				
 				Map map2=new HashMap();
-				map2.put("col1", col1);
-				map2.put("col2", col2);
 				map2.put("sno", sno);
-				map2.put("numPerPage", numPerPage);
-				
-				 List qnalist=dao.getqnalist();
+			    map2.put("id", s_id);
+			    map2.put("numPerPage", numPerPage);
+			
+				 List qnalist=dao.getqnalist(map2);
 				
 				String dbean=Utility.getDate();
-				 int total2=dao.getTotal2();
+				 int total2=dao.getTotal2(s_id);
 				
-				
-				String paging2=Paging.paging(total,nowPage,numPerPage,col1,col2,url);
-				
-				recNo=total2-(nowPage-1)*numPerPage;
+				 String paging2=Paging.paging5(total2,nowPage,numPerPage,url);
+					
+					
+				 int recNo = total2 - (nowPage - 1) * numPerPage + 1 ;
+				req.setAttribute("recNo", recNo);
 				
 				int totalPage2 = (total / numPerPage)+1;
 				
@@ -207,8 +205,6 @@ public class MypageController {
 				 req.setAttribute("dbean", dbean);
 				req.setAttribute("paging2", paging2);
 				req.setAttribute("totalPage2", totalPage2);
-				req.setAttribute("col1", col1);
-				req.setAttribute("col2", col2);
 				  req.setAttribute("total2", total2);
 				session.setAttribute("s_id", session.getAttribute("s_id"));
 			
@@ -252,7 +248,21 @@ public class MypageController {
 			int nowDay = cal.get(Calendar.DAY_OF_MONTH);
 			String nowregdate = (String)(nowYear+"0"+nowMonth+"0"+nowDay);
 			String nowregdate2 = (String)(nowYear+"-"+nowMonth+"-"+nowDay);
+			String nowregdate3 = (String)(nowYear+"-"+nowMonth+"-"+nowDay);
+			req.setAttribute("nowregdate3", nowregdate3);
 			
+			if(nowMonth <10 && nowDay <10){
+				 nowregdate2 = (String)(nowYear+"00"+nowMonth+"00"+nowDay);
+			}
+			if(nowMonth >=10 && nowDay >=10){
+				 nowregdate2 = (String)(nowYear+"0"+nowMonth+"0"+nowDay);
+			}
+			if(nowMonth <10 && nowDay >=10){
+				 nowregdate2 = (String)(nowYear+"00"+nowMonth+"0"+nowDay);
+			}
+			if(nowMonth >=10 && nowDay <10){
+				 nowregdate2 = (String)(nowYear+"0"+nowMonth+"00"+nowDay);
+			}
 			
 			List regdatelist = null;
 		    regdatelist = dao.getregdate(s_id); //강좌를들은날짜들을 LIST로 가져오자
@@ -354,10 +364,10 @@ public class MypageController {
 				
 				//--------------------------------------------------------------------------------
 				 
-			//자유게시판
+				//자유게시판
 			    int nowPage=1;      // 현재페이지, 페이지 시작번호 0->1page
-			    int numPerPage=3;   // 페이지당 레코드 수
-			    String url="calendar.do";  // 이동할 페이지 
+			    int numPerPage=5;   // 페이지당 레코드 수
+			    String url="calendar.do?s_id="+s_id;  // 이동할 페이지 
 			    
 			    // 현재 페이지의 정보를 가져옴    
 			    if(req.getParameter("nowPage")!=null) {
@@ -365,8 +375,6 @@ public class MypageController {
 			    }
 			    
 			    int sno=((nowPage-1)*numPerPage);
-			    
-			    System.out.println("nowPage: "+nowPage);
 			    
 			    
 			    Map map = new HashMap();
@@ -376,14 +384,13 @@ public class MypageController {
 			    
 			    List bbslist=dao.getbbslist(map);
 			
-			    int total=dao.getTotal();
-			    String paging=Paging.bbspaging(total,nowPage,numPerPage,url,s_id);
+			    int total=dao.getTotal(s_id);
+			    String paging=Paging.paging5(total,nowPage,numPerPage,url);
+				
 			    
-			    int recNo = total - (nowPage - 1) * numPerPage + 1 ;
 			    int totalPage = (int) Math.ceil((double)total/(double)numPerPage);
 			    
 				 req.setAttribute("bbslist", bbslist);
-			    req.setAttribute("recNo", recNo);
 			    req.setAttribute("paging", paging);
 			    req.setAttribute("nowPage", nowPage);
 			    req.setAttribute("totalPage", totalPage);
@@ -394,37 +401,21 @@ public class MypageController {
 			 
 				
 			    //qna게시판
-					
-					
-					String col1=null;
-					if(req.getParameter("col1")!="") {
-						col1=req.getParameter("col1");
-						System.out.println("컬럼: "+col1);
-					}
-					
-					String col2=null;
-					if(req.getParameter("col2")!="") {
-						col2=req.getParameter("col2");
-						System.out.println("컬럼: "+col2);
-					}
-
-					
-					
 					Map map2=new HashMap();
-					map2.put("col1", col1);
-					map2.put("col2", col2);
 					map2.put("sno", sno);
-					map2.put("numPerPage", numPerPage);
-					
-					 List qnalist=dao.getqnalist();
+				    map2.put("id", s_id);
+				    map2.put("numPerPage", numPerPage);
+				
+					 List qnalist=dao.getqnalist(map2);
 					
 					String dbean=Utility.getDate();
-					 int total2=dao.getTotal2();
+					 int total2=dao.getTotal2(s_id);
 					
-					
-					String paging2=Paging.paging(total,nowPage,numPerPage,col1,col2,url);
-					
-					recNo=total2-(nowPage-1)*numPerPage;
+					 String paging2=Paging.paging5(total2,nowPage,numPerPage,url);
+						
+						
+					 int recNo = total2 - (nowPage - 1) * numPerPage + 1 ;
+					req.setAttribute("recNo", recNo);
 					
 					int totalPage2 = (total / numPerPage)+1;
 					
@@ -432,12 +423,9 @@ public class MypageController {
 					 req.setAttribute("dbean", dbean);
 					req.setAttribute("paging2", paging2);
 					req.setAttribute("totalPage2", totalPage2);
-					req.setAttribute("col1", col1);
-					req.setAttribute("col2", col2);
 					  req.setAttribute("total2", total2);
 					session.setAttribute("s_id", session.getAttribute("s_id"));
 				
-				 
 				//--------------------------------------------------------------------------------
 				
 			 
