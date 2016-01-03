@@ -891,7 +891,7 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
     <tr>
         <td>제목</td>
         <td width="100">ID</td>
-        <td width="100">작성일</td>
+        <td width="100">최신순</td>
         <td width="60">조회수</td>
     </tr>
     
@@ -957,7 +957,7 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
         <td>제목</td>
         <td width="100">답변여부</td>
         <td width="100">ID</td>
-        <td width="100">작성일</td>
+        <td width="100">최신순</td>
         <td width="60">조회수</td>
     </tr>
     
