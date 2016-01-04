@@ -296,18 +296,17 @@ function updateProc() {
 <div id="menu3">
 총 <span style="color: red;"><strong>${postTotal}</strong></span>개의 후기가 있습니다.
 <br/>
-
-
 <table class="table">
+<tr align="center" >
 	<th width='60'>순번</th>
 	<th>내용</th>
 	<th width='60'></th>
 	<th width='60'>작성자</th>
 	<th width='100'>등록일</th>
 	<th width='100'>강의만족도</th>
-	</tr>
+</tr>
 
-<c:set var="postNo" value="${postNo+1 }" />	
+<c:set var="postNo" value="${postNo }" />	
 <c:forEach var="postDto" items="${postList }" >
 <c:set var="postNo" value="${postNo-1 }" />
 <tr align="center">
@@ -319,19 +318,16 @@ function updateProc() {
 	</td>
 	<td>${postDto.id }</td>
 	<td><c:set var="pregdt" value="${postDto.regdate }"/>${fn:substring(pregdt,0,10) }</td>
-	<td>${postDto.postgrade}<c:if test="${postDto.postgrade==5 }"><img src="img/rating_5.gif"></c:if>
+	<td><c:if test="${postDto.postgrade==5 }"><img src="img/rating_5.gif"></c:if>
 	<c:if test="${postDto.postgrade==4 }"><img src="img/rating_4.gif"></c:if><c:if test="${postDto.postgrade==3 }"><img src="img/rating_3.gif"></c:if>
 	<c:if test="${postDto.postgrade==2 }"><img src="img/rating_2.gif"></c:if><c:if test="${postDto.postgrade==1 }"><img src="img/rating_1.gif"></c:if></td>
 </tr>
-
 </c:forEach>
 
-	<tr>
-		<td colspan="5"><div align="center">${postPaging }</div></td>
-	</tr>
-
+<tr>
+	<td colspan="6"><div align="center">${postPaging }</div></td>
+</tr>
 </table>
-
 
 <div style='background-color:#f8f8f8; padding:25px;'>
 <form name='postForm' id='postForm' method='post'>  
@@ -340,20 +336,21 @@ function updateProc() {
 	<input type='hidden' name='grade' id='grade' value='${grade}'>
       
 	<span class="star-cb-group">
-		<input type="radio" id="rating-5" name="rating" value="5" onclick="alert1(this.value)" checked="checked"/><label for="rating-5">5</label>
-		<input type="radio" id="rating-4" name="rating" value="4" onclick="alert1(this.value)" /><label for="rating-4">4</label>
-		<input type="radio" id="rating-3" name="rating" value="3" onclick="alert1(this.value)" /><label for="rating-3">3</label>
-		<input type="radio" id="rating-2" name="rating" value="2" onclick="alert1(this.value)" /><label for="rating-2">2</label>
-		<input type="radio" id="rating-1" name="rating" value="1" onclick="alert1(this.value)" /><label for="rating-1">1</label>
+		<input type="radio" id="rating-5" name="postgrade" value="5" onclick="alert1(this.value)" checked="checked"/><label for="rating-5">5</label>
+		<input type="radio" id="rating-4" name="postgrade" value="4" onclick="alert1(this.value)" /><label for="rating-4">4</label>
+		<input type="radio" id="rating-3" name="postgrade" value="3" onclick="alert1(this.value)" /><label for="rating-3">3</label>
+		<input type="radio" id="rating-2" name="postgrade" value="2" onclick="alert1(this.value)" /><label for="rating-2">2</label>
+		<input type="radio" id="rating-1" name="postgrade" value="1" onclick="alert1(this.value)" /><label for="rating-1">1</label>
 	</span>
 	<span id="demo" style="font-size:12px;">&nbsp;별점:&nbsp;5</span><br />
 	<script>
 	function alert1(val) {
-		alert(val);
 		document.getElementById("demo").innerHTML = '&nbsp;별점:&nbsp;'+val;
 	}
 	</script>
+	
     <textarea name='content' id='content' rows="5" cols="50" style="width: 88%; height:53px;"></textarea>
+   
     <!-- <br><br> -->
 	<c:choose>
 	<c:when test="${s_id != null }">
@@ -365,11 +362,9 @@ function updateProc() {
 		</a>
 	</c:otherwise>
     </c:choose>
-
 </form>
 </div>
 </div>
-
 </c:if>
 <!-- 후기 탭 끝 -->
 
