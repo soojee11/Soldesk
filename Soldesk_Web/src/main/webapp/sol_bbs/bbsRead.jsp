@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ include file="../sol_header.jsp"%>
+<link href="./css/style.css" rel="stylesheet" type="text/css">
 <!-- page start-->
 <script>
 //댓글추가
@@ -137,7 +138,7 @@ function cancel(replyno) {
 </h4>
 <hr>
 <br />
-<table class="table">
+<table class="table" style="color: #000000;">
 	<tr bgcolor="#f8f8f8">
 		<td width="60px">제목</td>
 		<td colspan="5"><strong>${dto.subject }</strong></td>
@@ -175,9 +176,10 @@ function cancel(replyno) {
 			onclick="location.href='bbslist.do?nowPage=${nowPage }'">
 	</div>
 </c:if>
-
+<div style="color: #000000;">
 총 <strong>${replycnt }</strong> 개의 등록된 댓글이 있습니다.
-<div style="background-color: #f8f8f8; padding: 25px;">
+</div>
+<div style="background-color: #f8f8f8; padding: 25px; color: #000000;">
 	<c:forEach var="rdto" items="${list }">
 		<table style="border: 0; width:100%;">
 		<tr>

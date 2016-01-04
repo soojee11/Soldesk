@@ -32,6 +32,10 @@ public class LectureCont {
 
 	@RequestMapping(value="/sol_study/lectureInfo.do")
 	public String lectureInfo(HttpServletRequest request) {
+	  
+	// 어느 페이지에서 왔는지 나타내는 변수 
+    String whichPage = "lectureInfo";
+    request.setAttribute("whichPage", whichPage);
 
 		int grade = 1;
 		String gwamok = "국어";
