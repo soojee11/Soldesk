@@ -147,21 +147,7 @@ function qnaCreate(){
 <div id="menu2">
 <!-- 학습QnA List -->
 <div id="qnaList">
-총 <span style="color: red;"><strong>${qnaTotal}</strong></span>개의 Q&A가 있습니다.
-
-<br/>
-<div align="right">
-<c:choose>
-<c:when test="${s_id != null }">
-<a href="javascript:qnaCreate()"><img src='./img/bt_write.gif' width="40" height="20"></a>
-</c:when>
-<c:otherwise>
-<a href="javascript:lectureNotGo()"><img src='./img/bt_write.gif' width="40" height="20"></a>
-</c:otherwise>
-</c:choose>
-</div>
-<br/>
-
+총 <span style="color: red;"><strong>${qnaTotal}</strong></span>개의 Q&A가 있습니다.<br />
 <table class="table">
 <tr align="center" >
 	<td width="60">번호</td>
@@ -200,12 +186,12 @@ function qnaCreate(){
 <!-- 학습QnA Form -->
 <div id="qnaCreate" align="center" style="display:none">
 
-<form name='qnaCreateForm' id="qnaCreateForm" method="post" >  <!-- action="insert.do" -->
+<form name='qnaCreateForm' id="qnaCreateForm" method="post" style="width: 98%;">  <!-- action="insert.do" -->
  	<input type="hidden" name='QnAno' id='QnAno' value='${lectureqnano}'>
 	<input type='hidden' name='gwamok' id='gwamok' value='${gwamok}'> 
 	<input type='hidden' name='grade' id='grade' value='${grade}'>
  
- <table border ="0" width="100%" class="table" style="text-align:center">
+ <table border ="0" class="table" style="text-align:center">
 	<tr bgcolor="#f5f7f9">
 		<th style="text-align:center" valign="bottom"><a >제목</a></th>
 		<td bgcolor="#ffffff"><input type="text" name="subject" size="100"></td>
@@ -333,7 +319,7 @@ function updateProc() {
 	</td>
 	<td>${postDto.id }</td>
 	<td><c:set var="pregdt" value="${postDto.regdate }"/>${fn:substring(pregdt,0,10) }</td>
-	<td><c:if test="${postDto.postgrade==5 }"><img src="img/rating_5.gif"></c:if>
+	<td>${postDto.postgrade}<c:if test="${postDto.postgrade==5 }"><img src="img/rating_5.gif"></c:if>
 	<c:if test="${postDto.postgrade==4 }"><img src="img/rating_4.gif"></c:if><c:if test="${postDto.postgrade==3 }"><img src="img/rating_3.gif"></c:if>
 	<c:if test="${postDto.postgrade==2 }"><img src="img/rating_2.gif"></c:if><c:if test="${postDto.postgrade==1 }"><img src="img/rating_1.gif"></c:if></td>
 </tr>
