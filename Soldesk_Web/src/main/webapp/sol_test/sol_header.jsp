@@ -143,7 +143,7 @@
 			          		</a>
 			          		<div class="nav-collapse collapse">
 			            <ul class="nav">
-			            <li><a href="../../sol_study/lectureList.do">학습하기</a></li>
+			            <li><a href="../../sol_study/lectureInfo.do">학습하기</a></li>
 									<li><a href="../../sol_test/test/list.do">문제풀기</a></li>
 									<li><a href="../../sol_bbs/bbslist.do">자유게시판</a></li>
 									<li><a href="../../sol_qna/list.do">Q&A</a></li>

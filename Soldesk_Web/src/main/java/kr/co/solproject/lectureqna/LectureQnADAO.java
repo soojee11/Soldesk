@@ -57,7 +57,7 @@ public class LectureQnADAO {
 		return dto;
 	}// end
 	
-	/** 후기 등록 **/
+	/** q&a 등록 **/
 	public int qnaInsert(LectureQnADTO dto) {
 		int res = 0;
 		try {

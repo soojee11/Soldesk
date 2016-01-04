@@ -13,6 +13,7 @@
 		ON qna.categoryno = category.categoryno
 		WHERE category.grade = #grade# AND category.gwamok = #gwamok#
 		ORDER BY qna.lectureqnano DESC
+		limit #qno#, #qnaNumPerPage#
 	</select>
 
 	<select id="qnaTotal" resultClass="Integer" parameterClass="Map" >
