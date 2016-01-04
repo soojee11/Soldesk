@@ -42,7 +42,7 @@ function postApplyResponse(data, status) { //callback함수
 	<!-- 강의 카테고리 -->
 	<ul>
 		<li style="background-color: #99cc66">강의</li>
-		<li><a onclick="location.href='lectureList.do?grade=${grade}&gwamok=${gwamok}&tabNum=1'">목록</a></li>
+		<li><a onclick="location.href='lectureList.do?grade=${grade}&gwamok=${gwamok}&tabNfum=1'">목록</a></li>
 		<li><a onclick="location.href='lectureList.do?grade=${grade}&gwamok=${gwamok}&tabNum=2'">학습Q&A</a></li>
 		<li><a onclick="location.href='lectureList.do?grade=${grade}&gwamok=${gwamok}&tabNum=3'">수강후기</a></li>
 	</ul>		
@@ -144,12 +144,7 @@ function qnaCreate(){
     document.getElementById("qnaRead").style.display = 'none';
 }// end
 
-//학습QnA 자세히보기
-function qnaRead() {
-	document.getElementById("qnaList").style.display = 'none';
-    document.getElementById("qnaCreate").style.display = 'none';
-    document.getElementById("qnaRead").style.display = '';
-}
+
 </script>
 
 <c:if test="${tabNum==2 }">
@@ -174,7 +169,7 @@ function qnaRead() {
 
 <tr align="center">
 	<td>${QnAno }</td>
-	<td><a href="javascript:qnaRead()">${qnaDto.subject }</a></td>
+	<td><a href="javascript:qnaRead(${qnaDto.lectureqnano })">${qnaDto.subject }</a></td>
 	<td>${qnaDto.id }</td>
 	<td><c:set var="pregdt" value="${qnaDto.regdate }"/>${fn:substring(pregdt,0,10) }</td>
 	<td>${qnaDto.readcnt }</td>
@@ -228,39 +223,118 @@ function qnaRead() {
 
 </c:if>
 
+<script>
+
+//학습QnA 자세히보기
+function qnaRead(lectureqnano) {
+	document.getElementById("qnaList").style.display = 'none';
+    document.getElementById("qnaCreate").style.display = 'none';
+    document.getElementById("qnaRead").style.display = '';
+
+    var param="lectureqnano="+lectureqnano; // 전달할 데이터
+    //alert(param);
+    $.ajaxSetup({dataType:"text"});
+    $.get("./qnaRead.do",param,qnaReadResponse); // get방식
+    
+}
+
+function qnaReadResponse(data,status){
+    var sw=data.replace(/^\s*|\s*$/g, '');
+    //alert(sw);
+    var result=sw.split("/"); // 문자를 분할해서 배열값으로 리턴
+  	//alert(result[5]);
+  	document.getElementById("subject").innerHTML=result[0];
+  	document.getElementById("readid").innerHTML=result[1];
+  	document.getElementById("regdate").innerHTML=result[2];
+  	document.getElementById("content").innerHTML=result[3];
+  	document.getElementById("readcnt").innerHTML=result[4];
+  	//document.qnaReadForm.updateid.value=result[1];
+  	if(result[5]=="true"){
+  		document.getElementById("idcheck1").style.display = '';
+  		document.getElementById("idcheck2").style.display = 'none';
+  	}
+
+}
+
+
+//수정할 댓글 조회
+function updateForm(replyno){
+  $("#replyno").val(replyno);
+  var param="replyno="+replyno; // 전달할 데이터
+  $.ajaxSetup({dataType:"text"});
+  $.get("./read.do",param,updateFormResponse); // get방식
+}
+
+function updateFormResponse(data,status){
+  //alert(data);
+  $("#content").val(data.replace(/^\s*|\s*$/g, ''));
+  document.frm.btnCreate.style.display='none';
+  document.frm.btnUpdate.style.display='';
+  document.frm.btnDelete.style.display='none';
+  document.frm.btnCancel.style.display='';  
+}
+
+
+//수정 저장
+function updateProc() {
+  var param=$("#frm").serialize();
+  $.ajaxSetup({dataType:"text"});
+  $.post("./update.do",param,updateProcResponse);	
+}
+
+function updateProcResponse(data,textStatus){
+  var sw=data.replace(/^\s*|\s*$/g, ''); // "FAIL/패스워드~~"
+  var result=sw.split("/"); // 문자를 분할해서 배열값으로 리턴
+  if(result[0]=='FAIL'){
+	 alert(result[1]);
+  }
+  else { // SUCCESS
+	 alert(result[1]);
+     window.location.reload();
+  }
+  
+}
+
+</script>
 
 <!-- 학습QnA 자세히보기 -->
-<div id="qnaRead" align="center" style="display:none">
 
+<div id="qnaRead" align="center" style="display:none">
 <form name='qnaReadForm' id="qnaReadForm" method="post" >  <!-- action="insert.do" -->
  	<input type="hidden" name='QnAno' id='QnAno' value='${lectureqnano}'>
 	<input type='hidden' name='gwamok' id='gwamok' value='${gwamok}'> 
 	<input type='hidden' name='grade' id='grade' value='${grade}'>
- 
  <table border ="0" width="100%" class="table" style="text-align:center">
 	<tr bgcolor="#f5f7f9">
 		<td style="text-align:center" valign="bottom">제목</td>
-		<td bgcolor="#ffffff"><strong>${dto.subject }</strong></td>
+		<td bgcolor="#ffffff"><strong><span id="subject"></span></strong></td>	
+		<td> </td>
+		<td> </td>
 		<td> </td>
 		<td> </td>
 	</tr>
 	<tr bgcolor="#f5f7f9">
 		<th style="text-align:center" valign="bottom">ID</th>
-		<td bgcolor="#ffffff">${s_id }</td>
+		<td bgcolor="#ffffff" id="readid"></td>
 		<td width="60px">작성일</td>
-		<td><c:set var="regdt" value="${dto.regdt }" />
-			${fn:substring(regdt,0,16) }</td>
+		<td><span id="regdate"></span>
+			${fn:substring(regdate,0,16) }</td>
 		<td width="60px">조회수</td>
-		<td>${dto.readcnt }</td>
+		<td><span id="readcnt"></span></td>
 	</tr>
 	<tr bgcolor="#f5f7f9">
-		<td bgcolor="#ffffff">${dto.content }</td>
+		<td bgcolor="#ffffff"><span id="content"></span></td>
 	</tr>
 </table> 
  <div align="right">
+ 	<div id="idcheck1" style="display:none">
 	<input name="btnMod" type="button" class="btn btn-warning button" value="수정" onclick="qnaApply(this.form)">
- 	<input name="btnDelete" type="button" class="btn btn-warning button" value="삭제" onclick="javascript:history.go()">
+ 	<input name="btnDelete" type="button" class="btn btn-warning button" value="삭제" onclick="qnaDelete()">
  	<input name="btnList" type="button" class="btn btn-warning button" value="목록" onclick="javascript:history.go()">
+ 	</div>
+ 	<div id="idcheck2" >
+ 	<input name="btnList" type="button" class="btn btn-warning button" value="목록" onclick="javascript:history.go()">
+ 	</div>
  
 
   </div>
