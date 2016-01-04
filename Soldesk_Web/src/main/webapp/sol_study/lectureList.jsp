@@ -133,6 +133,7 @@ function qnaApply(frm){
 function qnaShow(){
     document.getElementById("qnaList").style.display = '';
     document.getElementById("qnaCreate").style.display = 'none';
+    document.getElementById("qnaRead").style.display = 'none';
     
 }//end
 
@@ -140,28 +141,22 @@ function qnaShow(){
 function qnaCreate(){
     document.getElementById("qnaList").style.display = 'none';
     document.getElementById("qnaCreate").style.display = '';
+    document.getElementById("qnaRead").style.display = 'none';
 }// end
+
+//학습QnA 자세히보기
+function qnaRead() {
+	document.getElementById("qnaList").style.display = 'none';
+    document.getElementById("qnaCreate").style.display = 'none';
+    document.getElementById("qnaRead").style.display = '';
+}
 </script>
 
 <c:if test="${tabNum==2 }">
 <div id="menu2">
 <!-- 학습QnA List -->
 <div id="qnaList">
-총 <span style="color: red;"><strong>${qnaTotal}</strong></span>개의 Q&A가 있습니다.
-
-<br/>
-<div align="right">
-<c:choose>
-<c:when test="${s_id != null }">
-<a href="javascript:qnaCreate()"><img src='./img/bt_write.gif' width="40" height="20"></a>
-</c:when>
-<c:otherwise>
-<a href="javascript:lectureNotGo()"><img src='./img/bt_write.gif' width="40" height="20"></a>
-</c:otherwise>
-</c:choose>
-</div>
-<br/>
-
+총 <span style="color: red;"><strong>${qnaTotal}</strong></span>개의 Q&A가 있습니다.<br /><br />
 <table class="table">
 <tr align="center" >
 	<td width="60">번호</td>
@@ -177,7 +172,7 @@ function qnaCreate(){
 
 <tr align="center">
 	<td>${QnAno }</td>
-	<td>${qnaDto.subject }</td>
+	<td><a href="javascript:qnaRead()">${qnaDto.subject }</a></td>
 	<td>${qnaDto.id }</td>
 	<td><c:set var="pregdt" value="${qnaDto.regdate }"/>${fn:substring(pregdt,0,10) }</td>
 	<td>${qnaDto.readcnt }</td>
@@ -207,11 +202,11 @@ function qnaCreate(){
  
  <table border ="0" width="100%" class="table" style="text-align:center">
 	<tr bgcolor="#f5f7f9">
-		<th style="text-align:center" valign="bottom"><a >제목</a></th>
+		<th style="text-align:center" valign="bottom"><a onclick="qnaRead()">제목</a></th>
 		<td bgcolor="#ffffff"><input type="text" name="subject" size="100"></td>
 	</tr>
 	<tr bgcolor="#f5f7f9">
-		<th style="text-align:center" valign="bottom">아이디</th>
+		<th style="text-align:center" valign="bottom">ID</th>
 		<td bgcolor="#ffffff">${s_id }</td>
 	</tr>
 	<tr bgcolor="#f5f7f9">
@@ -230,6 +225,47 @@ function qnaCreate(){
 </div>
 
 </c:if>
+
+
+<!-- 학습QnA 자세히보기 -->
+<div id="qnaRead" align="center" style="display:none">
+
+<form name='qnaReadForm' id="qnaReadForm" method="post" >  <!-- action="insert.do" -->
+ 	<input type="hidden" name='QnAno' id='QnAno' value='${lectureqnano}'>
+	<input type='hidden' name='gwamok' id='gwamok' value='${gwamok}'> 
+	<input type='hidden' name='grade' id='grade' value='${grade}'>
+ 
+ <table border ="0" width="100%" class="table" style="text-align:center">
+	<tr bgcolor="#f5f7f9">
+		<td style="text-align:center" valign="bottom">제목</td>
+		<td bgcolor="#ffffff"><strong>${dto.subject }</strong></td>
+		<td> </td>
+		<td> </td>
+	</tr>
+	<tr bgcolor="#f5f7f9">
+		<th style="text-align:center" valign="bottom">ID</th>
+		<td bgcolor="#ffffff">${s_id }</td>
+		<td width="60px">작성일</td>
+		<td><c:set var="regdt" value="${dto.regdt }" />
+			${fn:substring(regdt,0,16) }</td>
+		<td width="60px">조회수</td>
+		<td>${dto.readcnt }</td>
+	</tr>
+	<tr bgcolor="#f5f7f9">
+		<td bgcolor="#ffffff">${dto.content }</td>
+	</tr>
+</table> 
+ <div align="right">
+	<input name="btnMod" type="button" class="btn btn-warning button" value="수정" onclick="qnaApply(this.form)">
+ 	<input name="btnDelete" type="button" class="btn btn-warning button" value="삭제" onclick="javascript:history.go()">
+ 	<input name="btnList" type="button" class="btn btn-warning button" value="목록" onclick="javascript:history.go()">
+ 
+
+  </div>
+</form>
+</div>
+</div>
+
 
 <!-- 후기 탭 -->
 <script>
