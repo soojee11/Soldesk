@@ -26,21 +26,22 @@
 		frm.submit();
 	}//end
 </script>
+
 <h4>
 <img src="../sol_img/go_right.png" width="20px"/>
 <img src="../sol_img/logos/bbs_desc.png" width="190px" height="50px"><span style="font-size: 12px;">| 자유롭게 말해보세요 </span>
 </h4>
-<div>
-총 <strong>${total }</strong> 개의 등록된 글이 있습니다. | 현재 페이지 : <strong>${nowPage }/${totalPage }</strong>
+<div style="color: #000000;">
+총 <span style="color: red;"><strong>${total }</strong></span> 개의 등록된 글이 있습니다. | 현재 페이지 : <strong>${nowPage }/${totalPage }</strong>
 </div>
 <br />
-<table class="table">
+<table class="table" style="color: #000000;">
 	<tr>
-		<td width="60">번호</td>
-		<td>제목</td>
-		<td width="100">ID</td>
-		<td width="100">작성일</td>
-		<td width="60">조회수</td>
+		<th width="60">번호</th>
+		<th>제목</th>
+		<th width="100">ID</th>
+		<th width="100">작성일</th>
+		<th width="60">조회수</th>
 	</tr>
 	
 	<!-- 공지사항 -->
@@ -62,12 +63,16 @@
 	<c:forEach var="dto" items="${list }">
 	<c:if test="${dto.passwd ne '관리자' }">
 		<c:set var="recNo" value="${recNo-1 }" />
-		<tr>
+		<c:set var ="now" value="${fn:substring(dto.regdt,0,10) }"/>
+		<tr bgcolor="#ffffff" 
+         onmouseover="this.style.backgroundColor='#f1f8f4'"
+         onmouseout="this.style.backgroundColor='#ffffff'">
 			<td width="60">${recNo }</td>
 			<td><a href="bbsread.do?bbsno=${dto.bbsno }&nowPage=${nowPage }">${dto.subject }</a>
+				<c:if test="${today==now }"><img src="bbs_img/new.gif"></c:if>
 			</td>
 			<td width="100">${dto.passwd }</td>
-			<td width="100"><c:set var="regdt" value="${dto.regdt }"/> ${fn:substring(regdt,0,10) }</td>
+			<td width="100">${now }</td>
 			<td width="60">${dto.readcnt }</td>
 		</tr>
 	</c:if>

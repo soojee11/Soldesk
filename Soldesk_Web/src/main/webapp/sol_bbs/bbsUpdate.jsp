@@ -4,6 +4,7 @@
 <link rel="stylesheet" href="css/style.css" />
 <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script type="text/javascript" src="./js/HuskyEZCreator.js" charset="utf-8"></script>
+<link href="./css/style.css" rel="stylesheet" type="text/css">
 <script>
   $(function(){
       //전역변수

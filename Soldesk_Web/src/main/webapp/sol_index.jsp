@@ -181,7 +181,7 @@
 			          		</a>
 			          		<div class="nav-collapse collapse">
 			            		<ul class="nav">
-			              			<li><a href="sol_study/lectureList.do">학습하기</a></li>
+			              			<li><a href="sol_study/lectureInfo.do">학습하기</a></li>
 													<li><a href="sol_test/test/list.do">문제풀기</a></li>
 													<li><a href="sol_bbs/bbslist.do">자유게시판</a></li>
 													<li><a href="sol_qna/list.do">Q&A</a></li>
@@ -231,12 +231,13 @@
 						<td>
 								<div class="form-group">
 								<form class="form-inline" method="post">
-										<input type="text" name="id" value="<%=c_id%>" placeholder="ID" style="height: 30px"/> 
+								    <input type="hidden" name="whichPage" value="${whichPage }">
+										<input type="text" name="id" value="<%=c_id%>" placeholder="ID" style="height: 30px" "/> 
 										<input type="password" name="passwd" placeholder="Password" value="" style="height: 30px"/> 
 										<input type="checkbox" name="c_id" value="SAVE"
 											<%if (!c_id.isEmpty()) {
 													out.print("checked");
-												}%> />ID저장
+												}%> />ID저장 ${whichPage }
 										<input type="button" name="login" class="btn btn-primary button"
 											value="로그인" onclick="check1(this.form, 'sol_member/login.do')" />
 										<button type="submit" class="btn btn-primary button" onclick="joinagree(this.form,'sol_member/joinagree.do')">회원가입</button>

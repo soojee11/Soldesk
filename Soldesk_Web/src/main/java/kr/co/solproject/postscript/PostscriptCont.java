@@ -79,7 +79,7 @@ public class PostscriptCont {
 	@RequestMapping(value = "/sol_study/read.do", method = RequestMethod.GET)
 	public void updateRead(PostscriptDTO dto, HttpServletResponse resp, HttpSession session) {
 		dto.setId((String) session.getAttribute("s_id"));
-		try {	
+		try {
 			dto = postDao.postRead(dto);
 			resp.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = resp.getWriter();

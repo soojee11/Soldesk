@@ -51,7 +51,7 @@
 <hr>
 <div align="center">
 	<form method="post" action="create.do" name="frm" id="frm">
-		<table class="table" style="text-align: center">
+		<table class="table" style="text-align: center; color: #000000;">
 			<tr bgcolor="#f5f7f9">
 				<th style="text-align: center" valign="bottom">제목</th>
 				<td bgcolor="#ffffff"><input type="text" name="subject"

@@ -28,6 +28,10 @@ public class TestCont {
 	//http://localhost:9090/solproject/sol_test/test/list.do
 	@RequestMapping(value="/sol_test/test/list.do")
 	public String list(HttpServletRequest request,HttpSession session) {
+	  
+	  // 어느 페이지에서 왔는지 나타내는 변수 
+    String whichPage = "test";
+    request.setAttribute("whichPage", whichPage);
 
 		String url="list.do";	// page링크시 이동할 페이지
 		int nowPage=1;			// 현재페이지, 페이지 시작번호 0->1page

@@ -3,6 +3,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ include file="../sol_header.jsp"%>
 <script src="js/my.js"></script>
+<link href="./css/style.css" rel="stylesheet" type="text/css">
 <!-- page start-->
 <style>
 .replydiv{
@@ -159,7 +160,7 @@ function cancel(){
 </h4>
 <hr>
 <br />
-<table class="table">
+<table class="table" style="color: #000000;">
 	<tr bgcolor="#f8f8f8">
 		<td width="60px">제목</td>
 		<td ><strong>${dto.subject }</strong></td>
@@ -205,7 +206,7 @@ function cancel(){
 <div align="left" style="background-color: #f8f8f8; padding: 25px;">
 	
 	<c:if test="${dto.replyok=='Y' }">
-		<table style="border: 0; width:100%;">
+		<table style="border: 0; width:100%; color: #000000;">
 			<tr>
  				<td>
  					<img src="../sol_img/answer.png" width="15">&nbsp;&nbsp;<strong>답변 입니다.</strong>
@@ -225,12 +226,12 @@ function cancel(){
 				</c:if>
  			</tr>
 		</table>
-		<div id ="demo">
+		<div id ="demo" style="color: #000000;">
 			${rdto.content }
 		</div>
 	</c:if>
 
-	<form name="frm" id ="frm" method="post">
+	<form name="frm" id ="frm" method="post"  style="color: #000000;">
 		<input type="hidden" name="tableno" id="tableno" value="${param.qnano }">
 		<input type="hidden" name="passwd" id="passwd" value="${s_id }">
 		<input type="hidden" name="replyno" id="replyno">
@@ -242,7 +243,7 @@ function cancel(){
 	</form>
 
 	<c:if test="${mlevel!='A' and replyok=='N'}">
-		<div align="center">
+		<div align="center"  style="color: #000000;">
 			<img src="img/sad.png" width="20">
 			<strong>아직 등록된 답변이 없습니다. </strong>
 		</div>

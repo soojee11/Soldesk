@@ -3,6 +3,8 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ include file="../sol_header.jsp"%>
 <script src="js/my.js"></script>
+<link href="./css/style.css" rel="stylesheet" type="text/css">
+
 <c:if test="${msg==2 }">
 	<script>
 		alert("비공개 글 입니다.");
@@ -19,18 +21,18 @@
 <img src="../sol_img/go_right.png" width="20px"/>
 <img src="../sol_img/logos/qna_desc.png" width="120px" height="50px"><span style="font-size: 12px;">| 무엇이든 물어보세요</span>
 </h4>
-<div>
-총 <strong>${total }</strong> 개의 등록된 글이 있습니다. | 현재 페이지 : <strong>${nowPage }/${totalPage }</strong>
+<div style="color: #000000;">
+총 <span style="color: red;"><strong>${total }</strong></span> 개의 등록된 글이 있습니다. | 현재 페이지 : <strong>${nowPage }/${totalPage }</strong>
 </div>
 <br />
-<table class ="table">
+<table class ="table" style="color: #000000;">
 	<tr align ="center">
-		<td width="60">번호</td>
-		<td>제목</td>
-		<td width="100">답변여부</td>
-		<td width="100">ID</td>
-		<td width="100">작성일</td>
-		<td width="60">조회수</td>
+		<th width="60">번호</th>
+		<th>제목</th>
+		<th width="100">답변여부</th>
+		<th width="100">ID</th>
+		<th width="100">작성일</th>
+		<th width="60">조회수</th>
 	</tr>
 	<c:if test="${total ==0 }">
 		<tr>
@@ -40,7 +42,10 @@
 <c:set var ="recNo" value="${recNo }"/>
 	<c:forEach var ="dto" items="${list }">
 	<c:set var ="recNo" value="${recNo-1 }"/>
-		<tr align ="center">
+	<c:set var ="now" value="${fn:substring(dto.regdt,0,10) }"/>
+		<tr bgcolor="#ffffff" 
+         onmouseover="this.style.backgroundColor='#f1f8f4'"
+         onmouseout="this.style.backgroundColor='#ffffff'" align ="center">
 			<td>
 				${recNo+1 }
 			</td>
@@ -48,6 +53,7 @@
 					<span>
 						<c:if test="${dto.qnashow=='N' }"><img src="../sol_img/lock.png" width="15"></c:if>
 						<a href="JavaScript:goRead('${dto.qnano }','${recNo+1 }','${s_id }')">${dto.subject }</a>
+						<c:if test="${today==now }"><img src="img/new.gif"></c:if>
 					</span>
 				</td>
 			<td>
@@ -62,9 +68,7 @@
     		  	</c:forEach>
     			 ${fn:substring(id,fn:length(dto.id)-2,fn:length(dto.id)) }
 			</td>
-			<td>
-				<c:set var="regdt" value="${dto.regdt }"/> ${fn:substring(regdt,0,10) }
-			</td>
+			<td>${now }</td>
 			<td>${dto.readcnt }</td>
 		</tr>
 	</c:forEach>

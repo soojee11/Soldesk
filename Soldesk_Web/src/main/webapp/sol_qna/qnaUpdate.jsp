@@ -1,5 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="../sol_header.jsp"%>
+<link href="./css/style.css" rel="stylesheet" type="text/css">
+<!-- page start-->
 <script>
 function update_validate(frm){
 	  var subject = frm.subject.value;
@@ -32,7 +34,7 @@ function update_validate(frm){
 <form action="update.do" method="post">
 <input type="hidden" name="qnano" value="${param.qnano }">
 <input type="hidden" name="recNo" value="${param.recNo }">
-<table border ="0" width="100%" class="table" style="text-align:center">
+<table border ="0" width="100%" class="table" style="text-align:center;color: #000000;">
 	<tr bgcolor="#f5f7f9">
 		<th style="text-align:center" valign="bottom">제목</td>
 		<td bgcolor="#ffffff"><input type="text" name="subject" size="100" value="${dto.subject }"></td>

@@ -1,5 +1,7 @@
 package kr.co.solproject.qnabbs;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,6 +35,10 @@ public class QnaCont {
 	@RequestMapping(value="/sol_qna/list.do")
 	public String qnaList(HttpServletRequest request,HttpSession session) {
 		
+	// 어느 페이지에서 왔는지 나타내는 변수 
+    String whichPage = "qna";
+    request.setAttribute("whichPage", whichPage);
+    
 		String url="list.do";
 		int nowPage=1;	
 		int numPerPage=10;	
@@ -76,6 +82,11 @@ public class QnaCont {
 		
 		int totalPage = (total / numPerPage)+1;
 		
+		//오늘날짜 추가
+		Date d = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        //System.out.println("현재날짜 : "+ sdf.format(d));
+		
 		request.setAttribute("list", list);
 		request.setAttribute("dbean", dbean);
 		request.setAttribute("paging", paging);
@@ -85,6 +96,8 @@ public class QnaCont {
 		request.setAttribute("col1", col1);
 		request.setAttribute("col2", col2);
 		request.setAttribute("total", total);
+		request.setAttribute("today", sdf.format(d));
+		
 		session.setAttribute("s_id", session.getAttribute("s_id"));
 	
 		return "sol_qna/qnaList";
