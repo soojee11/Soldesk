@@ -6,8 +6,26 @@
 <sqlMap namespace="sol_category">
 	<typeAlias alias="CatetoryDTO" type="kr.co.solproject.category.CategoryDTO" />
 
-	<select id="list" parameterClass="Map" resultClass="CatetoryDTO">
+	<select id="checkCateinfo" resultClass="String" parameterClass="Map" >
+		select categoryinfo
+		from sol_category
+		where grade = #grade# and gwamok = #gwamok#
+	</select>
 	
+	<update id="cateIns" parameterClass="CategoryDTO">
+		insert into sol_category(grade, gwamok,teacherName,teacherPhoto,teacherCareer,categoryinfo,bookInfo)
+		values(#grade#,#gwamok#,#teacherName#,#teacherPhoto#,#teacherCareer#,#categoryinfo#,#bookInfo#)
+	</update>
+	
+	<select id="readCateInfo" parameterClass="Map" resultClass="CategoryDTO">
+		SELECT categoryno, grade, gwamok, categoryinfo, teacherName, teacherPhoto, teacherCareer,bookInfo
+		FROM sol_category
+		limit #sno#, #numPerPage#
+	</select>
+	
+	<select id="getCateTotal" parameterClass="Map" resultClass="Integer">
+		select count(*) as cnt
+		from sol_category
 	</select>
 		
 </sqlMap>

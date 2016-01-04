@@ -17,7 +17,7 @@
 
 <div align="left">
 <c:if test="${flag==1 }">
-	<a href="readCateInfo.do"><button class="btn btn-danger btn-sm">강좌 목록</button></a>
+	<a href="cateInfo.do"><button class="btn btn-danger btn-sm">강좌 목록</button></a>
 	<a href="lecinsert.do?categoryno=${param.categoryno }"><button class="btn btn-danger btn-sm">강의 등록</button></a>
 </c:if>
 <c:if test="${flag==2 }">
@@ -33,7 +33,6 @@
 		<th><div align="center">강의파일</div></th>
 		<th><div align="center">파일크기</div></th>
 		<th><div align="center">캡쳐화면</div></th>
-		<th><div align="center">선생님이름</div></th>
 		<th><div align="center">강의시간(분)</div></th>
 	</tr>
 	<c:if test="${total ==0 }">
@@ -62,7 +61,6 @@
 				<td><a href="lecread2.do?lectureno=${dto.lectureno }">${dto.filename }</a></td>
 				<td>${dto.filesize/(1024)-((dto.filesize/(1024))%1) }KB</td>
 				<td><a href="lecread2.do?lectureno=${dto.lectureno }"><img src="storage/${dto.poster }" width="60px"></a></td>
-				<td>${dto.teacher }</td>
 				<td>${dto.lecturetime }</td>
 			</tr>
 			</c:if>

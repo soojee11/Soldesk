@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.solproject.bbs.BbsDAO;
 import kr.co.solproject.bbs.BbsDTO;
+import kr.co.solproject.category.CategoryDAO;
 import kr.co.solproject.category.CategoryDTO;
 import kr.co.solproject.member.MemberDTO;
 import kr.co.solproject.player.PlayerDTO;
@@ -39,6 +40,9 @@ public class AdminCont {
 	
 	@Autowired
 	private QnaDAO qnadao=null;
+	
+	@Autowired
+	private CategoryDAO catedao=null;
 	
 	public AdminCont() {
 		System.out.println("--------------AdminCont객체 생성됨");
@@ -910,10 +914,10 @@ public class AdminCont {
 		return "redirect:leclist2.do?categoryno="+oldDTO.getCategoryno();
 	}//end
 
-	@RequestMapping(value="sol_admin/player/readCateInfo.do", method=RequestMethod.GET)
+	@RequestMapping(value="sol_admin/player/cateInfo.do", method=RequestMethod.GET)
 	public String readCateInfo(HttpServletRequest request) {
 		
-		String url = "./readCateInfo.do";
+		String url = "./cateInfo.do";
 		
 		int numPerPage=6;	
 		int recNo=1;
@@ -930,10 +934,10 @@ public class AdminCont {
 		map.put("sno", sno);
 		map.put("numPerPage", numPerPage);
 		
-		List list = dao.readCateInfo(map);
+		List list = catedao.readCateInfo(map);
 		
 		String dbean = Utility.getDate();
-		int total = dao.getCateTotal(map);
+		int total = catedao.getCateTotal(map);
 		
 		String paging = Paging.paging4(total, intNowPage, numPerPage, url);
 		
@@ -945,7 +949,7 @@ public class AdminCont {
 		request.setAttribute("nowPage", nowPage);
 		request.setAttribute("total", total);
 		
-		return "sol_admin/player/readCateInfo";
+		return "sol_admin/player/cateInfo";
 	}//end
 	
 	@RequestMapping(value="sol_admin/player/cateUpdate.do", method=RequestMethod.GET)
@@ -1014,18 +1018,26 @@ public class AdminCont {
 		//System.out.println("grade;" + dto.getGrade());
 		//System.out.println("getGwamok;" + dto.getGwamok());
 		String checkCateinfo = "";
-		checkCateinfo=dao.checkCateinfo(dto.getGrade(), dto.getGwamok());
+		checkCateinfo=catedao.checkCateinfo(dto.getGrade(), dto.getGwamok());
 		
 		System.out.println("checkCateinfo: "+checkCateinfo);
 		
 		if(checkCateinfo != null){
 			request.setAttribute("msg",0);
-			return "sol_admin/player/readCateInfo";
+			return "sol_admin/player/cateInfo";
 		}else{
-			boolean flag = dao.cateIns(dto);
+			//선생님 사진 등록
+			String basePath = Utility.getRealPath(request, "/sol_admin/player/cateStorage");
+			System.out.println("basePath 확인: "+basePath);
+			MultipartFile teacherMF = dto.getTeacherMF();
+			String teacherPhoto = UploadSaveManager.saveFileSpring30(teacherMF, basePath);
+			dto.setTeacherPhoto(teacherPhoto);
+			
+			boolean flag = catedao.cateIns(dto);
+			
 			if (flag) {
 				request.setAttribute("msg", 1);
-				return "sol_admin/player/readCateInfo";
+				return "sol_admin/player/cateInfo";
 			} else {
 				request.setAttribute("msg", "강좌 등록에 실패하였습니다.<br /><br /> 다시 시도해 주십시오.");
 				request.setAttribute("link1", "<input type='button' value='다시시도' onclick=\"history.back();\">");
@@ -1056,10 +1068,10 @@ public class AdminCont {
 		map.put("sno", sno);
 		map.put("numPerPage", numPerPage);
 		
-		List list = dao.readCateInfo(map);
+		List list = catedao.readCateInfo(map);
 		
 		String dbean = Utility.getDate();
-		int total = dao.getCateTotal(map);
+		int total = catedao.getCateTotal(map);
 		
 		String paging = Paging.paging4(total, intNowPage, numPerPage, url);
 		

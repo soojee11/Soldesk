@@ -16,11 +16,6 @@
   		from sol_category
   		where gwamok = #gwamok# and grade = #grade#
    </select>
-    	
-	<select id="getCateTotal" parameterClass="Map" resultClass="Integer">
-		select count(*) as cnt
-		from sol_category
-	</select>
 	
 	<select id="categoryRead" parameterClass="Integer" resultClass="CategoryDTO">
 		select categoryno, grade, gwamok, categoryinfo
@@ -32,11 +27,6 @@
 		delete from sol_category
 		where categoryno = #categoryno#
 	</update>
-		<select id="readCateInfo" parameterClass="Map" resultClass="CategoryDTO">
-		SELECT categoryno, grade, gwamok, categoryinfo
-		FROM sol_category
-		limit #sno#, #numPerPage#
-	</select>
 
 	<update id="updateCateProc" parameterClass="CategoryDTO">
 		update sol_category
@@ -44,17 +34,6 @@
 		where categoryno = #categoryno#
 	</update>
 	
-	<update id="cateIns" parameterClass="CategoryDTO">
-		insert into sol_category(grade, gwamok, categoryinfo)
-		values(#grade#,#gwamok#,#categoryinfo#)
-	</update>
-	
-	<select id="checkCateinfo" resultClass="String" parameterClass="Map" >
-		select categoryinfo
-		from sol_category
-		where grade = #grade# and gwamok = #gwamok#
-	</select>
-   	
 	<select id="getLectureno" parameterClass="Integer" resultClass="Integer">
 		select lectureno
 		from sol_lecture
