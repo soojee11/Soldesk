@@ -34,6 +34,10 @@ public class BbsCont {
   @RequestMapping(value="/sol_bbs/bbslist.do")
   public String bbslist(HttpServletRequest req, HttpSession session){
 	
+    // 어느 페이지에서 왔는지 나타내는 변수 
+    String whichPage = "bbs";
+    req.setAttribute("whichPage", whichPage);
+    
 	  //notice list
 	  Map noticemap = new HashMap();
 	  noticemap.put("passwd", "관리자");

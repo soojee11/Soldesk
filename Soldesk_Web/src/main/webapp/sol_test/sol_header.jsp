@@ -194,12 +194,13 @@
 						<td>
                 <div class="form-group">
                 <form class="form-inline" method="post">
+                    <input type="hidden" name="whichPage" value="${whichPage }">
                     <input type="text" name="id" value="<%=c_id%>" placeholder="ID"/> 
                     <input type="password" name="passwd" placeholder="Password" value="" /> 
                     <input type="checkbox" name="c_id" value="SAVE"
                       <%if (!c_id.isEmpty()) {
                           out.print("checked");
-                        }%> />ID저장
+                        }%> />ID저장 ${whichPage }
                     <input type="button" name="login" class="btn btn-primary button"
                       value="로그인" onclick="check1(this.form, '../../sol_member/login.do')" />
                     <button type="submit" class="btn btn-primary button" onclick="joinagree(this.form,'../../sol_member/joinagree.do')">회원가입</button>

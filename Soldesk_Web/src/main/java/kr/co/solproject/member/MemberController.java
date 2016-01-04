@@ -32,6 +32,10 @@ public class MemberController {
 	// --------------------------------------------------------------------
 	@RequestMapping(value = "/sol_index.do")
 	public String index(HttpServletRequest req, HttpSession session) {
+	  // 어느 페이지에서 왔는지 나타내는 변수 
+	  String whichPage = "index";
+	  req.setAttribute("whichPage", whichPage);
+	  
 	  // 동영상 로딩 정보 
 	  int videono = (int) (Math.random()*2+1); 
 	  VideoDTO vdto = null;
@@ -41,7 +45,6 @@ public class MemberController {
 	  
 	  req.setAttribute("link", link);
 	  req.setAttribute("title", link.substring(0, link.indexOf(".")));
-	  
 		return "/sol_index";
 	}// end	
 	
@@ -91,12 +94,29 @@ public class MemberController {
 			// session영역
 			session.setAttribute("s_id", id);
 			session.setAttribute("s_pw", pw);
-
-			String msg="<meta http-equiv='Refresh' content='0;url=/solproject/sol_index.do'>";
+			
+			// 어느 페이지에서 로그인 했는지
+			String msg="";
+			String whichPage = (String) req.getParameter("whichPage");
+			
+			if(whichPage.equals("lectureInfo")){
+			    msg="<meta http-equiv='Refresh' content='0;url=/solproject/sol_study/lectureInfo.do'>";
+			}
+      else if(whichPage.equals("test")){
+          msg="<meta http-equiv='Refresh' content='0;url=/solproject/sol_test/test/list.do'>";    
+            }
+      else if(whichPage.equals("bbs")){
+          msg="<meta http-equiv='Refresh' content='0;url=/solproject/sol_bbs/bbslist.do'>";
+      }
+      else if(whichPage.equals("qna")){
+          msg="<meta http-equiv='Refresh' content='0;url=/solproject/sol_qna/list.do'>";
+      }
+      else{ // index 
+          msg="<meta http-equiv='Refresh' content='0;url=/solproject/sol_index.do'>";
+      }
 			req.setAttribute("msg", msg);
 			
 			mav.setViewName("/sol_member/result");
-			//mav.setViewName("solproject/sol_index");
 			return mav;
 		}
 	}// end
@@ -107,14 +127,7 @@ public class MemberController {
 		return "/sol_member/logout";
 
 	}// end
-/*
-	@RequestMapping(value = "/sol_member/index.do", method = RequestMethod.GET)
-	public String login(HttpServletRequest req, HttpSession session) {
 
-		return "/sol_index";
-
-	}// end
-*/
 	@RequestMapping("/sol_member/joinagree.do")
 	public String join(HttpServletRequest req, HttpSession session) {
 
