@@ -33,5 +33,16 @@
     	VALUES (#categoryno#, #id#, #subject#, #content#, now())
  	 </insert>
  	 
+ 	 <select id="qnaRead" parameterClass="Integer" resultClass="LectureQnADTO">
+		select lectureqnano, id, subject, content, readcnt, regdate
+		from sol_lectureqna
+		where lectureqnano = #lectureqnano#
+	</select>
+	
+	<update id ="readCount"  parameterClass="Integer">
+		update sol_lectureqna
+		set readcnt = readcnt + 1
+		where lectureqnano = #lectureqnano#
+	</update>
 
 </sqlMap>

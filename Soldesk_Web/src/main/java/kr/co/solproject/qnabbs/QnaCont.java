@@ -35,6 +35,10 @@ public class QnaCont {
 	@RequestMapping(value="/sol_qna/list.do")
 	public String qnaList(HttpServletRequest request,HttpSession session) {
 		
+	// 어느 페이지에서 왔는지 나타내는 변수 
+    String whichPage = "qna";
+    request.setAttribute("whichPage", whichPage);
+    
 		String url="list.do";
 		int nowPage=1;	
 		int numPerPage=10;	

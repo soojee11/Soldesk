@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import kr.co.solproject.category.CategoryDTO;
 import kr.co.solproject.postscript.PostscriptDTO;
+import kr.co.solproject.qnabbs.QnaDTO;
+import kr.co.solproject.reply.ReplyDTO;
 
 /** Postscript controller에서는 리스트조회를 제외한 page reload해야하는 것만 제어함. **/
 
@@ -31,7 +33,7 @@ public class LectureQnACont {
 	}
 
 	
-	/** 후기 등록 **/
+	/** QnA 등록 **/
 	@RequestMapping(value = "/sol_study/qnaCreate.do", method = RequestMethod.POST)
 	public void createProc(LectureQnADTO dto, CategoryDTO cdto, HttpServletResponse resp, HttpServletRequest request, HttpSession session) {
 		//CategoryDTO cdto = null;
@@ -56,5 +58,42 @@ public class LectureQnACont {
 		}
 		
 	}// end
+	
+	
+	/** QnA 자세히보기 **/
+	@RequestMapping(value="/sol_study/qnaRead.do",method=RequestMethod.GET)
+	public void qnaRead(LectureQnADTO dto, HttpServletResponse resp, HttpServletRequest request, HttpSession session) {
+		int lectureqnano = dto.getLectureqnano();
+		String idcheck = "false";
+		String s_id = (String) session.getAttribute("s_id");
+		try {
+			//System.out.println(request.getParameter("lectureqnano"));
+			
+			dto = qnaDao.qnaRead(lectureqnano);
+			
+			qnaDao.readCount(lectureqnano);	
+			
+			resp.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = resp.getWriter();
+		
+			if (dto.getId().equals(s_id)) {
+				idcheck = "true";
+			} else{
+				
+			}
+			
+			if (dto != null) {
+				out.write(dto.getSubject()+"/"+dto.getId()+"/"+dto.getRegdate()+"/"+dto.getContent()+"/"+dto.getReadcnt()+"/"+idcheck);
+			} else {
+				out.write("학습QnA 상세보기 실패");
+			}
+
+		} catch (Exception e) {
+			System.out.println(e);
+			e.printStackTrace();
+		}
+
+		
+	}//end
 
 }
