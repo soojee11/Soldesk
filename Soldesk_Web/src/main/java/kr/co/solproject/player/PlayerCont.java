@@ -81,9 +81,23 @@ public class PlayerCont {
 	int nowMonth = cal.get(Calendar.MONTH) + 1;
 	//월은 0부터 시작하므로 1월 표시를 위해 1을 더해 줍니다.
 	int nowDay = cal.get(Calendar.DAY_OF_MONTH);
-	String nowregdate = (String)(nowYear+"-"+nowMonth+"-"+nowDay);
-  
-	System.out.println(id);
+	String nowregdate = null;
+	
+		if(nowMonth <10 && nowDay <10){
+			nowregdate = (String)(nowYear+"-0"+nowMonth+"-0"+nowDay);
+		}
+		if(nowMonth >=10 && nowDay >=10){
+			nowregdate = (String)(nowYear+"-"+nowMonth+"-"+nowDay);
+		}
+		if(nowMonth <10 && nowDay >=10){
+			nowregdate = (String)(nowYear+"-0"+nowMonth+"-"+nowDay);
+		}
+		if(nowMonth >=10 && nowDay <10){
+			nowregdate = (String)(nowYear+"-"+nowMonth+"-0"+nowDay);
+		}
+	
+	//String nowregdate = (String)(nowYear+"-"+nowMonth+"-"+nowDay);
+	//System.out.println(id);
 	mdao.calinsert(id, lectureno, nowregdate); //하나)추가 
    
     

@@ -26,21 +26,22 @@
 		frm.submit();
 	}//end
 </script>
+
 <h4>
 <img src="../sol_img/go_right.png" width="20px"/>
 <img src="../sol_img/logos/bbs_desc.png" width="190px" height="50px"><span style="font-size: 12px;">| 자유롭게 말해보세요 </span>
 </h4>
 <div>
-총 <strong>${total }</strong> 개의 등록된 글이 있습니다. | 현재 페이지 : <strong>${nowPage }/${totalPage }</strong>
+총 <span style="color: red;"><strong>${total }</strong></span> 개의 등록된 글이 있습니다. | 현재 페이지 : <strong>${nowPage }/${totalPage }</strong>
 </div>
 <br />
-<table class="table">
+<table class="table" id="a">
 	<tr>
-		<td width="60">번호</td>
-		<td>제목</td>
-		<td width="100">ID</td>
-		<td width="100">작성일</td>
-		<td width="60">조회수</td>
+		<th width="60">번호</th>
+		<th>제목</th>
+		<th width="100">ID</th>
+		<th width="100">작성일</th>
+		<th width="60">조회수</th>
 	</tr>
 	
 	<!-- 공지사항 -->

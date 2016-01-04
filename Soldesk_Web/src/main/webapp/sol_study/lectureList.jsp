@@ -4,6 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!-- page start-->
+<!-- <script src="js/postscript.js"></script>-->
 <script src="js/my.js"></script>
 <script>
 function lectureGo(lectureno){
@@ -13,6 +14,12 @@ function lectureGo(lectureno){
 function lectureNotGo(){
 	alert("로그인 후 이용해 주세요.");
 }
+function postApplyResponse(data, status) { //callback함수
+	alert(data.replace(/^\s+|\s+$/gm,''));
+	window.location.reload(); //현재 페이지 새로고침
+}
+
+
 </script>
 
 <link href="./css/style.css" rel="stylesheet" type="text/css">
@@ -141,7 +148,20 @@ function qnaCreate(){
 <!-- 학습QnA List -->
 <div id="qnaList">
 총 <span style="color: red;"><strong>${qnaTotal}</strong></span>개의 Q&A가 있습니다.
-<br />
+
+<br/>
+<div align="right">
+<c:choose>
+<c:when test="${s_id != null }">
+<a href="javascript:qnaCreate()"><img src='./img/bt_write.gif' width="40" height="20"></a>
+</c:when>
+<c:otherwise>
+<a href="javascript:lectureNotGo()"><img src='./img/bt_write.gif' width="40" height="20"></a>
+</c:otherwise>
+</c:choose>
+</div>
+<br/>
+
 <table class="table">
 <tr align="center" >
 	<td width="60">번호</td>
@@ -179,32 +199,37 @@ function qnaCreate(){
 
 <!-- 학습QnA Form -->
 <div id="qnaCreate" align="center" style="display:none">
-<form method="post" id="qnaCreateForm">
-<input type='hidden' name='gwamok' id='gwamok' value='${gwamok}'>
-<input type='hidden' name='grade' id='grade' value='${grade}'>
-<table class="table" style="width:98%;">
-    <tr bgcolor="#f5f7f9">
-        <th style="text-align:center" valign="bottom">제목</th>
-        <td bgcolor="#ffffff"><input type="text" name="subject"></td>
-    </tr>
-    <tr bgcolor="#f5f7f9">
-        <th style="text-align:center" valign="bottom">아이디</th>
-        <td bgcolor="#ffffff">${s_id }</td>
-    </tr>
-    <tr bgcolor="#f5f7f9">
-        <th style="text-align:center"  valign="bottom">내용</th>
-        <td bgcolor="#ffffff"><textarea cols="50" rows="7" name="content"></textarea></td>
-    </tr>
-</table>
+
+<form name='qnaCreateForm' id="qnaCreateForm" method="post" >  <!-- action="insert.do" -->
+ 	<input type="hidden" name='QnAno' id='QnAno' value='${lectureqnano}'>
+	<input type='hidden' name='gwamok' id='gwamok' value='${gwamok}'> 
+	<input type='hidden' name='grade' id='grade' value='${grade}'>
+ 
+ <table border ="0" width="100%" class="table" style="text-align:center">
+	<tr bgcolor="#f5f7f9">
+		<th style="text-align:center" valign="bottom"><a >제목</a></th>
+		<td bgcolor="#ffffff"><input type="text" name="subject" size="100"></td>
+	</tr>
+	<tr bgcolor="#f5f7f9">
+		<th style="text-align:center" valign="bottom">아이디</th>
+		<td bgcolor="#ffffff">${s_id }</td>
+	</tr>
+	<tr bgcolor="#f5f7f9">
+		<th style="text-align:center"  valign="bottom">내용</th>
+		<td bgcolor="#ffffff"><textarea cols="50" rows="7" name="content"></textarea></td>
+	</tr>
+</table> 
  <div align="right">
-    <input type="button" class="btn btn-warning button" value="등록" onclick="qnaApply(this.form)">
-     <input type="button" class="btn btn-warning button" value="취소" onclick="javascript:history.go()">
+	<input name="btnCreate" type="button" class="btn btn-warning button" value="등록" onclick="qnaApply(this.form)">
+ 	<input name="btnCancel" type="button" class="btn btn-warning button" value="취소" onclick="javascript:history.go()">
+ 
+
   </div>
 </form>
 </div>
 </div>
-</c:if>
 
+</c:if>
 
 <!-- 후기 탭 -->
 <script>
@@ -241,10 +266,6 @@ function postDelete(postscriptno) {
     } else {
         return;
 	} 
-}
-function postApplyResponse(data, status) { //callback함수
-	alert(data.replace(/^\s+|\s+$/gm,''));
-	window.location.reload(); //현재 페이지 새로고침
 }
 //수정할 댓글 조회
 function postUpdate(postscriptno){
@@ -289,17 +310,18 @@ function updateProc() {
 <div id="menu3">
 총 <span style="color: red;"><strong>${postTotal}</strong></span>개의 후기가 있습니다.
 <br/>
+
+
 <table class="table">
-<tr align="center" >
 	<th width='60'>순번</th>
 	<th>내용</th>
 	<th width='60'></th>
 	<th width='60'>작성자</th>
 	<th width='100'>등록일</th>
 	<th width='100'>강의만족도</th>
-</tr>
+	</tr>
 
-<c:set var="postNo" value="${postNo }" />	
+<c:set var="postNo" value="${postNo+1 }" />	
 <c:forEach var="postDto" items="${postList }" >
 <c:set var="postNo" value="${postNo-1 }" />
 <tr align="center">
@@ -315,12 +337,15 @@ function updateProc() {
 	<c:if test="${postDto.postgrade==4 }"><img src="img/rating_4.gif"></c:if><c:if test="${postDto.postgrade==3 }"><img src="img/rating_3.gif"></c:if>
 	<c:if test="${postDto.postgrade==2 }"><img src="img/rating_2.gif"></c:if><c:if test="${postDto.postgrade==1 }"><img src="img/rating_1.gif"></c:if></td>
 </tr>
+
 </c:forEach>
 
-<tr>
-	<td colspan="6"><div align="center">${postPaging }</div></td>
-</tr>
+	<tr>
+		<td colspan="5"><div align="center">${postPaging }</div></td>
+	</tr>
+
 </table>
+
 
 <div style='background-color:#f8f8f8; padding:25px;'>
 <form name='postForm' id='postForm' method='post'>  
@@ -329,21 +354,20 @@ function updateProc() {
 	<input type='hidden' name='grade' id='grade' value='${grade}'>
       
 	<span class="star-cb-group">
-		<input type="radio" id="rating-5" name="postgrade" value="5" onclick="alert1(this.value)" checked="checked"/><label for="rating-5">5</label>
-		<input type="radio" id="rating-4" name="postgrade" value="4" onclick="alert1(this.value)" /><label for="rating-4">4</label>
-		<input type="radio" id="rating-3" name="postgrade" value="3" onclick="alert1(this.value)" /><label for="rating-3">3</label>
-		<input type="radio" id="rating-2" name="postgrade" value="2" onclick="alert1(this.value)" /><label for="rating-2">2</label>
-		<input type="radio" id="rating-1" name="postgrade" value="1" onclick="alert1(this.value)" /><label for="rating-1">1</label>
+		<input type="radio" id="rating-5" name="rating" value="5" onclick="alert1(this.value)" checked="checked"/><label for="rating-5">5</label>
+		<input type="radio" id="rating-4" name="rating" value="4" onclick="alert1(this.value)" /><label for="rating-4">4</label>
+		<input type="radio" id="rating-3" name="rating" value="3" onclick="alert1(this.value)" /><label for="rating-3">3</label>
+		<input type="radio" id="rating-2" name="rating" value="2" onclick="alert1(this.value)" /><label for="rating-2">2</label>
+		<input type="radio" id="rating-1" name="rating" value="1" onclick="alert1(this.value)" /><label for="rating-1">1</label>
 	</span>
 	<span id="demo" style="font-size:12px;">&nbsp;별점:&nbsp;5</span><br />
 	<script>
 	function alert1(val) {
+		alert(val);
 		document.getElementById("demo").innerHTML = '&nbsp;별점:&nbsp;'+val;
 	}
 	</script>
-	
     <textarea name='content' id='content' rows="5" cols="50" style="width: 88%; height:53px;"></textarea>
-   
     <!-- <br><br> -->
 	<c:choose>
 	<c:when test="${s_id != null }">
@@ -355,11 +379,14 @@ function updateProc() {
 		</a>
 	</c:otherwise>
     </c:choose>
+
 </form>
 </div>
 </div>
+
 </c:if>
 <!-- 후기 탭 끝 -->
+
 </div>
 </div>
 <!-- page end-->

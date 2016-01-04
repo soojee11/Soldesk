@@ -52,6 +52,23 @@ public class MypageController {
 		int nowDay = cal.get(Calendar.DAY_OF_MONTH);
 		String nowregdate = (String)(nowYear+"0"+nowMonth+"0"+nowDay);
 		String nowregdate2 = (String)(nowYear+"-"+nowMonth+"-"+nowDay);
+		String nowregdate3 = (String)(nowYear+"-"+nowMonth+"-"+nowDay);
+		req.setAttribute("nowregdate3", nowregdate3);
+		
+		if(nowMonth <10 && nowDay <10){
+			 nowregdate2 = (String)(nowYear+"00"+nowMonth+"00"+nowDay);
+		}
+		if(nowMonth >=10 && nowDay >=10){
+			 nowregdate2 = (String)(nowYear+"0"+nowMonth+"0"+nowDay);
+		}
+		if(nowMonth <10 && nowDay >=10){
+			 nowregdate2 = (String)(nowYear+"00"+nowMonth+"0"+nowDay);
+		}
+		if(nowMonth >=10 && nowDay <10){
+			 nowregdate2 = (String)(nowYear+"0"+nowMonth+"00"+nowDay);
+		}
+
+		
 		
 		
 		List regdatelist = null;
@@ -133,7 +150,7 @@ public class MypageController {
 		//--------------------------------------------------------------------------------
 			//자유게시판
 		    int nowPage=1;      // 현재페이지, 페이지 시작번호 0->1page
-		    int numPerPage=3;   // 페이지당 레코드 수
+		    int numPerPage=5;   // 페이지당 레코드 수
 		    String url="calendar.do?s_id="+s_id;  // 이동할 페이지 
 		    
 		    // 현재 페이지의 정보를 가져옴    
@@ -151,7 +168,7 @@ public class MypageController {
 		    
 		    List bbslist=dao.getbbslist(map);
 		
-		    int total=dao.getTotal();
+		    int total=dao.getTotal(s_id);
 		    String paging=Paging.paging5(total,nowPage,numPerPage,url);
 			
 		    
@@ -174,7 +191,7 @@ public class MypageController {
 				 List qnalist=dao.getqnalist(map2);
 				
 				String dbean=Utility.getDate();
-				 int total2=dao.getTotal2();
+				 int total2=dao.getTotal2(s_id);
 				
 				 String paging2=Paging.paging5(total2,nowPage,numPerPage,url);
 					
@@ -231,7 +248,21 @@ public class MypageController {
 			int nowDay = cal.get(Calendar.DAY_OF_MONTH);
 			String nowregdate = (String)(nowYear+"0"+nowMonth+"0"+nowDay);
 			String nowregdate2 = (String)(nowYear+"-"+nowMonth+"-"+nowDay);
+			String nowregdate3 = (String)(nowYear+"-"+nowMonth+"-"+nowDay);
+			req.setAttribute("nowregdate3", nowregdate3);
 			
+			if(nowMonth <10 && nowDay <10){
+				 nowregdate2 = (String)(nowYear+"00"+nowMonth+"00"+nowDay);
+			}
+			if(nowMonth >=10 && nowDay >=10){
+				 nowregdate2 = (String)(nowYear+"0"+nowMonth+"0"+nowDay);
+			}
+			if(nowMonth <10 && nowDay >=10){
+				 nowregdate2 = (String)(nowYear+"00"+nowMonth+"0"+nowDay);
+			}
+			if(nowMonth >=10 && nowDay <10){
+				 nowregdate2 = (String)(nowYear+"0"+nowMonth+"00"+nowDay);
+			}
 			
 			List regdatelist = null;
 		    regdatelist = dao.getregdate(s_id); //강좌를들은날짜들을 LIST로 가져오자
@@ -335,7 +366,7 @@ public class MypageController {
 				 
 				//자유게시판
 			    int nowPage=1;      // 현재페이지, 페이지 시작번호 0->1page
-			    int numPerPage=3;   // 페이지당 레코드 수
+			    int numPerPage=5;   // 페이지당 레코드 수
 			    String url="calendar.do?s_id="+s_id;  // 이동할 페이지 
 			    
 			    // 현재 페이지의 정보를 가져옴    
@@ -353,7 +384,7 @@ public class MypageController {
 			    
 			    List bbslist=dao.getbbslist(map);
 			
-			    int total=dao.getTotal();
+			    int total=dao.getTotal(s_id);
 			    String paging=Paging.paging5(total,nowPage,numPerPage,url);
 				
 			    
@@ -378,7 +409,7 @@ public class MypageController {
 					 List qnalist=dao.getqnalist(map2);
 					
 					String dbean=Utility.getDate();
-					 int total2=dao.getTotal2();
+					 int total2=dao.getTotal2(s_id);
 					
 					 String paging2=Paging.paging5(total2,nowPage,numPerPage,url);
 						

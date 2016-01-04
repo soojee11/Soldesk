@@ -23,12 +23,12 @@
 		WHERE category.grade = #grade# AND category.gwamok = #gwamok#
 	</select>
 	
-	<select id="getCategory" parameterClass="CategoryDTO" resultClass="CategoryDTO">
+	<select id="getQnACategory" parameterClass="CategoryDTO" resultClass="CategoryDTO">
    		SELECT categoryno from sol_category
     	WHERE grade = #grade# AND gwamok = #gwamok#
  	 </select>
  	 
- 	 <insert id="insert" parameterClass="LectureQnADTO" >
+ 	 <insert id="qnaInsert" parameterClass="LectureQnADTO" >
     	INSERT INTO sol_lectureqna(categoryno, id, subject, content, regdate)
     	VALUES (#categoryno#, #id#, #subject#, #content#, now())
  	 </insert>

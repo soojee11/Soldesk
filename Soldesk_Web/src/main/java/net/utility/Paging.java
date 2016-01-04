@@ -251,7 +251,7 @@ public static  String paging4(int totalRecord, int nowPage, int recordPerPage, S
 
 
 
-    //하나)캘린더에서 자게 , 큐엔에이 에서 사용
+    //하나)캘린더에서 자게 , 큐엔에이탭에서 사용
 	public static  String paging5(int totalRecord, int nowPage, int recordPerPage, String filenm){
     int pagePerBlock = 3; // 블럭당 페이지 수
     int totalPage = (int)(Math.ceil((double)totalRecord/recordPerPage)); // 전체 페이지 

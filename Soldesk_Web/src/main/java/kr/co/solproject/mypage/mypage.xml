@@ -84,6 +84,7 @@
 		ON calendar.lectureno =
 		study.lectureno
 		where calendar.id=study.id
+		
 	</select>
 
 	<!-- SELECT t1.col, t3.col FROM table1 join table2 ON table1.primarykey 
@@ -99,6 +100,7 @@
 		join sol_lecture lecture on study.lectureno =
 		lecture.lectureno
 		where calendar.id=study.id
+		 order by calendar.regdate desc
 	</select>
 
 
@@ -146,6 +148,7 @@
 		ON calendar.id = myscore.id
 		join sol_test test on myscore.testno = test.testno
 		group by myscore.mytestno
+		 order by myscore.regdt desc
 	</select>
 
 
@@ -168,7 +171,7 @@
   <select id="getbbslist" parameterClass="Map" resultClass="MypageDTO">
         select bbs.bbsno,bbs.subject,bbs.content,bbs.passwd,bbs.regdt,bbs.readcnt,bbs.noticeshow,calendar.id
             FROM sol_calendar calendar join sol_bbs bbs
-            ON calendar.id = #id#
+            ON bbs.passwd = #id#
           
          group by bbs.bbsno
          order by bbs.bbsno desc
@@ -186,12 +189,12 @@
              limit #sno#, #numPerPage#
 	</select>
 	
-	  <select id="total" resultClass="Integer">
-      select count(*) from sol_bbs
+	  <select id="total" resultClass="Integer" parameterClass="String" >
+      select count(*) from sol_bbs where passwd = #id#
   </select>
   
-	     <select id="total2" resultClass="Integer">
-      select count(*) from sol_qna
+	     <select id="total2" resultClass="Integer"  parameterClass="String"> 
+      select count(*) from sol_qna where id = #id#
   </select>
     
 	
