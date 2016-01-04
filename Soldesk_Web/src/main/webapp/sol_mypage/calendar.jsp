@@ -87,7 +87,12 @@ function goRead(qnano,recNo,s_id){
 </tr> --%>
  <tr>
       <td  align="center">
-      <input type="button" value="◁" onClick="monthDown(this.form)">
+     <!--  <input type="button" class="btn-month" value="◀" onClick="monthDown(this.form)"> -->
+     <button type="button" class="btn-month"  onClick="monthDown(this.form)">
+      <img src="image/wbefore2.png" width=10px height=10px />
+      </button>
+     
+     
       <select name="year" onchange="selectCheck(this.form)">
 <%--       <%
       for(int i=year-5;i<year+6;i++){
@@ -122,7 +127,11 @@ function goRead(qnano,recNo,s_id){
       
       </select>
       
-      <input type="button" value="▷" onClick="monthUp(this.form)"/></td>
+    <!--   <input type="button" class="btn-month"  onClick="monthUp(this.form)" value=""/> -->
+     <button type="button" class="btn-month"  onClick="monthUp(this.form)">
+     <img src="image/wnext2.png" width=10px height=10px />
+      </button>
+      </td>
     </tr>
     <tr>
       <td align="center" colspan="3" style="font-weight: bold; width: 100%; font-size: 18px;">
@@ -201,10 +210,6 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
       </c:forEach> 
      
      
-       
-     
-     
-     
    <%--     <c:forEach begin="1" end="${week-1 }" var="i">
                         <td bgcolor='#ffffff'>&nbsp;</td>
                         <c:set var="newLine">${ newLine+1}</c:set> 
@@ -263,7 +268,7 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
       --%>
                        <c:choose>
                              <c:when test="${nowymd eq nowregdate2  && date eq i}">
-                                <c:set var="bgcolor" value="#99cc66"/>
+                                <c:set var="bgcolor" value="#fcef8d"/>
                                 
                             </c:when> 
                             <c:when test="${i gt endDate}"> <!-- 달력외부 -->
@@ -395,7 +400,7 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
 </span>
 
 
-  <span class="modal fade" id="${now }lecture" role="dialog"  ">
+  <span class="modal fade" id="${now }lecture" role="dialog"  >
     <span class="modal-dialog">
     
       <!-- Lecture Modal content-->
@@ -408,7 +413,7 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
          
 			<table cellpadding=3 border=0 cellspacing=1 width=100% bgcolor=#dddddd class="table">
 			          <thead>
-			        <tr style="font-size: 14px; font-weight: bold;" bgcolor=#fafafa align="center">
+			        <tr style="font-size: 14px; font-weight: bold;" bgcolor=#f8f8f8 align="center">
 			            <td >회차</td>
 			            <td>강의명</td>
 			            <td >선생님</td>
@@ -458,7 +463,14 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
 
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary button" data-dismiss="modal">Close</button>
+        <span align="right" style="font-size: 8px">*모바일에서는 가로화면을 권장합니다.</span>
+        <!--   <button type="button" class="btn btn-primary button" data-dismiss="modal">Close</button>
+        -->
+         <button type="button" class="btn-momodal"  data-dismiss="modal">
+     <img src="image/xxx.png" width=30px height=30px />
+      </button>
+       
+       
         </div>
       </span>
     </span>
@@ -476,6 +488,8 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
   <span class="modal fade" id="${now }memo" role="dialog">
     <span class="modal-dialog">
     
+    
+   
       <!-- Lecture Modal content-->
       <span class="modal-content">
         <span class="modal-header">
@@ -484,10 +498,11 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
         </span>
         <div class="modal-body">
          
+        
           <table cellpadding=3 border=0 cellspacing=1 width=100% bgcolor=#dddddd class="table">
             
             <thead>
-                <tr align="center" bgcolor="#fafafa" style="font-weight: bold; font-size: 14px;">
+                <tr align="center" bgcolor="#f8f8f8" style="font-weight: bold; font-size: 14px;">
                     <td width="9%" >회차</td>
                     <td width="18%">강의명</td>
                     <td width="35%">메모</td>
@@ -566,7 +581,13 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
           
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary button" data-dismiss="modal">Close</button>
+          <span align="right" style="font-size: 8px">*모바일에서는 가로화면을 권장합니다.</span>
+        <!--   <button type="button" class="btn btn-primary button" data-dismiss="modal">Close</button>
+        -->
+        <button type="button" class="btn-momodal"  data-dismiss="modal">
+     <img src="image/xxx.png" width=30px height=30px />
+      </button>
+       
         </div>
       </span>
     </span>
@@ -653,7 +674,7 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
 <!-- 학년/과목/과목제목/내점수/경과시간/학습한날짜  -->
 <table cellpadding=3 border=0 cellspacing=1 width=100% bgcolor=#dddddd class="table">
           <thead>
-        <tr style="font-size: 14px; font-weight: bold;" bgcolor=#fafafa align="center">
+        <tr style="font-size: 14px; font-weight: bold;" bgcolor=#f8f8f8 align="center">
             <td >학년</td>
             <td>과목</td>
             <td >문제지</td>
@@ -732,8 +753,14 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
           
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary button" data-dismiss="modal">Close</button>
+          <span align="right" style="font-size: 8px">*모바일에서는 가로화면을 권장합니다.</span>
+          <!-- <button type="button" class="btn btn-primary button" data-dismiss="modal">Close</button> -->
            <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
+        
+            <button type="button" class="btn-momodal"  data-dismiss="modal">
+     <img src="image/xxx.png" width=30px height=30px />
+      </button>
+        
         </div>
       </span>
     </span>
