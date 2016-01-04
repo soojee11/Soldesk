@@ -1,7 +1,31 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="../sol_header.jsp"%>
 <!-- page start-->
-<script src="js/my.js"></script>
+<script>
+function validate(frm){
+	  var subject = frm.subject.value;
+	  var content = frm.content.value;
+	  subject = subject.replace(/^\s*|\s*$/g, '');
+	  content = content.replace(/^\s*|\s*$/g, '');
+	  if(subject.length == 0){
+	    alert("제목을 입력해 주세요.");
+	    frm.subject.focus();
+	    return;
+	  }
+	  if(content.length == 0){
+	    alert("내용을 입력해 주세요.");
+	    frm.content.focus();
+	    return;
+	  }
+	  
+	  mess = "등록하시겠습니까? ";
+	  if(confirm(mess)!=0){ 
+			frm.submit();
+		}else{
+			return;
+		}
+}
+</script>
 <h4>
 <img src="../sol_img/go_right.png" width="20px"/>
 <img src="../sol_img/logos/qna_desc.png" width="120px" height="50px"><span style="font-size: 12px;">| 무엇이든 물어보세요</span>

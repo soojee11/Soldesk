@@ -39,8 +39,9 @@
 					<div class="col-sm-10">
 						<select class="form-control input-sm m-bot15" name="gwamok">
 							<option value="국어" <c:choose><c:when  test="${dto.gwamok eq '국어' }" >selected</c:when></c:choose>>국어</option>
-							<option value="영어" <c:choose><c:when  test="${dto.gwamok eq '영어' }" >selected</c:when></c:choose>>영어</option>
 							<option value="수학" <c:choose><c:when  test="${dto.gwamok eq '수학' }" >selected</c:when></c:choose>>수학</option>
+							<option value="사회" <c:choose><c:when  test="${dto.gwamok eq '사회' }" >selected</c:when></c:choose>>사회</option>
+							<option value="과학" <c:choose><c:when  test="${dto.gwamok eq '과학' }" >selected</c:when></c:choose>>과학</option>
 						</select>
 				</div>
 				</div>

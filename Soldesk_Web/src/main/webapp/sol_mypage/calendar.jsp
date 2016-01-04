@@ -882,15 +882,16 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
 <!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■자유게시판■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
            
            <div>
-총 <strong>${total }</strong> 개의 등록된 글이 있습니다. | 현재 페이지 : <strong>${nowPage }/${totalPage }</strong>
+<%-- 총 <strong>${total }</strong> 개의 등록된 글이 있습니다. | 현재 페이지 : <strong>${nowPage }/${totalPage }</strong>
+ --%>
+내가 등록한 글은 총 <strong>${total }</strong> 개 입니다.
 </div>
            
-           
            <table class="table"  style="background-color: #ffffff">
-    <tr>
+    <tr align ="center" style="color: #000000;">
         <td>제목</td>
         <td width="100">ID</td>
-        <td width="100">작성일</td>
+        <td width="100">최신순</td>
         <td width="60">조회수</td>
     </tr>
     
@@ -906,7 +907,7 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
     <!-- 게시판 -->
     <c:set var="recNo" value="${recNo-ntotal }" />
     <c:forEach var="dto" items="${bbslist }">
-     <c:set var="dtoid" value="${dto.id }" />
+     <c:set var="dtoid" value="${dto.passwd }" />
     
         <c:if test="${id eq dtoid }">
     
@@ -918,16 +919,23 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
             <td><a href="/solproject/sol_bbs/bbsread.do?bbsno=${dto.bbsno }&nowPage=${nowPage }">${dto.subject }</a>
             </td>
             <td width="100">${dto.passwd }</td>
-            <td width="100"><c:set var="regdt" value="${dto.regdt }"/> ${fn:substring(regdt,0,16) }</td>
+            <td width="100"><c:set var="regdt" value="${dto.regdt }"/> ${fn:substring(regdt,0,10) }</td>
             <td width="60">${dto.readcnt }</td>
         </tr>
     
     </c:if>
     </c:forEach>
+     
 </table>
-<div align="center">
+<c:if test="${total gt 5  }">
+ <a href="/solproject/sol_bbs/bbslist.do?col1=passwd&col2=${s_id }">
+            *이전에 작성한 글 보러가기 
+            </a>
+            </c:if>
+            
+<%-- <div align="center">
     ${paging }
-</div>
+</div> --%>
                      
  <!-- ■■■■■■■■■■■■■■■■■■■■■//■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
         </div>
@@ -939,15 +947,17 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
         <div class="seaTabs_item" style="background-color: #f1f8f4">
 <!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■Q&A■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
             <div>
-총 <strong>${total2 }</strong> 개의 등록된 글이 있습니다. | 현재 페이지 : <strong>${nowPage }/${totalPage }</strong>
+<%-- 총 <strong>${total2 }</strong> 개의 등록된 글이 있습니다. | 현재 페이지 : <strong>${nowPage }/${totalPage }</strong>
+ --%> 
+ 내가 등록한 글은 총 <strong>${total2 }</strong> 개 입니다.
 </div>
 
     <table class ="table" style="background-color: #ffffff">
-    <tr align ="center" >
+    <tr align ="center" style="color: #000000;">
         <td>제목</td>
         <td width="100">답변여부</td>
         <td width="100">ID</td>
-        <td width="100">작성일</td>
+        <td width="100">최신순</td>
         <td width="60">조회수</td>
     </tr>
     
@@ -965,7 +975,7 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
     <c:set var ="recNo" value="${recNo }"/>
 
     <c:forEach var ="dto" items="${qnalist }">
-    <c:set var ="dtoid" value="${dto.id }"/>
+    <c:set var ="dtoid" value="${dto.passwd }"/>
     <c:if test="${id eq dtoid }">
     
     
@@ -990,7 +1000,7 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
                  ${dto.id }
             </td>
             <td>
-                <c:set var="regdt" value="${dto.regdt }"/> ${fn:substring(regdt,0,16) }
+                <c:set var="regdt" value="${dto.regdt }"/> ${fn:substring(regdt,0,10) }
             </td>
             <td>${dto.readcnt }</td>
         </tr>
@@ -998,13 +1008,21 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
         
         </c:if>
     </c:forEach>
+  <!--      <tr align="center">
+            <td colspan="5" >*이전에 작성한 글 보러가기 </td>
+        </tr> -->
 </table>
             
+             <c:if test="${total2 gt 5   }">
+             <a href="/solproject/sol_qna/list.do?col1=id&col2=${s_id }">
+            *이전에 작성한 글 보러가기 
+            </a>
+            </c:if>
             
-            
+<%--             
             <div align="center">
     ${paging2 }
-</div>
+</div> --%>
  <!-- ■■■■■■■■■■■■■■■■■■■■■//■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
         </div>
     </div>
