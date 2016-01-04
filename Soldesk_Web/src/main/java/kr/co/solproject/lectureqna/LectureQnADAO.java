@@ -48,9 +48,7 @@ public class LectureQnADAO {
 	public CategoryDTO getCategory(CategoryDTO dto) {
 		// CategoryDTO dto = null;
 		try {
-			System.out.println("77777777777777777777"+dto.getGrade()+dto.getGwamok());
-			dto = (CategoryDTO) mybatis.queryForObject("sol_lectureqna.getCategory", dto);
-			System.out.println("77777777777777777777"+dto.toString());
+			dto = (CategoryDTO) mybatis.queryForObject("sol_lectureqna.getQnACategory", dto);
 		} catch (Exception e) {
 			System.out.println("read 실패다: " + e);
 			e.printStackTrace();
@@ -58,13 +56,13 @@ public class LectureQnADAO {
 		return dto;
 	}// end
 	
+
 	/** QnA 등록 **/
 	public int qnaInsert(LectureQnADTO dto) {
 		int res = 0;
 		try {
-			System.out.println("---질문--dao"+dto.toString());
-
-			res = mybatis.update("sol_lectureqna.insert", dto);
+			//System.out.println("---질문--dao"+dto.toString());
+			res = mybatis.update("sol_lectureqna.qnaInsert", dto);
 		} catch (Exception e) {
 			System.out.println("post create error: " + e);
 		}

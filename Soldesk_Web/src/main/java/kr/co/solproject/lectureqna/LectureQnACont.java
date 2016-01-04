@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import kr.co.solproject.category.CategoryDTO;
+import kr.co.solproject.postscript.PostscriptDTO;
 
 /** Postscript controller에서는 리스트조회를 제외한 page reload해야하는 것만 제어함. **/
 
@@ -36,14 +37,9 @@ public class LectureQnACont {
 		//CategoryDTO cdto = null;
 		dto.setId((String) session.getAttribute("s_id"));
 		
-		/*cdto.setGrade(cdto.getGrade());
-		cdto.setGwamok(cdto.getGwamok());*/
-		System.out.println(cdto.getGrade());
-		System.out.println(cdto.getGwamok());
-		
 		cdto = qnaDao.getCategory(cdto);
 		try {
-			System.out.println("질문나와라dto>>>>>>"+dto.toString());
+			//System.out.println("질문나와라dto>>>>>>"+dto.toString());
 			dto.setCategoryno(cdto.getCategoryno());
 			int cnt = qnaDao.qnaInsert(dto);
 			resp.setContentType("text/html; charset=UTF-8");
@@ -59,8 +55,6 @@ public class LectureQnACont {
 			e.printStackTrace();
 		}
 		
-
 	}// end
-	
-		
+
 }

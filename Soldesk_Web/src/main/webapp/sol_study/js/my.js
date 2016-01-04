@@ -39,7 +39,7 @@ function goRead(qnano,recNo,s_id){
 	location.href="read.do?qnano="+qnano+"&recNo="+recNo;
 }//end
 
-function validate(frm){
+/*function validate(frm){
 	  var subject = frm.subject.value;
 	  var content = frm.content.value;
 	  
@@ -64,4 +64,4 @@ function validate(frm){
 	  }else{
 		  return;
 	  }
-}//end
+}//end*/

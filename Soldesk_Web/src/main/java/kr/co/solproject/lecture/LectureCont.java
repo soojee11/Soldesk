@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import kr.co.solproject.lectureqna.LectureQnADAO;
 import kr.co.solproject.postscript.PostscriptDAO;
 import net.utility.Paging;
-import net.utility.Utility;
 
 
 @Controller
@@ -31,22 +29,32 @@ public class LectureCont {
 	public LectureCont() {
 		System.out.println("---------------LectureCont객체 생성");
 	}
-	
-	//http://localhost:9090/solproject/sol_study/lectureList.do"
-	@RequestMapping(value="/sol_study/lectureList.do")
-	public String list(HttpServletRequest request) {
 
-		String url="lectureList.do";	// page링크시 이동할 페이지
-		int nowPage=1;			// 현재페이지, 페이지 시작번호 0->1page
-		int numPerPage=5;		// 페이지당 레코드 수
+	@RequestMapping(value="/sol_study/lectureInfo.do")
+	public String lectureInfo(HttpServletRequest request) {
+
+		int grade = 1;
+		String gwamok = "국어";
+
+		if(request.getParameter("grade") != null){
+			grade = Integer.parseInt(request.getParameter("grade"));
+		}
+			
+		if(request.getParameter("gwamok")!=null) {
+			gwamok=request.getParameter("gwamok");
+		}
+		
+		request.setAttribute("grade", new Integer(grade));
+		request.setAttribute("gwamok", gwamok);
+		
+		return "sol_study/lectureInfo";
+	}
+	
+	@RequestMapping(value="/sol_study/lectureList.do")
+	public String lectureList(HttpServletRequest request) {
+		String url="lectureList.do";
 		int grade = 1;			// default 1학년으로 설정 
 		String gwamok = "국어";
-		
-		int qnaNowPage=1;
-		int qnaNumPerPage=5;
-		
-		int postNowPage=1;
-		int postNumPerPage=5;
 		
 		if(request.getParameter("grade") != null){
 			grade = Integer.parseInt(request.getParameter("grade"));
@@ -55,102 +63,110 @@ public class LectureCont {
 		if(request.getParameter("gwamok")!=null) {
 			gwamok=request.getParameter("gwamok");
 		}
-		
-		int lectureNo=1;	// 게시판 목록에 출력될 글 번호
-		int QnAno = 1;
-		int postNo = 1;
-		
-		// 현재 페이지의 정보를 가져옴		
-		if(request.getParameter("nowPage")!=null) {
-			nowPage=Integer.parseInt(request.getParameter("nowPage"));
-		}
-		
-		if(request.getParameter("qnaNowPage")!=null) {
-			qnaNowPage=Integer.parseInt(request.getParameter("qnaNowPage"));
-		}
-		
-		if(request.getParameter("postNowPage")!=null) {
-			postNowPage=Integer.parseInt(request.getParameter("postNowPage"));
-		}
-		
-		//int sno=((nowPage-1)*numPerPage)+1;	//(0*5)+1=1,6,11
-		int sno=((nowPage-1)*numPerPage);
-		//int eno=nowPage*numPerPage;//1*5=5,10,15
-		
-		int qno=((qnaNowPage-1)*qnaNumPerPage);
-		
-		int postno = ((postNowPage-1)*postNumPerPage);
-		
-		Map map=new HashMap();
-		map.put("sno", sno);
-		map.put("gwamok", gwamok);
-		map.put("grade", grade);
-		map.put("numPerPage", numPerPage);
-		
-		Map qnaMap = new HashMap();
-		qnaMap.put("qno", qno);
-		qnaMap.put("gwamok", gwamok);
-		qnaMap.put("grade", grade);
-		qnaMap.put("qnaNumPerPage", qnaNumPerPage);
-		
-		Map postMap = new HashMap();
-		postMap.put("postno", postno);
-		postMap.put("gwamok", gwamok);
-		postMap.put("grade", grade);
-		postMap.put("postNumPerPage", postNumPerPage);
-		
-		
-		// 1. model사용
-		List list=dao.getList(map);     // 수지야 getList query문 부분 수정했당 
+
 		String categoryInfo = dao.getCategoryInfo(grade, gwamok);
-		String dbean=Utility.getDate();
-		int total=dao.getTotal(map);
-		String paging=Paging.paging4(total,nowPage,numPerPage,url);
 		
-		// qna
-		List qnaList = qnaDao.getList(qnaMap);
-		int qnaTotal = qnaDao.getTotal(qnaMap);
-		String qnaPaging = Paging.paging4(qnaTotal, qnaNowPage, qnaNumPerPage, url);
-		
-		// post
-		List postList = postDao.getList(postMap);
-		int postTotal = postDao.getTotal(postMap);
-		String postPaging = Paging.paging4(postTotal, postNowPage, postNumPerPage, url);
-		
-		lectureNo=total - (nowPage - 1) * numPerPage + 1; // 수지야 이 부분 수정했당
-		QnAno = qnaList.size();
-		//postscriptNo = postTotal - (postNowPage - 1) * postNumPerPage + 1;
-		postNo = postTotal - (postNowPage - 1) * postNumPerPage + 1;
-		
-		// 2. model사용후 결과값을 request영역에 저장
-		request.setAttribute("categoryInfo", categoryInfo);
-		request.setAttribute("list", list);
-		request.setAttribute("grade", new Integer(grade));
-		request.setAttribute("gwamok", gwamok);
-		request.setAttribute("dbean", dbean);
-		request.setAttribute("paging", paging);
-		request.setAttribute("lectureNo", lectureNo);
-		request.setAttribute("nowPage", nowPage);
-		request.setAttribute("total", total);
-		
-		// qna
-		request.setAttribute("qnaList", qnaList);
-		request.setAttribute("qnaPaging", qnaPaging);
-		request.setAttribute("QnAno", QnAno);
-		request.setAttribute("qnaNowPage", qnaNowPage);
-		request.setAttribute("qnaTotal", qnaTotal);
-		
-		// post
-		request.setAttribute("postList", postList);
-		request.setAttribute("postPaging", postPaging);
-		request.setAttribute("postNo", postNo);
-		//request.setAttribute("postscriptNo", postscriptNo);
-		request.setAttribute("postNowPage", postNowPage);
-		request.setAttribute("postTotal", postTotal);
-		
-		
-		//System.out.println(list.toString());
-		// 3. 결과값을 보여줄 view 리턴
+		int tabNum=Integer.parseInt(request.getParameter("tabNum"));
+		if(tabNum==1) {
+			int nowPage=1;
+			int numPerPage=5;
+			int lectureNo=1;
+				
+			if(request.getParameter("nowPage")!=null) {
+				nowPage=Integer.parseInt(request.getParameter("nowPage"));
+			}
+			int sno=((nowPage-1)*numPerPage);
+			
+			Map map=new HashMap();
+			map.put("sno", sno);
+			map.put("gwamok", gwamok);
+			map.put("grade", grade);
+			map.put("numPerPage", numPerPage);
+			
+			List list=dao.getList(map);
+			int total=dao.getTotal(map);
+			String paging=Paging.paging9(total,nowPage,numPerPage,url,tabNum,grade,gwamok);
+			
+			lectureNo=total - (nowPage - 1) * numPerPage + 1;
+			
+			request.setAttribute("categoryInfo", categoryInfo);
+			request.setAttribute("list", list);
+			request.setAttribute("grade", grade);
+			request.setAttribute("gwamok", gwamok);
+			request.setAttribute("paging", paging);
+			request.setAttribute("lectureNo", lectureNo);
+			request.setAttribute("nowPage", nowPage);
+			request.setAttribute("total", total);
+			request.setAttribute("tabNum", tabNum);
+		}
+		if(tabNum==2) {
+			int qnaNowPage=1;
+			int qnaNumPerPage=5;
+			int QnAno = 1;
+			
+			if(request.getParameter("nowPage")!=null) {
+				qnaNowPage=Integer.parseInt(request.getParameter("nowPage"));
+			}
+			int qno=((qnaNowPage-1)*qnaNumPerPage);
+			
+			Map qnaMap = new HashMap();
+			qnaMap.put("qno", qno);
+			qnaMap.put("gwamok", gwamok);
+			qnaMap.put("grade", grade);
+			qnaMap.put("qnaNumPerPage", qnaNumPerPage);
+			
+			List qnaList = qnaDao.getList(qnaMap);
+			int qnaTotal = qnaDao.getTotal(qnaMap);
+			String qnaPaging = Paging.paging9(qnaTotal, qnaNowPage, qnaNumPerPage, url, tabNum,grade,gwamok);
+			
+			QnAno = qnaTotal - (qnaNowPage - 1) * qnaNumPerPage + 1;
+
+			request.setAttribute("categoryInfo", categoryInfo);
+			request.setAttribute("grade", grade);
+			request.setAttribute("gwamok", gwamok);
+			request.setAttribute("qnaList", qnaList);
+			request.setAttribute("qnaPaging", qnaPaging);
+			request.setAttribute("QnAno", QnAno);
+			request.setAttribute("qnaNowPage", qnaNowPage);
+			request.setAttribute("qnaTotal", qnaTotal);
+			request.setAttribute("tabNum", tabNum);
+			
+		}
+		if(tabNum==3) {
+			int postNowPage=1;
+			int postNumPerPage=5;
+			int postNo = 1;
+			
+			if(request.getParameter("nowPage")!=null) {
+				postNowPage=Integer.parseInt(request.getParameter("nowPage"));
+			}
+			int postno = ((postNowPage-1)*postNumPerPage);
+			
+			Map postMap = new HashMap();
+			postMap.put("postno", postno);
+			postMap.put("gwamok", gwamok);
+			postMap.put("grade", grade);
+			postMap.put("postNumPerPage", postNumPerPage);
+			
+			List postList = postDao.getList(postMap);
+			int postTotal = postDao.getTotal(postMap);
+			
+			String postPaging = Paging.paging9(postTotal, postNowPage, postNumPerPage, url, tabNum,grade,gwamok);
+			
+			postNo = postTotal - (postNowPage - 1) * postNumPerPage + 1;
+			
+			request.setAttribute("categoryInfo", categoryInfo);
+			request.setAttribute("grade", grade);
+			request.setAttribute("gwamok", gwamok);
+			request.setAttribute("postList", postList);
+			request.setAttribute("postPaging", postPaging);
+			request.setAttribute("postNo", postNo);
+			request.setAttribute("postNowPage", postNowPage);
+			request.setAttribute("postTotal", postTotal);
+
+			request.setAttribute("tabNum", tabNum);
+		}
+
 		return "sol_study/lectureList";
 	}
 }
