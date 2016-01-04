@@ -27,12 +27,6 @@
 					</div>
 				</div> 
 				<div class="form-group">
-					<label class="col-sm-2 control-label">선생님</label>
-					<div class="col-sm-10">
-						<input type="text" class="form-control" name="teacher" placeholder="신윤경 선생님">
-					</div>
-				</div>
-				<div class="form-group">
 					<label class="col-sm-2 control-label">포스터</label>
 					<div class="col-sm-10">
 						<input type="file" name="posterMF" size='50' >

@@ -12,10 +12,9 @@
 <c:if test="${msg==1 }">
 	<script>
 		alert("강좌등록 성공!");
-		location.href="readCateInfo.do";
+		location.href="cateInfo.do";
 	</script>
 </c:if>
-
 
 <div class="row">
 	<div class="col-lg-12">
@@ -35,7 +34,9 @@
 	<tr align ="center">
 		<th><div align="center">학년</div></th>
 		<th><div align="center">과목</div></th>
+		<th><div align="center">선생님</div></th>
 		<th size="300"><div align="center" >강좌설명</div></th>
+		<th><div align="center">강좌상세보기</div></th>
 		<th><div align="center">강의상세보기</div></th>
 	</tr>
 	<c:if test="${total ==0 }">
@@ -49,16 +50,18 @@
 			<tr align ="center">
 				<td>${dto.grade }학년</td>
 				<td>${dto.gwamok }</td>
+				<td>${dto.teacherName }</td>
 				<td>${dto.categoryinfo }</td>
-				<td><a href="leclist.do?categoryno=${dto.categoryno}"><button class="btn btn-success btn-sm">강의보러가기</button></a></td>
+				<td><a href="readCate.do?categoryno=${dto.categoryno}"><button class="btn btn-success btn-sm">강좌상세보기</button></a></td>
+				<td><a href="leclist.do?categoryno=${dto.categoryno}"><button class="btn btn-info btn-sm">강의상세보기</button></a></td>
 			</tr>
 	</c:forEach>
 	<!-- &col1=${param.col1}&col2=${param.col2} -->
 	<tr>
-		<td colspan="5" align="right" ><strong>total:</strong>${total }</td>
+		<td colspan="6" align="right" ><strong>total:</strong>${total }</td>
 	</tr>
 	<tr>
-		<td colspan="5"><div align="center">${paging }</div></td>
+		<td colspan="6"><div align="center">${paging }</div></td>
 	</tr>
 </table>
 

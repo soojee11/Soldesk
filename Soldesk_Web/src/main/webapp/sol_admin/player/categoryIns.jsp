@@ -2,6 +2,43 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ include file="../header.jsp"%>
+<script type="text/javascript"
+	src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="./js/HuskyEZCreator.js"
+	charset="utf-8"></script>
+<script>
+	$(function() {
+		//전역변수
+		var obj = [];
+		//스마트에디터 프레임생성
+		nhn.husky.EZCreator.createInIFrame({
+			oAppRef : obj,
+			elPlaceHolder : "bookInfo",
+			sSkinURI : "./SmartEditor2Skin.html",
+			htParams : {
+				// 툴바 사용 여부 (true:사용/ false:사용하지 않음)
+				bUseToolbar : true,
+				// 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)
+				bUseVerticalResizer : true,
+				// 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
+				bUseModeChanger : false,
+			}
+		});
+
+		//전송버튼
+		$("#savebutton").click(function() {
+			if ($("#subject").val() == "") {
+				alert("제목을 입력해 주세요.");
+				$("#subject").focus();
+				return;
+			}
+			//id가 smarteditor인 textarea에 에디터에서 대입
+			obj.getById["bookInfo"].exec("UPDATE_CONTENTS_FIELD", []);
+			//폼 submit
+			$("#frm").submit();
+		})
+	})
+</script>
 <div class="row">
 	<div class="col-lg-12">
 		<h3 class="page-header">
@@ -20,7 +57,7 @@
 			<header class="panel-heading">강좌 등록</header>
 			<div class="panel-body">
 			
-			<form class="form-horizontal" action="cateInsert.do" method="post" enctype='multipart/form-data'>
+			<form class="form-horizontal" action="cateInsert.do" method="post" enctype='multipart/form-data' name="frm" id="frm">
 				<div class="form-group">
 					<label class="col-sm-2 control-label">학년</label>
 					<div class="col-sm-10">
@@ -46,13 +83,37 @@
 				</div>
 				</div>
 				<div class="form-group">
+					<label class="col-sm-2 control-label">선생님</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" name="teacherName" placeholder="신윤경 선생님">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label">선생님 사진</label>
+					<div class="col-sm-10">
+						<input type="file" name="teacherMF" size='50' >
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label">선생님 이력</label>
+					<div class="col-sm-10">
+						<textarea rows="5" cols="100" name ="teacherCareer"></textarea>
+					</div>
+				</div>
+				<div class="form-group">
 					<label class="col-sm-2 control-label">강좌 설명</label>
 					<div class="col-sm-10">
 						<textarea rows="5" cols="100" name ="categoryinfo">${dto.categoryinfo }</textarea>
 					</div>
 				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label">교재 정보</label>
+					<div class="col-sm-10">
+						<textarea name="bookInfo" id="bookInfo" style="width: 80%; height: 300px;"></textarea>
+					</div>
+				</div>
 				<div align="center">
-					<button type="button" class="btn btn-danger btn-sm" onclick="cateInsert(this.form)">등록</button>
+					<button type="button" class="btn btn-danger btn-sm" id="savebutton">등록</button>
 					<button type="reset" class="btn btn-danger btn-sm" >취소</button>
 					<button type="button" class="btn btn-danger btn-sm" onclick="history.go(-1); return false;">목록</button>
 				</div>
