@@ -37,6 +37,15 @@ public class QuestionDAO {
 		return res;
 	}//end
 	
-	
+	public int getG_QuestionTotal(int testno) {
+		int res=0;
+		try {
+			res=(Integer)mybatis.queryForObject("sol_question.getG_QuestionTotal",testno);
+
+		}	catch(Exception e) {
+			System.out.println("getG_QuestionTotal error: "+e);		
+		}
+		return res;
+	}//end
 }
 
