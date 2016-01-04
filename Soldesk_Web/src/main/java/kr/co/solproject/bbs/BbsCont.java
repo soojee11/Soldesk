@@ -1,5 +1,7 @@
 package kr.co.solproject.bbs;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -41,8 +43,7 @@ public class BbsCont {
 	  noticeList=admindao.noticeList(noticemap); 
 	  int noticeTotal=admindao.getNoticeTotal(noticemap);
 
-	// bbs list
-	  
+	  //bbs list
 	  //검색
 	  String col1=null;
 		if(req.getParameter("col1")!="") {
@@ -86,6 +87,10 @@ public class BbsCont {
     int recNo = total - (nowPage - 1) * numPerPage + 1 ;
     int totalPage = (int) Math.ceil((double)total/(double)numPerPage);
     
+    //오늘날짜 추가
+  	Date d = new Date();
+  	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+  	
     req.setAttribute("list", list);
     req.setAttribute("nlist", noticeList);
     req.setAttribute("recNo", recNo);
@@ -96,6 +101,8 @@ public class BbsCont {
     req.setAttribute("totalPage", totalPage);
     req.setAttribute("total", total);
     req.setAttribute("ntotal", noticeTotal);
+    req.setAttribute("today", sdf.format(d));
+    
     
     return "/sol_bbs/bbsList";
   }

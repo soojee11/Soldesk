@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="../sol_header.jsp"%>
-<!-- page start-->
+<link href="./css/style.css" rel="stylesheet" type="text/css">
 <script>
 function validate(frm){
 	  var subject = frm.subject.value;
@@ -33,7 +33,7 @@ function validate(frm){
 <hr>
 <div align="center" >
 <form action="insert.do" method="post">
-<table border ="0" width="100%" class="table" style="text-align:center">
+<table border ="0" width="100%" class="table" style="text-align:center; color: #000000;">
 	<tr bgcolor="#f5f7f9">
 		<th style="text-align:center" valign="bottom">제목</td>
 		<td bgcolor="#ffffff"><input type="text" name="subject" size="100"></td>
