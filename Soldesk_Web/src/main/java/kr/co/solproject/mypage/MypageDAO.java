@@ -44,6 +44,11 @@ public class MypageDAO {
 		return res;
 	}// end
 
+	
+	
+//-------------------------------------------------------------------------------
+		
+	
 	public void calinsert(String id, int lectureno,String nowregdate) {
 		int cnt = 0,cnt2=0;
 		String rdt=null,rdt2=null,calno=null;
@@ -55,17 +60,20 @@ public class MypageDAO {
 		try {
 			cnt = (Integer) mybatis.queryForObject("sol_calendar.checkcount", map);
 			
-			//System.out.println(id+" "+lectureno+" "+nowregdate);
+			//System.out.println(id+" | "+lectureno+" | "+nowregdate);
 			//System.out.println("##cnt: "+cnt);
 			
 			if(cnt == 0){
 				cnt2 = mybatis.update("sol_calendar.calinsert", map); 
+				//System.out.println("##calinsert: "+cnt2);
 			}
 			else{
 				rdt =  (String) mybatis.queryForObject("sol_calendar.checkrdt", map);
 				//System.out.println("##rdt: "+rdt); //regdate중 max최신값가져온다.
+				
 				calno =  (String) mybatis.queryForObject("sol_calendar.checkcalno", map);
 				//System.out.println("##calno: "+calno); //regdate중 max최신값가져온다.
+				
 				rdt2 =  rdt.substring(0, 10);
 				//System.out.println("##rdt2: "+rdt2);//시간제외해줌.
 				
@@ -75,9 +83,11 @@ public class MypageDAO {
 				map2.put("regdate", rdt);
 				map2.put("calno", calno);
 				
+				
 				if(nowregdate.equals(rdt2) ){
 					cnt2 = mybatis.update("sol_calendar.calupdate", map2); 
-					//System.out.println("##calupdate: "+cnt2);
+					//System.out.println("###calupdate: "+cnt2);
+				
 				}else{
 					cnt2 = mybatis.update("sol_calendar.calinsert", map); 
 					//System.out.println("###calinsert: "+cnt2);
@@ -91,6 +101,9 @@ public class MypageDAO {
 		}
 	}
 
+	
+//-------------------------------------------------------------------------------
+	
 	public List getregdate(String id) {
 		List res = null;
 		try {
@@ -182,7 +195,7 @@ public class MypageDAO {
 		try {
 			list = mybatis.queryForList("sol_calendar.getbbslist",map);
 
-			System.out.println("0"+list);
+			//System.out.println("0"+list);
 			
 		} catch (Exception e) {
 			System.out.println("getbbslist: " + e);
@@ -197,7 +210,7 @@ public class MypageDAO {
 		try {
 			list = mybatis.queryForList("sol_calendar.getqnalist",map);
 
-			System.out.println(list);
+			//System.out.println(list);
 		} catch (Exception e) {
 			System.out.println("getqnalist: " + e);
 		}
