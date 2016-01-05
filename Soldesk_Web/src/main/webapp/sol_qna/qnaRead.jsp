@@ -238,7 +238,7 @@ function cancel(){
 			<c:if test="${mlevel=='A' and replyok=='N'}">
 				※ 답변을 달아주세요. ※
 				<textarea name="content" id="content" rows="5" cols="70" style="width: 89%; height:53px;"></textarea>
-				<img src="img/btn.gif" onclick="replyForm()"/>
+				<img src="img/btn_submit.png" onclick="replyForm()"/>
 			</c:if>
 	</form>
 
