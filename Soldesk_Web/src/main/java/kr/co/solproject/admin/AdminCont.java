@@ -953,11 +953,10 @@ public class AdminCont {
 	}//end
 	
 	@RequestMapping(value="sol_admin/player/cateUpdate.do", method=RequestMethod.GET)
-	public String updateCateInfo(int categoryno, HttpServletRequest request) {
-		CategoryDTO dto = null;
-		dto = dao.categoryRead(categoryno);
+	public String updateCateInfo(CategoryDTO dto, HttpServletRequest request) {
+		dto = catedao.readCate(dto);
 		
-		request.setAttribute("categoryno", categoryno);
+		request.setAttribute("categoryno", dto.getCategoryno());
 		request.setAttribute("dto", dto);
 		
 		return "sol_admin/player/updateCateInfo";
@@ -965,31 +964,55 @@ public class AdminCont {
 	
 	@RequestMapping(value="sol_admin/player/cateUpdate.do", method=RequestMethod.POST)
 	public String updateCateProc(CategoryDTO dto, HttpServletRequest request) {
-		dao.updateCateProc(dto);
-		return "redirect:./updelete.do";
+		
+		System.out.println("categoryno: "+dto.getCategoryno());
+		int categoryno = dto.getCategoryno();
+		
+		request.setAttribute("root", Utility.getRoot());
+		
+		String basePath = Utility.getRealPath(request, "/sol_admin/player/cateStorage");
+		CategoryDTO oldDTO = catedao.readCate(dto);
+		
+		MultipartFile teacherMF = dto.getTeacherMF();
+		
+		if(teacherMF.getSize()>0){
+			Utility.deleteFile(basePath, oldDTO.getTeacherPhoto());
+			String teacherPhoto = UploadSaveManager.saveFileSpring30(teacherMF, basePath);
+			dto.setTeacherPhoto(teacherPhoto);
+		}else{	
+			dto.setTeacherPhoto(oldDTO.getTeacherPhoto());
+		}
+		
+		if(dto.getBookInfo().equals("<p>&nbsp;</p>")){
+		      dto.setBookInfo("내용 없음");
+		}
+		
+		catedao.updateCateProc(dto);
+		return "redirect:./readCate.do?categoryno="+categoryno;
 	}//end
 	
 	
 	@RequestMapping(value="sol_admin/player/cateDel.do", method=RequestMethod.GET)
-	public String delCateInfo(int categoryno, HttpServletRequest request) {
-		CategoryDTO dto = null;
+	public String delCateInfo(CategoryDTO dto, HttpServletRequest request) {
+		dto = catedao.readCate(dto);
 		
-		dto = dao.categoryRead(categoryno);
-		
-		request.setAttribute("categoryno", categoryno);
+		request.setAttribute("categoryno", dto.getCategoryno());
 		request.setAttribute("dto", dto);
 		
 		return "sol_admin/player/delCateInfo";
 	}//end
 	
 	@RequestMapping(value="sol_admin/player/cateDelProc.do", method=RequestMethod.GET)
-	public String delCateProc(int categoryno, HttpServletRequest request) {
-		System.out.println(categoryno);
+	public String delCateProc(CategoryDTO dto, HttpServletRequest request) {
+		System.out.println(dto.getCategoryno());
 		List list = new ArrayList();
 		int lectureno = 0;
-		list = dao.getLectureno(categoryno);
-		Iterator it = list.iterator();
-		while(it.hasNext()){
+		list = dao.getLectureno(dto.getCategoryno());
+		
+		// 동영상 강의가 존재하면 동영상 강의도 모두 삭제
+		if (!list.isEmpty()){
+			Iterator it = list.iterator();
+			while(it.hasNext()){
 			
 			lectureno = (Integer) it.next();
 		    System.out.println("--lectureno : "+lectureno);
@@ -1001,11 +1024,19 @@ public class AdminCont {
 			Utility.deleteFile(basePath, oldDTO.getFilename());
 			
 			dao.lecDelProc(lectureno);
-			dao.categoryDelProc(categoryno);
-		    
+			}
 		}
+		// 선생님 사진 삭제
+		String basePath = Utility.getRealPath(request, "/sol_admin/player/cateStorage");
+		CategoryDTO oldDTO = catedao.readCate(dto);
+		Utility.deleteFile(basePath, oldDTO.getTeacherPhoto());
+		
+		// 강좌 삭제 
+		dao.categoryDelProc(dto.getCategoryno());
+		
 		request.setAttribute("root", Utility.getRoot());
-		return "redirect:./updelete.do";
+		request.setAttribute("msg", 2);
+		return "sol_admin/player/cateInfo";
 	}//end
 	
 	@RequestMapping(value="sol_admin/player/cateInsert.do", method=RequestMethod.GET)
@@ -1033,6 +1064,10 @@ public class AdminCont {
 			String teacherPhoto = UploadSaveManager.saveFileSpring30(teacherMF, basePath);
 			dto.setTeacherPhoto(teacherPhoto);
 			
+			if(dto.getBookInfo().equals("<p>&nbsp;</p>")){
+			      dto.setBookInfo("내용 없음");
+			}
+			
 			boolean flag = catedao.cateIns(dto);
 			
 			if (flag) {
@@ -1048,43 +1083,15 @@ public class AdminCont {
 		}
 	}//end
 	
-	@RequestMapping(value="sol_admin/player/updelete.do", method=RequestMethod.GET)
-	public String cateupdelete(HttpServletRequest request) {
-		
-		String url = "./readCateInfo.do";
-		
-		int numPerPage=6;	
-		int recNo=1;
-		
-		String nowPage = request.getParameter("nowPage");
-		if (nowPage == null) {
-			nowPage = "1";
-		}
-		
-		int sno = ((Integer.parseInt(nowPage) - 1) * numPerPage);
-		int intNowPage = Integer.parseInt(nowPage);
-		
-		Map map = new HashMap();
-		map.put("sno", sno);
-		map.put("numPerPage", numPerPage);
-		
-		List list = catedao.readCateInfo(map);
-		
-		String dbean = Utility.getDate();
-		int total = catedao.getCateTotal(map);
-		
-		String paging = Paging.paging4(total, intNowPage, numPerPage, url);
-		
-		recNo = total - (intNowPage - 1) * numPerPage + 1 ;
-		request.setAttribute("list", list);
-		request.setAttribute("dbean", dbean);
-		request.setAttribute("paging", paging);
-		request.setAttribute("recNo", recNo);
-		request.setAttribute("nowPage", nowPage);
-		request.setAttribute("total", total);
-			
-		return "sol_admin/player/cateUpDelete";
+	
+	@RequestMapping(value="sol_admin/player/readCate.do", method=RequestMethod.GET)
+	public String readCate(CategoryDTO dto, HttpServletRequest request) {
+		dto = catedao.readCate(dto);
+		request.setAttribute("dto", dto);
+		return "sol_admin/player/cateRead";
 	}//end
+	
+	
 //-----------------------------------------------------------------------------------------------------------
 //-------------------------------------------------------------------------------------------------PLAYER END
 	

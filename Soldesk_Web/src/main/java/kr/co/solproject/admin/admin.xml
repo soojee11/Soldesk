@@ -16,21 +16,9 @@
   		from sol_category
   		where gwamok = #gwamok# and grade = #grade#
    </select>
-	
-	<select id="categoryRead" parameterClass="Integer" resultClass="CategoryDTO">
-		select categoryno, grade, gwamok, categoryinfo
-		from sol_category
-		where categoryno = #categoryno#
-	</select>
-    
-    <update id="categoryDelProc" parameterClass="Integer">
-		delete from sol_category
-		where categoryno = #categoryno#
-	</update>
 
-	<update id="updateCateProc" parameterClass="CategoryDTO">
-		update sol_category
-		set grade = #grade#, gwamok=#gwamok#, categoryinfo=#categoryinfo#
+   <update id="categoryDelProc" parameterClass="Integer">
+		delete from sol_category
 		where categoryno = #categoryno#
 	</update>
 	
