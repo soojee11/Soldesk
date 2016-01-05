@@ -120,16 +120,11 @@
                           <li><a  href="../qna/qnaDel.do">Q&A_delete</a></li>
                       </ul>
                   </li>
-                  <li class="sub-menu">                     
-                      <a class="" href="javascript:;">
+                  <li>                     
+                   	  <a class="" href="../player/cateInfo.do">
                           <i class="icon_piechart"></i>
                           <span>Lecture</span>
-                          <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
-                        <ul class="sub">
-                          <li><a  href="../player/cateInfo.do">Lecture_insert</a></li>                          
-                          <li><a  href="../player/updelete.do">Update&Delete</a></li>
-                      </ul>
                   </li>
                    <li class="sub-menu">
                       <a class="" href="javascript:;">

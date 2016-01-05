@@ -11,7 +11,13 @@
 </c:if>
 <c:if test="${msg==1 }">
 	<script>
-		alert("강좌등록 성공!");
+		alert("강좌 등록 성공!");
+		location.href="cateInfo.do";
+	</script>
+</c:if>
+<c:if test="${msg==2 }">
+	<script>
+		alert("강좌 삭제 완료!");
 		location.href="cateInfo.do";
 	</script>
 </c:if>

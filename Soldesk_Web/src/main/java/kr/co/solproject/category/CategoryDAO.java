@@ -64,5 +64,24 @@ public class CategoryDAO {
 		}
 		return res;
 	}//end
+	
+	
+	public CategoryDTO readCate(CategoryDTO dto) {
+		try {
+			dto =  (CategoryDTO) mybatis.queryForObject("sol_category.readCate", dto);
+		} catch (Exception e) {
+			System.out.println("readCate error: " + e);
+		}
+		return dto;
+	}//end
+	
+	public void updateCateProc(CategoryDTO dto) {
+		boolean flag = false;
+		try {
+			mybatis.update("sol_category.updateCateProc", dto);
+		} catch (Exception e) {
+			System.out.println("updateCateProc error: " + e);
+		}
+	}// end
 
 }
