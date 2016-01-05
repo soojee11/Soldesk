@@ -404,7 +404,7 @@ function postApplyResponse(data, status) { //callback함수
 	<c:if test="${postDto.postgrade==4 }"><img src="img/star4.PNG"></c:if><c:if test="${postDto.postgrade==3 }"><img src="img/star3.PNG"></c:if>
 	<c:if test="${postDto.postgrade==2 }"><img src="img/star2.PNG"></c:if><c:if test="${postDto.postgrade==1 }"><img src="img/star1.PNG"></c:if></td>
 	<td style="text-align: left">${postDto.content }<br />
-	<span style="color: #999;">${postDto.id } | <c:set var="pregdt" value="${postDto.regdate }"/>${fn:substring(pregdt,0,10) }</span>
+	<span style="color: #999;">${postDto.id } | <c:set var="pregdt" value="${postDto.regdate }"/>${fn:substring(pregdt,0,16) }</span>
 	</td>
 	<td style="text-align: center"><c:if test="${s_id eq postDto.id}">
 		<a href="javascript:postDelete(${postDto.postscriptno })"><span>삭제</span></a></c:if>
