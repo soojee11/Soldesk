@@ -71,7 +71,7 @@ function postApplyResponse(data, status) { //callback함수
 		<td>${dto.subject }</td>
 		<td>${dto.poster }</td>
 		<td>${dto.lecturetime }분</td>
-		<td>${dto.teacher }</td>
+		<td>${dto.teacherName }</td>
 		<td align="center">
 		<c:choose>
 		  <c:when test="${s_id != null }">

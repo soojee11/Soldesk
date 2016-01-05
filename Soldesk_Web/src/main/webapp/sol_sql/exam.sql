@@ -31,8 +31,6 @@ create table sol_myscore(
 	primary key(mytestno)						
 )ENGINE=MyISAM DEFAULT CHARSET="euckr";							
 
-
-
 create table sol_qna(		
 qnano INT NOT NULL auto_increment,		
 id VARCHAR(20) NOT NULL,		
@@ -58,11 +56,6 @@ PRIMARY KEY (bbsno)
 )ENGINE=MyISAM DEFAULT CHARSET="euckr";	
 
 //noticeshow 하나가 추가함. 자료형 맞는지 모름
-
-
-
-
-
 
 CREATE TABLE sol_study(
 lectureno	int(11)		NOT NULL,
@@ -94,13 +87,17 @@ filename	VARCHAR(200)	NULL,
 PRIMARY KEY  (lectureqnano)
 )ENGINE=MyISAM DEFAULT CHARSET="euckr";	
 
-create table SOL_category(				
-	categoryno	INT(11)	NOT NULL auto_increment,	
-	grade		TINYINT NOT NULL,	
-	gwamok		VARCHAR(200) NOT NULL,	
-	categoryInfo	VARCHAR(500) NOT NULL,		
-	primary key(categoryno)			
-)ENGINE=MyISAM DEFAULT CHARSET="euckr";				
+create table SOL_category(
+	categoryno INT NOT NULL auto_increment,
+	grade TINYINT NOT NULL,
+	gwamok VARCHAR(200) NOT NULL,
+	categoryinfo VARCHAR(500) NOT NULL,
+	teacherName VARCHAR(20) NOT NULL,
+	teacherCareer VARCHAR(500) NOT NULL,
+	teacherPhoto VARCHAR(50) NOT NULL,
+	bookInfo VARCHAR(500) NOT NULL,
+	primary key(categoryno)
+)ENGINE=MyISAM DEFAULT CHARSET="euckr";
 				
 create table sol_lecture(				
 	lectureno	INT(11)	NOT NULL	auto_increment,
@@ -108,7 +105,6 @@ create table sol_lecture(
 	filename	VARCHAR(200)	NOT NULL,
 	filesize	BIGINT(20)	NOT NULL,
 	poster		VARCHAR(500)	NOT NULL,
-	teacher		VARCHAR(200)	NOT NULL,
 	lecturetime	INT(11)	NOT NULL,
 	categoryno	INT(11)	NOT NULL,
 	primary key(lectureno)		
