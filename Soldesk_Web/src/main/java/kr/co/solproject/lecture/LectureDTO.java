@@ -7,7 +7,6 @@ public class LectureDTO {
 	private String subject;		// 제목
 	private String filename;	// 강의파일 
 	private String poster;		// 캡쳐화면 
-	private String teacher;		// 선생님 이름 
 	private String lecturetime;	// 강의시간		
 	
 	private int categoryno;		// 카테고리번호	
@@ -68,17 +67,6 @@ public class LectureDTO {
 	public void setPoster(String poster) {
 		this.poster = poster;
 	}
-
-
-	public String getTeacher() {
-		return teacher;
-	}
-
-
-	public void setTeacher(String teacher) {
-		this.teacher = teacher;
-	}
-
 
 	public String getLecturetime() {
 		return lecturetime;
