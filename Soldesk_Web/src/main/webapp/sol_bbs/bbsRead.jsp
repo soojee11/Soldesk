@@ -208,7 +208,7 @@ function cancel(replyno) {
 				<form name="updatefrm" id="updateReply${rdto.replyno }" method="post" style="display:none">
 				<input type="hidden" name="replyno" id="replyno" />
 				<textarea name="updateContent" id="updateContent" rows="5" cols="50" style="width: 89%; height:53px;"></textarea>
-				<img src="img/btn.gif" onclick="updateReplyProc(${rdto.replyno})"/>
+				<img src="img/btn_submit.png" onclick="updateReplyProc(${rdto.replyno})"/>
 				</form>
 
 			</td>
@@ -225,7 +225,7 @@ function cancel(replyno) {
 		<div>
 			<c:if test="${s_id ne null}">
 			<textarea name="content" id="content" rows="5" cols="50" style="width: 89%; height:53px;"></textarea>
-			<img src="img/btn.gif" onclick="replyCreate()"/>
+			<img src="img/btn_submit.png" onclick="replyCreate()"/>
 			</c:if>
 		</div>
 	</form>

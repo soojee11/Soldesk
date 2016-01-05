@@ -83,6 +83,12 @@
 		testno=#testno#
 	</select>
 
+	<select id="getG_QuestionTotal" parameterClass="int" resultClass="int">
+		select count(*) as cnt
+		from sol_question
+		where qynshow='Y' and testno=#testno# and qtype='G'
+	</select>
+	
 	<select id="myscoreAnswer" resultClass="QuestionDTO"
 		parameterClass="Map">
 		select questno, answer

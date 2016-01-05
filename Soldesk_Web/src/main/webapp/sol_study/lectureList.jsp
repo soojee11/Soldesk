@@ -42,13 +42,13 @@ function postApplyResponse(data, status) { //callback함수
 	<!-- 강의 카테고리 -->
 	<ul>
 		<li style="background-color: #99cc66">강의</li>
-		<li><a onclick="location.href='lectureList.do?grade=${grade}&gwamok=${gwamok}&tabNfum=1'">목록</a></li>
+		<li><a onclick="location.href='lectureList.do?grade=${grade}&gwamok=${gwamok}&tabNum=1'">목록</a></li>
 		<li><a onclick="location.href='lectureList.do?grade=${grade}&gwamok=${gwamok}&tabNum=2'">학습Q&A</a></li>
 		<li><a onclick="location.href='lectureList.do?grade=${grade}&gwamok=${gwamok}&tabNum=3'">수강후기</a></li>
 	</ul>		
 </div>
 
-<div class="tab-content" style="width: 100%; color: black; height: 500px;">
+<div class="tab-content" style="width: 100%; color: black;">
 <c:if test="${tabNum == 1}">
 <div  id="menu1">
 총 <span style="color: red;"><strong>${total}</strong></span>개의 강좌가 있습니다.
@@ -347,9 +347,9 @@ function updateProcResponse(data,textStatus){
 <script>
 //후기 등록
 function postApply(){
-	if($.trim($("#content").val()) == "") {
+	if($.trim($("#postcontent").val()) == "") {
 		alert("후기내용을 입력해주세요");
-		$("#content").focus();
+		$("#postcontent").focus();
 		return;
 	}
 	
@@ -379,74 +379,36 @@ function postDelete(postscriptno) {
         return;
 	} 
 }
-//수정할 댓글 조회
-function postUpdate(postscriptno){
-	$("#postscriptno").val(postscriptno);
-	$.ajax({
-		cache:false,
-		type: "get",	//요청방식
-		url: "read.do?postscriptno="+postscriptno,//서버측페이지
-		datatype:"text",	//응답페이지 타입 설정
-		success:function(data){
-			var str =data.replace(/^\s+|\s+$/gm,'');
-			//alert(str);
-			var result = str.split("/");
-			if(result[0]=="SUCCESS"){
-			$("#content").val(result[1]);
-			//alert(result[1]);
-			//alert(result[2]);
-			document.getElementById("rating-"+ result[2]).checked='checked';
-			document.getElementById("demo").innerHTML = '&nbsp;별점:&nbsp;'+result[2];
-			document.getElementById("btnCreate").style.display = 'none';
-			document.getElementById("btnUpdate").style.display = '';
-			}
-			
-		},
-		error:function(err){	//응답 결과 상태코드가 실패했을때
-			alert(err+"오류발생");
-		}
-	});
-}
-//수정 저장
-function updateProc() {
-	$("#grade").remove();
-	$("#gwamok").remove();
-	alert("후기를 수정하시겠습니까?");
-	var param=$("#postForm").serialize();
-	//alert(param);
-	$.ajaxSetup({dataType:"text"});
-	$.post("./update.do",param,postApplyResponse);	
+function postApplyResponse(data, status) { //callback함수
+	alert(data.replace(/^\s+|\s+$/gm,''));
+	window.location.reload(); //현재 페이지 새로고침
 }
 </script>
 <c:if test="${tabNum == 3}">
-<div id="menu3">
+<div id="menu3" style="color: black;">
 총 <span style="color: red;"><strong>${postTotal}</strong></span>개의 후기가 있습니다.
 <br/>
 <table class="table">
 <tr align="center" >
-	<th width='60'>순번</th>
-	<th>내용</th>
-	<th width='60'></th>
-	<th width='60'>작성자</th>
-	<th width='100'>등록일</th>
-	<th width='100'>강의만족도</th>
+	<th width='30' style="text-align: center">번호</th>
+	<th width='80' style="text-align: center">강의만족도</th>
+	<th style="text-align: center">내용</th>
+	<th width='30' style="text-align: center"></th>
 </tr>
-
-<c:set var="postNo" value="${postNo+1 }" />	
+<c:set var="postNo" value="${postNo }" />	
 <c:forEach var="postDto" items="${postList }" >
 <c:set var="postNo" value="${postNo-1 }" />
 <tr align="center">
-	<td>${postNo }</td>
-	<td>${postDto.content }</td>
-	<td><c:if test="${s_id eq postDto.id}">
-		<a href="javascript:postUpdate(${postDto.postscriptno })"><span style="color:red;">수정</span></a> | 
-		<a href="javascript:postDelete(${postDto.postscriptno })"><span style="color:red;">삭제</span></a></c:if>
+	<td style="text-align: center">${postNo }</td>
+	<td style="text-align: center"><c:if test="${postDto.postgrade==5 }"><img src="img/star5.PNG"></c:if>
+	<c:if test="${postDto.postgrade==4 }"><img src="img/star4.PNG"></c:if><c:if test="${postDto.postgrade==3 }"><img src="img/star3.PNG"></c:if>
+	<c:if test="${postDto.postgrade==2 }"><img src="img/star2.PNG"></c:if><c:if test="${postDto.postgrade==1 }"><img src="img/star1.PNG"></c:if></td>
+	<td style="text-align: left">${postDto.content }<br />
+	<span style="color: #999;">${postDto.id } | <c:set var="pregdt" value="${postDto.regdate }"/>${fn:substring(pregdt,0,16) }</span>
 	</td>
-	<td>${postDto.id }</td>
-	<td><c:set var="pregdt" value="${postDto.regdate }"/>${fn:substring(pregdt,0,10) }</td>
-	<td><c:if test="${postDto.postgrade==5 }"><img src="img/rating_5.gif"></c:if>
-	<c:if test="${postDto.postgrade==4 }"><img src="img/rating_4.gif"></c:if><c:if test="${postDto.postgrade==3 }"><img src="img/rating_3.gif"></c:if>
-	<c:if test="${postDto.postgrade==2 }"><img src="img/rating_2.gif"></c:if><c:if test="${postDto.postgrade==1 }"><img src="img/rating_1.gif"></c:if></td>
+	<td style="text-align: center"><c:if test="${s_id eq postDto.id}">
+		<a href="javascript:postDelete(${postDto.postscriptno })"><span>삭제</span></a></c:if>
+	</td>
 </tr>
 </c:forEach>
 
@@ -455,48 +417,50 @@ function updateProc() {
 </tr>
 </table>
 
-<div style='background-color:#f8f8f8; padding:25px;'>
+<div style='background-color: #f8f8f8; padding:25px;'>
 <form name='postForm' id='postForm' method='post'>  
 	<input type='hidden' name='postscriptno' id='postscriptno' value='${postscriptno}'>
 	<input type='hidden' name='gwamok' id='gwamok' value='${gwamok}'>
 	<input type='hidden' name='grade' id='grade' value='${grade}'>
-      
-	<span class="star-cb-group">
-		<input type="radio" id="rating-5" name="rating" value="5" onclick="alert1(this.value)" checked="checked"/><label for="rating-5">5</label>
-		<input type="radio" id="rating-4" name="rating" value="4" onclick="alert1(this.value)" /><label for="rating-4">4</label>
-		<input type="radio" id="rating-3" name="rating" value="3" onclick="alert1(this.value)" /><label for="rating-3">3</label>
-		<input type="radio" id="rating-2" name="rating" value="2" onclick="alert1(this.value)" /><label for="rating-2">2</label>
-		<input type="radio" id="rating-1" name="rating" value="1" onclick="alert1(this.value)" /><label for="rating-1">1</label>
-
-	</span>
-	<span id="demo" style="font-size:12px;">&nbsp;별점:&nbsp;5</span><br />
-	<script>
-	function alert1(val) {
-		alert(val);
-		document.getElementById("demo").innerHTML = '&nbsp;별점:&nbsp;'+val;
-	}
-	</script>
-	
-    <textarea name='content' id='content' rows="5" cols="50" style="width: 88%; height:53px;"></textarea>
-   
-    <!-- <br><br> -->
-	<c:choose>
-	<c:when test="${s_id != null }">
-		<a id="btnCreate" href="javascript:postApply()">	<img src='img/btn.gif'></a>
-		<a id="btnUpdate" href="javascript:updateProc()" style="display:none">	<img src='img/btn.gif'></a>		  
-	</c:when>
-	<c:otherwise>
-		<a href="javascript:lectureNotGo()">	<img src='img/btn.gif'>
-		</a>
-	</c:otherwise>
-    </c:choose>
+    <table style="width:100%;">
+    <tr>
+	    <td style="width:130px;">
+		    <span class="star-cb-group">
+				<input type="radio" id="rating-5" name="postgrade" value="5" onclick="alert1(this.value)" checked="checked"/><label for="rating-5">5</label>
+				<input type="radio" id="rating-4" name="postgrade" value="4" onclick="alert1(this.value)" /><label for="rating-4">4</label>
+				<input type="radio" id="rating-3" name="postgrade" value="3" onclick="alert1(this.value)" /><label for="rating-3">3</label>
+				<input type="radio" id="rating-2" name="postgrade" value="2" onclick="alert1(this.value)" /><label for="rating-2">2</label>
+				<input type="radio" id="rating-1" name="postgrade" value="1" onclick="alert1(this.value)" /><label for="rating-1">1</label>
+			</span>
+			<span id="demo" style="font-size:12px;">&nbsp;별점:&nbsp;5</span><br />
+			<script>
+			function alert1(val) {
+				document.getElementById("demo").innerHTML = '&nbsp;별점:&nbsp;'+val;
+			}
+			</script>
+		</td>
+	    <td>
+	    	<textarea name='content' id='postcontent' rows="5" cols="50" style="width: 98%; height:53px;"></textarea>
+	    </td>
+	    <td style="width:80px;">
+		    <c:choose>
+			<c:when test="${s_id != null }">
+				<a id="btnCreate" href="javascript:postApply()">	<img src='img/btn_submit.png' style="margin-top: -7.5px;"></a>	  
+			</c:when>
+			<c:otherwise>
+				<a href="javascript:lectureNotGo()">	<img src='img/btn_submit.png' style="margin-top: -7.5px;">
+				</a>
+			</c:otherwise>
+		    </c:choose>
+	    </td>    
+    </tr>
+    </table>
 </form>
 </div>
 </div>
 </c:if>
 <!-- 후기 탭 끝 -->
 
-</div>
 </div>
 <!-- page end-->
 <%@ include file="../sol_footer.jsp"%>
