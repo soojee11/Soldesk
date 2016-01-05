@@ -68,54 +68,6 @@ function player_validate(frm){
 	  frm.submit();
 }
 
-function player_validate2(frm){
-	  var subject = frm.subject.value;
-	  var teacher = frm.teacher.value;
-	  var posterMF = frm.posterMF.value;
-	  var filenameMF = frm.filenameMF.value;
-	  var lecturetime = frm.lecturetime.value;
-	  
-	  subject = subject.replace(/^\s*|\s*$/g, '');
-	  teacher = teacher.replace(/^\s*|\s*$/g, '');
-	  lecturetime = lecturetime.replace(/^\s*|\s*$/g, '');
-	  posterMF = posterMF.replace(/^\s*|\s*$/g, '');
-	  filenameMF = filenameMF.replace(/^\s*|\s*$/g, '');
-	  
-	  if(subject.length == 0){
-	    alert("제목을 입력해 주세요.");
-	    frm.subject.focus();
-	    return;
-	  }
-	  
-	  if(teacher.length == 0){
-	    alert("선생님 이름을 입력해 주세요.");
-	    frm.teacher.focus();
-	    return;
-	  }
-
-	  if(posterMF.length == 0){
-	    alert("포스터를 등록하세요");
-	    frm.posterMF.focus();
-	    return;
-	  }
-
-	  if(filenameMF.length == 0){
-	    alert("파일을 등록하세요");
-	    frm.filenameMF.focus();
-	    return;
-	  }
-	  
-	  if(lecturetime.length == 0){
-	    alert("동영상 시간을 등록하세요");
-	    frm.lecturetime.focus();
-	    return;
-	  }
-
-	  alert("수정하시겠습니까? ");
-	  
-	  frm.submit();
-}
-
 function playCheck2(frm) {
 	var flag=false;
 	var check = document.getElementsByName('check2');

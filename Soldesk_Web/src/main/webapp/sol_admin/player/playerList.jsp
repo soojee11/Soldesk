@@ -31,8 +31,8 @@
 		<th><div align="center">교육번호</div></th>
 		<th><div align="center">제목</div></th>
 		<th><div align="center">강의파일</div></th>
-		<th><div align="center">파일크기</div></th>
 		<th><div align="center">캡쳐화면</div></th>
+		<th><div align="center">파일크기</div></th>
 		<th><div align="center">강의시간(분)</div></th>
 	</tr>
 	<c:if test="${total ==0 }">
@@ -48,9 +48,8 @@
 				<td>${dto.lectureno }</td>
 				<td>${dto.subject }</td>
 				<td><a href="lecread.do?lectureno=${dto.lectureno }">${dto.filename }</a></td>
-				<td>${dto.filesize/(1024)-((dto.filesize/(1024))%1) }KB</td>
 				<td><a href="lecread.do?lectureno=${dto.lectureno }"><img src="storage/${dto.poster }" width="60px"></a></td>
-				<td>${dto.teacher }</td>
+				<td>${dto.filesize/(1024)-((dto.filesize/(1024))%1) }KB</td>
 				<td>${dto.lecturetime }</td>
 			</tr>
 			</c:if>
