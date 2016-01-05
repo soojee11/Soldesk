@@ -101,4 +101,17 @@ public class PostscriptDAO {
 		}
 		return res;
 	}
+	
+	/** 카테고리 별 (선생님 별) 평점 가져오기 **/
+	public List postGrade(){
+    List list = null;
+    try {
+      //System.out.println("포스트::"+dto.toString());
+      list = mybatis.queryForList("sol_postscript.postGrade");
+    } catch (Exception e) {
+      System.out.println("post update error: " + e);
+    }
+    return list;
+  }
+	
 }

@@ -884,8 +884,9 @@ html[xmlns] .slides {
 
 .clients-carousel li {
 	float: left;
-	width: 120px;
-	padding: 0px 20px;
+	width: 160px;
+	height: 140px;
+	padding: 10px 20px;
 	overflow: hidden;
 	border-right: 1px solid #f6f6f6;
 	margin-left: 1px;
@@ -898,14 +899,15 @@ html[xmlns] .slides {
 .clients-carousel li img {
 	float: none !important;
 	margin: 0 auto !important;
+	height: 90px;
 	/*filter: url(filters.svg#grayscale); /* Firefox 3.5+ */
-	filter: gray; /* IE6-9 */
-	-webkit-filter: grayscale(1); /* Google Chrome & Safari 6+ */
+	/* Google Chrome & Safari 6+ */
+	/* -webkit-filter: grayscale(1); 
 	-webkit-transform: scale(1);
 	-moz-transform: scale(1);
 	-o-transform: scale(1);
 	-ms-transform: scale(1);
-	transform: scale(1);
+	transform: scale(1); */
 }
 
 .clients-carousel li:hover {
