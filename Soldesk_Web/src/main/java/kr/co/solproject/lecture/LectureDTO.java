@@ -15,11 +15,8 @@ public class LectureDTO {
 	//private int categoryno;	// 카테고리 번호
 	private int grade;		// 학년	
 	private String gwamok;	// 과목
-	
-	
-	// --------------------------------------- sol_lectureinfo 과목정보 테이블 컬럼
-	//private int lectureno;
 	private String categoryinfo;
+	private String teacherName;
 	
 	// 생성자
 	public LectureDTO() {
@@ -85,7 +82,15 @@ public class LectureDTO {
 	public void setCategoryno(int categoryno) {
 		this.categoryno = categoryno;
 	}
-		
+
+	public String getTeacherName() {
+		return teacherName;
+	}
+
+
+	public void setTeacherName(String teacherName) {
+		this.teacherName = teacherName;
+	}
 
 	//------------------------------------------ sol_category get, set method
 	public int getGrade() {
