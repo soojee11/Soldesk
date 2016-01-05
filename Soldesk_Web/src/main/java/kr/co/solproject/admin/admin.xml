@@ -43,7 +43,7 @@
 	</select>
 
 	<select id="lecRead" parameterClass="Integer" resultClass="PlayerDTO">
-		select subject,filename,filesize,poster,teacher,lecturetime,categoryno
+		select subject,filename,filesize,poster,lecturetime,categoryno
 		from sol_lecture
 		where lectureno = #lectureno#
 	</select>
@@ -64,7 +64,7 @@
 	
 	<update id="lecUpdate" parameterClass="PlayerDTO">
 		update sol_lecture
-		set subject = #subject#, filename=#filename#, filesize=#filesize#, poster=#poster#,teacher=#teacher#,lecturetime=#lecturetime#
+		set subject = #subject#, filename=#filename#, filesize=#filesize#, poster=#poster#, lecturetime=#lecturetime#
 		where lectureno = #lectureno#
 	</update>
 	

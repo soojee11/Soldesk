@@ -2,7 +2,44 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ include file="../header.jsp"%>
-
+<script>
+function player_validate2(frm){
+	  var subject = frm.subject.value;
+	  var posterMF = frm.posterMF.value;
+	  var filenameMF = frm.filenameMF.value;
+	  var lecturetime = frm.lecturetime.value;
+	  
+	  subject = subject.replace(/^\s*|\s*$/g, '');
+	  lecturetime = lecturetime.replace(/^\s*|\s*$/g, '');
+	  posterMF = posterMF.replace(/^\s*|\s*$/g, '');
+	  filenameMF = filenameMF.replace(/^\s*|\s*$/g, '');
+	  
+	  if(subject.length == 0){
+	    alert("제목을 입력해 주세요.");
+	    frm.subject.focus();
+	    return;
+	  }
+	  if(posterMF.length == 0){
+	    alert("포스터를 등록하세요");
+	    frm.posterMF.focus();
+	    return;
+	  }
+	  if(filenameMF.length == 0){
+	    alert("파일을 등록하세요");
+	    frm.filenameMF.focus();
+	    return;
+	  }
+	  if(lecturetime.length == 0){
+	    alert("동영상 시간을 등록하세요");
+	    frm.lecturetime.focus();
+	    return;
+	  }
+	  mess ="수정하시겠습니까? ";
+	  if(confirm(mess)!=0){ 
+			frm.submit(); 
+	  }else{return;}
+}
+</script>
 <div class="row">
 	<div class="col-lg-12">
 		<h3 class="page-header">
@@ -28,12 +65,6 @@
 					<label class="col-sm-2 control-label">제목</label>
 					<div class="col-sm-10">
 						<input type="text" class="form-control" name="subject" value="${dto.subject }">
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="col-sm-2 control-label">선생님</label>
-					<div class="col-sm-10">
-						<input type="text" class="form-control" name="teacher" value="${dto.teacher }">
 					</div>
 				</div>
 				<div class="form-group">

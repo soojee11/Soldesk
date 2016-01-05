@@ -717,12 +717,12 @@ public class AdminCont {
 	}//end
 	
 	@RequestMapping(value="sol_admin/player/lecread.do", method=RequestMethod.GET)
-	public String lecRead(PlayerDTO dto, HttpServletRequest request) {
+	public String lecRead(PlayerDTO dto, CategoryDTO dto2, HttpServletRequest request) {
 		
 		dto = dao.lecRead(dto.getLectureno());
-
-		CategoryDTO dto2 = null;
+		
 		dto2.setCategoryno(dto.getCategoryno());
+		dto2 = catedao.readCate(dto2);
 		
 		String filename = dto.getFilename();
 		filename = filename.toUpperCase();
@@ -733,8 +733,6 @@ public class AdminCont {
 		} else if (filename.endsWith(".MP4")) {
 			request.setAttribute("file_end", "MP4");
 		}
-		
-		dto2 = catedao.readCate(dto2);
 		
 		request.setAttribute("flag", 1);
 		request.setAttribute("dto", dto);
@@ -744,41 +742,10 @@ public class AdminCont {
 		return "sol_admin/player/playerRead";
 	}//end
 	
-	@RequestMapping(value="sol_admin/player/lecread2.do", method=RequestMethod.GET)
-	public String lecRead2(PlayerDTO dto, HttpServletRequest request) {
+	@RequestMapping(value="sol_admin/player/lecDel.do", method=RequestMethod.GET)
+	public String lecDel(PlayerDTO dto, CategoryDTO dto2, HttpServletRequest request) {
 		
 		dto = dao.lecRead(dto.getLectureno());
-		String filename = dto.getFilename();
-		filename = filename.toUpperCase();
-
-		if (filename.endsWith(".MP3")) {
-			request.setAttribute("file_end", "MP3");
-			
-		} else if (filename.endsWith(".MP4")) {
-			request.setAttribute("file_end", "MP4");
-		}
-		
-		int categoryno = dto.getCategoryno();
-		CategoryDTO dto2 = null;
-		dto2 = dao.categoryRead(categoryno);
-		
-		request.setAttribute("flag", 2);
-		request.setAttribute("dto", dto);
-		request.setAttribute("dto2", dto2);
-		request.setAttribute("root", Utility.getRoot());
-
-		return "sol_admin/player/playerRead";
-	}//end
-	
-	@RequestMapping(value="sol_admin/player/lecDel.do", method=RequestMethod.GET)
-	public String lecDel(int lectureno, int categoryno,HttpServletRequest request) {
-		
-		PlayerDTO dto = null;
-		CategoryDTO dto2 = null;
-		
-		dto2.setCategoryno(categoryno);
-		
-		dto = dao.lecRead(lectureno);
 		dto2 = catedao.readCate(dto2);
 		
 		request.setAttribute("dto", dto);
@@ -788,9 +755,7 @@ public class AdminCont {
 	}//end
 	
 	@RequestMapping(value="sol_admin/player/lecDelProc.do", method=RequestMethod.GET)
-	public String lecDelProc(int lectureno, int categoryno, HttpServletRequest request) {
-		
-		//dao.categoryDelProc(categoryno);
+	public String lecDelProc(PlayerDTO dto, CategoryDTO dto2, HttpServletRequest request) {
 		
 		request.setAttribute("root", Utility.getRoot());
 
@@ -798,27 +763,19 @@ public class AdminCont {
 		String basePath = Utility.getRealPath(request, "/sol_admin/player/storage");
 
 		// 파일 삭제
-		PlayerDTO oldDTO = dao.lecRead(lectureno); // 기존에 등록된 파일 정보 가져오기
+		PlayerDTO oldDTO = dao.lecRead(dto.getLectureno()); // 기존에 등록된 파일 정보 가져오기
 		Utility.deleteFile(basePath, oldDTO.getPoster());
 		Utility.deleteFile(basePath, oldDTO.getFilename());
 
-		dao.lecDelProc(lectureno);
+		dao.lecDelProc(dto.getLectureno());
 		
-		return "redirect:leclist2.do?categoryno="+categoryno;
+		return "redirect:leclist.do?categoryno="+dto2.getCategoryno();
 	}//end
 	
 	@RequestMapping(value = "sol_admin/player/lecUpdate.do", method = RequestMethod.GET)
-	public String lecUpdate(int lectureno, int categoryno, HttpServletRequest request) {
+	public String lecUpdate(PlayerDTO dto,CategoryDTO dto2, HttpServletRequest request) {
 		
-		//System.out.println("lectureno---"+lectureno);
-		//System.out.println("categoryno---"+categoryno);
-		
-		PlayerDTO dto = null;
-		CategoryDTO dto2 = null;
-		
-		dto2.setCategoryno(categoryno);
-		
-		dto = dao.lecRead(lectureno);
+		dto = dao.lecRead(dto.getLectureno());
 		dto2 = catedao.readCate(dto2);
 		
 		request.setAttribute("dto", dto);
@@ -864,8 +821,8 @@ public class AdminCont {
 		}
 		
 		dao.lecUpdate(dto);
-		//System.out.println("old update cateno: "+oldDTO.getCategoryno());
-		return "redirect:leclist2.do?categoryno="+oldDTO.getCategoryno();
+		
+		return "redirect:leclist.do?categoryno="+oldDTO.getCategoryno();
 	}//end
 
 	@RequestMapping(value="sol_admin/player/cateInfo.do", method=RequestMethod.GET)
