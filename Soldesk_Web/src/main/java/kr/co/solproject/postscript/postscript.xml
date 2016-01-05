@@ -55,5 +55,13 @@
  	 	SET content = #content#, postgrade=#postgrade#
  	 	WHERE postscriptno = #postscriptno#
  	 </update>
+ 	 
+ 	 <!-- 후기 평점 가져오기  -->
+ 	 <select id="postGrade" resultClass="java.util.HashMap">
+	 	  SELECT post.categoryno, category.teacherName, category.teacherPhoto, category.grade, category.gwamok, avg(post.postgrade) as avg
+			FROM sol_postscript post join sol_category category
+			ON post.categoryno = category.categoryno
+			GROUP BY categoryno
+ 	 </select>
 
 </sqlMap>

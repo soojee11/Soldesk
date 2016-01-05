@@ -15,14 +15,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.co.solproject.postscript.PostscriptDAO;
+
 @Controller
 public class MemberController {
 
 	@Autowired
 	private MemberDAO dao = null;
-	
 	@Autowired
   private VideoDAO vdao = null;
+	@Autowired
+	private PostscriptDAO pdao = null;
 
 	public MemberController() {
 		System.out.println("▶------MemberController()객체 생성됨...");
@@ -36,6 +39,8 @@ public class MemberController {
 	  String whichPage = "index";
 	  req.setAttribute("whichPage", whichPage);
 	  
+	  List list = null;
+	  
 	  // 동영상 로딩 정보 
 	  int videono = (int) (Math.random()*2+1); 
 	  VideoDTO vdto = null;
@@ -45,6 +50,12 @@ public class MemberController {
 	  
 	  req.setAttribute("link", link);
 	  req.setAttribute("title", link.substring(0, link.indexOf(".")));
+	  
+	  // 추천 선생님 목록 띄우기 
+	  list = pdao.postGrade();
+	  System.out.println(list);
+	  req.setAttribute("list", list);
+	  
 		return "/sol_index";
 	}// end	
 	
@@ -101,6 +112,12 @@ public class MemberController {
 			
 			if(whichPage.equals("lectureInfo")){
 			    msg="<meta http-equiv='Refresh' content='0;url=/solproject/sol_study/lectureInfo.do'>";
+			}
+			else if(whichPage.equals("lectureList")){
+			    String gwamok = req.getParameter("gwamok");
+			    String grade = req.getParameter("grade");
+			    String tabNum = req.getParameter("tabNum");
+			    msg="<meta http-equiv='Refresh' content='0;url=/solproject/sol_study/lectureList.do?gwamok="+gwamok+"&grade="+grade+"&tabNum="+tabNum+"'>";
 			}
       else if(whichPage.equals("test")){
           msg="<meta http-equiv='Refresh' content='0;url=/solproject/sol_test/test/list.do'>";    

@@ -33,7 +33,7 @@ public class ReplyDAO {
 				mybatis.update("sol_reply.setBbsReplyOk",number);
 			  }
 			}	catch(Exception e) {
-				System.out.println("QnaReplyCreate error: "+e);		
+				System.out.println("setReplyOk error: "+e);		
 			}
 	  }//end
 	  
@@ -46,7 +46,7 @@ public class ReplyDAO {
 				dto = (ReplyDTO) mybatis.queryForObject("sol_reply.getBbsReply",tableno);
 			  }
 			}	catch(Exception e) {
-				System.out.println("QnaReplyCreate error: "+e);		
+				System.out.println("getReply error: "+e);		
 			}
 		  return dto;
 	  }//end
@@ -70,7 +70,7 @@ public class ReplyDAO {
 				  res = mybatis.update("sol_reply.setBbsReplyNo",tableno);
 			  }
 			}	catch(Exception e) {
-				System.out.println("QnaReplyCreate error: "+e);		
+				System.out.println("setReplyNo error: "+e);		
 			}
 		  return res;
 	  }//end
