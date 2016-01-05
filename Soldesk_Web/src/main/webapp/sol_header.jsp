@@ -194,6 +194,11 @@
                 <div class="form-group">
                 <form class="form-inline" method="post">
                     <input type="hidden" name="whichPage" value="${whichPage }">
+                    <c:if test="${whichPage == 'lectureList' }">
+	                    <input type="hidden" name="gwamok" value="${gwamok }">
+	                    <input type="hidden" name="grade" value="${grade }">
+	                    <input type="hidden" name="tabNum" value="${tabNum }">
+                    </c:if>
                     <input type="text" name="id" value="<%=c_id%>" placeholder="ID"/> 
                     <input type="password" name="passwd" placeholder="Password" value="" /> 
                     <input type="checkbox" name="c_id" value="SAVE"

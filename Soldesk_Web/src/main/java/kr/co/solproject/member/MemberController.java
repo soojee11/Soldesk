@@ -102,6 +102,12 @@ public class MemberController {
 			if(whichPage.equals("lectureInfo")){
 			    msg="<meta http-equiv='Refresh' content='0;url=/solproject/sol_study/lectureInfo.do'>";
 			}
+			else if(whichPage.equals("lectureList")){
+			    String gwamok = req.getParameter("gwamok");
+			    String grade = req.getParameter("grade");
+			    String tabNum = req.getParameter("tabNum");
+			    msg="<meta http-equiv='Refresh' content='0;url=/solproject/sol_study/lectureList.do?gwamok="+gwamok+"&grade="+grade+"&tabNum="+tabNum+"'>";
+			}
       else if(whichPage.equals("test")){
           msg="<meta http-equiv='Refresh' content='0;url=/solproject/sol_test/test/list.do'>";    
             }
