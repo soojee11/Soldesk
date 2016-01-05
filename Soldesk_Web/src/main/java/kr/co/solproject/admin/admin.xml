@@ -29,7 +29,7 @@
 	</select>
    
    	<select id="getlecList" parameterClass="Map" resultClass="PlayerDTO">
-		SELECT lectureno, subject,filename,filesize,poster,teacher,lecturetime,categoryno
+		SELECT lectureno, subject,filename,filesize,poster,lecturetime,categoryno
 		FROM sol_lecture
 		where categoryno = #categoryno#
 		order by lectureno desc 

@@ -20,8 +20,8 @@
   </select>
 
   <insert id="insert" parameterClass="PlayerDTO" >
-    INSERT INTO sol_lecture(subject, filename, filesize, poster, teacher, lecturetime, categoryno)
-    VALUES (#subject#, #filename#, #filesize#, #poster#, #teacher#, #lecturetime#, #categoryno#)
+    INSERT INTO sol_lecture(subject, filename, filesize, poster, lecturetime, categoryno)
+    VALUES (#subject#, #filename#, #filesize#, #poster#, #lecturetime#, #categoryno#)
   </insert>
   
   <select id="lectureRead" parameterClass="Integer" resultClass="PlayerDTO">

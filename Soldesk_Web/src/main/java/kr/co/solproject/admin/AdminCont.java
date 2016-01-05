@@ -716,56 +716,14 @@ public class AdminCont {
 		return "sol_admin/player/playerList";
 	}//end
 	
-	@RequestMapping(value="sol_admin/player/leclist2.do")
-	public String lecList2(HttpServletRequest request) {
-		
-		int categoryno = Integer.parseInt(request.getParameter("categoryno"));
-		
-		String url = "./leclist2.do?categoryno="+categoryno;
-		
-		int numPerPage=5;	
-		int recNo=1;
-		
-		String nowPage = request.getParameter("nowPage");
-		if (nowPage == null) {
-			nowPage = "1";
-		}
-		
-		int sno = ((Integer.parseInt(nowPage) - 1) * numPerPage);
-		int intNowPage = Integer.parseInt(nowPage);
-		
-		Map map = new HashMap();
-		map.put("sno", sno);
-		map.put("numPerPage", numPerPage);
-		map.put("categoryno", categoryno);
-		
-		List list = null;
-		int total = 0;
-		
-		list = dao.getlecList(map);
-		total = dao.getlecTotal(map);
-		
-		String dbean = Utility.getDate();
-		String paging = Paging.paging5(total, intNowPage, numPerPage, url);
-		
-		recNo = total - (intNowPage - 1) * numPerPage + 1 ;
-		
-		request.setAttribute("flag", 2);
-		request.setAttribute("list", list);
-		request.setAttribute("dbean", dbean);
-		request.setAttribute("paging", paging);
-		request.setAttribute("recNo", recNo);
-		request.setAttribute("nowPage", nowPage);
-		request.setAttribute("total", total);
-	
-		return "sol_admin/player/playerList";
-	}//end
-	
 	@RequestMapping(value="sol_admin/player/lecread.do", method=RequestMethod.GET)
 	public String lecRead(PlayerDTO dto, HttpServletRequest request) {
 		
 		dto = dao.lecRead(dto.getLectureno());
 
+		CategoryDTO dto2 = null;
+		dto2.setCategoryno(dto.getCategoryno());
+		
 		String filename = dto.getFilename();
 		filename = filename.toUpperCase();
 
@@ -776,9 +734,7 @@ public class AdminCont {
 			request.setAttribute("file_end", "MP4");
 		}
 		
-		int categoryno = dto.getCategoryno();
-		CategoryDTO dto2 = null;
-		dto2 = dao.categoryRead(categoryno);
+		dto2 = catedao.readCate(dto2);
 		
 		request.setAttribute("flag", 1);
 		request.setAttribute("dto", dto);
@@ -815,19 +771,15 @@ public class AdminCont {
 	}//end
 	
 	@RequestMapping(value="sol_admin/player/lecDel.do", method=RequestMethod.GET)
-	public String lecDel(HttpServletRequest request) {
+	public String lecDel(int lectureno, int categoryno,HttpServletRequest request) {
 		
 		PlayerDTO dto = null;
 		CategoryDTO dto2 = null;
 		
-		//System.out.println("------lecno"+request.getParameter("lectureno"));
-		//System.out.println("------cateno"+request.getParameter("categoryno"));
-		
-		int lectureno = Integer.parseInt(request.getParameter("lectureno"));
-		int categoryno = Integer.parseInt(request.getParameter("categoryno"));
+		dto2.setCategoryno(categoryno);
 		
 		dto = dao.lecRead(lectureno);
-		dto2 = dao.categoryRead(categoryno);
+		dto2 = catedao.readCate(dto2);
 		
 		request.setAttribute("dto", dto);
 		request.setAttribute("dto2", dto2);
@@ -864,8 +816,10 @@ public class AdminCont {
 		PlayerDTO dto = null;
 		CategoryDTO dto2 = null;
 		
+		dto2.setCategoryno(categoryno);
+		
 		dto = dao.lecRead(lectureno);
-		dto2 = dao.categoryRead(categoryno);
+		dto2 = catedao.readCate(dto2);
 		
 		request.setAttribute("dto", dto);
 		request.setAttribute("dto2", dto2);

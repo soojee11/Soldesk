@@ -43,10 +43,7 @@
 			<c:if test="${file_end eq 'MP4' }">
 				<video controls src="storage/${dto.filename }"  width="300px"></video>
 			</c:if>
-		
 		</td>
-		<td  valign="bottom">선생님</td>
-		<td  valign="middle">${dto.teacher }</td>
 	</tr>
 	<tr align="center" >
 		<td  valign="bottom">파일크기</td>
@@ -59,11 +56,9 @@
 </table>
 <br />
 <div align="center">
-	<c:if test="${flag==2 }">
-		<button type="button" class="btn btn-info btn-sm"  onclick="location.href='./lecUpdate.do?lectureno=${param.lectureno}&categoryno=${dto.categoryno }'">수정</button>
-		<button type="button" class="btn btn-info btn-sm"  onclick="location.href='./lecDel.do?lectureno=${param.lectureno}&categoryno=${dto.categoryno }'">삭제</button>
-	</c:if>
-		<button type="button" class="btn btn-info btn-sm" onclick="history.go(-1); return false;">목록</button>
+	<button type="button" class="btn btn-info btn-sm"  onclick="location.href='./lecUpdate.do?lectureno=${param.lectureno}&categoryno=${dto.categoryno }'">수정</button>
+	<button type="button" class="btn btn-info btn-sm"  onclick="location.href='./lecDel.do?lectureno=${param.lectureno}&categoryno=${dto.categoryno }'">삭제</button>
+	<button type="button" class="btn btn-info btn-sm" onclick="history.go(-1); return false;">목록</button>
 </div>
 
 <%@ include file="../footer.jsp"%>
