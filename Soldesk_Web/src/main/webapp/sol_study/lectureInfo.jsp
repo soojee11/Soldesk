@@ -37,8 +37,8 @@
 				<li><a href="lectureInfo.do?grade=${grade }&gwamok=과학">과학</a></li>
 			</ul>		
 	</div>
-	
 	<hr>
+	
 	<div class="view">
 	감언이설, 개과천선, 오비이락... <br />
 	유식한 어른들만 쓰는 말이라고?? <br />
