@@ -37,19 +37,38 @@
 				<li><a href="lectureInfo.do?grade=${grade }&gwamok=과학">과학</a></li>
 			</ul>		
 	</div>
-	
 	<hr>
-	<div class="view">
-	감언이설, 개과천선, 오비이락... <br />
-	유식한 어른들만 쓰는 말이라고?? <br />
-	이제 스쿨랜드 다나도 사자성어 공부한다!  <br />
-	이제 EBS 초등 사이트에서도 웹툰을 즐겨라!  <br />
-	짧은 동영상으로 볼까? 아니면 웹툰으로 볼까?  <br />
-	골라보는 재미까지!  <br />
-	즐겁게 웹툰을 보다보니 사자성어가 머리에 쏙쏙! <br />
-	<a href="lectureList.do?gwamok=${gwamok }&grade=${grade }&tabNum=1"><span style="color:red;">강의보러가기</span></a>
-	</div>
-	
+	<table border="0">
+	 <tr>
+			 <td>
+			     <!-- teacherPhoto -->
+					<div class="view">
+					   <img src=''/>
+					</div>
+		   </td>
+		   <td>
+		        <!--  teacherName & teacherCareer & 평점 avg(postGrade) -->
+		        <div class="view">
+          </div>
+		   </td>
+   </tr>
+   <tr>
+      <td colspan="2">			
+					<div class="view">
+					 
+					</div>
+		  </td>
+		</tr>
+		<tr>
+	    <td>
+	       <!-- bookInfo -->
+	    </td>
+	    <td>
+	       <!-- 강좌보러가기 -->
+	       <a href="lectureList.do?gwamok=${gwamok }&grade=${grade }&tabNum=1"><span style="color:red;">강의보러가기</span></a>
+	    </td>
+		</tr>
+	</table>
 </div>
 <!-- page end-->
 <%@ include file="../sol_footer.jsp"%>

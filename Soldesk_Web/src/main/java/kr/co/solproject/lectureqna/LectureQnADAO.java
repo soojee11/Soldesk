@@ -57,7 +57,7 @@ public class LectureQnADAO {
 		return dto;
 	}// end
 
-	/** QnA 등록 **/
+	/** 학습하기 QnA 등록 **/
 	public int qnaInsert(LectureQnADTO dto) {
 		int res = 0;
 		try {
@@ -70,6 +70,7 @@ public class LectureQnADAO {
 
 	}
 
+	/** 학습하기 QnA 상세보기 **/
 	public LectureQnADTO qnaRead(int lectureqnano) {
 		LectureQnADTO dto = null;
 		try {
@@ -80,6 +81,7 @@ public class LectureQnADAO {
 		return dto;
 	}// end
 
+	/** 학습하기 QnA 조회수 **/
 	public int readCount(int lectureqnano) {
 		int res = 0;
 
@@ -90,5 +92,17 @@ public class LectureQnADAO {
 		}
 		return res;
 	}
+	
+	/** 학습하기 QnA 삭제 **/
+	public int qnaDelete(LectureQnADTO dto) {
+		int res = 0;
+		try {
+			res = mybatis.delete("sol_lectureqna.qnaDelete", dto);
+		} catch (Exception e) {
+			System.out.println("post delete error: " + e);
+		}
+		return res;
+	}
+
 
 }
