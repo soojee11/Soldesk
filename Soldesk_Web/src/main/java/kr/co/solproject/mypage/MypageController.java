@@ -190,6 +190,15 @@ public class MypageController {
 			
 				 List qnalist=dao.getqnalist(map2);
 				
+				 
+				 
+				// System.out.println("# " + s_id);
+				// System.out.println("# " +qnalist);
+				 
+				 
+				 
+				 
+				 
 				String dbean=Utility.getDate();
 				 int total2=dao.getTotal2(s_id);
 				
@@ -399,7 +408,7 @@ public class MypageController {
 			 
 			 
 			 
-				
+			   // System.out.println(s_id);
 			    //qna°Ô½ÃÆÇ
 					Map map2=new HashMap();
 					map2.put("sno", sno);
@@ -408,6 +417,11 @@ public class MypageController {
 				
 					 List qnalist=dao.getqnalist(map2);
 					
+					 
+					
+					// System.out.println(qnalist);
+					 
+					 
 					String dbean=Utility.getDate();
 					 int total2=dao.getTotal2(s_id);
 					

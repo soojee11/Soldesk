@@ -44,6 +44,13 @@ function monthUp(form){
         .modalfont{
       font-family:'Jeju Gothic', sans-serif;
       font-size:10pt;
+      color: #787878;
+      font-style: italic;
+    }
+    
+      .calfont{
+      font-family:'Jeju Gothic', sans-serif;
+      font-size:10pt;
       color: #000;
       font-style: italic;
     }
@@ -263,7 +270,7 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
                                 
                             </c:when> 
                             <c:when test="${i gt endDate}"> <!-- 달력외부 -->
-                                <c:set var="bgcolor" value="#f1f8f4"/>
+                                <c:set var="bgcolor" value="#f2ffd2"/>
                             </c:when> 
                             <c:otherwise>
                                 <c:set var="bgcolor" value="#ffffff"/>
@@ -294,7 +301,7 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
                   
                         <c:if test="${i gt endDate }">
    
-                            <c:set var="color" value="#f1f8f4"/>
+                            <c:set var="color" value="#f2ffd2"/>
                             <c:set var="i">0</c:set> 
                             
                         </c:if> 
@@ -392,7 +399,7 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
           <font size="7px" style="color:#000 ">Lecture List</font>
           </h4>
         </span>
-         <span class="modalfont" >·${name}(${id })·
+         <span class="modalfont" >·<strong>${name}</strong>(${id })·
          </span>
          <hr/>
         </div>
@@ -403,7 +410,7 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
 			<table cellpadding=3 border=0 cellspacing=1 width=100% bgcolor=#dddddd class="table">
 			          <thead>
 			        <tr style="font-size: 14px; color: #000000; font-weight: bold;" bgcolor=#f8f8f8 align="center">
-			            <td >회차</td>
+			            <td  >회차</td>
 			            <td>강의명</td>
 			            <td >선생님</td>
 			            <td >수강일</td>
@@ -489,7 +496,7 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
           <h4 class="modal-title">
           <font size="7px"  style="color:#000 ">&nbsp;Memo List</font></h4>
         </span>
-        <span class="modalfont">·${name}(${id })·</span>
+        <span class="modalfont">·<strong>${name}</strong>(${id })·</span>
         <hr/>
         </div>
         
@@ -668,7 +675,7 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
           <h4 class="modal-title">
           <font size="7px"  style="color:#000 ">Test List</font></h4>
         </span>
-          <span class="modalfont" >·${name}(${id })·</span>
+          <span class="modalfont" >·<strong>${name}</strong>(${id })·</span>
           <hr/>
         </div>
         
@@ -898,8 +905,8 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
 }
 
 .seaTabs_switch_active {
-    border-bottom: 1px solid #fff;
-    background: #f1f8f4;
+    border-bottom: 1px solid #f2ffd2;
+    background: #f2ffd2;
 }
 </style>
 
@@ -910,28 +917,27 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
         <div class="seaTabs_tab"><font color="#000000">Q&A</font></div>
     </div>
     <div class="seaTabs_content">
-        <div class="seaTabs_item seaTabs_content_active" style="background-color: #f1f8f4">
+        <div class="seaTabs_item seaTabs_content_active" style="background-color: #f2ffd2">
 
 <!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■자유게시판■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
            
            <div>
 <%-- 총 <strong>${total }</strong> 개의 등록된 글이 있습니다. | 현재 페이지 : <strong>${nowPage }/${totalPage }</strong>
  --%>
-내가 등록한 글은 총 <strong>${total }</strong> 개 입니다.
+ ${name}님의 자유글은 총 <strong style="color: red;" >${total }</strong> 개입니다.
 </div>
            
-           <table class="table"  style="background-color: #ffffff" style="color: #000000;">
-    <tr align ="center" style="color: #000000;">
+           <table class="table"  style="background-color: #ffffff; color: #000000;" >
+    <tr align ="center" style="color: #000000; font-weight: bold;">
         <td>제목</td>
-        <td width="100">ID</td>
-        <td width="100">최신순</td>
-        <td width="60">조회수</td>
+        <td width="18%">최신순</td>
+        <td width="18%">조회수</td>
     </tr>
     
 
        <c:if test="${total eq 0 }">
-        <tr>
-            <td colspan="4" align="center">내가 작성한 글이 존재하지않습니다. </td>
+        <tr  style="color: #000000; ">
+            <td colspan="3" align="center" class="calfont">내가 작성한 글이 존재하지않습니다. </td>
         </tr>
        </c:if>
     
@@ -942,19 +948,31 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
     <c:forEach var="dto" items="${bbslist }">
      <c:set var="dtoid" value="${dto.passwd }" />
     
+<%--      id- <c:out  value="${s_id }"/> <br/>
+     bbsid- <c:out  value="${dtoid }"/> <br/>
+    
+     --%>
         <c:if test="${id eq dtoid }">
     
         <c:set var="recNo" value="${recNo-1 }" />
+       
          <tr
          style="color: #000000;"
          bgcolor="#ffffff" 
-         onmouseover="this.style.backgroundColor='#f1f8f4'"
+         onmouseover="this.style.backgroundColor='#f2ffd2'"
          onmouseout="this.style.backgroundColor='#ffffff'"  align="center">
-            <td><a href="/solproject/sol_bbs/bbsread.do?bbsno=${dto.bbsno }&nowPage=${nowPage }">${dto.subject }</a>
+         <td><a href="/solproject/sol_bbs/bbsread.do?bbsno=${dto.bbsno }&nowPage=${nowPage }"  style="color: #000000;">
+          
+         
+            ${dto.subject }
+           
+            
+            </a>
             </td>
-            <td width="100">${dto.passwd }</td>
-            <td width="100"><c:set var="regdt" value="${dto.regdt }"/> ${fn:substring(regdt,0,10) }</td>
-            <td width="60">${dto.readcnt }</td>
+            
+            
+            <td ><c:set var="regdt" value="${dto.regdt }"/> ${fn:substring(regdt,0,10) }</td>
+            <td >${dto.readcnt }</td>
         </tr>
     
     </c:if>
@@ -962,8 +980,8 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
      
 </table>
 <c:if test="${total gt 5  }">
- <a href="/solproject/sol_bbs/bbslist.do?col1=passwd&col2=${s_id }">
-            *이전에 작성한 글 보러가기 
+ <a href="/solproject/sol_bbs/bbslist.do?col1=passwd&col2=${s_id }"  style="color: #000000;">
+              *이전에 작성한 글 검색하러가기
             </a>
             </c:if>
             
@@ -978,21 +996,20 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
 <!-- ////////////////////////////////////////////////////////////////////////////////////////// -->
 
 
-        <div class="seaTabs_item" style="background-color: #f1f8f4">
+        <div class="seaTabs_item" style="background-color: #f2ffd2">
 <!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■Q&A■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
             <div>
 <%-- 총 <strong>${total2 }</strong> 개의 등록된 글이 있습니다. | 현재 페이지 : <strong>${nowPage }/${totalPage }</strong>
  --%> 
- 내가 등록한 글은 총 <strong>${total2 }</strong> 개 입니다.
+ ${name}님의 질문글은 총 <strong style="color: red;">${total2 }</strong> 개입니다.
 </div>
 
-    <table class ="table" style="background-color: #ffffff" style="color: #000000;">
-    <tr align ="center" style="color: #000000;">
-        <td>제목</td>
-        <td width="100">답변여부</td>
-        <td width="100">ID</td>
-        <td width="100">최신순</td>
-        <td width="60">조회수</td>
+    <table class ="table" style="background-color: #ffffff; color: #000000;">
+    <tr align ="center" style="color: #000000; font-weight: bold;">
+        <td >제목</td>
+        <td width="15%">답변여부</td>
+        <td width="12%">최신순</td>
+        <td width="12%">조회수</td>
     </tr>
     
     <c:set var ="recNo" value=""/>
@@ -1000,44 +1017,47 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
     
     
     <c:if test="${total2 eq 0  }">
-        <tr>
-            <td colspan="5" align="center">내가 작성한 글이 존재하지않습니다. </td>
+        <tr  style="color: #000000;">
+            <td colspan="4" align="center" class="calfont">내가 작성한 글이 존재하지않습니다. </td>
         </tr>
     </c:if>
     
     
+       
+   
+    
     <c:set var ="recNo" value="${recNo }"/>
 
-    <c:forEach var ="dto" items="${qnalist }">
-    <c:set var ="dtoid" value="${dto.passwd }"/>
-    <c:if test="${id eq dtoid }">
+    <c:forEach var ="dto2" items="${qnalist }">
+    <c:set var ="dto2id" value="${dto2.passwd }"/>
+    
+<%--     id- <c:out  value="${s_id }"/> <br/>
+     qnaid- <c:out  value="${dto2id }"/> <br/>
+     --%>
+    <c:if test="${id eq dto2id }">
     
     
-    <c:set var ="recNo" value="${recNo-1 }"/>
          <tr
          style="color: #000000;"
          bgcolor="#ffffff" 
-         onmouseover="this.style.backgroundColor='#f1f8f4'"
+         onmouseover="this.style.backgroundColor='#f2ffd2'"
          onmouseout="this.style.backgroundColor='#ffffff'"  align="center">
                
                
                 <td>
                     <span>
-                        <c:if test="${dto.qnashow=='N' }"><img src="../sol_img/lock.png" width="15"></c:if>
-                        <a href="JavaScript:goRead('${dto.qnano }','${recNo+1 }','${s_id }')">${dto.subject }</a>
+                        <c:if test="${dto2.qnashow=='N' }"><img src="../sol_img/lock.png" width="15"></c:if>
+                        <a href="JavaScript:goRead('${dto2.qnano }','${recNo+1 }','${s_id }')"  style="color: #000000;">${dto2.subject }</a>
                     </span>
                 </td>
             <td>
-                <c:if test="${dto.replyok=='N' }">미답변</c:if>
-                <c:if test="${dto.replyok=='Y' }">답변완료</c:if>
+                <c:if test="${dto2.replyok=='N' }">미답변</c:if>
+                <c:if test="${dto2.replyok=='Y' }">답변완료</c:if>
             </td>
             <td>
-                 ${dto.id }
+                <c:set var="regdt" value="${dto2.regdt }"/> ${fn:substring(regdt,0,10) }
             </td>
-            <td>
-                <c:set var="regdt" value="${dto.regdt }"/> ${fn:substring(regdt,0,10) }
-            </td>
-            <td>${dto.readcnt }</td>
+            <td>${dto2.readcnt }</td>
         </tr>
         
         
@@ -1049,8 +1069,8 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
 </table>
             
              <c:if test="${total2 gt 5   }">
-             <a href="/solproject/sol_qna/list.do?col1=id&col2=${s_id }">
-            *이전에 작성한 글 보러가기 
+             <a href="/solproject/sol_qna/list.do?col1=id&col2=${s_id }"  style="color: #000000;">
+            *이전에 작성한 글 검색하러가기
             </a>
             </c:if>
             
@@ -1094,7 +1114,7 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
 
 
 
-
+<br/><br/>
 
 
 
@@ -1108,7 +1128,7 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
 %> 
  </tr>
  
- 
+
  <tr  style='height: 50px; font-weight: bold;'>
 <%
   }

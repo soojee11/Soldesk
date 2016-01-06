@@ -183,9 +183,9 @@
     
 	<select id="getqnalist"  parameterClass="Map"  resultClass="MypageDTO">  <!-- qna게시판 -->
 
-           select qna.qnano,qna.id,qna.subject,qna.passwd,qna.readcnt,qna.regdt,qna.replyok,qna.qnashow,qna.content
+           select qna.qnano,calendar.id,qna.subject,qna.passwd,qna.readcnt,qna.regdt,qna.replyok,qna.qnashow,qna.content
             FROM sol_calendar calendar join sol_qna qna 
-            ON calendar.id = qna.id
+            ON qna.id = #id#
             group by qna.qnano
             order by  qna.qnano desc
              limit #sno#, #numPerPage#

@@ -205,12 +205,14 @@ public class MypageDAO {
 	
 	
 	
-	public List getqnalist(Map map) { //sol_qna
+	public List getqnalist(Map map2) { //sol_qna
 		List list = null;
 		try {
-			list = mybatis.queryForList("sol_calendar.getqnalist",map);
+			list = mybatis.queryForList("sol_calendar.getqnalist",map2);
 
-			//System.out.println(list);
+			//System.out.println("qna ="+list);
+			
+			
 		} catch (Exception e) {
 			System.out.println("getqnalist: " + e);
 		}
@@ -233,13 +235,13 @@ public class MypageDAO {
 		}
 	
 		// 게시물 전체 개수 불러오기
-				public int getTotal2(String id) {
-					int cnt = 0;
-					try {
-						cnt = (Integer) mybatis.queryForObject("sol_calendar.total2",id);
-					} catch (Exception e) {
-						System.out.println("getTotal2() 실패: " + e);
-					}
-					return cnt;
-				}
+		public int getTotal2(String id) {
+			int cnt = 0;
+			try {
+				cnt = (Integer) mybatis.queryForObject("sol_calendar.total2",id);
+			} catch (Exception e) {
+				System.out.println("getTotal2() 실패: " + e);
+			}
+			return cnt;
+		}
 }
