@@ -224,12 +224,24 @@ function cancel(replyno) {
 		<input type="hidden" name="replyno" id="createReplyno" />
 		<div>
 			<c:if test="${s_id ne null}">
-			<textarea name="content" id="content" rows="5" cols="50" style="width: 89%; height:53px;"></textarea>
+			<textarea onkeyup='displayLeng(140,"content");' name="content" id="content" rows="5" cols="50" style="width: 89%; height:53px;" placeholder="최대 140자까지 입력이 가능합니다."></textarea>
 			<img src="img/btn_submit.png" onclick="replyCreate()"/>
+			<p style="color: #999; margin-top: -10px;"><em id='content_bytes' style="color:black;">0</em>/140</p>
 			</c:if>
 		</div>
 	</form>
 </div>
-
+<script>
+function displayLeng(sz, id) {
+	var form = document.frm;
+	if (form[id].value.length > sz) {
+		if (event.keyCode != '8') {//백스페이스는 지우기작업시 바이트 체크하지 않기 위해서
+			alert(sz + '자까지 입력이 가능합니다.');
+		}
+			form[id].value = form[id].value.substring(0, sz);
+		}
+	document.getElementById(id + '_bytes').innerHTML = form[id].value.length;
+}
+</script>
 <!-- page end-->
 <%@ include file="../sol_footer.jsp"%>
