@@ -12,9 +12,12 @@ public class CategoryDTO {
 	private String teacherCareer; 	// 선생님 이력
 	private String categoryinfo;  	// 강의 설명
 	private String bookInfo; 		// 책 정보
+	private String bookPhoto;		// 책 사진
 	
 	// 선생님 사진 업로드 변수
 	private MultipartFile teacherMF; //<INPUT type='file' name='teacherMF'>
+	// 교재 사진 업로드 변수
+	private MultipartFile bookMF; //<INPUT type='file' name='bookMF'>
 	
 	public CategoryDTO() {
 	}
@@ -90,6 +93,23 @@ public class CategoryDTO {
 	public void setTeacherMF(MultipartFile teacherMF) {
 		this.teacherMF = teacherMF;
 	}
+
+	public String getBookPhoto() {
+		return bookPhoto;
+	}
+
+	public void setBookPhoto(String bookPhoto) {
+		this.bookPhoto = bookPhoto;
+	}
+
+	public MultipartFile getBookMF() {
+		return bookMF;
+	}
+
+	public void setBookMF(MultipartFile bookMF) {
+		this.bookMF = bookMF;
+	}
+	
 	
 	
 	
