@@ -58,20 +58,4 @@ public class LectureDAO {
 		return categoryInfo;
 	}
 	
-	/** 학습하기 카테고리 설명 조회 **/
-	public List getCategory(int grade, String gwamok){
-	  List list = null;
-    try {
-      Map map = new HashMap();
-      map.put("grade", grade);
-      map.put("gwamok", gwamok);
-      
-      list = mybatis.queryForList("sol_lecture.category",map);
-      
-    } catch (Exception e) {
-      System.out.println("getCategory error: "+e);   
-    }
-    return list;
-	}
-	
 }

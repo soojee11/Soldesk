@@ -13,8 +13,8 @@
 	</select>
 	
 	<update id="cateIns" parameterClass="CategoryDTO">
-		insert into sol_category(grade, gwamok,teacherName,teacherPhoto,teacherCareer,categoryinfo,bookInfo)
-		values(#grade#,#gwamok#,#teacherName#,#teacherPhoto#,#teacherCareer#,#categoryinfo#,#bookInfo#)
+		insert into sol_category(grade, gwamok,teacherName,teacherPhoto,teacherCareer,categoryinfo,bookInfo,bookPhoto)
+		values(#grade#,#gwamok#,#teacherName#,#teacherPhoto#,#teacherCareer#,#categoryinfo#,#bookInfo#,#bookPhoto#)
 	</update>
 	
 	<!-- 카테고리 목록 가져오기/ readCate와 주의 -->
@@ -31,15 +31,29 @@
 	
 	<!-- 카테고리 상세보기 -->
 	<select id="readCate" parameterClass="CategoryDTO" resultClass="CategoryDTO">
-		select categoryno, grade, gwamok, categoryinfo, teacherName, teacherPhoto, teacherCareer,bookInfo
+		select categoryno, grade, gwamok, categoryinfo, teacherName, teacherPhoto, teacherCareer,bookInfo, bookPhoto
 		from sol_category
 		where categoryno = #categoryno#
 	</select>
 	
 	<update id="updateCateProc" parameterClass="CategoryDTO">
 		update sol_category
-		set grade = #grade#, gwamok=#gwamok#, categoryinfo=#categoryinfo#,teacherName=#teacherName#, teacherPhoto=#teacherPhoto#, teacherCareer=#teacherCareer#,bookInfo=#bookInfo#
+		set grade = #grade#, gwamok=#gwamok#, categoryinfo=#categoryinfo#,teacherName=#teacherName#, teacherPhoto=#teacherPhoto#, teacherCareer=#teacherCareer#,bookInfo=#bookInfo#, bookPhoto = #bookPhoto#
 		where categoryno = #categoryno#
 	</update>
+	
+	<!-- 카테고리 상세보기 -->
+  <select id="readCate2" parameterClass="CategoryDTO" resultClass="CategoryDTO">
+    select categoryno, grade, gwamok, categoryinfo, teacherName, teacherPhoto, teacherCareer,bookInfo, bookPhoto
+    from sol_category
+    where grade=#grade# and gwamok=#gwamok#
+  </select>
+  
+  <!-- Player.jsp에서 출력할 선생님 이름 가져오기 -->
+  <select id="teacher" parameterClass="Integer" resultClass="String">
+    SELECT teacherName
+    FROM sol_category
+    WHERE categoryno = #categoryno# 
+  </select>
 		
 </sqlMap>
