@@ -99,7 +99,8 @@ public class LectureQnADAO {
 		try {
 			res = mybatis.delete("sol_lectureqna.qnaDelete", dto);
 		} catch (Exception e) {
-			System.out.println("post delete error: " + e);
+			System.out.println("qnaDelete error: " + e);
+			e.getStackTrace();
 		}
 		return res;
 	}
