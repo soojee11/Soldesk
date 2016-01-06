@@ -652,8 +652,19 @@
 		<div class="container">
 
 			<p>
-				&copy; 2015, soldesk created by no.5&nbsp;&nbsp;&nbsp;<a href="http://localhost:9090/solproject/sol_admin/login.do">관리자 페이지</a>
+				&copy; 2015, soldesk created by no.5&nbsp;&nbsp;&nbsp;<a href="javascript:showAdmin();"><strong>관리자 페이지</strong></a>
 			</p>
+			<script>
+			function showAdmin() {//아이디중복확인
+				var sx = parseInt(screen.width);//팝업창 나타내는 위치
+			    var sy = parseInt(screen.height);
+			    var x = (sx / 2) - 600;
+			    var y = (sy / 2) - 350;
+			    
+			    var win = window.open("http://localhost:9090/solproject/sol_admin/login.do", "", "width=1200, height=700");
+			    win.moveTo(x, y);//화면이동
+			 }//end
+			</script>
 
 		</div>
 		<!-- end: Container  -->

@@ -226,7 +226,7 @@ function cancel(replyno) {
 			<c:if test="${s_id ne null}">
 			<textarea onkeyup='displayLeng(140,"content");' name="content" id="content" rows="5" cols="50" style="width: 89%; height:53px;" placeholder="최대 140자까지 입력이 가능합니다."></textarea>
 			<img src="img/btn_submit.png" onclick="replyCreate()"/>
-			<p style="color: #999; margin-top: -10px;"><em id='content_bytes' style="color:black;">0</em>/140</p>
+			<span style="color: #999;"><em id='content_bytes' style="color:black;">0</em>/140</span>
 			</c:if>
 		</div>
 	</form>

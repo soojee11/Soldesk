@@ -175,7 +175,14 @@
 									<td style="background-color: #FAFAD2;">해설</td>
 								</tr>
 								<tr>
-									<td>${dto.comment }</td>
+									<td>
+											<jsp:scriptlet>
+											pageContext.setAttribute("cr", "\r");
+											pageContext.setAttribute("lf", "\n");									
+											pageContext.setAttribute("crlf", "\r\n");									
+											</jsp:scriptlet>
+											${fn:replace(dto.comment,crlf,'<br/>') }
+									</td>
 								</tr>
 							</table>
 						</td>
