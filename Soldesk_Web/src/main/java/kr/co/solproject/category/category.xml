@@ -19,7 +19,7 @@
 	
 	<!-- 카테고리 목록 가져오기/ readCate와 주의 -->
 	<select id="readCateInfo" parameterClass="Map" resultClass="CategoryDTO">
-		SELECT categoryno, grade, gwamok, categoryinfo, teacherName, teacherPhoto, teacherCareer,bookInfo
+		SELECT categoryno, grade, gwamok, categoryinfo, teacherName, teacherPhoto, teacherCareer,bookInfo, bookPhoto
 		FROM sol_category
 		limit #sno#, #numPerPage#
 	</select>

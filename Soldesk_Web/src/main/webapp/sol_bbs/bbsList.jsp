@@ -43,7 +43,6 @@
 		<th width="100">작성일</th>
 		<th width="60">조회수</th>
 	</tr>
-	
 	<!-- 공지사항 -->
 	<c:forEach var="ndto" items="${nlist }">
 		<c:if test="${ndto.noticeshow=='Y' }">
@@ -57,6 +56,12 @@
 			</tr>
 		</c:if>
 	</c:forEach>
+	
+	<c:if test="${total ==0 }">
+		<tr>
+			<td colspan="6"><div align="center">관련된 게시글이 존재하지않습니다. </div></td>
+		</tr>
+	</c:if>
 	
 	<!-- 게시판 -->
 	<c:set var="recNo" value="${recNo }" />
