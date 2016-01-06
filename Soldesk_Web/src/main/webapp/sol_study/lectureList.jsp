@@ -193,7 +193,6 @@ function qnaCreate(){
 <div id="qnaCreate" align="center" style="display:none">
 
 <form name='qnaCreateForm' id="qnaCreateForm" method="post" style="width: 98%;">  <!-- action="insert.do" -->
-	<input type='hidden' name='lectureqnano' id='lectureqnano' value='${lectureqnano}'> 
 	<input type='hidden' name='gwamok' id='gwamok' value='${gwamok}'> 
 	<input type='hidden' name='grade' id='grade' value='${grade}'>
  
@@ -260,7 +259,7 @@ function qnaReadResponse(data,status){
   	  	document.frm.btnDelete.style.display='none';
   	  	document.frm.btnList.style.display='';  	 */	  	
   	}
-  	alert(result[6]);
+  	//alert(result[6]);
 	document.getElementById("lectureqnano3").value=result[6];
 
 }
@@ -273,8 +272,8 @@ function qnaDelete() {
     $.get("./qnaDelete.do", param, postApplyResponse); //get방식	 */
 
     lectureqnano=document.getElementById("lectureqnano3").value;
-    $("#lectureqnano").val(lectureqnano);
-    var param="lectureqnano="+lectureqnano;         //전송 데이터
+   /*  $("#lectureqnano").val(lectureqnano);
+    var param="lectureqnano="+lectureqnano;         //전송 데이터 */
 	var param=$("#qnaReadForm").serialize();    //서버에 전달할 값
 	//alert(param);
 	$.ajaxSetup({datatype: "text"});
@@ -282,51 +281,14 @@ function qnaDelete() {
     
 }
 
-//수정할 댓글 조회
-function updateForm(replyno){
-  $("#replyno").val(replyno);
-  var param="replyno="+replyno; // 전달할 데이터
-  $.ajaxSetup({dataType:"text"});
-  $.get("./read.do",param,updateFormResponse); // get방식
-}
-
-function updateFormResponse(data,status){
-  //alert(data);
-  $("#content").val(data.replace(/^\s*|\s*$/g, ''));
-  document.frm.btnCreate.style.display='none';
-  document.frm.btnUpdate.style.display='';
-  document.frm.btnDelete.style.display='none';
-  document.frm.btnCancel.style.display='';  
-}
-
-
-//수정 저장
-function updateProc() {
-  var param=$("#frm").serialize();
-  $.ajaxSetup({dataType:"text"});
-  $.post("./update.do",param,updateProcResponse);	
-}
-
-function updateProcResponse(data,textStatus){
-  var sw=data.replace(/^\s*|\s*$/g, ''); // "FAIL/패스워드~~"
-  var result=sw.split("/"); // 문자를 분할해서 배열값으로 리턴
-  if(result[0]=='FAIL'){
-	 alert(result[1]);
-  }
-  else { // SUCCESS
-	 alert(result[1]);
-     window.location.reload();
-  }
-  
-}
 
 </script>
 
-<!-- 학습QnA 자세히보기 -->
-
+<!-- 학습QnA 상세보기 -->
+<input type='hidden' name='lectureqnano' id='lectureqnano3' value=''> 
 <div id="qnaRead" align="center" style="display:none">
 <form name='qnaReadForm' id="qnaReadForm" method="post" >  <!-- action="insert.do" -->
-	<input type='hidden' name='lectureqnano' id='lectureqnano3' value=''> 
+	
  	<input type='hidden' name='gwamok' id='gwamok' value='${gwamok}'> 
 	<input type='hidden' name='grade' id='grade' value='${grade}'>
  <table border ="0" width="100%" class="table" style="text-align:center">
@@ -358,7 +320,7 @@ function updateProcResponse(data,textStatus){
  	</div>
  	
  	<div id="idcheck2">
- 	<input name="btnMod" type="button" class="btn btn-warning button" value="수정" onclick="qnaApply(this.form)">
+ 	<input name="btnMod" type="button" class="btn btn-warning button" value="수정" onclick="javascript:qnaUpdateForm()">
  	<input name="btnDelete" type="button" class="btn btn-warning button" value="삭제" onclick="javascript:qnaDelete()">
  	<input name="btnList" type="button" class="btn btn-warning button" value="목록" onclick="javascript:history.go()">
  	</div>
@@ -366,7 +328,83 @@ function updateProcResponse(data,textStatus){
 
   </div>
 </form>
+</div><!--  상세보기 폼 끝  -->
+
+
+<script>
+
+//수정할 글 조회
+function qnaUpdateForm(){
+	
+	document.getElementById("qnaList").style.display = 'none';
+    document.getElementById("qnaCreate").style.display = 'none';
+    document.getElementById("qnaRead").style.display = 'none';
+    document.getElementById("qnaModi").style.display = '';
+    
+    lectureqnano=document.getElementById("lectureqnano3").value;
+    var param="lectureqnano="+lectureqnano; 
+
+	$.ajaxSetup({dataType:"text"});
+	$.get("./qnaUpdateRead.do",param,updateFormResponse); // get방식
+	
+}
+
+function updateFormResponse(data,status){
+	var sw=data.replace(/^\s*|\s*$/g, '');
+	alert(sw);
+	var result=sw.split("/"); // 문자를 분할해서 배열값으로 리턴
+	//alert(result[5]);
+	document.qnaModiForm.subject.value=result[0];
+	document.qnaModiForm.content.value=result[1];
+	document.qnaModiForm.lectureqnano3.value=result[2];
+}
+
+
+//수정 저장
+function qnaUpdateProc() {
+	alert("학습하기QnA를 수정하시겠습니까?");
+	lectureqnano=document.getElementById("lectureqnano3").value;
+	var param=$("#qnaModiForm").serialize();
+	$.ajaxSetup({dataType:"text"});
+	$.post("./qnaUpdate.do",param,postApplyResponse);	
+}
+
+
+</script>
+
+<!--  학습QnA 수정폼  -->
+
+<div id="qnaModi" align="center" style="display:none">
+
+<form name='qnaModiForm' id="qnaModiForm" method="post" style="width: 98%;">  <!-- action="insert.do" -->
+	<input type='hidden' name='lectureqnano' id='lectureqnano3' value=''> 
+	<input type='hidden' name='gwamok' id='gwamok' value='${gwamok}'> 
+	<input type='hidden' name='grade' id='grade' value='${grade}'>
+ 
+ <table border ="0" width="100%" class="table" style="text-align:center">
+	<tr bgcolor="#f5f7f9">
+		<th style="text-align:center" valign="bottom">제목</th>
+		<td bgcolor="#ffffff"><input type="text" name="subject" id="subject" size="100"></td>
+	</tr>
+	<tr bgcolor="#f5f7f9">
+		<th style="text-align:center" valign="bottom">ID</th>
+		<td bgcolor="#ffffff">${s_id }</td>
+	</tr>
+	<tr bgcolor="#f5f7f9">
+		<th style="text-align:center"  valign="bottom">내용</th>
+		<td bgcolor="#ffffff"><textarea cols="50" rows="7" id="content" name="content"></textarea></td>
+	</tr>
+</table> 
+ <div align="right">
+	<input name="btnModi" type="button" class="btn btn-warning button" value="수정" onclick="javascript:qnaUpdateProc()">
+ 	<input name="btnCancel" type="button" class="btn btn-warning button" value="취소" onclick="javascript:history.go()">
+ 
+
+  </div>
+</form>
 </div>
+
+
 </div>
 
 
