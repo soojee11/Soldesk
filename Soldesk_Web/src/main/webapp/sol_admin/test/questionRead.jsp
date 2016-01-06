@@ -80,7 +80,14 @@
 	
 	<tr>
 		<th width="100">해설</th>
-		<td colspan="5">${dto.comment }</td>
+		<td colspan="5">
+		<jsp:scriptlet>
+			pageContext.setAttribute("cr", "\r");
+			pageContext.setAttribute("lf", "\n");									
+			pageContext.setAttribute("crlf", "\r\n");									
+		</jsp:scriptlet>
+			${fn:replace(dto.comment,crlf,'<br/>') }
+		</td>
 	</tr>
 	
 </table>

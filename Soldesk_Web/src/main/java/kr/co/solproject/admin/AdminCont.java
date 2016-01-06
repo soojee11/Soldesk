@@ -968,6 +968,13 @@ public class AdminCont {
 			request.setAttribute("msg",0);
 			return "sol_admin/player/cateInfo";
 		}else{
+			// \n -> <br/> 치환
+			String teacherCareer = dto.getTeacherCareer().replace("\r\n", "<br>");
+			String categoryinfo = dto.getCategoryinfo().replace("\r\n", "<br>");
+			
+			dto.setTeacherCareer(teacherCareer);
+			dto.setCategoryinfo(categoryinfo);
+			
 			//선생님 사진 등록
 			String basePath = Utility.getRealPath(request, "/sol_admin/player/cateStorage");
 			System.out.println("basePath 확인: "+basePath);

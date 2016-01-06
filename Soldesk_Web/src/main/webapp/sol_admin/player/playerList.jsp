@@ -43,34 +43,36 @@
 	<c:set var ="recNo" value="${recNo }"/>
 	<c:forEach var ="dto" items="${list }">
 		<c:set var ="recNo" value="${recNo-1 }"/>
-			<c:if test="${flag==1 }">
 			<tr align ="center">
 				<td>${dto.lectureno }</td>
 				<td>${dto.subject }</td>
-				<td><a href="lecread.do?lectureno=${dto.lectureno }">${dto.filename }</a></td>
-				<td><a href="lecread.do?lectureno=${dto.lectureno }"><img src="storage/${dto.poster }" width="60px"></a></td>
+				<td>
+					<a href="lecread.do?lectureno=${dto.lectureno }">
+						<c:choose>
+							<c:when test="${fn:length(dto.filename) > 25}">
+								<c:out value="${fn:substring(dto.filename,0,24)}"/>...${fn:substring(dto.filename,fn:length(dto.filename)-4,fn:length(dto.filename)) }
+							</c:when>
+						</c:choose>
+					</a>
+				</td>
+				<td>
+				<c:choose>
+					<c:when test="${fn:length(dto.poster)==0}">-</c:when>
+					<c:when test="${dto.poster!=null}">
+						<a href="lecread.do?lectureno=${dto.lectureno }"><img src="storage/${dto.poster }" width="60px"></a>
+					</c:when>
+				</c:choose>	
+				</td>
 				<td>${dto.filesize/(1024)-((dto.filesize/(1024))%1) }KB</td>
 				<td>${dto.lecturetime }</td>
 			</tr>
-			</c:if>
-			<c:if test="${flag==2 }">
-			<tr align ="center">
-				<td>${dto.lectureno }</td>
-				<td>${dto.subject }</td>
-				<td><a href="lecread2.do?lectureno=${dto.lectureno }">${dto.filename }</a></td>
-				<td>${dto.filesize/(1024)-((dto.filesize/(1024))%1) }KB</td>
-				<td><a href="lecread2.do?lectureno=${dto.lectureno }"><img src="storage/${dto.poster }" width="60px"></a></td>
-				<td>${dto.lecturetime }</td>
-			</tr>
-			</c:if>
 	</c:forEach>
-	<!-- &col1=${param.col1}&col2=${param.col2} -->
-	<tr>
-		<td colspan="7" align="right" ><strong>total:</strong>${total }</td>
-	</tr>
-	<tr>
-		<td colspan="7"><div align="center">${paging }</div></td>
-	</tr>
 </table>
+<div align="right">
+	<strong>total:</strong>${total }
+</div>
+<div align="center">
+	${paging }
+</div>
 
 <%@ include file="../footer.jsp"%>

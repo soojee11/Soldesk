@@ -33,7 +33,8 @@
 	</strong>
 </h4>
 </div>
-
+<div align="center">
+<div style="width:850px;">
 <table class="table table-bordered">
 	<tr align="center" >
 		<td rowspan="3">
@@ -41,7 +42,7 @@
 				<audio controls autoplay id="audio1" src="storage/${dto.filename }"></audio>	
 			</c:if>
 			<c:if test="${file_end eq 'MP4' }">
-				<video controls src="storage/${dto.filename }"  width="300px"></video>
+				<video controls src="storage/${dto.filename }"  width="600px"></video>
 			</c:if>
 		</td>
 	</tr>
@@ -54,6 +55,8 @@
 		<td  valign="middle">${dto.lecturetime }</td>
 	</tr>
 </table>
+</div>
+</div>
 <br />
 <div align="center">
 	<button type="button" class="btn btn-info btn-sm"  onclick="location.href='./lecUpdate.do?lectureno=${param.lectureno}&categoryno=${dto.categoryno }'">수정</button>
