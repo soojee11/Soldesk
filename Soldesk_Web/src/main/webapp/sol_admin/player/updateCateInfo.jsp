@@ -117,6 +117,7 @@
 				<div class="form-group">
 					<label class="col-sm-2 control-label">선생님 사진</label>
 					<div class="col-sm-10">
+						등록된 파일명: &nbsp;&nbsp;&nbsp; ${dto.teacherPhoto }
 						<input type="file" name="teacherMF" id="teacherMF" size='50' >
 					</div>
 				</div>
@@ -133,9 +134,16 @@
 					</div>
 				</div>
 				<div class="form-group">
+					<label class="col-sm-2 control-label">교재</label>
+					<div class="col-sm-10">
+						등록된 파일명: ${dto.bookPhoto }
+						<input type="file" name="bookMF" size='50' >
+					</div>
+				</div>
+				<div class="form-group">
 					<label class="col-sm-2 control-label">교재 정보</label>
 					<div class="col-sm-10">
-						<textarea name="bookInfo" id="bookInfo" style="width: 80%; height: 300px;">${dto.bookInfo }</textarea>
+						<textarea name="bookInfo" id="bookInfo" style="width: 80%; height: 300px;">${dto.categoryinfo }</textarea>
 					</div>
 				</div>
 				<div align="center">
