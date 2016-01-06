@@ -47,11 +47,16 @@
 	</tr>
 	<tr align="center">
 		<td>강좌설명</td>
-		<td colspan="2">${dto.categoryinfo }</td>
+		<td colspan="3">${dto.categoryinfo }</td>
 	</tr>
 	<tr align="center">
-		<td>책 정보</td>
-		<td colspan="2">${dto.bookInfo }</td>
+		<td>교재</td>
+		<td colspan="2">교재 정보</td>
+		
+	</tr>
+	<tr>
+		<td><img src="cateStorage/${dto.bookPhoto }" width="200px" height="200px" ></td>
+		<td colspan="3">${dto.bookInfo }</td>
 	</tr>
 </table>
 </div>

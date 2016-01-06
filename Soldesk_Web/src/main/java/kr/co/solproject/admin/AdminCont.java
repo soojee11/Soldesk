@@ -885,13 +885,24 @@ public class AdminCont {
 		CategoryDTO oldDTO = catedao.readCate(dto);
 		
 		MultipartFile teacherMF = dto.getTeacherMF();
+		MultipartFile bookMF = dto.getBookMF();
 		
+		//기존 선생님 사진 삭제 
 		if(teacherMF.getSize()>0){
 			Utility.deleteFile(basePath, oldDTO.getTeacherPhoto());
 			String teacherPhoto = UploadSaveManager.saveFileSpring30(teacherMF, basePath);
 			dto.setTeacherPhoto(teacherPhoto);
 		}else{	
 			dto.setTeacherPhoto(oldDTO.getTeacherPhoto());
+		}
+		
+		//기존 교재 사진 삭제
+		if(bookMF.getSize()>0){
+			Utility.deleteFile(basePath, oldDTO.getBookPhoto());
+			String bookPhoto = UploadSaveManager.saveFileSpring30(bookMF, basePath);
+			dto.setBookPhoto(bookPhoto);
+		}else{	
+			dto.setBookPhoto(oldDTO.getBookPhoto());
 		}
 		
 		if(dto.getBookInfo().equals("<p>&nbsp;</p>")){
@@ -977,10 +988,14 @@ public class AdminCont {
 			
 			//선생님 사진 등록
 			String basePath = Utility.getRealPath(request, "/sol_admin/player/cateStorage");
-			System.out.println("basePath 확인: "+basePath);
 			MultipartFile teacherMF = dto.getTeacherMF();
 			String teacherPhoto = UploadSaveManager.saveFileSpring30(teacherMF, basePath);
 			dto.setTeacherPhoto(teacherPhoto);
+			
+			//교재 사진 등록
+			MultipartFile bookMF = dto.getBookMF();
+			String bookPhoto = UploadSaveManager.saveFileSpring30(bookMF, basePath);
+			dto.setBookPhoto(bookPhoto);
 			
 			if(dto.getBookInfo().equals("<p>&nbsp;</p>")){
 			      dto.setBookInfo("내용 없음");

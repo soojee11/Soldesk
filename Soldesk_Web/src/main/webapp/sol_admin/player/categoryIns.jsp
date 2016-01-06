@@ -107,6 +107,12 @@
 					</div>
 				</div>
 				<div class="form-group">
+					<label class="col-sm-2 control-label">교재</label>
+					<div class="col-sm-10">
+						<input type="file" name="bookMF" size='50' >
+					</div>
+				</div>
+				<div class="form-group">
 					<label class="col-sm-2 control-label">교재 정보</label>
 					<div class="col-sm-10">
 						<textarea name="bookInfo" id="bookInfo" style="width: 80%; height: 300px;"></textarea>

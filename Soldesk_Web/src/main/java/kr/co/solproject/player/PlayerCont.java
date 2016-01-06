@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 
-
+import kr.co.solproject.category.CategoryDAO;
 import kr.co.solproject.category.CategoryDTO;
 import kr.co.solproject.mypage.MypageDAO;
 import kr.co.solproject.mypage.MypageDTO;
@@ -29,13 +29,14 @@ import net.utility.Utility;
 @Controller
 public class PlayerCont {
 
-	@Autowired
-	private PlayerDAO dao = null;
+  	@Autowired
+  	private PlayerDAO dao = null;
 	 @Autowired
 	  private StudyDAO sdao=null;
 	 @Autowired
-	  private MypageDAO mdao=null; //하나)추가-캘린더
-	 
+	  private MypageDAO mdao=null;   //하나)추가-캘린더
+	 @Autowired
+	   private CategoryDAO cdao = null;
 	 
 	public PlayerCont() {
 		System.out.println("---------------PlayerCont 객체 생성");
@@ -43,8 +44,6 @@ public class PlayerCont {
 
 	@RequestMapping(value="/sol_player/player.do", method=RequestMethod.GET)
   public String createForm(HttpServletRequest req, HttpSession session){
-	 // System.out.println("-----------session id값"+session.getAttribute("s_id"));
-   // System.out.println("-----------session pw값"+session.getAttribute("s_pw"));
     // 여기서 동영상 정보들 가져오기     
     PlayerDTO dto = null;
     StudyDTO sdto = null;
@@ -52,18 +51,23 @@ public class PlayerCont {
     List list = null;
     
     String id = (String) session.getAttribute("s_id");    // 우선적으로 id
-    int lectureno =3;        // default 우선적으로 해놈 
+    int lectureno =1;        // default 우선적으로 해놈 
     
     if(req.getParameter("lectureno") != null){
       lectureno = Integer.parseInt(req.getParameter("lectureno"));
     }
+    
     dto = dao.read(lectureno);  // play되는 동영상의 정보 가져오기 
     
-    int categoryno = dto.getCategoryno(); // play되는 동영상과 categoryno이 일치하는 동영상 목록 가져오기 
+    // 선생님 이름 가져오기 
+    String teacher = cdao.teacher(dto.getCategoryno());
+    
+    int categoryno = dto.getCategoryno(); // play되는 동영상과 categoryno 이 일치하는 동영상 목록 가져오기 
     list = dao.list(categoryno);
     
     int lecNo = list.size();
     
+    req.setAttribute("teacher", teacher);
     req.setAttribute("lecNo", lecNo);
     req.setAttribute("list", list);
     req.setAttribute("dto", dto);

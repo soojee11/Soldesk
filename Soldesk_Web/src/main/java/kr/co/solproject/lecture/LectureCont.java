@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import kr.co.solproject.category.CategoryDAO;
+import kr.co.solproject.category.CategoryDTO;
 import kr.co.solproject.lectureqna.LectureQnADAO;
 import kr.co.solproject.postscript.PostscriptDAO;
 import net.utility.Paging;
@@ -26,6 +28,9 @@ public class LectureCont {
 	@Autowired
 	private PostscriptDAO postDao = null;
 	
+	@Autowired
+	private CategoryDAO cateDao = null;
+	
 	public LectureCont() {
 		System.out.println("---------------LectureCont객체 생성");
 	}
@@ -39,7 +44,7 @@ public class LectureCont {
 
 		int grade = 1;
 		String gwamok = "국어";
-		List list = null;   // 카테고리 정보 저장 
+		CategoryDTO cateDto = new CategoryDTO();   // 카테고리 정보 저장 
 
 		if(request.getParameter("grade") != null){
 			grade = Integer.parseInt(request.getParameter("grade"));
@@ -49,8 +54,18 @@ public class LectureCont {
 			gwamok=request.getParameter("gwamok");
 		}
 		
+		cateDto.setGrade(grade);
+		cateDto.setGwamok(gwamok);
+		cateDto = cateDao.readCate2(cateDto);
+		
+		// 이미지 경로 조정
+		String bookInfo = cateDto.getBookInfo();
+		bookInfo = bookInfo.replaceAll("=\"cateStorage", "=\"../sol_admin/player/cateStorage");
+		cateDto.setBookInfo(bookInfo);
+		
+		request.setAttribute("cateDto", cateDto);
 		request.setAttribute("grade", new Integer(grade));
-		request.setAttribute("gwamok", gwamok);
+    request.setAttribute("gwamok", gwamok);
 		
 		return "sol_study/lectureInfo";
 	}

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import com.ibatis.sqlmap.client.SqlMapClient;
 
 import kr.co.solproject.GetSqlMapClient;
+import net.utility.Utility;
 
 @Component
 public class CategoryDAO {
@@ -65,7 +66,7 @@ public class CategoryDAO {
 		return res;
 	}//end
 	
-	
+	// categoryno 으로 불러오기  
 	public CategoryDTO readCate(CategoryDTO dto) {
 		try {
 			dto =  (CategoryDTO) mybatis.queryForObject("sol_category.readCate", dto);
@@ -83,5 +84,30 @@ public class CategoryDAO {
 			System.out.println("updateCateProc error: " + e);
 		}
 	}// end
+	
+	// grade랑 gwamok 으로 읽어오기 
+	public CategoryDTO readCate2(CategoryDTO dto) {
+    try {
+      dto =  (CategoryDTO) mybatis.queryForObject("sol_category.readCate2", dto);
+      String career = dto.getTeacherCareer();
+      career = Utility.getConvertBR(career);
+      dto.setTeacherCareer(career);
+    } catch (Exception e) {
+      System.out.println("readCate2 error: " + e);
+    }
+    return dto;
+  }//end
+	
+  	//categoryno 으로 불러오기  
+   public String teacher(int categoryno) {
+     String teacher = "";
+     try {
+       teacher =  (String) mybatis.queryForObject("sol_category.teacher", categoryno);
+     } catch (Exception e) {
+       System.out.println("readCate error: " + e);
+     }
+     return teacher;
+   }//end
+	
 
 }

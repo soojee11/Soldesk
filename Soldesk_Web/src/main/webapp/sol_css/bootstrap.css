@@ -4907,7 +4907,6 @@ input[type="submit"].btn.btn-mini {
   z-index: 1050;
   width: 650px; 
   margin: -280px 0 0 0;
-  
   overflow: auto;
  background-color: #ffffff;
   border: 1px solid #999;
@@ -4939,7 +4938,7 @@ input[type="submit"].btn.btn-mini {
 
 .modal-header {
   padding: 9px 15px;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid #fff;
   
 }
 

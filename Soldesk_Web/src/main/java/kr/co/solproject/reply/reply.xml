@@ -26,7 +26,7 @@
 	<select id="getQnaReply" parameterClass="Integer" resultClass="ReplyDTO">
 		select replyno,content,passwd,rdate,tablename,tableno
 		from sol_reply
-		where tableno = #number#
+		where tableno = #number# and tablename='Q'
 	</select>
 
 	<update id="replyDel" parameterClass="Integer">

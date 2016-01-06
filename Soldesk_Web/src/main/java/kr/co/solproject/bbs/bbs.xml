@@ -20,18 +20,21 @@
 		<dynamic prepend="where">
       		<isNotEqual property="passwd" compareValue="관리자">
       			passwd != #passwd#
+      			order by bbsno DESC
       		</isNotEqual>
      	 </dynamic>     
      )a
      <dynamic prepend="where">
 		<isEqual property="col1" compareValue="subject">
 			subject LIKE CONCAT('%',#col2#,'%')
+			order by bbsno DESC
 		</isEqual>
 		<isEqual property="col1" compareValue="passwd">
 			passwd LIKE CONCAT('%',#col2#,'%')	
+			  order by passwd asc
 		</isEqual>
 	</dynamic>
-     order by bbsno DESC
+     
      limit #sno#, #numPerPage#
   </select>
   
