@@ -62,38 +62,43 @@
    </div>
    <table border="0" width="100%">
    <tr height="10px"></tr>
-   <tr><td colspan="2"><div style="font-size: 18px">< 강좌 설명 ></div></td></tr>
+   <tr><td><div style="font-size: 18px">< 강좌 설명 ></div></td></tr>
    <tr height="10px"></tr>
    <tr>
-      <td colspan="2">			
+      <td >			
 					<div class="view" style="text-align: left; padding-top: 5px; ">
 					   <!-- categoryInfo -->
-					   ${cateDto.categoryinfo }<br/><br/><br/><br/><br/><br/>
+					   ${cateDto.categoryinfo }<br/><br/>
 					</div>
 		  </td>
 		</tr>
 		<tr height="10px"></tr>
-   <tr><td colspan="2"><div style="font-size: 18px">< 교재 설명 ></div></td></tr>
-   <tr height="10px"></tr>
-		<tr>
-	    <td width="70%">
-	       <div  style="text-align: left; padding-top: 5px;">
-		       <!-- bookInfo -->
-		       ${cateDto.bookInfo }
-	       </div>
-	    </td>
-	    <td>
-	       <div class="view"  style="text-align: left; color: black;">
-		       <!-- 강좌보러가기 -->
-		       <a href="lectureList.do?gwamok=${gwamok }&grade=${grade }&tabNum=1">
-		       <div align="center">
-			       <font color="green">강좌보러가기</font>
-			       <br/><i class="fa fa-play-circle" style="font-size:48px; color:green"></i></a>
-		       </div>
-	       </div>
-	    </td>
-		</tr>
-	</table>
+    <tr><td><div style="font-size: 18px">< 교재 설명 ></div></td></tr>
+    <tr height="10px"></tr>
+		</table>
+		  <div style="border : 5px solid #99cc66; width: 98%">
+				<table border="0" width="100%">
+					 <tr>
+					  <td width="30%">
+					     <div align="left"><img src='../sol_admin/player/cateStorage/${cateDto.bookPhoto }' style="margin: 20px"></div>
+					  </td>
+				    <td width="40%">
+				       <div style="text-align: left; padding-top: 5px;">
+					       <!-- bookInfo -->
+					       ${cateDto.bookInfo }
+				       </div>
+				    </td>
+				    <td align="left">
+				       <!-- 강좌보러가기 -->
+				       <a href="lectureList.do?gwamok=${gwamok }&grade=${grade }&tabNum=1">
+				       <div align="center">
+					       <font color="green">강좌보러가기</font>
+					       <br/><i class="fa fa-play-circle" style="font-size:48px; color:green"></i></a>
+			        </div>
+				     </td>
+					 </tr>
+			</table>
+	 </div>
 </div>
 <!-- page end-->
 <%@ include file="../sol_footer.jsp"%>
