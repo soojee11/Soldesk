@@ -151,8 +151,7 @@ function qnaCreate(){
 <!-- 학습QnA List -->
 <div id="qnaList">
 
-총 <span style="color: red;"><strong>${qnaTotal}</strong></span>개의 Q&A가 있습니다.<br /><br />
-
+총 <span style="color: red;"><strong>${qnaTotal}</strong></span>개의 Q&A가 있습니다.
 <table class="table">
 <tr align="center" >
 	<td width="60">번호</td>
@@ -265,21 +264,19 @@ function qnaReadResponse(data,status){
 
 //학습하기 삭제
 function qnaDelete() {
-	alert("학습하기QnA를 삭제하시겠습니까?");
-   /*  alert(lectureqnano);
-    $.ajaxSetup({datatype: "text"});
-    $.get("./qnaDelete.do", param, postApplyResponse); //get방식	 */
+	msg="학습하기QnA를 삭제하시겠습니까?";
+	if(confirm(msg)!=0){
+		lectureqnano=document.getElementById("lectureqnano3").value;
 
-    lectureqnano=document.getElementById("lectureqnano3").value;
-   /*  $("#lectureqnano").val(lectureqnano);
-    var param="lectureqnano="+lectureqnano;         //전송 데이터 */
-	var param=$("#qnaReadForm").serialize();    //서버에 전달할 값
-	//alert(param);
-	$.ajaxSetup({datatype: "text"});
-    $.get("./qnaDelete.do", param, postApplyResponse); //get방식	
-    
+	    var param="lectureqnano="+lectureqnano;         //전송 데이터
+		//alert(param);
+		$.ajaxSetup({datatype: "text"});
+	    $.get("./qnaDelete.do", param, postApplyResponse); //get방식	
+	    
+	}else{
+		return;
+	}
 }
-
 
 </script>
 
@@ -350,22 +347,28 @@ function qnaUpdateForm(){
 
 function updateFormResponse(data,status){
 	var sw=data.replace(/^\s*|\s*$/g, '');
-	alert(sw);
+	//alert(sw);
 	var result=sw.split("/"); // 문자를 분할해서 배열값으로 리턴
 	//alert(result[5]);
 	document.qnaModiForm.subject.value=result[0];
 	document.qnaModiForm.content.value=result[1];
-	document.qnaModiForm.lectureqnano3.value=result[2];
+	document.qnaModiForm.lectureqnano4.value=result[2];
 }
 
 
 //수정 저장
 function qnaUpdateProc() {
-	alert("학습하기QnA를 수정하시겠습니까?");
-	lectureqnano=document.getElementById("lectureqnano3").value;
-	var param=$("#qnaModiForm").serialize();
-	$.ajaxSetup({dataType:"text"});
-	$.post("./qnaUpdate.do",param,postApplyResponse);	
+	msg="학습하기QnA를 수정하시겠습니까?";
+	if(confirm(msg)!=0){
+		var param=$("#qnaModiForm").serialize();
+		//alert(param);
+		$.ajaxSetup({dataType:"text"});
+		$.post("./qnaUpdate.do",param,postApplyResponse);	
+	    
+	}else{
+		return;
+	}
+	
 }
 
 
@@ -376,7 +379,7 @@ function qnaUpdateProc() {
 <div id="qnaModi" align="center" style="display:none">
 
 <form name='qnaModiForm' id="qnaModiForm" method="post" style="width: 98%;">  <!-- action="insert.do" -->
-	<input type='hidden' name='lectureqnano' id='lectureqnano3' value=''> 
+	<input type='hidden' name='lectureqnano' id='lectureqnano4' value=''>
 	<input type='hidden' name='gwamok' id='gwamok' value='${gwamok}'> 
 	<input type='hidden' name='grade' id='grade' value='${grade}'>
  
@@ -447,6 +450,20 @@ function postApplyResponse(data, status) { //callback함수
 	alert(data.replace(/^\s+|\s+$/gm,''));
 	window.location.reload(); //현재 페이지 새로고침
 }
+
+function alert1(val) {
+	document.getElementById("demo").innerHTML = '&nbsp;별점:&nbsp;'+val;
+}
+function displayLeng(sz, id) {
+	var form = document.postForm;
+	if (form[id].value.length > sz) {
+		if (event.keyCode != '8') {//백스페이스는 지우기작업시 바이트 체크하지 않기 위해서
+			alert(sz + '자까지 입력이 가능합니다.');
+		}
+			form[id].value = form[id].value.substring(0, sz);
+		}
+	document.getElementById(id + '_bytes').innerHTML = form[id].value.length;
+}
 </script>
 <c:if test="${tabNum == 3}">
 <div id="menu3" style="color: black;">
@@ -486,9 +503,7 @@ function postApplyResponse(data, status) { //callback함수
 	<input type='hidden' name='postscriptno' id='postscriptno' value='${postscriptno}'>
 	<input type='hidden' name='gwamok' id='gwamok' value='${gwamok}'>
 	<input type='hidden' name='grade' id='grade' value='${grade}'>
-    <table style="width:100%;">
-    <tr>
-	    <td style="width:130px;">
+
 		    <span class="star-cb-group">
 				<input type="radio" id="rating-5" name="postgrade" value="5" onclick="alert1(this.value)" checked="checked"/><label for="rating-5">5</label>
 				<input type="radio" id="rating-4" name="postgrade" value="4" onclick="alert1(this.value)" /><label for="rating-4">4</label>
@@ -497,28 +512,19 @@ function postApplyResponse(data, status) { //callback함수
 				<input type="radio" id="rating-1" name="postgrade" value="1" onclick="alert1(this.value)" /><label for="rating-1">1</label>
 			</span>
 			<span id="demo" style="font-size:12px;">&nbsp;별점:&nbsp;5</span><br />
-			<script>
-			function alert1(val) {
-				document.getElementById("demo").innerHTML = '&nbsp;별점:&nbsp;'+val;
-			}
-			</script>
-		</td>
-	    <td>
-	    	<textarea name='content' id='postcontent' rows="5" cols="50" style="width: 98%; height:53px;"></textarea>
-	    </td>
-	    <td style="width:80px;">
+
+	    	<textarea onkeyup='displayLeng(140,"postcontent");' name='content' id='postcontent' style="width: 89%; height:53px;" placeholder="최대 140자까지 입력이 가능합니다."></textarea>
+
 		    <c:choose>
 			<c:when test="${s_id != null }">
-				<a id="btnCreate" href="javascript:postApply()">	<img src='img/btn_submit.png' style="margin-top: -7.5px;"></a>	  
+				<a id="btnCreate" href="javascript:postApply()">	<img src='img/btn_submit.png'></a>	  
 			</c:when>
 			<c:otherwise>
-				<a href="javascript:lectureNotGo()">	<img src='img/btn_submit.png' style="margin-top: -7.5px;">
+				<a href="javascript:lectureNotGo()">	<img src='img/btn_submit.png'>
 				</a>
 			</c:otherwise>
 		    </c:choose>
-	    </td>    
-    </tr>
-    </table>
+		    <span style="color: #999;"><em id='postcontent_bytes' style="color:black;">0</em>/140</span>
 </form>
 </div>
 </div>

@@ -107,8 +107,8 @@ public class LectureQnACont {
 	public void deleteProc(LectureQnADTO dto, HttpServletResponse resp, HttpServletRequest request, HttpSession session) {
 		//CategoryDTO cdto = null;
 		int lectureqnano = dto.getLectureqnano();
-		dto.setId((String) session.getAttribute("s_id"));
-		dto = qnaDao.qnaRead(lectureqnano);
+		//dto.setId((String) session.getAttribute("s_id"));
+		//dto = qnaDao.qnaRead(lectureqnano);
 		dto.setLectureqnano(lectureqnano);
 		
 		//System.out.println("렉쳐1!!!!!!!!!!!!!!!"+lectureqnano);
@@ -136,11 +136,11 @@ public class LectureQnACont {
 		dto.setId((String) session.getAttribute("s_id"));		
 		
 		try {						
-			System.out.println("수정가져오ㅜㅏㅗ!!!!!!!!!!"+lectureqnano);		
+			//System.out.println("수정가져오ㅜㅏㅗ!!!!!!!!!!"+lectureqnano);		
 			//dto.setCategoryno(cdto.getCategoryno());
 			
 			dto = qnaDao.qnaRead(lectureqnano);
-			System.out.println("dto.getLectureqnano():"+dto.getLectureqnano());
+			//System.out.println("dto.getLectureqnano():"+dto.getLectureqnano());
 
 			resp.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = resp.getWriter();
@@ -164,7 +164,6 @@ public class LectureQnACont {
 		//CategoryDTO cdto = null;
 		//int lectureqnano = dto.getLectureqnano();
 		dto.setId((String) session.getAttribute("s_id"));
-		//dto.setLectureqnano(lectureqnano);
 		
 		try {
 			//System.out.println("dto>>>>>>"+dto.toString());
