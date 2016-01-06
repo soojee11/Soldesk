@@ -12,12 +12,14 @@
 		<dynamic prepend="where">
 				<isEqual property="col1" compareValue="subject">
 					subject LIKE CONCAT('%',#col2#,'%')
+					order by qnano desc
 				</isEqual>
 				<isEqual property="col1" compareValue="id">
 					id LIKE CONCAT('%',#col2#,'%')	
+					order by id asc
 				</isEqual>
 		</dynamic>
-		order by qnano desc
+		
 		limit #sno#, #numPerPage#
 	</select>
 	

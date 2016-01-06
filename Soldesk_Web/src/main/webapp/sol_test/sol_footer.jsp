@@ -13,11 +13,11 @@
 		<div class="container">
 
 			<p>
-				&copy; 2015, soldesk created by no.5&nbsp;&nbsp;&nbsp;<a href="javascript:showAdmin();">관리자 페이지</a>
+				&copy; 2015, soldesk created by no.5&nbsp;&nbsp;&nbsp;<a href="javascript:showAdmin();"><strong>관리자 페이지</strong></a>
 			</p>
 
 			<script>
-			function showAdmin() {//아이디중복확인
+			function showAdmin() {
 				var sx = parseInt(screen.width);//팝업창 나타내는 위치
 			    var sy = parseInt(screen.height);
 			    var x = (sx / 2) - 600;

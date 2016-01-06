@@ -36,7 +36,7 @@
 	</tr>
 	<c:if test="${total ==0 }">
 		<tr>
-			<td colspan="6" align="center">관련된 QNA글이 존재하지않습니다. </td>
+			<td colspan="6"><div align="center">관련된 QNA글이 존재하지않습니다. </div></td>
 		</tr>
 	</c:if>
 <c:set var ="recNo" value="${recNo }"/>

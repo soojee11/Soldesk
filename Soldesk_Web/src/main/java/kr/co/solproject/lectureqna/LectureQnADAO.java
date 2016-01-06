@@ -104,6 +104,18 @@ public class LectureQnADAO {
 		}
 		return res;
 	}
+	
+	/** 학습하기 수정 **/
+	public int qnaUpdate(LectureQnADTO dto){
+		int res = 0;
+		try {
+			res = mybatis.update("sol_lectureqna.qnaUpdate", dto);
+		} catch (Exception e) {
+			System.out.println("qnaUpdate  error: " + e);
+		}
+		return res;
+	}
+
 
 
 }
