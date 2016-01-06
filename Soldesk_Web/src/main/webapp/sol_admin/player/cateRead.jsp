@@ -34,7 +34,7 @@
 </h4>
 </div>
 <div align="center">
-<div style="width:850px;">
+<div style="width:1000px;">
 <table class="table table-bordered">
 	<tr align="center" >
 		<td rowspan="2" width="230px"><img src="cateStorage/${dto.teacherPhoto }" width="200px" height="200px" ></td>
