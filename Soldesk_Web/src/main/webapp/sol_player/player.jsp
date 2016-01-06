@@ -51,7 +51,7 @@ function memoSaveResponse(data, status) { //callback함수
   <tr style="background-color: #99cc66">
       <td height="50px" colspan="2" style="padding-top: 7px;"> 
           <p><span style="color: White; font: 30px arial, sans-serif; font-weight: bold;">&nbsp;&nbsp;&nbsp;${dto.subject }</span>
-          &nbsp;&nbsp;&nbsp;<span style="color: #444444">${dto.teacher }</span></p>
+          &nbsp;&nbsp;&nbsp;<span style="color: #444444">${teacher }</span></p>
       </td>
   </tr>
   <tr>
