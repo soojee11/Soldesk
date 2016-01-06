@@ -199,7 +199,7 @@ function qnaCreate(){
  
  <table border ="0" width="100%" class="table" style="text-align:center">
 	<tr bgcolor="#f5f7f9">
-		<th style="text-align:center" valign="bottom"><a onclick="qnaRead()">제목</a></th>
+		<th style="text-align:center" valign="bottom">제목</th>
 		<td bgcolor="#ffffff"><input type="text" name="subject" size="100"></td>
 	</tr>
 	<tr bgcolor="#f5f7f9">
@@ -250,12 +250,28 @@ function qnaReadResponse(data,status){
   	document.getElementById("readcnt").innerHTML=result[4];
   	//document.qnaReadForm.updateid.value=result[1];
   	if(result[5]=="true"){
+  		document.getElementById("idcheck1").style.display = 'none';
+  		document.getElementById("idcheck2").style.display = '';
+  	} else{
   		document.getElementById("idcheck1").style.display = '';
   		document.getElementById("idcheck2").style.display = 'none';
+  		/* document.getElementById("idcheck").style.display = '';
+  		document.frm.btnMod.style.display='none';
+  	  	document.frm.btnDelete.style.display='none';
+  	  	document.frm.btnList.style.display='';  	 */	  		
   	}
 
 }
 
+//학습하기 삭제
+function qnaDelete(lectureqnano) {
+	alert("학습하기QnA를 삭제하시겠습니까?");
+    var param="lectureqnano="+lectureqnano;         //전송 데이터
+    alert(param);
+    $.ajaxSetup({datatype: "text"});
+    $.get("./qnaDelete.do", param, postApplyResponse); //get방식	
+    
+}
 
 //수정할 댓글 조회
 function updateForm(replyno){
@@ -301,7 +317,7 @@ function updateProcResponse(data,textStatus){
 
 <div id="qnaRead" align="center" style="display:none">
 <form name='qnaReadForm' id="qnaReadForm" method="post" >  <!-- action="insert.do" -->
- 	<input type="hidden" name='QnAno' id='QnAno' value='${lectureqnano}'>
+ 	<input type="hidden" name='lectureqnano' id='lectureqnano' value='${lectureqnano}'>
 	<input type='hidden' name='gwamok' id='gwamok' value='${gwamok}'> 
 	<input type='hidden' name='grade' id='grade' value='${grade}'>
  <table border ="0" width="100%" class="table" style="text-align:center">
@@ -317,22 +333,23 @@ function updateProcResponse(data,textStatus){
 		<th style="text-align:center" valign="bottom">ID</th>
 		<td bgcolor="#ffffff" id="readid"></td>
 		<td width="60px">작성일</td>
-		<td><span id="regdate"></span>
+		<td bgcolor="#ffffff"><span id="regdate"></span>
 			${fn:substring(regdate,0,16) }</td>
 		<td width="60px">조회수</td>
-		<td><span id="readcnt"></span></td>
+		<td bgcolor="#ffffff"><span id="readcnt"></span></td>
 	</tr>
-	<tr bgcolor="#f5f7f9">
-		<td bgcolor="#ffffff"><span id="content"></span></td>
+	<tr bgcolor="#ffffff">
+	<td id="content"></td>
+	
 	</tr>
 </table> 
  <div align="right">
  	<div id="idcheck1" style="display:none">
-	<input name="btnMod" type="button" class="btn btn-warning button" value="수정" onclick="qnaApply(this.form)">
- 	<input name="btnDelete" type="button" class="btn btn-warning button" value="삭제" onclick="qnaDelete()">
  	<input name="btnList" type="button" class="btn btn-warning button" value="목록" onclick="javascript:history.go()">
  	</div>
- 	<div id="idcheck2" >
+ 	<div id="idcheck2">
+ 	<input name="btnMod" type="button" class="btn btn-warning button" value="수정" onclick="qnaApply(this.form)">
+ 	<input name="btnDelete" type="button" class="btn btn-warning button" value="삭제" onclick="javascript:qnaDelete(${lectureqnano})">
  	<input name="btnList" type="button" class="btn btn-warning button" value="목록" onclick="javascript:history.go()">
  	</div>
  
