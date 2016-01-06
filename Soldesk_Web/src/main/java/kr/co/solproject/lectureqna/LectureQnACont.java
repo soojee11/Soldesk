@@ -33,7 +33,7 @@ public class LectureQnACont {
 	}
 
 	
-	/** QnA 등록 **/
+	/** 학습하기 QnA 등록 **/
 	@RequestMapping(value = "/sol_study/qnaCreate.do", method = RequestMethod.POST)
 	public void createProc(LectureQnADTO dto, CategoryDTO cdto, HttpServletResponse resp, HttpServletRequest request, HttpSession session) {
 		//CategoryDTO cdto = null;
@@ -60,7 +60,7 @@ public class LectureQnACont {
 	}// end
 	
 	
-	/** QnA 자세히보기 **/
+	/** 학습하기 QnA 상세히보기 **/
 	@RequestMapping(value="/sol_study/qnaRead.do",method=RequestMethod.GET)
 	public void qnaRead(LectureQnADTO dto, HttpServletResponse resp, HttpServletRequest request, HttpSession session) {
 		int lectureqnano = dto.getLectureqnano();
@@ -73,6 +73,8 @@ public class LectureQnACont {
 			
 			qnaDao.readCount(lectureqnano);	
 			
+			System.out.println(s_id+"////////"+dto.getId());
+						
 			resp.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = resp.getWriter();
 		
@@ -95,5 +97,28 @@ public class LectureQnACont {
 
 		
 	}//end
+	
+	/** 학습하기QnA 삭제 **/
+	@RequestMapping(value = "/sol_study/qnaDelete.do", method = RequestMethod.GET)
+	public void deleteProc(LectureQnADTO dto, HttpServletResponse resp, HttpServletRequest request, HttpSession session) {
+		//CategoryDTO cdto = null;
+		dto.setId((String) session.getAttribute("s_id"));
+		
+		try {
+			//System.out.println("dto>>>>>>"+dto.toString());
+			int cnt = qnaDao.qnaDelete(dto);
+			resp.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = resp.getWriter();
+			if (cnt == 1) {
+				out.write("후기 삭제 완료!");
+			} else {
+				out.write("후기 삭제 실패! 다시 시도해 주세요.");
+			}
+
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+
+	}// end
 
 }
