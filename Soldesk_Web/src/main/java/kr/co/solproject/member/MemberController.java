@@ -121,10 +121,15 @@ public class MemberController {
 			}
       else if(whichPage.equals("test")){
           msg="<meta http-equiv='Refresh' content='0;url=/solproject/sol_test/test/list.do'>";    
-            }
+       }
       else if(whichPage.equals("bbs")){
           msg="<meta http-equiv='Refresh' content='0;url=/solproject/sol_bbs/bbslist.do'>";
       }
+      else if(whichPage.equals("bbsRead")){
+        int bbsno = Integer.parseInt(req.getParameter("bbsno"));
+        int nowPage = Integer.parseInt(req.getParameter("nowPage"));
+        msg="<meta http-equiv='Refresh' content='0;url=/solproject/sol_bbs/bbsread.do?bbsno="+bbsno+"&nowPage="+nowPage+"'>";
+    }
       else if(whichPage.equals("qna")){
           msg="<meta http-equiv='Refresh' content='0;url=/solproject/sol_qna/list.do'>";
       }

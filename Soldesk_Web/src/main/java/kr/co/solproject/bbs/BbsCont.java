@@ -142,9 +142,17 @@ public class BbsCont {
   
   @RequestMapping(value="/sol_bbs/bbsread.do")
   public String bbsRead(BbsDTO dto, ReplyDTO rdto, HttpServletRequest req){
+    // 어느 페이지에서 왔는지 나타내는 변수 
+    String whichPage = "bbsRead";
+    req.setAttribute("whichPage", whichPage);
+    
     dao.increment(dto);
     dto = dao.read(dto); // dto 에 저장된 bbsno 넘김
+    
+    // 페이지에서 로그인 시 필요한 변수들 
+    req.setAttribute("bbsno", dto.getBbsno());
     req.setAttribute("nowPage", req.getParameter("nowPage"));
+    
     String content = "";
     if(dto.getPasswd().equals("관리자")){
     	content =dto.getContent();

@@ -7,6 +7,8 @@
 <script src="js/my.js"></script>
 <link href="./css/style.css" rel="stylesheet" type="text/css">
 <link rel='stylesheet' type='text/css' href='css/star.css'>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
 <h4>
 	<!-- <img src="img/cont.JPG"> -->
 	<img src="../sol_img/go_right.png" width="20px"/>
@@ -38,34 +40,57 @@
 			</ul>		
 	</div>
 	<hr>
-	<table border="0">
-	 <tr>
-			 <td>
-			     <!-- teacherPhoto -->
-					<div class="view">
-					   <img src=''/>
-					</div>
-		   </td>
-		   <td>
-		        <!--  teacherName & teacherCareer & 평점 avg(postGrade) -->
-		        <div class="view">
-          </div>
-		   </td>
-   </tr>
+	 <div class="view">
+	 <table border="0" width="100%">
+		 <tr style="height: auto;">
+				 <td>
+				     <!-- teacherPhoto -->
+						<div style="font-size: 20px; text-align: center;">
+						   <img src='../sol_admin/player/cateStorage/${cateDto.teacherPhoto }' 
+						        width="300px" height="200px" style="margin: 20px; border-radius: 8px; border: 1px solid; "/>
+						   <br/>${cateDto.teacherName }<br/><br/>
+						</div>
+			   </td>
+			   <td>
+			        <!-- teacherCareer & 평점 avg(postGrade) -->
+			        <div style="text-align: left; margin: 20px; padding: 10px; font-size: 12px;">
+			           <font style="font-size: 20px">< 선생님 이력 ></font><br/><br/>${cateDto.teacherCareer }
+	            </div>
+			   </td>
+	   </tr>
+   </table>
+   </div>
+   <table border="0" width="100%">
+   <tr height="10px"></tr>
+   <tr><td colspan="2"><div style="font-size: 18px">< 강좌 설명 ></div></td></tr>
+   <tr height="10px"></tr>
    <tr>
       <td colspan="2">			
-					<div class="view">
-					 
+					<div class="view" style="text-align: left; padding-top: 5px; ">
+					   <!-- categoryInfo -->
+					   ${cateDto.categoryinfo }<br/><br/><br/><br/><br/><br/>
 					</div>
 		  </td>
 		</tr>
+		<tr height="10px"></tr>
+   <tr><td colspan="2"><div style="font-size: 18px">< 교재 설명 ></div></td></tr>
+   <tr height="10px"></tr>
 		<tr>
-	    <td>
-	       <!-- bookInfo -->
+	    <td width="70%">
+	       <div  style="text-align: left; padding-top: 5px;">
+		       <!-- bookInfo -->
+		       ${cateDto.bookInfo }
+	       </div>
 	    </td>
 	    <td>
-	       <!-- 강좌보러가기 -->
-	       <a href="lectureList.do?gwamok=${gwamok }&grade=${grade }&tabNum=1"><span style="color:red;">강의보러가기</span></a>
+	       <div class="view"  style="text-align: left; color: black;">
+		       <!-- 강좌보러가기 -->
+		       <a href="lectureList.do?gwamok=${gwamok }&grade=${grade }&tabNum=1">
+		       <div align="center">
+			       <font color="green">강좌보러가기</font>
+			       <br/><i class="fa fa-play-circle" style="font-size:48px; color:green"></i></a>
+		       </div>
+	       </div>
 	    </td>
 		</tr>
 	</table>
