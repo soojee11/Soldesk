@@ -199,12 +199,16 @@
 	                    <input type="hidden" name="grade" value="${grade }">
 	                    <input type="hidden" name="tabNum" value="${tabNum }">
                     </c:if>
+                    <c:if test="${whichPage == 'bbsRead' }">
+                      <input type="hidden" name="bbsno" value="${bbsno }">
+                      <input type="hidden" name="nowPage" value="${nowPage }">
+                    </c:if>
                     <input type="text" name="id" value="<%=c_id%>" placeholder="ID"/> 
                     <input type="password" name="passwd" placeholder="Password" value="" /> 
                     <input type="checkbox" name="c_id" value="SAVE"
                       <%if (!c_id.isEmpty()) {
                           out.print("checked");
-                        }%> />ID저장 ${whichPage }
+                        }%> />ID저장 
                     <input type="button" name="login" class="btn btn-primary button"
                       value="로그인" onclick="check1(this.form, '../sol_member/login.do')" />
                     <button type="submit" class="btn btn-primary button" onclick="joinagree(this.form,'../sol_member/joinagree.do')">회원가입</button>

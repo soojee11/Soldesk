@@ -57,18 +57,29 @@
 				<td>${dto.grade }학년</td>
 				<td>${dto.gwamok }</td>
 				<td>${dto.teacherName }</td>
-				<td>${dto.categoryinfo }</td>
+				<td>
+				<c:set var ="categoryinfo" value="${fn:replace(dto.categoryinfo, '<br>',' ')}"/>
+				<c:choose>
+					<c:when test="${fn:length(categoryinfo) > 35}">
+						<c:out value="${fn:substring(categoryinfo,0,34)}"/>...(이하생략)
+					</c:when>
+				</c:choose>
+				<c:choose>
+					<c:when test="${fn:length(categoryinfo) < 35}">
+						${categoryinfo }
+					</c:when>
+				</c:choose>
+				 </td>
 				<td><a href="readCate.do?categoryno=${dto.categoryno}"><button class="btn btn-success btn-sm">강좌상세보기</button></a></td>
 				<td><a href="leclist.do?categoryno=${dto.categoryno}"><button class="btn btn-info btn-sm">강의상세보기</button></a></td>
 			</tr>
 	</c:forEach>
-	<!-- &col1=${param.col1}&col2=${param.col2} -->
-	<tr>
-		<td colspan="6" align="right" ><strong>total:</strong>${total }</td>
-	</tr>
-	<tr>
-		<td colspan="6"><div align="center">${paging }</div></td>
-	</tr>
 </table>
+<div align="right">
+	<strong>total:</strong>${total }
+</div>
+<div align="center">
+	${paging }
+</div>
 
 <%@ include file="../footer.jsp"%>

@@ -8,7 +8,6 @@ public class PlayerDTO {
   private String filename;
   private Long filesize;
   private String poster;
-  private String teacher;
   private int lecturetime;
   private int categoryno;
   
@@ -77,14 +76,6 @@ public class PlayerDTO {
     this.poster = poster;
   }
 
-  public String getTeacher() {
-    return teacher;
-  }
-
-  public void setTeacher(String teacher) {
-    this.teacher = teacher;
-  }
-
   public int getLecturetime() {
     return lecturetime;
   }
@@ -104,7 +95,7 @@ public class PlayerDTO {
   @Override
   public String toString() {
     return "PlayerDTO [lectureno=" + lectureno + ", subject=" + subject + ", filename=" + filename + ", filesize="
-        + filesize + ", poster=" + poster + ", teacher=" + teacher + ", lecturetime=" + lecturetime + ", categoryno="
+        + filesize + ", poster=" + poster + ", lecturetime=" + lecturetime + ", categoryno="
         + categoryno + "]";
   }
   

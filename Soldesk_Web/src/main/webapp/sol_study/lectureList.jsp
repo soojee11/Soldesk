@@ -65,7 +65,6 @@ function postApplyResponse(data, status) { //callback함수
 <c:set var="lectureNo" value="${lectureNo }" />	
 <c:forEach var="dto" items="${list }" >
 <c:set var="lectureNo" value="${lectureNo-1 }" />
-
 	<tr align="center">
 		<td>${lectureNo }</td>
 		<td>${dto.subject }</td>
@@ -193,7 +192,7 @@ function qnaCreate(){
 <div id="qnaCreate" align="center" style="display:none">
 
 <form name='qnaCreateForm' id="qnaCreateForm" method="post" style="width: 98%;">  <!-- action="insert.do" -->
- 	<input type="hidden" name='QnAno' id='QnAno' value='${lectureqnano}'>
+	<input type='hidden' name='lectureqnano' id='lectureqnano' value='${lectureqnano}'> 
 	<input type='hidden' name='gwamok' id='gwamok' value='${gwamok}'> 
 	<input type='hidden' name='grade' id='grade' value='${grade}'>
  
@@ -258,17 +257,26 @@ function qnaReadResponse(data,status){
   		/* document.getElementById("idcheck").style.display = '';
   		document.frm.btnMod.style.display='none';
   	  	document.frm.btnDelete.style.display='none';
-  	  	document.frm.btnList.style.display='';  	 */	  		
+  	  	document.frm.btnList.style.display='';  	 */	  	
   	}
+  	alert(result[6]);
+	document.getElementById("lectureqnano3").value=result[6];
 
 }
 
 //학습하기 삭제
-function qnaDelete(lectureqnano) {
+function qnaDelete() {
 	alert("학습하기QnA를 삭제하시겠습니까?");
-    var param="lectureqnano="+lectureqnano;         //전송 데이터
-    alert(param);
+   /*  alert(lectureqnano);
     $.ajaxSetup({datatype: "text"});
+    $.get("./qnaDelete.do", param, postApplyResponse); //get방식	 */
+
+    lectureqnano=document.getElementById("lectureqnano3").value;
+    $("#lectureqnano").val(lectureqnano);
+    var param="lectureqnano="+lectureqnano;         //전송 데이터
+	var param=$("#qnaReadForm").serialize();    //서버에 전달할 값
+	//alert(param);
+	$.ajaxSetup({datatype: "text"});
     $.get("./qnaDelete.do", param, postApplyResponse); //get방식	
     
 }
@@ -317,8 +325,8 @@ function updateProcResponse(data,textStatus){
 
 <div id="qnaRead" align="center" style="display:none">
 <form name='qnaReadForm' id="qnaReadForm" method="post" >  <!-- action="insert.do" -->
- 	<input type="hidden" name='lectureqnano' id='lectureqnano' value='${lectureqnano}'>
-	<input type='hidden' name='gwamok' id='gwamok' value='${gwamok}'> 
+	<input type='hidden' name='lectureqnano' id='lectureqnano3' value=''> 
+ 	<input type='hidden' name='gwamok' id='gwamok' value='${gwamok}'> 
 	<input type='hidden' name='grade' id='grade' value='${grade}'>
  <table border ="0" width="100%" class="table" style="text-align:center">
 	<tr bgcolor="#f5f7f9">
@@ -347,9 +355,10 @@ function updateProcResponse(data,textStatus){
  	<div id="idcheck1" style="display:none">
  	<input name="btnList" type="button" class="btn btn-warning button" value="목록" onclick="javascript:history.go()">
  	</div>
+ 	
  	<div id="idcheck2">
  	<input name="btnMod" type="button" class="btn btn-warning button" value="수정" onclick="qnaApply(this.form)">
- 	<input name="btnDelete" type="button" class="btn btn-warning button" value="삭제" onclick="javascript:qnaDelete(${lectureqnano})">
+ 	<input name="btnDelete" type="button" class="btn btn-warning button" value="삭제" onclick="javascript:qnaDelete()">
  	<input name="btnList" type="button" class="btn btn-warning button" value="목록" onclick="javascript:history.go()">
  	</div>
  
