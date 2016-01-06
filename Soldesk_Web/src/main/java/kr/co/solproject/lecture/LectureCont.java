@@ -39,6 +39,7 @@ public class LectureCont {
 
 		int grade = 1;
 		String gwamok = "국어";
+		List list = null;   // 카테고리 정보 저장 
 
 		if(request.getParameter("grade") != null){
 			grade = Integer.parseInt(request.getParameter("grade"));
