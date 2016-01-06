@@ -45,10 +45,10 @@
 		WHERE lectureqnano = #lectureqnano#
 	</update>
 	
-	<update id="qnaDelete" parameterClass="LectureQnADTO">
+	<delete id="qnaDelete" parameterClass="LectureQnADTO">
  	 	DELETE FROM sol_lectureqna
  	 	WHERE lectureqnano = #lectureqnano#
- 	</update>
- 	
+ 	</delete>
+ 	 	
 
 </sqlMap>

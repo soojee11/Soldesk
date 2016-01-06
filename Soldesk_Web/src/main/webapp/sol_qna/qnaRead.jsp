@@ -183,7 +183,13 @@ function cancel(){
 	</tr>
 
 	<tr>
-		<td colspan="6">${dto.content }</td>
+		<td colspan="6">
+		<jsp:scriptlet>
+		pageContext.setAttribute("cr", "\r");
+		pageContext.setAttribute("lf", "\n");									
+		pageContext.setAttribute("crlf", "\r\n");									
+		</jsp:scriptlet>
+		${fn:replace(dto.content,crlf,'<br/>') }</td>
 	</tr>
 
 </table>
@@ -227,7 +233,12 @@ function cancel(){
  			</tr>
 		</table>
 		<div id ="demo" style="color: #000000;">
-			${rdto.content }
+				<jsp:scriptlet>
+				pageContext.setAttribute("cr", "\r");
+				pageContext.setAttribute("lf", "\n");									
+				pageContext.setAttribute("crlf", "\r\n");									
+				</jsp:scriptlet>
+				${fn:replace(rdto.content,crlf,'<br/>') }
 		</div>
 	</c:if>
 

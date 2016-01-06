@@ -74,6 +74,7 @@ public class LectureQnACont {
 			qnaDao.readCount(lectureqnano);	
 			
 			System.out.println(s_id+"////////"+dto.getId());
+			System.out.println("dto.getLectureqnano():"+dto.getLectureqnano());
 						
 			resp.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = resp.getWriter();
@@ -85,7 +86,10 @@ public class LectureQnACont {
 			}
 			
 			if (dto != null) {
-				out.write(dto.getSubject()+"/"+dto.getId()+"/"+dto.getRegdate()+"/"+dto.getContent()+"/"+dto.getReadcnt()+"/"+idcheck);
+				out.write(dto.getSubject()+"/"+dto.getId()+"/"+dto.getRegdate()+"/"+
+						  dto.getContent()+"/"+dto.getReadcnt()+"/"+idcheck+
+						  "/"+dto.getLectureqnano());
+				
 			} else {
 				out.write("학습QnA 상세보기 실패");
 			}
@@ -102,8 +106,12 @@ public class LectureQnACont {
 	@RequestMapping(value = "/sol_study/qnaDelete.do", method = RequestMethod.GET)
 	public void deleteProc(LectureQnADTO dto, HttpServletResponse resp, HttpServletRequest request, HttpSession session) {
 		//CategoryDTO cdto = null;
+		int lectureqnano = dto.getLectureqnano();
 		dto.setId((String) session.getAttribute("s_id"));
+		dto = qnaDao.qnaRead(lectureqnano);
+		dto.setLectureqnano(lectureqnano);
 		
+		//System.out.println("렉쳐1!!!!!!!!!!!!!!!"+lectureqnano);
 		try {
 			//System.out.println("dto>>>>>>"+dto.toString());
 			int cnt = qnaDao.qnaDelete(dto);

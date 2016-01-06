@@ -29,11 +29,6 @@
 		WHERE category.grade = #grade# AND category.gwamok= #gwamok#
 		GROUP BY lecture.categoryno
 	</select>
-	
-	<select id="category" resultClass="java.util.HashMap" parameterClass="Map">
-	   SELECT categoryno, grade, gwamok, categoryinfo, teacherName, teacherCareerm teacherPhoto, bookInfo
-	   FROM sol_category
-	   WHERE grade = #grade# AND gwamok= #gwamok#
-	</select>
+
 
 </sqlMap>
