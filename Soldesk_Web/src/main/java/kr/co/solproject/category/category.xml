@@ -44,7 +44,7 @@
 	
 	<!-- 카테고리 상세보기 -->
   <select id="readCate2" parameterClass="CategoryDTO" resultClass="CategoryDTO">
-    select categoryno, grade, gwamok, categoryinfo, teacherName, teacherPhoto, teacherCareer,bookInfo
+    select categoryno, grade, gwamok, categoryinfo, teacherName, teacherPhoto, teacherCareer,bookInfo, bookPhoto
     from sol_category
     where grade=#grade# and gwamok=#gwamok#
   </select>
