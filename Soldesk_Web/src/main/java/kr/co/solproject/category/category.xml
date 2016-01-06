@@ -38,7 +38,7 @@
 	
 	<update id="updateCateProc" parameterClass="CategoryDTO">
 		update sol_category
-		set grade = #grade#, gwamok=#gwamok#, categoryinfo=#categoryinfo#,teacherName=#teacherName#, teacherPhoto=#teacherPhoto#, teacherCareer=#teacherCareer#,bookInfo=#bookInfo#
+		set grade = #grade#, gwamok=#gwamok#, categoryinfo=#categoryinfo#,teacherName=#teacherName#, teacherPhoto=#teacherPhoto#, teacherCareer=#teacherCareer#,bookInfo=#bookInfo#, bookPhoto = #bookPhoto#
 		where categoryno = #categoryno#
 	</update>
 	

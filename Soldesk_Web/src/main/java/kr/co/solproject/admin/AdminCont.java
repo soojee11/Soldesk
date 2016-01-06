@@ -885,13 +885,24 @@ public class AdminCont {
 		CategoryDTO oldDTO = catedao.readCate(dto);
 		
 		MultipartFile teacherMF = dto.getTeacherMF();
+		MultipartFile bookMF = dto.getBookMF();
 		
+		//기존 선생님 사진 삭제 
 		if(teacherMF.getSize()>0){
 			Utility.deleteFile(basePath, oldDTO.getTeacherPhoto());
 			String teacherPhoto = UploadSaveManager.saveFileSpring30(teacherMF, basePath);
 			dto.setTeacherPhoto(teacherPhoto);
 		}else{	
 			dto.setTeacherPhoto(oldDTO.getTeacherPhoto());
+		}
+		
+		//기존 교재 사진 삭제
+		if(bookMF.getSize()>0){
+			Utility.deleteFile(basePath, oldDTO.getBookPhoto());
+			String bookPhoto = UploadSaveManager.saveFileSpring30(bookMF, basePath);
+			dto.setBookPhoto(bookPhoto);
+		}else{	
+			dto.setBookPhoto(oldDTO.getBookPhoto());
 		}
 		
 		if(dto.getBookInfo().equals("<p>&nbsp;</p>")){

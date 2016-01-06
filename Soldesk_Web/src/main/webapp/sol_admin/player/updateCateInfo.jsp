@@ -117,7 +117,7 @@
 				<div class="form-group">
 					<label class="col-sm-2 control-label">선생님 사진</label>
 					<div class="col-sm-10">
-						등록된 파일명: &nbsp;&nbsp;&nbsp; ${dto.teacherPhoto }
+						등록된 파일명: ${dto.teacherPhoto }
 						<input type="file" name="teacherMF" id="teacherMF" size='50' >
 					</div>
 				</div>
