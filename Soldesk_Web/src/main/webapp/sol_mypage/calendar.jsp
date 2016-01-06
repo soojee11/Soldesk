@@ -392,7 +392,7 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
           <font size="7px" style="color:#000 ">Lecture List</font>
           </h4>
         </span>
-         <span class="modalfont" >'${name}'님
+         <span class="modalfont" >·${name}(${id })·
          </span>
          <hr/>
         </div>
@@ -488,7 +488,7 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
           <h4 class="modal-title">
           <font size="7px"  style="color:#000 ">&nbsp;Memo List</font></h4>
         </span>
-        <span class="modalfont">'${name}'님</span>
+        <span class="modalfont">·${name}(${id })·</span>
         <hr/>
         </div>
         
@@ -666,7 +666,7 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
           <h4 class="modal-title">
           <font size="7px"  style="color:#000 ">Test List</font></h4>
         </span>
-          <span class="modalfont" >'${name}'님</span>
+          <span class="modalfont" >·${name}(${id })·</span>
           <hr/>
         </div>
         
