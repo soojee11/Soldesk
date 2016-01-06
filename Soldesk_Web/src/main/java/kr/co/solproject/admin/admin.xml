@@ -16,45 +16,12 @@
   		from sol_category
   		where gwamok = #gwamok# and grade = #grade#
    </select>
-    	
-	<select id="getCateTotal" parameterClass="Map" resultClass="Integer">
-		select count(*) as cnt
-		from sol_category
-	</select>
-	
-	<select id="categoryRead" parameterClass="Integer" resultClass="CategoryDTO">
-		select categoryno, grade, gwamok, categoryinfo
-		from sol_category
-		where categoryno = #categoryno#
-	</select>
-    
-    <update id="categoryDelProc" parameterClass="Integer">
+
+   <update id="categoryDelProc" parameterClass="Integer">
 		delete from sol_category
 		where categoryno = #categoryno#
 	</update>
-		<select id="readCateInfo" parameterClass="Map" resultClass="CategoryDTO">
-		SELECT categoryno, grade, gwamok, categoryinfo
-		FROM sol_category
-		limit #sno#, #numPerPage#
-	</select>
-
-	<update id="updateCateProc" parameterClass="CategoryDTO">
-		update sol_category
-		set grade = #grade#, gwamok=#gwamok#, categoryinfo=#categoryinfo#
-		where categoryno = #categoryno#
-	</update>
 	
-	<update id="cateIns" parameterClass="CategoryDTO">
-		insert into sol_category(grade, gwamok, categoryinfo)
-		values(#grade#,#gwamok#,#categoryinfo#)
-	</update>
-	
-	<select id="checkCateinfo" resultClass="String" parameterClass="Map" >
-		select categoryinfo
-		from sol_category
-		where grade = #grade# and gwamok = #gwamok#
-	</select>
-   	
 	<select id="getLectureno" parameterClass="Integer" resultClass="Integer">
 		select lectureno
 		from sol_lecture
@@ -62,7 +29,7 @@
 	</select>
    
    	<select id="getlecList" parameterClass="Map" resultClass="PlayerDTO">
-		SELECT lectureno, subject,filename,filesize,poster,teacher,lecturetime,categoryno
+		SELECT lectureno, subject,filename,filesize,poster,lecturetime,categoryno
 		FROM sol_lecture
 		where categoryno = #categoryno#
 		order by lectureno desc 
@@ -76,7 +43,7 @@
 	</select>
 
 	<select id="lecRead" parameterClass="Integer" resultClass="PlayerDTO">
-		select subject,filename,filesize,poster,teacher,lecturetime,categoryno
+		select subject,filename,filesize,poster,lecturetime,categoryno
 		from sol_lecture
 		where lectureno = #lectureno#
 	</select>
@@ -97,7 +64,7 @@
 	
 	<update id="lecUpdate" parameterClass="PlayerDTO">
 		update sol_lecture
-		set subject = #subject#, filename=#filename#, filesize=#filesize#, poster=#poster#,teacher=#teacher#,lecturetime=#lecturetime#
+		set subject = #subject#, filename=#filename#, filesize=#filesize#, poster=#poster#, lecturetime=#lecturetime#
 		where lectureno = #lectureno#
 	</update>
 	

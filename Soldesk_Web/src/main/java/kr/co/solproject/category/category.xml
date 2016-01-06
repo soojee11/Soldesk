@@ -6,8 +6,40 @@
 <sqlMap namespace="sol_category">
 	<typeAlias alias="CatetoryDTO" type="kr.co.solproject.category.CategoryDTO" />
 
-	<select id="list" parameterClass="Map" resultClass="CatetoryDTO">
-	
+	<select id="checkCateinfo" resultClass="String" parameterClass="Map" >
+		select categoryinfo
+		from sol_category
+		where grade = #grade# and gwamok = #gwamok#
 	</select>
+	
+	<update id="cateIns" parameterClass="CategoryDTO">
+		insert into sol_category(grade, gwamok,teacherName,teacherPhoto,teacherCareer,categoryinfo,bookInfo)
+		values(#grade#,#gwamok#,#teacherName#,#teacherPhoto#,#teacherCareer#,#categoryinfo#,#bookInfo#)
+	</update>
+	
+	<!-- 카테고리 목록 가져오기/ readCate와 주의 -->
+	<select id="readCateInfo" parameterClass="Map" resultClass="CategoryDTO">
+		SELECT categoryno, grade, gwamok, categoryinfo, teacherName, teacherPhoto, teacherCareer,bookInfo
+		FROM sol_category
+		limit #sno#, #numPerPage#
+	</select>
+	
+	<select id="getCateTotal" parameterClass="Map" resultClass="Integer">
+		select count(*) as cnt
+		from sol_category
+	</select>
+	
+	<!-- 카테고리 상세보기 -->
+	<select id="readCate" parameterClass="CategoryDTO" resultClass="CategoryDTO">
+		select categoryno, grade, gwamok, categoryinfo, teacherName, teacherPhoto, teacherCareer,bookInfo
+		from sol_category
+		where categoryno = #categoryno#
+	</select>
+	
+	<update id="updateCateProc" parameterClass="CategoryDTO">
+		update sol_category
+		set grade = #grade#, gwamok=#gwamok#, categoryinfo=#categoryinfo#,teacherName=#teacherName#, teacherPhoto=#teacherPhoto#, teacherCareer=#teacherCareer#,bookInfo=#bookInfo#
+		where categoryno = #categoryno#
+	</update>
 		
 </sqlMap>

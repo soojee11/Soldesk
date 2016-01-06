@@ -14,11 +14,13 @@ create table sol_question(
 	qtype VARCHAR(10)	 NOT NULL,		
 	answer VARCHAR(500) NOT NULL,			
 	comment VARCHAR(600) NOT NULL,			
-	poster VARCHAR(600) NULL,			
+	poster text NULL,			
 	example VARCHAR(500) NULL,			
 	qynshow VARCHAR(10)	 NOT NULL default 'Y',		
 	primary key(testno,questno)						
-)ENGINE=MyISAM DEFAULT CHARSET="euckr";							
+)ENGINE=MyISAM DEFAULT CHARSET="euckr";	
+alter table sol_question modify poster text null;
+
 											
 create table sol_myscore(							
 	mytestno INT NOT NULL auto_increment,
@@ -30,8 +32,6 @@ create table sol_myscore(
 	myscore INT NOT NULL,
 	primary key(mytestno)						
 )ENGINE=MyISAM DEFAULT CHARSET="euckr";							
-
-
 
 create table sol_qna(		
 qnano INT NOT NULL auto_increment,		
@@ -58,11 +58,6 @@ PRIMARY KEY (bbsno)
 )ENGINE=MyISAM DEFAULT CHARSET="euckr";	
 
 //noticeshow 하나가 추가함. 자료형 맞는지 모름
-
-
-
-
-
 
 CREATE TABLE sol_study(
 lectureno	int(11)		NOT NULL,
@@ -94,13 +89,17 @@ filename	VARCHAR(200)	NULL,
 PRIMARY KEY  (lectureqnano)
 )ENGINE=MyISAM DEFAULT CHARSET="euckr";	
 
-create table SOL_category(				
-	categoryno	INT(11)	NOT NULL auto_increment,	
-	grade		TINYINT NOT NULL,	
-	gwamok		VARCHAR(200) NOT NULL,	
-	categoryInfo	VARCHAR(500) NOT NULL,		
-	primary key(categoryno)			
-)ENGINE=MyISAM DEFAULT CHARSET="euckr";				
+create table SOL_category(
+	categoryno INT NOT NULL auto_increment,
+	grade TINYINT NOT NULL,
+	gwamok VARCHAR(200) NOT NULL,
+	categoryinfo VARCHAR(500) NOT NULL,
+	teacherName VARCHAR(20) NOT NULL,
+	teacherCareer VARCHAR(500) NOT NULL,
+	teacherPhoto VARCHAR(50) NOT NULL,
+	bookInfo TEXT NOT NULL,
+	primary key(categoryno)
+)ENGINE=MyISAM DEFAULT CHARSET="euckr";
 				
 create table sol_lecture(				
 	lectureno	INT(11)	NOT NULL	auto_increment,
@@ -108,7 +107,6 @@ create table sol_lecture(
 	filename	VARCHAR(200)	NOT NULL,
 	filesize	BIGINT(20)	NOT NULL,
 	poster		VARCHAR(500)	NOT NULL,
-	teacher		VARCHAR(200)	NOT NULL,
 	lecturetime	INT(11)	NOT NULL,
 	categoryno	INT(11)	NOT NULL,
 	primary key(lectureno)		
@@ -122,4 +120,35 @@ CREATE TABLE sol_reply(
   tablename VARCHAR(10) NOT NULL,   -- B자게 Q질게	
   tableno INT NOT NULL,	
   primary key(replyno)	
+)ENGINE=MyISAM DEFAULT CHARSET="euckr";	
+
+CREATE TABLE sol_calendar(			
+  calno           int(11)        NOT NULL  auto_increment primary key,			
+  id              varchar(10)    NOT NULL,       			
+  lectureno       int(11)        NOT NULL,			
+  regdate         datetime       NOT NULL			
+)ENGINE=MyISAM DEFAULT CHARSET="euckr";			
+
+CREATE TABLE sol_member(			
+  id          varchar(10)    NOT NULL primary key ,			
+  name        varchar(50)    NOT NULL,       			
+  passwd      varchar(15)    NOT NULL,			
+  email       varchar(50)    NOT NULL ,			
+  tel         varchar(14)     NULL,			
+  zipcode     varchar(7)     NULL,			
+  address1     varchar(200)    NULL,			
+  address2    varchar(200)     NULL ,			
+  mdate  datetime not null,			
+  mlevel  varchar(10) not null default 'B',	promise varchar(200) null default 'fighting!',		
+  unique key(email)					
+)ENGINE=MyISAM DEFAULT CHARSET="euckr";	
+
+CREATE TABLE sol_zipcode(
+	zipcode char(7) not null,
+	sido varchar(30) not null,
+	gugun varchar(50) not null,
+	dong varchar(50) not null,
+	li varchar(50)  null,
+	bunji varchar(255) null,
+	etc varchar(255) null
 )ENGINE=MyISAM DEFAULT CHARSET="euckr";	

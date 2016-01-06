@@ -60,6 +60,9 @@ public class LectureCont {
 		int grade = 1;			// default 1학년으로 설정 
 		String gwamok = "국어";
 		
+		// 어느 페이지에서 왔는지 나타내는 변수 
+		 String whichPage = "lectureList";
+		
 		if(request.getParameter("grade") != null){
 			grade = Integer.parseInt(request.getParameter("grade"));
 		}
@@ -102,7 +105,8 @@ public class LectureCont {
 			request.setAttribute("nowPage", nowPage);
 			request.setAttribute("total", total);
 			request.setAttribute("tabNum", tabNum);
-		}
+			request.setAttribute("whichPage", whichPage);		
+			}
 		if(tabNum==2) {
 			int qnaNowPage=1;
 			int qnaNumPerPage=5;
@@ -134,7 +138,7 @@ public class LectureCont {
 			request.setAttribute("qnaNowPage", qnaNowPage);
 			request.setAttribute("qnaTotal", qnaTotal);
 			request.setAttribute("tabNum", tabNum);
-			
+			request.setAttribute("whichPage", whichPage);
 		}
 		if(tabNum==3) {
 			int postNowPage=1;
@@ -167,8 +171,8 @@ public class LectureCont {
 			request.setAttribute("postNo", postNo);
 			request.setAttribute("postNowPage", postNowPage);
 			request.setAttribute("postTotal", postTotal);
-
 			request.setAttribute("tabNum", tabNum);
+			request.setAttribute("whichPage", whichPage);
 		}
 
 		return "sol_study/lectureList";

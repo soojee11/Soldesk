@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.solproject.bbs.BbsDAO;
 import kr.co.solproject.bbs.BbsDTO;
+import kr.co.solproject.category.CategoryDAO;
 import kr.co.solproject.category.CategoryDTO;
 import kr.co.solproject.member.MemberDTO;
 import kr.co.solproject.player.PlayerDTO;
@@ -39,6 +40,9 @@ public class AdminCont {
 	
 	@Autowired
 	private QnaDAO qnadao=null;
+	
+	@Autowired
+	private CategoryDAO catedao=null;
 	
 	public AdminCont() {
 		System.out.println("--------------AdminCont객체 생성됨");
@@ -712,56 +716,14 @@ public class AdminCont {
 		return "sol_admin/player/playerList";
 	}//end
 	
-	@RequestMapping(value="sol_admin/player/leclist2.do")
-	public String lecList2(HttpServletRequest request) {
-		
-		int categoryno = Integer.parseInt(request.getParameter("categoryno"));
-		
-		String url = "./leclist2.do?categoryno="+categoryno;
-		
-		int numPerPage=5;	
-		int recNo=1;
-		
-		String nowPage = request.getParameter("nowPage");
-		if (nowPage == null) {
-			nowPage = "1";
-		}
-		
-		int sno = ((Integer.parseInt(nowPage) - 1) * numPerPage);
-		int intNowPage = Integer.parseInt(nowPage);
-		
-		Map map = new HashMap();
-		map.put("sno", sno);
-		map.put("numPerPage", numPerPage);
-		map.put("categoryno", categoryno);
-		
-		List list = null;
-		int total = 0;
-		
-		list = dao.getlecList(map);
-		total = dao.getlecTotal(map);
-		
-		String dbean = Utility.getDate();
-		String paging = Paging.paging5(total, intNowPage, numPerPage, url);
-		
-		recNo = total - (intNowPage - 1) * numPerPage + 1 ;
-		
-		request.setAttribute("flag", 2);
-		request.setAttribute("list", list);
-		request.setAttribute("dbean", dbean);
-		request.setAttribute("paging", paging);
-		request.setAttribute("recNo", recNo);
-		request.setAttribute("nowPage", nowPage);
-		request.setAttribute("total", total);
-	
-		return "sol_admin/player/playerList";
-	}//end
-	
 	@RequestMapping(value="sol_admin/player/lecread.do", method=RequestMethod.GET)
-	public String lecRead(PlayerDTO dto, HttpServletRequest request) {
+	public String lecRead(PlayerDTO dto, CategoryDTO dto2, HttpServletRequest request) {
 		
 		dto = dao.lecRead(dto.getLectureno());
-
+		
+		dto2.setCategoryno(dto.getCategoryno());
+		dto2 = catedao.readCate(dto2);
+		
 		String filename = dto.getFilename();
 		filename = filename.toUpperCase();
 
@@ -771,10 +733,6 @@ public class AdminCont {
 		} else if (filename.endsWith(".MP4")) {
 			request.setAttribute("file_end", "MP4");
 		}
-		
-		int categoryno = dto.getCategoryno();
-		CategoryDTO dto2 = null;
-		dto2 = dao.categoryRead(categoryno);
 		
 		request.setAttribute("flag", 1);
 		request.setAttribute("dto", dto);
@@ -784,46 +742,11 @@ public class AdminCont {
 		return "sol_admin/player/playerRead";
 	}//end
 	
-	@RequestMapping(value="sol_admin/player/lecread2.do", method=RequestMethod.GET)
-	public String lecRead2(PlayerDTO dto, HttpServletRequest request) {
+	@RequestMapping(value="sol_admin/player/lecDel.do", method=RequestMethod.GET)
+	public String lecDel(PlayerDTO dto, CategoryDTO dto2, HttpServletRequest request) {
 		
 		dto = dao.lecRead(dto.getLectureno());
-		String filename = dto.getFilename();
-		filename = filename.toUpperCase();
-
-		if (filename.endsWith(".MP3")) {
-			request.setAttribute("file_end", "MP3");
-			
-		} else if (filename.endsWith(".MP4")) {
-			request.setAttribute("file_end", "MP4");
-		}
-		
-		int categoryno = dto.getCategoryno();
-		CategoryDTO dto2 = null;
-		dto2 = dao.categoryRead(categoryno);
-		
-		request.setAttribute("flag", 2);
-		request.setAttribute("dto", dto);
-		request.setAttribute("dto2", dto2);
-		request.setAttribute("root", Utility.getRoot());
-
-		return "sol_admin/player/playerRead";
-	}//end
-	
-	@RequestMapping(value="sol_admin/player/lecDel.do", method=RequestMethod.GET)
-	public String lecDel(HttpServletRequest request) {
-		
-		PlayerDTO dto = null;
-		CategoryDTO dto2 = null;
-		
-		//System.out.println("------lecno"+request.getParameter("lectureno"));
-		//System.out.println("------cateno"+request.getParameter("categoryno"));
-		
-		int lectureno = Integer.parseInt(request.getParameter("lectureno"));
-		int categoryno = Integer.parseInt(request.getParameter("categoryno"));
-		
-		dto = dao.lecRead(lectureno);
-		dto2 = dao.categoryRead(categoryno);
+		dto2 = catedao.readCate(dto2);
 		
 		request.setAttribute("dto", dto);
 		request.setAttribute("dto2", dto2);
@@ -832,9 +755,7 @@ public class AdminCont {
 	}//end
 	
 	@RequestMapping(value="sol_admin/player/lecDelProc.do", method=RequestMethod.GET)
-	public String lecDelProc(int lectureno, int categoryno, HttpServletRequest request) {
-		
-		//dao.categoryDelProc(categoryno);
+	public String lecDelProc(PlayerDTO dto, CategoryDTO dto2, HttpServletRequest request) {
 		
 		request.setAttribute("root", Utility.getRoot());
 
@@ -842,26 +763,20 @@ public class AdminCont {
 		String basePath = Utility.getRealPath(request, "/sol_admin/player/storage");
 
 		// 파일 삭제
-		PlayerDTO oldDTO = dao.lecRead(lectureno); // 기존에 등록된 파일 정보 가져오기
+		PlayerDTO oldDTO = dao.lecRead(dto.getLectureno()); // 기존에 등록된 파일 정보 가져오기
 		Utility.deleteFile(basePath, oldDTO.getPoster());
 		Utility.deleteFile(basePath, oldDTO.getFilename());
 
-		dao.lecDelProc(lectureno);
+		dao.lecDelProc(dto.getLectureno());
 		
-		return "redirect:leclist2.do?categoryno="+categoryno;
+		return "redirect:leclist.do?categoryno="+dto2.getCategoryno();
 	}//end
 	
 	@RequestMapping(value = "sol_admin/player/lecUpdate.do", method = RequestMethod.GET)
-	public String lecUpdate(int lectureno, int categoryno, HttpServletRequest request) {
+	public String lecUpdate(PlayerDTO dto,CategoryDTO dto2, HttpServletRequest request) {
 		
-		//System.out.println("lectureno---"+lectureno);
-		//System.out.println("categoryno---"+categoryno);
-		
-		PlayerDTO dto = null;
-		CategoryDTO dto2 = null;
-		
-		dto = dao.lecRead(lectureno);
-		dto2 = dao.categoryRead(categoryno);
+		dto = dao.lecRead(dto.getLectureno());
+		dto2 = catedao.readCate(dto2);
 		
 		request.setAttribute("dto", dto);
 		request.setAttribute("dto2", dto2);
@@ -906,14 +821,14 @@ public class AdminCont {
 		}
 		
 		dao.lecUpdate(dto);
-		//System.out.println("old update cateno: "+oldDTO.getCategoryno());
-		return "redirect:leclist2.do?categoryno="+oldDTO.getCategoryno();
+		
+		return "redirect:leclist.do?categoryno="+oldDTO.getCategoryno();
 	}//end
 
-	@RequestMapping(value="sol_admin/player/readCateInfo.do", method=RequestMethod.GET)
+	@RequestMapping(value="sol_admin/player/cateInfo.do", method=RequestMethod.GET)
 	public String readCateInfo(HttpServletRequest request) {
 		
-		String url = "./readCateInfo.do";
+		String url = "./cateInfo.do";
 		
 		int numPerPage=6;	
 		int recNo=1;
@@ -930,10 +845,10 @@ public class AdminCont {
 		map.put("sno", sno);
 		map.put("numPerPage", numPerPage);
 		
-		List list = dao.readCateInfo(map);
+		List list = catedao.readCateInfo(map);
 		
 		String dbean = Utility.getDate();
-		int total = dao.getCateTotal(map);
+		int total = catedao.getCateTotal(map);
 		
 		String paging = Paging.paging4(total, intNowPage, numPerPage, url);
 		
@@ -945,15 +860,14 @@ public class AdminCont {
 		request.setAttribute("nowPage", nowPage);
 		request.setAttribute("total", total);
 		
-		return "sol_admin/player/readCateInfo";
+		return "sol_admin/player/cateInfo";
 	}//end
 	
 	@RequestMapping(value="sol_admin/player/cateUpdate.do", method=RequestMethod.GET)
-	public String updateCateInfo(int categoryno, HttpServletRequest request) {
-		CategoryDTO dto = null;
-		dto = dao.categoryRead(categoryno);
+	public String updateCateInfo(CategoryDTO dto, HttpServletRequest request) {
+		dto = catedao.readCate(dto);
 		
-		request.setAttribute("categoryno", categoryno);
+		request.setAttribute("categoryno", dto.getCategoryno());
 		request.setAttribute("dto", dto);
 		
 		return "sol_admin/player/updateCateInfo";
@@ -961,31 +875,55 @@ public class AdminCont {
 	
 	@RequestMapping(value="sol_admin/player/cateUpdate.do", method=RequestMethod.POST)
 	public String updateCateProc(CategoryDTO dto, HttpServletRequest request) {
-		dao.updateCateProc(dto);
-		return "redirect:./updelete.do";
+		
+		System.out.println("categoryno: "+dto.getCategoryno());
+		int categoryno = dto.getCategoryno();
+		
+		request.setAttribute("root", Utility.getRoot());
+		
+		String basePath = Utility.getRealPath(request, "/sol_admin/player/cateStorage");
+		CategoryDTO oldDTO = catedao.readCate(dto);
+		
+		MultipartFile teacherMF = dto.getTeacherMF();
+		
+		if(teacherMF.getSize()>0){
+			Utility.deleteFile(basePath, oldDTO.getTeacherPhoto());
+			String teacherPhoto = UploadSaveManager.saveFileSpring30(teacherMF, basePath);
+			dto.setTeacherPhoto(teacherPhoto);
+		}else{	
+			dto.setTeacherPhoto(oldDTO.getTeacherPhoto());
+		}
+		
+		if(dto.getBookInfo().equals("<p>&nbsp;</p>")){
+		      dto.setBookInfo("내용 없음");
+		}
+		
+		catedao.updateCateProc(dto);
+		return "redirect:./readCate.do?categoryno="+categoryno;
 	}//end
 	
 	
 	@RequestMapping(value="sol_admin/player/cateDel.do", method=RequestMethod.GET)
-	public String delCateInfo(int categoryno, HttpServletRequest request) {
-		CategoryDTO dto = null;
+	public String delCateInfo(CategoryDTO dto, HttpServletRequest request) {
+		dto = catedao.readCate(dto);
 		
-		dto = dao.categoryRead(categoryno);
-		
-		request.setAttribute("categoryno", categoryno);
+		request.setAttribute("categoryno", dto.getCategoryno());
 		request.setAttribute("dto", dto);
 		
 		return "sol_admin/player/delCateInfo";
 	}//end
 	
 	@RequestMapping(value="sol_admin/player/cateDelProc.do", method=RequestMethod.GET)
-	public String delCateProc(int categoryno, HttpServletRequest request) {
-		System.out.println(categoryno);
+	public String delCateProc(CategoryDTO dto, HttpServletRequest request) {
+		System.out.println(dto.getCategoryno());
 		List list = new ArrayList();
 		int lectureno = 0;
-		list = dao.getLectureno(categoryno);
-		Iterator it = list.iterator();
-		while(it.hasNext()){
+		list = dao.getLectureno(dto.getCategoryno());
+		
+		// 동영상 강의가 존재하면 동영상 강의도 모두 삭제
+		if (!list.isEmpty()){
+			Iterator it = list.iterator();
+			while(it.hasNext()){
 			
 			lectureno = (Integer) it.next();
 		    System.out.println("--lectureno : "+lectureno);
@@ -997,11 +935,19 @@ public class AdminCont {
 			Utility.deleteFile(basePath, oldDTO.getFilename());
 			
 			dao.lecDelProc(lectureno);
-			dao.categoryDelProc(categoryno);
-		    
+			}
 		}
+		// 선생님 사진 삭제
+		String basePath = Utility.getRealPath(request, "/sol_admin/player/cateStorage");
+		CategoryDTO oldDTO = catedao.readCate(dto);
+		Utility.deleteFile(basePath, oldDTO.getTeacherPhoto());
+		
+		// 강좌 삭제 
+		dao.categoryDelProc(dto.getCategoryno());
+		
 		request.setAttribute("root", Utility.getRoot());
-		return "redirect:./updelete.do";
+		request.setAttribute("msg", 2);
+		return "sol_admin/player/cateInfo";
 	}//end
 	
 	@RequestMapping(value="sol_admin/player/cateInsert.do", method=RequestMethod.GET)
@@ -1014,18 +960,30 @@ public class AdminCont {
 		//System.out.println("grade;" + dto.getGrade());
 		//System.out.println("getGwamok;" + dto.getGwamok());
 		String checkCateinfo = "";
-		checkCateinfo=dao.checkCateinfo(dto.getGrade(), dto.getGwamok());
+		checkCateinfo=catedao.checkCateinfo(dto.getGrade(), dto.getGwamok());
 		
 		System.out.println("checkCateinfo: "+checkCateinfo);
 		
 		if(checkCateinfo != null){
 			request.setAttribute("msg",0);
-			return "sol_admin/player/readCateInfo";
+			return "sol_admin/player/cateInfo";
 		}else{
-			boolean flag = dao.cateIns(dto);
+			//선생님 사진 등록
+			String basePath = Utility.getRealPath(request, "/sol_admin/player/cateStorage");
+			System.out.println("basePath 확인: "+basePath);
+			MultipartFile teacherMF = dto.getTeacherMF();
+			String teacherPhoto = UploadSaveManager.saveFileSpring30(teacherMF, basePath);
+			dto.setTeacherPhoto(teacherPhoto);
+			
+			if(dto.getBookInfo().equals("<p>&nbsp;</p>")){
+			      dto.setBookInfo("내용 없음");
+			}
+			
+			boolean flag = catedao.cateIns(dto);
+			
 			if (flag) {
 				request.setAttribute("msg", 1);
-				return "sol_admin/player/readCateInfo";
+				return "sol_admin/player/cateInfo";
 			} else {
 				request.setAttribute("msg", "강좌 등록에 실패하였습니다.<br /><br /> 다시 시도해 주십시오.");
 				request.setAttribute("link1", "<input type='button' value='다시시도' onclick=\"history.back();\">");
@@ -1036,43 +994,15 @@ public class AdminCont {
 		}
 	}//end
 	
-	@RequestMapping(value="sol_admin/player/updelete.do", method=RequestMethod.GET)
-	public String cateupdelete(HttpServletRequest request) {
-		
-		String url = "./readCateInfo.do";
-		
-		int numPerPage=6;	
-		int recNo=1;
-		
-		String nowPage = request.getParameter("nowPage");
-		if (nowPage == null) {
-			nowPage = "1";
-		}
-		
-		int sno = ((Integer.parseInt(nowPage) - 1) * numPerPage);
-		int intNowPage = Integer.parseInt(nowPage);
-		
-		Map map = new HashMap();
-		map.put("sno", sno);
-		map.put("numPerPage", numPerPage);
-		
-		List list = dao.readCateInfo(map);
-		
-		String dbean = Utility.getDate();
-		int total = dao.getCateTotal(map);
-		
-		String paging = Paging.paging4(total, intNowPage, numPerPage, url);
-		
-		recNo = total - (intNowPage - 1) * numPerPage + 1 ;
-		request.setAttribute("list", list);
-		request.setAttribute("dbean", dbean);
-		request.setAttribute("paging", paging);
-		request.setAttribute("recNo", recNo);
-		request.setAttribute("nowPage", nowPage);
-		request.setAttribute("total", total);
-			
-		return "sol_admin/player/cateUpDelete";
+	
+	@RequestMapping(value="sol_admin/player/readCate.do", method=RequestMethod.GET)
+	public String readCate(CategoryDTO dto, HttpServletRequest request) {
+		dto = catedao.readCate(dto);
+		request.setAttribute("dto", dto);
+		return "sol_admin/player/cateRead";
 	}//end
+	
+	
 //-----------------------------------------------------------------------------------------------------------
 //-------------------------------------------------------------------------------------------------PLAYER END
 	

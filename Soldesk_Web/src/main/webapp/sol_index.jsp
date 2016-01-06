@@ -350,10 +350,10 @@
 							<i class="ico-ok ico-color circle-color big"></i>
 							<div class="icons-box-vert-info">
 								<p style="font-size: 15pt">1학년</p><br/>
-								<p><a href="sol_study/lectureList.do?grade=1&gwamok=국어">국어</a> 
-								   <a href="sol_study/lectureList.do?grade=1&gwamok=수학">수학</a>  
-								   <a href="sol_study/lectureList.do?grade=1&gwamok=사회">사회</a> 
-								   <a href="sol_study/lectureList.do?grade=1&gwamok=과학">과학</a></p>
+								<p><a href="sol_study/lectureInfo.do?grade=1&gwamok=국어">국어</a> 
+								   <a href="sol_study/lectureInfo.do?grade=1&gwamok=수학">수학</a>  
+								   <a href="sol_study/lectureInfo.do?grade=1&gwamok=사회">사회</a> 
+								   <a href="sol_study/lectureInfo.do?grade=1&gwamok=과학">과학</a></p>
 							</div>
 							<div class="clear"></div>
 						</div>
@@ -366,10 +366,10 @@
 							<i class="ico-cup  ico-white circle-color-full big-color"></i>
 							<div class="icons-box-vert-info">
 								<p style="font-size: 15pt">2학년</p><br/>
-                <p><a href="sol_study/lectureList.do?grade=2&gwamok=국어">국어</a> 
-                   <a href="sol_study/lectureList.do?grade=2&gwamok=수학">수학</a>  
-                   <a href="sol_study/lectureList.do?grade=2&gwamok=사회">사회</a> 
-                   <a href="sol_study/lectureList.do?grade=2&gwamok=과학">과학</a></p>
+                <p><a href="sol_study/lectureInfo.do?grade=2&gwamok=국어">국어</a> 
+                   <a href="sol_study/lectureInfo.do?grade=2&gwamok=수학">수학</a>  
+                   <a href="sol_study/lectureInfo.do?grade=2&gwamok=사회">사회</a> 
+                   <a href="sol_study/lectureInfo.do?grade=2&gwamok=과학">과학</a></p>
 							</div>
 							<div class="clear"></div>
 						</div>
@@ -382,10 +382,10 @@
 							<i class="ico-ipad ico-color circle-color big"></i>
 							<div class="icons-box-vert-info">
 								<p style="font-size: 15pt">3학년</p><br/>
-                <p><a href="sol_study/lectureList.do?grade=3&gwamok=국어">국어</a> 
-                   <a href="sol_study/lectureList.do?grade=3&gwamok=수학">수학</a>  
-                   <a href="sol_study/lectureList.do?grade=3&gwamok=사회">사회</a> 
-                   <a href="sol_study/lectureList.do?grade=3&gwamok=과학">과학</a></p>
+                <p><a href="sol_study/lectureInfo.do?grade=3&gwamok=국어">국어</a> 
+                   <a href="sol_study/lectureInfo.do?grade=3&gwamok=수학">수학</a>  
+                   <a href="sol_study/lectureInfo.do?grade=3&gwamok=사회">사회</a> 
+                   <a href="sol_study/lectureInfo.do?grade=3&gwamok=과학">과학</a></p>
 							</div>
 							<div class="clear"></div>
 						</div>
@@ -398,10 +398,10 @@
 							<i class="ico-thumbs-up  ico-white circle-color-full big-color"></i>
 							<div class="icons-box-vert-info">
 								<p style="font-size: 15pt">4학년</p><br/>
-                <p><a href="sol_study/lectureList.do?grade=4&gwamok=국어">국어</a> 
-                   <a href="sol_study/lectureList.do?grade=4&gwamok=수학">수학</a>  
-                   <a href="sol_study/lectureList.do?grade=4&gwamok=사회">사회</a> 
-                   <a href="sol_study/lectureList.do?grade=4&gwamok=과학">과학</a></p>
+                <p><a href="sol_study/lectureInfo.do?grade=4&gwamok=국어">국어</a> 
+                   <a href="sol_study/lectureInfo.do?grade=4&gwamok=수학">수학</a>  
+                   <a href="sol_study/lectureInfo.do?grade=4&gwamok=사회">사회</a> 
+                   <a href="sol_study/lectureInfo.do?grade=4&gwamok=과학">과학</a></p>
 							</div>
 							<div class="clear"></div>
 						</div>
@@ -414,10 +414,10 @@
               <i class="ico-ipad ico-color circle-color big"></i>
               <div class="icons-box-vert-info">
                 <p style="font-size: 15pt">5학년</p><br/>
-                <p><a href="sol_study/lectureList.do?grade=5&gwamok=국어">국어</a> 
-                   <a href="sol_study/lectureList.do?grade=5&gwamok=수학">수학</a>  
-                   <a href="sol_study/lectureList.do?grade=5&gwamok=사회">사회</a> 
-                   <a href="sol_study/lectureList.do?grade=5&gwamok=과학">과학</a></p>
+                <p><a href="sol_study/lectureInfo.do?grade=5&gwamok=국어">국어</a> 
+                   <a href="sol_study/lectureInfo.do?grade=5&gwamok=수학">수학</a>  
+                   <a href="sol_study/lectureInfo.do?grade=5&gwamok=사회">사회</a> 
+                   <a href="sol_study/lectureInfo.do?grade=5&gwamok=과학">과학</a></p>
               </div>
               <div class="clear"></div>
             </div>
@@ -430,10 +430,10 @@
               <i class="ico-thumbs-up  ico-white circle-color-full big-color"></i>
               <div class="icons-box-vert-info">
                 <p style="font-size: 15pt">6학년</p><br/>
-                <p><a href="sol_study/lectureList.do?grade=6&gwamok=국어">국어</a> 
-                   <a href="sol_study/lectureList.do?grade=6&gwamok=수학">수학</a>  
-                   <a href="sol_study/lectureList.do?grade=6&gwamok=사회">사회</a> 
-                   <a href="sol_study/lectureList.do?grade=6&gwamok=과학">과학</a></p>
+                <p><a href="sol_study/lectureInfo.do?grade=6&gwamok=국어">국어</a> 
+                   <a href="sol_study/lectureInfo.do?grade=6&gwamok=수학">수학</a>  
+                   <a href="sol_study/lectureInfo.do?grade=6&gwamok=사회">사회</a> 
+                   <a href="sol_study/lectureInfo.do?grade=6&gwamok=과학">과학</a></p>
               </div>
               <div class="clear"></div>
             </div>
@@ -449,19 +449,17 @@
 			<hr>
 			
 			<!-- start Clients List -->
+			   <div class="hero-unit">
+          <p> 인기 강좌 선생님!! 인기 만점 선생님들과 함께 공부해 보세요 </p>
+        </div>
 			<div class="clients-carousel">
-
-				<ul class="slides clients">
-					<li><img src="sol_img/logos/1.png" alt="" /></li>
-					<li><img src="sol_img/logos/2.png" alt="" /></li>
-					<li><img src="sol_img/logos/3.png" alt="" /></li>
-					<li><img src="sol_img/logos/4.png" alt="" /></li>
-					<li><img src="sol_img/logos/5.png" alt="" /></li>
-					<li><img src="sol_img/logos/6.png" alt="" /></li>
-					<li><img src="sol_img/logos/7.png" alt="" /></li>
-					<li><img src="sol_img/logos/8.png" alt="" /></li>
-					<li><img src="sol_img/logos/9.png" alt="" /></li>
-					<li><img src="sol_img/logos/10.png" alt="" /></li>
+				<ul class="slides clients" align="center">
+				   <c:forEach var="list" items="${list }">
+				     <c:if test="${list.avg > 3.5 }">
+					     <li><a href='sol_study/lectureInfo.do?grade=${list.grade }&gwamok=${list.gwamok }'><img src="sol_admin/player/cateStorage/${list.teacherPhoto }"/></a>
+					         <br/><br/>${list.teacherName }</li>
+					   </c:if>
+					 </c:forEach>
 				</ul>
 
 			</div>

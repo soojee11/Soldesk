@@ -7,7 +7,7 @@
 	<typeAlias alias="LectureDTO" type="kr.co.solproject.lecture.LectureDTO" />
 
 	<select id="list" parameterClass="Map" resultClass="LectureDTO">
-		SELECT lecture.lectureno, lecture.subject, lecture.poster, lecture.teacher, lecture.lecturetime
+		SELECT lecture.lectureno, lecture.subject, lecture.poster, category.teacherName, lecture.lecturetime
 		FROM sol_lecture lecture join sol_category category
 		ON lecture.categoryno = category.categoryno
 		WHERE category.grade = #grade# AND category.gwamok = #gwamok#

@@ -75,46 +75,4 @@ public class PostscriptCont {
 
 	}// end
 
-	/** 후기 수정: 후기 조회 **/
-	@RequestMapping(value = "/sol_study/read.do", method = RequestMethod.GET)
-	public void updateRead(PostscriptDTO dto, HttpServletResponse resp, HttpSession session) {
-		dto.setId((String) session.getAttribute("s_id"));
-		try {
-			dto = postDao.postRead(dto);
-			resp.setContentType("text/html; charset=UTF-8");
-			PrintWriter out = resp.getWriter();
-			out.write("SUCCESS/"+dto.getContent()+"/"+dto.getPostgrade());
-
-		} catch (Exception e) {
-			System.out.println("오류임:::"+e);
-		}
-
-	}// end
-	
-
-	/** 후기 수정 **/
-	@RequestMapping(value = "/sol_study/update.do", method = RequestMethod.POST)
-	public void updateProc(PostscriptDTO dto, CategoryDTO cdto, HttpServletResponse resp, HttpSession session) {
-		dto.setId((String) session.getAttribute("s_id"));		
-		
-		//cdto = postDao.getCategory(cdto);
-		try {						
-			//System.out.println("수정!!!!!!!!!!"+dto.toString());		
-			//dto.setCategoryno(cdto.getCategoryno());
-			int cnt = postDao.postUpdate(dto);
-			resp.setContentType("text/html; charset=UTF-8");
-			PrintWriter out = resp.getWriter();
-			if (cnt == 1) {
-				out.write("후기 수정 완료!");
-			} else {
-				out.write("후기 수정 실패! 다시 시도해 주세요.");
-			}
-
-		} catch (Exception e) {
-			System.out.println(e);
-		}
-
-	}// end
-	
-	
 }

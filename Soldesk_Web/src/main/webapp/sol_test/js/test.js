@@ -43,15 +43,40 @@ function showtime() {
 	timer2 = window.setTimeout("showtime()", 1000);
 }
 
-function killtime(frm) {
+function killtime(frm,gtotal) {
+	//alert(gtotal);
+	obj=frm.answer;
+	var cnt=0;
+	for(var i=0; i<obj.length; i++) {
+		if(obj[i].checked==true){
+			//alert(obj[i].value);
+			cnt++;
+		}
+		if(obj[i].value==''){
+			//alert(obj[i].value);
+			alert("문제를 모두 풀어야 점수확인이 가능합니다.");
+			return;
+		}
+	}
 
-	window.clearTimeout(timer);
-	window.clearTimeout(timer2);
+	if(cnt<gtotal) {
+		alert("문제를 모두 풀어야 점수확인이 가능합니다.");
+		//alert(cnt);
+		return;
+	}
 	
-	var clock=document.getElementById("clock").innerHTML;
-	frm.clock.value=clock;
+	msg = "점수확인을 하시겠습니까?";
+    if (confirm(msg)!=0) {
+    	window.clearTimeout(timer);
+    	window.clearTimeout(timer2);
+    	
+    	var clock=document.getElementById("clock").innerHTML;
+    	frm.clock.value=clock;
 
-	frm.submit();
+    	frm.submit();
+    } else {
+        return;
+	} 
 }
 
 function check_only(chk,num){

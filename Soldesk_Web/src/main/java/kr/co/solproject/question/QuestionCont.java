@@ -27,8 +27,9 @@ public class QuestionCont {
 		request.setAttribute("list", list);
 		
 		int total=dao.getQuestionTotal(testno);
+		int gtotal=dao.getG_QuestionTotal(testno);
 		request.setAttribute("recNo", total);
-		
+		request.setAttribute("gtotal", gtotal);
 		
 		
 		return "sol_test/test/questionList";
