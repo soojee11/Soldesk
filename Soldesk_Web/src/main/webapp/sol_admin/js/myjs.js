@@ -30,24 +30,16 @@ function checkForm(frm){
 
 function player_validate(frm){
 	  var subject = frm.subject.value;
-	  var posterMF = frm.posterMF.value;
 	  var filenameMF = frm.filenameMF.value;
 	  var lecturetime = frm.lecturetime.value;
 	  
 	  subject = subject.replace(/^\s*|\s*$/g, '');
 	  lecturetime = lecturetime.replace(/^\s*|\s*$/g, '');
-	  posterMF = posterMF.replace(/^\s*|\s*$/g, '');
 	  filenameMF = filenameMF.replace(/^\s*|\s*$/g, '');
 	  
 	  if(subject.length == 0){
 	    alert("제목을 입력해 주세요.");
 	    frm.subject.focus();
-	    return;
-	  }
-
-	  if(posterMF.length == 0){
-	    alert("포스터를 등록하세요");
-	    frm.posterMF.focus();
 	    return;
 	  }
 
@@ -62,10 +54,12 @@ function player_validate(frm){
 	    frm.lecturetime.focus();
 	    return;
 	  }
-	  
-	  alert("동영상을 등록 하시겠습니까? ");
-	  
-	  frm.submit();
+	  var mess="동영상을 등록 하시겠습니까? "
+	  if(confirm(mess)){ 
+		  frm.submit();
+	  }else{
+		  return;  
+	  }
 }
 
 function playCheck2(frm) {

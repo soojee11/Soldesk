@@ -39,6 +39,17 @@ function monthUp(form){
 }
 </script>
 
+
+<style type="text/css">
+        .modalfont{
+      font-family:'Jeju Gothic', sans-serif;
+      font-size:10pt;
+      color: #000;
+      font-style: italic;
+    }
+</style>
+
+
 <!-- <script type="text/javascript">
 function memoGo(now){
     str = "/solproject/sol_mypage/memoGo.do?now="+now;
@@ -94,13 +105,7 @@ function goRead(qnano,recNo,s_id){
      
      
       <select name="year" onchange="selectCheck(this.form)">
-<%--       <%
-      for(int i=year-5;i<year+6;i++){
-       String selected = (i == year)?"selected":"";
-       String color = (i == year)?"#CCCCCC":"#FFFFFF";
-         out.print("<option value="+i+" "+selected+" style=background:"+color+">"+i+"</option>");       
-      }
-      %>  --%>
+
       
       <c:forEach begin="${year -5 }" end="${year +5 }" var="val">
       <option value="${val}" ${val == year ? 'selected="selected"' : '' }> 
@@ -110,14 +115,7 @@ function goRead(qnano,recNo,s_id){
       </select>
       
       <select name="month" onchange="selectCheck(this.form)">
-<%--    <%
-      for(int j=1;j<=12;j++){
-       String selected = (j == month+1)?"selected":"";
-       String color = (j == month+1)?"#CCCCCC":"#FFFFFF";
-         out.print("<option value="+j+" "+selected+" style=background:"+color+">"+j+"</option>");       
-      
-      }
-      %> --%>
+
       
        <c:forEach begin="1" end="12" var="mth">
        <option value="${mth}" ${mth == month+1 ? 'selected="selected"' : '' }> 
@@ -149,7 +147,7 @@ function goRead(qnano,recNo,s_id){
         <c:set var="lectureno" value="${list.lectureno }" />
         <c:set var="subject" value="${list.subject }" />
         <c:set var="poster" value="${list.poster }" />
-        <c:set var="teacher" value="${list.teacher }" />
+        <c:set var="teacher" value="${list.teacherName }" />
         <c:set var="memodate" value="${list.memodate }" />
         <c:set var="memo" value="${list.memo }" />
         <c:set var="lectureno" value="${list.lectureno }" />
@@ -169,7 +167,7 @@ function goRead(qnano,recNo,s_id){
     
  <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
  
-<div align="right"> <img src="image/btn_study_play.png" width=20px height=20px/> 강의 | <img src="image/pink.png" width=20px height=28px/> 메모   |   <img src="image/test.png" width=20px height=20px/> 학습결과</div>
+<div align="right"> <img src="image/btn_study_play.png" width=20px height=20px/> 강의 | <img src="image/pink.png" width=20px height=28px/> 메모   |   <img src="image/test.png" width=20px height=20px/> 시험</div>
         
 <table width=100% cellpadding="0" cellspacing="1"
 	 border="1">
@@ -258,14 +256,7 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
  <%--      <c:forEach begin="${startDate}" end="${endDate}" var="i"> --%>
    <c:forEach begin="${startDate}" end="${42-newLine}" var="i">
        
-   <%--     
-                  <c:if test="${year eq val && month eq mth && date eq i }">
-                     <c:set var="bgcolor" value="#99cc66"/>
-                  </c:if>
-                  <c:if test="${year ne val && month ne mth}">
-                     <c:set var="bgcolor" value="#FFFFFF"/>
-                  </c:if> 
-      --%>
+  
                        <c:choose>
                              <c:when test="${nowymd eq nowregdate2  && date eq i}">
                                 <c:set var="bgcolor" value="#fcef8d"/>
@@ -280,21 +271,7 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
                         </c:choose>
                         
                         
-                        
      
-      <%--             <c:if test="${count%7 eq 0 }">
-                     <c:set var="color" value="red"/>
-                  </c:if>
-                  <c:if test="${count%7 eq 6}">
-                     <c:set var="color" value="blue"/>
-                  </c:if>
-                   <c:if test="${count%7 ne 6  &&  count%7 ne 0 }">
-                     <c:set var="color" value="black"/>
-                  </c:if> --%>
-                  
-                       <%-- <c:if test="${(count-(7-(startDay-1)))%7 eq 6}">
-                        <c:set var="color" value="blue"/>
-                       </c:if> --%>
                   
                   
                         <c:choose>
@@ -405,15 +382,27 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
     
       <!-- Lecture Modal content-->
       <span class="modal-content">
+      
+        <div align="center">
         <span class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title"><font size="7px">Lecture List</font>_${name}(${id })</h4>
+        
+       <!--  <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+          
+          <h4 class="modal-title" >
+          <font size="7px" style="color:#000 ">Lecture List</font>
+          </h4>
         </span>
+         <span class="modalfont" >·${name}(${id })·
+         </span>
+         <hr/>
+        </div>
+        
+        
         <div class="modal-body">
          
 			<table cellpadding=3 border=0 cellspacing=1 width=100% bgcolor=#dddddd class="table">
 			          <thead>
-			        <tr style="font-size: 14px; font-weight: bold;" bgcolor=#f8f8f8 align="center">
+			        <tr style="font-size: 14px; color: #000000; font-weight: bold;" bgcolor=#f8f8f8 align="center">
 			            <td >회차</td>
 			            <td>강의명</td>
 			            <td >선생님</td>
@@ -428,7 +417,7 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
 			        <c:set var="lectureno" value="${list.lectureno }" />
 			        <c:set var="subject" value="${list.subject }" />
 			        <c:set var="poster" value="${list.poster }" />
-			        <c:set var="teacher" value="${list.teacher }" />
+			        <c:set var="teacher" value="${list.teacherName }" />
 			        <c:set var="memodate" value="${list.memodate }" />
 			        <c:set var="memo" value="${list.memo }" />
 			        <c:set var="id" value="${list.id }" />
@@ -443,6 +432,7 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
            
 			        <tbody>
 			        <tr
+			        style="color: #000000;"
 			         bgcolor="#ffffff" 
 			         onmouseover="this.style.backgroundColor='#fafafa'"
 			         onmouseout="this.style.backgroundColor='#ffffff'"  style="font-size: 14px;">
@@ -463,7 +453,7 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
 
         </div>
         <div class="modal-footer">
-        <span align="right" style="font-size: 8px">*모바일에서는 가로화면을 권장합니다.</span>
+        <span align="right" style="font-size: 8px;color: #000000;">*모바일에서는 가로화면을 권장합니다.</span>
         <!--   <button type="button" class="btn btn-primary button" data-dismiss="modal">Close</button>
         -->
          <button type="button" class="btn-momodal"  data-dismiss="modal">
@@ -492,17 +482,24 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
    
       <!-- Lecture Modal content-->
       <span class="modal-content">
+       
+       <div align="center">
         <span class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title"><font size="7px">Memo List</font>_${name}(${id })</h4>
+         <!--  <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+          <h4 class="modal-title">
+          <font size="7px"  style="color:#000 ">&nbsp;Memo List</font></h4>
         </span>
+        <span class="modalfont">·${name}(${id })·</span>
+        <hr/>
+        </div>
+        
         <div class="modal-body">
          
         
           <table cellpadding=3 border=0 cellspacing=1 width=100% bgcolor=#dddddd class="table">
             
             <thead>
-                <tr align="center" bgcolor="#f8f8f8" style="font-weight: bold; font-size: 14px;">
+                <tr align="center" bgcolor="#f8f8f8" style="font-weight: bold; color: #000000; font-size: 14px;">
                     <td width="9%" >회차</td>
                     <td width="18%">강의명</td>
                     <td width="35%">메모</td>
@@ -519,7 +516,7 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
                 <c:set var="lectureno" value="${mlist.lectureno }" />
                 <c:set var="subject" value="${mlist.subject }" />
                 <c:set var="poster" value="${mlist.poster }" />
-                <c:set var="teacher" value="${mlist.teacher }" />
+                <c:set var="teacher" value="${mlist.teacherName }" />
                 
                 <c:set var="memo" value="${mlist.memo }" />
                 <c:set var="id" value="${mlist.id }" />
@@ -541,6 +538,7 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
                <c:if test="${memoyear == nowyear && memomonth==nowmonth && memodate==nowdate }">
               <tbody>
                 <tr
+                style="color: #000000;"
                  bgcolor="#ffffff" 
                  onmouseover="this.style.backgroundColor='#fafafa'"
                  onmouseout="this.style.backgroundColor='#ffffff'" style="font-size: 14px;">
@@ -581,7 +579,7 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
           
         </div>
         <div class="modal-footer">
-          <span align="right" style="font-size: 8px">*모바일에서는 가로화면을 권장합니다.</span>
+          <span align="right" style="font-size: 8px; color: #000000;">*모바일에서는 가로화면을 권장합니다.</span>
         <!--   <button type="button" class="btn btn-primary button" data-dismiss="modal">Close</button>
         -->
         <button type="button" class="btn-momodal"  data-dismiss="modal">
@@ -663,10 +661,17 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
     
       <!-- Lecture Modal content-->
       <span class="modal-content">
+      
+      <div align="center" >
         <span class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title"><font size="7px">MyStudy List</font>_${name}(${id })</h4>
+         <!--  <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+          <h4 class="modal-title">
+          <font size="7px"  style="color:#000 ">Test List</font></h4>
         </span>
+          <span class="modalfont" >·${name}(${id })·</span>
+          <hr/>
+        </div>
+        
         <div class="modal-body">
          
          
@@ -674,7 +679,7 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
 <!-- 학년/과목/과목제목/내점수/경과시간/학습한날짜  -->
 <table cellpadding=3 border=0 cellspacing=1 width=100% bgcolor=#dddddd class="table">
           <thead>
-        <tr style="font-size: 14px; font-weight: bold;" bgcolor=#f8f8f8 align="center">
+        <tr style="font-size: 14px; color: #000000; font-weight: bold;" bgcolor=#f8f8f8 align="center">
             <td >학년</td>
             <td>과목</td>
             <td >문제지</td>
@@ -705,6 +710,7 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
        <c:if test="${slistyear == nowyear && slistmonth==nowmonth && slistdate==nowdate }">
         <tbody>
         <tr
+         style="color: #000000;"
          bgcolor="#ffffff" 
          onmouseover="this.style.backgroundColor='#fafafa'"
          onmouseout="this.style.backgroundColor='#ffffff'"  style="font-size: 14px;">
@@ -753,7 +759,7 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
           
         </div>
         <div class="modal-footer">
-          <span align="right" style="font-size: 8px">*모바일에서는 가로화면을 권장합니다.</span>
+          <span align="right" style="font-size: 8px; color: #000000;">*모바일에서는 가로화면을 권장합니다.</span>
           <!-- <button type="button" class="btn btn-primary button" data-dismiss="modal">Close</button> -->
            <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
         
@@ -914,7 +920,7 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
 내가 등록한 글은 총 <strong>${total }</strong> 개 입니다.
 </div>
            
-           <table class="table"  style="background-color: #ffffff">
+           <table class="table"  style="background-color: #ffffff" style="color: #000000;">
     <tr align ="center" style="color: #000000;">
         <td>제목</td>
         <td width="100">ID</td>
@@ -940,6 +946,7 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
     
         <c:set var="recNo" value="${recNo-1 }" />
          <tr
+         style="color: #000000;"
          bgcolor="#ffffff" 
          onmouseover="this.style.backgroundColor='#f1f8f4'"
          onmouseout="this.style.backgroundColor='#ffffff'"  align="center">
@@ -979,7 +986,7 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
  내가 등록한 글은 총 <strong>${total2 }</strong> 개 입니다.
 </div>
 
-    <table class ="table" style="background-color: #ffffff">
+    <table class ="table" style="background-color: #ffffff" style="color: #000000;">
     <tr align ="center" style="color: #000000;">
         <td>제목</td>
         <td width="100">답변여부</td>
@@ -1008,6 +1015,7 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
     
     <c:set var ="recNo" value="${recNo-1 }"/>
          <tr
+         style="color: #000000;"
          bgcolor="#ffffff" 
          onmouseover="this.style.backgroundColor='#f1f8f4'"
          onmouseout="this.style.backgroundColor='#ffffff'"  align="center">

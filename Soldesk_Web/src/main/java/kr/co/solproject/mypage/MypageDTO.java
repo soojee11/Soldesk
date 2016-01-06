@@ -9,7 +9,57 @@ public class MypageDTO {
 	
 	
 	
-	//------------------------------------------------------sol_bbs
+	//------------------------------------------------------sol_category
+	private String teacherName; 	// 선생님 이름
+	private String teacherPhoto; 	// 선생님 사진
+	private String teacherCareer; 	// 선생님 이력
+	private String categoryinfo;  	// 강의 설명
+	private String bookInfo; 		// 책 정보
+	
+	
+	public String getTeacherName() {
+		return teacherName;
+	}
+
+	public void setTeacherName(String teacherName) {
+		this.teacherName = teacherName;
+	}
+
+	public String getTeacherPhoto() {
+		return teacherPhoto;
+	}
+
+	public void setTeacherPhoto(String teacherPhoto) {
+		this.teacherPhoto = teacherPhoto;
+	}
+
+	public String getTeacherCareer() {
+		return teacherCareer;
+	}
+
+	public void setTeacherCareer(String teacherCareer) {
+		this.teacherCareer = teacherCareer;
+	}
+
+	public String getCategoryinfo() {
+		return categoryinfo;
+	}
+
+	public void setCategoryinfo(String categoryinfo) {
+		this.categoryinfo = categoryinfo;
+	}
+
+	public String getBookInfo() {
+		return bookInfo;
+	}
+
+	public void setBookInfo(String bookInfo) {
+		this.bookInfo = bookInfo;
+	}
+
+
+
+		//------------------------------------------------------sol_bbs
 		  private int bbsno;
 		  private String content;
 		  private String passwd;
@@ -178,7 +228,6 @@ public class MypageDTO {
 	//------------------------------------------------------sol_lecture
     private String subject;     // 강의제목
     private String poster;		// 캡쳐화면 
-	private String teacher;		// 선생님 이름 
     
     public String getSubject() {
 		return subject;
@@ -197,14 +246,7 @@ public class MypageDTO {
 	}
 
 
-	public String getTeacher() {
-		return teacher;
-	}
-
-
-	public void setTeacher(String teacher) {
-		this.teacher = teacher;
-	}
+	
 
 	//------------------------------------------------------sol_study
     private String memo;     // memo
@@ -260,21 +302,21 @@ public class MypageDTO {
 		this.lectureno = lectureno;
 	}
 
-	
-	
-	
 	@Override
 	public String toString() {
-		return "MypageDTO [calno=" + calno + ", id=" + id + ", regdate=" + regdate + ", lectureno=" + lectureno
-				+ ", bbsno=" + bbsno + ", content=" + content + ", passwd=" + passwd + ", readcnt=" + readcnt
-				+ ", noticeshow=" + noticeshow + ", qnano=" + qnano + ", replyok=" + replyok + ", qnashow=" + qnashow
-				+ ", mytestno=" + mytestno + ", testno=" + testno + ", usetime=" + usetime + ", answerno=" + answerno
-				+ ", regdt=" + regdt + ", grade=" + grade + ", testtitle=" + testtitle + ", myscore=" + myscore
-				+ ", subject=" + subject + ", poster=" + poster + ", teacher=" + teacher + ", memo=" + memo
-				+ ", memodate=" + memodate + "] \n" ;
+		return "Calendar [calno=" + calno + ", id=" + id + ", regdate=" + regdate + ", lectureno=" + lectureno
+				+ ", teacherName=" + teacherName + ", teacherPhoto=" + teacherPhoto + ", teacherCareer=" + teacherCareer
+				+ ", categoryinfo=" + categoryinfo + ", bookInfo=" + bookInfo + ", bbsno=" + bbsno + ", content="
+				+ content + ", passwd=" + passwd + ", readcnt=" + readcnt + ", noticeshow=" + noticeshow + ", qnano="
+				+ qnano + ", replyok=" + replyok + ", qnashow=" + qnashow + ", mytestno=" + mytestno + ", testno="
+				+ testno + ", usetime=" + usetime + ", answerno=" + answerno + ", regdt=" + regdt + ", grade=" + grade
+				+ ", testtitle=" + testtitle + ", myscore=" + myscore + ", subject=" + subject + ", poster=" + poster
+				+ ", memo=" + memo + ", memodate=" + memodate + "] \n";
 	}
 
 	
+	
+
 
 	
 	
