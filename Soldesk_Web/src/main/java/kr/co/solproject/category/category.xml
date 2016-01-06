@@ -48,5 +48,12 @@
     from sol_category
     where grade=#grade# and gwamok=#gwamok#
   </select>
+  
+  <!-- Player.jsp에서 출력할 선생님 이름 가져오기 -->
+  <select id="teacher" parameterClass="Integer" resultClass="String">
+    SELECT teacherName
+    FROM sol_category
+    WHERE categoryno = #categoryno# 
+  </select>
 		
 </sqlMap>

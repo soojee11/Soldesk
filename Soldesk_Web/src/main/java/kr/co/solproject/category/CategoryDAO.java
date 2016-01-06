@@ -97,5 +97,17 @@ public class CategoryDAO {
     }
     return dto;
   }//end
+	
+  	//categoryno 으로 불러오기  
+   public String teacher(int categoryno) {
+     String teacher = "";
+     try {
+       teacher =  (String) mybatis.queryForObject("sol_category.teacher", categoryno);
+     } catch (Exception e) {
+       System.out.println("readCate error: " + e);
+     }
+     return teacher;
+   }//end
+	
 
 }

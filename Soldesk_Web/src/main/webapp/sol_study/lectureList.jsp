@@ -65,7 +65,6 @@ function postApplyResponse(data, status) { //callback함수
 <c:set var="lectureNo" value="${lectureNo }" />	
 <c:forEach var="dto" items="${list }" >
 <c:set var="lectureNo" value="${lectureNo-1 }" />
-
 	<tr align="center">
 		<td>${lectureNo }</td>
 		<td>${dto.subject }</td>
