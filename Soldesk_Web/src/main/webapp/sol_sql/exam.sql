@@ -13,7 +13,7 @@ create table sol_question(
 	qtitle VARCHAR(500) NOT NULL,			
 	qtype VARCHAR(10)	 NOT NULL,		
 	answer VARCHAR(500) NOT NULL,			
-	comment VARCHAR(600) NOT NULL,			
+	comment text NOT NULL,			
 	poster text NULL,			
 	example VARCHAR(500) NULL,			
 	qynshow VARCHAR(10)	 NOT NULL default 'Y',		
@@ -98,6 +98,7 @@ create table SOL_category(
 	teacherCareer VARCHAR(500) NOT NULL,
 	teacherPhoto VARCHAR(50) NOT NULL,
 	bookInfo TEXT NOT NULL,
+	bookPhoto  VARCHAR(50) not null,
 	primary key(categoryno)
 )ENGINE=MyISAM DEFAULT CHARSET="euckr";
 				
