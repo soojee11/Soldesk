@@ -5,7 +5,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ include file="../sol_header.jsp"%>
 
-<!--  모달관련  
+
+<!--  하나모달관련  )기존부트스랩템플릿과 이 script가 겹쳐서 에서가 났던거같다.
    <meta name="viewport" content="width=device-width, initial-scale=1">
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
@@ -326,7 +327,7 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
     <font color="${color}">
     
     
-     &nbsp;${i }) <br/>
+     &nbsp;${i } <br/>
       
    
       
@@ -962,7 +963,7 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
          <tr
          style="color: #000000;"
          bgcolor="#ffffff" 
-         onmouseover="this.style.backgroundColor='#f2ffd2'"
+         onmouseover="this.style.backgroundColor='#f8f8f8'"
          onmouseout="this.style.backgroundColor='#ffffff'"  align="center">
          <td><a href="/solproject/sol_bbs/bbsread.do?bbsno=${dto.bbsno }&nowPage=${nowPage }"  style="color: #000000;">
           
@@ -1043,7 +1044,7 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
          <tr
          style="color: #000000;"
          bgcolor="#ffffff" 
-         onmouseover="this.style.backgroundColor='#f2ffd2'"
+         onmouseover="this.style.backgroundColor='#f8f8f8'"
          onmouseout="this.style.backgroundColor='#ffffff'"  align="center">
                
                
