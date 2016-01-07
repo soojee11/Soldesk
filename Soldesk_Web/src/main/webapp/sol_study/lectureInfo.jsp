@@ -76,7 +76,7 @@
     <tr><td><div style="font-size: 18px">< 교재 설명 ></div></td></tr>
     <tr height="10px"></tr>
 		</table>
-		  <div style="border : 5px solid #99cc66; width: 98%">
+		  <div style="border : 2px solid #99cc66; width: 98%">
 				<table border="0" width="100%">
 					 <tr>
 					  <td width="30%">
