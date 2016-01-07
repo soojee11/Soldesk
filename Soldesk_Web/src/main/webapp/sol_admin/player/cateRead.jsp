@@ -37,25 +37,25 @@
 <div style="width:1000px;">
 <table class="table table-bordered">
 	<tr align="center" >
-		<td rowspan="2" width="230px"><img src="cateStorage/${dto.teacherPhoto }" width="200px" height="200px" ></td>
-		<td height="30px" width="100px">선생님 </td>
+		<td rowspan="2" width="230px" style="vertical-align:middle"><img src="cateStorage/${dto.teacherPhoto }" width="200px" height="200px" ></td>
+		<th height="30px" width="100px"><div align="center">선생님</div></th>
 		<td>${dto.teacherName }</td>
 	</tr>
 	<tr align="center" width="80%">
-		<td >선생님 이력</td>
+		<th style="vertical-align:middle"><div align="center">선생님 이력</div></th>
 		<td>${dto.teacherCareer }</td>
 	</tr>
 	<tr align="center">
-		<td>강좌설명</td>
+		<th style="vertical-align:middle"><div align="center">강좌설명</div></th>
 		<td colspan="3">${dto.categoryinfo }</td>
 	</tr>
 	<tr align="center">
-		<td>교재</td>
-		<td colspan="2">교재 정보</td>
+		<th><div align="center">교재</div></th>
+		<th colspan="2"><div align="center">교재 정보</div></th>
 		
 	</tr>
 	<tr>
-		<td><img src="cateStorage/${dto.bookPhoto }" width="200px" height="200px" ></td>
+		<td style="vertical-align:middle; align:center;"><div align="center"><img src="cateStorage/${dto.bookPhoto }" width="200px" height="200px" ></div></td>
 		<td colspan="3">${dto.bookInfo }</td>
 	</tr>
 </table>
