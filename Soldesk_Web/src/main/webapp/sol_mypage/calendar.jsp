@@ -270,7 +270,7 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
                                 
                             </c:when> 
                             <c:when test="${i gt endDate}"> <!-- 달력외부 -->
-                                <c:set var="bgcolor" value="#f2ffd2"/>
+                                <c:set var="bgcolor" value="#f8f8f8"/>
                             </c:when> 
                             <c:otherwise>
                                 <c:set var="bgcolor" value="#ffffff"/>
@@ -301,7 +301,7 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
                   
                         <c:if test="${i gt endDate }">
    
-                            <c:set var="color" value="#f2ffd2"/>
+                            <c:set var="color" value="#f8f8f8"/>
                             <c:set var="i">0</c:set> 
                             
                         </c:if> 
@@ -399,7 +399,7 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
           <font size="7px" style="color:#000 ">Lecture List</font>
           </h4>
         </span>
-         <span class="modalfont" >·<strong>${name}</strong>(${id })·
+         <span class="modalfont" >강의목록 | ${name}(<font  style="color:#89c44f;" >${id }</font>)
          </span>
          <hr/>
         </div>
@@ -496,7 +496,7 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
           <h4 class="modal-title">
           <font size="7px"  style="color:#000 ">&nbsp;Memo List</font></h4>
         </span>
-        <span class="modalfont">·<strong>${name}</strong>(${id })·</span>
+        <span class="modalfont">메모목록 | ${name}(<font  style="color:#89c44f;" >${id }</font>)</span>
         <hr/>
         </div>
         
@@ -675,7 +675,7 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
           <h4 class="modal-title">
           <font size="7px"  style="color:#000 ">Test List</font></h4>
         </span>
-          <span class="modalfont" >·<strong>${name}</strong>(${id })·</span>
+          <span class="modalfont" >시험목록 | ${name}(<font  style="color:#89c44f;" >${id }</font>)</span>
           <hr/>
         </div>
         
@@ -905,8 +905,8 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
 }
 
 .seaTabs_switch_active {
-    border-bottom: 1px solid #f2ffd2;
-    background: #f2ffd2;
+    border-bottom: 1px solid #ffefe6;
+    background: #ffefe6;
 }
 </style>
 
@@ -917,7 +917,7 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
         <div class="seaTabs_tab"><font color="#000000">Q&A</font></div>
     </div>
     <div class="seaTabs_content">
-        <div class="seaTabs_item seaTabs_content_active" style="background-color: #f2ffd2">
+        <div class="seaTabs_item seaTabs_content_active" style="background-color: #ffefe6">
 
 <!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■자유게시판■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
            
@@ -959,7 +959,7 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
          <tr
          style="color: #000000;"
          bgcolor="#ffffff" 
-         onmouseover="this.style.backgroundColor='#f2ffd2'"
+         onmouseover="this.style.backgroundColor='#ffefe6'"
          onmouseout="this.style.backgroundColor='#ffffff'"  align="center">
          <td><a href="/solproject/sol_bbs/bbsread.do?bbsno=${dto.bbsno }&nowPage=${nowPage }"  style="color: #000000;">
           
@@ -996,7 +996,7 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
 <!-- ////////////////////////////////////////////////////////////////////////////////////////// -->
 
 
-        <div class="seaTabs_item" style="background-color: #f2ffd2">
+        <div class="seaTabs_item" style="background-color: #ffefe6">
 <!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■Q&A■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
             <div>
 <%-- 총 <strong>${total2 }</strong> 개의 등록된 글이 있습니다. | 현재 페이지 : <strong>${nowPage }/${totalPage }</strong>
@@ -1040,7 +1040,7 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
          <tr
          style="color: #000000;"
          bgcolor="#ffffff" 
-         onmouseover="this.style.backgroundColor='#f2ffd2'"
+         onmouseover="this.style.backgroundColor='#ffefe6'"
          onmouseout="this.style.backgroundColor='#ffffff'"  align="center">
                
                
