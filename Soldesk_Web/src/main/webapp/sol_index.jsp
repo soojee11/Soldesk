@@ -164,7 +164,7 @@
 				<div class="logo span3">
 
 					<a class="brand" href="sol_index.do"><img
-						src="sol_img/logo.png" alt="Logo"></a>
+						src="sol_img/logo1.png" alt="Logo" ></a>
 
 				</div>
 				<!--end: Logo -->

@@ -106,36 +106,39 @@
 	}//end
 		
 </script>
-<br/><br/>
+<br/><br/><br/>
 <div class="title" style="text-align: center">
- <div class="h3">회원 가입</div>
+ <div class="h3">< 회원정보입력 <font style="font-size:10pt; ">(<font color="#64b438">*</font>필수 입력)</font> > </div>
+ 
+ 
+ <br/><br/>
 <form name="joinForm" 
       method="post"
       action="join.do"><!--name=> register form -->
-<br/><div style="text-align:center;" class="must">(*필수 입력)</div>
+<!-- <br/><div style="text-align:center;" class="must">(*필수 입력)</div> -->
 
 <table align="center" border="0" >
 <tr align="left"> 
-  <th width="100px">아이디*</th>
+  <th width="100px"><font color="#64b438">*</font>아이디</th>
   <td> 
      <input type="text" name="id" size="15" readonly="readonly" style="background-color:#f7f4f5;" >
      &nbsp;&nbsp;&nbsp;&nbsp;<input  type="button" value="ID중복확인" class="btn btn-primary button"  onclick="idCheck()">
   </td>
 </tr>
 <tr align="left"> 
-  <th>비밀번호*</th>
+  <th><font color="#64b438">*</font>비밀번호</th>
   <td> <input type="password" name="passwd" size="15" style="background-color:#f7f4f5;">
 </tr>
 <tr  align="left" > 
-  <th>비밀번호 확인*</th>
+  <th><font color="#64b438">*</font>비밀번호 확인</th>
   <td> <input type="password" name="repasswd" size="15" style="background-color:#f7f4f5;" >
 </tr>
 <tr  align="left" > 
-  <th >이름*</th>
+  <th ><font color="#64b438">*</font>이름</th>
   <td> <input type="text" name="name" size="15" style="background-color:#f7f4f5;">
 </tr>	
 <tr align="left" > 
-  <th>이메일*</th>
+  <th><font color="#64b438">*</font>이메일</th>
   <td>
       <input type="text" name="email" size="27" readonly="readonly" style="background-color:#f7f4f5;">
        &nbsp;&nbsp;&nbsp;&nbsp;<input  type="button" value="Email중복확인" class="btn btn-primary button" 
@@ -157,7 +160,7 @@
   </td>
 </tr>
 <tr align="left" >  
-  <th >주소</th>
+  <th >기본주소</th>
   <td><input type="text" name="address1" size="30" readonly="readonly" style="background-color:#f7f4f5;"></td>
 </tr>
 <tr align="left" >  
@@ -166,9 +169,11 @@
 </tr>
 <tr align="left" >  
   <th >한줄다짐</th>
-  <td><input type="text" name="promise" size="30" value="fighting!" style="background-color:#f7f4f5;"></td>
+  <td><input type="text" name="promise" size="30" value="화이팅!" style="background-color:#f7f4f5;"></td>
 </tr>
 </table>
+
+
 <br/>
 <div style="text-align: center">
   <input  type="button" class="btn btn-primary button"  value="가입하기"
@@ -177,7 +182,7 @@
  
 </div>	
 </form>	
- <form method='get'>
+<!--  <form method='get'>
       <input type="button" class="btn btn-primary button"  value="홈으로" onclick="move(this.form, '../sol_index.do') " /> 
         <script>
 					function move(frm, file) {
@@ -185,7 +190,11 @@
 						frm.submit();
 					}
 				</script>
-    </form> 
+    </form>  
+-->
 
 </div>
+
+<br/><br/><br/>
+
 <%@ include file="../sol_footer.jsp" %>

@@ -44,7 +44,7 @@
 	border-width: 1px 1px 1px 0;
 	border-style: solid;
 	border-color: #ccc;
-	background: #eaeaea;
+	background: #fff;
 }
 
 .seaTabs_tab:first-child {
@@ -67,8 +67,8 @@
 }
 
 .seaTabs_switch_active {
-	border-bottom: 1px solid #fff;
-	background: #fff;
+	border-bottom: 1px solid #ffefe6;
+	background: #ffefe6;
 }
 </style>
 
@@ -168,14 +168,14 @@
 </script>
 
 <br />
-<Br />
+<Br /><Br />
 <div class="seaTabs" >
 	<div class="seaTabs_switch">
-		<div class="seaTabs_tab seaTabs_switch_active">아이디찾기</div>
-		<div class="seaTabs_tab">비밀번호찾기</div>
+		<div class="seaTabs_tab seaTabs_switch_active"><font color="#000">아이디찾기</font></div>
+		<div class="seaTabs_tab"><font color="#000">비밀번호찾기</font></div>
 	</div>
 	<div class="seaTabs_content">
-		<div class="seaTabs_item seaTabs_content_active">
+		<div class="seaTabs_item seaTabs_content_active" style="background-color: #ffefe6">
 
 			<form name="findidfrm" method="post" action="findidform.do">
 				<input type="hidden" name="from" value="soldesk" />
@@ -184,44 +184,44 @@
 					<tr>
 						<td width="100px" height="20px" align="right">이름</td>
 						<td align="left" valign="middle">&nbsp; <input type="text"
-							name="name" style="width: 180px; background-color: #f7f4f5;" />
+							name="name" style="width: 180px; background-color: #ffffff;" />
 						</td>
 					</tr>
 					<tr>
 						<td width="90px" height="20px" align="right">이메일</td>
 						<td align="left" valign="middle">&nbsp; <input type="text"
-							name="email" style="width: 180px; background-color: #f7f4f5;" />
+							name="email" style="width: 180px; background-color: #ffffff;" />
 						</td>
 					</tr>
 				</table>
 				<br />
 				<div align="center">
-					<input class="btn btn-primary" type="button" value="아이디찾기"
+					<input class="btn btn-warning button" type="button" value="아이디찾기"
 						onclick="forgetidcheck(this.form)">
 				</div>
 			</form>
 		</div>
 
-		<div class="seaTabs_item">
+		<div class="seaTabs_item" style="background-color: #ffefe6">
 			<form name="findpwfrm" method="post" action="findpwform.do">
 				<input type="hidden" name="from" value="soldesk" />
 				<table border="0" align="center">
 					<tr>
 						<td width="100px" height="20px" align="right">아이디</td>
 						<td align="left" valign="middle">&nbsp; <input type="text"
-							name="id" style="width: 180px; background-color: #f7f4f5;" />
+							name="id" style="width: 180px; background-color: #ffffff;" />
 						</td>
 					</tr>
 					<tr>
 						<td width="90px" height="20px" align="right">이메일</td>
 						<td align="left" valign="middle">&nbsp; <input type="text"
-							name="email" style="width: 180px; background-color: #f7f4f5;" />
+							name="email" style="width: 180px; background-color: #ffffff;" />
 						</td>
 					</tr>
 				</table>
 				<br />
 				<div align="center">
-					<input class="btn btn-primary" type="button" value="비밀번호찾기"
+					<input class="btn btn-warning button" type="button" value="비밀번호찾기"
 						onclick="forgetpwcheck(this.form)">
 				</div>
 			</form>

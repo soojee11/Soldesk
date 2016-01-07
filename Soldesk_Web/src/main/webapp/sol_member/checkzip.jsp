@@ -80,7 +80,7 @@
 		         <td>${dto.sido } ${dto.gugun } ${dto.dong } ${dto.li } ${dto.bunji } ${dto.etc }&nbsp;</td> 
 		                      
 		         <td align = "right">
-		         <input type='button'  class="button white"  value='선택' 
+		         <input type='button'  class="btn btn-primary" value='선택' 
 		         onclick="applyzip('${dto.zipcode }','${dto.sido } ${dto.gugun } ${dto.dong } ${dto.li } ${dto.bunji } ${dto.etc }')" />
 		        </td> 
 		        
