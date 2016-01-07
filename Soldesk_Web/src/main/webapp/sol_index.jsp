@@ -59,7 +59,7 @@
 
 <!-- start: Meta -->
 <meta charset="utf-8">
-<title>SOLPROJECT</title>
+<title>공부의 신(초등)</title>
 <meta name="description" content="GotYa Free Bootstrap Theme" />
 <meta name="keywords"
 	content="Template, Theme, web, html5, css3, Bootstrap" />
@@ -164,7 +164,7 @@
 				<div class="logo span3">
 
 					<a class="brand" href="sol_index.do"><img
-						src="sol_img/logo1.png" alt="Logo" ></a>
+						src="sol_img/slogo.png" alt="Logo" height="64px" style="max-height:64px"></a>
 
 				</div>
 				<!--end: Logo -->
@@ -661,7 +661,7 @@
 			    var x = (sx / 2) - 600;
 			    var y = (sy / 2) - 350;
 			    
-			    var win = window.open("http://localhost:9090/solproject/sol_admin/login.do", "", "width=1200, height=700");
+			    var win = window.open("http://172.16.6.175:9090/solproject/sol_admin/login.do", "", "width=1200, height=700");
 			    win.moveTo(x, y);//화면이동
 			 }//end
 			</script>

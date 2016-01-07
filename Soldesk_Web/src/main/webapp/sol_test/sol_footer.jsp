@@ -23,7 +23,7 @@
 			    var x = (sx / 2) - 600;
 			    var y = (sy / 2) - 350;
 			    
-			    var win = window.open("http://localhost:9090/solproject/sol_admin/login.do", "", "width=1200, height=700");
+			    var win = window.open("http://172.16.6.175:9090/solproject/sol_admin/login.do", "", "width=1200, height=700");
 			    win.moveTo(x, y);//화면이동
 			 }//end
 			</script>

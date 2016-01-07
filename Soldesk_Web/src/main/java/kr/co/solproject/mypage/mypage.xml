@@ -84,7 +84,7 @@
 		ON calendar.lectureno =
 		study.lectureno
 		where calendar.id=study.id
-		
+
 	</select>
 
 	<!-- SELECT t1.col, t3.col FROM table1 join table2 ON table1.primarykey 
@@ -93,16 +93,18 @@
 	<select id="getLectureList" resultClass="MypageDTO">
 		SELECT
 		lecture.lectureno,
-		lecture.subject,lecture.poster,category.teacherName ,calendar.regdate,calendar.id,study.memo,study.memodate
-		FROM sol_calendar calendar join sol_study study
+		lecture.subject,lecture.poster,category.teacherName
+		,calendar.regdate,calendar.id,study.memo,study.memodate
+		FROM
+		sol_calendar calendar join sol_study study
 		ON calendar.lectureno =
 		study.lectureno
 		join sol_lecture lecture on study.lectureno =
 		lecture.lectureno
 		join sol_category category on lecture.categoryno =
-        category.categoryno
+		category.categoryno
 		where calendar.id=study.id
-		 order by calendar.regdate desc
+		order by calendar.regdate desc
 	</select>
 
 
@@ -128,10 +130,12 @@
 		resultClass="MypageDTO">
 		select calendar.id,myscore.regdt
 
-		FROM sol_calendar calendar join sol_myscore myscore
+		FROM sol_calendar calendar
+		join sol_myscore myscore
 		ON calendar.id = myscore.id
 
-		where calendar.id=#id#
+		where
+		calendar.id=#id#
 		group by left(myscore.regdt,10);
 	</select>
 
@@ -146,59 +150,55 @@
 		myscore.mytestno ,myscore.id ,myscore.testno , myscore.myscore ,
 		myscore.usetime ,myscore.answerno ,myscore.regdt ,
 		test.grade,test.subject,test.testtitle,myscore.mytestno
-		FROM sol_calendar calendar join sol_myscore myscore
-		ON calendar.id = myscore.id
+		FROM
+		sol_calendar calendar join sol_myscore myscore
+		ON calendar.id =
+		myscore.id
 		join sol_test test on myscore.testno = test.testno
-		group by myscore.mytestno
-		 order by myscore.regdt desc
+		group by
+		myscore.mytestno
+		order by myscore.regdt desc
 	</select>
 
 
 
 
-    <!-- SELECT t1.col, t3.col FROM table1 join table2 ON table1.primarykey 
-        = table2.foreignkey join table3 ON table2.primarykey = table3.foreignkey -->
+	<!-- SELECT t1.col, t3.col FROM table1 join table2 ON table1.primarykey 
+		= table2.foreignkey join table3 ON table2.primarykey = table3.foreignkey -->
 
-<!-- 	<select id="getbbslist" resultClass="MypageDTO" parameterClass="String">  자유게시판
-            select bbs.bbsno,bbs.subject,bbs.content,bbs.passwd,bbs.regdt,bbs.readcnt,bbs.noticeshow,calendar.id
-            FROM sol_calendar calendar join sol_bbs bbs
-            ON calendar.id = #id#
-            group by bbs.bbsno
-            limit #sno# , #numPerPage#
+	<!-- <select id="getbbslist" resultClass="MypageDTO" parameterClass="String"> 
+		자유게시판 select bbs.bbsno,bbs.subject,bbs.content,bbs.passwd,bbs.regdt,bbs.readcnt,bbs.noticeshow,calendar.id 
+		FROM sol_calendar calendar join sol_bbs bbs ON calendar.id = #id# group by 
+		bbs.bbsno limit #sno# , #numPerPage# </select> -->
 
+
+	<select id="getbbslist" parameterClass="Map" resultClass="MypageDTO">
+		select
+		bbs.bbsno,bbs.subject,bbs.content,bbs.passwd,bbs.regdt,bbs.readcnt,bbs.noticeshow
+		FROM sol_bbs bbs
+		where bbs.passwd=#id#
+		order by bbs.bbsno desc
+		limit #sno#, #numPerPage#
 	</select>
- -->
- 
- 
-  <select id="getbbslist" parameterClass="Map" resultClass="MypageDTO">
-        select bbs.bbsno,bbs.subject,bbs.content,bbs.passwd,bbs.regdt,bbs.readcnt,bbs.noticeshow,calendar.id
-            FROM sol_calendar calendar join sol_bbs bbs
-            ON bbs.passwd = #id#
-          
-         group by bbs.bbsno
-         order by bbs.bbsno desc
-        limit #sno#, #numPerPage#
-    </select>
-    
-    
-	<select id="getqnalist"  parameterClass="Map"  resultClass="MypageDTO">  <!-- qna게시판 -->
 
-           select qna.qnano,calendar.id,qna.subject,qna.passwd,qna.readcnt,qna.regdt,qna.replyok,qna.qnashow,qna.content
-            FROM sol_calendar calendar join sol_qna qna 
-            ON qna.id = #id#
-            group by qna.qnano
-            order by  qna.qnano desc
-             limit #sno#, #numPerPage#
+
+	<select id="getqnalist" parameterClass="Map" resultClass="MypageDTO">  <!-- qna게시판 -->
+		select
+		qna.qnano,qna.subject,qna.passwd,qna.readcnt,qna.regdt,qna.replyok,qna.qnashow,qna.content
+		FROM sol_qna qna
+		where qna.id = #id#
+		order by qna.qnano desc
+		limit #sno#, #numPerPage#
 	</select>
-	
-	  <select id="total" resultClass="Integer" parameterClass="String" >
-      select count(*) from sol_bbs where passwd = #id#
-  </select>
-  
-	     <select id="total2" resultClass="Integer"  parameterClass="String"> 
-      select count(*) from sol_qna where id = #id#
-  </select>
-    
-	
+
+	<select id="total" resultClass="Integer" parameterClass="String">
+		select count(*) from sol_bbs where passwd = #id#
+	</select>
+
+	<select id="total2" resultClass="Integer" parameterClass="String">
+		select count(*) from sol_qna where id = #id#
+	</select>
+
+
 
 </sqlMap> 

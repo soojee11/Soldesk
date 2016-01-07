@@ -89,7 +89,7 @@ CREATE TABLE sol_lectureqna(
 	constraint fkfkfk_categoryno foreign key ( categoryno ) REFERENCES  sol_category ( categoryno ) on delete cascade
 );
 
-create table SOL_category(
+create table sol_category(
 	categoryno INT NOT NULL auto_increment,
 	grade TINYINT NOT NULL,
 	gwamok VARCHAR(200) NOT NULL,
@@ -128,8 +128,8 @@ CREATE TABLE sol_calendar(
 	calno           int(11)        NOT NULL  auto_increment primary key,			
 	id              varchar(10)    NOT NULL,       			
 	lectureno       int(11)        NOT NULL,			
-	regdate         datetime       NOT NULL,
-);		
+	regdate         datetime       NOT NULL
+);
 
 CREATE TABLE sol_member(			
 	id          varchar(10)    NOT NULL primary key ,			
