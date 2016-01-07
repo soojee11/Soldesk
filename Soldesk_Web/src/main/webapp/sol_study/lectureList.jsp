@@ -243,7 +243,8 @@ function qnaReadResponse(data,status){
   	document.getElementById("subject").innerHTML=result[0];
   	document.getElementById("readid").innerHTML=result[1];
   	document.getElementById("regdate").innerHTML=result[2];
-  	document.getElementById("content").innerHTML=result[3];
+  	contentResult=result[3].replace(/\r\n|\r|\n/g,"<br />")
+  	document.getElementById("content").innerHTML=contentResult;
   	document.getElementById("readcnt").innerHTML=result[4];
   	//document.qnaReadForm.updateid.value=result[1];
   	if(result[5]=="true"){
