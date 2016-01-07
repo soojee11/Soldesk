@@ -47,12 +47,12 @@
 		</td>
 	</tr>
 	<tr align="center" >
-		<td  valign="bottom">파일크기</td>
-		<td  valign="middle">${dto.filesize }</td>
+		<th style="vertical-align:middle"><div align="center">파일크기</div></th>
+		<td style="vertical-align:middle"><div align="center">${dto.filesize }</div></td>
 	</tr>
 	<tr align="center">
-		<td  valign="middle">강의시간(분)</td>
-		<td  valign="middle">${dto.lecturetime }</td>
+		<th style="vertical-align:middle"><div align="center">강의시간(분)</div></th>
+		<td style="vertical-align:middle"><div align="center">${dto.lecturetime }</div></td>
 	</tr>
 </table>
 </div>
