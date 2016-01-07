@@ -48,13 +48,13 @@ public class QnaCont {
 		String col1=null;
 		if(request.getParameter("col1")!="") {
 			col1=request.getParameter("col1");
-			System.out.println("컬럼: "+col1);
+			//System.out.println("컬럼: "+col1);
 		}
 		
 		String col2=null;
 		if(request.getParameter("col2")!="") {
 			col2=request.getParameter("col2");
-			System.out.println("컬럼: "+col2);
+			//System.out.println("컬럼: "+col2);
 		}
 
 		if(request.getParameter("nowPage")!=null) {
