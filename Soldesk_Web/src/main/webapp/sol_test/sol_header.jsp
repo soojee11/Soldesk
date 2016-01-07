@@ -22,7 +22,7 @@
 <!-- 한글 웹 폰트 적용 끝 -->
 <!-- start: Meta -->
 <meta charset="utf-8">
-<title>SOLPROJECT</title>
+<title>공부의 신(초등)</title>
 <meta name="description" content="GotYa Free Bootstrap Theme" />
 <meta name="keywords"
 	content="Template, Theme, web, html5, css3, Bootstrap" />
@@ -124,7 +124,7 @@
 				<div class="logo span3">
 
 					<a class="brand" href="../../sol_index.do"><img
-						src="../../sol_img/logo.png" alt="Logo"></a>
+						src="../../sol_img/slogo.png" alt="Logo" height="64px" style="max-height:64px"></a>
 
 				</div>
 				<!--end: Logo -->
