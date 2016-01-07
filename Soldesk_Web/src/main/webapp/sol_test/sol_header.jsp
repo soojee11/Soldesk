@@ -205,7 +205,7 @@
                     <input type="checkbox" name="c_id" value="SAVE"
                       <%if (!c_id.isEmpty()) {
                           out.print("checked");
-                        }%> />ID저장 ${whichPage }
+                        }%> />ID저장<%--  ${whichPage } --%>
                     <input type="button" name="login" class="btn btn-primary button"
                       value="로그인" onclick="check1(this.form, '../../sol_member/login.do')" />
                     <button type="submit" class="btn btn-primary button" onclick="joinagree(this.form,'../../sol_member/joinagree.do')">회원가입</button>

@@ -49,6 +49,12 @@
  	 	DELETE FROM sol_lectureqna
  	 	WHERE lectureqnano = #lectureqnano#
  	</delete>
+ 	
+ 	<update id ="qnaUpdate"  parameterClass="LectureQnADTO">
+		UPDATE sol_lectureqna
+		SET subject = #subject#, content = #content#
+		WHERE lectureqnano = #lectureqnano#
+	</update>
  	 	
 
 </sqlMap>
