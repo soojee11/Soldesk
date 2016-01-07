@@ -5,14 +5,17 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ include file="../sol_header.jsp"%>
 
+<!--  모달관련  
    <meta name="viewport" content="width=device-width, initial-scale=1">
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
    <script src="http://code.jquery.com/jquery-latest.js"></script>
-   <script src="js/bootstrap.min.js"></script> 
+   <script src="../sol_js/bootstrap.min.js"></script>  
+-->
 
-<!--  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
- -->
+<!--  
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+-->
 
 
 <script type="text/javascript">
@@ -607,7 +610,7 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
 
             
             
-    <!-- ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●//강의모달●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●● --> 
+    <!-- ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●////강의모달●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●● --> 
              
              
 <%--              <a href="javascript:videoGo(${now })">
@@ -959,7 +962,7 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
          <tr
          style="color: #000000;"
          bgcolor="#ffffff" 
-         onmouseover="this.style.backgroundColor='#ffefe6'"
+         onmouseover="this.style.backgroundColor='#f2ffd2'"
          onmouseout="this.style.backgroundColor='#ffffff'"  align="center">
          <td><a href="/solproject/sol_bbs/bbsread.do?bbsno=${dto.bbsno }&nowPage=${nowPage }"  style="color: #000000;">
           
@@ -989,7 +992,7 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
     ${paging }
 </div> --%>
                      
- <!-- ■■■■■■■■■■■■■■■■■■■■■//■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
+ <!-- ■■■■■■■■■■■■■■■■■■■■■//자유게시판■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
         </div>
 
 
@@ -997,7 +1000,7 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
 
 
         <div class="seaTabs_item" style="background-color: #ffefe6">
-<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■Q&A■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
+<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■Q&A■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
             <div>
 <%-- 총 <strong>${total2 }</strong> 개의 등록된 글이 있습니다. | 현재 페이지 : <strong>${nowPage }/${totalPage }</strong>
  --%> 
@@ -1040,7 +1043,7 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
          <tr
          style="color: #000000;"
          bgcolor="#ffffff" 
-         onmouseover="this.style.backgroundColor='#ffefe6'"
+         onmouseover="this.style.backgroundColor='#f2ffd2'"
          onmouseout="this.style.backgroundColor='#ffffff'"  align="center">
                
                
@@ -1078,7 +1081,7 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
             <div align="center">
     ${paging2 }
 </div> --%>
- <!-- ■■■■■■■■■■■■■■■■■■■■■//■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
+ <!-- ■■■■■■■■■■■■■■■■■■■■■//Q&A■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
         </div>
     </div>
 </div>
@@ -1106,7 +1109,7 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
 
 
 
-
+<!-- 끄읕~  -->
 
 
 
