@@ -13,8 +13,8 @@
 <div>
 <table>
 <tr>
-<td><span style="color: #FF3336;font-size: 18px;"><strong>EBS가 추천하는</strong></span> 필수 문제지!<br />
-<span style="color: #909090;font-size: 15px;">문제은행의 문항을 EBS가 랜덤 추출하여 제공하는<br />
+<td><span style="color: #FF3336;font-size: 18px;"><strong>공부의 신이 추천하는</strong></span> 필수 문제지!<br />
+<span style="color: #909090;font-size: 15px;">문제은행의 문항을 공부의 신이 랜덤 추출하여 제공하는<br />
 문제지를 풀어보고 다른 친구들에 비해 취약 분류를 확인해 보세요</span></td>
 <td>&nbsp;&nbsp;&nbsp;<img src="../img/testImg.PNG" /></td>
 </tr>

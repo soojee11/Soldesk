@@ -55,20 +55,19 @@ function postApplyResponse(data, status) { //callback함수
 <table class="table">
 	<tr align="center" >
 		<th>회차</th>
-		<th >강의명</th>
 		<th>강의</th>
+		<th>강의명</th>
 		<th>강의시간</th>
 		<th>선생님</th>
 		<th>학습하기</th>
 	</tr>
-
 <c:set var="lectureNo" value="${lectureNo }" />	
 <c:forEach var="dto" items="${list }" >
 <c:set var="lectureNo" value="${lectureNo-1 }" />
 	<tr align="center">
 		<td>${lectureNo }</td>
+		<td><img src='../sol_admin/player/storage/${dto.poster }' width="100px"></td>
 		<td>${dto.subject }</td>
-		<td>${dto.poster }</td>
 		<td>${dto.lecturetime }분</td>
 		<td>${dto.teacherName }</td>
 		<td align="center">
@@ -85,11 +84,9 @@ function postApplyResponse(data, status) { //callback함수
 		</td>
 	</tr>
 </c:forEach>
-
 	<tr>
-		<td colspan="5"><div align="center">${paging }</div></td>
+		<td colspan="6"><div align="center">${paging }</div></td>
 	</tr>
-
 </table>
 </div>
 </c:if>

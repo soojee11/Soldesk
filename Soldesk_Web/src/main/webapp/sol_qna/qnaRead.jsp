@@ -63,7 +63,7 @@ function deletePrcoResponse(data,status){
 
 function updateReply(replyno,qnano){
 	$("#replyno").val(replyno);
-	
+	alert("들어왓다");
 	$.ajax({
 		cache:false,
 		type: "get",	//요청방식
