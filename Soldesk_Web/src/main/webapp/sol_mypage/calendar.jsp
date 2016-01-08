@@ -351,6 +351,8 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
    
    <c:set var="regdate" value="${fn:substring(rdt.regdate, 0 ,10) }" />
    
+   
+   
    <c:if test="${parsemonth <10 && parsedate <10 }">
    <c:set var="now" value="${parseyear }00${parsemonth }00${parsedate }"/>
    </c:if>
@@ -366,11 +368,11 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
    
 
          <c:if test="${rdt_id == id }">
-            <c:if test="${lecturelist != null}">
-            <c:if test="${ii == parsedate && iy == parseyear && im == parsemonth}">
-                
-           
+            <c:if test="${lecturelist ne null}">
             
+          <c:if test="${ii == parsedate && iy == parseyear && im == parsemonth}">
+            
+          
            
                  
   <!-- ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●강의모달●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●● --> 
@@ -389,8 +391,16 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
 
 
   <span class="modal fade" id="${now }lecture" role="dialog"  >
+   
+   
+   
+     <span align="left">
+          <img src="image/slogo3.png" alt="Logo" height="29px" style="max-height:29px">
+        </span> 
+   
     <span class="modal-dialog">
-    
+   
+        
       <!-- Lecture Modal content-->
       <span class="modal-content">
       
@@ -398,6 +408,8 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
         <span class="modal-header">
         
        <!--  <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+      
+          
           
           <h4 class="modal-title" >
           <font size="7px" style="color:#000 ">Lecture List</font>
@@ -464,7 +476,11 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
 
         </div>
         <div class="modal-footer">
-        <span align="right" style="font-size: 8px;color: #000000;">*모바일에서는 가로화면을 권장합니다.</span>
+        <span align="right" style="font-size: 8px;color: #000000;">
+        
+       
+        
+        *모바일에서는 가로화면을 권장합니다.</span>
         <!--   <button type="button" class="btn btn-primary button" data-dismiss="modal">Close</button>
         -->
          <button type="button" class="btn-momodal"  data-dismiss="modal">
@@ -487,6 +503,12 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
 
 
   <span class="modal fade" id="${now }memo" role="dialog">
+  
+  
+    <span align="left">
+          <img src="image/slogo3.png" alt="Logo" height="29px" style="max-height:29px">
+        </span> 
+  
     <span class="modal-dialog">
     
     
@@ -620,6 +642,10 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
                 <a href="javascript:memoGo(${now })">
                 <img src="image/pink.png" width=20px height=28px/></a> <!-- 메모리스트 -->
               --%>
+              
+              
+              
+              
            </c:if>
            </c:if>
           </c:if>
@@ -670,6 +696,12 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
 </span>
 
   <span class="modal fade" id="${now }study" role="dialog" >
+  
+    <span align="left">
+          <img src="image/slogo3.png" alt="Logo" height="29px" style="max-height:29px">
+        </span> 
+  
+  
     <span class="modal-dialog">
     
       <!-- Lecture Modal content-->
