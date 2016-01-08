@@ -383,8 +383,8 @@ public class UploadSaveManager extends HttpServletRequestWrapper {
         // file size
         long fileSize = multipartFile.getSize();
 
-        System.out.println("fileSize: " + fileSize);
-        System.out.println("originalFileName: " + originalFileName);
+        //System.out.println("fileSize: " + fileSize);
+        //System.out.println("originalFileName: " + originalFileName);
 
 	      InputStream inputStream = null;
         OutputStream outputStream = null;
@@ -413,8 +413,8 @@ public class UploadSaveManager extends HttpServletRequestWrapper {
                 //make server full path to save
                 String serverFullPath = basePath + "/" + fileName;
 
-                System.out.println("fileName: " + fileName);
-                System.out.println("serverFullPath: " + serverFullPath);
+               //System.out.println("fileName: " + fileName);
+               //System.out.println("serverFullPath: " + serverFullPath);
 
                 outputStream = new FileOutputStream( serverFullPath );
 

@@ -52,7 +52,7 @@
 		<th width="100">응시</th>
 	</tr>
 	
-<c:set var="recNo" value="${recNo+1 }" />
+<c:set var="recNo" value="${recNo+3 }" />
 <c:forEach var="dto" items="${list }" >
 <c:if test="${dto.testshow eq 'Y' }">
 <c:set var="recNo" value="${recNo-1 }" />

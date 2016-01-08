@@ -104,28 +104,12 @@ public class AdminCont {
 		int numPerPage = 5; // 페이지당 레코드 수
 
 		int recNo = 1; // 게시판 목록에 출력될 글 번호
-
-		String col1 = null;// null이면 <dynamic prepend="where">가 적용안됨
-		if (request.getParameter("col1") != "") {
-			col1 = request.getParameter("col1");
-			// System.out.println("학년: "+col1);
-		}
-
-		String col2 = null;
-		if (request.getParameter("col2") != "") {
-			col2 = request.getParameter("col2");
-			// System.out.println("과목: "+col2);
-		}
-
-		// 현재 페이지의 정보를 가져옴
-		if (request.getParameter("nowPage") != null) {
-			nowPage = Integer.parseInt(request.getParameter("nowPage"));
-		}
-
-		// int sno=((nowPage-1)*numPerPage)+1; //(0*5)+1=1,6,11
 		int sno = ((nowPage - 1) * numPerPage);
-		// int eno=nowPage*numPerPage;//1*5=5,10,15
-
+		
+		String paging;
+		String col1 = null;// null이면 <dynamic prepend="where">가 적용안됨
+		String col2 = null;
+		
 		Map map = new HashMap();
 		map.put("col1", col1);
 		map.put("col2", col2);
@@ -136,7 +120,28 @@ public class AdminCont {
 		String dbean = Utility.getDate();
 		int total = dao.testTotal(map);
 
-		String paging = Paging.paging(total, nowPage, numPerPage, col1, col2, url);
+
+		paging= Paging.paging55(total, nowPage, numPerPage,url);
+		
+		// 현재 페이지의 정보를 가져옴
+		if (request.getParameter("nowPage") != null) {
+			nowPage = Integer.parseInt(request.getParameter("nowPage"));
+		}
+		paging = Paging.paging55(total, nowPage, numPerPage, url);
+
+		if (request.getParameter("col1") != null) {
+			col1 = request.getParameter("col1");
+			//System.out.println("학년: " + col1);
+			col2 = Utility.checkNull(col2);
+			paging = Paging.paging(total, nowPage, numPerPage, col1, col2, url);
+		}
+		if (request.getParameter("col2") != null) {
+			col2 = request.getParameter("col2");
+			//System.out.println("과목: " + col2);
+			col1 = Utility.checkNull(col1);
+			paging = Paging.paging(total, nowPage, numPerPage, col1, col2, url);
+		}
+		
 
 		recNo = total - (nowPage - 1) * numPerPage;
 
