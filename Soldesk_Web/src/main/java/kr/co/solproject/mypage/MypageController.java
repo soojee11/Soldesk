@@ -78,7 +78,9 @@ public class MypageController {
 		//System.out.println("1"+memolist);
 		
 		List lecturelist=dao.getLectureList();//sol_lecture와 조인해서 강의제목을 가져오자
-		//System.out.println("1"+lecturelist);
+		System.out.println("1"+lecturelist);
+		
+		
 		
 		List maxrdtlist=dao.getMaxrdtList(s_id);//각 날짜마다 max(regdate)가져오기
 		//System.out.println("1"+maxrdtlist);

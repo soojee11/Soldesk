@@ -141,6 +141,7 @@
 		
 		select myscore.id, myscore.regdt
         FROM sol_myscore myscore
+        
         where myscore.id =#id#
         group by left(myscore.regdt,10);
 		
@@ -150,11 +151,31 @@
 
 
 <select id="myscorelist2" parameterClass="String" resultClass="MypageDTO">  <!-- myscore list -->
-       select myscore.mytestno, myscore.id, myscore.testno, myscore.id, myscore.usetime,
+     
+     
+<!--        select myscore.mytestno, myscore.id, myscore.testno, myscore.id, myscore.usetime,
        myscore.answerno, myscore.regdt,  myscore.myscore
        from sol_myscore myscore
        where myscore.id =#id#
        group by myscore.mytestno
+        -->
+       
+       SELECT
+        myscore.mytestno ,myscore.id ,myscore.testno , myscore.myscore ,
+        myscore.usetime ,myscore.answerno ,myscore.regdt ,
+        test.grade,test.subject,test.testtitle,myscore.mytestno
+        
+        FROM sol_myscore myscore
+         
+         
+        join sol_test test 
+        on myscore.testno = test.testno
+       
+       where myscore.id =#id#
+         group by myscore.mytestno
+        order by myscore.regdt desc
+       
+       
     </select>
 
 

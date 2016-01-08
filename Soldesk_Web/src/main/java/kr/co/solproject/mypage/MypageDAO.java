@@ -225,7 +225,7 @@ public class MypageDAO {
 		List list = null;
 		try {
 			list = mybatis.queryForList("sol_calendar.myscorelist2",id);
-			
+			//System.out.println("myscorelist2: " +list);
 		} catch (Exception e) {
 			System.out.println("myscorelist2: " + e);
 		}

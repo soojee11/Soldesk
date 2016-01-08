@@ -703,7 +703,7 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
         </thead>
         
     <c:forEach var="slist" items="${myscorelist2 }">
-        <c:if test="${slist.id == id }">
+        <c:if test="${slist.id == s_id }">
        
         <c:set var="regdt" value="${slist.regdt }" />
         <c:set var="grade" value="${slist.grade }" />
