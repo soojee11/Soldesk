@@ -221,6 +221,16 @@ public class MypageDAO {
 	}// end	
 	
 	
+	public List getMyscoretList2(String id) { //sol_qna
+		List list = null;
+		try {
+			list = mybatis.queryForList("sol_calendar.myscorelist2",id);
+			
+		} catch (Exception e) {
+			System.out.println("myscorelist2: " + e);
+		}
+		return list;
+	}// end	
 	
 	// 게시물 전체 개수 불러오기
 		public int getTotal(String id) {

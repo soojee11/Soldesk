@@ -92,6 +92,11 @@ public class MypageController {
 		//System.out.println("1**"+myscorelist);
 		req.setAttribute("myscorelist", myscorelist);
 		
+		List myscorelist2=dao.getMyscoretList2(s_id);//sol_myscore
+		//System.out.println("1**"+myscorelist2);
+		req.setAttribute("myscorelist2", myscorelist2);
+		
+		
 		//################################################################
 		
 		//현재 날짜 정보 
@@ -301,6 +306,10 @@ public class MypageController {
 			//System.out.println("0**"+myscorelist);
 			req.setAttribute("myscorelist", myscorelist);
 			
+			
+			List myscorelist2=dao.getMyscoretList2(s_id);//sol_myscore
+			//System.out.println("0**"+myscorelist2);
+			req.setAttribute("myscorelist2", myscorelist2);
 			
 			//################################################################
 			
