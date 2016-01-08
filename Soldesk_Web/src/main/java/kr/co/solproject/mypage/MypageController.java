@@ -51,7 +51,7 @@ public class MypageController {
 		//월은 0부터 시작하므로 1월 표시를 위해 1을 더해 줍니다.
 		int nowDay = cal.get(Calendar.DAY_OF_MONTH);
 		String nowregdate = (String)(nowYear+"0"+nowMonth+"0"+nowDay);
-		String nowregdate2 = (String)(nowYear+"-"+nowMonth+"-"+nowDay);
+		String nowregdate2 = null;
 		String nowregdate3 = (String)(nowYear+"-"+nowMonth+"-"+nowDay);
 		req.setAttribute("nowregdate3", nowregdate3);
 		
@@ -263,7 +263,7 @@ public class MypageController {
 			//월은 0부터 시작하므로 1월 표시를 위해 1을 더해 줍니다.
 			int nowDay = cal.get(Calendar.DAY_OF_MONTH);
 			String nowregdate = (String)(nowYear+"0"+nowMonth+"0"+nowDay);
-			String nowregdate2 = (String)(nowYear+"-"+nowMonth+"-"+nowDay);
+			String nowregdate2 = null;
 			String nowregdate3 = (String)(nowYear+"-"+nowMonth+"-"+nowDay);
 			req.setAttribute("nowregdate3", nowregdate3);
 			
@@ -280,6 +280,11 @@ public class MypageController {
 				 nowregdate2 = (String)(nowYear+"0"+nowMonth+"00"+nowDay);
 			}
 			
+			
+			//System.out.println(nowregdate2);
+			
+			
+			
 			List regdatelist = null;
 		    regdatelist = dao.getregdate(s_id); //강좌를들은날짜들을 LIST로 가져오자
 		    
@@ -289,6 +294,9 @@ public class MypageController {
 			
 			List lecturelist=dao.getLectureList();//sol_lecture와 조인해서 강의제목을 가져오자
 			//System.out.println("0"+lecturelist);
+			
+			
+			
 			
 			List maxrdtlist=dao.getMaxrdtList(s_id);//각 날짜마다 max(regdate)가져오기
 			//System.out.println("0"+maxrdtlist);
@@ -453,6 +461,10 @@ public class MypageController {
 				
 				//--------------------------------------------------------------------------------
 				
+					
+					
+					
+					
 			 
 			return "/sol_mypage/calendar";
 		}

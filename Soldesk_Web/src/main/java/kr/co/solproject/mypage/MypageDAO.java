@@ -141,7 +141,7 @@ public class MypageDAO {
 		List list = null;
 		try {
 			list = mybatis.queryForList("sol_calendar.getMaxrdtList",id);
-
+			
 		} catch (Exception e) {
 			System.out.println("getMaxrdtList: " + e);
 		}
