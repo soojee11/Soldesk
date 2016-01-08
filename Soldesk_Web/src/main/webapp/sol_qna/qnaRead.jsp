@@ -63,6 +63,7 @@ function deletePrcoResponse(data,status){
 
 function updateReply(replyno,qnano){
 	$("#replyno").val(replyno);
+	alert("들어왓다");
 	$.ajax({
 		cache:false,
 		type: "get",	//요청방식
@@ -222,7 +223,7 @@ function cancel(){
 				<td style="text-align:right;">
 				
 						<div id="update" style="display: ;">
-							<a href="javascript:updateReply(${rdto.replyno },${param.qnano },'Y');">수정</a> | 
+							<a href="javascript:updateReply(${rdto.replyno },${param.qnano });">수정</a> | 
 							<a href="javascript:deleteReply(${rdto.replyno },${param.qnano });">삭제</a> 
 						</div>
  						<div id="cancel" style="display: none;">

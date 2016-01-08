@@ -19,7 +19,11 @@
 					order by id asc
 				</isEqual>
 		</dynamic>
-		
+		<dynamic>
+			<isEmpty property="col1">
+					order by qnano desc
+			</isEmpty>
+		</dynamic>
 		limit #sno#, #numPerPage#
 	</select>
 	
