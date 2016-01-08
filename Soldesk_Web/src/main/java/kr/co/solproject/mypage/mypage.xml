@@ -128,7 +128,7 @@
 	<!-- sol_study에서 regdt가져오기 -->
 	<select id="getMaxregdtList" parameterClass="String"
 		resultClass="MypageDTO">
-		select calendar.id,myscore.regdt
+	<!-- 	select calendar.id,myscore.regdt
 
 		FROM sol_calendar calendar
 		join sol_myscore myscore
@@ -136,8 +136,29 @@
 
 		where
 		calendar.id=#id#
-		group by left(myscore.regdt,10);
+		group by left(myscore.regdt,10); -->
+		
+		
+		select myscore.id, myscore.regdt
+        FROM sol_myscore myscore
+        where myscore.id =#id#
+        group by left(myscore.regdt,10);
+		
+		
 	</select>
+
+
+
+<select id="myscorelist2" parameterClass="String" resultClass="MypageDTO">  <!-- myscore list -->
+       select myscore.mytestno, myscore.id, myscore.testno, myscore.id, myscore.usetime,
+       myscore.answerno, myscore.regdt,  myscore.myscore
+       from sol_myscore myscore
+       where myscore.id =#id#
+       group by myscore.mytestno
+    </select>
+
+
+
 
 
 	<select id="getMyscoretList" resultClass="MypageDTO">
@@ -190,6 +211,10 @@
 		order by qna.qnano desc
 		limit #sno#, #numPerPage#
 	</select>
+
+
+
+
 
 	<select id="total" resultClass="Integer" parameterClass="String">
 		select count(*) from sol_bbs where passwd = #id#

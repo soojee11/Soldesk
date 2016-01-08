@@ -629,6 +629,8 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
    
    
    
+   <!-- <<<<<<<<<<<<<<<<<<<<<<<<<학습결과모달시작>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> --> 
+     
    
     <!-- 학습결과리스트 -->
    <c:if test="${maxregdtlist ne null }">
@@ -700,7 +702,7 @@ for (int i=1;i<startDay;i++){ /* 날짜시작전 빈공간 */
         </tr>
         </thead>
         
-    <c:forEach var="slist" items="${mystudylist }">
+    <c:forEach var="slist" items="${myscorelist2 }">
         <c:if test="${slist.id == id }">
        
         <c:set var="regdt" value="${slist.regdt }" />
