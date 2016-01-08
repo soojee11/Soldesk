@@ -29,10 +29,10 @@
 
 <table class="table" style="text-align: left; width:750px;">
 	<tr>
-		<th width="100">번호</th>
-		<td width="100">${dto.questno }</td>
-		<th width="100">종류</th>
-		<td width="100">${dto.qtype }</td>
+		<th width="60">번호</th>
+		<td width="60">${dto.questno }</td>
+		<th width="60">종류</th>
+		<td width="60">${dto.qtype }</td>
 		<th width="100">답</th>
 		<td>${dto.answer }</td>
 	</tr>

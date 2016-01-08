@@ -65,7 +65,7 @@
 		<th width="45">선택</th>
 		<th width="45">번호</th>
 		<th width="50">종류</th>
-		<th width="200">답</th>
+		<th width="250">답</th>
 		<th>제목</th>
 		<th width="100">상세보기</th>
 	</tr>

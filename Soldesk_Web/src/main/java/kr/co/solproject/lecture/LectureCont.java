@@ -59,13 +59,15 @@ public class LectureCont {
 		cateDto = cateDao.readCate2(cateDto);
 		
 		// 이미지 경로 조정
-		String bookInfo = cateDto.getBookInfo();
-		bookInfo = bookInfo.replaceAll("=\"cateStorage", "=\"../sol_admin/player/cateStorage");
-		cateDto.setBookInfo(bookInfo);
-		
+		String bookInfo = "";
+		if(cateDto.getBookInfo() != null){
+			bookInfo = cateDto.getBookInfo();
+			bookInfo = bookInfo.replaceAll("=\"cateStorage", "=\"../sol_admin/player/cateStorage");
+			cateDto.setBookInfo(bookInfo);
+		}
 		request.setAttribute("cateDto", cateDto);
 		request.setAttribute("grade", new Integer(grade));
-    request.setAttribute("gwamok", gwamok);
+		request.setAttribute("gwamok", gwamok);
 		
 		return "sol_study/lectureInfo";
 	}

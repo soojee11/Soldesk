@@ -18,8 +18,11 @@
 <table cellspacing="0" cellpadding="0" style="width:100%; height:100%;">
 <tr>
 	<td style="text-align:left; padding-left: 20px; padding-right: 20px;">
-	<span style="color: #065B89;font-size: 25px;"><strong>EBS</strong></span> <span style="color: #73AB2D; font-size: 25px;"><strong>초등</strong></span>
-		<!-- <img src="../img/ebslogo.PNG" align="left"/> -->
+	<span style="color: #065B89;font-size: 25px;">
+	
+	<!-- <strong>공부의 신</strong></span> <span style="color: #73AB2D; font-size: 25px;"><strong>초등</strong></span> -->
+	<img src="../img/slogo.png" alt="Logo" height="64px">
+	
 	</td>
 	<td style="text-align: center; font-size:25px; padding-left: 20px; padding-right: 20px;">
 		${testtitle }
