@@ -65,7 +65,7 @@
 <div align="center">
 		<button type="button" class="btn btn-info btn-sm"  onclick="location.href='./cateUpdate.do?categoryno=${param.categoryno}'">수정</button>
 		<button type="button" class="btn btn-info btn-sm"  onclick="location.href='./cateDel.do?categoryno=${param.categoryno}'">삭제</button>
-		<button type="button" class="btn btn-info btn-sm" onclick="history.go(-1); return false;">목록</button>
+		<button type="button" class="btn btn-info btn-sm" onclick="location.href='./cateInfo.do'">목록</button>
 </div>
 
 <%@ include file="../footer.jsp"%>

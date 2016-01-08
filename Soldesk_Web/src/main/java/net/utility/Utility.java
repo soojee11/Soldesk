@@ -754,7 +754,7 @@ public class Utility {
     
     try{
       path = request.getRealPath(dir) + "/";  
-      System.out.println("Upload path: " + path);
+      //System.out.println("Upload path: " + path);
     }catch(Exception e){
       System.out.println(e.toString());
     }
