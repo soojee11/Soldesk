@@ -7,7 +7,7 @@ function questionList(s_id,testno,testtitle)
 		return;
 	}
 
-	alert('"채점하기"를 완료해야 성적현황 및 오답노트에 시험지가 저장됩니다 ');
+	alert('"채점하기"를 완료해야 성적현황과 오답을 확인할 수 있습니다. ');
 /*	userwidth = (screen.width-500); 
 	userheight = (screen.height-150); */
 	userwidth = (screen.width-400); 

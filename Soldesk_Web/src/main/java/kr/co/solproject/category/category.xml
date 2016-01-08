@@ -21,6 +21,7 @@
 	<select id="readCateInfo" parameterClass="Map" resultClass="CategoryDTO">
 		SELECT categoryno, grade, gwamok, categoryinfo, teacherName, teacherPhoto, teacherCareer,bookInfo, bookPhoto
 		FROM sol_category
+		order by grade asc
 		limit #sno#, #numPerPage#
 	</select>
 	

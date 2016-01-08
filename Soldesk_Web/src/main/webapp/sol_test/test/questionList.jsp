@@ -17,17 +17,13 @@
 <div id="layer_fixed">
 <table cellspacing="0" cellpadding="0" style="width:100%; height:100%;">
 <tr>
-	<td style="text-align:left; padding-left: 20px; padding-right: 20px;">
-	<span style="color: #065B89;font-size: 25px;">
-	
-	<!-- <strong>공부의 신</strong></span> <span style="color: #73AB2D; font-size: 25px;"><strong>초등</strong></span> -->
+	<td style="text-align:left; width: 250px;">
 	<img src="../img/slogo.png" alt="Logo" height="64px">
-	
 	</td>
-	<td style="text-align: center; font-size:25px; padding-left: 20px; padding-right: 20px;">
-		${testtitle }
+	<td style="text-align: center; font-size:25px;">
+		<strong>${testtitle }</strong>
 	</td>
-		<td style="text-align:right; padding-left: 20px; padding-right: 20px;">
+		<td style="text-align:right; width: 250px; padding-right: 20px;">
 		<img src="../img/alarm.png" /> 경과시간<br />
 		<span id="clock" style="font: 20px bold;"></span>
 	</td>
