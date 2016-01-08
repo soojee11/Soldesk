@@ -143,7 +143,7 @@
 				<div class="form-group">
 					<label class="col-sm-2 control-label">교재 정보</label>
 					<div class="col-sm-10">
-						<textarea name="bookInfo" id="bookInfo" style="width: 80%; height: 300px;">${dto.categoryinfo }</textarea>
+						<textarea name="bookInfo" id="bookInfo" style="width: 80%; height: 300px;">${dto.bookInfo }</textarea>
 					</div>
 				</div>
 				<div align="center">

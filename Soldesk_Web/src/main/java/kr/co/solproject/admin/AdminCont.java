@@ -830,7 +830,7 @@ public class AdminCont {
 		
 		String url = "./cateInfo.do";
 		
-		int numPerPage=6;	
+		int numPerPage=8;	
 		int recNo=1;
 		
 		String nowPage = request.getParameter("nowPage");
@@ -973,7 +973,7 @@ public class AdminCont {
 		String checkCateinfo = "";
 		checkCateinfo=catedao.checkCateinfo(dto.getGrade(), dto.getGwamok());
 		
-		System.out.println("checkCateinfo: "+checkCateinfo);
+		//System.out.println("checkCateinfo: "+checkCateinfo);
 		
 		if(checkCateinfo != null){
 			request.setAttribute("msg",0);
@@ -1021,6 +1021,7 @@ public class AdminCont {
 	public String readCate(CategoryDTO dto, HttpServletRequest request) {
 		dto = catedao.readCate(dto);
 		request.setAttribute("dto", dto);
+		System.out.println("dtocate:"+dto.getBookInfo());
 		return "sol_admin/player/cateRead";
 	}//end
 	
@@ -1148,7 +1149,19 @@ public class AdminCont {
 		map.put("col1", col1);
 		map.put("col2", col2);
     
-		list=bbsdao.list(map); 
+		list=bbsdao.list(map);
+		
+		if (!list.isEmpty()){
+			Iterator it = list.iterator();
+			while(it.hasNext()){
+			dto = (BbsDTO) it.next();
+		    String content = dto.getContent();
+		    content= content.replaceAll("<img src=\"../", "<img src=\"../../");
+		    dto.setContent(content);
+			}
+		}
+
+		
 		int total=bbsdao.getTotal(map);
     
 		String paging=Paging.paging4(total, nowPage, numPerPage, url);
