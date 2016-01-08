@@ -35,12 +35,23 @@ public class TestCont {
 		int numPerPage = 5; // 페이지당 레코드 수
 		
 		int recNo = 1; // 게시판 목록에 출력될 글 번호
+		// 현재 페이지의 정보를 가져옴
+		if (request.getParameter("nowPage") != null) {
+			nowPage = Integer.parseInt(request.getParameter("nowPage"));
+		}
 		int sno = ((nowPage - 1) * numPerPage);
 		
 		String paging;
 		String col1 = null;// null이면 <dynamic prepend="where">가 적용안됨
 		String col2 = null;
 
+		if (request.getParameter("col1") != "") {
+			col1 = request.getParameter("col1");
+		}
+		if (request.getParameter("col2") != "") {
+			col2 = request.getParameter("col2");
+		}
+		
 		Map map = new HashMap();
 		map.put("col1", col1);
 		map.put("col2", col2);
@@ -54,12 +65,11 @@ public class TestCont {
 		request.setAttribute("whichPage", whichPage);
 		int total = dao.getTotal(map);
 
-		// 현재 페이지의 정보를 가져옴
-		if (request.getParameter("nowPage") != null) {
-			nowPage = Integer.parseInt(request.getParameter("nowPage"));
-		}
+
 		paging = Paging.paging55(total, nowPage, numPerPage, url);
 
+		col1 = null;// null이면 <dynamic prepend="where">가 적용안됨
+		col2 = null;
 		if (request.getParameter("col1") != null) {
 			col1 = request.getParameter("col1");
 			//System.out.println("학년: " + col1);
