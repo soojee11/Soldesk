@@ -56,12 +56,21 @@
 	
 	
 </script>
+<style type="text/css">
+        .modalfont{
+     font-family:'Jeju Gothic', sans-serif;
+      font-size:11pt;
+    }
+    
+      
+</style>
+
 </head>
 <body>
 	<div style="text-align: center">
 		<form name="idcheck" method="post" action="checkid.do">
 		<br/>
-			ID&nbsp;&nbsp;<input type="text" name="id" size="20"> <br/>
+			<font color="#000" class="modalfont">아이디를 입력하세요</font>&nbsp;&nbsp;<input type="text" name="id" size="20"> <br/>
 			<input  type="button" name="search" class="btn btn-primary" value="검색" onclick="frmSubmit(this.form)">
 		 <a href="javascript:window.close()"> 
 		 <input type='button' value='닫기' class="btn btn-primary"></a>
