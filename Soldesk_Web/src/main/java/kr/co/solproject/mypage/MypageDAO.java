@@ -193,8 +193,9 @@ public class MypageDAO {
 	public List getbbslist(Map map) { //sol_Bbs
 		List list = null;
 		try {
+			//System.out.println("map"+map.toString());
 			list = mybatis.queryForList("sol_calendar.getbbslist",map);
-
+			//System.out.println(list.toString());
 			//System.out.println("0"+list);
 			
 		} catch (Exception e) {

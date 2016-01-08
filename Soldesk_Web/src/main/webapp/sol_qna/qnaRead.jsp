@@ -221,7 +221,6 @@ function cancel(){
  				</td>
  				<c:if test="${mlevel=='A'  }">
 				<td style="text-align:right;">
-				
 						<div id="update" style="display: ;">
 							<a href="javascript:updateReply(${rdto.replyno },${param.qnano });">수정</a> | 
 							<a href="javascript:deleteReply(${rdto.replyno },${param.qnano });">삭제</a> 

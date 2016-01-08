@@ -52,13 +52,13 @@ public class BbsCont {
 	  String col1=null;
 		if(req.getParameter("col1")!="") {
 			col1=req.getParameter("col1");
-			System.out.println("컬럼: "+col1);
+			//System.out.println("컬럼: "+col1);
 		}
 		
 		String col2=null;
 		if(req.getParameter("col2")!="") {
 			col2=req.getParameter("col2");
-			System.out.println("컬럼: "+col2);
+			//System.out.println("컬럼: "+col2);
 		}
 	  
     int nowPage=1;      // 현재페이지, 페이지 시작번호 0->1page

@@ -18,19 +18,40 @@ function send() {
   }
 }
 </script>
+
+<style type="text/css">
+      .memfont{
+      font-size:15pt;
+    }
+</style>
+
+
 <div style="text-align: center"></div>
 <!--
  onsubmit 이벤트는 form이 submit이 될 때 발생함.
  실행된 함수가 false를 리턴하면 submit을 하지 않음.
 -->
-<br/><br/>
+<br/><br/><br/>
 
 <form name="frmAgree" 
  	  method="post" 
       action="joinok.do" 
       onsubmit="return send()">
 
-<div style="text-align: center" >회원약관</div>
+<span style=" font-size:20pt; color:#000"  >
+창의 교육·미래 방송 <font color="#64b438">공부의신(초등)</font> 회원가입을 환영합니다.
+</span> 
+
+<br/><br/>
+
+
+공부의신(초등)회원으로 가입하시면 공부의신(초등)가 제작한 방송 및 교육콘텐츠를 다양한 인터넷 사이트에 <br/> 통합 회원으로 동시 가입되어 
+보다 편리한 회원서비스를 제공 받으실 수 있습니다.
+
+<br/><br/><br/>
+
+<div style="text-align: center;"  class="memfont">< 회원 약관동의 ></div>
+
 <br/>
 <table  border="0"  cellspacing="0" cellpadding="2"  align="center">
     <tr align="center" height="10"> 
@@ -219,7 +240,7 @@ function send() {
     </tr>
 </table>
 <div style="text-align: center">
-<input type="checkbox" name="agree"/> 약관에 동의합니다.<br/> <br/><!-- true/false -->
+<input type="checkbox" name="agree"/> 약관을 충분히 이해하였으며 동의 합니다.<br/> <br/><!-- true/false -->
 <input type="submit"  class="btn btn-primary"  value="회원가입"/> 
 <input type="button"  class="btn btn-primary"  value="취소" onclick="javascript:history.back();"/>
 </div>

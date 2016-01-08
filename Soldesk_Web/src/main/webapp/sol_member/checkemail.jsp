@@ -33,13 +33,21 @@
 		return true;
 	}
 </script>
+<style type="text/css">
+        .modalfont{
+     font-family:'Jeju Gothic', sans-serif;
+      font-size:11pt;
+    }
+    
+      
+</style>
 </head>
 <body>
 	<div style="text-align: center">
 		<form name="emailcheck" method="post"
 			action="checkemail.do" onsubmit="return frmSubmit()">
 			<Br/>
-			EMAIL&nbsp;&nbsp;<input type="text" name="email" size="20"><br/> 
+			<font color="#000" class="modalfont">이메일을 입력하세요</font>&nbsp;&nbsp;<input type="text" name="email" size="20"><br/> 
 			<input class="btn btn-primary" type="submit" value="검색" >
 		  <a href="javascript:window.close()"> <input type='button' value='닫기' class="btn btn-primary"></a>
 		</form>
