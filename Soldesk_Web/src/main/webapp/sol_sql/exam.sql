@@ -152,6 +152,11 @@ CREATE TABLE sol_zipcode(
 	etc varchar(255) null
 )ENGINE=MyISAM DEFAULT CHARSET="euckr";	
 
+--<mysql>		
+LOAD DATA INFILE 'f:/java_0713a/setup/post.csv'		
+INTO TABLE sol_zipcode CHARACTER SET 'euckr' 		
+FIELDS TERMINATED BY ',' IGNORE 1 LINES;
+
 create table sol_video(				
 	videono	INT	NOT NULL	auto_increment,
 	title	VARCHAR(100)	NOT NULL,	
