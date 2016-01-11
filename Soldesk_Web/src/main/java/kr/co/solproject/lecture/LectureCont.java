@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -73,7 +75,7 @@ public class LectureCont {
 	}
 	
 	@RequestMapping(value="/sol_study/lectureList.do")
-	public String lectureList(HttpServletRequest request) {
+	public String lectureList(HttpServletRequest request, HttpSession session) {
 		String url="lectureList.do";
 		int grade = 1;			// default 1학년으로 설정 
 		String gwamok = "국어";
@@ -146,7 +148,12 @@ public class LectureCont {
 			String qnaPaging = Paging.paging9(qnaTotal, qnaNowPage, qnaNumPerPage, url, tabNum,grade,gwamok);
 			
 			QnAno = qnaTotal - (qnaNowPage - 1) * qnaNumPerPage + 1;
-
+			
+			//관리자아이디
+			String adminId = (String)session.getAttribute("s_id");
+			String adminRes= dao.checkAdmin(adminId);
+			
+			request.setAttribute("adminRes", adminRes);
 			request.setAttribute("categoryInfo", categoryInfo);
 			request.setAttribute("grade", grade);
 			request.setAttribute("gwamok", gwamok);
