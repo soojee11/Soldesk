@@ -33,48 +33,56 @@
 	<select id="zipcheck" parameterClass="String" resultClass="ZipcodeDTO">
 		select zipcode,sido,gugun,dong,li,bunji,etc
 		from sol_zipcode
-		where dong like "%$dong$%"
+		where dong
+		like "%$dong$%"
 		order by zipcode
 	</select>
 
 	<update id="join" parameterClass="MemberDTO">
-	  insert into sol_member (id,name, passwd,email,tel,zipcode,address1,address2,mdate,promise)
-		values(#id#, #name#, #passwd#, #email#, #tel#, #zipcode#, #address1#, #address2#, now(),#promise#)
-	</update> 
-	
+		insert into sol_member (id,name,
+		passwd,email,tel,zipcode,address1,address2,mdate,promise)
+		values(#id#,
+		#name#, #passwd#, #email#, #tel#, #zipcode#, #address1#, #address2#,
+		now(),#promise#)
+	</update>
+
 	<select id="pwcheck" parameterClass="Map" resultClass="int">
 		select
 		count(*)
 		from sol_member
 		where passwd = #passwd# and id = #id#
 	</select>
-	
 
-	<select id="loginproc"  parameterClass="MemberDTO" resultClass="String">
+
+	<select id="loginproc" parameterClass="MemberDTO" resultClass="String">
 		select mlevel from sol_member
-		where id =#id# and passwd = #passwd# and mlevel in('A','B','D')
+		where id =#id# and passwd = #passwd# and
+		mlevel in('A','B','D')
 	</select>
 
 	<select id="read" parameterClass="String" resultClass="MemberDTO">
-		select id,name, passwd,email,tel,zipcode,address1,address2,promise
-		from sol_member
+		select
+		id,name, passwd,email,tel,zipcode,address1,address2,promise
+		from
+		sol_member
 		where id = #id#
 	</select>
 
 
-	<update id="updatego" parameterClass="MemberDTO" >
-	  update sol_member
-	  set  passwd=#passwd#, tel=#tel#, zipcode=#zipcode#, address1=#address1#,address2=#address2#,promise=#promise#
-	  where id=#id#
-	  and mlevel in
+	<update id="updatego" parameterClass="MemberDTO">
+		update sol_member
+		set passwd=#passwd#, tel=#tel#, zipcode=#zipcode#,
+		address1=#address1#,address2=#address2#,promise=#promise#
+		where id=#id#
+		and mlevel in
 		('A','B')
-	</update> 
-	
+	</update>
+
 	<update id="deletego" parameterClass="Map">
-	  update sol_member
-	  set mlevel = 'D'
-	  where id=#id# and passwd=#passwd#
-	</update> 
+		update sol_member
+		set mlevel = 'D'
+		where id=#id# and passwd=#passwd#
+	</update>
 
 
 	<select id="findid" parameterClass="Map" resultClass="String">
@@ -96,11 +104,15 @@
 	</select>
 
 	<update id="findpwupdate" parameterClass="Map">
-	  update sol_member
-	  set passwd =#passwd#
-	  where id=#id# and email=#email#
-	</update> 
+		update sol_member
+		set passwd =#passwd#
+		where id=#id# and email=#email#
+	</update>
 
-	
-	
+	<select id="checkAdmin" parameterClass="String" resultClass="String">
+		select mlevel
+		from sol_member
+		where id=#id#
+	</select>
+
 </sqlMap> 

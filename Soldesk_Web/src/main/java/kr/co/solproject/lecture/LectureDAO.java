@@ -58,4 +58,15 @@ public class LectureDAO {
 		return categoryInfo;
 	}
 	
+	public String checkAdmin(String adminId) {
+		String mlevel = null;
+		try {
+			mlevel=(String) mybatis.queryForObject("sol_member.checkAdmin",adminId);
+			//System.out.println("mlevel"+mlevel);
+		}	catch(Exception e) {
+			System.out.println("checkAdmin error: "+e);		
+		}
+		return mlevel;
+	}
+	
 }

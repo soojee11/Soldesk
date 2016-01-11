@@ -43,7 +43,7 @@ function postApplyResponse(data, status) { //callback함수
 	<ul>
 		<li style="background-color: #99cc66">강의</li>
 		<li><a onclick="location.href='lectureList.do?grade=${grade}&gwamok=${gwamok}&tabNum=1'">목록</a></li>
-		<li><a onclick="location.href='lectureList.do?grade=${grade}&gwamok=${gwamok}&tabNum=2'">학습Q&A</a></li>
+		<li><a onclick="location.href='lectureList.do?grade=${grade}&gwamok=${gwamok}&tabNum=2'">학습공지</a></li>
 		<li><a onclick="location.href='lectureList.do?grade=${grade}&gwamok=${gwamok}&tabNum=3'">수강후기</a></li>
 	</ul>		
 </div>
@@ -148,7 +148,7 @@ function qnaCreate(){
 <!-- 학습QnA List -->
 <div id="qnaList">
 
-총 <span style="color: red;"><strong>${qnaTotal}</strong></span>개의 Q&A가 있습니다.
+총 <span style="color: red;"><strong>${qnaTotal}</strong></span>개의 학습공지가 있습니다.
 <table class="table">
 <tr align="center" >
 	<td width="60">번호</td>
@@ -176,12 +176,15 @@ function qnaCreate(){
 </tr>
 
 </table>
-
 <div align="right">
+<c:if test="${adminRes == 'A' }">
 	<input type="button" value="글쓰기" class="btn btn-warning button"
 		<c:if test="${s_id == null }">onclick="lectureNotGo()"</c:if>
 		<c:if test="${s_id != null }">onclick="qnaCreate()"</c:if>>
+</c:if>
 </div>
+
+
 </div>
 
 <!-- 학습QnA Form -->
@@ -285,29 +288,28 @@ function qnaDelete() {
 	
  	<input type='hidden' name='gwamok' id='gwamok' value='${gwamok}'> 
 	<input type='hidden' name='grade' id='grade' value='${grade}'>
- <table border ="0" width="100%" class="table" style="text-align:center">
-	<tr bgcolor="#f5f7f9">
-		<td style="text-align:center" valign="bottom">제목</td>
-		<td bgcolor="#ffffff"><strong><span id="subject"></span></strong></td>	
-		<td> </td>
-		<td> </td>
-		<td> </td>
-		<td> </td>
-	</tr>
-	<tr bgcolor="#f5f7f9">
-		<th style="text-align:center" valign="bottom">ID</th>
-		<td bgcolor="#ffffff" id="readid"></td>
-		<td width="60px">작성일</td>
-		<td bgcolor="#ffffff"><span id="regdate"></span>
-			${fn:substring(regdate,0,16) }</td>
-		<td width="60px">조회수</td>
-		<td bgcolor="#ffffff"><span id="readcnt"></span></td>
-	</tr>
-	<tr bgcolor="#ffffff">
-	<td id="content"></td>
 	
+	<table class="table" style="color: #000000;">
+	<tr bgcolor="#f5f7f9">
+		<td width="60px">제목</td>
+		<td colspan="5"><strong><span id="subject"></span></strong></td>
 	</tr>
-</table> 
+	<tr>
+		<td width="60px">ID</td>
+		<td id="readid"></td>
+		<td width="60px">작성일</td>
+		<td> <span id="regdate"></span></td>
+		<td width="60px">조회수</td>
+		<td><span id="readcnt"></span></td>
+	</tr>
+
+	<tr>
+		<td colspan="6" id="content"></td>
+	</tr>
+
+</table>
+<br />
+<br />
  <div align="right">
  	<div id="idcheck1" style="display:none">
  	<input name="btnList" type="button" class="btn btn-warning button" value="목록" onclick="javascript:history.go()">
@@ -323,7 +325,6 @@ function qnaDelete() {
   </div>
 </form>
 </div><!--  상세보기 폼 끝  -->
-
 
 <script>
 
