@@ -218,7 +218,7 @@
 						}
 					}
 				}
-				System.out.print("쿠키값= "+c_id);
+				//System.out.print("쿠키값= "+c_id);
 		%>
 
 	<!-- 하나)로그인 페이지 -->

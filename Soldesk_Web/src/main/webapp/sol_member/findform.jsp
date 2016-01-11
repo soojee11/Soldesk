@@ -75,13 +75,7 @@
 <script type="text/javascript">
 	function forgetidcheck(frm) {
 		var frm = document.findidfrm;
-		name = frm.name.value;
-		name = name.replace(/^\s*|\s*$/g, '');
-		if (name.length < 3) {
-			alert("가입된 이름을 입력하세요.");
-			frm.name.focus();
-			return;
-		}
+
 		email = frm.email.value;
 		email = email.replace(/^\s*|\s*$/g, '');
 		var regemail = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
@@ -119,7 +113,9 @@
 		}
 	}//end
 </script>
-<script type="text/javascript">
+
+
+<!-- <script type="text/javascript">
 	function forgetidcheck(frm) {
 		var frm = document.findidfrm;
 		name = frm.name.value;
@@ -166,7 +162,7 @@
 		}
 	}//end
 </script>
-
+ -->
 <br />
 <Br /><Br />
 <div class="seaTabs" >

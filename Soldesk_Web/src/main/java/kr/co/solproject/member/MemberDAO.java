@@ -37,7 +37,7 @@ public class MemberDAO {
 		int res = 0;
 		try {
 			res = (Integer) mybatis.queryForObject("sol_member.idcheck",id);
-		System.out.println(res);
+		//System.out.println(res);
 		} catch (Exception e) {
 			System.out.println(e);
 		}

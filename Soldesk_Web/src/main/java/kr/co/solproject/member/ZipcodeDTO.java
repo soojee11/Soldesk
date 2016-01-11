@@ -10,7 +10,6 @@ public class ZipcodeDTO {
 	private String etc; 	// -- 技何 林家
 	
 	public ZipcodeDTO() {
-		System.out.println("⒑------ZipcodeDTO()按眉 积己凳...");
 	}
 	public String getZipcode() {
 		return zipcode;
