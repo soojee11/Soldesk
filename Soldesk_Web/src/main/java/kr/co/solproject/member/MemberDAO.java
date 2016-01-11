@@ -25,7 +25,7 @@ public class MemberDAO {
 		int res = 0;
 		try {
 			res = (Integer) mybatis.queryForObject("sol_member.logincount",map);
-		System.out.println(res);
+		//System.out.println(res);
 		} catch (Exception e) {
 			System.out.println(e);
 		}
@@ -48,7 +48,7 @@ public class MemberDAO {
 		int res = 0;
 		try {
 			res = (Integer) mybatis.queryForObject("sol_member.emailcheck",email);
-		System.out.println(res);
+		//System.out.println(res);
 		} catch (Exception e) {
 			System.out.println(e);
 		}
@@ -84,7 +84,7 @@ public class MemberDAO {
 		int res = 0;
 		try {
 			res = (Integer) mybatis.queryForObject("sol_member.pwcheck",map);
-		System.out.println(res);
+		//System.out.println(res);
 		} catch (Exception e) {
 			System.out.println(e);
 		}
@@ -95,7 +95,7 @@ public class MemberDAO {
 		MemberDTO dto = null;
 		try {
 			dto =  (MemberDTO) mybatis.queryForObject("sol_member.read",id);
-		System.out.println(dto);
+		//System.out.println(dto);
 		} catch (Exception e) {
 			System.out.println(e);
 		}
@@ -118,7 +118,7 @@ public class MemberDAO {
 		int res = 0;
 		try {
 			res = (Integer) mybatis.update("sol_member.deletego",map);
-		System.out.println(res);
+		//System.out.println(res);
 		} catch (Exception e) {
 			System.out.println(e);
 		}
@@ -130,7 +130,7 @@ public class MemberDAO {
 		String res = null;
 		try {
 			res = (String) mybatis.queryForObject("sol_member.findid",map);
-		System.out.println(res);
+		//System.out.println(res);
 		} catch (Exception e) {
 			System.out.println(e);
 		}
@@ -141,7 +141,7 @@ public class MemberDAO {
 		String res = null;
 		try {
 			res = (String) mybatis.queryForObject("sol_member.findpw",map);
-		System.out.println(res);
+		//System.out.println(res);
 		} catch (Exception e) {
 			System.out.println(e);
 		}
@@ -152,7 +152,7 @@ public class MemberDAO {
 		int res = 0;
 		try {
 			res = mybatis.update("sol_member.findpwupdate",map);
-		System.out.println(res);
+		//System.out.println(res);
 		} catch (Exception e) {
 			System.out.println(e);
 		}

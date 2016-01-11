@@ -289,8 +289,8 @@ public class MemberController {
 	public String zipcheck(String dong, HttpServletRequest req, HttpSession session) {
 
 		List<ZipcodeDTO> list = dao.zipcheck(dong);
-		System.out.println("동이릉: " + dong);
-		System.out.println("리스트: " + list);
+		//System.out.println("동이릉: " + dong);
+		//System.out.println("리스트: " + list);
 
 		if (list.size() == 0) { // list ==null은 안됨!
 
