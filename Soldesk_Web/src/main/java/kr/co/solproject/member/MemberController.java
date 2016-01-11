@@ -53,7 +53,7 @@ public class MemberController {
 	  
 	  // 추천 선생님 목록 띄우기 
 	  list = pdao.postGrade();
-	  System.out.println(list);
+	  //System.out.println(list);
 	  req.setAttribute("list", list);
 	  
 		return "/sol_index";
@@ -89,7 +89,7 @@ public class MemberController {
 				// 체크하지않은경우
 				c_id = "";
 			}
-			System.out.println(c_id);
+			//System.out.println(c_id);
 
 			Cookie cookie = null;
 			if (c_id.equals("SAVE")) {
@@ -101,7 +101,7 @@ public class MemberController {
 			}
 			resp.addCookie(cookie);// 사용자 pc에 쿠키값 저장
 
-			System.out.println(id);
+			//System.out.println(id);
 			// session영역
 			session.setAttribute("s_id", id);
 			session.setAttribute("s_pw", pw);
@@ -241,7 +241,7 @@ public class MemberController {
 
 		if (res == 0) {
 			id.trim();
-			System.out.println(id);
+			//System.out.println(id);
 			
 			req.setAttribute("id", id);
 			return "/sol_member/checkprocid";
@@ -304,7 +304,7 @@ public class MemberController {
 
 	@RequestMapping(value = "/sol_member/update.do", method = RequestMethod.POST)
 	public String update(String id, HttpServletRequest req, HttpSession session) {
-		System.out.println(id);
+		//System.out.println(id);
 		req.setAttribute("id", id);
 		return "/sol_member/update";
 	}// end
@@ -312,8 +312,8 @@ public class MemberController {
 	@RequestMapping(value = "/sol_member/updateproc.do", method = RequestMethod.POST)
 	public String updateproc(MemberDTO dto, String passwd, String id, HttpServletRequest req, HttpSession session) {
 
-		System.out.println(passwd);
-		System.out.println(id);
+		//System.out.println(passwd);
+		//System.out.println(id);
 
 		Map map = new HashMap();
 		map.put("passwd", passwd);
@@ -340,9 +340,9 @@ public class MemberController {
 			req.setAttribute("address1", address1);
 			req.setAttribute("address2", address2);
 			req.setAttribute("promise", promise);
-			System.out.println(email);
-			System.out.println(name);
-			System.out.println(tel);
+			//System.out.println(email);
+			//System.out.println(name);
+			//System.out.println(tel);
 
 			return "/sol_member/updateProc";
 		} else {
@@ -369,7 +369,7 @@ public class MemberController {
 
 	@RequestMapping(value = "/sol_member/delete.do", method = RequestMethod.POST)
 	public String delete(MemberDTO dto, HttpServletRequest req, HttpSession session) {
-		System.out.println(dto.getId());
+		//System.out.println(dto.getId());
 		String id = dto.getId();
 		req.setAttribute("id", id);
 
@@ -382,8 +382,8 @@ public class MemberController {
 		String id = dto.getId();
 		String passwd = dto.getPasswd();
 
-		System.out.println(passwd);
-		System.out.println(id);
+		//System.out.println(passwd);
+		//System.out.println(id);
 
 		Map map = new HashMap();
 		map.put("passwd", passwd);
@@ -407,9 +407,9 @@ public class MemberController {
 	@RequestMapping(value = "/sol_member/findidform.do", method = RequestMethod.POST)
 	public String findidform(String name,String email,String from, HttpServletRequest req, HttpSession session) {
 
-		System.out.println(name);
-		System.out.println(email);
-		System.out.println(from);
+		//System.out.println(name);
+		//System.out.println(email);
+		//System.out.println(from);
 
 		Map map = new HashMap();
 		map.put("name", name);
@@ -434,10 +434,10 @@ public class MemberController {
 		map.put("email", email);
 		String passwd = dao.findpw(map);
 
-		System.out.println("id= "+id);
-		System.out.println("email= "+email);
-		System.out.println("from= "+from);
-		System.out.println("passwd= "+passwd);
+		//System.out.println("id= "+id);
+		//System.out.println("email= "+email);
+		//System.out.println("from= "+from);
+		//System.out.println("passwd= "+passwd);
 
 		
 		if (passwd != null) {
@@ -460,7 +460,7 @@ public class MemberController {
 			map2.put("passwd", passwd);
 			int res = dao.findpwupdate(map2);
 						
-			System.out.println(res+""+passwd);
+			//System.out.println(res+""+passwd);
 			
 			//메일보내는거-request에 올리지않아도된다.
 			return "redirect:./mail.do?id="+id+"&passwd="+passwd+"&email="+email+"&from="+from;
