@@ -143,14 +143,4 @@ public class ReplyDAO {
 			return flag;
 		}//end
 	  
-	  public int studyQnaReplyCreate(ReplyDTO dto) {
-			int res=0;
-			try {
-				res=(Integer) mybatis.update("sol_reply.studyQnaReplyCreate",dto);
-			}	catch(Exception e) {
-				System.out.println("studyQnaReplyCreate error: "+e);		
-			}
-			return res;
-	  }//end
-	  
 }
