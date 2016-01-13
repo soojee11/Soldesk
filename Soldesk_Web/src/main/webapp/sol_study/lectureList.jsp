@@ -30,10 +30,17 @@ function postApplyResponse(data, status) { //callback함수
 </h4>
 <div class="column">
 	<div class="view">
-		<table class="table">
+		<table>
 			<tr>
 				<td><img src="img/lecture_desc.png" width="80px" height="80px"></td>
-				<td>${categoryInfo }</td>
+				<td style="padding-left:40px; font-size:15px;">
+				<jsp:scriptlet>
+				pageContext.setAttribute("cr", "\r");
+				pageContext.setAttribute("lf", "\n");									
+				pageContext.setAttribute("crlf", "\r\n");									
+				</jsp:scriptlet>
+				${fn:replace(categoryInfo,crlf,'<br/>') }
+				</td>
 			</tr>
 		</table>
 	</div>
